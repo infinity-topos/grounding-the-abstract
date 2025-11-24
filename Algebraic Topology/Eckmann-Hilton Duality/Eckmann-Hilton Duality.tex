@@ -1,0 +1,153 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Font and Encoding ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% --- Mathematics Packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+% --- Diagram Package ---
+\usepackage{tikz-cd}
+
+% --- Page Layout ---
+\usepackage{geometry}
+\geometry{left=1in, right=1in, top=1in, bottom=1in}
+
+% --- Custom Commands ---
+\newcommand{\Top}{\mathbf{Top}_*}      % Category of pointed topological spaces
+\newcommand{\Cone}{C}                  % Cone
+\newcommand{\Susp}{\Sigma}             % Suspension
+\newcommand{\Loop}{\Omega}             % Loop space
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\id}{\operatorname{id}}
+
+% --- Title Info ---
+\title{\textbf{Eckmann-Hilton Duality and Topological Exactness: \\ From Functors to Geometric Theorems}}
+\author{Algebraic Topology Notes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document systematically expounds the definition of "exactness" in the category of topological spaces and its manifestation under algebraic functors through the lens of Eckmann-Hilton Duality. We discuss in detail how Homotopy groups ($\pi_*$), Homology groups ($H_*$), and Cohomology groups ($H^*$) respond to fiber sequences and cofiber sequences respectively, and derive their dual applications in the Mayer-Vietoris sequence and the Excision Theorem.
+\end{abstract}
+
+\tableofcontents
+
+\section{Overview of Eckmann-Hilton Duality}
+
+Eckmann-Hilton duality reveals the deep symmetry between Limit and Colimit operations in the category of topological spaces $\Top$. This duality is reflected not only in constructions but also determines which algebraic invariants (functors) can form long exact sequences.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{Cofiber World (Colimits)} & \textbf{Fiber World (Limits)} \\
+\hline
+\textbf{Core Construction} & Pushout / Mapping Cone & Pullback / Fiber \\
+\hline
+\textbf{Basic Operator} & Suspension $\Susp$ (Dimension +) & Loop Space $\Loop$ (Dimension -) \\
+\hline
+\textbf{Compatible Functors} & Homology $H_*$ / Cohomology $H^*$ & Homotopy $\pi_*$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Defining Exactness in Topological Spaces}
+
+In Abelian categories (like the category of modules), exactness is defined as $\operatorname{Im} = \operatorname{Ker}$. However, in the category $\Top$, this definition does not apply directly. We define the exactness of topological sequences via **representable functors**.
+
+\subsection{Cofiber Exactness}
+A sequence $A \xrightarrow{f} B \xrightarrow{g} C$ is called a \textbf{cofiber sequence} (or exact at $B$) if, for any pointed space $Z$, the induced sequence of pointed sets is exact:
+\[
+    [C, Z]_* \xrightarrow{g^*} [B, Z]_* \xrightarrow{f^*} [A, Z]_*
+\]
+This means the image of $g^*$ is exactly the "kernel" (null-set) of $f^*$ (i.e., $f \circ h \sim *$ if and only if $h$ factors through $g$).
+\textbf{Standard Model}: $X \xrightarrow{f} Y \to C_f \to \Susp X \to \dots$
+
+\subsection{Fiber Exactness}
+A sequence $A \xrightarrow{f} B \xrightarrow{g} C$ is called a \textbf{fiber sequence}, if for any pointed space $Z$, the induced sequence of pointed sets is exact:
+\[
+    [Z, A]_* \xrightarrow{f_*} [Z, B]_* \xrightarrow{g_*} [Z, C]_*
+\]
+\textbf{Standard Model}: $\dots \to \Loop B \to F_f \to E \xrightarrow{p} B$
+
+\section{Exact Sequences Under Functors}
+
+Different algebraic functors "respond" differently to topological sequences. Eckmann-Hilton duality dictates which functors yield long exact algebraic sequences.
+
+\subsection{Action on Homotopy Functor $\pi_*$}
+Homotopy groups $\pi_n(X) = [S^n, X]_*$ are inherently products of the **Fiber World** (it is a covariant functor testing maps \textit{into} $X$).
+\begin{itemize}
+    \item \textbf{On Fiber Sequences}: Produces a long exact sequence.
+    \[ \dots \to \pi_n(F) \to \pi_n(E) \to \pi_n(B) \xrightarrow{\partial} \pi_{n-1}(F) \to \dots \]
+    \item \textbf{On Cofiber Sequences}: Generally \textbf{does not} produce a long exact sequence (this is why computing homotopy groups is difficult).
+\end{itemize}
+
+\subsection{Action on Homology $H_*$ and Cohomology $H^*$}
+Homology and Cohomology are inherently products of the **Cofiber World**.
+\begin{itemize}
+    \item \textbf{On Cofiber Sequences} ($A \to X \to X/A$):
+        \begin{itemize}
+            \item Homology ($H_*$): Produces long exact sequence $\dots \to H_n(A) \to H_n(X) \to H_n(X/A) \to \dots$
+            \item Cohomology ($H^*$): Produces long exact sequence $\dots \to H^n(X/A) \to H^n(X) \to H^n(A) \to \dots$
+        \end{itemize}
+    \item \textbf{On Fiber Sequences}: Generally \textbf{does not} produce simple long exact sequences (requires Serre Spectral Sequence).
+\end{itemize}
+
+\section{Dual Applications in Mayer-Vietoris Sequences}
+
+The MV sequence deals with decomposing a space into two parts. Its existence depends on whether the space is a "Pushout" or a "Pullback".
+
+\subsection{Homology/Cohomology MV Sequence (Pushout View)}
+Let $X = A \cup B$ (where $A, B$ are open covers). This is a **Pushout** diagram:
+\[
+\begin{tikzcd}
+    A \cap B \arrow[r] \arrow[d] & A \arrow[d] \\
+    B \arrow[r] & X
+\end{tikzcd}
+\]
+Since $H_*$ and $H^*$ belong to Cofiber (Pushout) theory, we have:
+\begin{equation}
+    \cdots \to H_n(A \cap B) \to H_n(A) \oplus H_n(B) \to H_n(X) \xrightarrow{\partial} H_{n-1}(A \cap B) \to \cdots
+\end{equation}
+
+\subsection{Homotopy MV Sequence (Pullback View)}
+Let $E$ be the **Homotopy Pullback** of $X$ and $Y$ over $B$:
+\[
+\begin{tikzcd}
+    E \arrow[r] \arrow[d] & Y \arrow[d, "g"] \\
+    X \arrow[r, "f"] & B
+\end{tikzcd}
+\]
+Since $\pi_*$ belongs to Fiber (Pullback) theory, we have:
+\begin{equation}
+    \cdots \to \pi_{n+1}(B) \xrightarrow{\partial} \pi_n(E) \to \pi_n(X) \oplus \pi_n(Y) \to \pi_n(B) \to \cdots
+\end{equation}
+\textbf{Note:} For a standard union $A \cup B$ (Pushout), homotopy groups typically do not have an MV sequence (Van Kampen's theorem is a special case for $\pi_1$).
+
+\section{Duality of the Excision Theorem}
+
+The Excision Theorem essentially asks: Does the functor treat a "Pushout" as a "Direct Sum" (or preserve exactness)?
+
+\subsection{Homology/Cohomology Excision}
+\textbf{Theorem:} For a good pair, the inclusion map $i: (X \setminus U, A \setminus U) \to (X, A)$ induces an isomorphism on homology groups.
+\[ H_*(X, A) \cong H_*(X/A) \]
+\textbf{Interpretation:} This indicates that homology theory is fully compatible with cofiber structures. It transforms geometric "quotient spaces" into algebraic relative groups. This is the core reason why homology is easier to compute.
+
+\subsection{Failure and Correction of Homotopy Excision}
+\textbf{Phenomenon:} In general, $\pi_*(X, A) \not\cong \pi_*(X/A)$.
+\textbf{Reason:} Homotopy groups are a fiber theory and are incompatible with geometric "excision" (pushout operations).
+\textbf{Blakers-Massey Theorem (Correction):}
+This is an "Excision Theorem within a limited range". If $(X, A)$ is $n$-connected and $(X, B)$ is $m$-connected, then the excision map is an isomorphism in dimensions $k < n+m-1$. This quantifies the extent to which homotopy groups deviate from cofiber properties.
+
+\subsection{Dual Excision Theorem}
+Homotopy groups satisfy a "Dual Excision Theorem": they preserve structures for Pullbacks (Fiber Products).
+If $E = X \times_B Y$ (Pullback), then $\pi_*(E)$ is determined by the algebraic relationship between $\pi_*(X)$ and $\pi_*(Y)$ over $\pi_*(B)$ (in the sense of exact sequences). The simplest example is the product space: $\pi_*(X \times Y) \cong \pi_*(X) \times \pi_*(Y)$.
+
+\end{document}
