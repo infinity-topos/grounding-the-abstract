@@ -7,6 +7,19 @@
 \usepackage{tikz-cd}
 \usepackage{mathrsfs}
 
+% 定义 section 的样式
+\titleformat{\section}
+  {\large\bfseries}      % 字体格式 (粗体, 稍大)
+  {\S\,\thesection.}     % 标签格式：§ 符号 + 微小空格 + 编号 + 点
+  {0.5em}                % 编号与标题之间的间距
+  {}
+
+\titleformat{\subsection}
+  {\bfseries}            % 字体格式
+  {\thesubsection.}      % 标签格式：编号 + 点
+  {0.5em}
+  {}
+
 % Spacing Settings
 \setlength{\parindent}{0pt}
 \setlist{nosep}
@@ -24,9 +37,9 @@
 
 \begin{document}
 
-\section*{§ 1. Basic Definitions}
+\section{Simplicial Sets}
 
-\subsection*{1. Simplicial Sets}
+\subsection{1. Simplicial Sets}
 Let $\Delta$ be the category of finite ordinal numbers.
 \begin{itemize}
     \item \textbf{Objects:} Ordered sets $\mathbf{n} = \{0 \to 1 \to \dots \to n\}$ for $n \ge 0$.
