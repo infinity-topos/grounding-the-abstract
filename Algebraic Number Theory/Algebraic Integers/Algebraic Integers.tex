@@ -1,0 +1,285 @@
+\documentclass[10pt, a4paper, twocolumn]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tikz-cd}
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlist{nosep}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1pt}
+
+
+\titleformat{\section}
+  {\large\bfseries}      % Font format
+  {\S\,\thesection.}     % Label: § + space + number + dot
+  {0.5em}                % Spacing
+  {}
+\titleformat{\subsection}
+  {\bfseries}            % Font format
+  {\thesubsection.}      % Label: number + dot
+  {0.5em}
+  {}
+
+
+
+\title{\vspace{-1cm}Algebraic Number Theory - Chapter I: Integers (Summary)}
+\date{}
+\author{}
+
+\begin{document}
+{\let\newpage\relax\maketitle}
+\vspace{-1.5cm}
+
+\section{The Gaussian Integers}
+
+\textbf{Ring of Integers:} The ring $\mathbb{Z}[i] = \{a+bi \mid a,b \in \mathbb{Z}\}$ is the integral closure of $\mathbb{Z}$ in the field $\mathbb{Q}(i)$. It consists precisely of the elements in $\mathbb{Q}(i)$ satisfying a monic polynomial in $\mathbb{Z}[x]$.
+
+\textbf{Prime Elements (up to units):}
+\begin{enumerate}
+    \item $\pi = 1+i$ (associated to 2).
+    \item $\pi = a+bi$ with $a^2+b^2=p$, where $p \in \mathbb{Z}$ is a prime with $p \equiv 1 \pmod 4$.
+    \item $\pi = p$, where $p \in \mathbb{Z}$ is a prime with $p \equiv 3 \pmod 4$.
+\end{enumerate}
+
+\hrulefill
+
+\section{Integrality}
+
+\subsection{Definitions \& Transitivity}
+\begin{itemize}
+    \item \textbf{Algebraic Number Field:} Finite extension $K|\mathbb{Q}$.
+    \item \textbf{Algebraic Integer:} Root of a monic $f(x) \in \mathbb{Z}[x]$.
+    \item \textbf{Integral over $A$:} $b \in B$ is integral over $A \subseteq B$ if it satisfies $x^n + a_1x^{n-1} + \dots + a_n = 0$ ($a_i \in A$).
+    \item \textbf{Integral Closure:} $\overline{A} = \{b \in B \mid b \text{ integral over } A\}$.
+    \item \textbf{Normalization:} The integral closure of a domain $A$ in its fraction field.
+    \item \textbf{Transitivity (Prop 2.4):} If $A \subseteq B \subseteq C$ are rings, $B$ integral over $A$, $C$ integral over $B \implies C$ integral over $A$.
+\end{itemize}
+
+\subsection{Row-Column Expansion}
+Let $M$ be an $r \times r$ matrix, $M^*$ its adjoint. Then $MM^* = \det(M)I$. Implication:
+\[ Mx = 0 \implies \det(M)x = 0. \]
+(Used to prove: finite generation $\iff$ integrality).
+
+\subsection{Integrality in Extensions}
+Let \textcolor{red}{$A$ be an integrally closed domain}, $K = \text{frac}(A)$, $L|K$ a finite extension, and $B$ the integral closure of $A$ in $L$.
+\begin{itemize}
+    \item Every $\beta \in L$ can be written as $\beta = b/a$ with $b \in B, a \in A$.
+    \item An element $\beta \in L$ belongs to $B$ if and only if its minimal polynomial over $K$ lies in $A[x]$.
+\end{itemize}
+
+\subsection{Trace, Norm, Characteristic Poly.}
+For $x \in L$, let $T_x: L \to L$ be the map $\alpha \mapsto x\alpha$.
+\begin{itemize}
+    \item \textbf{Char. Poly:} $f_x(t) = \det(tI - T_x)$.
+    \item \textbf{Trace:} $Tr_{L/K}(x) = \text{trace}(T_x)$.
+    \item \textbf{Norm:} $N_{L/K}(x) = \det(T_x)$.
+\end{itemize}
+If $L|K$ is separable with embeddings $\sigma: L \to \bar{K}$:
+\[ f_x(t) = \prod_\sigma (t - \sigma x), \quad Tr(x) = \sum_\sigma \sigma x, \quad N(x) = \prod_\sigma \sigma x. \]
+\textbf{Tower Property:} $K \subseteq L \subseteq M$.
+\[ Tr_{M/K} = Tr_{L/K} \circ Tr_{M/L}, \quad N_{M/K} = N_{L/K} \circ N_{M/L}. \]
+
+\subsection{Discriminant Calculations}
+For a basis $\alpha_1, \dots, \alpha_n$ of $L|K$ (separable):
+\[ d(\alpha_1, \dots, \alpha_n) = \det(\sigma_i \alpha_j)^2 = \det(Tr_{L/K}(\alpha_i \alpha_j)). \]
+If the basis is $1, \theta, \dots, \theta^{n-1}$ (power basis):
+\[ d(1, \theta, \dots, \theta^{n-1}) = \prod_{i < j} (\theta_i - \theta_j)^2 \quad (\text{Vandermonde}). \]
+
+\subsection{Bilinear Form}
+The trace defines a bilinear form $L \times L \to K$:
+\[ (x, y) \mapsto Tr_{L/K}(xy). \]
+It is \textbf{non-degenerate} if $L|K$ is separable (i.e., discriminant $\neq 0$). With basis $\{\alpha_i\}$, it corresponds to matrix $M_{ij} = Tr(\alpha_i \alpha_j)$.
+
+\subsection{Integrality of Trace and Norm}
+If $A$ is integrally closed and $x \in B$ (integral closure), then:
+\[ Tr_{L/K}(x) \in A \quad \text{and} \quad N_{L/K}(x) \in A. \]
+\textbf{Units and Norms:} Since the norm is multiplicative, an element $x \in B$ is a unit if and only if its norm is a unit in $A$:
+\[ x \in B^\times \iff N_{L/K}(x) \in A^\times. \]
+(e.g., for $A=\mathbb{Z}$, $x$ is a unit $\iff N(x) = \pm 1$).
+
+\subsection{Localization of the Discriminant}
+Let $\alpha_1, \dots, \alpha_n \in B$ be a basis of $L|K$ with discriminant $d$. Then:
+\[ \textcolor{red}{d B \subseteq A\alpha_1 + \dots + A\alpha_n}. \]
+
+\subsection{Integral Basis}
+An integral basis is a basis $\omega_1, \dots, \omega_n$ of $L|K$ such that $B = A\omega_1 + \dots + A\omega_n$.
+\begin{itemize}
+    \item \textcolor{red}{If $A$ is a PID}, then every finitely generated submodule $M \neq 0$ of $L$ is a free $A$-module of rank $[L:K]$. Thus, $B$ admits an integral basis.
+\end{itemize}
+
+\subsection{Discriminant of Algebraic Integers}
+Let $\mathcal{o}_K$ be the ring of integers of $K$. The discriminant of $K$ (or an ideal $\mathfrak{a}$) is defined via a $\mathbb{Z}$-basis $\alpha_1, \dots, \alpha_n$ of $\mathcal{o}_K$ (or $\mathfrak{a}$):
+\[ d(\mathfrak{a}) = d(\alpha_1, \dots, \alpha_n). \]
+\begin{itemize}
+    \item It is independent of the choice of basis.
+    \item $d(\mathfrak{a}) \neq 0$ implies linear independence.
+    \item Relation: If $\mathfrak{a} \subseteq \mathfrak{a}'$, then $d(\mathfrak{a}) = (\mathfrak{a}' : \mathfrak{a})^2 d(\mathfrak{a}')$.
+\end{itemize}
+
+\hrulefill
+
+\section{Ideals}
+
+\subsection{Dedekind Domains}
+
+\textbf{Theorem 3.1 (Properties of $\mathfrak{o}_K$).} The ring of integers $\mathfrak{o}_K$ in a number field $K$ is Noetherian, integrally closed, and every non-zero prime ideal is maximal.
+
+\textbf{Definition 3.2.} An integral domain $\mathfrak{o}$ is called a \textbf{Dedekind domain} if it satisfies the following conditions:
+\begin{enumerate}
+    \item It is \textbf{Noetherian}.
+    \item It is \textbf{integrally closed}.
+    \item Every non-zero prime ideal is \textbf{maximal}.
+\end{enumerate}
+
+\subsection{Factorization of Integral Ideals}
+
+\textbf{Lemma 3.4.} For every ideal $\mathfrak{a} \neq 0$ of a Dedekind domain $\mathfrak{o}$, there exist non-zero prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_r$ such that:
+\[
+\mathfrak{a} \supseteq \mathfrak{p}_1 \mathfrak{p}_2 \cdots \mathfrak{p}_r.
+\]
+
+\textbf{Definition (Inverse of a Prime).} Let $\mathfrak{p}$ be a prime ideal. Define the set:
+\[ \mathfrak{p}^{-1} = \{x \in K \mid x\mathfrak{p} \subseteq \mathfrak{o}\}. \]
+
+\textbf{Lemma 3.5.} Let $\mathfrak{p}$ be a prime ideal of $\mathfrak{o}$. For every ideal $\mathfrak{a} \neq 0$:
+\[
+\mathfrak{a}\mathfrak{p}^{-1} := \left\{ \sum a_i x_i \mid a_i \in \mathfrak{a}, x_i \in \mathfrak{p}^{-1} \right\} \neq \mathfrak{a}.
+\]
+Specifically, $\mathfrak{o} \subsetneq \mathfrak{p}^{-1}$ and $\mathfrak{p}\mathfrak{p}^{-1} = \mathfrak{o}$.
+
+\textbf{Theorem 3.3 (Unique Prime Factorization).} Every ideal $\mathfrak{a}$ of $\mathfrak{o}$ different from $(0)$ and $(1)$ admits a factorization
+\[
+\mathfrak{a} = \mathfrak{p}_1 \cdots \mathfrak{p}_r
+\]
+into non-zero prime ideals $\mathfrak{p}_i$ of $\mathfrak{o}$, which is \textbf{unique} up to the order of the factors.
+
+\subsection{Fractional Ideals and the Ideal Group}
+
+\textbf{Definition 3.7.} A \textbf{fractional ideal} of $K$ is a finitely generated $\mathfrak{o}$-submodule $\mathfrak{a} \neq 0$ of $K$.
+
+\textbf{Equivalent Definition:} An $\mathfrak{o}$-submodule $\mathfrak{a} \subset K$ ($\mathfrak{a} \neq 0$) is a fractional ideal if and only if there exists a non-zero element $c \in \mathfrak{o}$ such that $c\mathfrak{a} \subseteq \mathfrak{o}$ (i.e., $c\mathfrak{a}$ is an integral ideal).
+
+\textbf{Proposition 3.8 (Ideal Group).} The fractional ideals form an abelian group $J_K$, called the \textbf{ideal group} of $K$.
+\begin{itemize}
+    \item \textbf{Identity:} $(1) = \mathfrak{o}$.
+    \item \textbf{Inverse:} The inverse of $\mathfrak{a}$ is:
+    \[
+    \mathfrak{a}^{-1} = \{x \in K \mid x\mathfrak{a} \subseteq \mathfrak{o}\}.
+    \]
+\end{itemize}
+
+\textbf{Corollary 3.9.} Every fractional ideal $\mathfrak{a}$ admits a unique representation as a product:
+\[
+\mathfrak{a} = \prod_{\mathfrak{p}} \mathfrak{p}^{\nu_{\mathfrak{p}}}
+\]
+with $\nu_{\mathfrak{p}} \in \mathbb{Z}$ and $\nu_{\mathfrak{p}} = 0$ for almost all $\mathfrak{p}$.
+Thus, $J_K$ is the \textbf{free abelian group} on the set of non-zero prime ideals $\mathfrak{p}$ of $\mathfrak{o}$.
+
+\subsection{The Class Group}
+
+\textbf{Principal Fractional Ideals ($P_K$).} The fractional ideals of the form $(a) = a\mathfrak{o}$ for $a \in K^*$ form a subgroup of $J_K$ denoted by $P_K$.
+
+\textbf{Ideal Class Group ($Cl_K$).} The quotient group:
+\[
+Cl_K = J_K / P_K
+\]
+is called the \textbf{ideal class group} of $K$.
+
+\textbf{Fundamental Exact Sequence}:
+The relation between numbers and ideals is captured by the exact sequence:
+\begin{equation*}
+    \begin{tikzcd}
+        1 \arrow[r] & \mathfrak{o}^* \arrow[r, hook] & K^* \arrow[r, "a \mapsto (a)"] & J_K \arrow[r, "proj"] & Cl_K \arrow[r] & 1
+    \end{tikzcd}
+\end{equation*}
+
+\hrulefill
+
+\section{Extensions of Dedekind Domains}
+
+Let $o$ be a Dedekind domain, $K$ its field of fractions, $L|K$ a finite extension, and $\mathcal{O}$ the integral closure of $o$ in $L$.
+
+\subsection{Stability of Dedekind Domains}
+\textbf{Proposition:} The ring $\mathcal{O}$ is a Dedekind domain.
+
+\textbf{Proof Sketch (Key Points):}
+\begin{enumerate}
+    \item \textbf{Integrally Closed:} $\mathcal{O}$ is the integral closure by definition.
+    \item \textbf{Krull Dimension 1:} Let $\mathfrak{P}$ be a nonzero prime ideal of $\mathcal{O}$. Then $\mathfrak{p} = \mathfrak{P} \cap o$ is a nonzero prime (maximal) ideal of $o$. The field extension $\mathcal{O}/\mathfrak{P}$ over $o/\mathfrak{p}$ implies $\mathcal{O}/\mathfrak{P}$ is a field, hence $\mathfrak{P}$ is maximal.
+    \item \textbf{Noetherian:} \textcolor{red}{Condition: If $L|K$ is separable}, $\mathcal{O}$ is contained in a finitely generated $o$-module (via the discriminant), thus $\mathcal{O}$ is a finitely generated $o$-module (noetherian). (Note: The general case relies on Krull-Akizuki).
+\end{enumerate}
+
+\subsection{Prime Decomposition and Invariants}
+Since $\mathcal{O}$ is Dedekind, a nonzero prime ideal $\mathfrak{p} \subset o$ admits a unique factorization in $\mathcal{O}$:
+\[
+\mathfrak{p}\mathcal{O} = \prod_{i=1}^r \mathfrak{P}_i^{e_i}
+\]
+We say $\mathfrak{P}_i$ lies over $\mathfrak{p}$ ($\mathfrak{P}_i | \mathfrak{p}$).
+
+\textbf{Definitions:}
+\begin{itemize}
+    \item \textbf{Ramification Index ($e_i$):} The exponent $e_i = e(\mathfrak{P}_i|\mathfrak{p})$.
+    \item \textbf{Inertia Degree ($f_i$):} The degree of the residue field extension:
+    \[ f_i = [\mathcal{O}/\mathfrak{P}_i : o/\mathfrak{p}] \]
+\end{itemize}
+
+\textbf{Classification of Primes:}
+\begin{itemize}
+    \item \textbf{Split Completely:} $e_i = f_i = 1$ for all $i$, hence $r = [L:K]$.
+    \item \textbf{Nonsplit (Indecomposed):} $r=1$.
+    \item \textbf{Unramified:} $e_i = 1$ for all $i$ and all residue extensions $\kappa(\mathfrak{P}_i)|\kappa(\mathfrak{p})$ are separable.
+    \item \textbf{Ramified:} There exists some $e_i > 1$ or inseparable residue extension.
+    \item \textbf{Totally Ramified:} $r=1$ and $f_1=1$ (implies $e_1 = [L:K]$).
+\end{itemize}
+
+\subsection{The Fundamental Identity}
+\textbf{Proposition:} \textcolor{red}{Condition: If $L|K$ is separable}, let $n = [L:K]$. Then:
+\[
+\sum_{i=1}^r e_i f_i = n
+\]
+\textbf{Proof Sketch:}
+Using the Chinese Remainder Theorem:
+\[
+\mathcal{O}/\mathfrak{p}\mathcal{O} \cong \bigoplus_{i=1}^r \mathcal{O}/\mathfrak{P}_i^{e_i}
+\]
+We compute the dimension over $\kappa = o/\mathfrak{p}$:
+1. $\dim_\kappa(\mathcal{O}/\mathfrak{p}\mathcal{O}) = n$. Since $\mathcal{O}$ is a finitely generated $o$-module, a basis of $\mathcal{O}/\mathfrak{p}\mathcal{O}$ lifts to a basis of $L|K$.
+2. $\dim_\kappa(\mathcal{O}/\mathfrak{P}_i^{e_i}) = e_i f_i$. Considering the filtration $\mathcal{O} \supset \mathfrak{P}_i \supset \dots \supset \mathfrak{P}_i^{e_i}$, each quotient $\mathfrak{P}_i^{\nu}/\mathfrak{P}_i^{\nu+1} \cong \mathcal{O}/\mathfrak{P}_i$ has dimension $f_i$. Summing $e_i$ times gives $e_i f_i$.
+
+\subsection{Decomposition via the Conductor}
+Let $L = K(\theta)$ with $\theta \in \mathcal{O}$. Let $p(x) \in o[x]$ be the minimal polynomial.
+
+\textbf{Conductor ($\mathfrak{F}$):} The largest ideal of $\mathcal{O}$ contained in the ring $o[\theta]$:
+\[
+\mathfrak{F} = \{ \alpha \in \mathcal{O} \mid \alpha \mathcal{O} \subseteq o[\theta] \}
+\]
+\textbf{Proposition (Kummer):} Let $\mathfrak{p}$ be a prime of $o$. \textcolor{red}{Condition: $\mathfrak{p}$ is relatively prime to the conductor ($\mathfrak{p} + \mathfrak{F} = o$).}
+Let $\bar{p}(X) \in (o/\mathfrak{p})[X]$ factor as:
+\[
+\bar{p}(X) = \prod_{i=1}^r \bar{p}_i(X)^{e_i}
+\]
+Then the prime decomposition of $\mathfrak{p}$ in $\mathcal{O}$ is $\mathfrak{p}\mathcal{O} = \prod_{i=1}^r \mathfrak{P}_i^{e_i}$ with $f_i = \deg(\bar{p}_i)$.
+
+\textbf{Key Isomorphisms (Proof Core):}
+The proof relies on the commutative diagram of isomorphisms established by the condition $(\mathfrak{p}, \mathfrak{F}) = 1$:
+\[
+\mathcal{O}/\mathfrak{p}\mathcal{O} \cong o[\theta]/\mathfrak{p}o[\theta] \cong (o/\mathfrak{p})[X]/(\bar{p}(X))
+\]
+The factorization in the polynomial ring corresponds directly to the decomposition of the ideal.
+
+\subsection{Finiteness of Ramification}
+\textbf{Proposition:} \textcolor{red}{Condition: $L|K$ is separable.} There are only finitely many prime ideals of $K$ that ramify in $L$.
+
+\textbf{Proof Key:}
+Let $L=K(\theta)$ and $d = \text{disc}(1, \theta, \dots, \theta^{n-1})$ be the discriminant of the polynomial $p(x)$.
+A prime $\mathfrak{p}$ is unramified if:
+1. $\mathfrak{p} \nmid d$ (implies $\bar{p}(X)$ has simple roots, so all $e_i=1$).
+2. $\mathfrak{p} \nmid \mathfrak{F}$ (allows using the conductor proposition).
+Since $d \neq 0$ and $\mathfrak{F} \neq 0$, only finitely many primes divide $d$ or are not coprime to $\mathfrak{F}$.
+
+
+\end{document}
