@@ -1,0 +1,76 @@
+\section{Ideals}
+
+\subsection{Dedekind Domains}
+
+\textbf{Theorem(Properties of $\mathfrak{o}_K$).} The ring of integers $\mathfrak{o}_K$ in a number field $K$ is Noetherian, integrally closed, and every non-zero prime ideal is maximal.
+
+\textbf{Definition} An integral domain $\mathfrak{o}$ is called a \textbf{Dedekind domain} if it satisfies the following conditions:
+\begin{enumerate}
+    \item It is \textbf{Noetherian}.
+    \item It is \textbf{integrally closed}.
+    \item Every non-zero prime ideal is \textbf{maximal}.
+\end{enumerate}
+
+\subsection{Factorization of Integral Ideals}
+
+\textbf{Lemma} For every ideal $\mathfrak{a} \neq 0$ of a Dedekind domain $\mathfrak{o}$, there exist non-zero prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_r$ such that:
+\[
+\mathfrak{a} \supseteq \mathfrak{p}_1 \mathfrak{p}_2 \cdots \mathfrak{p}_r.
+\]
+
+\textbf{Definition (Inverse of a Prime).} Let $\mathfrak{p}$ be a prime ideal. Define the set:
+\[ \mathfrak{p}^{-1} = \{x \in K \mid x\mathfrak{p} \subseteq \mathfrak{o}\}. \]
+
+\textbf{Lemma} Let $\mathfrak{p}$ be a prime ideal of $\mathfrak{o}$. For every ideal $\mathfrak{a} \neq 0$:
+\[
+\mathfrak{a}\mathfrak{p}^{-1} := \left\{ \sum a_i x_i \mid a_i \in \mathfrak{a}, x_i \in \mathfrak{p}^{-1} \right\} \neq \mathfrak{a}.
+\]
+Specifically, $\mathfrak{o} \subsetneq \mathfrak{p}^{-1}$ and $\mathfrak{p}\mathfrak{p}^{-1} = \mathfrak{o}$.
+
+\textbf{Theorem(Unique Prime Factorization).} Every ideal $\mathfrak{a}$ of $\mathfrak{o}$ different from $(0)$ and $(1)$ admits a factorization
+\[
+\mathfrak{a} = \mathfrak{p}_1 \cdots \mathfrak{p}_r
+\]
+into non-zero prime ideals $\mathfrak{p}_i$ of $\mathfrak{o}$, which is \textbf{unique} up to the order of the factors.
+
+\subsection{Fractional Ideals and the Ideal Group}
+
+\textbf{Definition} A \textbf{fractional ideal} of $K$ is a finitely generated $\mathfrak{o}$-submodule $\mathfrak{a} \neq 0$ of $K$.
+
+\textbf{Equivalent Definition:} An $\mathfrak{o}$-submodule $\mathfrak{a} \subset K$ ($\mathfrak{a} \neq 0$) is a fractional ideal if and only if there exists a non-zero element $c \in \mathfrak{o}$ such that $c\mathfrak{a} \subseteq \mathfrak{o}$ (i.e., $c\mathfrak{a}$ is an integral ideal).
+
+\textbf{Proposition(Ideal Group).} The fractional ideals form an abelian group $J_K$, called the \textbf{ideal group} of $K$.
+\begin{itemize}
+    \item \textbf{Identity:} $(1) = \mathfrak{o}$.
+    \item \textbf{Inverse:} The inverse of $\mathfrak{a}$ is:
+    \[
+    \mathfrak{a}^{-1} = \{x \in K \mid x\mathfrak{a} \subseteq \mathfrak{o}\}.
+    \]
+\end{itemize}
+
+\textbf{Corollary} Every fractional ideal $\mathfrak{a}$ admits a unique representation as a product:
+\[
+\mathfrak{a} = \prod_{\mathfrak{p}} \mathfrak{p}^{\nu_{\mathfrak{p}}}
+\]
+with $\nu_{\mathfrak{p}} \in \mathbb{Z}$ and $\nu_{\mathfrak{p}} = 0$ for almost all $\mathfrak{p}$.
+Thus, $J_K$ is the \textbf{free abelian group} on the set of non-zero prime ideals $\mathfrak{p}$ of $\mathfrak{o}$.
+
+\subsection{The Class Group}
+
+\textbf{Principal Fractional Ideals ($P_K$).} The fractional ideals of the form $(a) = a\mathfrak{o}$ for $a \in K^*$ form a subgroup of $J_K$ denoted by $P_K$.
+
+\textbf{Ideal Class Group ($Cl_K$).} The quotient group:
+\[
+Cl_K = J_K / P_K
+\]
+is called the \textbf{ideal class group} of $K$.
+
+\textbf{Fundamental Exact Sequence}:
+The relation between numbers and ideals is captured by the exact sequence:
+\begin{equation*}
+    \begin{tikzcd}
+        1 \arrow[r] & \mathfrak{o}^* \arrow[r, hook] & K^* \arrow[r, "a \mapsto (a)"] & J_K \arrow[r, "proj"] & Cl_K \arrow[r] & 1
+    \end{tikzcd}
+\end{equation*}
+
+\hrulefill

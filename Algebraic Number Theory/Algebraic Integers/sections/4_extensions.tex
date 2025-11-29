@@ -1,0 +1,83 @@
+\section{Extensions of Dedekind Domains}
+
+Let $o$ be a Dedekind domain, $K$ its field of fractions, $L|K$ a finite extension, and $\mathcal{O}$ the integral closure of $o$ in $L$.
+
+\subsection{Stability of Dedekind Domains}
+\textbf{Proposition:} The ring $\mathcal{O}$ is a Dedekind domain.
+
+\textbf{Proof Sketch (Key Points):}
+\begin{enumerate}
+    \item \textbf{Integrally Closed:} $\mathcal{O}$ is the integral closure by definition.
+    \item \textbf{Krull Dimension 1:} Let $\mathfrak{P}$ be a nonzero prime ideal of $\mathcal{O}$. Then $\mathfrak{p} = \mathfrak{P} \cap o$ is a nonzero prime (maximal) ideal of $o$. The field extension $\mathcal{O}/\mathfrak{P}$ over $o/\mathfrak{p}$ implies $\mathcal{O}/\mathfrak{P}$ is a field, hence $\mathfrak{P}$ is maximal.
+    \item \textbf{Noetherian:} \textcolor{red}{Condition: If $L|K$ is separable}, $\mathcal{O}$ is contained in a finitely generated $o$-module (via the discriminant), thus $\mathcal{O}$ is a finitely generated $o$-module (noetherian). (Note: The general case relies on Krull-Akizuki).
+\end{enumerate}
+
+\subsection{Prime Decomposition and Invariants}
+Since $\mathcal{O}$ is Dedekind, a nonzero prime ideal $\mathfrak{p} \subset o$ admits a unique factorization in $\mathcal{O}$:
+\[
+\mathfrak{p}\mathcal{O} = \prod_{i=1}^r \mathfrak{P}_i^{e_i}
+\]
+We say $\mathfrak{P}_i$ lies over $\mathfrak{p}$ ($\mathfrak{P}_i | \mathfrak{p}$).
+
+\textbf{Definitions:}
+\begin{itemize}
+    \item \textbf{Ramification Index ($e_i$):} The exponent $e_i = e(\mathfrak{P}_i|\mathfrak{p})$.
+    \item \textbf{Inertia Degree ($f_i$):} The degree of the residue field extension:
+    \[ f_i = [\mathcal{O}/\mathfrak{P}_i : o/\mathfrak{p}] \]
+\end{itemize}
+
+\textbf{Classification of Primes:}
+\begin{itemize}
+    \item \textbf{Split Completely:} $e_i = f_i = 1$ for all $i$, hence $r = [L:K]$.
+    \item \textbf{Nonsplit (Indecomposed):} $r=1$.
+    \item \textbf{Unramified:} $e_i = 1$ for all $i$ and all residue extensions $\kappa(\mathfrak{P}_i)|\kappa(\mathfrak{p})$ are separable.
+    \item \textbf{Ramified:} There exists some $e_i > 1$ or inseparable residue extension.
+    \item \textbf{Totally Ramified:} $r=1$ and $f_1=1$ (implies $e_1 = [L:K]$).
+\end{itemize}
+
+\subsection{The Fundamental Identity}
+\textbf{Proposition:} \textcolor{red}{Condition: If $L|K$ is separable}, let $n = [L:K]$. Then:
+\[
+\sum_{i=1}^r e_i f_i = n
+\]
+\textbf{Proof Sketch:}
+Using the Chinese Remainder Theorem:
+\[
+\mathcal{O}/\mathfrak{p}\mathcal{O} \cong \bigoplus_{i=1}^r \mathcal{O}/\mathfrak{P}_i^{e_i}
+\]
+We compute the dimension over $\kappa = o/\mathfrak{p}$:
+1. $\dim_\kappa(\mathcal{O}/\mathfrak{p}\mathcal{O}) = n$. Since $\mathcal{O}$ is a finitely generated $o$-module, a basis of $\mathcal{O}/\mathfrak{p}\mathcal{O}$ lifts to a basis of $L|K$.
+2. $\dim_\kappa(\mathcal{O}/\mathfrak{P}_i^{e_i}) = e_i f_i$. Considering the filtration $\mathcal{O} \supset \mathfrak{P}_i \supset \dots \supset \mathfrak{P}_i^{e_i}$, each quotient $\mathfrak{P}_i^{\nu}/\mathfrak{P}_i^{\nu+1} \cong \mathcal{O}/\mathfrak{P}_i$ has dimension $f_i$. Summing $e_i$ times gives $e_i f_i$.
+
+\subsection{Decomposition via the Conductor}
+Let $L = K(\theta)$ with $\theta \in \mathcal{O}$. Let $p(x) \in o[x]$ be the minimal polynomial.
+
+\textbf{Conductor ($\mathfrak{F}$):} The largest ideal of $\mathcal{O}$ contained in the ring $o[\theta]$:
+\[
+\mathfrak{F} = \{ \alpha \in \mathcal{O} \mid \alpha \mathcal{O} \subseteq o[\theta] \}
+\]
+\textbf{Proposition (Kummer):} Let $\mathfrak{p}$ be a prime of $o$. \textcolor{red}{Condition: $\mathfrak{p}$ is relatively prime to the conductor ($\mathfrak{p} + \mathfrak{F} = o$).}
+Let $\bar{p}(X) \in (o/\mathfrak{p})[X]$ factor as:
+\[
+\bar{p}(X) = \prod_{i=1}^r \bar{p}_i(X)^{e_i}
+\]
+Then the prime decomposition of $\mathfrak{p}$ in $\mathcal{O}$ is $\mathfrak{p}\mathcal{O} = \prod_{i=1}^r \mathfrak{P}_i^{e_i}$ with $f_i = \deg(\bar{p}_i)$.
+
+\textbf{Key Isomorphisms (Proof Core):}
+The proof relies on the commutative diagram of isomorphisms established by the condition $(\mathfrak{p}, \mathfrak{F}) = 1$:
+\[
+\mathcal{O}/\mathfrak{p}\mathcal{O} \cong o[\theta]/\mathfrak{p}o[\theta] \cong (o/\mathfrak{p})[X]/(\bar{p}(X))
+\]
+The factorization in the polynomial ring corresponds directly to the decomposition of the ideal.
+
+\subsection{Finiteness of Ramification}
+\textbf{Proposition:} \textcolor{red}{Condition: $L|K$ is separable.} There are only finitely many prime ideals of $K$ that ramify in $L$.
+
+\textbf{Proof Key:}
+Let $L=K(\theta)$ and $d = \text{disc}(1, \theta, \dots, \theta^{n-1})$ be the discriminant of the polynomial $p(x)$.
+A prime $\mathfrak{p}$ is unramified if:
+1. $\mathfrak{p} \nmid d$ (implies $\bar{p}(X)$ has simple roots, so all $e_i=1$).
+2. $\mathfrak{p} \nmid \mathfrak{F}$ (allows using the conductor proposition).
+Since $d \neq 0$ and $\mathfrak{F} \neq 0$, only finitely many primes divide $d$ or are not coprime to $\mathfrak{F}$.
+
+\hrulefill

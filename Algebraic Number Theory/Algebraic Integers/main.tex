@@ -1,0 +1,25 @@
+\documentclass[10pt, a4paper, twocolumn]{article}
+
+% 引入我们自定义的样式包
+\usepackage{mystyle}
+
+% 标题信息
+\title{\vspace{-1cm}Algebraic Number Theory - Chapter I: Integers (Summary)}
+\date{}
+\author{}
+
+\begin{document}
+% 生成标题
+{\let\newpage\relax\maketitle}
+\vspace{-1.5cm}
+
+% 导入各个章节
+% 使用 \input 可以保持紧凑排版（不会强制换页）
+% 如果想要每一章从新的一页开始，可以使用 \include
+
+\input{sections/1_gaussian}
+\input{sections/2_integrality}
+\input{sections/3_ideals}
+\input{sections/4_extensions}
+
+\end{document}
