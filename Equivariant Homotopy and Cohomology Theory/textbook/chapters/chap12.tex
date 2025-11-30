@@ -1,0 +1,176 @@
+% chapter12.tex
+
+\chapter{The Equivariant Stable Homotopy Category}
+
+\section{An introductory overview}
+
+Let us start nonequivariantly. As the home of stable phenomena, the subject of stable homotopy theory includes all of homology and cohomology theory. Over thirty years ago, it became apparent that very significant benefits would accrue if one could work in an additive triangulated category whose objects were ``stable spaces'', or ``spectra'', a central point being that the translation from topology to algebra through such tools as the Adams spectral sequence would become far smoother and more structured. Here ``triangulated'' means that one has a suspension functor that is an equivalence of categories, together with cofibration sequences that satisfy all of the standard properties.
+
+The essential point is to have a smash product that is associative, commutative, and unital up to coherent natural isomorphisms, with unit the sphere spectrum $S$. A category with such a product is said to be ``symmetric monoidal''. This structure allows one to transport algebraic notions such as ring and module into stable homotopy theory. Thus, in the stable homotopy category of spectra --- which we shall denote by $\overline{h}\mathscr{S}$ --- a ring is just a spectrum $R$ together with a product $\phi: R \wedge R \longrightarrow R$ and unit $\eta: S \longrightarrow R$ such that the following diagrams commute in $\overline{h}\mathscr{S}$:
+
+\begin{center}
+\begin{tikzcd}
+S \wedge R \arrow[r, "\eta \wedge 1"] \arrow[dr, "\cong"'] & R \wedge R \arrow[d, "\phi"] & R \wedge S \arrow[l, "1 \wedge \eta"'] \arrow[dl, "\cong"] \\
+& R &
+\end{tikzcd}
+\end{center}
+
+and
+
+\begin{center}
+\begin{tikzcd}
+R \wedge R \wedge R \arrow[r, "1 \wedge \phi"] \arrow[d, "\phi \wedge 1"'] & R \wedge R \arrow[d, "\phi"] \\
+R \wedge R \arrow[r, "\phi"] & R.
+\end{tikzcd}
+\end{center}
+
+The unlabelled isomorphisms are canonical isomorphisms giving the unital property, and we have suppressed associativity isomorphisms in the second diagram. Similarly, there is a transposition isomorphism $\tau: E \wedge F \longrightarrow F \wedge E$ in $\overline{h}\mathscr{S}$, and $R$ is said to be commutative if the following diagram commutes in $\overline{h}\mathscr{S}$:
+
+\begin{center}
+\begin{tikzcd}
+R \wedge R \arrow[rr, "\tau"] \arrow[dr, "\phi"'] & & R \wedge R \arrow[dl, "\phi"] \\
+& R &
+\end{tikzcd}
+\end{center}
+
+A left $R$-module is a spectrum $M$ together with a map $\mu: R \wedge M \longrightarrow M$ such that the following diagrams commute in $\overline{h}\mathscr{S}$:
+
+\begin{center}
+\begin{tikzcd}
+S \wedge M \arrow[r, "\eta \wedge 1"] \arrow[dr, "\cong"'] & R \wedge M \arrow[d, "\mu"] \\
+& M
+\end{tikzcd}
+\end{center}
+
+and
+
+\begin{center}
+\begin{tikzcd}
+R \wedge R \wedge M \arrow[r, "1 \wedge \mu"] \arrow[d, "\phi \wedge 1"'] & R \wedge M \arrow[d, "\mu"] \\
+R \wedge M \arrow[r, "\mu"] & M.
+\end{tikzcd}
+\end{center}
+
+Over twenty years ago, it became apparent that it would be of great value to have more precisely structured notions of ring and module, with good properties before passage to homotopy. For example, when one is working in $\overline{h}\mathscr{S}$, it is not even true that the cofiber of a map of $R$-modules is an $R$-module, so that one does not have a triangulated category of $R$-modules. More deeply, when $R$ is commutative, one would like to be able to construct a smash product $\wedge_R$ of $R$-modules. Quinn, Ray, and I defined such structured ring spectra in 1972. Elmendorf and I, and independently Robinson, defined such structured module spectra around 1983. However, the problem just posed was not fully solved until after the Alaska conference, in work of Elmendorf, Kriz, Mandell, and myself. We shall return to this later.
+
+For now, let us just say that the technical problems focus on the construction of an associative and commutative smash product of spectra. Before June of 1993, I would have said that it was not possible to construct such a product on a category that has all colimits and limits and whose associated homotopy category is equivalent to the stable homotopy category. We now have such a construction, and it actually gives a point-set level symmetric monoidal category.
+
+However, it is not a totally new construction. Rather, it is a natural extension of the approach to the stable category $\overline{h}\mathscr{S}$ that Lewis and I developed in the early 1980's. Even from the viewpoint of classical nonequivariant stable homotopy theory, this approach has very significant advantages over any of its predecessors. What is especially relevant to us is that it is the only approach that extends effortlessly to the equivariant context, giving a good stable homotopy category of $G$-spectra for any compact Lie group $G$. Moreover, for a great deal of the homotopical theory, the new point-set level construction offers no advantages over the original Lewis-May theory: the latter is by no means rendered obsolete by the new theory.
+
+From an expository point of view this raises a conundrum. The only real defect of the Lewis-May approach is that the only published account is in the general equivariant context, with emphasis on those details that are special to that setting. Therefore, despite the theme of this book, I will first outline some features of the theory that are nearly identical in the nonequivariant and equivariant contexts, returning later to a discussion of significant equivariant points. I will follow in part an unpublished exposition of the Lewis-May category due to Jim McClure. A comparison with earlier approaches and full details of definitions and proofs may be found in the encyclopedic first reference below. The second reference contains important technical refinements of the theory, as well as the new theory of highly structured ring and module spectra. The third reference gives a brief general overview of the theory that the reader may find helpful. We shall often refer to these as [LMS], [EKMM], and [EKMM'].
+
+\paragraph{General References}
+\begin{itemize}
+    \item[{[LMS]}] L. G. Lewis, Jr., J. P. May, and M. Steinberger (with contributions by J. E. McClure). Equivariant stable homotopy theory. Springer Lecture Notes in Mathematics. Vol. 1213. 1986.
+    \item[{[EKMM]}] A. Elmendorf, I. Kriz, M. A. Mandell, and J. P. May. Rings, modules, and algebras in stable homotopy theory. Preprint, 1995.
+    \item[{[EKMM']}] A. Elmendorf, I. Kriz, M. A. Mandell, and J. P. May. Modern foundations for stable homotopy theory. In ``Handbook of Algebraic Topology'', edited by I.M. James. North Holland, 1995, pp 213-254.
+\end{itemize}
+
+\section{Prespectra and spectra}
+
+The simplest relevant notion is that of a prespectrum $E$. The naive version is a sequence of based spaces $E_n$, $n \ge 0$, and based maps
+\[ \sigma_n: \Sigma E_n \longrightarrow E_{n+1}. \]
+A map $D \longrightarrow E$ of prespectra is a sequence of maps $D_n \longrightarrow E_n$ that commute with the structure maps $\sigma_n$. The structure maps have adjoints
+\[ \tilde{\sigma}_n: E_n \longrightarrow \Omega E_{n+1}, \]
+and it is customary to say that $E$ is an \emph{$\Omega$-spectrum} if these maps are equivalences. While this is the right kind of spectrum for representing cohomology theories on spaces, we shall make little use of this concept. By a \emph{spectrum}, we mean a prespectrum for which the adjoints $\tilde{\sigma}_n$ are homeomorphisms. (The insistence on homeomorphisms goes back to a 1969 paper of mine that initiated the present approach to stable homotopy theory.) In particular, for us, an ``$\Omega$-spectrum'' need not be a spectrum: henceforward, we use the more accurate term \emph{$\Omega$-prespectrum} for this notion.
+
+One advantage of our definition of a spectrum is that the obvious forgetful functor from spectra to prespectra --- call it $l$ --- has a left adjoint spectrification functor $L$ such that the canonical map $LlE \longrightarrow E$ is an isomorphism. Thus there is a formal analogy between $L$ and the passage from presheaves to sheaves, which is the reason for the term ``prespectrum''. The category of spectra has limits, which are formed in the obvious way by taking the limit for each $n$ separately. It also has colimits. These are formed on the prespectrum level by taking the colimit for each $n$ separately; the spectrum level colimit is then obtained by applying $L$.
+
+The central technical issue that must be faced in any version of the category of spectra is how to define the smash product of two prespectra $\{D_n\}$ and $\{E_n\}$. Any such construction must begin with the naive bi-indexed smash product $\{D_m \wedge E_n\}$. The problem arises of how to convert it back into a singly indexed object in some good way. It is an instructive exercise to attempt to do this directly. One quickly gets entangled in permutations of suspension coordinates. Let us think of a circle as the one-point compactification of $\mathbb{R}$ and the sphere $S^n$ as the one-point compactification of $\mathbb{R}^n$. Then the iterated structure maps $\Sigma^n E_m = E_m \wedge S^n \longrightarrow E_{m+n}$ seem to involve $\mathbb{R}^n$ as the last $n$ coordinates in $\mathbb{R}^{m+n}$. This is literally true if we consider the sphere prespectrum $\{S\}$ with identity structural maps. This suggests that our entanglement really concerns changes of basis. If so, then we all know the solution: do our linear algebra in a coordinate-free setting, choosing bases only when it is convenient and avoiding doing so when it is inconvenient.
+
+Let $\mathbb{R}^\infty$ denote the union of the $\mathbb{R}^n$, $n > 0$. This is a space whose elements are sequences of real numbers, all but finitely many of which are zero. We give it the evident inner product. By a \emph{universe} $U$, we mean an inner product space isomorphic to $\mathbb{R}^\infty$. If $V$ is a finite dimensional subspace of $U$, we refer to $V$ as an \emph{indexing space} in $U$, and we write $S^V$ for the one-point compactification of $V$, which is a based sphere. We write $\Sigma^V X$ for $X \wedge S^V$ and $\Omega^V X$ for $F(S^V, X)$.
+
+By a \emph{prespectrum indexed on $U$}, we mean a family of based spaces $EV$, one for each indexing space $V$ in $U$, together with structure maps
+\[ \sigma_{V,W}: \Sigma^{W-V} EV \longrightarrow EW \]
+whenever $V \subset W$, where $W-V$ denotes the orthogonal complement of $V$ in $W$. We require $\sigma_{V,V} = \id$, and we require the evident transitivity diagram to commute for $V \subset W \subset Z$:
+
+\begin{center}
+\begin{tikzcd}
+\Sigma^{Z-W}\Sigma^{W-V} EV \arrow[r] \arrow[d, "\cong"'] & \Sigma^{Z-W} EW \arrow[d] \\
+\Sigma^{Z-V} EV \arrow[r] & EZ.
+\end{tikzcd}
+\end{center}
+
+We call $E$ a \emph{spectrum indexed on $U$} if the adjoints
+\[ \tilde{\sigma}: EV \longrightarrow \Omega^{W-V} EW \]
+of the structural maps are homeomorphisms. As before, the forgetful functor $l$ from spectra to prespectra has a left adjoint spectrification functor $L$ that leaves spectra unchanged. We denote the categories of prespectra and spectra indexed on $U$ by $\mathscr{P}U$ and $\mathscr{S}U$. When $U$ is fixed and understood, we abbreviate notation to $\mathscr{P}$ and $\mathscr{S}$.
+
+If $U = \mathbb{R}^\infty$ and $E$ is a spectrum indexed on $U$, we obtain a spectrum in our original sense by setting $E_n = E\mathbb{R}^n$. Conversely, if $\{E_n\}$ is a spectrum in our original sense, we obtain a spectrum indexed on $U$ by setting $EV = \Omega^{\mathbb{R}^n-V} E_n$ where $n$ is minimal such that $V \subset \mathbb{R}^n$. It is easy to work out what the structural maps must be. This gives an isomorphism between our new category of spectra indexed on $U$ and our original category of sequentially indexed spectra.
+
+More generally, it often happens that a spectrum or prespectrum is naturally indexed on some other cofinal set $\mathscr{A}$ of indexing spaces in $U$. Here cofinality means that every indexing space $V$ is contained in some $A \in \mathscr{A}$; it is convenient to also require that $\{0\} \in \mathscr{A}$. We write $\mathscr{P}\mathscr{A}$ and $\mathscr{S}\mathscr{A}$ for the categories of prespectra and spectra indexed on $\mathscr{A}$. On the spectrum level, all of the categories $\mathscr{S}\mathscr{A}$ are isomorphic since we can extend a spectrum indexed on $\mathscr{A}$ to a spectrum indexed on all indexing spaces $V$ in $U$ by the method that we just described for the case $\mathscr{A} = \{\mathbb{R}^n\}$.
+
+\begin{remark}
+J. P. May. Categories of spectra and infinite loop spaces. Springer Lecture Notes in Mathematics Vol. 99. 1969, 448-479.
+\end{remark}
+
+\section{Smash products}
+
+We can now define a smash product. Given prespectra $E$ and $E'$ indexed on universes $U$ and $U'$, we form the collection $\{EV \wedge E'V'\}$, where $V$ and $V'$ run through the indexing spaces in $U$ and $U'$, respectively. With the evident structure maps, this is a prespectrum indexed on the set of indexing spaces in $U \oplus U'$ that are of the form $V \oplus V'$. If we start with spectra $E$ and $E'$, we can apply the functor $L$ to get to a spectrum indexed on this set, and we can then extend the result to a spectrum indexed on all indexing spaces in $U \oplus U'$. We thereby obtain the ``external smash product'' of $E$ and $E'$,
+\[ E \wedge E' \in \mathscr{S}(U \oplus U'). \]
+Thus, if $U=U'$, then two-fold smash products are indexed on $U^2$, three-fold smash products are indexed on $U^3$, and so on.
+
+This external smash product is associative up to isomorphism,
+\[ (E \wedge E') \wedge E'' \cong E \wedge (E' \wedge E''). \]
+This is evident on the prespectrum level. It follows on the spectrum level by a formal argument of a sort that pervades the theory. One need only show that, for prespectra $D$ and $D'$,
+\[ L(lL(D) \wedge D') \cong L(D \wedge D') \cong L(D \wedge lL(D')). \]
+Conceptually, these are commutation relations between functors that are left adjoints, and they will hold if and only if the corresponding commutation relations are valid for the right adjoints. We shall soon write down the right adjoint function spectra functors. They turn out to be so simple and explicit that it is altogether trivial to check the required commutation relations relating them and the right adjoint $l$.
+
+The external smash product is very nearly commutative, but to see this we need another observation. If $f: U \longrightarrow U'$ is a linear isometric isomorphism, then we obtain an isomorphism of categories $f^*: \mathscr{S}U' \longrightarrow \mathscr{S}U$ via
+\[ (f^*E')(V) = E'(fV). \]
+Its inverse is $f_* = (f^{-1})^*$. If $\tau: U \oplus U' \longrightarrow U' \oplus U$ is the transposition, then the commutativity isomorphism of the smash product is
+\[ E' \wedge E \cong \tau_*(E \wedge E'). \]
+Analogously, the associativity isomorphism implicitly used the obvious isomorphism of universes $(U \oplus U') \oplus U'' \cong U \oplus (U' \oplus U'')$.
+
+What about unity? We would like $E \wedge S$ to be isomorphic to $E$, but this doesn't make sense on the face of it since these spectra are indexed on different universes. However, for a based space $X$ and a prespectrum $E$, we have a prespectrum $E \wedge X$ with
+\[ (E \wedge X)(V) = EV \wedge X. \]
+If we start with a spectrum $E$ and apply $L$, we obtain a spectrum $E \wedge X$. It is quite often useful to think of based spaces as spectra indexed on the universe $\{0\}$. This makes good sense on the face of our definitions, and we have $E \wedge S^0 \cong E$, where $S^0$ means the space $S^0$.
+
+Of course, this is not adequate, and we have still not addressed our original problem about bi-indexed smash products: we have only given it a bit more formal structure. To solve these problems, we go back to our ``change of universe functors'' $f^*: \mathscr{S}U' \longrightarrow \mathscr{S}U$. Clearly, to define $f^*$, the map $f: U \longrightarrow U'$ need only be a linear isometry, not necessarily an isomorphism. While a general linear isometry $f$ need not be an isomorphism, it is a monomorphism. For a prespectrum $E \in \mathscr{P}U$, we can define a prespectrum $f_*E \in \mathscr{P}U'$ by
+\begin{equation}
+    (f_*E)(V') = EV \wedge S^{V' - fV}, \text{ where } V = f^{-1}(V' \cap f(U)).
+\end{equation}
+Its structure maps are induced from those of $E$ via the isomorphisms
+\begin{equation}
+    EV \wedge S^{V' - fV} \wedge S^{W' - V'} \cong EV \wedge S^{W - V} \wedge S^{W' - fW}.
+\end{equation}
+As usual, we use the functor $L$ to extend to a functor $f_*: \mathscr{S}U \longrightarrow \mathscr{S}U'$. As is easily verified on the prespectrum level and follows formally on the spectrum level, the inverse isomorphisms that we had in the case of isomorphisms generalize to adjunctions in the case of isometries:
+\begin{equation}
+    \mathscr{S}U'(f_*E, E') \cong \mathscr{S}U(E, f^*E').
+\end{equation}
+
+How does this help us? Let $\mathscr{I}(U, U')$ denote the set of linear isometries $U \longrightarrow U'$. If $V$ is an indexing space in $U$, then $\mathscr{I}(V, U')$ has an evident metric topology, and we give $\mathscr{I}(U, U')$ the topology of the union. It is vital --- and not hard to prove --- that $\mathscr{I}(U, U')$ is in fact a contractible space. As we shall explain later, this can be used to prove a version of the following result (which is slightly misstated for clarity in this sketch of ideas).
+
+\begin{theorem}
+Any two linear isometries $U \longrightarrow U'$ induce canonically and coherently weakly equivalent functors $\mathscr{S}U \longrightarrow \mathscr{S}U'$.
+\end{theorem}
+
+We have not yet defined weak equivalences, nor have we defined the stable category. A map $f: D \longrightarrow E$ of spectra is said to be a \emph{weak equivalence} if each of its component maps $DV \longrightarrow EV$ is a weak equivalence. Since the smash product of a spectrum and a space is defined, we have cylinders $E \wedge I_+$ and thus a notion of homotopy in $\mathscr{S}U$. We let $h\mathscr{S}U$ be the resulting homotopy category, and we let $\overline{h}\mathscr{S}U$ be the category that is obtained from $h\mathscr{S}U$ by adjoining formal inverses to the weak equivalences. We shall be more explicit later. This is our stable category, and we proceed to define its smash product.
+
+We choose a linear isometry $f: U^2 \longrightarrow U$. For spectra $E$ and $E'$ indexed on $U$, we define an \emph{internal smash product} $f_*(E \wedge E') \in \mathscr{S}U$. Up to canonical isomorphism in the stable category $h\mathscr{S}U$, $f_*(E \wedge E')$ is independent of the choice of $f$. For associativity, we have
+\[ f_*(E \wedge f_*(E' \wedge E'')) \cong (f(1 \oplus f))_*(E \wedge E' \wedge E'') \simeq (f(f \oplus 1))_*(E \wedge E' \wedge E'') \cong f_*(f_*(E \wedge E') \wedge E''). \]
+Here we write $\cong$ for isomorphisms that hold on the point-set level and $\simeq$ for isomorphisms in the category $\overline{h}\mathscr{S}U$. For commutativity,
+\[ f_*(E' \wedge E) \simeq f_* \tau_*(E \wedge E') \simeq (f\tau)_*(E \wedge E') \simeq f_*(E \wedge E'). \]
+
+For a space $X$, we have a suspension prespectrum $\{\Sigma^V X\}$ whose structure maps are identity maps. We let $\Sigma^\infty X = L\{\Sigma^V X\}$. In this case, the construction of $L$ is quite concrete, and we find that
+\begin{equation}
+    \Sigma^\infty X = \{Q\Sigma^V X\}, \text{ where } QY = \bigcup \Omega^W \Sigma^W Y.
+\end{equation}
+This gives the suspension spectrum functor $\Sigma^\infty: \mathscr{T} \longrightarrow \mathscr{S}U$. It has a right adjoint $\Omega^\infty$ which sends a spectrum $E$ to the space $E_0 = E\{0\}$:
+\begin{equation}
+    \mathscr{S}U(\Sigma^\infty X, F) \cong \mathscr{T}(X, \Omega^\infty F).
+\end{equation}
+The functor is the same as $\Omega^\infty \Sigma^\infty$. For a linear isometry $f: U \longrightarrow U'$, we have
+\begin{equation}
+    f_* \Sigma^\infty X \cong \Sigma^\infty X
+\end{equation}
+since, trivially, $\Omega^\infty f^* F' = F'_0 = \Omega^\infty F'$. A space equivalent to $F_0$ for some spectrum $E$ is called an infinite loop space.
+
+Remember that we can think of the category $\mathscr{T}$ of based spaces as the category $\mathscr{S}\{0\}$ of spectra indexed on the universe $\{0\}$. With this interpretation, $\Omega^\infty$ coincides with $i^*$, where $i: \{0\} \longrightarrow U$ is the inclusion. Therefore, by the uniqueness of adjoints, $\Sigma^\infty X$ is isomorphic to $i_* X$. Let $i_1: U \longrightarrow U^2$ be the inclusion of $U$ as the first summand in $U \oplus U$. The unity isomorphism of the smash product is the case $X = S^0$ of the following isomorphism in $h\mathscr{S}U$:
+\begin{equation}
+    f_*(E \wedge \Sigma^\infty X) \cong f_*(i_1)_*(E \wedge X) \cong (f \circ i_1)_*(E \wedge X) \simeq 1_*(E \wedge X) = E \wedge X.
+\end{equation}
+We conclude that, up to natural isomorphisms that are implied by Theorem 3.4 and elementary inspections, the stable category $\overline{h}\mathscr{S}U$ is symmetric monoidal with respect to the internal smash product $f_*(E \wedge E')$ for any choice of linear isometry $f: U^2 \longrightarrow U$. It is customary, once this has been proven, to write $E \wedge E'$ to mean this internal smash product, relying on context to distinguish it from the external product.
+
+
+
+\end{document}

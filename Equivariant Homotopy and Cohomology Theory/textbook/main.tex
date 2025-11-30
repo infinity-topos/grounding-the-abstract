@@ -1,0 +1,44 @@
+\documentclass[11pt, openany]{book} % openany 允许章节在偶数页开始，适合草稿
+
+% 引入自定义样式文件
+\usepackage{equihomotopy}
+
+% ==========================================
+% 分章节编译设置
+% ==========================================
+% 如果只想编译第七章，请取消下面这行的注释：
+%\includeonly{chapters/chap07}
+
+% 如果想编译第一章和第七章：
+%\includeonly{chapters/chap01, chapters/chap07}
+% ==========================================
+
+\title{\textbf{Equivariant Homotopy and Cohomology Theory}}
+\author{J.P. May}
+\date{1996}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+
+% 这里引入各章节文件
+% 建议在项目文件夹下创建一个名为 'chapters' 的文件夹
+
+% \include{chapters/intro}
+% \include{chapters/chap01}
+% ... (其他章节)
+\include{chapters/chap12} 
+% ... (后续章节)
+
+\backmatter
+% 参考文献
+\begin{thebibliography}{99}
+\bibitem{May96} J.P. May et al., \textit{Equivariant Homotopy and Cohomology Theory}, CBMS Regional Conference Series in Mathematics, 1996.
+% 在此添加更多参考文献
+\end{thebibliography}
+
+\end{document}
