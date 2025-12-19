@@ -1,0 +1,141 @@
+\lecture{Perfectoid Spaces I: The Weight-Monodromy Conjecture}{Peter Scholze}
+
+% ==========================================
+% [Scope Start] 本章符号定义的局部作用域
+% ==========================================
+\begingroup
+
+% --- 本章专用符号 (Local Macros) ---
+% 这些定义只在 \begingroup 和 \endgroup 之间有效
+\newcommand{\Qp}{\mathbb{Q}_p}
+\newcommand{\Zp}{\mathbb{Z}_p}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Ql}{\mathbb{Q}_{\ell}}
+\newcommand{\barQp}{\overline{\mathbb{Q}}_p}
+\newcommand{\barQl}{\overline{\mathbb{Q}}_{\ell}}
+\newcommand{\barFp}{\overline{\mathbb{F}}_p}
+\newcommand{\Gm}{\mathbb{G}_m}
+\newcommand{\Gal}{\mathrm{Gal}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\Het}{H_{\mathrm{\acute{e}t}}} % Etale cohomology
+\newcommand{\Rep}{\mathrm{Rep}}
+% ==========================================
+% 正文开始
+% ==========================================
+
+\section{Introduction}
+These notes reconstruct the motivations leading to the theory of Perfectoid Spaces, rooted in Peter Scholze's undergraduate years in Bonn (circa 2007)[cite: 2]. The central motivation discussed here is the \textbf{Weight-Monodromy Conjecture} (WMC) by Deligne.
+
+\section{The Setup and The Monodromy Operator}
+
+\subsection{Geometric Setup}
+Let $K = \Qp$ be the $p$-adic field. Let $X$ be a smooth projective scheme over $\Qp$[cite: 2]. Fix a prime $\ell \neq p$[cite: 3]. We are interested in the $\ell$-adic cohomology of $X$:
+\[
+    V \coloneqq \Het^i(X_{\barQp}, \barQl).
+\]
+This vector space admits a continuous action of the absolute Galois group $G_{\Qp} = \Gal(\barQp/\Qp)$[cite: 4].
+
+\subsection{The Monodromy Theorem}
+To state the conjecture, we must first define the structure of this Galois representation. The inertia group $I_{\Qp} \subset G_{\Qp}$ acts on $V$. Even if $X$ does not have good reduction, Grothendieck's $\ell$-adic Monodromy Theorem describes this action.
+
+\begin{theorem}[Grothendieck's $\ell$-adic Monodromy]
+There exists a nilpotent operator $N: V \to V(-1)$, called the \textbf{Monodromy Operator}, such that on an open subgroup of the inertia $I_{\Qp}$, the action of $\sigma \in I_{\Qp}$ is given by
+\[
+    \rho(\sigma) = \exp(t_{\ell}(\sigma) N),
+\]
+where $t_{\ell}: I_{\Qp} \to \Z_{\ell}$ is the $\ell$-adic tame character[cite: 10, 11].
+\end{theorem}
+
+\begin{definition}[Weight Decomposition]
+The representation $V$ admits a decomposition based on the eigenvalues of the Geometric Frobenius $\Phi$. We say $V$ has a \textbf{weight decomposition}[cite: 8]:
+\[
+    V = \bigoplus_{j=0}^{2i} V_j,
+\]
+where the eigenvalues of $\Phi$ acting on $V_j$ are Weil numbers of weight $j$.
+\end{definition}
+
+The monodromy operator $N$ respects this structure in a specific way. Since $N$ maps $V$ to $V(-1)$ (a Tate twist), it lowers the weight by 2[cite: 13]:
+\[
+    N: V_j \longrightarrow V_{j-2}(-1).
+\]
+
+\section{The Weight-Monodromy Conjecture}
+
+Deligne proposed the following conjecture regarding the interplay between the filtration by weights and the monodromy operator.
+
+\begin{conjecture}[Deligne's Weight-Monodromy Conjecture] \label{conj:wmc}
+For any $j \ge 0$, the power of the monodromy operator induces an isomorphism[cite: 17, 25]:
+\[
+    N^j: V_{i+j} \xrightarrow{\sim} V_{i-j}(-j).
+\]
+\end{conjecture}
+
+Intuitively, this suggests that the monodromy operator acts like the hard Lefschetz operator, reflecting the weight filtration across the center $i$.
+
+\section{Examples and Evidence}
+
+\subsection{Case 1: Good Reduction}
+Assume $X$ has good reduction, meaning there exists a smooth projective model $\mathcal{X}$ over $\Zp$ such that $\mathcal{X}_{\Qp} \cong X$[cite: 19].
+
+\begin{lemma}
+If $X$ has good reduction, the action of the inertia group $I_{\Qp}$ is trivial[cite: 22].
+\end{lemma}
+
+Consequently, the monodromy operator is trivial ($N = 0$)[cite: 23]. In this case, Conjecture \ref{conj:wmc} implies that $V_j = 0$ for all $j \neq i$. Thus $V = V_i$. This reduces to the \textbf{Weil Conjectures} for the reduction $X_{\F_p}$, which are known[cite: 26].
+
+\subsection{Case 2: The Tate Curve}
+Consider an elliptic curve $E$ over $\Qp$ with split multiplicative reduction. As a rigid analytic space, $E$ can be uniformized as the \textbf{Tate Curve}[cite: 30]:
+\[
+    E(\barQp) \cong \Gm(\barQp) / q^{\Z}, \quad \text{with } |q| < 1.
+\]
+We compute $H^1(E_{\barQp}, \barQl)$. Using the Hochschild-Serre spectral sequence (or the Kummer sequence for $\Gm$), we have an exact sequence[cite: 39]:
+\[
+    0 \longrightarrow \barQl(0) \longrightarrow H^1(E, \barQl) \longrightarrow \barQl(-1) \longrightarrow 0.
+\]
+Here:
+\begin{itemize}
+    \item The subspace $V_0 = \barQl(0)$ has weight 0.
+    \item The quotient $V_2 = \barQl(-1)$ has weight 2.
+    \item The center weight is $i=1$.
+\end{itemize}
+The Monodromy operator $N$ maps the weight 2 part to the weight 0 part:
+\[
+    N: V_2 \xrightarrow{\sim} V_0(-1).
+\]
+This verifies the conjecture for $j=1$: $N^1: V_{1+1} \to V_{1-1}(-1)$ is an isomorphism[cite: 40].
+
+\section{Strategy: Reduction to Equal Characteristic}
+
+\subsection{Known Results}
+The conjecture is known in the following cases:
+\begin{enumerate}
+    \item Dimension of $X$ is $\le 2$[cite: 47].
+    \item \textbf{Equal Characteristic:} If $X$ is defined over a function field $F \cong \F_p((t))$ rather than $\Qp$, the conjecture was proved by Deligne using $L$-functions[cite: 52, 53].
+\end{enumerate}
+
+\subsection{Rapoport's Suggestion}
+The strategy to prove WMC in mixed characteristic ($\Qp$) is to reduce it to the equal characteristic case ($\F_p((t))$).
+\begin{itemize}
+    \item \textbf{Idea:} Base change to a highly ramified extension $K/\Qp$[cite: 60].
+    \item Let $e$ be the ramification index. The ring of integers behaves like:
+    \[
+        \mathcal{O}_K / p \cong \F_q[t] / t^e.
+    \]
+    \item As $e \to \infty$, this ring approximates $\F_q[[t]]$[cite: 63, 65].
+\end{itemize}
+
+\subsection{The Obstruction and Perfectoid Spaces}
+However, for any finite $e$, the approximation is insufficient. There are algebraic obstructions to deforming $X_{\mathcal{O}_K/p}$ to a scheme over $\F_q[[t]]$[cite: 72, 76].
+
+This failure suggests that we must pass to the limit $e = \infty$. This leads to the definition of \textbf{Perfectoid Fields} (fields with infinite ramification). In the world of perfectoid spaces, we can construct a rigorous isomorphism (Tilting) between geometric objects in mixed characteristic and equal characteristic:
+\[
+    X_{\text{perfectoid}} \longleftrightarrow X^\flat_{\text{equal char}}.
+\]
+This correspondence allows the transfer of cohomological results (like Deligne's theorem) back to $\Qp$, as realized in Scholze's work [cite: 78-81].
+
+% ==========================================
+% [Scope End] 本章结束，释放局部符号
+% ==========================================
+\endgroup
