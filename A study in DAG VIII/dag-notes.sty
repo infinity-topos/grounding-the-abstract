@@ -1,0 +1,85 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGE IDENTIFICATION
+%----------------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dag-notes}[2023/10/27 v1.0 Custom Style for Lurie's DAG Notes]
+
+%----------------------------------------------------------------------------------------
+%	BASIC PACKAGES & GEOMETRY
+%----------------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern} % 更加清晰的字体
+\RequirePackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\RequirePackage{fancyhdr} % 页眉页脚
+
+%----------------------------------------------------------------------------------------
+%	MATH PACKAGES
+%----------------------------------------------------------------------------------------
+\RequirePackage{amsmath, amssymb, amsthm, amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs} % 花体字 \mathscr
+\RequirePackage{tikz-cd}  % 交换图表，DAG笔记必备
+
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS (Usually loaded last)
+%----------------------------------------------------------------------------------------
+\RequirePackage[hidelinks]{hyperref}
+
+%----------------------------------------------------------------------------------------
+%	THEOREM ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{construction}[definition]{Construction}
+\newtheorem{convention}[definition]{Convention} % 增加 Convention 环境
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{conjecture}[definition]{Conjecture}
+
+%----------------------------------------------------------------------------------------
+%	MACROS & SHORTCUTS (DAG SPECIFIC)
+%----------------------------------------------------------------------------------------
+
+% Categories & Functors
+\newcommand{\QCoh}{\operatorname{QCoh}}
+\newcommand{\Coh}{\operatorname{Coh}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Fun}{\operatorname{Fun}}
+\newcommand{\Map}{\operatorname{Map}} % Mapping space
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\Alg}{\operatorname{Alg}}
+\newcommand{\CAlg}{\operatorname{CAlg}}
+\newcommand{\Sp}{\operatorname{Sp}} % Spectra
+\newcommand{\PSh}{\mathcal{P}}      % Presheaves
+
+% Geometry
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Sch}{\operatorname{Sch}}
+\newcommand{\St}{\operatorname{St}} 
+\newcommand{\co}{\mathcal{O}} % Structure sheaf
+
+% Limits and Colimits
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{\varinjlim}
+\newcommand{\tensor}{\otimes}
+
+% Logic & Sets
+\newcommand{\infcat}{$\infty$-category}
+\newcommand{\infcats}{$\infty$-categories}
+\newcommand{\sSet}{\operatorname{Set}_{\Delta}} % Simplicial Sets
+
+\newcommand{\Cat}{\operatorname{Cat}}            % 经典 1-范畴构成的范畴
+\newcommand{\CatI}{\mathcal{C}\mathrm{at}_{\infty}} % 无穷范畴构成的无穷范畴
+\newcommand{\Kan}{\mathbf{Kan}}                  % Kan 复形全子范畴
+\newcommand{\Ob}{\mathrm{Ob}}  
+% End of Package
+\endinput

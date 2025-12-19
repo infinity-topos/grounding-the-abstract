@@ -1,0 +1,96 @@
+%----------------------------------------------------------------------------------------
+%	SECTION 2: Preliminaries
+%----------------------------------------------------------------------------------------
+\section{Preliminaries}
+\subsection{$\infty$-categories}
+
+
+\begin{definition}[$\infty$-Category]
+A simplicial set $K$ is an \textbf{$\infty$-category} if for every $n > 1$ and every \textbf{inner} index $0 < i < n$, every map of simplicial sets $f_0: \Lambda^n_i \to K$ admits an extension to an $n$-simplex $f: \Delta^n \to K$.
+\[
+\begin{tikzcd}
+\Lambda^n_i \arrow[d, hook] \arrow[r, "f_0"] & K \\
+\Delta^n \arrow[ru, dashed, "f"'] & 
+\end{tikzcd}
+\]
+\end{definition}
+
+\begin{definition}[Simplicial Category]
+A \textbf{simplicial category} (or $\sSet$-enriched category) $\mathcal{C}$ is a category where:
+\begin{enumerate}
+    \item For any two objects $X, Y \in \mathcal{C}$, the collection of morphisms between them is not a set, but a \textbf{simplicial set} $\Map_{\mathcal{C}}(X, Y)$.
+    \item For any three objects $X, Y, Z \in \mathcal{C}$, the composition map 
+    \[ \Map_{\mathcal{C}}(Y, Z) \times \Map_{\mathcal{C}}(X, Y) \to \Map_{\mathcal{C}}(X, Z) \]
+    is a morphism of simplicial sets and satisfies the usual associativity and identity axioms.
+\end{enumerate}
+A simplicial category $\mathcal{C}$ is \textbf{locally Kan} if for every pair of objects $X, Y \in \Ob(\mathcal{C})$, the mapping simplicial set $\Map_{\mathcal{C}}(X, Y)$ is a Kan complex.
+\end{definition}
+
+
+
+
+\begin{definition}[Simplicial Nerve $N_{\Delta}$]
+The \textbf{simplicial nerve} $N_{\Delta}(\mathcal{C})$ is the simplicial set defined by the assignment:
+\[ 
+    N_{\Delta}(\mathcal{C})_n = \mathrm{Hom}_{\Cat_{\Delta}}(\mathfrak{C}[\Delta^n], \mathcal{C}) 
+\]
+where $\mathfrak{C}[\Delta^n]$ is the \textbf{rigidification} of the $n$-simplex $\Delta^n$ into a simplicial category.
+\end{definition}
+
+\begin{definition}[$\infty$-category via $N_\Delta$]
+An \textbf{$\infty$-category} (or quasicategory) is a simplicial set $K$ that is equivalent to the simplicial nerve of some locally Kan simplicial category $\mathcal{C}$.
+\[ K \simeq N_{\Delta}(\mathcal{C}) \]
+\end{definition}
+
+
+
+
+
+\begin{theorem}[Joyal-Lurie]
+There exists a Quillen equivalence between the Joyal model structure on $\sSet$ (modeling quasicategories) and the Bergner model structure on $\Cat_{\Delta}$ (modeling simplicial categories):
+\[
+\mathfrak{C}[\cdot] : \sSet \rightleftarrows \Cat_{\Delta} : N_{\Delta}.
+\]
+Specifically, for any simplicial category $\mathcal{C}$ where mapping spaces are Kan complexes, its simplicial nerve $N_{\Delta}(\mathcal{C})$ is a quasicategory.
+\end{theorem}
+
+
+
+
+\begin{definition}[Free Cocompletion]
+Let $\mathcal{C}$ be a small \infcat{}. An \infcat{} $\PSh(\mathcal{C})$ is called the \textbf{free cocompletion} of $\mathcal{C}$ if it satisfies the following universal property:
+
+\begin{enumerate}
+    \item $\PSh(\mathcal{C})$ admits all small colimits.
+    \item There exists a functor $j: \mathcal{C} \to \PSh(\mathcal{C})$ (called the Yoneda embedding) such that for any \infcat{} $\mathcal{D}$ which admits small colimits, composition with $j$ induces an equivalence of \infcats{}:
+    \[
+        \Fun^L(\PSh(\mathcal{C}), \mathcal{D}) \xrightarrow{\sim} \Fun(\mathcal{C}, \mathcal{D}).
+    \]
+\end{enumerate}
+Here, $\Fun^L$ denotes the full subcategory of functors that preserve small colimits (left adjoints).
+\end{definition}
+
+
+\begin{definition}[The \infcat{} of Spaces]
+Let $\mathcal{S}$ denote the \infcat{} of spaces. It is defined in two equivalent ways:
+
+\begin{enumerate}
+    \item \textbf{Via Dwyer-Kan Localization:} \\
+    Let $W$ be the class of weak homotopy equivalences in $\sSet$. We define $\mathcal{S}$ as the homotopy coherent nerve of the simplicial localization:
+    \[
+        \mathcal{S} \coloneqq N\bigl(\sSet[W^{-1}]\bigr).
+    \]
+    Equivalently, via Kan complexes: $\mathcal{S} \simeq N(\Kan)$.
+
+    \item \textbf{Via Free Cocompletion:} \\
+    The \infcat{} $\mathcal{S}$ is the free cocompletion of the point $*$. That is, it is the category of presheaves:
+    \[
+        \mathcal{S} \simeq \PSh(*).
+    \]
+    Universal Property: For any cocomplete \infcat{} $\mathcal{C}$, there is an equivalence $\Fun^L(\mathcal{S}, \mathcal{C}) \simeq \mathcal{C}$.
+\end{enumerate}
+
+
+
+
+\end{definition}
