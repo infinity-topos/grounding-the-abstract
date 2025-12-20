@@ -1,7 +1,7 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 2: Preliminaries
 %----------------------------------------------------------------------------------------
-\begingroup
+{\begingroup
 
 
 % Categories & Functors
@@ -38,7 +38,12 @@
 \newcommand{\Kan}{\mathbf{Kan}}                  % Kan 复形全子范畴
 \newcommand{\Ob}{\mathrm{Ob}}  
 
-
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Sfin}{\mathcal{S}}
+\newcommand{\Nerve}{N}
+\newcommand{\Rig}{\mathfrak{C}}
+\newcommand{\Pinf}{\mathcal{P}}
+\newcommand{\Psimp}{\mathcal{P}_{\Delta}}
 
 \section{Preliminaries}
 \subsection{$\infty$-categories}
@@ -128,9 +133,227 @@ Let $\mathcal{S}$ denote the \infcat{} of spaces. It is defined in two equivalen
     \]
     Universal Property: For any cocomplete \infcat{} $\mathcal{C}$, there is an equivalence $\Fun^L(\mathcal{S}, \mathcal{C}) \simeq \mathcal{C}$.
 \end{enumerate}
-
-
-
-
 \end{definition}
-\endgroup
+
+\begin{theorem}
+Let $K$ be an $\infty$-category (quasi-category). Let $\C = \Rig[K]$ be its associated simplicial category (via rigidification). The construction of the presheaf $\infty$-category commutes with the nerve construction in the following sense:
+
+\begin{enumerate}
+    \item \textbf{Simplicial Side:} Consider the category of simplicial presheaves $\Psimp(\C) := \mathrm{Fun}_{\Delta}(\C^{op}, \Sfin_{\text{Kan}})$. This category admits a simplicial model structure (projective structure).
+    
+    \item \textbf{Infinity Side:} Consider the $\infty$-category of presheaves $\Pinf(K) := \mathrm{Fun}(K^{op}, \Sfin)$.
+    
+    \item \textbf{Equivalence:} There is an equivalence of $\infty$-categories:
+    \[ \Pinf(K) \simeq \Nerve \left( \Psimp(\C)^{\mathrm{cf}} \right) \]
+    where $\Psimp(\C)^{\mathrm{cf}}$ denotes the full simplicial subcategory of fibrant-cofibrant objects in the model category of simplicial presheaves.
+\end{enumerate}
+In summary, the presheaf of an $\infty$-category is modeled by the nerve of the strictly cocomplete simplicial category of enriched presheaves.
+\end{theorem}
+
+\begin{remark}[Homotopy Category via Fibrant-Cofibrant Objects]
+To correctly construct the homotopy category $\mathrm{Ho}(\mathcal{M})$ from a simplicial model category $\mathcal{M}$, one cannot simply take the path components $\pi_0$ of the mapping spaces between arbitrary objects. 
+
+Instead, one must restrict attention to the full subcategory of \textbf{fibrant-cofibrant objects}, denoted $\mathcal{M}_{cf}$. It is only within this subcategory that the simplicial mapping spaces $\mathrm{Map}_{\mathcal{M}}(X, Y)$ are guaranteed to be Kan complexes representing the correct derived mapping spaces. The morphisms in the homotopy category are thus given by:
+\[
+[X, Y]_{\mathrm{Ho}(\mathcal{M})} \cong \pi_0 \mathrm{Map}_{\mathcal{M}}(X, Y) \quad \text{for } X, Y \in \mathcal{M}_{cf}.
+\]
+For general objects $X, Y$, one must first replace them with weakly equivalent fibrant-cofibrant objects (via cofibrant replacement $QX$ and fibrant replacement $RY$) to compute this group.
+\end{remark}
+\endgroup}
+
+{\begingroup
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\Sp}{\text{Sp}}
+\newcommand{\Exc}{\text{Exc}}
+\newcommand{\Sfin}{\mathcal{S}_*^{\text{fin}}}
+\newcommand{\uMap}{\underline{\mathrm{Map}}}
+\newcommand{\Sone}{\mathbb{S}}
+\newcommand{\Vlim}{\varprojlim}
+\newcommand{\Clim}{\varinjlim}
+\newcommand{\Ssphere}{\mathbb{S}}
+\newcommand{\wedgeS}{\wedge}
+\newcommand{\Stab}{\mathrm{Stab}} % 稳定化算子
+\newcommand{\Sspace}{\mathcal{S}} % 空间范畴
+\newcommand{\otimesD}{\otimes_{\mathcal{D}}}
+\newcommand{\Unit}{\mathbf{1}_{\mathcal{D}}}
+
+\newcommand{\SigInf}{\Sigma^\infty}    % Suspension Spectrum Functor
+\newcommand{\OmeInf}{\Omega^\infty}    % Infinite Loop Space Functor
+
+
+\subsection{Stable $\infty$-Category}
+
+\begin{definition}[Loop Object]
+For any object $X \in \C$, the loop object $\Omega X$ is the limit of the diagram $0 \to X \leftarrow 0$. It fits into the following pullback square:
+\[
+\begin{tikzcd}
+\Omega X \arrow[r] \arrow[d] \arrow[dr, phantom, "\lrcorner", very near start] & 0 \arrow[d] \\
+0 \arrow[r] & X
+\end{tikzcd}
+\]
+Intuitively, $\Omega X \simeq 0 \times_X 0$.
+\end{definition}
+
+\begin{definition}[Suspension Object]
+For any object $X \in \C$, the suspension object $\Sigma X$ is the colimit of the diagram $0 \leftarrow X \to 0$. It fits into the following pushout square:
+\[
+\begin{tikzcd}
+X \arrow[r] \arrow[d] \arrow[dr, phantom, "\ulcorner", very near end] & 0 \arrow[d] \\
+0 \arrow[r] & \Sigma X
+\end{tikzcd}
+§\]
+Intuitively, $\Sigma X \simeq 0 \amalg_X 0$.
+\end{definition}
+\begin{definition}[Stable $\infty$-Category]
+An $\infty$-category $\C$ is called \textbf{stable} if it satisfies the following conditions:
+\begin{enumerate}
+    \item There exists a zero object $0 \in \C$ (i.e., $\C$ is pointed).
+    \item Every morphism in $\C$ admits a kernel and a cokernel.
+    \item A triangle in $\C$ is a pushout square if and only if it is a pullback square.
+\end{enumerate}
+\end{definition}
+\begin{definition}[The Stabilization of an $\infty$-Category]
+Let $\mathcal{C}$ be an $\infty$-category admitting finite limits. The process of constructing the stable $\infty$-category associated to $\mathcal{C}$ proceeds in two stages:
+
+\begin{enumerate}
+    \item \textbf{Pointed View (Formation of $\mathcal{C}_*$):} \\
+    First, we construct the \textit{pointed} $\infty$-category $\mathcal{C}_*$. Assuming $\mathcal{C}$ has a terminal object $*$, $\mathcal{C}_*$ is defined as the under-category of the terminal object:
+    \[
+    \mathcal{C}_* := \mathcal{C}_{*/} \cong \text{Fun}(\Delta^1, \mathcal{C}) \times_{\text{Fun}(\{0\}, \mathcal{C})} \{*\}
+    \]
+    Objects in $\mathcal{C}_*$ are morphisms $* \to X$ in $\mathcal{C}$ (i.e., objects equipped with a base point). In $\mathcal{C}_*$, the object corresponding to the identity $* \to *$ serves as a \textit{zero object} (both initial and terminal). Consequently, the loop functor $\Omega: \mathcal{C}_* \to \mathcal{C}_*$ is well-defined by $\Omega X = * \times_X *$.
+
+    \item \textbf{Stabilization (Formation of $\text{Sp}(\mathcal{C})$):} \\
+    The \textit{stabilization} of $\mathcal{C}$, denoted as $\text{Sp}(\mathcal{C})$ (or $\text{Stab}(\mathcal{C})$), is defined as the $\infty$-category of spectrum objects in $\mathcal{C}_*$. It is constructed as the homotopy limit of the tower of loop functors:
+    \[
+    \text{Sp}(\mathcal{C}) := \varprojlim \left( \cdots \xrightarrow{\Omega} \mathcal{C}_* \xrightarrow{\Omega} \mathcal{C}_* \xrightarrow{\Omega} \mathcal{C}_* \right)
+    \]
+    Explicitly, an object $E \in \text{Sp}(\mathcal{C})$ consists of a sequence $\{E_n\}_{n \geq 0}$ of objects in $\mathcal{C}_*$ together with equivalences $E_n \xrightarrow{\sim} \Omega E_{n+1}$ for each $n$. This construction forces the suspension functor $\Sigma$ to be an equivalence, rendering $\text{Sp}(\mathcal{C})$ a stable $\infty$-category.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Universal Property of Stabilization]
+Let $\C$ be an $\infty$-category with finite limits and a terminal object $\ast$. Let $\C_* = \C_{\ast/}$ be its pointed version. The stabilization $\Sp(\C)$ is characterized by the following equivalent descriptions:
+
+\begin{enumerate}
+    \item \textbf{Internal Construction (Loop Towers):} 
+    $\Sp(\C)$ is the homotopy limit of the sequence of loop functors:
+    \[
+    \Sp(\C) \simeq \varprojlim \left( \cdots \xrightarrow{\Omega} \C_* \xrightarrow{\Omega} \C_* \xrightarrow{\Omega} \C_* \right)
+    \]
+    An object in $\Sp(\C)$ is an $\Omega$-spectrum, i.e., a sequence $\{E_n\}_{n \geq 0}$ in $\C_*$ with equivalences $E_n \simeq \Omega E_{n+1}$.
+
+    \item \textbf{External Construction (Excision):} 
+    $\Sp(\C)$ is equivalent to the $\infty$-category of pointed excisive functors from the category of finite pointed spaces $\Sfin$ to $\C$:
+    \[
+    \Sp(\C) \simeq \Exc_*(\Sfin, \C)
+    \]
+    A functor $F: \Sfin \to \C$ belongs to $\Exc_*(\Sfin, \C)$ if $F(\ast) \simeq \ast$ and $F$ maps every pushout square in $\Sfin$ to a pullback square in $\C$.
+\end{enumerate}
+
+Furthermore, the stabilization $\Sp(\C)$ is the universal stable $\infty$-category under $\C$: for any stable $\infty$-category $\mathcal{D}$, the functor $\Sp(\C) \to \mathcal{D}$ induces an equivalence of $\infty$-categories $\text{Fun}^{\text{lex}}(\Sp(\C), \mathcal{D}) \simeq \text{Fun}^{\text{lex}}(\C, \mathcal{D})$, where $\text{Fun}^{\text{lex}}$ denotes the $\infty$-category of left exact functors.
+\end{theorem}
+
+\begin{remark}[Distinction between $\Stab(\C)$ and $\Sp$]
+It is essential to distinguish between the abstract process of stabilization and the specific category of spectra:
+\begin{enumerate}
+    \item \textbf{The Category of Spectra ($\Sp$):} Historically and by convention, $\Sp$ refers specifically to the stabilization of the $\infty$-category of pointed spaces $\Sspace_{\ast}$. That is:
+    \[ \Sp \simeq \Stab(\Sspace) \simeq \varprojlim (\dots \xrightarrow{\Omega} \Sspace_{\ast} \xrightarrow{\Omega} \Sspace_{\ast}) \]
+    This category serves as the unit object in the $\infty$-category of stable $\infty$-categories and provides the ground for stable homotopy theory.
+
+    \item \textbf{Stabilization of an Arbitrary $\infty$-Category ($\Stab(\C)$):} For any $\infty$-category $\C$ with finite limits, $\Stab(\C)$ is the stable $\infty$-category constructed as the limit of the tower of loop functors:
+    \[ \Stab(\C) = \varprojlim (\dots \xrightarrow{\Omega} \C_{\ast} \xrightarrow{\Omega} \C_{\ast}) \]
+    While $\Stab(\C)$ is always a stable $\infty$-category, it may not possess a symmetric monoidal structure (like the smash product) unless $\C$ itself is equipped with a compatible monoidal structure.
+
+    \item \textbf{The Relation:} Any stable $\infty$-category $\mathcal{D}$ is naturally tensored over $\Sp$. In this sense, $\Sp$ plays a role analogous to the ring of integers $\mathbb{Z}$ in abelian groups: for any $D \in \mathcal{D}$ and $E \in \Sp$, there is a well-defined object $E \otimes D \in \mathcal{D}$.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Internal Mapping Spectrum in $\Stab(\C)$]
+Let $\C$ be a \textbf{closed symmetric monoidal $\infty$-category} $(\C, \otimes, \mathbf{1})$ that admits finite limits. Assume further that the tensor product $\otimes$ is compatible with the stabilization (i.e., it preserves colimits in each variable). 
+
+Let $\mathcal{D} = \Stab(\C)$ be the resulting stable $\infty$-category, equipped with the induced symmetric monoidal structure $\otimesD$. For any objects $X, Y \in \mathcal{D}$, the \textbf{internal mapping spectrum} is defined as the object $\uMap_{\mathcal{D}}(X, Y) \in \mathcal{D}$ that satisfies the following conditions:
+
+\begin{enumerate}
+    \item \textbf{Adjunction Property:} It is the right adjoint to the tensor product functor. For any object $Z \in \mathcal{D}$, there is a natural equivalence of mapping spaces:
+    \[ \Map_{\mathcal{D}}(Z \otimesD X, Y) \simeq \Map_{\mathcal{D}}(Z, \uMap_{\mathcal{D}}(X, Y)) \]
+    
+    \item \textbf{Spectrum Level Structure:} In terms of the sequence of objects $\{E_n\} \in \C_{\ast}$ representing the spectrum, the $n$-th level of the internal mapping spectrum is given by:
+    \[ \uMap_{\mathcal{D}}(X, Y)_n \simeq \uMap_{\C}(X, \Sigma^n Y) \]
+    where $\uMap_{\C}$ denotes the internal Hom in the underlying category $\C$ (if it exists) or the corresponding enrichment.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Mapping Spectrum]
+Let $X$ and $Y$ be spectra in $\Sp$. The \textbf{mapping spectrum} from $X$ to $Y$, denoted as $\uMap(X, Y) \in \Sp$, is the unique spectrum (up to equivalence) characterized by the following properties:
+
+\begin{enumerate}
+    \item \textbf{Adjunction (Internal Hom):}
+    For any spectrum $Z$, there is a natural equivalence of mapping spaces:
+    \[
+    \Map_{\Sp}(Z \wedgeS X, Y) \simeq \Map_{\Sp}(Z, \uMap(X, Y))
+    \]
+    This identifies $\uMap(X, Y)$ as the right adjoint to the smash product functor $( - \wedgeS X )$.
+
+    \item \textbf{Omega-Spectrum Structure:}
+    The $n$-th space of the mapping spectrum is equivalent to the space of maps from $X$ to the $n$-th suspension of $Y$:
+    \[
+    \uMap(X, Y)_n \simeq \Map_{\Sp}(X, \Sigma^n Y)
+    \]
+    The structure maps $\Sigma \uMap(X, Y)_n \to \uMap(X, Y)_{n+1}$ are induced by the stability of $\Sp$.
+\end{enumerate}
+\end{definition}
+
+
+\begin{definition}[Homotopy Groups in $\Stab(\C)$]
+Let $\C$ be a closed symmetric monoidal $\infty$-category with finite limits, and let $\D = \Stab(\C)$ be its stabilization with unit object $\Unit$. 
+\begin{enumerate}
+    \item \textbf{Homotopy Groups of an Object:} For any object $E \in \D$ and $n \in \mathbb{Z}$, the $n$-th homotopy group of $E$ is defined as the abelian group of homotopy classes of maps from the $n$-shifted unit object:
+    \[ \pi_n(E) := [\Sigma^n \Unit, E]_{\D}  \]
+    
+    \item \textbf{Homotopy Groups of the Mapping Spectrum:} Let $\uMap_{\D}(X, Y) \in \D$ be the internal mapping spectrum between $X, Y \in \D$. Its homotopy groups characterize the graded morphisms between the two objects:
+    \[ \pi_n \uMap_{\D}(X, Y) \cong [X, \Sigma^n Y]_{\D} \cong [\Sigma^{-n} X, Y]_{\D} \]
+    where $[-, -]_{\D}$ denotes the set of homotopy classes i.e. the $0$-th homotopy group of the kan complex $\Map_{\D}(-, -)$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+The distinction lies in the target category:
+\begin{itemize}
+    \item $\Map_{\D}(X, Y) \in \mathcal{S}$ is a \textbf{space} (Kan complex). It represents the mapping space in the $\infty$-categorical sense.
+    \item $\uMap_{\D}(X, Y) \in \D$ is a \textbf{spectrum} (Internal Hom). It is an object of the stable category $\D$ that stabilizes the mapping space.
+\end{itemize}
+In terms of homotopy groups: $\pi_n \Map_{\D}(X, Y) \cong \pi_n \uMap_{\D}(X, Y)$ for $n \ge 0$, because every spectrum is $\Omega$-spectrum in $\Stab(\C)$.
+\end{remark}
+
+\begin{construction}[Stabilization of a Suspension Spectrum]
+Let $X \in \Sspace_{\ast}$ be a pointed space (or generally an object in a pointed $\infty$-category $\mathcal{C}$ with finite colimits). The construction of its associated \textbf{suspension spectrum} $\SigInf X \in \Sp$ proceeds as follows:
+
+\begin{enumerate}
+    \item \textbf{The Prespectrum Construction:}
+    First, we form a \textit{prespectrum} $P_X$ by iterating the suspension functor $\Sigma$ on $X$. This is given by the sequence of spaces:
+    \[ (P_X)_n := \Sigma^n X, \quad \text{for } n \ge 0 \]
+    together with the structural maps (identities):
+    \[ \sigma_n: \Sigma((P_X)_n) = \Sigma(\Sigma^n X) \xrightarrow{id} \Sigma^{n+1} X = (P_X)_{n+1} \]
+
+    \item \textbf{Spectrification (The L-functor):}
+    Since $P_X$ is not necessarily an $\Omega$-spectrum (i.e., the adjoint maps $(P_X)_n \to \Omega (P_X)_{n+1}$ are not equivalences), we apply the \textit{spectrification functor} $L$ (or stabilization) to convert it into a true spectrum. The resulting object is the suspension spectrum:
+    \[ \SigInf X := L(P_X) \]
+    Conceptually, the $k$-th space of this stable object is the colimit:
+    \[ (\SigInf X)_k \simeq \operatorname*{colim}_{m \to \infty} \Omega^m \Sigma^{m+k} X \]
+
+    \item \textbf{Universal Property (Adjunction):}
+    The construction defines the left adjoint functor $\SigInf$ in the stabilization adjunction:
+    \[
+    \begin{tikzcd}
+        \Sspace_{\ast}\arrow[r, "\SigInf", bend left] & \Sp \arrow[l, "\OmeInf", bend left]
+    \end{tikzcd}
+    \]
+    where for any spectrum $E$, the right adjoint is given by $\OmeInf E := E_0$ (the 0-th space of the $\Omega$-spectrum $E$).
+\end{enumerate}
+\end{construction}
+
+
+\endgroup}
