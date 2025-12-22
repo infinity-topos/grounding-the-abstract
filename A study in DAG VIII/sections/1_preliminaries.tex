@@ -1,6 +1,11 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 2: Preliminaries
 %----------------------------------------------------------------------------------------
+
+\section{Preliminaries}
+
+
+
 {\begingroup
 
 
@@ -44,8 +49,6 @@
 \newcommand{\Rig}{\mathfrak{C}}
 \newcommand{\Pinf}{\mathcal{P}}
 \newcommand{\Psimp}{\mathcal{P}_{\Delta}}
-
-\section{Preliminaries}
 \subsection{$\infty$-categories}
 
 
@@ -560,5 +563,228 @@ We classify common algebraic structures by specifying the underlying \textbf{Bas
 
 \end{example}
 
+\begin{definition}[Endomorphism $\infty$-Category]
+Let $\mathcal{C}$ be an $\infty$-category. The \textbf{Endomorphism $\infty$-Category}, denoted by $\text{End}(\mathcal{C})$, is defined as the functor $\infty$-category $\text{Fun}(\mathcal{C}, \mathcal{C})$. 
 
+It forms a \textbf{monoidal $\infty$-category} where the monoidal structure is determined by the composition of endofunctors:
+\begin{enumerate}
+    \item The tensor product is given by composition: $F \otimes G := F \circ G$.
+    \item The unit object is given by the identity functor: $\mathbb{I} := \text{Id}_{\mathcal{C}}$.
+\end{enumerate}
+\end{definition}
+
+
+
+\begin{definition}[Spaces of Monads and Comonads]
+Let $\mathcal{C}$ be an $\infty$-category, and let $\text{End}(\mathcal{C})$ denote the monoidal $\infty$-category of endofunctors on $\mathcal{C}$ (equipped with the composition product).
+The $\infty$-categories (or spaces) of Monads and Comonads as the categories of associative algebra objects in $\text{End}(\mathcal{C})$ and its opposite, respectively:
+
+\begin{enumerate}
+    \item The \textbf{$\infty$-category of Monads} is defined as:
+    \[
+    \text{Mnd}(\mathcal{C}) := \text{Alg}_{\mathcal{A}ss}(\text{End}(\mathcal{C}))
+    \]
+    
+    \item The \textbf{$\infty$-category of Comonads} is defined as:
+    \[
+    \text{CoMnd}(\mathcal{C}) := \text{Alg}_{\mathcal{A}ss}(\text{End}(\mathcal{C})^{op})
+    \]
+\end{enumerate}
+The objects of $\text{Mnd}(\mathcal{C})$ are referred to as \textbf{Monads} on $\mathcal{C}$, and the objects of $\text{CoMnd}(\mathcal{C})$ are referred to as \textbf{Comonads} on $\mathcal{C}$.
+\end{definition}
+
+\begin{definition}[Reedy Category]
+A small category $\mathcal{R}$ is a \textbf{Reedy category} if it is equipped with a degree function $d: \text{Ob}(\mathcal{R}) \to \lambda$ (where $\lambda$ is an ordinal) and two subcategories $\overrightarrow{\mathcal{R}}$ (the direct category) and $\overleftarrow{\mathcal{R}}$ (the inverse category), such that:
+\begin{enumerate}
+    \item Every non-identity morphism in $\overrightarrow{\mathcal{R}}$ raises the degree.
+    \item Every non-identity morphism in $\overleftarrow{\mathcal{R}}$ lowers the degree.
+    \item Every morphism $f$ in $\mathcal{R}$ factors uniquely as $f = g \circ h$, where $h \in \overleftarrow{\mathcal{R}}$ and $g \in \overrightarrow{\mathcal{R}}$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[The Reedy Model Structure]
+Let $\mathcal{M}$ be a model category and $\mathcal{R}$ be a Reedy category. The category of diagrams $\text{Fun}(\mathcal{R}, \mathcal{M})$ is equipped with the \textbf{Reedy model structure}, where a morphism $f: X \to Y$ is defined to be:
+
+\begin{enumerate}
+    \item A \textbf{Weak Equivalence} if it is a levelwise weak equivalence. That is, for every object $\alpha \in \mathcal{R}$, the map $f_\alpha: X_\alpha \to Y_\alpha$ is a weak equivalence in $\mathcal{M}$.
+
+    \item A \textbf{Cofibration} if for every $\alpha \in \mathcal{R}$, the \textbf{relative latching map} $\lambda_\alpha(f)$ is a cofibration in $\mathcal{M}$.
+    Here, $\lambda_\alpha(f)$ is the map induced by the pushout of the latching objects:
+    \[
+    \lambda_\alpha(f): X_\alpha \amalg_{L_\alpha X} L_\alpha Y \longrightarrow Y_\alpha
+    \]
+    where the \textit{latching object} is defined as $L_\alpha X = \text{colim}_{\partial \vec{\mathcal{R}}/\alpha} X$.
+
+    \item A \textbf{Fibration} if for every $\alpha \in \mathcal{R}$, the \textbf{relative matching map} $\mu_\alpha(f)$ is a fibration in $\mathcal{M}$.
+    Here, $\mu_\alpha(f)$ is the map induced into the pullback of the matching objects:
+    \[
+    \mu_\alpha(f): X_\alpha \longrightarrow M_\alpha X \times_{M_\alpha Y} Y_\alpha
+    \]
+    where the \textit{matching object} is defined as $M_\alpha X = \lim_{\alpha / \partial \overleftarrow{\mathcal{R}}} X$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Latching and Matching as Monadic Structures]
+Let $\mathcal{R}$ be a Reedy category. For any degree $\alpha$, consider the truncation inclusion of the category of degrees strictly lower than $\alpha$:
+\[ u: \mathcal{R}_{< \alpha} \hookrightarrow \mathcal{R}_{\le \alpha} \]
+Let $u^*$ be the restriction functor. We identify the Latching and Matching objects via the adjunctions defining the skeleton and coskeleton:
+
+\begin{enumerate}
+    \item \textbf{Latching as a Monad (Skeleton):}
+    The pair $u_! \dashv u^*$ generates a \textbf{Monad} $T = u_! \circ u^*$ (Left Kan Extension followed by restriction). The Latching object is the value of this monad:
+    \[
+    L_\alpha X \cong (T(X))_\alpha = (\text{Lan}_u (u^* X))_\alpha
+    \]
+    The canonical map $L_\alpha X \to X_\alpha$ corresponds to the monad algebra structure map (or the counit of the adjunction).
+
+    \item \textbf{Matching as a Comonad (Coskeleton):}
+    The pair $u^* \dashv u_*$ generates a \textbf{Comonad} $G = u_* \circ u^*$ (Right Kan Extension followed by restriction). The Matching object is the value of this comonad:
+    \[
+    M_\alpha X \cong (G(X))_\alpha = (\text{Ran}_u (u^* X))_\alpha
+    \]
+    The canonical map $X_\alpha \to M_\alpha X$ corresponds to the comonad coalgebra structure map (or the unit of the adjunction).
+\end{enumerate}
+
+\end{proposition}
+
+\begin{definition}[Monadic and Comonadic Resolution]
+Let $\mathcal{C}$ be a category and $X$ an object in $\mathcal{C}$. We define the canonical resolutions generated by monads and comonads as follows:
+
+\begin{enumerate}
+    \item \textbf{Monadic Resolution:}
+    Let $(T, \mu, \eta)$ be a \textbf{Monad} on $\mathcal{C}$. The \textbf{Bar Construction} provides an augmented simplicial object $B_\bullet(X)$ resolving $X$:
+    \[
+    \begin{tikzcd}
+    \dots \arrow[r, shift left] \arrow[r, shift right] 
+    & T^3 X \arrow[r, shift left] \arrow[r] \arrow[r, shift right] 
+    & T^2 X \arrow[r, shift left] \arrow[r, shift right] 
+    & TX \arrow[r, "\epsilon"] 
+    & X
+    \end{tikzcd}
+    \]
+    The face maps $d_i$ are given by the multiplication $\mu$, and degeneracy maps $s_i$ by the unit $\eta$. This construction typically serves as a \textbf{cofibrant replacement} of $X$.
+
+    \vspace{1em}
+
+    \item \textbf{Comonadic Resolution:}
+    Let $(G, \delta, \epsilon)$ be a \textbf{Comonad} on $\mathcal{C}$. The \textbf{Cobar Construction} provides an augmented cosimplicial object $C^\bullet(X)$ resolving $X$:
+    \[
+    \begin{tikzcd}
+    X \arrow[r, "\eta"] 
+    & GX \arrow[r, shift left] \arrow[r, shift right] 
+    & G^2 X \arrow[r, shift left] \arrow[r] \arrow[r, shift right] 
+    & G^3 X \arrow[r, shift left] \arrow[r, shift right] 
+    & \dots
+    \end{tikzcd}
+    \]
+    The coface maps $d^i$ are given by the comultiplication $\delta$, and codegeneracy maps $s^i$ by the counit $\epsilon$. This construction typically serves as a \textbf{fibrant replacement} of $X$.
+\end{enumerate}
+
+\end{definition}
+
+
+\begin{example}[\textbf{Reedy Latching and Matching}]
+In a Reedy category $\mathcal{R}$, resolutions arise from Kan extensions along the filtration $u: \mathcal{R}_{< \alpha} \hookrightarrow \mathcal{R}_{\le \alpha}$.
+\begin{itemize}
+    \item \textbf{Latching (Monad):} The Latching object $L_\alpha X$ is generated by the \textbf{Skeleton Monad} $T = u_! u^*$ (Left Kan extension followed by restriction).
+    \[ L_\alpha X \cong (T X)_\alpha \]
+    \item \textbf{Matching (Comonad):} The Matching object $M_\alpha X$ is generated by the \textbf{Coskeleton Comonad} $G = u_* u^*$ (Right Kan extension followed by restriction).
+    \[ M_\alpha X \cong (G X)_\alpha \]
+\end{itemize}
+\end{example}
+
+\begin{example}[\textbf{The Cotangent Complex (André-Quillen)}]
+Used to define the derived cotangent complex $\mathbb{L}_{A/k}$.
+\begin{itemize}
+    \item \textbf{Monad:} The \textbf{Free Algebra Monad} $T$ on the category of $k$-modules (or sets).
+    \[ T(V) = \text{Sym}_k(V) \quad (\text{Polynomial Algebra}) \]
+    \item \textbf{Resolution:} The simplicial resolution $P_\bullet \to A$ is the Bar construction $B_\bullet(T, T, A)$. The cotangent complex is derived from applying differentials $\Omega^1_{P_\bullet/k} \otimes_{P_\bullet} A$.
+\end{itemize}
+\end{example}
+
+\begin{example}[\textbf{The Postnikov Tower}]
+Decomposing a space $X$ into its homotopy types.
+\begin{itemize}
+    \item \textbf{Monad:} The \textbf{$n$-Truncation Monad} $\tau_{\le n}$ (or $P_n$).
+    \[ T_n(X) = \tau_{\le n}(X) \]
+    This is an \textit{idempotent} monad (localization). The tower is the limit sequence $\dots \to T_n X \to T_{n-1} X$.
+    \item \textit{Note:} Dually, the \textbf{Whitehead Tower} uses the $n$-connected cover Comonad $\tau_{>n}$.
+\end{itemize}
+\end{example}
+
+\begin{example}[\textbf{Projective and Injective Resolution}]
+Let $R$ be a ring and $M$ an $R$-module.
+
+\begin{enumerate}
+    \item \textbf{Projective Resolution (The Bar Construction):}
+    Using the free-forgetful adjunction $F \dashv U$, we define the \textbf{Free Monad} $T = F \circ U$. Since $T(M)$ is a free module, the associated Bar construction yields a canonical projective resolution:
+    \[
+    \dots \longrightarrow T^3 M \longrightarrow T^2 M \longrightarrow T M \xrightarrow{\epsilon} M \longrightarrow 0
+    \]
+    The boundary maps are alternating sums of the monad multiplication $\mu: T^2 \to T$.
+
+    \item \textbf{Injective Resolution (The Cobar Construction):}
+    Using the forgetful-cofree adjunction $U \dashv C$ (where $C(A) = \text{Hom}_{\mathbb{Z}}(R, A)$), we define the \textbf{Cofree Comonad} $G = C \circ U$. Since $G(M)$ is an injective module, the associated Cobar construction yields a canonical injective resolution:
+    \[
+    0 \longrightarrow M \xrightarrow{\eta} G M \longrightarrow G^2 M \longrightarrow G^3 M \longrightarrow \dots
+    \]
+    The boundary maps are alternating sums of the comonad comultiplication $\delta: G \to G^2$.
+\end{enumerate}
+
+\end{example}
+
+\begin{example}[\textbf{The Spectrification Monad on Prespectra}]
+Let $\mathcal{P}$ be the category of Prespectra (sequences of spaces with maps $\Sigma E_n \to E_{n+1}$). The process of converting a naive suspension spectrum into a genuine $\Omega$-spectrum is governed by the \textbf{Spectrification Monad} $\mathbb{L}$.
+
+\begin{enumerate}
+    \item \textbf{The Level-wise Monad:}
+    We define a Monad $\mathbb{L}: \mathcal{P} \to \mathcal{P}$ by applying the spatial stabilization monad $Q = \Omega^\infty \Sigma^\infty$ to \textit{each level} of the spectrum independently:
+    \[ (\mathbb{L} E)_n := Q(E_n) = \mathop{\text{colim}}_{k} \Omega^k \Sigma^k E_n \]
+    
+    \item \textbf{Application to Suspension Spectra:}
+    If $E = \Sigma^\infty X$ is the suspension spectrum of $X$ (where $E_n = \Sigma^n X$), applying this monad yields:
+    \[ (\mathbb{L}(\Sigma^\infty X))_n = Q(\Sigma^n X) \]
+    The result $\mathbb{L}(\Sigma^\infty X)$ is an \textbf{$\Omega$-spectrum}. This is the \textit{fibrant replacement} of $\Sigma^\infty X$ in the stable model structure.
+
+    \item \textbf{Distinction from Adams Resolution:}
+    \begin{itemize}
+        \item The \textbf{Adams/Bousfield-Kan resolution} builds a tower $X \to QX \to Q^2 X \dots$ to resolve the \textit{space} $X$.
+        \item The \textbf{Spectrification Monad} $\mathbb{L}$ acts once (essentially as a completion) to fix the \textit{structure} of the spectrum, ensuring the adjoint structure maps $E_n \to \Omega E_{n+1}$ become weak equivalences.
+    \end{itemize}
+\end{enumerate}
+
+\end{example}
+
+\begin{example}[\textbf{The $R$-Completion of a Space}]
+Let $R$ be a commutative ring (typically $\mathbb{Z}_p$ or $\mathbb{Q}$). The Bousfield-Kan resolution constructs the "$R$-completion" of a space $X$, effectively translating algebraic information (homology with coefficients in $R$) into homotopy information.
+
+\begin{enumerate}
+    \item \textbf{The Monad ($R$-Linearization):}
+    Let $R: \mathcal{S} \to \mathcal{S}$ be the monad that assigns to a simplicial set $K$ the free simplicial $R$-module generated by $K$ (forgetting the module structure back to a simplicial set).
+    \[ X \xrightarrow{\eta} R(X) \]
+    Intuitively, this replaces every simplex of $X$ with the free $R$-module generated by its vertices.
+
+    \item \textbf{The Cosimplicial Space (Bar Construction):}
+    Applying the Monad iteratively generates a \textbf{cosimplicial space} $R^\bullet X$:
+    \[
+    \begin{tikzcd}
+    X \arrow[r, "\eta"] 
+    & R(X) \arrow[r, shift left] \arrow[r, shift right] 
+    & R(R(X)) \arrow[r, shift left] \arrow[r] \arrow[r, shift right] 
+    & R^3(X) \cdots
+    \end{tikzcd}
+    \]
+    This tower resolves $X$ by spaces that are algebraically simple (generalized Eilenberg-MacLane spaces).
+
+    \item \textbf{Totalization ($R$-Completion):}
+    The \textbf{Totalization} (Homotopy Limit) of this cosimplicial space defines the $R$-completion of $X$:
+    \[ X^\wedge_R := \text{Tot}(R^\bullet X) \simeq \mathop{\text{holim}}_{\Delta} R^\bullet X \]
+    
+    \item \textbf{The Spectral Sequence:}
+    This resolution yields the \textbf{Bousfield-Kan Spectral Sequence}, which computes the homotopy groups of the completion from the cohomology of $X$:
+    \[ E_2^{s,t} \cong \text{Ext}^s_{\text{Comod}}(R, H_*(X; R))_t \implies \pi_{t-s}(X^\wedge_R) \]
+    For $R=\mathbb{Z}_p$, this computes the homotopy groups of the $p$-adic completion of $X$.
+\end{enumerate}
+
+\end{example}
 \endgroup
