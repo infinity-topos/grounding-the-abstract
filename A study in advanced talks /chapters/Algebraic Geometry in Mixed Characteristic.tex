@@ -1,0 +1,168 @@
+\lecture{Algebraic Geometry in Mixed Characteristic}{Bhargav Bhatt}
+
+\begingroup
+% --- [Local Symbol Definitions] ---
+\newcommand{\Zp}{\mathbb{Z}_p}
+\newcommand{\Qp}{\mathbb{Q}_p}
+\newcommand{\Cp}{\mathbb{C}_p}
+\newcommand{\Fp}{\mathbb{F}_p}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Hprism}{H_{\mathbin{\triangle}}^*}
+\newcommand{\Hsyn}{H_{\mathrm{syn}}^*}
+\newcommand{\Hdr}{H_{\mathrm{dR}}}
+\newcommand{\Het}{H_{\mathrm{\acute{e}t}}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Kth}{K}
+
+% --- [Main Content] ---
+
+\section{Motivation: The Defect of Classical Cohomology}
+
+The motivating goal for modern $p$-adic geometry is to establish a geometric understanding of integral cohomology classes, particularly torsion, in an algebraic setting.
+
+\begin{theorem}[de Rham 1931, Hodge 1941]
+Let $X$ be a compact complex Kähler manifold (e.g., $X \subset \mathbb{CP}^m$). The integration of differential forms over cycles yields the following isomorphisms:
+\[
+H^n(X; \mathbb{C}) \simeq \Hdr^n(X; \mathbb{C}) \simeq \bigoplus_{i+j=n} H^{i,j}(X).
+\]
+\end{theorem}
+
+This classical result provides a bidirectional bridge between topology and geometry:
+\begin{itemize}
+    \item \textbf{Geometry to Topology:} The symmetry $H^{i,j} \simeq \overline{H^{j,i}}$ implies constraints on the topological Betti numbers (e.g., if $n$ is odd, $\dim H^n(X; \mathbb{C})$ must be even).
+    \item \textbf{Topology to Geometry:} Topological constraints, such as $\pi_1(X)=0$, force the vanishing of holomorphic 1-forms ($H^{1,0}(X) \subset H^1(X;\mathbb{C}) = 0$).
+\end{itemize}
+
+\begin{remark}[The Defect]
+The comparison above relies on coefficients in $\mathbb{C}$. Consequently, it completely misses the torsion information in $H^*(X; \mathbb{Z})$! The goal of mixed characteristic geometry is to understand $H^*(X; \mathbb{Z}/p^n)$ geometrically for algebraic varieties.
+\end{remark}
+
+\section{The Geometric Backdrop: Hensel's $p$-adic World}
+
+To bridge characteristic $0$ and characteristic $p$, we utilize the ring of $p$-adic integers $\Zp$.
+
+\begin{definition}[Mixed Characteristic Setting]
+We define the following base rings and fields:
+\begin{itemize}
+    \item $\Zp = \left\{\sum_{i\ge0}a_{i}p^{i} \mid a_{i}\in\{0,\dots,p-1\}\right\}$: The bridge between characteristics.
+    \item $\Qp = \Zp[1/p]$: Characteristic $0$.
+    \item $\Cp = \widehat{\overline{\Qp}}$: The $p$-adic analog of $\mathbb{C}$.
+    \item $\Fp = \Zp/p\Zp$: Characteristic $p$.
+\end{itemize}
+\end{definition}
+
+For a smooth projective variety $X$ over $\Zp$, we obtain a correspondence between the generic fiber (analytic/topological side) and the special fiber (algebraic side):
+
+\[
+\begin{tikzcd}
+X_{\Cp} \arrow[d, "\text{generic fiber}"'] & X \arrow[d] & X_{\Fp} \arrow[d, "\text{special fiber}"] \\
+\Spec(\Cp) \arrow[r] & \Spec(\Zp) & \Spec(\Fp) \arrow[l]
+\end{tikzcd}
+\]
+
+Historically, the comparison principle (Tate 1966, Grothendieck 1970, Fontaine 1978) suggested that the mod $p^n$ topology of $X_{\Cp}$ should be recoverable from the algebraic geometry of $X_{\Fp}$ augmented with specific linear algebra data (e.g., Frobenius actions).
+
+\section{Prismatic Cohomology}
+
+Prismatic cohomology serves as a 21st-century upgrade to this principle, unifying various cohomology theories.
+
+\begin{theorem}[Bhatt-Morrow-Scholze, 2016, 2018]
+Let $X$ be a smooth formal scheme over $\Zp$. There exists a cohomology theory $\Hprism(X; \Fp) \in \mathrm{Mod}^{fg}(\Fp[[T]])$ satisfying the following comparisons:
+
+\begin{enumerate}
+    \item \textbf{Topological Comparison (Generic Fiber):}
+    \[
+    \Hprism(X; \Fp)[1/T] \simeq H^*(X_{\Cp}; \Fp) \otimes_{\Fp} \Fp((T))
+    \]
+    This recovers the cohomology of the generic fiber.
+    
+    \item \textbf{Differential Comparison (Special Fiber):}
+    \[
+    \Hprism(X; \Fp)/T \simeq \Hdr^*(X_{\Fp})
+    \]
+    This recovers the de Rham cohomology of the reduction mod $p$.
+\end{enumerate}
+\end{theorem}
+
+There is also an integral variant $\Hprism(X; \Zp) \in \mathrm{Mod}^{fg}(\Zp[[T]])$.
+
+\section{The Shape of Prismatic Cohomology}
+
+One of the most powerful aspects of prismatic cohomology is how it organizes different cohomology theories into a single geometric family over the parameter space $\Spec(\Zp[[T]])$.
+
+The following table illustrates the correspondence between the specializations of the "prism" and classical cohomology theories:
+
+\begin{table}[h]
+\centering
+\caption{Specializations of $\Hprism(X; \Zp)$ (Fibers over $\Spec(\Zp[[T]])$)}
+\label{tab:prismatic_specializations}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Locus} & \textbf{Condition} & \textbf{Recovered Theory} \\ \midrule
+$p$-axis & $T=0$ & \textbf{Crystalline / de Rham} \\
+ & & (Geometry of $X_{\Fp}$) \\ \midrule
+$T$-axis & $p=0$ & \textbf{Mod $p$ Étale} \\
+ & & (Char $p$ topology) \\ \midrule
+Hodge-Tate Locus & $T=p$ (approx.) & \textbf{Hodge-Tate} \\ \midrule
+Generic Locus & $T$ inverted & \textbf{Étale Cohomology ($p$-adic)} \\
+ & & (Topology of $X_{\Cp}$) \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+This structure effectively upgrades the classical Hodge filtration to a deformation over the variable $T$.
+
+\section{Detailed Applications}
+
+The algebraic construction of prismatic cohomology has provided new tools to address long-standing questions where torsion classes were previously problematic.
+
+\subsection{Algebraic K-Theory}
+Classical results by Atiyah, Hirzebruch, and Bott established a spectral sequence relating the topological K-theory $K(X)$ to singular cohomology for nice spaces. A major open question (Beilinson 1982) was to find an analog for the algebraic K-theory of rings.
+
+\begin{theorem}[Clausen-Mathew-Morrow 2018, B-Morrow-Scholze 2018]
+For a $p$-complete commutative ring $R$, there exists a natural "motivic" filtration on the $p$-adic K-theory $K_{\mathrm{et}}(R; \Zp)$ where the graded pieces are given by \textbf{syntomic cohomology}:
+\[
+\operatorname{gr}^i K_{\mathrm{et}}(R; \Zp) \simeq \Hsyn(R, \Zp(i))[2i].
+\]
+Syntomic cohomology is a new object determined entirely by prismatic cohomology.
+\end{theorem}
+
+This structural result has led to concrete calculations that were previously out of reach:
+\begin{enumerate}
+    \item \textbf{Odd Vanishing (B-Scholze 2019):} For many "large" rings, such as $\mathcal{O}_{\Cp}/p^n$, the odd homotopy groups vanish: $\pi_{\mathrm{odd}} \Kth(\mathcal{O}_{\Cp}/p^n) = 0$. This relies on $q$-de Rham complexes and André's flatness lemma.
+    \item \textbf{Even Vanishing (Antieau-Krause-Nikolaus 2022):} Using absolute prismatic cohomology, it is shown that:
+    \[
+    \pi_{2k} \Kth(\mathbb{Z}/p^n) = 0 \quad \text{for all } k \gg 0.
+    \]
+\end{enumerate}
+
+\subsection{Kodaira Vanishing in Mixed Characteristic}
+The classic Kodaira vanishing theorem states that for $X \subset \mathbb{P}^n_{\mathbb{C}}$ smooth projective of dimension $d$, $H^{<d}(X, \Ocal(-1)) = 0$. This is known to fail in positive characteristic (Raynaud 1978, Totaro 2021).
+
+\begin{theorem}[Global KV up to Finite Covers, Bhatt 2020]
+For $X \subset \mathbb{P}^n_{\Zp}$ projective of relative dimension $d$, there exists a finite cover $\pi: Y \to X$ such that the torsion part of the cohomology is annihilated by the pullback map:
+\[
+\operatorname{Image}\left( H^{<d}(X, \Ocal(-1))_{\mathrm{tors}} \xrightarrow{\pi^*} H^{<d}(Y, \pi^*\Ocal(-1))_{\mathrm{tors}} \right) = 0.
+\]
+\end{theorem}
+
+This theorem is established using prismatic cohomology and Riemann-Hilbert constructions for perverse $\Fp$-sheaves. It also has a purely local commutative algebra formulation:
+
+\begin{theorem}[Local KV / Splinter Property, Bhatt 2020]
+Fix a finite extension $\Zp[x_1, \dots, x_n] \subset R$. Then there exists a finite extension $R \subset S$ such that any relation $\sum a_i x_i = 0$ in $R/p$ becomes trivial in $S/p$. Conceptually, if $R^+$ is the integral closure of $R$ in $\operatorname{Frac}(R)$, then $R^+/p$ is Cohen-Macaulay over $R/p$.
+\end{theorem}
+
+\begin{remark}[Application to Minimal Model Program]
+These vanishing results were key ingredients in establishing the Minimal Model Program for arithmetic 3-folds with residue characteristic $p > 5$ (B-Ma-Patakfalvi-Schwede-Tucker-Waldron-Witaszek 2020).
+\end{remark}
+
+\subsection{Other Recent Developments}
+Prismatic cohomology has also been instrumental in several other major results:
+\begin{itemize}
+    \item \textbf{Tate Conjecture in Char 2:} Proved for K3 surfaces in characteristic 2 by Madapusi Pera (2016) and Ito-Ito-Koshikawa (2018).
+    \item \textbf{$p$-adic Upper Half Space:} Colmez-Dospinescu-Nizioł (2019) proved that $H^*(\Omega; \Zp)$ is $p$-torsionfree for Drinfeld's $p$-adic upper half space.
+    \item \textbf{Essential Dimension:} Farb-Kisin-Wolfson (2021) proved that for an abelian variety $A/\mathbb{C}$, the multiplication map $[p]$ has essential dimension $\dim(A)$ for $p \gg 0$.
+    \item \textbf{Poincaré Duality:} Established for $\Zp$-étale cohomology in $p$-adic analytic geometry by Zavyalov (2021).
+\end{itemize}
+
+\endgroup
