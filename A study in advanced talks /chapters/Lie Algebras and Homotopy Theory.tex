@@ -1,0 +1,206 @@
+\lecture{Lie Algebras and Homotopy Theory}{Based on Notes}
+
+\begingroup
+% --- [Local Symbol Definitions] ---
+\newcommand{\OmX}{\Omega X}
+\newcommand{\piQ}{\pi_{*}(X) \otimes \mathbb{Q}}
+\newcommand{\LieAlg}{\mathcal{L}ie}
+\newcommand{\catC}{\mathcal{C}}
+\newcommand{\catA}{\mathcal{A}}
+\newcommand{\catE}{\mathcal{E}}
+
+% --- [Main Content] ---
+
+\section{Group Structures and Loop Spaces}
+
+Recall that if $G$ is a group, we have the commutator map $G \times G \to G$ defined by $(x,y) \mapsto xyx^{-1}y^{-1}$. If $G$ is a Lie group, differentiation of the commutator map yields the Lie bracket on the tangent space at the identity:
+\[
+    [\cdot, \cdot] : T_e G \times T_e G \to T_e G.
+\]
+
+We wish to apply this intuition to topological spaces. Let $X$ be a topological space with a base point $x_0 \in X$.
+\begin{definition}[Loop Space]
+    The loop space $\OmX$ is defined as the space of based paths:
+    \[
+        \OmX = \{ p : [0,1] \to X \mid p(0) = p(1) = x_0 \}.
+    \]
+\end{definition}
+
+There is a well-known isomorphism relating the fundamental group of the loop space to the homotopy groups of the base space:
+\[
+    \pi_1(\OmX) \cong \pi_2(X), \quad \text{and generally} \quad \pi_k(\OmX) \cong \pi_{k+1}(X).
+\]
+
+The space $\OmX$ admits a binary operation via concatenation of loops. Let $p, q \in \OmX$. We define the product $p * q$ as:
+\[
+    (p * q)(t) = 
+    \begin{cases} 
+        p(2t) & 0 \le t \le \frac{1}{2} \\
+        q(2t-1) & \frac{1}{2} \le t \le 1 
+    \end{cases}
+\]
+This operation is not strictly associative, but it is \textit{associative up to homotopy}. Similarly, inversion is defined up to homotopy by $\bar{p}(t) = p(1-t)$.
+
+We can define a map $\OmX \times \OmX \to \OmX$ analogous to the group commutator:
+\[
+    (p, q) \mapsto (p * q) * (\bar{p} * \bar{q}).
+\]
+This construction leads to algebraic structures on homotopy groups similar to Lie algebras.
+
+\section{The Whitehead Bracket and Graded Lie Algebras}
+
+The commutator in the loop space induces the \textbf{Whitehead bracket}.
+\begin{definition}[Whitehead Bracket]
+    The Whitehead bracket is a bilinear map:
+    \[
+        [\cdot, \cdot] : \pi_{a+1}(X) \times \pi_{b+1}(X) \to \pi_{a+b+1}(X).
+    \]
+\end{definition}
+
+We can organize the homotopy groups into a graded object. Let us define the shifted graded vector space $L_*$ by:
+\[
+    L_n := \pi_{n+1}(X).
+\]
+Then the total space $L = \bigoplus_{n \ge 0} L_n = \bigoplus_{n \ge 0} \pi_{n+1}(X)$ carries the structure of a \textbf{Graded Lie Algebra (GLA)}.
+
+\begin{theorem}[Structure of Homotopy Groups]
+    The bracket defined above satisfies:
+    \begin{enumerate}
+        \item \textbf{Graded Skew-symmetry:} For $x \in L_a, y \in L_b$,
+        \[
+            [x, y] + (-1)^{|x||y|} [y, x] = 0.
+        \]
+        \item \textbf{Graded Jacobi Identity:}
+        \[
+            [x, [y, z]] = [[x, y], z] + (-1)^{|x||y|} [y, [x, z]].
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}[Homotopy Operations]
+    A homotopy operation of $n$-variables is a map:
+    \[
+        \pi_{a_1}(X) \times \dots \times \pi_{a_n}(X) \to \pi_{b}(X).
+    \]
+    The Whitehead bracket is a 2-variable operation. The \textbf{Hilton-Milnor Theorem} essentially states that all such homotopy operations can be built from 1-variable operations and the Whitehead bracket.
+\end{remark}
+
+\section{Rational Homotopy Theory}
+
+We now transition to \textbf{Rational Homotopy Theory}, where we ignore torsion by tensoring with $\mathbb{Q}$.
+\[
+    \pi_*(X) \otimes \mathbb{Q}.
+\]
+This simplifies calculations significantly (Type II algebraic topology—computable and concrete).
+
+\subsection{Quillen's Theorem}
+Quillen established an equivalence between the homotopy category of simply connected rational spaces and the category of Differential Graded Lie Algebras (DGLA).
+
+\begin{definition}[Differential Graded Lie Algebra]
+    A DGLA is a pair $(L_*, d)$ where $L_*$ is a graded Lie algebra and $d: L_* \to L_{*-1}$ is a differential satisfying:
+    \begin{enumerate}
+        \item $d^2 = 0$.
+        \item \textbf{Leibniz Rule:} $d[x, y] = [dx, y] + (-1)^{|x|} [x, dy]$.
+    \end{enumerate}
+\end{definition}
+
+Taking the homology of a DGLA, $H_*(L_*, d)$, yields a graded Lie algebra. In Quillen's model for a space $X$, we have:
+\[
+    H_*(L_*(X)) \cong \pi_{*+1}(X) \otimes \mathbb{Q}.
+\]
+
+\begin{definition}[Rational Homotopy Equivalence]
+    A map $f: X \to Y$ between simply connected spaces is a \textit{rational homotopy equivalence} if it induces an isomorphism on rational homotopy groups:
+    \[
+        f_*: \pi_*(X) \otimes \mathbb{Q} \xrightarrow{\cong} \pi_*(Y) \otimes \mathbb{Q}.
+    \]
+    In the DGLA setting, this corresponds to a \textbf{quasi-isomorphism} (a map inducing an isomorphism on homology) $L_*(X) \to L_*(Y)$.
+\end{definition}
+
+\begin{theorem}[Quillen]
+    The construction $X \mapsto L_*(X)$ defines an equivalence of categories:
+    \[
+        \left\{ \begin{matrix} \text{Simply connected} \\ \text{rational homotopy types} \end{matrix} \right\}
+        \longleftrightarrow
+        \left\{ \begin{matrix} \text{Reduced DGLAs over } \mathbb{Q} \\ \text{up to quasi-isomorphism} \end{matrix} \right\}.
+    \]
+\end{theorem}
+
+\section{Lie Algebras in General Categories}
+
+We can generalize the notion of a Lie algebra to an arbitrary category $\catA$, provided $\catA$ has sufficient structure.
+
+\begin{definition}[Requirements for $\catA$]
+    Let $\catA$ be a category that is:
+    \begin{enumerate}
+        \item Cocomplete (has all colimits).
+        \item Additive.
+        \item Symmetric Monoidal: There exists a tensor product $\otimes: \catA \times \catA \to \catA$ that is commutative and associative up to isomorphism, preserving colimits in each variable.
+    \end{enumerate}
+\end{definition}
+
+A \textbf{Lie algebra object} $L \in \catA$ is equipped with a bracket morphism $br: L \otimes L \to L$ satisfying skew-symmetry and the Jacobi identity.
+
+\begin{example}
+    \begin{itemize}
+        \item If $\catA = \mathbf{Ab}$ (Abelian groups), $\LieAlg(\catA)$ is the category of standard Lie algebras.
+        \item If $\catA = \mathbf{GrAb}$ (Graded Abelian groups), $\LieAlg(\catA)$ is the category of Graded Lie Algebras.
+        \item If $\catA = \mathbf{Ch}$ (Chain complexes), $\LieAlg(\catA)$ is the category of DGLAs.
+    \end{itemize}
+\end{example}
+
+\section{The Universal Category for Lie Algebras}
+
+We can formalize the category of Lie algebras using a universal construction.
+
+\begin{claim}
+    There exists a \textbf{universal category} $\catE$ equipped with a generic Lie algebra object $L_u$.
+\end{claim}
+
+This allows us to define the category of Lie algebras in any symmetric monoidal category $\catA$ via functors.
+
+\begin{definition}[Functorial Definition of Lie Algebras]
+    The category of Lie algebras in $\catA$, denoted as $\LieAlg(\catA)$, is defined as the category of tensor functors from $\catE$ to $\catA$ that preserve colimits:
+    \[
+        \LieAlg(\catA) \triangleq \left\{ F: \catE \to \catA \mid F \text{ is a } \otimes\text{-functor preserving colimits} \right\}.
+    \]
+    Under this correspondence, the value of the functor on the universal object recovers the Lie algebra: $F(L_u) \in \LieAlg(\catA)$.
+\end{definition}
+
+\subsection{Structure of the Universal Category}
+The universal category $\catE$ is constructed such that its objects are generated by tensor powers of the universal Lie algebra object $L_u$.
+\begin{itemize}
+    \item Objects in $\catE$ are of the form of colimits of direct sums:
+    \[
+        \bigoplus_{\alpha} L_u^{\otimes n_\alpha} \to \bigoplus_{\beta} L_u^{\otimes m_\beta}.
+    \]
+    \item $\catE$ serves as an abelian category containing $L_u$.
+\end{itemize}
+
+\begin{remark}[Homological Context]
+    Recall that if $\catA$ is an abelian category, the category of chain complexes $\mathbf{Ch}(\catA)$ admits a projective generator. We can consider the derived category:
+    \[
+        D(\catA) = \mathbf{Ch}(\catA)[\text{quasi-iso}^{-1}].
+    \]
+    There is a construction of the Lie functor in the derived setting:
+    \[
+        \LieAlg: D(\catE) \to D(\mathbf{Ab}).
+    \]
+\end{remark}
+
+\subsection{Connection to Finite Sets (Operads)}
+The structure of this universal category is closely related to the combinatorics of finite sets.
+
+\begin{definition}
+    Let $\text{Fin}^{\text{surj}}$ be the category of finite sets with surjective maps.
+\end{definition}
+
+The tensor product of functors $F, G: \text{Fin}^{\text{surj}} \to \catA$ is given by the convolution formula:
+\[
+    (F \otimes G)(I) = \bigoplus_{J \subseteq I} F(J) \otimes G(I \setminus J).
+\]
+This formalism leads to the duality in operad theory (Koszul Duality), where we have an equivalence of derived categories:
+\[
+    D(\catE) \cong D(\catE').
+\]
+\endgroup
