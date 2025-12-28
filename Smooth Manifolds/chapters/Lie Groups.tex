@@ -1,0 +1,213 @@
+\lecture{Lie Groups}
+
+\begingroup
+\begin{definition}
+A \textbf{Lie group} is a set $G$ endowed with the structure of a smooth manifold and a group, such that the group operations are smooth. That is, the multiplication map
+\[
+\mu : G \times G \to G, \quad (g, h) \mapsto gh
+\]
+and the inversion map
+\[
+\iota : G \to G, \quad g \mapsto g^{-1}
+\]
+are both smooth maps.
+\end{definition}
+\begin{definition}
+Let $G$ be a Lie group and let $g \in G$ be a fixed element.
+\begin{itemize}
+    \item The \textbf{left translation} by $g$ is the map $L_g : G \to G$ defined by
+    \[
+    L_g(h) = gh \quad \text{for all } h \in G.
+    \]
+    \item The \textbf{right translation} by $g$ is the map $R_g : G \to G$ defined by
+    \[
+    R_g(h) = hg \quad \text{for all } h \in G.
+    \]
+\end{itemize}
+Since the group multiplication is smooth, both $L_g$ and $R_g$ are diffeomorphisms of the manifold $G$.
+\end{definition}
+\begin{definition}
+Let $G$ and $H$ be Lie groups. A map $\phi: G \to H$ is called a \textbf{Lie group homomorphism} if:
+\begin{enumerate}
+    \item $\phi$ is a group homomorphism, meaning $\phi(gh) = \phi(g)\phi(h)$ for all $g, h \in G$; and
+    \item $\phi$ is a smooth map between the manifolds $G$ and $H$.
+\end{enumerate}
+If $\phi$ is in addition a diffeomorphism, then $\phi$ is called a \textbf{Lie group isomorphism}.
+\end{definition}
+\begin{theorem}
+Let $G$ and $H$ be Lie groups, and let $\phi: G \to H$ be a Lie group homomorphism. Then $\phi$ has \textbf{constant rank}.
+
+Specifically, for any $g \in G$, the rank of the differential $d\phi_g: T_g G \to T_{\phi(g)} H$ is equal to the rank of the differential at the identity, $d\phi_e$.
+\end{theorem}
+\begin{definition}
+Let $G$ be a Lie group. A subset $H \subseteq G$ is called a \textbf{Lie subgroup} if:
+\begin{enumerate}
+    \item $H$ is a subgroup of $G$ in the algebraic sense;
+    \item $H$ is endowed with a topology and a smooth structure that make it an \textbf{immersed submanifold} of $G$ (meaning the inclusion map $\iota: H \hookrightarrow G$ is a smooth immersion); and
+    \item $H$ is a Lie group with respect to this smooth structure.
+\end{enumerate}
+It is important to note that the topology on an immersed submanifold $H$ is not necessarily the subspace topology induced from $G$.
+\end{definition}
+\begin{theorem}[Closed Subgroup Theorem]
+Let $G$ be a Lie group and let $H$ be a subgroup of $G$. If $H$ is a closed subset of $G$, then $H$ is an \textbf{embedded Lie subgroup} of $G$.
+\end{theorem}
+\begin{definition}
+Let $G$ be a Lie group and let $M$ be a smooth manifold. A \textbf{left Lie group action} of $G$ on $M$ is a smooth map
+\[
+\theta : G \times M \to M, \quad (g, p) \mapsto g \cdot p,
+\]
+satisfying the following two axioms:
+\begin{enumerate}
+    \item \textbf{Identity:} $e \cdot p = p$ for all $p \in M$, where $e$ is the identity of $G$.
+    \item \textbf{Associativity:} $g \cdot (h \cdot p) = (gh) \cdot p$ for all $g, h \in G$ and $p \in M$.
+\end{enumerate}
+Since the map $\theta$ is smooth, for every $g \in G$, the map $\theta_g : M \to M$ given by $p \mapsto g \cdot p$ is a diffeomorphism.
+\end{definition}
+
+
+\begin{definition}
+Let $M$ and $N$ be smooth manifolds endowed with smooth left actions of a Lie group $G$. Let $\theta^M_g : M \to M$ and $\theta^N_g : N \to N$ denote the diffeomorphisms associated with the action of an element $g \in G$.
+
+A smooth map $F : M \to N$ is called \textbf{$G$-equivariant} if it commutes with the $G$-action. That is, for every $g \in G$, the following diagram commutes:
+
+\begin{center}
+\begin{tikzcd}[row sep=large, column sep=large]
+M \arrow[r, "F"] \arrow[d, "\theta^M_g"']
+& N \arrow[d, "\theta^N_g"] \\
+M \arrow[r, "F"]
+& N
+\end{tikzcd}
+\end{center}
+
+In algebraic terms, this condition is written as:
+\[
+F(g \cdot p) = g \cdot F(p) \quad \text{for all } g \in G \text{ and } p \in M.
+\]
+\end{definition}
+\begin{theorem}[Equivariant Rank Theorem]
+Let $M$ and $N$ be smooth manifolds endowed with smooth actions of a Lie group $G$. Let $F : M \to N$ be a smooth $G$-equivariant map.
+If the action of $G$ on $M$ is \textbf{transitive}, then $F$ has \textbf{constant rank}.
+
+Consequently, if the action is transitive:
+\begin{itemize}
+    \item The image $F(M)$ is an \textbf{immersed submanifold} of $N$; and
+    \item The fibers $F^{-1}(y)$ (for $y \in F(M)$) are closed \textbf{embedded submanifolds} of $M$.
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Rank Theorem]
+Let $M$ and $N$ be smooth manifolds of dimension $m$ and $n$, respectively, and let $F: M \to N$ be a smooth map. Suppose that $F$ has \textbf{constant rank} $k$ in a neighborhood of a point $p \in M$.
+
+Then there exist smooth charts $(U, \varphi)$ centered at $p$ (with coordinates $x^1, \dots, x^m$) and $(V, \psi)$ centered at $F(p)$ (with coordinates $y^1, \dots, y^n$) such that the local coordinate representation of $F$,
+\[
+\hat{F} = \psi \circ F \circ \varphi^{-1},
+\]
+takes the following canonical form:
+\[
+\hat{F}(x^1, \dots, x^m) = (x^1, \dots, x^k, \underbrace{0, \dots, 0}_{n-k}).
+\]
+\textbf{Consequences:}
+\begin{itemize}
+    \item The level set $F^{-1}(F(p)) \cap U$ is a smooth submanifold of $M$ of dimension $m-k$ (Kernel).
+    \item The image $F(U)$ is an immersed submanifold of $N$ of dimension $k$ (Image).
+\end{itemize}
+\end{theorem}
+
+\begin{remark}
+    \textbf{Computation via Jacobian Matrices.}
+    Let $X$ and $Y$ be vector fields on $\mathbb{R}^n$ (or on a local chart $U \subset \mathbb{R}^n$), identified with column vectors of component functions $X = (X^1, \dots, X^n)^T$ and $Y = (Y^1, \dots, Y^n)^T$.
+    The Lie bracket $[X, Y]$ can be explicitly computed using the Jacobian matrices $J_X = \left( \frac{\partial X^i}{\partial x^j} \right)$ and $J_Y = \left( \frac{\partial Y^i}{\partial x^j} \right)$ via the formula:
+    \[
+        [X, Y] = J_Y X - J_X Y.
+    \]
+\end{remark}
+
+
+\begin{remark}
+    \textbf{Tangent Space as the Kernel of the Jacobian.}
+    Let $M \subset \mathbb{R}^n$ be a submanifold defined implicitly by the independent equations $f_1(x) = \cdots = f_k(x) = 0$.
+    At any point $p \in M$, the differentials $df_1|_p, \dots, df_k|_p$ form a basis for the \textit{conormal space} $N_p^*M$. These differentials appear explicitly as the rows of the Jacobian matrix $J_f(p)$:
+    \[
+        J_f(p) = \begin{pmatrix} \nabla f_1(p)^T \\ \vdots \\ \nabla f_k(p)^T \end{pmatrix}.
+    \]
+    Since a tangent vector $v \in T_p M$ must represent a direction in which the defining functions do not change (to first order), the tangent space is precisely the \textbf{kernel} (or null space) of this Jacobian matrix:
+    \[
+        T_p M = \ker(dF_p) = \left\{ v \in \mathbb{R}^n \mid J_f(p) \cdot v = 0 \right\}.
+    \]
+    Geometrically, this means the tangent space consists of all vectors orthogonal to the gradients $\{ \nabla f_1, \dots, \nabla f_k \}$.
+\end{remark}
+
+\begin{remark}
+    \textbf{Decomposition of Volume Forms under Multiple Constraints.}
+    Let $N$ be an ambient manifold with a global volume form $\Omega$, and let $M \subset N$ be a submanifold of codimension $k$ defined by the vanishing of $k$ independent functions, $f_1 = \dots = f_k = 0$.
+    
+    The relationship between the ambient geometry and the submanifold geometry is established by the unique decomposition:
+    \[
+        \Omega = df_1 \wedge df_2 \wedge \dots \wedge df_k \wedge \omega_M,
+    \]
+    where:
+    \begin{itemize}
+        \item The $k$-form $df_1 \wedge \dots \wedge df_k$ represents the \textbf{conormal volume}, generated by the constraint differentials (the rows of the Jacobian) which annihilate the tangent space.
+        \item The $(n-k)$-form $\omega_M$ is the \textbf{induced volume form} (or boundary form) on $M$, measuring the volume of the tangent space $TM = \bigcap_{i=1}^k \ker(df_i)$.
+    \end{itemize}
+    
+    In the context of complex geometry or residue theory, this relationship is often denoted using the \textit{Leray residue} notation, intuitively expressing the induced form as a "division" of the ambient form by the defining equations:
+    \[
+        \omega_M = \frac{\Omega}{df_1 \wedge \dots \wedge df_k} \bigg|_M.
+    \]
+\end{remark}
+\begin{definition}
+    \textbf{Orientation Compatibility for Submanifolds.}
+    
+    Let $X$ be an oriented smooth $n$-manifold with volume form $\Omega_X$. Let $M \subset X$ be a submanifold of dimension $m$ (codimension $k = n-m$).
+    
+    Suppose the \textbf{normal bundle} $N(M)$ of $M$ is oriented. Let $\nu$ be a non-vanishing $k$-form along $M$ representing this normal orientation (often called the \textit{transverse volume form}).
+    
+    The \textbf{induced orientation} on $M$ is defined by the unique $m$-form $\omega_M$ satisfying the compatibility condition:
+    \[
+        \Omega_X \big|_M = \nu \wedge \omega_M.
+    \]
+    
+    In the specific case where $M$ is defined regular level set of independent functions $f_1, \dots, f_k$ (i.e., $M = \{f^{-1}(0)\}$), the normal orientation is naturally given by $\nu = df_1 \wedge \dots \wedge df_k$. The condition becomes:
+    \[
+        \Omega_X = (df_1 \wedge \dots \wedge df_k) \wedge \omega_M.
+    \]
+    
+    \textit{Note:} This generalizes the boundary case. For a boundary, $k=1$, and $\nu$ corresponds to the single outward normal form. For a general submanifold, $\nu$ represents the "volume" of the directions perpendicular to $M$.
+\end{definition}
+\begin{definition}
+    \textbf{Riemannian Volume Form.}
+    
+    Let $(M, g)$ be an oriented Riemannian manifold of dimension $n$. The \textbf{Riemannian volume form}, denoted by $dV_g$ (or $\operatorname{vol}_g$), is the unique differential $n$-form on $M$ satisfying the following geometric condition:
+    \[
+        dV_g(e_1, e_2, \dots, e_n) = 1,
+    \]
+    for any positively oriented orthonormal basis $\{e_1, \dots, e_n\}$ of the tangent space $T_pM$ at any point $p \in M$.
+    
+    In terms of any positively oriented local coordinate chart $(U, x^1, \dots, x^n)$, the volume form is given explicitly by:
+    \[
+        dV_g = \sqrt{\det(g_{ij})} \, dx^1 \wedge dx^2 \wedge \dots \wedge dx^n,
+    \]
+    where $g_{ij} = g(\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j})$ are the components of the metric tensor, and $\sqrt{\det(g_{ij})}$ is the volume density factor.
+\end{definition}
+\begin{remark}
+    \textbf{Converting Scalar Functions to Volume Forms via the Hodge Star.}
+    Let $(M, g)$ be an oriented Riemannian $n$-manifold. The mapping from a scalar function $f \in C^\infty(M)$ (a $0$-form) to a top-degree form (an $n$-form) is canonically realized by the \textbf{Hodge star operator} $*$:
+    \[
+        *: \Omega^0(M) \to \Omega^n(M).
+    \]
+    
+    This isomorphism is defined by multiplication with the Riemannian volume form $dV_g$:
+    \[
+        *f = f \wedge (*1) = f \cdot dV_g.
+    \]
+    
+    In local coordinates, this transformation encapsulates the density factor:
+    \[
+        *f = f(x) \sqrt{\det(g_{ij})} \, dx^1 \wedge \dots \wedge dx^n.
+    \]
+    Consequently, the integral of a function $f$ over $M$ is rigorously defined as the integral of its Hodge dual:
+    \[
+        \int_M f \coloneqq \int_M *f.
+    \]
+\end{remark}
+\endgroup

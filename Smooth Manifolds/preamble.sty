@@ -1,0 +1,66 @@
+\ProvidesPackage{preamble}
+
+% --- 基础包 ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+% 引入 fancyhdr 包，让我们能更好地控制页眉（防止意外情况）
+\usepackage{fancyhdr} 
+
+% --- 页面设置 ---
+\geometry{a4paper, margin=1in}
+
+% --- [核心修改 1] 设置页眉风格 ---
+% 使用 fancy 风格，并清空默认设置，防止怪东西出现
+\pagestyle{fancy}
+\fancyhf{} % 清空所有页眉页脚
+\fancyhead[LE,RO]{\thepage} % 偶数页左侧(LE)、奇数页右侧(RO) 显示页码
+\fancyhead[RE,LO]{\leftmark} % 偶数页右侧(RE)、奇数页左侧(LO) 显示章节标题
+\renewcommand{\headrulewidth}{0.4pt} % 页眉下划线粗细
+
+% --- [核心修改 2] 讲座扉页命令 ---
+\newcommand{\lecture}[1]{
+    \cleardoublepage       
+    \thispagestyle{empty}  % 扉页不显示页眉页脚
+    
+    \refstepcounter{chapter} 
+    
+    % =============================================
+    % [修复关键点] 手动更新页眉标记
+    % 这告诉 LaTeX: 把页眉的标题改成当前的 #1 (讲座题目)
+    % =============================================
+    \markboth{#1}{#1} 
+    
+    \vspace*{4cm}
+    \begin{center}
+        {\Huge \bfseries #1 \par} 
+    \end{center}
+    
+    \addcontentsline{toc}{chapter}{#1} 
+    
+    \cleardoublepage       
+}
+
+% --- 定理环境设置 ---
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{claim}[theorem]{Claim}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- 通用符号 ---
