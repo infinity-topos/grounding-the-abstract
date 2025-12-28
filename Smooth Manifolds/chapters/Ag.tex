@@ -1,0 +1,63 @@
+\begin{remark}[Dimension Identity]
+Let $X = \operatorname{Spec}(A)$ be an irreducible affine variety. For any point $x \in X$ (not necessarily closed) corresponding to a prime ideal $\mathfrak{p} \subset A$, let $Y = \overline{\{x\}} = V(\mathfrak{p})$ be the subvariety defined by $\mathfrak{p}$. The fundamental identity linking local geometry to algebra is:
+\[
+    \dim(\mathcal{O}_{X,x}) = \dim(A_{\mathfrak{p}}) = \operatorname{ht}(\mathfrak{p}) = \operatorname{codim}_X(Y).
+\]
+Consequently, the global dimension formula can be rewritten locally as:
+\[
+    \dim(X) = \dim(Y) + \dim(\mathcal{O}_{X,x}).
+\]
+\end{remark}
+\begin{remark}[Algorithm: Computing Blow-ups via Affine Charts]
+Let $X \subseteq \mathbb{A}^n$ be an affine variety and $Y = V(I) \subset X$ be the center of blowing up, where $I = \langle f_1, \dots, f_k \rangle$. The blow-up $\tilde{X} = \operatorname{Bl}_Y X$ is a closed subscheme of $X \times \mathbb{P}^{k-1}$. To determine the local equations of the \textit{strict transform}:
+
+\begin{enumerate}
+    \item \textbf{Select a Chart:} Consider the $i$-th affine chart $U_i \subset \mathbb{P}^{k-1}$ defined by $y_i \neq 0$. Introduce affine coordinates $u_j = y_j/y_i$ for $j \neq i$.
+    
+    \item \textbf{Substitution (Total Transform):} The blow-up relations $y_j f_i = y_i f_j$ become $f_j = u_j f_i$. Geometrically, this treats $f_i$ as the local generator of the exceptional divisor.
+    
+    \item \textbf{Strict Transform:} For any defining equation $g \in I(X)$, substitute $f_j \mapsto u_j f_i$. Since $g \in I^d$ (where $d = \operatorname{ord}_Y(g)$), the term $f_i^d$ factors out. The equation for the strict transform is:
+    \[
+        g^{\text{st}} = \frac{g(x_1, \dots, x_n) \big|_{f_j = u_j f_i}}{f_i^d} = 0.
+    \]
+\end{enumerate}
+
+
+\end{remark}
+
+\begin{problem}[Global Polynomial Representation of Morphisms on $\mathbb{P}^n$]
+Let $k$ be an algebraically closed field and let $n, m$ be positive integers with $n \le m$. Consider an arbitrary morphism $\phi: \mathbb{P}^n \to \mathbb{P}^m$. Prove that $\phi$ is induced by a tuple of homogeneous polynomials $[F_0: \dots : F_m]$ of the same degree.
+
+\noindent\textbf{Proof Guidelines:}
+\begin{enumerate}
+    \item \textbf{Local Representation:} Consider the standard affine open covering $\{U_i\}_{i=0}^m$ of $\mathbb{P}^m$. Let $V_{ij} = \phi^{-1}(U_i) \cap \mathbb{A}^n_j$ be the preimage in the affine charts of $\mathbb{P}^n$. Show that locally, $\phi$ is determined by regular functions (polynomials) $f_{ij}$.
+    
+    \item \textbf{Extension:} Prove that these local polynomial forms $f_{ij}$ (viewed as maps from affine to projective space) can be homogenized and extended to morphisms defined on the entire projective space $\mathbb{P}^n$.
+    
+    \item \textbf{Uniqueness (The Constant Factor):} Suppose there are two such global polynomial representations $F = [F_0: \dots : F_m]$ and $G = [G_0: \dots : G_m]$ that agree on a non-empty open subset. Consider the ratio function $h = F_k / G_k$ on the intersection of their non-vanishing loci.
+    \begin{itemize}
+        \item Show that $h$ extends to a global regular function on $\mathbb{P}^n$.
+        \item Conclude that $h$ must be a constant, thereby proving $F_k = \lambda G_k$ for some $\lambda \in k^*$.
+    \end{itemize}
+\end{enumerate}
+\end{problem}
+
+\begin{remark}[Duality of $f^*$ and $f$]
+Let $f: X \to Y$ be a morphism of affine varieties, and let $f^*: A(Y) \to A(X)$ be the induced homomorphism of coordinate rings. The algebraic properties of $f^*$ correspond precisely to the geometric properties of $f$ as follows:
+
+\begin{enumerate}
+    \item \textbf{Injectivity of $f^*$ (Dominance):}
+    \[
+        f^* \text{ is injective} \iff f \text{ is dominant (i.e., } \overline{f(X)} = Y \text{).}
+    \]
+    \textit{Reasoning:} If $f^*$ has a non-trivial kernel, there exists a non-zero function $g \in A(Y)$ such that $g \circ f = 0$. This implies $f(X) \subseteq V(g) \subsetneq Y$, so the image is not dense. Conversely, if $f(X)$ is dense, no non-zero function can vanish on it.
+
+    \item \textbf{Surjectivity of $f^*$ (Closed Immersion):}
+    \[
+        f^* \text{ is surjective} \iff f \text{ is a closed immersion.}
+    \]
+    \textit{Reasoning:} If $f^*$ is surjective, then by the First Isomorphism Theorem, $A(X) \cong A(Y)/\ker(f^*)$. Geometrically, rings of the form $A(Y)/I$ correspond exactly to closed subvarieties $V(I) \subseteq Y$. Thus, $X$ is isomorphic to a closed subset of $Y$.
+\end{enumerate}
+
+\noindent \textbf{Note:} While algebraic surjectivity implies geometric injectivity (since embeddings are injective), algebraic injectivity does \textbf{not} imply geometric surjectivity (it only implies the image is dense).
+\end{remark}
