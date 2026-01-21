@@ -1335,7 +1335,18 @@ P_{n-1}(X) \arrow[r, "k_{n+1}"'] & K(\underline{\pi}_n, n+1)
 Here, $\mathcal{P}K(\underline{\pi}_n, n+1)$ is the contractible path space of the twisted Eilenberg-MacLane space. The resulting space $P_n(X)$ is the total space of a fibration over $P_{n-1}(X)$ with fiber $K(\pi_n, n)$, where the twisting is fully encoded by the map $k_{n+1}$.
 \end{example}
 
-
+\begin{theorem}[Homological Whitehead Theorem with Twisted Coefficients]
+  Let $f: X \to Y$ be a continuous map between connected CW complexes. Suppose that the following two conditions hold:
+  \begin{enumerate}
+    \item The map induces an isomorphism on the fundamental groups, i.e., $f_*: \pi_1(X) \xrightarrow{\cong} \pi_1(Y)$. Let $G = \pi_1(Y)$.
+    \item For every local system of coefficients $\mathcal{L}$ on $Y$ (regarded as a $\mathbb{Z}[G]$-module), the induced homomorphism on twisted homology
+    \[
+      f_*: H_*(X; f^*\mathcal{L}) \xrightarrow{\cong} H_*(Y; \mathcal{L})
+    \]
+    is an isomorphism.
+  \end{enumerate}
+  Then $f$ is a weak homotopy equivalence; that is, $f_*: \pi_n(X) \to \pi_n(Y)$ is an isomorphism for all $n \ge 1$.
+\end{theorem}
 
 \begin{remark}[\textbf{Operations as Monodromy via Spectral Sequence Dynamics}]
 The diverse zoology of homotopy operations can be unified as manifestations of \textit{Universal Monodromy} within the differential dynamics ($d_r$) and multiplicative structures of specific spectral sequences. Each operation represents an obstruction or a higher-order coherence constraint.
