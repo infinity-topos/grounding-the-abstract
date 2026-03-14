@@ -1,0 +1,178 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+\newtheorem{lemma}{Lemma}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Lie Theory:Assignment 1}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% --- Problem 1 ---
+\section*{Problem 1}
+Prove the simplicity of $\mathfrak{o}(n),\mathfrak{sp}(2n),\mathfrak{sl}(n),\mathcal{W}(n)$ over a field $F$ of characteristic 0.
+
+\begin{solution}
+\subsubsection*{Simplicity of $\mathfrak{sl}(n)$}
+Suppose $I\neq (0)$ is ideal of $\mathfrak{sl}(n)$. Let $x= \sum c_{ij}E_{ij} \in I$. Let $H_{pq} =E_{pp}-E_{qq} \in \mathfrak{sl}(n)$. For $p\neq q$,
+Let $L= \text{ad}_{H_{pq}}$ and 
+\begin{align*}
+  f_{pq}= \frac{1}{24}(L^4 + 2L^3 - L^2 - 2L)
+\end{align*}
+then $f_{pq}(E_{ij}) = \delta_{pi}\delta_{qj}E_{ij}$. Therefore if $c_{pq}\neq 0$ we obtain that $f(x) = E_{pq} \in I$. 
+Hence, $[E_{pq},E_{qp}] = H_{pq} \in I$, $[H_pq,E_{qp}]=-2 E_{qp}\in I$. For $k\neq p,q$, $[E_{kp},E_{pq}] = E_{kq}\in I$, and for $j\neq p,q$, $[E_{kq},E_{qj}]= E_{kj}\in I$. Thus, for any $i\neq j$ ,$E_{ij} \in I$. From $E_{ii}-E_{jj} = [E_{ij},E_{ji}] \in I$, we obtain that a basis $\{E_{ij},E_{ii}-E_{jj}\}_{i\neq j}$ of $\mathfrak{sl}(n)$ is contained in $I$, if $I$ has a non-diagnal element $x$.
+
+If elements in $I$ are all diagnal, let $x = \sum c_i E_{ii}$, then $[x,E_{ij}] = (c_i-c_j)E_{ij}\in I$. If $I\neq (0)$, we obtain that there exist $E_{ij}\in I$ for $i\neq j$, this is the case we have discussed above.
+
+Therefore, if $I\neq (0)$ then contains a basis of $\mathfrak{sl}(n)$. The simplicity of $\mathfrak{sl}(n)$ yields.
+
+\subsubsection*{Simplicity of $\mathfrak{o}(n)$}
+Let $F_{ij} = E_{ij}-E_{ji}$, then $\{F_{ij}\}_{i<j}$ forms a basis of $\mathfrak{o}(n)$. By calculating the Lie braket 
+\begin{align*}
+ [F_{ij}, F_{kl}] = \delta_{jk}F_{il} + \delta_{il}F_{jk} - \delta_{ik}F_{jl} - \delta_{jl}F_{ik},
+\end{align*}
+if $x= \sum c_{ij}F_{ij}$ is a non-zero element of ideal $I$, where $c_{kl}\neq 0$ and let $p>l>k$, 
+we obtain that 
+\begin{align*}
+  [F_{lp}, x] = \sum_{p<j} c_{pj}F_{lj} - \sum_{l<j} c_{lj}F_{pj} - \sum_{i<l} c_{il}F_{ip} + \sum_{i<p} c_{ip}F_{il}
+\end{align*} 
+Hence, let $q>k$, we obtain that
+\begin{align*}
+  [F_{kq}, [F_{lp}, x]] = c_{kl}F_{qp} - c_{ql}F_{kp} + c_{qp}F_{kl} - c_{kp}F_{ql}.
+\end{align*}
+Let $y=[F_{kq}, [F_{lp}, x]]$, then
+\begin{align*}
+  [F_{kl},[F_{kl},y]] = c_{ql}F_{kp} + c_{kp}F_{ql}
+\end{align*}
+and 
+\begin{align*}
+  y+[F_{kl},[F_{kl},y]]= c_{kl}F_{qp}+c_{qp}F_{kl}.
+\end{align*}
+Let $z = c_{kl}F_{qp}+c_{qp}F_{kl}$ and $m>p$, then 
+\begin{align*}
+  [F_{qm},z] = -c_{kl}F_{mp} \in I
+\end{align*}
+for $m>p>q>l>k$. By our assumption, $c_{kl}\neq 0$ implies $F_{mp}\in I$. Hence, we can use $F_{mp}$ to generat the basis of $\mathfrak{o(n)}$ by Lie bracket:
+\begin{align*}
+  F_{mp'} = [F_{mp},F_{pp'}] \quad F_{m'p'} = [F_{m'm},F_{mp'}].
+\end{align*}
+Therefore, if $n\ge 5$, $\mathfrak{o}(n)$ is simple.
+
+
+\subsubsection*{Simplicity of $\mathfrak{sp}(2n)$}
+
+Consider standard basis for $\mathfrak{sp}(2n)$:
+\begin{align*}
+  X_{ij} &= E_{ij} - E_{n+j, n+i} \quad \text{for } 1 \le i, j \le n \\
+  Y_{ij} &= E_{i, n+j} + E_{j, n+i} \quad \text{for } 1 \le i \le j \le n \\
+  Z_{ij} &= E_{n+i, j} + E_{n+j, i} \quad \text{for } 1 \le i \le j \le n.
+\end{align*}
+Let  $H_k = X_{kk} = E_{kk}-E_{n+k,n+k}$, we obtain that 
+\begin{align*}
+  [H_k, X_{ij}] &= (\delta_{ki} - \delta_{kj}) X_{ij} \\ 
+  [H_k, Y_{ij}] &= (\delta_{ki} + \delta_{kj}) Y_{ij} \\
+  [H_k, Z_{ij}] &= -(\delta_{ki} + \delta_{kj}) Z_{ij} 
+\end{align*}
+Let $H=\sum d_k H_k$ and $L = \text{ad}_{H}$, then
+\begin{align*}
+  L(X_{ij}) &= (d_i-d_j) X_{ij} \\
+  L(Y_{ij}) &= (d_i+d_j) Y_{ij} \\
+  L(Z_{ij}) &= -(d_i+d_j) Z_{ij}.
+\end{align*}
+Let $I$ be a non-zero ideal of $\mathfrak{sp}(2n)$ and $x= \sum a_{ij}X_{ij}+\sum b_{ij}Y_{ij} + \sum c_{ij} Z_{ij}$ is a non-zero element of $I$. 
+
+If $x$ is diagonal, which means $x= \sum a_{kk} H_{k}$, the Lie bracket
+\begin{align*}
+  [x,Y_{ii}] = \sum a_{kk}[H_{k},Y_{ii}] = 2a_{ii}Y_{ii} 
+\end{align*}
+implies $Y_{ii}\in I$. Therefore we can suppose $x$ is not diagnal. Non-diagonal basis forms the eigenvector of linear operator $L$ with distinct eigenvalues,by seclecting proper value of $d_k$, and diagonal basis is eigenvector of eigenvalues 0. 
+Thus, for any non-diagonal basis element $T$, there exists a polynomial $f$ such that $f(L)=p_{L}$ where $p_L$ is the projection on $T$. If $p_{L}(x)\neq 0$, $f(L)(x)\in I$ implies there exists a non-diagonal basis element $T\in I$.
+
+Suppose $T = X_{ij}$ for $i\neq j$, then $[X_{ij},Z_{ij}] = -Z_{jj}\in I$; If $T=Y_{ij}$ for $i\neq j$,then $[Y_{ij}, Z_{jj}] = 2X_{ij} \in I$;If $T=Z_{ij}$ for $i\neq j$,then $[Y_{jj}, Z_{ij}] = 2X_{ji}\in I$; If $T=Y_{ii}$ or $T=Z_{ii}$, then $[Y_{ii},Z_{ii}] = 4H_i\in I$. Therefore $H_i\in I$ and it generates all basis elements as we have shown. The simplicity of $\mathfrak{sp}(2n)$ follows.
+
+
+\subsubsection*{Simplicity of $\mathcal{W}(n)$}
+
+Let $I$ be a non-zero ideal of $W(n) = \text{Der}(F[x_1, \dots, x_n])$.
+Take any $0 \neq D = \sum f_i \partial_i \in I$. The commutator
+\begin{align*}
+  [\partial_k ,D] = \sum \frac{\partial f_i}{\partial x_k} \partial_{i}
+\end{align*}
+implies
+repeatedly bracketing $D$ with the basis derivations $\partial_k $ strictly lowers its polynomial degree. This process eventually yields a non-zero constant vector field $v = \sum c_i \partial_i \in I$.
+Hence, $[\partial_k,x_i\partial_j] = \delta_{ik}\partial_{j}$ implies for $c_k\neq 0$ and any $j\in\{1,..,n\}$, $[v,x_k\partial_j]=c_k\partial_j\in I$, which means
+$\{\partial_i\} \subseteq I$. 
+
+Let $D = \sum f_i\partial_i$ be an arbitrary element in $\mathcal{W}(n)$, let $\tilde{D} = \sum \tilde{f}_i \partial_i$, where $\frac{\partial{\tilde{f}_i}}{\partial x_k} = f_i$. Then $[\partial_k,\tilde{D}] = D \in I$. $\mathcal{W}(n)$ is simple.
+\end{solution}
+
+
+\section*{Problem 2}
+Prove that if $A$ is a finite-dimensional associative algebra and for an arbitrary element $a \in A$, $a^n = 0$, then the algebra $A$ is nilpotent. [Do not use Wedderburn's theorems. Use Engel's theorem.]
+\begin{solution}
+  For $a\in A$, let $L_a: A \to A,x \mapsto ax$ be left multiplication operator, then $\mathcal{L} = \{L_a\}_{a\in A}$ is the Lie subalgebra of $\mathfrak{gl}(A)$ with all $L_a$ is nilpotent because $(L_a)^n = L_{a^n} = 0$.
+   By Engel's theorem, we consider $A$ as $\mathcal{L}$-module, there exists $v\in A$ such that $v_1\neq 0$ and $\mathcal{L}v_1 =0$. Consider quotient module $A/ \langle v_1 \rangle$, and using Engel's theorem again, we obtain there exist $v_2\in A$ such that $\{v_1,v_2\}$ is linear independent and $\mathcal{L}v_2 \subset \langle v_1 \rangle$. The dimension of $A$ is finite implies 
+   there exists a basis $\{v_1,...,v_m\}$ of $A$ such that $\mathcal{L}v_{i} \subset \langle v_1,...,v_{i-1} \rangle$. Therefore $A^{m+1} = \mathcal{L}^{m}A = 0$, $A$ is nilpotent. 
+\end{solution}
+
+
+\section*{Problem 3}
+Let $\text{char } F = 0$; let $L$ be a finite-dimensional solvable Lie algebra; let $e_1, \dots, e_m$ be a basis of the algebra $L$. Let $M$ be a finite-dimensional $L$-module. Suppose that every element $e_i$, for $1 \le i \le m$, acts on $M$ nilpotently. Prove that the algebra $L$ acts on $M$ nilpotently.
+
+\begin{solution}
+  Suppose $\phi:L \to \mathfrak{gl}(M)$ is a faithful representation, if not, $\phi(L)$ is a finite-dimensional solvable Lie subalgebra of $\mathfrak{gl}(M)$. If the claim holds, $\phi(L)$ acts nilpotently on $M$. Hence, $L$ also does. 
+  
+  Suppose $F$ is algebraically closed. Lie's theorem implies there exist a basis of $M$ such that $L$ is represented by upper triangular matrices. Every element in a basis $\{e_1,...,e_m\}$ of $L$ acts nilpotently, then $e_i$ is represented by a strictly upper triangular matrix. Therefore, $L\subseteq \mathfrak{n}(M)$, $L$ acts nilpotently.
+
+  If $F$ is not algebraically closed. Consider base change $\bar{L} = L \otimes_{F} \bar{F}, \bar{M} = M \otimes_{F} \bar{F}$. Then $\bar{L}$ acts on $\bar{M}$ nilpotently implies $L$ acts on $M$ nilpotently.
+\end{solution}
+\section*{Problem 4}
+For every prime $p$, find an example showing that Lie's theorem fails.
+
+
+\begin{solution}
+  Let base field $F =\mathbb{F}_p$ and vector space $V = \mathbb{F}_{p^2}$ with left multiplication operator $L_{a}: V \to V, x \mapsto ax$. $\mathfrak{g} = \text{span}(L_a)$ is a solvable Lie algebra. Suppose $a\in \mathbb{F}^\times_{p^2}$ be a primitive root and $W$ is a $\mathfrak{g}$-submodule of $V$. 
+  If $\dim (W) = 1$, let $w\in W$ is a non-zero element, then $L_a(w) = aw \in W$. Hence, $\{w,aw,...,a^{p^2-2}w\} = \mathbb{F}^\times_{p^2}\subseteq W$, $W$ must equal $V$ which contradicts to our assumption. Therefore, $\dim(W) = 0 \text{ or } 2$, $V$ is an irreducible module but $\dim(V) = 2$, Lie's theorem not yields over characteristic $p\neq 0$.
+
+
+
+If $F$ be an algebraically closed field of characteristic $p > 0$. 
+Let $V$ be a $p$-dimensional vector space over $k$ with basis $\{e_0, e_1, \dots, e_{p-1}\}$. 
+Define two linear operators $X, Y$:
+\begin{align*}
+    Y(e_i) &= i e_i \quad \text{for } i = 0, 1, \dots, p-1, \\
+    X(e_i) &= e_{i+1} \quad \text{where the index is taken modulo } p.
+\end{align*}
+
+Then the commutator 
+\begin{align*}
+    [Y, X](e_i) &= Y(X(e_i)) - X(Y(e_i)) \\
+    &= Y(e_{i+1}) - X(i e_i) \\
+    &= (i+1)e_{i+1} - i e_{i+1} \\
+    &= e_{i+1} = X(e_i).
+\end{align*}
+$[Y,X]=X$ yields $\mathfrak{g} = \text{span}(X,Y)$ is a solvable Lie algebra.
+
+We claim that $V$ contains no 1-dimensional $\mathfrak{g}$-invariant subspace. 
+Suppose that $v \in V \setminus \{0\}$ is a common eigenvector for all elements in $\mathfrak{g}$. In particular, $v$ must be an eigenvector for $Y$.
+Since the eigenvalues of $Y$ are $0, 1, \dots, p-1$ the eigenspaces of $Y$ are exactly the 1-dimensional spaces spanned by each $e_i$. 
+Therefore, $v$ must be a scalar multiple of some $e_k$ for $0 \le k \le p-1$.
+However, $v$ must also be an eigenvector for $X$. But $X(e_k) = e_{k+1}$, and since $p \ge 2$, $e_{k+1}$ is linearly independent of $e_k$. Thus, $e_k$ cannot be an eigenvector for $X$. This is a contradiction.
+
+Consequently,  Lie's Theorem fails over algebraically closed fields of characteristic $p>0$.
+\end{solution}
+\end{document}

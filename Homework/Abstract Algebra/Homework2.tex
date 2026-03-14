@@ -1,0 +1,230 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 3}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Let $R$ be a commutative ring, and suppose that $\varphi$ is an endomorphism of the free $R$-module $R^m$. Prove that if $\varphi$ is surjective, then $\varphi$ is injective. Consider that: if $\varphi$ is injective, is $\varphi$ surjective?
+\begin{solution}
+Suppose $\{e_1,\dots,e_m\}$ is a basis of $R^m$ and $v_j=\varphi(e_j) = \sum_{i=1}^m a_{ij} e_i$. Then
+we represent $\varphi$ by matrix $A = (a_{ij}) \in M_m(R)$, we have 
+\begin{align*}
+(v_1,v_2,\dots,v_m) = (e_1,e_2,\dots,e_m) A. \tag{$\clubsuit$}
+\end{align*}
+Surjectivity implies that $\{e_i\}$ can be linearly represented by $\{v_i\}$. Equivalently, there exists an $m\times m$ matrix $B=(b_{ij})\in M_m(R)$ such that
+\begin{align*}
+    (e_1,e_2,\dots,e_m) = (v_1,v_2,\dots,v_m)B. \tag{$\spadesuit$}
+\end{align*} 
+Combine $\spadesuit$ and $\clubsuit$, we obtain that 
+\begin{align*}
+     (e_1,e_2,\dots,e_m)= (e_1,e_2,\dots,e_m)AB.
+\end{align*}
+$\{e_i\}$ is a basis implies that $AB=I$ and hence $\det(A)\det(B)=1$, $\det(A)$ is a unit in $R$. Let $A^*$ be adjoint matrix of $A$, then $A^*A=\det(A)I$. 
+Let $c=(c_1,\dots,c_m)^T\in R^m$ such that $\sum c_iv_i=0$, then 
+\begin{align*}
+    (e_1,e_2,\dots,e_m) Ac = (v_1,v_2,\dots,v_m)c =0
+\end{align*}  
+implies $Ac=0$, whence $c=\det(A)^{-1}A^*Ac=0$. Therefore, $\{v_i\}$, as linearly independent generators of $R^m$, is a basis.  If $w=\sum c_ie_i\in\ker(\varphi)$, then 
+$\sum c_iv_i=0$ implies $c_i=0$. The injectivity of $\varphi$ holds.
+
+The converse is not true. Take $R=\mathbb{Z}$ and consider an injective endomorphism
+\begin{align*}
+    \varphi:\mathbb{Z}^m &\to \mathbb{Z}^m\\
+    (n_1,\dots,n_m) &\mapsto (2n_1,\cdots,2n_m),
+\end{align*}
+which is not surjective.
+\end{solution}
+
+
+\section*{Problem 2}
+Let $\varphi : M \to N$ be a homomorphism of $R$-modules. Prove that:
+\begin{enumerate}
+    \item $\varphi$ is a monomorphism if and only if for any $R$-module $T$ and any two $R$-module homomorphisms $\xi, \eta : T \to M$, $\varphi\xi = \varphi\eta$ implies $\xi = \eta$;
+    \item $\varphi$ is an epimorphism if and only if for any $R$-module $S$ and any two $R$-module homomorphisms $\rho, \theta : N \to S$, $\rho\varphi = \theta\varphi$ implies $\rho = \theta$.
+\end{enumerate}
+
+\begin{solution}
+\textbf{(1)} Let $\varphi$ be a monomorphism and $\xi,\eta:T\to M$ be arbitrary module homomorphisms. Let $f=\xi-\eta$, then $\varphi f=0$ implies $\text{Im}(f)\subseteq \ker{\varphi} = \{0\}$. Therefore, It follows that $f=0$ and $\xi=\eta$.
+Conversely, setting $T = \ker(\varphi)$ and $\xi=\text{id},\eta=0$, then $\varphi\xi = \varphi\eta$ implies $\xi=\eta$. Consequently, $\text{id}=0$ yields $\ker(\varphi)=T=0$, $\varphi$ is injective.
+
+\textbf{(2)} Let $\varphi$ be an epimorphism and $\rho,\theta:N\to S$ be arbitrary module homomorphisms. Let $g=\rho-\theta$, then $g\varphi =0$ implies $N=\text{Im}(\varphi)\subseteq \ker(g)\subseteq N$, it follows $\ker(g)=N$ and $g=0,\rho=\theta$.
+Conversely, setting $S=\text{coker}(\varphi)=  N/\text{Im}(\varphi)$, let $\rho$ be the canonical module homomorphism and $\theta$ be a null homomorphism. $\rho\varphi = \theta\varphi$ implies $\rho = \theta$ is a null homomorphism,which yields $\text{Im}(\varphi) = N$.
+Therefore, the surjectivity of $\varphi$ holds. 
+\end{solution}
+
+\section*{Problem 3}
+Let $M$ and $M_i(1 \le i \le n)$ be $R$-modules. Show that $M \simeq \bigoplus_{i=1}^n M_i$ if and only if for every $i \in \{1, \dots, n\}$, there exists an $\varphi_i \in \text{End}_R(M)$ such that $\text{im } \varphi_i \simeq M_i$, $\varphi_i\varphi_j = 0$ (for $i \neq j$), and $\varphi_1 + \varphi_2 + \dots + \varphi_n = \text{id}_M$.
+
+\begin{solution}
+    Assume $M \simeq \bigoplus_{i=1}^n M_i$. Without loss of generality, identify $M$ with $\bigoplus_{i=1}^n M_i$.
+    Let $\pi_i: M \to M_i$ be the natural projection and $\iota_i: M_i \to M$ be the natural inclusion. 
+    Define $\varphi_i = \iota_i \circ \pi_i \in \text{End}_R(M)$. Then $\text{im} (\varphi_i) = \iota_i(M_i) \simeq M_i$
+    and for $i \neq j$, $\varphi_i \varphi_j = (\iota_i \pi_i)(\iota_j \pi_j) = \iota_i \circ (\pi_i \iota_j) \circ \pi_j = 0$.
+    For any $x = (m_1, \dots, m_n) \in M$, we have $\sum_{i=1}^n \varphi_i(x) = \sum_{i=1}^n (0, \dots, m_i, \dots, 0) = x$. Thus, $\sum_{i=1}^n \varphi_i = \text{id}_M$.
+    
+    Assume there exist $\varphi_1, \dots, \varphi_n \in \text{End}_R(M)$ satisfying the given conditions. Let $N_i = \text{im } \varphi_i$. By assumption, $N_i \simeq M_i$.
+    Firstly, note that $\varphi_i$ is idempotent. Multiplying $\sum_{j=1}^n \varphi_j = \text{id}_M$ by $\varphi_i$ gives $\sum_{j=1}^n \varphi_i \varphi_j = \varphi_i$. Since $\varphi_i \varphi_j = 0$ for $i \neq j$, this reduces to $\varphi_i^2 = \varphi_i$. 
+    Consequently, for any $x \in N_i$, $\varphi_i(x) = x$. $M$ is the sum of $N_i$ because for any $x \in M$, $x = \text{id}_M(x) = \sum_{i=1}^n \varphi_i(x)$. Since $\varphi_i(x) \in N_i$, we have $M = \sum_{i=1}^n N_i$.
+    Suppose $\sum_{j=1}^n x_j = 0$ where $x_j \in N_j$. Apply $\varphi_i$ to both sides:
+    $$\varphi_i \left( \sum_{j=1}^n x_j \right) = \varphi_i(0) = 0.$$
+    Because $x_j \in \text{im } \varphi_j$, we can write $x_j = \varphi_j(y_j)$ for some $y_j \in M$. 
+    For $j \neq i$, $\varphi_i(x_j) = \varphi_i \varphi_j(y_j) = 0$. 
+    Thus, the sum collapses to $\varphi_i(x_i) = 0$. Since $x_i \in N_i$, $x_i = \varphi_i(x_i) = 0$. 
+    This holds for all $i$, proving the sum is direct. Therefore, $M = \bigoplus_{i=1}^n N_i \simeq \bigoplus_{i=1}^n M_i$. 
+\end{solution}
+
+\section*{Problem 4}
+\begin{enumerate}
+    \item Prove $\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq \mathbb{Z}/(m,n)\mathbb{Z}$, where $m, n \in \mathbb{Z}$.
+    \item Let $A$ be an abelian group, prove $A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq A/nA$.
+    \item Let $A, B$ be two finitely generated abelian groups. What is $A \otimes_{\mathbb{Z}} B$?
+\end{enumerate}
+
+\begin{solution}
+    \textbf{(1)}
+    Let $d = (m,n)$. First, consider the map
+    \begin{align*}
+        f: \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z} &\to \mathbb{Z}/d\mathbb{Z} \\
+        (a\bmod m, b\bmod n) &\mapsto ab\bmod d.
+    \end{align*}
+    $f$ is well-defined because if we suppose $a' = a + km$ and $b' = b + ln$ for some integers $k, l$ then $a'b' = (a + km)(b + ln) \equiv ab \bmod d$. 
+    Furthermore, multiplication in $\mathbb{Z}/d\mathbb{Z}$ naturally distributes over addition, making $f$ a $\mathbb{Z}$-bilinear map. 
+    By the universal property of the tensor product, this bilinear map induces a unique $\mathbb{Z}$-module homomorphism
+    \begin{align*}
+        \phi: \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} &\to \mathbb{Z}/d\mathbb{Z}\\
+        a \otimes b &\mapsto ab \bmod d.
+    \end{align*}
+    Next, we construct the inverse homomorphism. 
+    Consider the $\mathbb{Z}$-module homomorphism 
+    \begin{align*}
+        \psi:\mathbb{Z}/d\mathbb{Z} &\to \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}\\
+        c \bmod d&\mapsto c(1 \otimes 1),
+    \end{align*}
+    which is well-defined because there exist integers $x,y$ such that $xm+yn=d$ by Bézout's identity and thus
+    \begin{align*}
+        d(1 \otimes 1) = (xm + yn)(1 \otimes 1) = xm(1 \otimes 1) + yn(1 \otimes 1)= x(m \otimes 1) + y(1 \otimes n)=0,
+    \end{align*}
+    then $\psi(c+kd) = \psi(c)$.
+    Finally, we verify that $\phi$ and $\psi$ are mutually inverse. For any $c \bmod d \in \mathbb{Z}/d\mathbb{Z}$, we have $\phi(\psi(c)) = \phi(c(1 \otimes 1)) = c \cdot \phi(1 \otimes 1) = c \cdot 1 = c \bmod d$,
+     so $\phi \circ \psi = \text{id}_{\mathbb{Z}/d\mathbb{Z}}$. Conversely, for any pure tensor $a \otimes b \in \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}$, we have $\psi(\phi(a \otimes b)) = \psi(ab) = ab(1 \otimes 1) = a \otimes b$. 
+     Since the pure tensors generate the entire tensor product, $\psi \circ \phi = \text{id}_{\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}}$. Therefore, $\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq \mathbb{Z}/(m,n)\mathbb{Z}$.
+
+     \textbf{(2)} First, consider the map
+     \begin{align*}
+        f: A \times \mathbb{Z}/n\mathbb{Z} &\to A/nA \\
+        (a, \bar{k}) &\mapsto ka\bmod nA,
+     \end{align*} 
+    where $\bar{k} = k\bmod n\mathbb{Z}$. To verify this is well-defined, suppose $k' = k + cn$ for some integer $c$. Then $f(a,\bar{k'}) = k'a \bmod nA = ka + cna + nA=ka\bmod nA $, since $A$ is a $\mathbb{Z}$-module and $cna \in nA$.
+    Furthermore, $f$ naturally preserves addition in both components, making it a $\mathbb{Z}$-bilinear map. 
+    By the universal property of the tensor product, this induces a unique $\mathbb{Z}$-module homomorphism 
+    \begin{align*}
+        \phi: A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} &\to A/nA \\
+        a \otimes \bar{k} &\mapsto ka \bmod nA.
+    \end{align*}
+    Next, we construct the inverse homomorphism. 
+    Consider the module homomorphism
+    \begin{align*}
+        \psi:A/nA &\to A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}\\
+        a \bmod nA&\mapsto a \otimes \bar{1},
+    \end{align*}
+    which is well-defined because if $a'=a+n\alpha$ where $\alpha\in A$ then $\psi(a') = a \otimes \bar{1} + \alpha \otimes \bar{n} = a \otimes \bar{1}$. 
+
+    Finally, we verify that $\phi$ and $\psi$ are mutually inverse. 
+    For any class $a + nA \in A/nA$, we have $\phi(\psi(a + nA)) = \phi(a \otimes \bar{1}) = 1a + nA = a + nA$, meaning $\phi \circ \psi = \text{id}_{A/nA}$. Conversely, for any pure tensor $a \otimes \bar{k} \in A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}$, we can rewrite it using scalar multiplication as $a \otimes k\bar{1} = ka \otimes \bar{1}$. Applying the composition yields $\psi(\phi(ka \otimes \bar{1})) = \psi(ka + nA) = ka \otimes \bar{1} = a \otimes \bar{k}$. Since pure tensors generate the entire tensor product, $\psi \circ \phi = \text{id}_{A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}}$. Therefore, $A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq A/nA$.
+
+    \textbf{(3)} By the Structure Theorem for Finitely Generated Abelian Groups, suppose 
+    \begin{align*}
+        A \simeq \mathbb{Z}^r \oplus \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z}, \quad B \simeq \mathbb{Z}^s \oplus \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z}
+    \end{align*}
+    where $r, s \geq 0$, $\alpha_i,\beta_j>0$ and $p_i, q_j$ are prime numbers.
+    Since the tensor product functor distributes over arbitrary direct sums, we can expand $A \otimes_{\mathbb{Z}} B$ into four distinct blocks:
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq (\mathbb{Z}^r \otimes_{\mathbb{Z}} \mathbb{Z}^s) \oplus \left( \mathbb{Z}^r \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right) \oplus \left( \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}^s \right) \oplus \left( \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right).
+    \end{align*}
+    By $\textbf{(2)}$ and distributive law, we obtaint that 
+    \begin{align*}
+        \mathbb{Z}^r \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \simeq \bigoplus_{j=1}^l \left(\mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right)^r\text{ and }
+        \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}^s \simeq \bigoplus_{i=1}^k \left(\mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \right)^s.
+    \end{align*}
+    Hence, \textbf{(1)} implies
+    \begin{align*}
+        \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \simeq 
+        \bigoplus_{p_i = q_j = p} \mathbb{Z}/p^{\min(\alpha_i, \beta_j)}\mathbb{Z}.
+    \end{align*}
+    Therefore we obtain that 
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq \mathbb{Z}^{rs} \oplus \bigoplus_{j=1}^l \left(\mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right)^r \oplus \bigoplus_{i=1}^k \left(\mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \right)^s
+        \oplus \bigoplus_{p_i = q_j = p} \mathbb{Z}/p^{\min(\alpha_i, \beta_j)}\mathbb{Z}.
+    \end{align*}
+    Alternatively, if we let $T(A)$ and $T(B)$ denote the torsion subgroups of $A$ and $B$ respectively,
+    this entire result can be represented as 
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq \mathbb{Z}^{rs} \oplus T(B)^r \oplus T(A)^s \oplus \big(T(A) \otimes_{\mathbb{Z}} T(B)\big).
+    \end{align*}
+\end{solution}
+
+\section*{Problem 5}
+Let $\varphi : \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ be the unique monomorphism. Prove that 
+\[ \text{id} \otimes \varphi : \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/4\mathbb{Z} \]
+is a zero homomorphism.
+\begin{solution}
+    The unique monomorphism $\varphi : \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ must map the generator $\bar{1} \in \mathbb{Z}/2\mathbb{Z}$ to the unique element of order $2$ in $\mathbb{Z}/4\mathbb{Z}$, which is $\bar{2}$. Therefore, $\varphi(\bar{1}) = \bar{2}$. 
+    Thus, we obtain that 
+    \begin{align*}
+        (\text{id} \otimes \varphi)(\bar{1} \otimes \bar{1}) = \text{id}(\bar{1}) \otimes \varphi(\bar{1}) = \bar{1} \otimes \bar{2} = 2(\bar{1})\otimes \bar{1} = 0.
+    \end{align*}
+    Therefore the only non-zero element $\bar{1} \otimes \bar{1}$ in $\mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z}$ is mapped to 0 meaning that $\text{id} \otimes \varphi$ is a null homomorphism.
+\end{solution}
+
+
+
+\section*{Problem 6}
+Let $V_1$ and $V_2$ be two vector spaces over a field $F$ with dimension $n$ and $m$ respectively. Let $\{\epsilon_1, \dots, \epsilon_n\}$ and $\{\eta_1, \dots, \eta_m\}$ be bases of $V_1$ and $V_2$ respectively. Suppose that $\mathscr{A}$ (resp. $\mathscr{B}$) is an $F$-linear map of $V_1$ (resp. $V_2$), and it is represented by the matrix $A = (a_{ij})_{n \times n}$ (resp. $B = (b_{ij})_{m \times m}$) with respect to the above bases. Prove that 
+\[ \{\epsilon_i \otimes \eta_j \mid 1 \le i \le n, 1 \le j \le m\} \]
+is an $F$-basis of $V_1 \otimes_F V_2$. Determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis.
+\begin{solution}
+    We first prove that the set $\{\epsilon_i \otimes \eta_j \mid 1 \leq i \leq n, 1 \leq j \leq m\}$ forms an $F$-basis for $V_1 \otimes_F V_2$.
+    For arbitrary $v=\sum_{i=1}^n x_i \epsilon_i \in V_1$ and $w =\sum_{j=1}^m y_j \eta_j\in V_2$, we obtain that 
+    \begin{align*}
+        v \otimes w = (\sum_{i=1}^n x_i \epsilon_i) \otimes (\sum_{j=1}^m y_j \eta_j) = \sum_{i=1}^n \sum_{j=1}^m (x_i y_j) (\epsilon_i \otimes \eta_j).
+    \end{align*}
+    Since pure tensors of the form $v \otimes w$ generate the space $V_1 \otimes_F V_2$, and any such pure tensor can be expressed as a linear combination of $\{\epsilon_i \otimes \eta_j\}$, this set spans $V_1 \otimes_F V_2$.
+    To establish linear independence, suppose there exist scalars $c_{ij} \in F$ such that $\sum_{i=1}^n \sum_{j=1}^m c_{ij} (\epsilon_i \otimes \eta_j) = 0$.
+    There are natural isomorphisms
+    \begin{align*}
+        \text{Hom}_F(V_1\otimes_F V_2,F)\simeq \text{Hom}_F(V_1,V_2^*)\simeq V_1^* \otimes_F V_2^*.
+    \end{align*}
+    The first isomorphism arises directly from the Tensor-Hom adjunction and the second holds beacuse of finite dimension of $V_1$.  Therefore for any $1\le k\le n,1\le l\le m$, we obtain that
+    \begin{align*}
+        c_{kl} = (\epsilon_k^*\otimes \eta_l^*)\left(\sum_{i=1}^n \sum_{j=1}^m c_{ij} (\epsilon_i \otimes \eta_j)\right)  = 0
+    \end{align*}
+    meaning that $\{\epsilon_i \otimes \eta_j\}$ is a basis of $V_1\otimes V_2$.
+
+    Next, we determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis. 
+    By definition, the given matrices $A = (a_{ij})_{n \times n}$ and $B = (b_{ij})_{m \times m}$ describe the action of the linear maps on their respective bases as $\mathscr{A}(\epsilon_j) = \sum_{i=1}^n a_{ij} \epsilon_i$ and $\mathscr{B}(\eta_l) = \sum_{k=1}^m b_{kl} \eta_k$. 
+    Evaluating the action of $\mathscr{A} \otimes \mathscr{B}$ on a basis element $\epsilon_j \otimes \eta_l$ yields:$$(\mathscr{A} \otimes \mathscr{B})(\epsilon_j \otimes \eta_l) = \mathscr{A}(\epsilon_j) \otimes \mathscr{B}(\eta_l) = \left(\sum_{i=1}^n a_{ij} \epsilon_i\right) \otimes \left(\sum_{k=1}^m b_{kl} \eta_k\right) = \sum_{i=1}^n \sum_{k=1}^m (a_{ij} b_{kl}) (\epsilon_i \otimes \eta_k).$$
+    If we order the $nm$ basis vectors lexicographically (i.e., $(1,1), (1,2), \dots, (1,m), (2,1), \dots$), the resulting $nm \times nm$ matrix representation is the Kronecker product of the matrices
+    \begin{align*}
+        A \otimes B = \begin{pmatrix} a_{11}B & a_{12}B & \cdots & a_{1n}B \\ a_{21}B & a_{22}B & \cdots & a_{2n}B \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1}B & a_{n2}B & \cdots & a_{nn}B \end{pmatrix}
+    \end{align*}
+\end{solution}
+\end{document}

@@ -1,0 +1,132 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\vspace{0.1cm}} 
+
+\title{Abstract Algebra III: Assignment - Week 2}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% --- Problem 1 ---
+\section*{Problem 1}
+Let $R$ be a ring, and let $M$ be an $R$-module. Suppose that $S$ is a ring and $\theta : S \to R$ is a ring homomorphism satisfying $\theta(1_S) = 1_R$. Let $S$ act on $M$ by $sx = \theta(s)x$, where $x \in M, s \in S$. Prove that $M$ is an $S$-module.
+
+\begin{solution}
+Define $s \cdot_S x = \theta(s) \cdot_R x$. We verify the axioms:
+\begin{itemize}
+    \item $s \cdot_S (x+y) = \theta(s) \cdot_R (x+y) = \theta(s) \cdot_R x + \theta(s) \cdot_R y = s \cdot_S x + s \cdot_S y$.
+    \item $(s_1 + s_2) \cdot_S x = \theta(s_1 + s_2) \cdot_R x = (\theta(s_1) + \theta(s_2)) \cdot_R x = s_1 \cdot_S x + s_2 \cdot_S x$.
+    \item $(s_1 s_2) \cdot_S x = \theta(s_1 s_2) \cdot_R x = \theta(s_1) \cdot_R (\theta(s_2) \cdot_R x) = s_1 \cdot_S (s_2 \cdot_S x)$.
+    \item $1_S \cdot_S x = \theta(1_S) \cdot_R x = 1_R \cdot_R x = x$.
+\end{itemize}
+Thus $M$ is an $S$-module.
+\end{solution}
+
+% --- Problem 2 ---
+\section*{Problem 2}
+Let $R$ be a ring, and let $M$ and $N$ be two right $R$-modules. Let $\text{Hom}_{\mathbb{Z}}(M, N)$ be the set of group homomorphisms from $M$ to $N$ (as abelian groups). The action of $R$ on $\text{Hom}_{\mathbb{Z}}(M, N)$ is given as follows: for any $a \in R, \varphi \in \text{Hom}_{\mathbb{Z}}(M, N)$, define
+\[ (\varphi a)(x) = \varphi(xa), \quad \forall x \in M. \]
+Prove that $\text{Hom}_{\mathbb{Z}}(M, N)$ is a left $R$-module.
+
+\begin{solution}
+    For any $a, b \in R$, $\varphi, \psi \in \text{Hom}_{\mathbb{Z}}(M, N)$, and $x \in M$:
+\begin{itemize}
+    \item  $(a \cdot (\varphi + \psi))(x) = (\varphi + \psi)(x \cdot a) = \varphi(x \cdot a) + \psi(x \cdot a) = (a \cdot \varphi)(x) + (a \cdot \psi)(x)$.
+    \item  $((a + b) \cdot \varphi)(x) = \varphi(x \cdot (a + b)) = \varphi(x \cdot a + x \cdot b) = \varphi(x \cdot a) + \varphi(x \cdot b) = (a \cdot \varphi)(x) + (b \cdot \varphi)(x)$.
+    \item  $((a \cdot b) \cdot \varphi)(x) = \varphi(x \cdot (a \cdot b)) = \varphi((x \cdot a) \cdot b) = (b \cdot \varphi)(x \cdot a) = (a \cdot (b \cdot \varphi))(x)$.
+    \item  $(1_R \cdot \varphi)(x) = \varphi(x \cdot 1_R) = \varphi(x)$, so $1_R \cdot \varphi = \varphi$.
+\end{itemize}
+Thus, $\text{Hom}_{\mathbb{Z}}(M, N)$ is a left $R$-module.
+\end{solution}
+
+% --- Problem 3 ---
+\section*{Problem 3}
+Let $R$ be a ring, and let $M$ be an $R$-module. Denote $\text{Ann}_R M = \{r \in R \mid rm = 0, \forall m \in M\}$. We call $M$ a \textbf{faithful} $R$-module if $\text{Ann}_R M = \{0\}$. Define the action of the quotient ring $R/\text{Ann}_R M$ on $M$ by $\bar{r}x = rx$, where $x \in M, r \in R, \bar{r} = r + \text{Ann}_R M$. Prove that $M$ is a faithful $R/\text{Ann}_R M$-module.
+
+\begin{solution}
+    Let $I = \text{Ann}_R M$ and $S = R/I$. 
+\begin{enumerate}
+    \item \textbf{$M$ is an $S$-module}: 
+    The action is well-defined because if $\bar{r} = \bar{r'}$, then $r - r' \in I$, so $(r - r') \cdot_R x = 0$, implying $r \cdot_R x = r' \cdot_R x$. The module axioms follow directly from the $R$-module structure.
+    
+    \item \textbf{$M$ is faithful over $S$}: 
+    Suppose $\bar{r} \in \text{Ann}_S M$. Then for all $x \in M$,
+    \[ \bar{r} \cdot_S x = r \cdot_R x = 0. \]
+    By definition of $I$, this implies $r \in I$. Thus $\bar{r} = r + I = \bar{0}$ in $S$. 
+    Since $\text{Ann}_S M = \{\bar{0}\}$, $M$ is a faithful $S$-module.
+\end{enumerate}
+\end{solution}
+
+% --- Problem 4 ---
+\section*{Problem 4}
+Let $\varphi : M \to M$ be a homomorphism of $R$-modules such that $\varphi\varphi = \varphi$. Prove that
+\[ M = \ker \varphi \oplus \text{im}\,\varphi. \]
+
+\begin{solution}
+Let $\psi = \text{id} - \varphi$. First, we observe that:
+\[ \varphi \cdot \psi = \varphi \cdot (\text{id} - \varphi) = \varphi - \varphi^2 = \varphi - \varphi = 0, \]
+\[ \psi \cdot \varphi = (\text{id} - \varphi) \cdot \varphi = \varphi - \varphi^2 = 0. \]
+We claim that $M = \text{im} \, \psi \oplus \text{im} \, \varphi$ and $\text{im} \, \psi = \ker \varphi$.
+
+\begin{enumerate}
+    \item 
+    For any $x \in M$, we can write:
+    \[ x = \text{id}(x) = (\psi + \varphi)(x) = \psi(x) + \varphi(x). \]
+    Since $\psi(x) \in \text{im} \, \psi$ and $\varphi(x) \in \text{im} \, \varphi$, it is clear that $M = \text{im} \, \psi + \text{im} \, \varphi$.
+
+    \item 
+     Since $\varphi \cdot \psi = 0$, for any $y = \psi(z) \in \text{im} \, \psi$, we have $\varphi(y) = \varphi(\psi(z)) = 0$. Thus $\text{im} \, \psi \subseteq \ker \varphi$.
+     If $x \in \ker \varphi$, then $x =\varphi(x)+ \psi(x)= \psi(x)$. 
+        This implies $x \in \text{im} \, \psi$, so $\ker \varphi \subseteq \text{im} \, \psi$.
+    Hence, $\text{im} \, \psi = \ker \varphi$.
+
+    \item 
+    Suppose $x \in \text{im} \, \psi \cap \text{im} \, \varphi$. Using the identity from step 2:
+    \[ x \in \text{im} \, \psi \implies x \in \ker \varphi \implies \varphi(x) = 0. \]
+    Meanwhile, $x \in \text{im} \, \varphi \implies x = \varphi(y)$ for some $y \in M$. 
+    Applying $\varphi$ to both sides: $\varphi(x) = \varphi^2(y) = \varphi(y) = x$.
+    Since $\varphi(x) = 0$ and $\varphi(x) = x$, we must have $x = 0$.
+\end{enumerate}
+Therefore, $M = \ker \varphi \oplus \text{im} \, \varphi$.
+\end{solution}
+
+% --- Problem 5 ---
+\section*{Problem 5}
+Show that any $R$-module is a homomorphic image of some free $R$-module.
+
+\begin{solution}
+    Let $M$ be an $R$-module. We construct a free $R$-module $F$ using the elements of $M$ as a basis. Specifically, let $F = \bigoplus_{m \in M} R \cdot e_m$, where $\{e_m\}_{m \in M}$ is the set of free generators indexed by $M$.
+
+By the universal property of free modules, there exists a unique $R$-module homomorphism $\pi: F \to M$ such that $\pi(e_m) = m$ for all $m \in M$. For any element in $F$, the map is defined as:
+\[ \pi\left( \sum_{i=1}^n r_i \cdot e_{m_i} \right) = \sum_{i=1}^n r_i \cdot m_i. \]
+
+For any $m \in M$, there is a corresponding generator $e_m \in F$ such that $\pi(e_m) = m$. This shows that $\pi$ is a surjective homomorphism. Therefore, $M = \text{im} \pi$ is a homomorphic image of the free $R$-module $F$.
+\end{solution}
+
+% --- Problem 6 ---
+\section*{Problem 6}
+Let $\mathbb{Q}$ be the field of rational numbers. Is the additive group $(\mathbb{Q}, +)$ a free $\mathbb{Z}$-module? Explain your answer.
+
+\begin{solution}
+Suppose $\mathbb{Q}$ is free over $\mathbb{Z}$. For any two non-zero elements $\frac{a}{b}, \frac{c}{d} \in \mathbb{Q}$ (where $a, b, c, d \in \mathbb{Z} \setminus \{0\}$), they are $\mathbb{Z}$-linearly dependent since:
+\[ (b \cdot c) \cdot \frac{a}{b} - (a \cdot d) \cdot \frac{c}{d} = (a \cdot c) - (a \cdot c) = 0. \]
+This implies that if $\mathbb{Q}$ were free, its rank must be $1$. 
+
+However, a free $\mathbb{Z}$-module of rank $1$ is isomorphic to $\mathbb{Z}$ itself, which is a cyclic group. $\mathbb{Q}$ is not cyclic because for any $q \in \mathbb{Q}$, the element $\frac{q}{2}$ cannot be expressed as $n \cdot q$ for any $n \in \mathbb{Z}$. Thus, $\mathbb{Q}$ cannot be a free $\mathbb{Z}$-module.
+\end{solution}
+
+\end{document}
