@@ -1,0 +1,174 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,mathrsfs}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz-cd}
+\newtheorem{lemma}{Lemma}
+
+
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Algebraic Number Theory:Assignment}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{A.1 \quad Homework 1}
+
+Throughout what follows, let $R$ denote an integral domain with fraction field $K$.
+
+\subsection*{Exercise A.1.1.} 
+Suppose $R$ is a local domain. Let $I$ be a fractional ideal of $R$. Prove that $I$ is invertible if and only if it is principal. \\
+\emph{Hint: There exist $x \in I$, $y \in I^{-1}$ such that $xy \in R^{\times}$. Then prove $I = xR$.}
+\begin{solution}
+    Suppose $x\neq 0$ and $I=xR$ is principal then let $J=x^{-1}R$ and $IJ=R$ implies $I$ is invertible. Conversely, if there exist a fractional ideal $J$ such that $IJ=R$. Then there exist $x_i\in I$ and $y_i\in J$ such that
+    \begin{align*}
+        \sum x_iy_i = 1.
+    \end{align*} 
+    Because $R$ is local, without loss of generality, we can suppose $x_1y_1\in R\backslash \mathfrak{m}=R^{\times}$. Since $x_1\in I$, $x_1R\subseteq I$ is obvious. Hence $y_1\in J$ implies $y_1I\subseteq R$, multiplying by $x_1$ on both sides, we obtain that 
+    $I\subseteq x_1 R$. Therefore, $I=x_1R$ is principal.
+\end{solution}
+
+
+\subsection*{Exercise A.1.2.} 
+Prove that a Dedekind domain with only finitely many prime ideals is a PID.
+\begin{solution}
+    Let $\mathfrak{p}_1,\dots,\mathfrak{p}_n$ be all prime ideals of Dedekind domain $R$.
+    It suffices to prove all prime ideals are principal. Without loss of generality, we prove $\mathfrak{p}_1$ is principal and others are in 
+    the same way. Let $x\in \mathfrak{p}_1\backslash \mathfrak{p}_1^2$ and by Chinese Remainder Theorem, there exist $u\in R$ such that 
+    \begin{align*}
+        u\equiv x \bmod \mathfrak{p}_1^2 \text{ and } u\equiv 1 \bmod \mathfrak{p}_i\text{ for }i\neq 1.
+    \end{align*} 
+    Let $v_1,\dots,v_n$ be the valuations of local rings $R_{\mathfrak{p}_1},\dots,R_{\mathfrak{p}_n}$ respectively. Then we obtain that 
+    \begin{align*}
+        v_1(u) = 1 \text{ and } v_i(u) = 0\text{ for }i\neq 1,
+    \end{align*}
+    because $u-x\in \mathfrak{p}_1^2$ and implies $u\in (x)+\mathfrak{p}_1^2\subseteq \mathfrak{p}_1$ meaning that $v_1(u)\ge 1$. Suppose $v_1(u)\ge 2$, equivalently $u\in \mathfrak{p}_1^2$, then $x\in (u)+\mathfrak{p}_1^2 = \mathfrak{p}_1^2$ contradicting our
+    assumption, therefore $v_1(u)=1$. Because $R$ is Dedekind domain, the unique factorization of fractional ideals implies 
+    \begin{align*}
+        (u) = \mathfrak{p}_1^{v_1(u)}\dots\mathfrak{p}_n^{v_n(u)} = \mathfrak{p}_1,
+    \end{align*}
+    the principality of $\mathfrak{p}_1$ follows.
+\end{solution}
+
+
+
+\subsection*{Exercise A.1.3.} 
+Suppose $R$ is a DVR with maximal ideal $\mathfrak{p}$. Let $k = R/\mathfrak{p}$ and $U = R^{\times}$. Let $v$ be the normalized discrete valuation of $K$ associated to $R$. For each $n \geq 1$, define
+\[
+U_n = 1 + \mathfrak{p}^n = \{x \in K \mid v(x - 1) \geq n\} \, .
+\]
+
+\begin{enumerate}
+    \item Show that each $U_n$ is a subgroup of $U$ and that $\bigcap_{n=1}^{\infty} U_n = 1$.
+    \item Prove that the natural quotient map $R \to k = R/\mathfrak{p}$ induces an isomorphism of multiplicative groups $U/U_1 \cong k^*$.
+    \item Prove that for each $n \in \mathbb{Z}$, there is an isomorphism of $R$-modules $k = R/\mathfrak{p} \xrightarrow{\sim} \mathfrak{p}^n/\mathfrak{p}^{n+1}$.
+    \item Prove that for each $n \geq 1$, the map $u \mapsto u - 1$ induces an isomorphism of abelian groups $U_n/U_{n+1} \xrightarrow{\sim} \mathfrak{p}^n/\mathfrak{p}^{n+1}$.
+    \item Let $p$ be the characteristic of $k$. (So $p = 0$ or $p$ is a prime number.)
+    \begin{enumerate}
+        \item[(a)] Show that $U_n^p := \{a^p \mid a \in U_n\}$ is contained in $U_{n+1}$ for every $n \geq 1$.
+        \item[(b)] Let $m \geq 1$ be an integer not divisible by $p$. Prove that for every $n \geq 1$, the group homomorphism
+        \[
+        U_n \longrightarrow U_n \ ; \quad u \longmapsto u^m
+        \]
+        is injective.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{solution}
+    \textbf{(1)} Closed under multiplication holds since $(1 + \mathfrak{p}^n)(1 + \mathfrak{p}^n)\subseteq 1 + \mathfrak{p}^n$. 
+    Identity element is $1$. Suppose $x\in U_n$, then $v(x^{-1}-1) = v(x^{-1})+v(1-x)$ hence $x$ is invertible meaning that $v(x)=0$ and 
+    $v(1-x) = v(x-1)$ implies $v(x^{-1}-1)\ge n$. Suppose $x\in \bigcap_{n=1}^{\infty} U_n $, then we obtain $v(x-1) = \infty$, equivalently, $x=1$.
+    \textbf{(2)} The natural quotient map restricted to $U$, denoted by $\pi:U\to k^*$, induces isomorphism $U/U_1 \cong k^*$ because $\ker(\pi) = U_1$.
+    \textbf{(3)} Consider commutative graph 
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+0 \arrow[r] & \mathfrak{p} \arrow[r, hook] \arrow[d, "\cdot u^n"', "\cong"] & R \arrow[r, two heads] \arrow[d, "\cdot u^n"', "\cong"] & k \arrow[r] \arrow[d, dashed, "\bar{\phi}", "\cong"'] & 0 \\
+0 \arrow[r] & \mathfrak{p}^{n+1} \arrow[r, hook] & \mathfrak{p}^n \arrow[r, two heads] & \mathfrak{p}^n/\mathfrak{p}^{n+1} \arrow[r] & 0
+\end{tikzcd}
+\] 
+which the third isomorphism follows from the Five Lemma.
+\textbf{(4)} Consider a surjective group homomorphism 
+\begin{align*}
+    \varphi:U_n\to \mathfrak{p}^n/\mathfrak{p}^{n+1} \quad u\mapsto u-1 + \mathfrak{p}^{n+1}
+\end{align*}
+with kernel $U_{n+1}$, then the first isomorphism theorem yields isomorphism $U_n/U_{n+1} \cong \mathfrak{p}^n/\mathfrak{p}^{n+1}$.
+\textbf{(5.a)} For $p=0$, obvious to see that $U_n^0=\{1\}\subseteq U_{n+1}$. For $p\neq 0$ and any $a\in U_n$, 
+\begin{align*}
+    v(a^p-1) =  v((a-1)^p) = p\cdot v(a-1)\ge n+1
+\end{align*} 
+implies $a^p\in U_{n+1}$.
+\textbf{(5.b)} It suffices to prove for $m=q$ where $q$ is a prime number and coprime to $p$. Suppose that $u\in U_n$ such that $u^q =1$. 
+According to Bézout's identity and \textbf{(5.a)}, suppose $ap+bq=1$, then $u = u^{ap+bq} = u^{ap}\in U_{n+1}$. Thus we can consider a new group homomorphism:
+$U_{n+1} \to U_{n+1}$. Continuing this process, we obtain that $u\in \bigcap_{n=1}^{\infty} U_n$, then $u=1$ and injectivity holds.
+\end{solution}
+
+\subsection*{Exercise A.1.4.} 
+Prove that if a domain $R$ is integrally closed, then so is the polynomial ring $R[t]$.
+\begin{solution}
+Let $f=p/q$ be an arbitrary integral element in $R(t)$. Without loss of generality, we can suppose $q$ is irreducible, because if $q=q_1q_2$ then we consider
+integral element $fq_1$, and suppose $p,q$ are coprime. Suppose $f$ satisfies a monic polynomial $f^n+a_{n-1}f^{n-1}+\dots+a_0=0$ where $a_k\in R[t]$. Then, by multiplying both side by $q^n$ 
+, we obtain that $p^n+a_{n-1}qp^{n-1}+\dots+a_0q^n=0$, which implies that $q|p^n$. Let $F=\text{Frac}(R)$ be the fraction field of $R$, and 
+interprete $p,q$ as elements in $F[t]$, then we obtain that $q|p$ since $F[t]$ is an UFD and hence $q\in F^*$ because $p,q$ coprime.
+Therefore, we can write $f=c_mt^m+\dots+c_0$ where $c_k\in F$.  Let $f_1 = t^r - f$, where $r=\deg f+\sum \deg a_k$, then $f_1$ is the root of polynomial
+\begin{align*}
+    P(X)=(t^r-X)^{n}+a_{n-1}(t^r-X)^{n-1}+\dots + a_0.
+\end{align*}
+Let $X=0$, we obtain the constant term of this polynomial
+\begin{align*}
+    t^{rn}+a_{n-1}t^{rn-r}+a_{n-2}t^{rn-2r}+\dots+a_0
+\end{align*}
+denoted by $P(0)$. Let $P(X)=XQ(X)+P(0)$, then from $P(f_1)=0$ we obtain that 
+\begin{align*}
+    P(0) = -f_1Q(f_1),
+\end{align*} 
+the roots of $f_1$ are among the roots of monic polynomial $P(0)\in R[t]$, the coefficients of $f$ as of $f_1$ are elementary symmetric polynomials of its roots, which are integral over $R$. Therefore, we obtain that the coefficients of 
+$f$ are contained in $R$, $R[t]$ is integrally closed.  
+\end{solution}
+
+
+
+\subsection*{Exercise A.1.5.} 
+Let $A = \mathbb{Q}[X, Y]/(X^2 - Y^3)$. Show that $A$ is a domain but it is not integrally closed.
+\begin{solution}
+    $(X^2-Y^3)$ is a prime ideal because $X^2-Y^3$ is irreducible and $\mathbb{Q}[X,Y]$ is UFD, \textit{a fortiori}, $A$ is a domain.
+    Hence, $X/Y$ is the root of a monic polynomial $P(Z) = Z^2-Y$ but not contained in $A$. If it is containd, then there exist $f,g\in\mathbb{Q}[X,Y]$ such that 
+    \begin{align*}
+        X = Yf-(X^2-Y^3)g
+    \end{align*}
+    implies contradiction by comparing their linear terms.
+\end{solution}
+
+\subsection*{Exercise A.1.6.} 
+Let $R$ be a Dedekind domain and let $\mathfrak{a} \subseteq R$ be a nonzero ideal. Show that the quotient ring $R/\mathfrak{a}$ has only finitely many ideals and that all of these ideals are principal.
+\begin{solution}
+    By isomorphism theorem of rings, the natural quotient $R\to R/\mathfrak{a}$ gives one-to-one correspondence of the ideals of $R$ containing $\mathfrak{a}$ and the ideals of $R/\mathfrak{a}$.
+    Therefore, all ideals of $R/\mathfrak{a}$ can be written as the form 
+    \begin{align*}
+        \mathfrak{p}_1^{i_1}\dots \mathfrak{p}_n^{i_n} + \mathfrak{a}
+    \end{align*}
+    where $\mathfrak{p}_k$ are the prime ideals of $R$ containing $\mathfrak{a}$ and $0\le i_k\le v_k(\mathfrak{a})$ where $v_k$ is the valuation associated to $\mathfrak{p}_k$.
+    The principality directly from \textit{Exercise A.1.2.}
+\end{solution}
+\subsection*{Exercise A.1.7.} 
+Show that every integral ideal of a Dedekind domain can be generated by two elements.
+\begin{solution}
+    Let $\mathfrak{a}$ is an arbitrary ideal of $R$ with prime ideal decomposition
+    \begin{align*}
+        \mathfrak{a} = \mathfrak{p}^k\mathfrak{b}
+    \end{align*}
+    Where $\mathfrak{p}$ is a prime ideal coprime to the ideal $\mathfrak{b}$.
+    The quotient ring $R/\mathfrak{p}^{k+1}\mathfrak{b}$ is principal from \textit{Exercise A.1.6.} Therefore
+    we can assume that $\mathfrak{a} = (a)+\mathfrak{p}^{k+1}\mathfrak{b}$. Hence, consider another quotient ring $R/(a)$, we obtain that $\mathfrak{a}=(a,b)$. 
+\end{solution}
+\end{document}

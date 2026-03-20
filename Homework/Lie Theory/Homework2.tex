@@ -1,0 +1,46 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+\newtheorem{lemma}{Lemma}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Lie Theory:Assignment 2}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+If $x, y \in \text{End } V$ commute, prove that $(x+y)_s = x_s + y_s$, and $(x+y)_n = x_n + y_n$. Show by example that this can fail if $x, y$ fail to commute. [Show first that $x, y$ semisimple (resp. nilpotent) implies $x + y$ semisimple (resp. nilpotent).]
+\begin{solution}
+
+\end{solution}
+
+
+
+\section*{Problem 2}
+Let $L = \mathfrak{sl}(2, \mathbb{F})$. Compute the basis of $L$ dual to the standard basis, relative to the Killing form.
+
+\section*{Problem 3}
+Relative to the standard basis of $\mathfrak{sl}(3, \mathbb{F})$, compute the determinant of $\kappa$. Which primes divide it?
+
+\section*{Problem 4}
+Using the standard basis for $L = \mathfrak{sl}(2, \mathbb{F})$, write down the Casimir element of the adjoint representation of $L$. Do the same thing for the usual (3-dimensional) representation of $\mathfrak{sl}(3, \mathbb{F})$, first computing dual bases relative to the trace form.
+
+\section*{Problem 5}
+It will be seen later on that $\mathfrak{sl}(n, \mathbb{F})$ is actually \textit{simple}. Assuming this and using Exercise 6, prove that the Killing form $\kappa$ on $\mathfrak{sl}(n, \mathbb{F})$ is related to the ordinary trace form by $\kappa(x, y) = 2n \text{Tr}(xy)$.
+
+\section*{Problem 6}
+Let $L$ be a simple Lie algebra. Let $\beta(x, y)$ and $\gamma(x, y)$ be two symmetric associative bilinear forms on $L$. If $\beta, \gamma$ are nondegenerate, prove that $\beta$ and $\gamma$ are proportional. [Use Schur's Lemma.]
+\end{document}
