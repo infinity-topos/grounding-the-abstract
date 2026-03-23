@@ -24,23 +24,206 @@
 \section*{Problem 1}
 If $x, y \in \text{End } V$ commute, prove that $(x+y)_s = x_s + y_s$, and $(x+y)_n = x_n + y_n$. Show by example that this can fail if $x, y$ fail to commute. [Show first that $x, y$ semisimple (resp. nilpotent) implies $x + y$ semisimple (resp. nilpotent).]
 \begin{solution}
+Suppose $x,y$ are semisimple, then we claim $x+y$ is semisimple. To see that, let 
+\begin{align*}
+  m(t) =  (t-a_1)\dots(t-a_m)
+\end{align*} 
+be the minimal polynomial of $x$ and because $x$ is semisimple we assert that the roots $a_k$ are all distinct. Then using Chinese Remainder Theorem, there exists a collection of polynomials $\{p_k(t)\}$ such that 
+\begin{align*}
+  p_k(t)\equiv 1 \bmod (t-a_k) \text{\quad and\quad} p_k(t) \equiv 0 \bmod \prod_{i\neq k} (t-a_i).
+\end{align*}
+I claim that $V = \bigoplus_{k=1}^m \text{Im}(p_k(x))$ with unique decomposition $v = \sum (p_k(x)v)$. 
+According to Linear Algebra, the primary decomposition of $x$ associated with minimal polynomial $m(t)$ 
+implies $V=  \bigoplus_{k=1}^m \ker(x-a_k)$. Suppose $p_k(t) = c_k(t)\cdot\prod_{i\neq k} (t-a_i)$ then for an arbitrary vector $v\in V$, we obtain that
+\begin{align*}
+  (x-a_k)p_k(x)v  =c_k(x)m(x)v=0 
+\end{align*}
+Therefore, $\text{Im}(p_k(x))\subseteq \ker(x-a_k)$. Conversely, let $p_k(t) = 1+d_k(t)(t-a_k)$ and suppose $v\in\ker(x-a_k)$, then 
+\begin{align*}
+  p_k(x)v = (I+d_k(x)(x-a_k))v = v,
+\end{align*}
+which implies that $\ker(x-a_k)=\text{Im}(p_k(x))$. Hence, because $p_k(x)$ acts as identity on $\ker(x-a_k)$ we obtain the unique decomposition.
+Let $V_k = \text{Im}p_k(x)$, then I claim $V_k$ is stable under $y$. To see that, let $v$ be an arbitrary element in $V_k$,
+since $x,y$ commute and thus $y$ commutes with the polynomial form $p_k(x)$, then
+we obtain that 
+\begin{align*}
+  yv = yp_k(x)v = p_k(x)yv\in V_k.
+\end{align*}
+Since, $y$ is semisimple then $y|_{V_k}$ is also semisimple. Because if we suppose $f_k$ is the minimal polynomial of $y|_{V_k}$ and $f$ be the minimal polynomial of $y$.
+Then $f$ is the annihilating polynomial of $y|_{V_k}$ since $f(y|_{V_k})=f(y)|_{V_k}=0$, then $f_k$ must divide $f$ and thus $f_k$ has distinct roots because $f$ does by considering 
+that $y$ is semisimple. Therefore, $y|_{V_k}$ is semisimple and thus it has diagonal form by choosing one basis. 
+Hence, because all elements of $V_k$ is eigenvectors with same eigenvalue of $x$, $x|_{V_k}$ always has the diagonal forms for any basis of $V_k$. Therefore, there exists a basis of $V$
+such that $x,y$ have diagnal form, which implies $x+y$ is semisimple.
 
+Suppose $x,y$ is nilpotent. Since $x,y$ commutes, then we have 
+\begin{align*}
+  (x+y)^{2n-1} = \sum_{k=0}^{2n-1} \binom{2n-1}{k} x^ky^{2n-1-k} = 0
+\end{align*}
+since pigeonhole principle implies $\max\{k,2n-1-k\}\ge n$. Therefore, $x+y$ is also nilpotent.
+
+Suppose arbitrary $x,y\in \text{End } V$ commutes. Let $x=x_s+x_n$ and $y=y_s+y_n$ be the Jordan-Chevalley decomposition. 
+Then we obtain that $(x+y) = (x_s+y_s)+(x_n+y_n)$ with semisimple part $x_s+y_s$ and nilpotent part $x_n+y_n$.
+Hence, this two parts commute because by Jordan-Chevalley decomposition $x_s,x_n$ and $y_s,y_n$ can expressed as polynomials in $x$ and $y$ respectively,
+and thus the condition that $x,y$ commute validates the commutativity of two parts.
+Therefore, by the uniqueness of the Jordan-Chevalley decomposition, we conclude that $(x+y)_s = x_s + y_s$ and $(x+y)_n = x_n + y_n$.
+
+For non-commutativity case, we can take 
+\begin{align*}
+  x = 
+  \begin{pmatrix}
+1 & -1\\
+0 & 1
+\end{pmatrix} 
+\quad 
+  y = 
+  \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix}.
+\end{align*}
+Since the characteristic polynomial of $y$ is $\lambda(\lambda-1)$ with two distinct roots, then $y$ is semisimple.
+If our claim holds for this case, we obtain that 
+\begin{align*}
+  (x+y)_n= x_n=\begin{pmatrix}
+0 & -1 \\
+0 & 0
+\end{pmatrix} 
+\end{align*}
+However, it contradicts the fact that 
+\begin{align*}
+  (x+y)_n= 
+  \begin{pmatrix}
+1 & 0 \\
+0 & 2
+\end{pmatrix} _n = 0.
+\end{align*}
 \end{solution}
 
 
 
 \section*{Problem 2}
 Let $L = \mathfrak{sl}(2, \mathbb{F})$. Compute the basis of $L$ dual to the standard basis, relative to the Killing form.
+\begin{solution}
+  Let the standard basis of $L = \mathfrak{sl}(2, \mathbb{F})$ be $\{h, e, f\}$, where
+  $$h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \quad f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$$
+  The Lie bracket relations for this standard basis are 
+  $$[h, e] = 2e, \quad [h, f] = -2f, \quad [e, f] = h.$$
+  Compute the values of the Killing form on pairs of basis elements. We obtain that 
+  \begin{align*}
+    \kappa(h, h) = 8\quad \kappa(e, f)  = 4\quad \kappa(h, e) = 0\quad \kappa(h, f) = 0\quad \kappa(e, e) = 0
+    \quad \kappa(f, f) = 0.
+  \end{align*}
+  Let $\{h, e, f\}$ be our ordered basis. The matrix representation of the Killing form $K$ is $$K = \begin{pmatrix} \kappa(h,h) & \kappa(h,e) & \kappa(h,f) \\ \kappa(e,h) & \kappa(e,e) & \kappa(e,f) \\ \kappa(f,h) & \kappa(f,e) & \kappa(f,f) \end{pmatrix} = \begin{pmatrix} 8 & 0 & 0 \\ 0 & 0 & 4 \\ 0 & 4 & 0 \end{pmatrix}.$$
+  Let the dual basis relative to the Killing form be $\{h^*, e^*, f^*\}$. 
+  By Linear Algebra, the dual basis must satisfy $\kappa(x_i, x_j^*) = \delta_{ij}$. The coordinates of the dual basis elements in terms of the standard basis can be found by computing the inverse of the matrix $K$:$$K^{-1} = \begin{pmatrix} \frac{1}{8} & 0 & 0 \\ 0 & 0 & \frac{1}{4} \\ 0 & \frac{1}{4} & 0 \end{pmatrix}.$$
+  The columns of $K^{-1}$ implies the explicit form of the dual basis, which is 
+  \begin{align*}
+    h^* = \frac{1}{8}h \quad e^* = \frac{1}{4}f \quad f^* = \frac{1}{4}e.
+  \end{align*}
+\end{solution}
+
+
 
 \section*{Problem 3}
 Relative to the standard basis of $\mathfrak{sl}(3, \mathbb{F})$, compute the determinant of $\kappa$. Which primes divide it?
 
+
+\begin{solution}
+  The standard basis of $\mathfrak{sl}(3, \mathbb{F})$ is 
+  \begin{align*}
+    H_1 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad 
+    H_2 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{pmatrix}
+  \end{align*}
+  and $E_{12},E_{23},E_{13},E_{21},E_{32},E_{31}$ denoted by $X_1,X_2,X_3,Y_1,Y_2,Y_3$ respectively. 
+  The values of the Killing form on pairs of basis elements are 
+  \begin{align*}
+    \kappa(H_1, H_1) =  12 \quad \kappa(H_2, H_2) =  12 \quad \kappa(H_1, H_2) =  -6 \quad \kappa(X_i,Y_i)= 6,
+  \end{align*}
+  and for other pairs, the Killing form are zero. Then the matrix of the Killing form is 
+  \begin{align*}
+    K = 
+\begin{pmatrix}
+12 & -6 & 0 & 0 & 0 & 0 & 0 & 0 \\
+-6 & 12 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 6 & 0 & 0 & 0 & 0 \\
+0 & 0 & 6 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 6 & 0 & 0 \\
+0 & 0 & 0 & 0 & 6 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 6 \\
+0 & 0 & 0 & 0 & 0 & 0 & 6 & 0 
+\end{pmatrix}
+  \end{align*}
+with determinant $\det(K) = - 2^8 \cdot 3^9$, which has prime divisors $2$ and $3$.
+\end{solution}
+
+
 \section*{Problem 4}
 Using the standard basis for $L = \mathfrak{sl}(2, \mathbb{F})$, write down the Casimir element of the adjoint representation of $L$. Do the same thing for the usual (3-dimensional) representation of $\mathfrak{sl}(3, \mathbb{F})$, first computing dual bases relative to the trace form.
+\begin{solution}
+  Using the notation and results from \textit{Problem 2} and \textit{Problem 3}, the Casimir element of $\mathfrak{sl}(2, \mathbb{F})$ is given by 
+  \begin{align*}
+    c_2 = h h^* + e e^* + f f^* 
+    =h\left(\frac{1}{8}h\right) + e\left(\frac{1}{4}f\right) + f\left(\frac{1}{4}e\right)
+    = \frac{1}{8}h^2 + \frac{1}{4}(ef + fe).
+  \end{align*}
+  For $\mathfrak{sl}(3, \mathbb{F})$, the dual basis of the standard basis is given by 
+  \begin{align*}
+    H_1^* = \frac{1}{9}H_1 + \frac{1}{18}H_2\quad H_2^* = \frac{1}{18}H_1 + \frac{1}{9}H_2 \quad X_i^*=\frac{1}{6}Y_i \quad Y_i^*=\frac{1}{6}X_i.
+  \end{align*}
+  The duals of $H_1$ and $H_2$ are given by the matrix of the Killing form on the Cartan subalgebra 
+  \begin{align*}
+    K_H = \begin{pmatrix} \kappa(H_1, H_1) & \kappa(H_1, H_2) \\ \kappa(H_2, H_1) & \kappa(H_2, H_2) \end{pmatrix} = \begin{pmatrix} 12 & -6 \\ -6 & 12 \end{pmatrix}.
+  \end{align*}
+  The inverse matrix 
+  \begin{align*}
+    K_H^{-1} = \begin{pmatrix} 1/9 & 1/18 \\ 1/18 & 1/9 \end{pmatrix}
+  \end{align*}
+  yields the coefficients of the dual basis. Therefore, the Casimir element of $\mathfrak{sl}(3, \mathbb{F})$ is 
+  \begin{align*}
+    c_3 &= H_1 H_1^* + H_2 H_2^* + \sum_{i=1}^3 (X_i X_i^* + Y_i Y_i^*)\\
+    & = \frac{1}{9}(H_1^2 + H_1 H_2 + H_2^2) + \frac{1}{6}\sum_{i=1}^3 (X_i Y_i + Y_i X_i).
+  \end{align*}
+\end{solution}
+
+
 
 \section*{Problem 5}
 It will be seen later on that $\mathfrak{sl}(n, \mathbb{F})$ is actually \textit{simple}. Assuming this and using Exercise 6, prove that the Killing form $\kappa$ on $\mathfrak{sl}(n, \mathbb{F})$ is related to the ordinary trace form by $\kappa(x, y) = 2n \text{Tr}(xy)$.
+\begin{solution}
+  Let $L=\mathfrak{sl}(n, \mathbb{F})$. Consider the assignment $\alpha$ on $L\times L$ defined by 
+  \begin{align*}
+    \alpha(x,y) := \text{Tr}(xy),
+  \end{align*}
+  which is a symmetric bilinear form on $L$ due to the basic property of trace. To see the associativity, we observe that 
+  \begin{align*}
+    \alpha([x,y],z) = \text{Tr}(xyz-yxz) = \text{Tr}(xyz) - \text{Tr}(xzy)=\alpha(x,[y,z]).
+  \end{align*}
+  According to \textit{Problem 6}, we can suppose the Killing form on $L$ is given by $\kappa = c\cdot \alpha$, where $c\in \mathbb{F}$ is the proportionality constant of two forms.
+  Let 
+  \begin{align*}
+    \{H_1,\cdots,H_{n-1},E_{12},E_{23},\dots,E_{n-1,n},E_{13},\dots,E_{n-2,n},\dots,E_{1n},E_{21},E_{23},\cdots,E_{n1}\},
+  \end{align*}
+  where $H_i = E_{11}-E_{i+1,i+1}$, be the standard basis of $L$.
+  To compute the constant $c$, we evaluate the forms on two specific elements $E_{12},E_{21}\in L$. Then we obtain that 
+  \begin{align*}
+    \alpha(E_{12},E_{21}) = \text{Tr}(E_{12}E_{21}) = 1.
+  \end{align*} 
+  For the Killing form, let $X=\sum x_{ij}E_{ij}\in M(n,\mathbb{F})$ be an arbitrary matrix. Then we obtain that 
+  \begin{align*}
+    \left(\text{ad}(E_{12})\circ \text{ad}(E_{21})\right) X = \sum_{k=1}^n x_{1k}E_{1k} +\sum_{j=1}x_{j2}E_{j2} - x_{22}E_{11}-x_{11}E_{22}
+   \end{align*}
+   Let $T=\text{ad}(E_{12})\circ \text{ad}(E_{21})$, then we obtain that 
+   \begin{align*}
+    T (E_{1j}) = E_{1j}  \quad 
+     T(E_{i2}) = E_{i2}  \quad 
+    T (E_{12}) =E_{12} + E_{21} \quad 
+    T(H_1) = 2 H_1 
+   \end{align*}
+   where neither $i$ nor $j$ equals $1$ or $2$. Other elements in the standard basis are mapped to zero by $T$. Therefore, we obtain that 
+   \begin{align*}
+    \kappa(E_{12},E_{21}) = \text{Tr}(\text{ad}(E_{12})\circ \text{ad}(E_{21})) = 2n
+   \end{align*}
+   which implies $c = 2n$, or equivalently, $\kappa(x,y) =2n\cdot \text{Tr}(xy) $.
+\end{solution}
 
-\section*{Problem 6}
-Let $L$ be a simple Lie algebra. Let $\beta(x, y)$ and $\gamma(x, y)$ be two symmetric associative bilinear forms on $L$. If $\beta, \gamma$ are nondegenerate, prove that $\beta$ and $\gamma$ are proportional. [Use Schur's Lemma.]
 \end{document}

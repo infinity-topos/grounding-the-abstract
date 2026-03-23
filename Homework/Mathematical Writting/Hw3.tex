@@ -1,0 +1,241 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+% ----- 宏包调用 -----
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{xcolor}   % 用于设置字体颜色
+\usepackage{setspace} % 用于调整行距
+
+% ----- 中文字体设置 (必须用 XeLaTeX 编译) -----
+\usepackage[UTF8]{ctex}
+
+% ----- 自定义双语对照命令 -----
+% 语法: \bilingual{英文句子}{中文翻译}
+\newcommand{\bilingual}[2]{
+    \begin{spacing}{1.15} % 稍微收紧了一点点行距，配合小字号
+        \noindent \normalsize #1 \\[-0.5ex] % 英文部分：使用 \normalsize
+        \small \textcolor{blue!70!black}{#2} % 中文部分：使用 \small
+    \end{spacing}
+    \vspace{0.8em} % 段落间距
+}
+
+
+\begin{document}
+
+\title{Mathematical Writing: Comments on Student Answers}
+\author{Notes by TLL}
+\date{}
+\maketitle
+
+\section*{§5. Excerpts from class, October 9 / §5. 10月9日课堂摘录} % [cite: 1]
+
+\bilingual{[notes by TLL]}
+{[TLL 笔记]} % [cite: 2]
+
+\bilingual{"I'm thinking about running a contest for the best Pascal program that is also a sonnet," was the one of the first sentences out of Don's mouth on the topic of the exact definition of "Mathematical Writing."}
+{“我正在考虑举办一场比赛，评选既是十四行诗又是最佳 Pascal 程序的代码，”这是 Don 在讨论“数学写作”确切定义时最先说出的话之一。} % [cite: 3]
+
+\bilingual{He admitted that such a contest was "probably not the right topic for this course."}
+{他承认这样的比赛“可能不是这门课的合适主题”。} % [cite: 4]
+
+\bilingual{However, a program (presumably even an iambic pentameter program) is among the documents that he will accept as the course term paper.}
+{然而，程序（想必甚至是用五步抑扬格写的程序）也是他可以接受的作为本课程期末论文的文档之一。} % [cite: 5]
+
+\bilingual{He will accept articles for professional journals, chapters of books or theses, term papers for other courses, computer programs, user manuals or parts thereof: anything that falls into a definite genre where you have a specific audience in mind and the technical aspect is significant.}
+{他将接受为专业期刊撰写的文章、书籍或论文的章节、其他课程的期末论文、计算机程序、用户手册或其中的部分：任何属于明确体裁、脑海中有特定读者群、且技术方面具有重要意义的内容。} % [cite: 6]
+
+\bilingual{We spent the rest of class continuing to examine the homework assignment.}
+{我们在剩下的课堂时间里继续检查了家庭作业。} % [cite: 7]
+
+\bilingual{In the interest of succinct notes, I have replaced many literal phrases by their generic equivalents.}
+{为了使笔记简洁，我用通用的等效词替换了许多字面短语。} % [cite: 8]
+
+\bilingual{For example, I might have replaced '$A>B$' by '(relation)'.}
+{例如，我可能把“$A>B$”替换成了“（关系）”。} % [cite: 9]
+
+\bilingual{This time I have divided the comments into two sets: those dealing with what I will call "form" (parentheses, capitalization, fonts, etc.) and those dealing with "content" (wording, sentence construction, tense, etc.).}
+{这一次，我把评论分为两类：一类涉及我称之为“形式”的问题（括号、大写、字体等），另一类涉及“内容”的问题（措辞、句子结构、时态等）。} % [cite: 10]
+
+\subsection*{Comments Concerning Form / 关于形式的评论} % [cite: 11]
+
+\bilingual{First, the comments concerning form:}
+{首先是关于形式的评论：} % [cite: 11]
+
+\bilingual{Don't overdo the use of colons. While the colon in 'Define it as follows:' is fine, the one in 'We have: (formula)' should be omitted since the formula just completes the sentence.}
+{不要过度使用冒号。虽然在“定义如下：”中使用冒号没问题，但“我们得到：（公式）”中的冒号应该省略，因为公式只是在补全句子。} % [cite: 12]
+
+\bilingual{Some papers had more colons than periods.}
+{有些论文里的冒号比句号还多。} % [cite: 13]
+
+\bilingual{Should the first word after a colon be capitalized? Yes, if the phrase following the colon is a full sentence.}
+{冒号后面的第一个单词应该大写吗？是的，如果冒号后面的短语是一个完整的句子。} % [cite: 14]
+
+\bilingual{No, if it is a sentence fragment. (This is not "yet" a standard rule, but Don has been trying it for several years and he likes it.)}
+{不是，如果它是一个句子片段。（这“还”不是一条标准规则，但 Don 已经尝试了好几年，而且他很喜欢。）} % [cite: 15]
+
+\bilingual{While too many commas will interfere with the smooth flow of a sentence, too few can make a sentence difficult to read.}
+{逗号太多会影响句子的流畅性，而逗号太少则会使句子难以阅读。} % [cite: 16]
+
+\bilingual{As examples, a sentence beginning with 'Therefore,' does not need the comma following 'therefore'.}
+{例如，以“因此（Therefore），”开头的句子不需要在“因此”后面加逗号。} % [cite: 17]
+
+\bilingual{But 'Observe that if (symbol) is (formula) then so is (symbol) because (reasoning)' at least needs a comma before 'because'.}
+{但是，“观察到如果（符号）是（公式）那么（符号）也是，因为（推理）”至少需要在“因为（because）”之前加一个逗号。} % [cite: 18]
+
+\bilingual{Putting too many things in parentheses is a stylistic thing that can get very tiring.}
+{把太多的东西放在括号里是一种会让人非常疲劳的文风问题。} % [cite: 19]
+
+\bilingual{(When Don moves from his original, handwritten draft to a typed, computer-stored version his most frequent change is to remove extra parentheses.)}
+{（当 Don 从他最初的手写草稿转移到打印的、计算机存储的版本时，他最频繁的修改就是删除多余的括号。）} % [cite: 20]
+
+\bilingual{Among the parentheses most in need of removal are nested parentheses.}
+{在最需要删除的括号中，嵌套括号首当其冲。} % [cite: 21]
+
+\bilingual{To this end, it is better to write '(Definition 2)' than (definition (2)) .}
+{为此，写成“(定义 2)”比写成“（定义（2））”要好。} % [cite: 22]
+
+\bilingual{Unfortunately, however, you can't use the former if the definition was given in displayed formula (2).}
+{然而不幸的是，如果定义是在展示公式 (2) 中给出的，你就不能使用前者。} % [cite: 23]
+
+\bilingual{Then it's probably best to think of a way to avoid the outer parentheses altogether.}
+{这时候最好的办法可能就是想办法完全避免使用外层括号。} % [cite: 24]
+
+\bilingual{In some cases your audience may expect nested parentheses. In this case (or in any other case when you feel you must have them), should the outer pair be changed to brackets (or curly-braces)?}
+{在某些情况下，你的读者可能会期望看到嵌套括号。在这种情况下（或者在你觉得必须使用它们的任何其他情况下），最外层的那对括号应该改成方括号（或大括号）吗？} % [cite: 25]
+
+\bilingual{This was once the prevailing convention, but it is now not only obsolete but potentially dangerous;}
+{这曾经是普遍的惯例，但现在不仅过时了，而且具有潜在的危险；} % [cite: 26]
+
+\bilingual{brackets and curly braces have semantic content for many scientific professionals. ("The world is short of delimiters," says Don.)}
+{方括号和大括号对许多科学专业人士来说具有语义内容。（“世界上缺少分隔符，” Don 说。）} % [cite: 27, 30, 31]
+
+\bilingual{Typographers help by using slightly larger parentheses for the outer pair in a nested set.}
+{排版人员通过在嵌套括号中为最外层使用稍大一点的括号来提供帮助。} % [cite: 31]
+
+\bilingual{An entire paper or proof in capital letters is distracting. It gives the impression of sustained shouting.}
+{整篇论文或证明都用大写字母会分散注意力。这给人一种在持续大声喊叫的印象。} % [cite: 32]
+
+\bilingual{Same goes for boldface, etc.}
+{粗体字等也是如此。} % [cite: 33]
+
+\bilingual{Paul Halmos introduced the handy convention of placing a box at the end of a proof;}
+{保罗·哈尔莫斯（Paul Halmos）引入了一个方便的惯例，即在证明结尾处放置一个方框；} % [cite: 34]
+
+\bilingual{this box serves the same function as the initials 'Q.E.D.'.}
+{这个方框的功能与首字母缩写 'Q.E.D.' 相同。} % [cite: 35]
+
+\bilingual{If you use such a box, it seems best to leave a space between it and the final period.}
+{如果你使用这样一个方框，最好在它和最后一个句号之间留出一个空格。} % [cite: 36]
+
+\bilingual{Try to make it clear where new paragraphs begin. When using displayed formulas, this can become confusing unless you are careful.}
+{尽量清楚地标明新段落从哪里开始。当使用展示公式时，如果不小心，这就容易变得让人困惑。} % [cite: 37]
+
+\bilingual{Using notational or typographic conventions can be helpful to your readers (as long as your convention is appropriate to your audience).}
+{使用符号或排版惯例对你的读者很有帮助（只要你的惯例适合你的读者群）。} % [cite: 38]
+
+\bilingual{Boldface symbols or arrows over your vectors are each appropriate in the correct context.}
+{粗体符号或在向量上加箭头，在正确的语境下都是合适的。} % [cite: 39]
+
+\bilingual{When using a raised 'st' in phrases such as 'the $i+1^{\mathrm{st}}$ component', it's better to use roman type: $i+1^{\mathrm{st}}$.}
+{在诸如“第 $i+1^{\mathrm{st}}$ 个分量”这样的短语中使用上标 'st' 时，最好使用正体（roman type）：$i+1^{\mathrm{st}}$。} % [cite: 40]
+
+\bilingual{Then it's clear that you aren't speaking of "1 raised to the power st."}
+{这样一来，很明显你说的不是“1 的 st 次方”。} % [cite: 41]
+
+\bilingual{Avoid "psychologically bad" line breaks. This is subjective, but you can catch many such awkward breaks by not letting the final symbol lie on a line separate from the rest of its sentence.}
+{避免“心理上感觉糟糕”的换行。这是主观的，但你可以通过不让最后一个符号与句子的其余部分分离到另一行，来发现许多这样尴尬的换行。} % [cite: 42]
+
+\bilingual{If you are using \TeX, a tilde (\textasciitilde) in place of a space will cause the two symbols on either side of the tilde to be tied together.}
+{如果你正在使用 \TeX，用波浪号 (\textasciitilde) 代替空格会将波浪号两边的两个符号绑定在一起。} % [cite: 43]
+
+\bilingual{(Other text processors also have methods to disallow line breaks at specific points.)}
+{（其他文本处理程序也有在特定位置禁止换行的方法。）} % [cite: 44]
+
+\bilingual{Some of us are much better at spelling than others of us.}
+{我们中有些人比其他人更擅长拼写。} % [cite: 45]
+
+\bilingual{Those of us who are not naturally wonderful spellers should learn to use spelling checkers.}
+{我们中那些天生拼写不好的人，应该学会使用拼写检查器。} % [cite: 46]
+
+\bilingual{Allowing formulas to get so long that they do not format well or are unnecessarily confusing "violates the principle of 'name and conquer' that makes mathematics readable."}
+{任由公式变得太长，以至于排版不佳或造成不必要的混乱，这“违反了使数学具有可读性的‘命名并征服’的原则”。} % [cite: 47]
+
+\bilingual{For example, $v=c+u(c_{i}-c_{j}+1)$ should be $v=c+ku$, where $k=c_{i}-c_{j}+1$, if you're going to do a lot of formula manipulation in which $c_{i}-c_{j}+1$ remains as a unit.}
+{例如，如果你要做大量公式推导，且在其中 $c_{i}-c_{j}+1$ 始终作为一个整体出现，那么 $v=c+u(c_{i}-c_{j}+1)$ 应该写成 $v=c+ku$，其中 $k=c_{i}-c_{j}+1$。} % [cite: 48]
+
+\bilingual{Be stingy with your quotation marks. "Three cute things in quotes is a little too cute."}
+{吝啬使用你的引号。“加引号的三个‘可爱’的东西放在一起就有点可爱过头了。”} % [cite: 49]
+
+\bilingual{Remember to minimize subscripts. For example, '$p_{i}$ is an element of $P$' could more easily be '$p$ is an element of $P$'.}
+{记住要尽量少用下标。例如，写成“$p$ 是 $P$ 的一个元素”比写成“$p_{i}$ 是 $P$ 的一个元素”要容易得多。} % [cite: 50]
+
+\bilingual{Remember to capitalize words like theorem and lemma in titles like Lemma 1 and Theorem 23.}
+{记住在诸如“引理 1 (Lemma 1)”和“定理 23 (Theorem 23)”这样的标题中，要将 theorem 和 lemma 这样的单词首字母大写。} % [cite: 51]
+
+\bilingual{Remember to place words between adjacent formulas. A particularly bad example was, "Add $p$ $k$ times to $c$."}
+{记住要在相邻的公式之间加上文字。一个特别糟糕的例子是，“将 $p$ 相加 $k$ 次得到 $c$（Add $p$ $k$ times to $c$）”。} % [cite: 52]
+
+\bilingual{Be careful to define symbols before you use them (or at least to define them very near where you use them).}
+{注意在使用符号之前定义它们（或者至少在非常靠近使用它们的地方定义它们）。} % [cite: 53]
+
+\bilingual{Don't get hung up on one or two styles of sentences. The following sort of thing can become very monotonous: Thus, / Consequently, / Therefore, / And so,}
+{不要局限于一两种句子风格。下面这样的套话会变得非常单调：因此，/ 所以，/ 因而，/ 那么，} % [cite: 55, 56, 57, 58, 59]
+
+\bilingual{On the other hand, parallelism should be used when it is the point of the sentence.}
+{另一方面，当平行结构是句子的重点时，应该使用它。} % [cite: 60]
+
+\subsection*{Comments Involving Content / 关于内容的评论} % [cite: 61]
+
+\bilingual{Now the comments involving content:}
+{现在是关于内容的评论：} % [cite: 61]
+
+\bilingual{Try to make sentences easily comprehensible from left to right. For example, "We prove that (grunt) and (snort) implies (blah)."}
+{尽量让句子从左到右容易理解。例如，“我们证明 (哼) 并且 (哈) 蕴涵 (啦)”。} % [cite: 62]
+
+\bilingual{It would be better to write "We prove that the two conditions (grunt) and (snort) imply (blah)."}
+{最好写成“我们证明 (哼) 和 (哈) 这两个条件蕴涵 (啦)”。} % [cite: 63]
+
+\bilingual{Otherwise it seems at first that (grunt) and (snort) are being proved.}
+{否则，乍一看像是在证明 (哼) 和 (哈)。} % [cite: 64]
+
+\bilingual{While guidelines have been given for the use of the word 'that', the final placement must be dictated by cadence and clarity.}
+{虽然关于 'that' 的使用已经给出了指导原则，但最终的位置必须由节奏和清晰度来决定。} % [cite: 65]
+
+\bilingual{Read your words aloud to yourself.}
+{把自己写的话大声读给自己听。} % [cite: 66]
+
+\bilingual{The word 'shall' seems to be a natural word for definitions to many mathematical readers, but it is considered formal by younger members of the audience.}
+{对于许多数学读者来说，'shall' 这个词在定义中似乎是一个很自然的词，但年轻一点的读者会认为它太正式了。} % [cite: 67]
+
+\bilingual{Be precise in your wording. If you mean "not nonincreasing," don't say "increasing";}
+{措辞要精确。如果你想表达的是“非非递增（not nonincreasing）”，就不要说“递增（increasing）”；} % [cite: 68]
+
+\bilingual{the former means that $p_{j}<p_{j+1}$ for some $j$, while the latter that $p_{j}<p_{j+1}$ for all $j$.}
+{前者意味着对某些 $j$ 有 $p_{j}<p_{j+1}$，而后者意味着对所有 $j$ 都有 $p_{j}<p_{j+1}$。} % [cite: 69]
+
+\bilingual{Mixed tenses on the same subject are awkward. For example, "We assume now (grunt), hoping to show a contradiction," is better than, "We assume now (grunt), and will show that this leads to a contradiction."}
+{在同一主语上混用时态是很尴尬的。例如，“我们现在假设 (哼)，希望能得出一个矛盾”就比“我们现在假设 (哼)，并且将证明这会导致一个矛盾”要好。} % [cite: 70]
+
+\bilingual{Many people used the ungainly phrase "Assume by contradiction that (blah)."}
+{许多人使用了笨拙的短语“通过矛盾来假设 (啦)”。} % [cite: 71]
+
+\bilingual{It is better to say, "The proof that (blah) is by contradiction," and even better to say "To prove (grunt), let us assume the opposite and see what happens."}
+{最好说“证明 (啦) 的方法是反证法（by contradiction）”，更好的是说“为了证明 (哼)，让我们假设相反的情况，看看会发生什么”。} % [cite: 72]
+
+\bilingual{In general, a conversational tone giving signposts and clearly written transition paragraphs provides for pleasant reading.}
+{总的来说，一种能给出路标的对话语气，以及写得清晰的过渡段落，能带来愉悦的阅读体验。} % [cite: 73]
+
+\bilingual{One especially easy-to-read proof contained the phrases "The operative word is zero," "The lemma is half proved," and "We divide the proof into two parts, first proving (blah) and then proving (grunt)."}
+{有一个特别容易阅读的证明包含了这样的短语：“关键词是零”，“引理已经证明了一半”，以及“我们把证明分为两部分，先证明 (啦)，然后证明 (哼)”。} % [cite: 74]
+
+\bilingual{You can give relations in two ways, either saying '$p_{i}<p_{j}$' or '$p_{j}>p_{i}$'.}
+{你可以用两种方式给出关系，要么说 '$p_{i}<p_{j}$'，要么说 '$p_{j}>p_{i}$'。} % [cite: 75]
+
+\bilingual{The latter is for "people who are into dominance," Don says, but the former is much easier for a reader to visualize after you've just said '$p=(p_{1},p_{2},...,p_{n})$' and '$i<j$'.}
+{Don 说，后者适合那些“喜欢支配地位的人”，但在你刚刚说过 '$p=(p_{1},p_{2},...,p_{n})$' 且 '$i<j$' 之后，前者对读者来说更容易想象。} % [cite: 76]
+
+\bilingual{Similarly, don't say '$i<j$ and $p_{j}<p_{i}$'; keep $i$ and $j$ in the same relative position.}
+{同样地，不要说 '$i<j$ 且 $p_{j}<p_{i}$'；让 $i$ 和 $j$ 保持在相同的相对位置上。} % [cite: 77]
+
+\end{document}

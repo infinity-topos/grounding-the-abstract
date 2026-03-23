@@ -1,0 +1,1581 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+% ----- 宏包调用 -----
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{xcolor}   % 用于设置字体颜色
+\usepackage{setspace} % 用于调整行距
+
+% ----- 中文字体设置 (必须用 XeLaTeX 编译) -----
+\usepackage[UTF8]{ctex}
+
+% ----- 自定义双语对照命令 -----
+% 语法: \bilingual{英文句子}{中文翻译}
+\newcommand{\bilingual}[2]{
+    \begin{spacing}{1.15} % 稍微收紧了一点点行距，配合小字号
+        \noindent \normalsize #1 \\[-0.5ex] % 英文部分：使用 \normalsize
+        \small \textcolor{blue!70!black}{#2} % 中文部分：使用 \small
+    \end{spacing}
+    \vspace{0.8em} % 段落间距
+}
+
+\begin{document}
+\title{How to Write Mathematics} %
+\author{P. R. Halmos} %
+\date{} % 留空日期，或者你可以填上你排版的日期
+\maketitle % 生成标题 %
+\section*{0. PREFACE / 前言} % [cite: 4]
+
+\bilingual{This is a subjective essay, and its title is misleading; a more honest title might be HOW I WRITE MATHEMATICS.}
+{这是一篇主观的散文，它的标题具有误导性；一个更诚实的标题可能是“我是如何撰写数学的”。} % [cite: 5]
+
+\bilingual{It started with a committee of the American Mathematical Society, on which I served for a brief time, but it quickly became a private project that ran away with me.}
+{它始于我曾短暂任职的美国数学学会的一个委员会，但很快就变成了一个让我完全沉浸其中的私人项目。} % [cite: 6]
+
+\bilingual{In an effort to bring it under control I asked a few friends to read it and criticize it.}
+{为了控制它的篇幅和走向，我请了几位朋友来阅读并提出批评意见。} % [cite: 7]
+
+\bilingual{The criticisms were excellent; they were sharp, honest, and constructive; and they were contradictory. "Not enough concrete examples" said one; "don't agree that more concrete examples are needed" said another. "Too long" said one; "maybe more is needed" said another.}
+{这些批评非常精彩；它们尖锐、诚实且具有建设性；同时它们也是相互矛盾的。有人说“具体的例子不够”；另一人却说“不同意需要更多具体的例子”。有人说“太长了”；另一人则说“也许还需要写得更多”。} % [cite: 8, 9]
+
+\bilingual{"There are traditional (and effective) methods of minimizing the tediousness of long proofs, such as breaking them up in a series of lemmas" said one. "One of the things that irritates me greatly is the custom (especially of beginners) to present a proof as a long series of elaborately stated, utterly boring lemmas" said another.}
+{有人说：“有一些传统（且有效）的方法可以最大程度地减少长篇证明的乏味感，例如将它们分解成一系列的引理。”另一人却说：“最让我恼火的事情之一，就是（尤其是初学者）习惯把一个证明呈现为一长串陈述复杂、极其无聊的引理。”} % [cite: 10, 11]
+
+\bilingual{There was one thing that most of my advisors agreed on; the writing of such an essay is bound to be a thankless task.}
+{有一件事是我大多数顾问都同意的；写这样一篇文章注定是一件吃力不讨好的差事。} % [cite: 12, 13]
+
+\bilingual{Advisor 1: "By the time a mathematician has written his second paper, he is convinced he knows how to write papers, and would react to advice with impatience."}
+{顾问一：“当一个数学家写完他的第二篇论文时，他就会确信自己已经懂得如何写论文了，并且会对任何建议表现出不耐烦。”} % [cite: 14]
+
+\bilingual{Advisor 2: "All of us, I think, feel secretly that if we but bothered we could be really first rate expositors. People who are quite modest about their mathematics will get their dander up if their ability to write well is questioned."}
+{顾问二：“我认为，我们所有人都暗自觉得，只要我们愿意费心，我们就能成为真正一流的阐述者。那些对自己的数学水平相当谦虚的人，如果他们优秀的写作能力受到质疑，也会大发雷霆的。”} % [cite: 15]
+
+\bilingual{Advisor 3 used the strongest language; he warned me that since I cannot possibly display great intellectual depth in a discussion of matters of technique, I should not be surprised at "the scorn you may reap from some of our more supercilious colleagues".}
+{顾问三用了最强烈的措辞；他警告我，既然我在讨论技巧问题时不可能展现出伟大的思想深度，那么如果我受到“我们一些更傲慢的同事的嘲讽”，也不应该感到惊讶。} % [cite: 16]
+
+\bilingual{My advisors are established and well known mathematicians. A credit line from me here wouldn't add a thing to their stature, but my possible misunderstanding, misplacing, and misapplying their advice might cause them annoyance and embarrassment.}
+{我的顾问们都是地位稳固且著名的数学家。我在这里对他们表示感谢并不会为他们的声望增添分毫，但我如果对他们的建议产生了误解、放错位置或不当应用，可能会给他们带来烦恼和尴尬。} % [cite: 17]
+
+\bilingual{That is why I decided on the unscholarly procedure of nameless quotations and the expression of nameless thanks. I am not the less grateful for that, and not the less eager to acknowledge that without their help this essay would have been worse.}
+{这就是为什么我决定采取不符合学术规范的做法：进行匿名引用并表达不具名的感谢。我对此的感激之情丝毫未减，也同样渴望承认：如果没有他们的帮助，这篇文章会写得更糟。} % [cite: 18, 22]
+
+\bilingual{"Hier stehe ich; ich kann nicht anders."}
+{“我立场如此；我别无选择。”} % [cite: 23]
+\section*{1. THERE IS NO RECIPE AND WHAT IT IS / 1. 没有秘诀，以及它究竟是什么} % [cite: 24]
+
+\bilingual{I think I can tell someone how to write, but I can't think who would want to listen.}
+{我想我可以告诉别人如何写作，但我实在想不出有谁会愿意听。} % [cite: 25]
+
+\bilingual{The ability to communicate effectively, the power to be intelligible, is congenital, I believe, or, in any event, it is so early acquired that by the time someone reads my wisdom on the subject he is likely to be invariant under it.}
+{我相信，有效沟通的能力、让人理解的能力是与生俱来的，或者无论如何，它是很早就习得的，以至于当有人读到我关于这个主题的见解时，他很可能已经对此“保持不变”（不受影响）了。} % [cite: 26]
+
+\bilingual{To understand a syllogism is not something you can learn; you are either born with the ability or you are not.}
+{理解三段论不是你能学到的东西；你或者生来就有这种能力，或者就是没有。} % [cite: 27, 28]
+
+\bilingual{In the same way, effective exposition is not a teachable art; some can do it and some cannot. There is no usable recipe for good writing.}
+{同样地，有效的阐述也不是一门可以教授的艺术；有些人能做到，有些人则不能。好文章并没有现成可用的秘诀。} % [cite: 29, 30]
+
+\bilingual{Then why go on? A small reason is the hope that what I said isn't quite right; and, anyway, I'd like a chance to try to do what perhaps cannot be done.}
+{那为什么还要继续写下去呢？一个微小的原因是，我希望我刚才说的并不完全正确；而且，无论如何，我想有个机会去尝试做一些也许不可能做到的事情。} % [cite: 31, 32]
+
+\bilingual{A more practical reason is that in the other arts that require innate talent, even the gifted ones who are born with it are not usually born with full knowledge of all the tricks of the trade.}
+{一个更实际的原因是，在其他需要天赋的艺术领域中，即使是生来就具备天赋的奇才，通常也不是生来就完全掌握所有行业诀窍的。} % [cite: 33]
+
+\bilingual{A few essays such as this may serve to "remind" (in the sense of Plato) the ones who want to be and are destined to be the expositors of the future of the techniques found useful by the expositors of the past.}
+{像这样的一些文章或许可以起到一种“提醒”的作用（在柏拉图的意义上），提醒那些想要成为且注定要成为未来阐述者的人们，去了解过去阐述者们发现的有用技巧。} % [cite: 34]
+
+\bilingual{The basic problem in writing mathematics is the same as in writing biology, writing a novel, or writing directions for assembling a harpsichord: the problem is to communicate an idea.}
+{撰写数学的基本问题，与撰写生物学、写小说，或者写大键琴的组装说明书是一样的：核心问题都在于传达一个想法。} % [cite: 35]
+
+\bilingual{To do so, and to do it clearly, you must have something to say, and you must have someone to say it to, you must organize what you want to say, and you must arrange it in the order you want it said in, you must write it, rewrite it, and re-rewrite it several times, and you must be willing to think hard about and work hard on mechanical details such as diction, notation, and punctuation.}
+{为了做到这一点，并且清晰地做到这一点，你必须有话可说，必须有倾听的对象，必须组织你想要说的话，必须按照你希望的顺序来安排它，你必须写出来、重写、再重写好几次，而且你必须愿意在措辞、符号和标点等机械细节上苦思冥想并下足功夫。} % [cite: 36]
+
+\bilingual{That's all there is to it.}
+{这就是全部的奥秘所在。} % [cite: 37]
+
+
+\section*{2. SAY SOMETHING / 2. 言之有物} %
+
+\bilingual{It might seem unnecessary to insist that in order to say something well you must have something to say, but it's no joke.}
+{强调“要想说得好就必须有话可说”似乎是多此一举，但这绝不是开玩笑。} %
+
+\bilingual{Much bad writing, mathematical and otherwise, is caused by a violation of that first principle.}
+{许多糟糕的文章，无论是数学领域的还是其他领域的，都是由于违反了这第一原则造成的。} %
+
+\bilingual{Just as there are two ways for a sequence not to have a limit (no cluster points or too many), there are two ways for a piece of writing not to have a subject (no ideas or too many).}
+{正如一个数列没有极限有两种情况（没有聚点或聚点太多），一篇文章没有主题也有两种情况（没有想法或想法太多）。} %
+
+\bilingual{The first disease is the harder one to catch. It is hard to write many words about nothing, especially in mathematics, but it can be done, and the result is bound to be hard to read.}
+{第一种病症更难得上。要对“空无一物”写上长篇大论是很难的，尤其是在数学领域，但这并非不可能，其结果必然是晦涩难懂。} %
+
+\bilingual{There is a classic crank book by Carl Theodore Heisel [5] that serves as an example.}
+{卡尔·西奥多·海塞尔（Carl Theodore Heisel）写的一本经典的“民科”书籍 [5] 就是一个例子。} %
+
+\bilingual{It is full of correctly spelled words strung together in grammatical sentences, but after three decades of looking at it every now and then I still cannot read two consecutive pages and make a one-paragraph abstract of what they say; the reason is, I think, that they don't say anything.}
+{书里满是拼写正确的单词，串联成符合语法的句子，但三十年来我偶尔翻看，依然无法连续读下两页并为它们所说的内容写出一段摘要；我认为原因是，它们什么也没说。} %
+
+\bilingual{The second disease is very common: there are many books that violate the principle of having something to say by trying to say too many things.}
+{第二种病症非常普遍：有许多书因为试图说太多东西，从而违反了“言之有物”的原则。} %
+
+\bilingual{Teachers of elementary mathematics in the U.S.A. frequently complain that all calculus books are bad.}
+{美国的初等数学教师经常抱怨所有的微积分书都很糟糕。} %
+
+\bilingual{That is a case in point. Calculus books are bad because there is no such subject as calculus; it is not a subject because it is many subjects.}
+{这就是一个典型的例子。微积分书之所以糟糕，是因为根本就不存在“微积分”这样一门单一的学科；它不是一门学科，因为它是许多门学科的集合。} %
+
+\bilingual{What we call calculus nowadays is the union of a dab of logic and set theory, some axiomatic theory of complete ordered fields, analytic geometry and topology, the latter in both the "general" sense (limits and continuous functions) and the algebraic sense (orientation), real-variable theory properly so called (differentiation), the combinatoric symbol manipulation called formal integration, the first steps of low-dimensional measure theory, some differential geometry, the first steps of the classical analysis of the trigonometric, exponential, and logarithmic functions, and, depending on the space available and the personal inclinations of the author, some cook-book differential equations, elementary mechanics, and a small assortment of applied mathematics.}
+{我们现在所谓的微积分，是一点逻辑学和集合论、一些完备有序域的公理化理论、解析几何和拓扑学（后者既包括“一般”意义上的极限和连续函数，也包括代数意义上的定向）、名副其实的实变函数理论（微分）、称为形式积分的组合符号运算、低维测度论的初步、一些微分几何、三角函数、指数函数和对数函数的经典分析初步的结合体，并且，根据可用篇幅和作者的个人倾向，还可能掺杂一些食谱式的微分方程、初等力学以及少量的应用数学大杂烩。} %
+
+\bilingual{Any one of these is hard to write a good book on; the mixture is impossible.}
+{要写好其中任何一门学科的书都很难；把它们混在一起则是不可能的。} %
+
+\bilingual{Nelson's little gem of a proof that a bounded harmonic function is a constant [7] and Dunford and Schwartz's monumental treatise on functional analysis [3] are examples of mathematical writings that have something to say.}
+{纳尔逊（Nelson）证明有界调和函数是常数的精妙小证明 [7]，以及邓福德（Dunford）和施瓦茨（Schwartz）关于泛函分析的不朽巨著 [3]，都是“言之有物”的数学写作的典范。} %
+
+\bilingual{Nelson's work is not quite half a page and Dunford-Schwartz is more than four thousand times as long, but it is plain in each case that the authors had an unambiguous idea of what they wanted to say.}
+{纳尔逊的著作不到半页，而邓福德-施瓦茨的著作则比它长四千多倍，但在每个例子中，作者对自己想表达的内容都有一个毫不含糊的清晰想法。} %
+
+\bilingual{The subject is clearly delineated; it is a subject; it hangs together; it is something to say.}
+{主题被清晰地勾勒出来；它是一个独立的主题；它紧密连贯；它言之有物。} %
+
+\bilingual{To have something to say is by far the most important ingredient of good exposition-so much so that if the idea is important enough, the work has a chance to be immortal even if it is confusingly misorganized and awkwardly expressed.}
+{言之有物是迄今为止优秀阐述中最重要的要素——甚至可以说，只要想法足够重要，即使这部作品组织得混乱不堪、表达得笨拙别扭，它也有机会成为不朽之作。} %
+
+\bilingual{Birkhoff's proof of the ergopic theorem [1] is almost maximally confusing, and Vanzetti's "last letter" [9] is halting and awkward, but surely anyone who reads them is glad that they were written.}
+{伯克霍夫（Birkhoff）对遍历定理的证明 [1] 几乎达到了混乱的极点，凡泽蒂（Vanzetti）的“绝笔信” [9] 也结结巴巴、笨拙不堪，但毫无疑问，任何读过它们的人都会庆幸它们被写了出来。} %
+
+\bilingual{To get by on the first principle alone is, however, only rarely possible and never desirable.}
+{然而，仅仅依靠这第一条原则蒙混过关，是极少可能的，也绝不值得提倡。} %
+
+
+
+\section*{3. SPEAK TO SOMEONE / 3. 明确你的读者} % [cite: 61]
+
+\bilingual{The second principle of good writing is to write for someone.}
+{优秀写作的第二个原则是为某个人而写。} % [cite: 62]
+
+\bilingual{When you decide to write something, ask yourself who it is that you want to reach.}
+{当你决定写点什么的时候，问问自己你想要传达给谁。} % [cite: 63]
+
+\bilingual{Are you writing a diary note to be read by yourself only, a letter to a friend, a research announcement for specialists, or a textbook for undergraduates?}
+{你是在写只有自己看的日记、给朋友的信、给专家的研究公告，还是给本科生看的教科书？} % [cite: 64]
+
+\bilingual{The problems are much the same in any case; what varies is the amount of motivation you need to put in, the extent of informality you may allow yourself, the fussiness of the detail that is necessary, and the number of times things have to be repeated.}
+{无论哪种情况，面临的问题都大同小异；不同之处在于你需要提供多少背景动机，你可以允许自己多大程度的非正式，所需细节的繁琐程度，以及某些事情需要重复的次数。} % [cite: 65]
+
+\bilingual{All writing is influenced by the audience, but, given the audience, an author's problem is to communicate with it as best he can.}
+{所有的写作都会受到读者的影响，但是，既然确定了读者，作者面临的问题就是尽可能好地与他们沟通。} % [cite: 66]
+
+\bilingual{Publishers know that 25 years is a respectable old age for most mathematical books; for research papers five years (at a guess) is the average age of obsolescence. (Of course there can be 50-year old papers that remain alive and books that die in five.)}
+{出版商知道，对于大多数数学书籍来说，25年已经算得高寿了；对于研究论文，5年（猜测）是平均的过时年限。（当然，也会有50年后依然活跃的论文，以及5年就夭折的书籍。）} % [cite: 67, 68, 69]
+
+\bilingual{Mathematical writing is ephemeral, to be sure, but if you want to reach your audience now, you must write as if for the ages.}
+{诚然，数学写作是短暂的，但如果你想现在就打动你的读者，你就必须像为千秋万代写作那样去写。} % [cite: 69]
+
+\bilingual{I like to specify my audience not only in some vague, large sense (e.g., professional topologists, or second year graduate students), but also in a very specific, personal sense.}
+{我喜欢不仅在某种模糊、宽泛的意义上（例如，专业的拓扑学家，或者二年级研究生）指定我的读者，而且还在非常具体、个人的意义上指定。} % [cite: 70]
+
+\bilingual{It helps me to think of a person, perhaps someone I discussed the subject with two years ago, or perhaps a deliberately obtuse, friendly colleague, and then to keep him in mind as I write.}
+{这有助于我想象出一个具体的人，也许是两年前和我讨论过这个话题的人，或者是某个故意显得迟钝但很友好的同事，然后在我写作时把他记在心里。} % [cite: 71]
+
+\bilingual{In this essay, for instance, I am hoping to reach mathematics students who are near the beginning of their thesis work, but, at the same time, I am keeping my mental eye on a colleague whose ways can stand mending.}
+{例如，在这篇文章中，我希望能接触到那些刚开始做毕业论文的数学系学生，但同时，我在脑海中也一直盯着一位行事方式有待改进的同事。} % [cite: 72]
+
+\bilingual{Of course I hope that (a) he'll be converted to my ways, but (b) he won't take offence if and when he realizes that I am writing for him.}
+{当然，我希望 (a) 他能被我同化，而且 (b) 当他意识到我是在为他而写时，他不会生气。} % [cite: 73]
+
+\bilingual{There are advantages and disadvantages to addressing a very sharply specified audience.}
+{针对一个非常明确指定的读者群体有好处也有坏处。} % [cite: 74]
+
+\bilingual{A great advantage is that it makes easier the mind reading that is necessary; a disadvantage is that it becomes tempting to indulge in snide polemic comments and heavy-handed "in" jokes.}
+{一个很大的好处是，它使必要的“读心术”变得更容易；坏处是，这容易让人受到诱惑，沉溺于尖刻的论战性评论和笨拙的“内部圈子”笑话。} % [cite: 75, 76]
+
+\bilingual{It is surely obvious what I mean by the disadvantage, and it is obviously bad; avoid it. The advantage deserves further emphasis.}
+{我所说的坏处显然是显而易见的，而且它显然是不好的；要避免它。而它的好处则值得进一步强调。} % [cite: 78]
+
+\bilingual{The writer must anticipate and avoid the reader's difficulties.}
+{作者必须预见并避免读者的困难。} % [cite: 79]
+
+\bilingual{As he writes, he must keep trying to imagine what in the words being written may tend to mislead the reader, and what will set him right.}
+{在写作时，他必须不断尝试想象正在写下的文字中有什么可能会误导读者，以及什么能使读者走上正轨。} % [cite: 79]
+
+\bilingual{I'll give examples of one or two things of this kind later; for now I emphasize that keeping a specific reader in mind is not only helpful in this aspect of the writer's work, it is essential.}
+{稍后我将举一两个这方面的例子；现在我只强调，在作者这方面的工作中，牢记一个特定的读者不仅是有帮助的，而且是必不可少的。} % [cite: 80, 81]
+
+\bilingual{Perhaps it needn't be said, but it won't hurt to say, that the audience actually reached may differ greatly from the intended one.}
+{也许不用说（但说出来也无妨），实际接触到的读者可能与预期的读者大相径庭。} % [cite: 82]
+
+\bilingual{There is nothing that guarantees that a writer's aim is always perfect.}
+{没有任何东西能保证作者的目标总是完美的。} % [cite: 83]
+
+\bilingual{I still say it's better to have a definite aim and hit something else, than to have an aim that is too inclusive or too vaguely specified and have no chance of hitting anything.}
+{我仍然认为，有一个明确的目标却击中了别的东西，总比目标太包罗万象或指定得太模糊，以至于根本没有机会击中任何东西要好。} % [cite: 84]
+
+\bilingual{Get ready, aim, and fire, and hope that you'll hit a target: the target you were aiming at, for choice, but some target in preference to none.}
+{准备，瞄准，开火，并希望你能击中一个目标：最好是你瞄准的那个目标，但无论如何，击中某个目标总比什么都没击中要好。} % [cite: 85]
+
+\section*{4. ORGANIZE FIRST / 4. 组织为先} %
+
+\bilingual{The main contribution that an expository writer can make is to organize and arrange the material so as to minimize the resistance and maximize the insight of the reader and keep him on the track with no unintended distractions.}
+{一个阐述型作者所能做出的主要贡献，就是对材料进行组织和排列，从而将读者的阻力降到最低，将他们的洞察力最大化，并让他们保持在正轨上，不受任何意外的干扰。} %
+
+\bilingual{What, after all, are the advantages of a book over a stack of reprints?}
+{毕竟，一本书相对于一堆单印本的优势是什么呢？} %
+
+\bilingual{Answer: efficient and pleasant arrangement, emphasis where emphasis is needed, the indication of interconnections, and the description of the examples and counterexamples on which the theory is based; in one word, organization.}
+{答案是：高效且令人愉悦的排列，在需要强调的地方加以强调，指出事物之间的相互联系，以及对作为理论基础的例子和反例进行描述；用一个词来概括，就是“组织”。} %
+
+\bilingual{The discoverer of an idea, who may of course be the same as its expositor, stumbled on it helter-skelter, inefficiently, almost at random.}
+{一个想法的发现者（当然，他可能和阐述者是同一个人），往往是在杂乱无章、效率低下、几乎是随机的情况下偶然得出这个想法的。} %
+
+\bilingual{If there were no way to trim, to consolidate, and to rearrange the discovery, every student would have to recapitulate it, there would be no advantage to be gained from standing "on the shoulders of giants", and there would never be time to learn something new that the previous generation did not know.}
+{如果没有办法对这一发现进行修剪、巩固和重新排列，每个学生就都不得不重新经历一遍这个发现过程，那么“站在巨人的肩膀上”也就没有任何优势可言了，而且我们也永远没有时间去学习上一代人不知道的新事物。} %
+
+\bilingual{Once you know what you want to say, and to whom you want to say it, the next step is to make an outline.}
+{一旦你知道了你想说什么，以及你想对谁说，下一步就是制定一个大纲。} %
+
+\bilingual{In my experience that is usually impossible.}
+{根据我的经验，这通常是不可能的。} %
+
+\bilingual{The ideal is to make an outline in which every preliminary heuristic discussion, every lemma, every theorem, every corollary, every remark, and every proof are mentioned, and in which all these pieces occur in an order that is both logically correct and psychologically digestible.}
+{理想的状态是制定一个大纲，其中提到了每一次初步的启发式讨论、每一个引理、每一个定理、每一个推论、每一条注记以及每一个证明，并且所有这些部分出现的顺序既在逻辑上正确，又在心理上易于被读者吸收。} %
+
+\bilingual{In the ideal organization there is a place for everything and everything is in its place.}
+{在理想的组织结构中，一切皆有其位，且各就其位。} %
+
+\bilingual{The reader's attention is held because he was told early what to expect, and, at the same time and in apparent contradiction, pleasant surprises keep happening that could not have been predicted from the bare bones of the definitions.}
+{读者的注意力被吸引住了，因为他很早就被告知了会发生什么，而与此同时（似乎有些矛盾），令人愉悦的惊喜却不断发生，这些惊喜是无法从光秃秃的定义框架中预测出来的。} %
+
+\bilingual{The parts fit, and they fit snugly.}
+{各个部分相互契合，并且契合得严丝合缝。} %
+
+\bilingual{The lemmas are there when they are needed, and the interconnections of the theorems are visible; and the outline tells you where all this belongs.}
+{引理在需要的时候适时出现，定理之间的相互联系清晰可见；而大纲会告诉你这一切分别属于哪里。} %
+
+\bilingual{I make a small distinction, perhaps an unnecessary one, between organization and arrangement.}
+{我在“组织（organization）”和“排列（arrangement）”之间做了一个小小的区分，也许这个区分是不必要的。} %
+
+\bilingual{To organize a subject means to decide what the main headings and subheadings are, what goes under each, and what are the connections among them.}
+{组织一门学科，意味着决定哪些是主要标题和次要标题，每个标题下包含什么内容，以及它们之间的联系是什么。} %
+
+\bilingual{A diagram of the organization is a graph, very likely a tree, but almost certainly not a chain.}
+{组织结构的图解是一个图，很可能是一棵树，但几乎可以肯定不是一条链。} %
+
+\bilingual{There are many ways to organize most subjects, and usually there are many ways to arrange the results of each method of organization in a linear order.}
+{对于大多数学科，都有许多种组织方法，并且通常有很多种方法可以将每种组织方法的结果按线性顺序排列起来。} %
+
+\bilingual{The organization is more important than the arrangement, but the latter frequently has psychological value.}
+{组织比排列更重要，但后者往往具有心理学上的价值。} %
+
+\bilingual{One of the most appreciated compliments I paid an author came from a fiasco; I botched a course of lectures based on his book.}
+{我曾对一位作者表达过极高的赞扬，而这赞扬源自一次彻底的惨败；我搞砸了一门基于他的书的课程。} %
+
+\bilingual{The way it started was that there was a section of the book that I didn't like, and I skipped it.}
+{事情的起因是，书里有一节我不喜欢，于是我跳过了它。} %
+
+\bilingual{Three sections later I needed a small fragment from the end of the omitted section, but it was easy to give a different proof.}
+{三节之后，我需要用到那被省略的一节末尾的一个小片段，但这很容易用另一个证明来替代。} %
+
+\bilingual{The same sort of thing happened a couple of times more, but each time a little ingenuity and an ad hoc concept or two patched the leak.}
+{同样的事情又发生了几次，但每次我都靠一点小聪明和一两个临时构造的概念把漏洞补上了。} %
+
+\bilingual{In the next chapter, however, something else arose in which what was needed was not a part of the omitted section but the fact that the results of that section were applicable to two apparently very different situations.}
+{然而，在下一章中出现了另一种情况，当时需要的不是被省略部分的内容，而是该节的结果能够应用于两个看似截然不同的情况这一事实。} %
+
+\bilingual{That was almost impossible to patch up, and after that chaos rapidly set in. The organization of the book was tight;}
+{这几乎是不可能修补的，在那之后，混乱迅速蔓延开来。这本书的组织非常严密；} %
+
+\bilingual{things were there because they were needed; the presentation had the kind of coherence which makes for ease in reading and understanding.}
+{事物出现在那里是因为它们被需要；它的呈现方式具有一种连贯性，使得阅读和理解变得轻松。} %
+
+\bilingual{At the same time the wires that were holding it all together were not obtrusive; they became visible only when a part of the structure was tampered with.}
+{同时，将这一切维系在一起的引线并不张扬；只有当结构的一部分被篡改时，它们才会显现出来。} %
+
+\bilingual{Even the least organized authors make a coarse and perhaps unwritten outline; the subject itself is, after all, a one-concept outline of the book.}
+{即使是最不讲究组织的作者，也会制定一个粗略的、也许是不成文的大纲；毕竟，主题本身就是这本书的一个“单概念”大纲。} %
+
+\bilingual{If you know that you are writing about measure theory, then you have a two-word outline, and that's something.}
+{如果你知道你写的是关于测度论（measure theory）的，那么你就有一个两个词的大纲，这总算是个开始。} %
+
+\bilingual{A tentative chapter outline is something better.}
+{一个初步的章节大纲则要好得多。} %
+
+\bilingual{It might go like this: I'll tell them about sets, and then measures, and then functions, and then integrals.}
+{它可能是这样的：我将向他们介绍集合，然后是测度，然后是函数，最后是积分。} %
+
+\bilingual{At this stage you'll want to make some decisions, which, however, may have to be rescinded later; you may for instance decide to leave probability out, but put Haar measure in.}
+{在这个阶段，你需要做出一些决定，不过这些决定可能在稍后必须撤销；例如，你可能会决定不写概率论，但把哈尔测度（Haar measure）加进去。} %
+
+\bilingual{There is a sense in which the preparation of an outline can take years, or, at the very least, many weeks.}
+{在某种意义上，准备一个大纲可能需要数年时间，或者至少也需要好几个星期。} %
+
+\bilingual{For me there is usually a long time between the first joyful moment when I conceive the idea of writing a book and the first painful moment when I sit down and begin to do so.}
+{对我来说，从最初构思写一本书的快乐时刻，到我坐下来开始写作的痛苦时刻，这之间通常会有很长的一段时间。} %
+
+\bilingual{In the interim, while continue my daily bread and butter work, I daydream about the new project, and, as ideas occur to me about it, I jot them down on loose slips of paper and put them helter-skelter in a folder.}
+{在此期间，当我继续做我赖以谋生的日常工作时，我会对这个新项目进行白日梦般的遐想；当有相关的想法出现时，我就会把它们记在散落的纸条上，然后杂乱无章地塞进一个文件夹里。} %
+
+\bilingual{An "idea" in this sense may be a field of mathematics I feel should be included, or it may be an item of notation; it may be a proof, it may be an aptly descriptive word, or it may be a witticism that, I hope, will not fall flat but will enliven, emphasize, and exemplify what I want to say.}
+{这种意义上的“想法”，可能是我觉得应该包含进来的一个数学领域，或者是一个符号项目；它可能是一个证明，可能是一个贴切的描述性词语，或者是我想出的一句俏皮话——我希望它不仅不会冷场，还能活跃气氛、强调并例证我想说的话。} %
+
+\bilingual{When the painful moment finally arrives, I have the folder at least; playing solitaire with slips of paper can be a big help in preparing the outline.}
+{当痛苦的时刻最终到来时，我至少还有这个文件夹；用这些纸条玩“纸牌接龙”对于准备大纲有很大的帮助。} %
+
+\bilingual{In the organization of a piece of writing, the question of what to put in is hardly more important than what to leave out;}
+{在一篇文章的组织中，“放什么进去”这个问题，绝不比“把什么删掉”更重要；} %
+
+\bilingual{too much detail can be as discouraging as none.}
+{过多的细节和完全没有细节一样让人望而生畏。} %
+
+\bilingual{The last dotting of the last i, in the manner of the old-fashioned Cours d'Analyse in general and Bourbaki in particular, gives satisfaction to the author who understands it anyway and to the helplessly weak student who never will; for most serious-minded readers it is worse than useless.}
+{像老式的《分析教程》（Cours d'Analyse）通常的做法，特别是布尔巴基（Bourbaki）学派那样，对最微小的细节都面面俱到，这只能让无论如何都能看懂的作者，以及永远也看不懂的、无助而薄弱的学生感到满足；但对于大多数态度认真的读者来说，这简直比毫无用处还要糟糕。} %
+
+\bilingual{The heart of mathematics consists of concrete examples and concrete problems.}
+{数学的核心在于具体的例子和具体的问题。} %
+
+\bilingual{Big general theories are usually afterthoughts based on small but profound insights; the insights themselves come from concrete special cases.}
+{宏大的通用理论通常是基于微小但深刻的洞察力所产生的后见之明；而洞察力本身来源于具体的特殊情况。} %
+
+\bilingual{The moral is that it's best to organize your work around the central, crucial examples and counterexamples.}
+{这里的寓意是：最好围绕那些核心的、关键的例子和反例来组织你的工作。} %
+
+\bilingual{The observation that a proof proves something a little more general than it was invented for can frequently be left to the reader.}
+{至于“某个证明所证明的东西，比它最初被发明时所针对的情况要稍微普遍一些”这样的观察结论，通常可以留给读者自己去发现。} %
+
+\bilingual{Where the reader needs experienced guidance is in the discovery of the things the proof does not prove; what are the appropriate counterexamples and where do we go from here?}
+{读者真正需要经验丰富的人来引导的地方，是去发现该证明“没有”证明的东西；合适的反例是什么，以及接下来我们要走向何方？} %
+
+\section*{5. THINK ABOUT THE ALPHABET / 5. 考虑字母表} %
+
+\bilingual{Once you have some kind of plan of organization, an outline, which may not be a fine one but is the best you can do, you are almost ready to start writing.}
+{一旦你有了某种组织计划、一个大纲——它可能不够完善，但已经是你所能做到的最好程度了——你差不多就可以开始写作了。} %
+
+\bilingual{The only other thing I would recommend that you do first is to invest an hour or two of thought in the alphabet;}
+{我建议你首先要做的另一件事，就是花一两个小时思考一下字母表；} %
+
+\bilingual{you'll find it saves many headaches later.}
+{你会发现这能省去以后许多令人头疼的问题。} %
+
+\bilingual{The letters that are used to denote the concepts you'll discuss are worthy of thought and careful design.}
+{用于表示你将要讨论的概念的字母，值得深思熟虑和精心设计。} %
+
+\bilingual{A good, consistent notation can be a tremendous help, and I urge (to the writers of articles too, but especially to the writers of books) that it be designed at the beginning.}
+{一套良好、一致的符号系统能带来巨大的帮助，我强烈建议（对文章作者如此，对书籍作者更是如此）在动笔之初就把它们设计好。} %
+
+\bilingual{I make huge tables with many alphabets, with many fonts, for both upper and lower case, and I try to anticipate all the spaces, groups, vectors, functions, points, surfaces, measures, and whatever that will sooner or later need to be baptized.}
+{我会制作巨大的表格，包含许多种字母表、许多种字体、大写和小写，并尽量预见所有迟早需要被“洗礼”（命名）的空间、群、向量、函数、点、曲面和测度等。} %
+
+\bilingual{Bad notation can make good exposition bad and bad exposition worse;}
+{糟糕的符号会使原本优秀的阐述变糟，使原本糟糕的阐述变得更糟；} %
+
+\bilingual{ad hoc decisions about notation, made mid-sentence in the heat of composition, are almost certain to result in bad notation.}
+{在写作的狂热中、在句子写到一半时临时做出的符号决定，几乎必然会导致糟糕的符号。} %
+
+\bilingual{Good notation has a kind of alphabetical harmony and avoids dissonance.}
+{良好的符号具有一种字母上的和谐，并避免产生不协调感。} %
+
+\bilingual{Example: either $ax+by$ or $a_{1}x_{1}+a_{2}x_{2}$ is preferable to $ax_{1}+bx_{2}$.}
+{例如：$ax+by$ 或 $a_{1}x_{1}+a_{2}x_{2}$ 都比 $ax_{1}+bx_{2}$ 要好。} %
+
+\bilingual{Or: if you must use $\Sigma$ for an index set, make sure you don't run into $\sum_{\sigma\in\Sigma}a_{\sigma}$}
+{或者：如果你必须用 $\Sigma$ 来表示索引集，请确保你不会遇到类似 $\sum_{\sigma\in\Sigma}a_{\sigma}$ 这样的情况。} %
+
+\bilingual{Along the same lines: perhaps most readers wouldn't notice that you used $|z|<\epsilon$ at the top of the page and $z \in U$ at the bottom, but that's the sort of near dissonance that causes a vague non-localized feeling of malaise.}
+{同样地：也许大多数读者不会注意到你在页面顶部使用了 $|z|<\epsilon$，而在底部使用了 $z \in U$，但正是这种近乎不协调的设定，会引起一种模糊的、难以定位的不适感。} %
+
+\bilingual{The remedy is easy and is getting more and more nearly universally accepted: $\in$ is reserved for membership and $\epsilon$ for ad hoc use.}
+{补救措施很简单，而且越来越被普遍接受：$\in$ 保留给集合从属关系（membership），而 $\epsilon$ 留作临时使用。} %
+
+\bilingual{Mathematics has access to a potentially infinite alphabet (e.g., $x, x^{\prime}, x_{1}, x^{\prime\prime\prime}, \dots$), but, in practice, only a small finite fragment of it is usable.}
+{数学可以使用的字母表潜在上是无限的（例如，$x, x^{\prime}, x_{1}, x^{\prime\prime\prime}, \dots$），但在实践中，只有一小部分有限的字母是真正可用的。} %
+
+\bilingual{One reason is that a human being's ability to distinguish between symbols is very much more limited than his ability to conceive of new ones;}
+{一个原因是，人类区分符号的能力远比构思新符号的能力有限得多；} %
+
+\bilingual{another reason is the bad habit of freezing letters.}
+{另一个原因则是“冻结”字母的坏习惯。} %
+
+\bilingual{Some old-fashioned analysts would speak of "xyz-space", meaning, I think, 3-dimensional Euclidean space, plus the convention that a point of that space shall always be denoted by "$(x,y,z)$".}
+{一些老派的分析学家会谈论“$xyz$-空间”，我想他们的意思是三维欧几里得空间，外加一个约定：该空间的一个点将始终表示为“$(x,y,z)$”。} %
+
+\bilingual{This is bad: it "freezes" $x$, and $y$, and $z$, i.e., prohibits their use in another context, and, at the same time, it makes it impossible (or, in any case, inconsistent) to use, say, "$(a,b,c)$" when "$(x,y,z)$" has been temporarily exhausted.}
+{这很糟糕：它“冻结”了 $x, y, z$，即禁止在其他上下文中去使用它们，同时，当“$(x,y,z)$”暂时被用完时，这也使得使用例如“$(a,b,c)$”变得不可能（或者无论如何都是不一致的）。} %
+
+\bilingual{Modern versions of the custom exist, and are no better. Example: matrices with "property L" - a frozen and unsuggestive designation.}
+{这种习惯在现代依然存在，而且情况并未好转。例如：具有“性质 L”的矩阵——一个僵化且毫无启发性的称呼。} %
+
+\bilingual{There are other awkward and unhelpful ways to use letters: "CW complexes" and "CCR groups" are examples.}
+{还有其他一些尴尬且无益的字母使用方式：“CW 复形”和“CCR 群”就是例子。} %
+
+\bilingual{A related curiosity that is probably the upper bound of using letters in an unusable way occurs in Lefschetz [6].}
+{在莱夫谢茨（Lefschetz）[6] 的著作中出现了一个相关的奇特现象，这可能是以不可用的方式使用字母的“上确界”了。} %
+
+\bilingual{There $x_{i}^{p}$ is a chain of dimension $p$ (the subscript is just an index), whereas $x_{p}^{i}$ is a co-chain of dimension $p$ (and the superscript is an index).}
+{在那里，$x_{i}^{p}$ 是一个 $p$ 维链（下标只是一个索引），而 $x_{p}^{i}$ 是一个 $p$ 维上链（上标是一个索引）。} %
+
+\bilingual{Question: what is $x_{3}^{2}$?}
+{试问：$x_{3}^{2}$ 是什么？} %
+
+\bilingual{As history progresses, more and more symbols get frozen. The standard examples are $e$, $i$, and $\pi$, and, of course, 0, 1, 2, 3, \dots}
+{随着历史的发展，越来越多的符号被冻结了。标准的例子是 $e, i, \pi$，当然还有 0, 1, 2, 3, \dots} %
+
+\bilingual{(Who would dare write "Let 6 be a group."?)}
+{（谁敢写“令 6 为一个群”？）} %
+
+\bilingual{A few other letters are almost frozen: many readers would feel offended if "$n$" were used for a complex number, "$e$" for a positive integer, and "$z$" for a topological space.}
+{少数其他字母几乎也被冻结了：如果用“$n$”表示复数，用“$e$”表示正整数，或者用“$z$”表示拓扑空间，许多读者会感到被冒犯。} %
+
+\bilingual{(A mathematician's nightmare is a sequence $n_{t}$ that tends to 0 as $t$ becomes infinite.)}
+{（数学家的噩梦是一个序列 $n_{t}$ 在 $t$ 趋于无穷大时趋于 0。）} %
+
+\bilingual{Moral: do not increase the rigid frigidity. Think about the alphabet. It's a nuisance, but it's worth it.}
+{寓意：不要增加这种僵化的冷酷。好好思考一下字母表。这很麻烦，但这是值得的。} %
+
+\bilingual{To save time and trouble later, think about the alphabet for an hour now; then start writing.}
+{为了省去以后的时间和麻烦，现在先花一个小时思考一下字母表；然后再开始写作。} %
+
+\section*{6. WRITE IN SPIRALS / 6. 螺旋式写作} %
+
+\bilingual{The best way to start writing, perhaps the only way, is to write on the spiral plan.}
+{开始写作的最好方法，也许是唯一的方法，就是按照螺旋计划来写。} %
+
+\bilingual{According to the spiral plan the chapters get written and re-written in the order 1, 2, 1, 2, 3, 1, 2, 3, 4, etc.}
+{根据螺旋计划，章节的撰写和重写顺序是 1, 2, 1, 2, 3, 1, 2, 3, 4，依此类推。} %
+
+\bilingual{You think you know how to write Chapter 1, but after you've done it and gone on to Chapter 2, you'll realize that you could have done a better job on Chapter 2 if you had done Chapter 1 differently.}
+{你以为你知道怎么写第一章，但在你写完并继续写第二章后，你会意识到如果你以不同的方式写第一章，你在第二章本可以做得更好。} %
+
+\bilingual{There is no help for it but to go back, do Chapter 1 differently, do a better job on Chapter 2, and then dive into Chapter 3.}
+{没办法，只好退回去，以不同的方式重写第一章，把第二章写得更好，然后再一头扎进第三章。} %
+
+\bilingual{And, of course, you know what will happen: Chapter 3 will show up the weaknesses of Chapters 1 and 2, and there is no help for it... etc., etc., etc.}
+{当然，你知道接下来会发生什么：第三章会暴露出第一章和第二章的弱点，这没办法……诸如此类，不断循环。} %
+
+\bilingual{It's an obvious idea, and frequently an unavoidable one, but it may help a future author to know in advance what he'll run into, and it may help him to know that the same phenomenon will occur not only for chapters, but for sections, for paragraphs, for sentences, and even for words.}
+{这是一个显而易见的想法，且通常是不可避免的，但它或许能帮助未来的作者提前知道他会遇到什么情况，并且有助于他了解，同样的现象不仅会发生在章节上，还会发生在小节、段落、句子，甚至单词上。} %
+
+\bilingual{The first step in the process of writing, rewriting, and re-rewriting, is writing.}
+{写作、重写再重写的过程中的第一步，就是先写。} %
+
+\bilingual{Given the subject, the audience, and the outline (and, don't forget, the alphabet), start writing, and let nothing stop you.}
+{既然有了主题、读者和大纲（别忘了，还有字母表），那就开始写吧，不要让任何事情阻止你。} %
+
+\bilingual{There is no better incentive for writing a good book than a bad book.}
+{想要写出一本好书，没有什么比先写出一本烂书更好的动力了。} %
+
+\bilingual{Once you have a first draft in hand, spiral-written, based on a subject, aimed at an audience, and backed by as detailed an outline as you could scrape together, then your book is more than half done.}
+{一旦你手里有了一份螺旋式写出的初稿——基于一个主题、针对特定读者群、并以你能拼凑出的最详细的大纲为后盾——那么你的书就已经完成大半了。} %
+
+\bilingual{The spiral plan accounts for most of the rewriting and re-rewriting that a book involves (most, but not all).}
+{书籍创作中涉及的大部分（虽然不是全部）重写和再重写工作，都是由螺旋计划造成的。} %
+
+\bilingual{In the first draft of each chapter I recommend that you spill your heart, write quickly, violate all rules, write with hate or with pride, be snide, be confused, be "funny" if you must, be unclear, be ungrammatical-just keep on writing.}
+{在每一章的初稿中，我建议你倾注心血，快速书写，打破所有规则，带着仇恨或骄傲去写，可以尖刻、可以困惑，如果必须的话可以装“幽默”，可以含糊不清，也可以不合语法——只要继续写下去就行。} %
+
+\bilingual{When you come to rewrite, however, and however often that may be necessary, do not edit but rewrite.}
+{然而，当你需要重写时——无论多频繁——不要去局部修改（edit），而是要彻底重写（rewrite）。} %
+
+\bilingual{It is tempting to use a red pencil to indicate insertions, deletions, and permutations, but in my experience it leads to catastrophic blunders.}
+{用红铅笔来标示插入、删除和顺序调整是很诱人的，但根据我的经验，这会导致灾难性的失误。} %
+
+\bilingual{Against human impatience, and against the all too human partiality everyone feels toward his own words, a red pencil is much too feeble a weapon.}
+{面对人类的急躁，面对每个人对自己写下的文字那种过于人性化的偏爱，红铅笔这种武器显得太无力了。} %
+
+\bilingual{You are faced with a first draft that any reader except yourself would find all but unbearable;}
+{你面对的是一份除了你自己以外任何读者都会觉得几乎无法忍受的初稿；} %
+
+\bilingual{you must be merciless about changes of all kinds, and, especially, about wholesale omissions. Rewrite means write again every word.}
+{你必须对各种更改毫不留情，尤其是大段大段的删减。重写意味着每个字都要重新写一遍。} %
+
+\bilingual{I do not literally mean that, in a 10-chapter book, Chapter 1 should be written ten times, but I do mean something like three or four.}
+{我并不是字面上的意思，说在一本 10 章的书里，第 1 章要写 10 遍，但我确实指的是写上三四遍。} %
+
+\bilingual{The chances are that Chapter 1 should be re-written, literally, as soon as Chapter 2 is finished, and, very likely, at least once again, somewhere after Chapter 4. With luck you'll have to write Chapter 9 only once.}
+{很有可能的情况是，第 2 章一写完，第 1 章就要逐字重写，并且很可能在第 4 章之后的某个地方，至少还要再重写一次。运气好的话，第 9 章你只需写一遍。} %
+
+\bilingual{The description of my own practice might indicate the total amount of rewriting that I am talking about.}
+{对我个人实践的描述，或许能说明我所说的重写总工作量。} %
+
+\bilingual{After a spiral-written first draft I usually rewrite the whole book, and then add the mechanical but indispensable reader's aids (such as a list of prerequisites, preface, index, and table of contents).}
+{在螺旋式写出初稿后，我通常会重写整本书，然后加上一些机械但必不可少的读者辅助内容（比如先决条件列表、前言、索引和目录）。} %
+
+\bilingual{Next, I rewrite again, this time on the typewriter, or, in any event, so neatly and beautifully that a mathematically untrained typist can use this version (the third in some sense) to prepare the "final" typescript with no trouble.}
+{接下来，我再重写一遍，这次是在打字机上写，或者无论如何，写得非常整洁漂亮，使得一个没受过数学训练的打字员都能毫无困难地用这个版本（在某种意义上的第三版）打出“最终版”的打印稿。} %
+
+\bilingual{The rewriting in this third version is minimal; it is usually confined to changes that affect one word only, or, in the worst case, one sentence.}
+{第三版的重写工作量极小；通常仅限于只影响一个单词的更改，或者在最坏的情况下，影响一个句子。} %
+
+\bilingual{The third version is the first that others see. I ask friends to read it, my wife reads it, my students may read parts of it, and, best of all, an expert junior-grade, respectably paid to do a good job, reads it and is encouraged not to be polite in his criticisms.}
+{第三版是别人看到的第一个版本。我请朋友们阅读，我妻子也会读，我的学生可能会读其中的一部分，最好的是，请一位领取体面报酬、能做好这项工作的初级专家来读，并鼓励他提出毫不留情的批评。} %
+
+\bilingual{The changes that become necessary in the third version can, with good luck, be effected with a red pencil; with bad luck they will cause one third of the pages to be retyped.}
+{第三版中必须要做的修改，运气好的话可以用红铅笔搞定；运气不好的话，会导致三分之一的页面需要重新打字。} %
+
+\bilingual{The "final" typescript is based on the edited third version, and, once it exists, it is read, reread, proofread, and reproofread.}
+{“最终版”的打印稿基于编辑过的第三版，一旦它成型，它就会被阅读、重读、校对、再校对。} %
+
+\bilingual{Approximately two years after it was started (two working years, which may be much more than two calendar years) the book is sent to the publisher.}
+{大约在动笔两年后（这两个工作年可能远超两个日历年），这本书被送交出版商。} %
+
+\bilingual{Then begins another kind of labor pain, but that is another story.}
+{接着就开始了另一种分娩般的阵痛，但那又是另一个故事了。} %
+
+\bilingual{Archimedes taught us that a small quantity added to itself often enough becomes a large quantity (or, in proverbial terms, every little bit helps).}
+{阿基米德教导我们，一个很小的量只要自身相加足够多次，就会变成一个很大的量（或者用谚语来说，聚沙成塔）。} %
+
+\bilingual{When it comes to accomplishing the bulk of the world's work, and, in particular, when it comes to writing a book, I believe that the converse of Archimedes' teaching is also true: the only way to write a large book is to keep writing a small bit of it, steadily every day, with no exception, with no holiday.}
+{在谈到完成世界上大部分的工作时，特别是在谈到写书时，我相信阿基米德教导的逆命题也是成立的：写一本大部头书的唯一方法，就是坚持每天写一点，持之以恒，风雨无阻，没有假期。} %
+
+\bilingual{A good technique, to help the steadiness of your rate of production, is to stop each day by priming the pump for the next day.}
+{一个有助于保持稳定产出率的好技巧是，每天在结束工作时，为第二天的写作“引水”（做好预热准备）。} %
+
+\bilingual{What will you begin with tomorrow? What is the content of the next section to be; what is its title ?}
+{明天你要从什么开始写？下一节的内容是什么；它的标题是什么？} %
+
+\bilingual{(I recommend that you find a possible short title for each section, before or after it's written, even if you don't plan to print section titles. The purpose is to test how well the section is planned: if you cannot find a title, the reason may be that the section doesn't have a single unified subject.)}
+{（我建议你在写每一节之前或之后，都为其想一个可能的简短标题，即使你不打算印出小节标题。这样做的目的是检验该节的计划是否周全：如果你找不到一个标题，原因可能是这一节没有一个单一统一的主题。）} %
+
+\bilingual{Sometimes I write tomorrow's first sentence today; some authors begin today by revising and rewriting the last page or so of yesterday's work.}
+{有时候我会在今天写下明天的第一句话；有些作者则是通过修改和重写昨天工作的最后一两页来开始今天的写作。} %
+
+\bilingual{In any case, end each work session on an up-beat; give your subconscious something solid to feed on between sessions.}
+{无论如何，每次工作都应在一个积极向上的状态中结束；在两次工作间隔期间，给你的潜意识提供一些坚实的东西去咀嚼。} %
+
+\bilingual{It's surprising how well you can fool yourself that way; the pump-priming technique is enough to overcome the natural human inertia against creative work.}
+{令人惊讶的是，这种自欺欺人的方法效果竟然这么好；这种“引水”技巧足以克服人类抗拒创造性工作的自然惰性。} %
+\section*{7. ORGANIZE ALWAYS / 7. 始终保持组织} % [cite: 206]
+
+\bilingual{Even if your original plan of organization was detailed and good (and especially if it was not), the all-important job of organizing the material does not stop when the writing starts;}
+{即使你最初的组织计划详细且优秀（特别是如果它并不那么好），组织材料这项至关重要的工作也不会在开始写作时停止；} % [cite: 207]
+
+\bilingual{it goes on all the way through the writing and even after.}
+{它贯穿于整个写作过程，甚至在写作之后依然继续。} % [cite: 208]
+
+\bilingual{The spiral plan of writing goes hand in hand with the spiral plan of organization, a plan that is frequently (perhaps always) applicable to mathematical writing.}
+{螺旋式写作计划与螺旋式组织计划是齐头并进的，这种计划经常（也许总是）适用于数学写作。} % [cite: 209]
+
+\bilingual{It goes like this. Begin with whatever you have chosen as your basic concept vector spaces, say and do right by it: motivate it, define it, give examples, and give counterexamples.}
+{它是这样运作的。从你选择的任何基本概念开始——比如说向量空间——并把它处理好：提供动机，下定义，给出例子，再给出反例。} % [cite: 210]
+
+\bilingual{That's Section 1. In Section 2 introduce the first related concept that you propose to study-linear dependence, say and do right by it: motivate it, define it, give examples, and give counterexamples, and then, this is the important point, review Section 1, as nearly completely as possible, from the point of view of Section 2. For instance: what examples of linearly dependent and independent sets are easily accessible within the very examples of vector spaces that Section 1 introduced?}
+{这就是第一节。在第二节中，引入你打算研究的第一个相关概念——比如说线性相关——并把它处理好：提供动机，下定义，给出例子和反例，然后（这是重要的一点），从第二节的视角，尽可能完整地回顾第一节。例如：在第一节介绍的向量空间的例子中，有哪些线性相关和线性无关集合的例子是很容易得到的？} % [cite: 211]
+
+\bilingual{(Here, by the way, is another clear reason why the spiral plan of writing is necessary: you may think, in Section 2, of examples of linearly dependent and independent sets in vector spaces that you forgot to give as examples in Section 1.) In Section 3 introduce your next concept (of course just what that should be needs careful planning, and, more often, a fundamental change of mind that once again makes spiral writing the right procedure), and, after clearing it up in the customary manner, review Sections 1 and 2 from the point of view of the new concept.}
+{（顺便说一句，这里是螺旋式写作计划之所以必要的另一个明显原因：在第二节中，你可能会想到向量空间中线性相关和线性无关集合的例子，而这些是你忘记在第一节中作为例子给出的。）在第三节中引入你的下一个概念（当然，那应该是什么需要仔细规划，而且更常见的情况是，观念的根本改变再次证明螺旋式写作是正确的程序），在用惯常的方式把它解释清楚之后，从这个新概念的视角回顾第一节和第二节。} % [cite: 212]
+
+\bilingual{It works, it works like a charm. It is easy to do, it is fun to do, it is easy to read, and the reader is helped by the firm organizational scaffolding, even If he doesn't bother to examine it and see where the joins come and how they support one another.}
+{这很有效，效果出奇的好。它做起来很容易，很有趣，读起来也很轻松，并且读者能得到坚实的组织框架的帮助，即使他懒得去检查它，懒得去看连接处在哪里以及它们是如何相互支撑的。} % [cite: 213]
+
+\bilingual{The historical novelist's plots and subplots and the detective story writer's hints and clues all have their mathematical analogues.}
+{历史小说家的主线与支线情节，侦探小说作家的提示与线索，都有其数学上的对应物。} % [cite: 215]
+
+\bilingual{To make the point by way of an example: much of the theory of metric spaces could be developed as a "subplot" in a book on general topology, in unpretentious comments, parenthetical asides, and illustrative exercises.}
+{举个例子来说明这一点：度量空间的大部分理论，可以作为一般拓扑学书籍中的“支线情节”来发展，体现在不加掩饰的评论、括号里的旁白以及说明性的练习中。} % [cite: 216]
+
+\bilingual{Such an organization would give the reader more firmly founded motivation and more insight than can be obtained by inexorable generality, and with no visible extra effort.}
+{这种组织方式将赋予读者更坚实的动机和更深入的洞察力，这比通过冷酷无情的普适性所能获得的要多，而且表面上不需要付出额外的努力。} % [cite: 217]
+
+\bilingual{As for clues: a single word, first mentioned several chapters earlier than its definition, and then re-mentioned, with more and more detail each time as the official treatment comes closer and closer, can serve as an inconspicuous, subliminal preparation for its full-dress introduction.}
+{至于线索：一个简单的词，在其被定义之前好几章就被首次提及，然后被再次提及，并且随着正式论述的日益临近，每次提供的细节越来越多，这可以作为它正式出场之前一种不显眼的、潜意识的铺垫。} % [cite: 218]
+
+\bilingual{Such a procedure can greatly help the reader, and, at the same time, make the author's formal work much easier, at the expense, to be sure, of greatly increasing the thought and preparation that goes into his informal prose writing.}
+{这样的程序可以极大地帮助读者，同时也能使作者的正式工作变得容易得多，当然，代价是大大增加了他在撰写非正式散文时所投入的思考和准备工作。} % [cite: 219]
+
+\bilingual{It's worth it. If you work eight hours to save five minutes of the reader's time, you have saved over 80 man-hours for each 1000 readers, and your name will be deservedly blessed down the corridors of many mathematics buildings.}
+{这是值得的。如果你工作八小时能为读者节省五分钟的时间，那么对于每 1000 名读者，你就节省了 80 多个工时，你的名字理应在许多数学大楼的走廊里受到祝福。} % [cite: 220]
+
+\bilingual{But remember: for an effective use of subplots and clues, something very like the spiral plan of organization is indispensable.}
+{但请记住：为了有效使用支线情节和线索，非常类似于螺旋式组织计划的东西是不可或缺的。} % [cite: 221]
+
+\bilingual{The last, least, but still very important aspect of organization that deserves mention here is the correct arrangement of the mathematics from the purely logical point of view.}
+{最后，虽然相对次要但仍然非常重要、且在此值得一提的组织方面，是纯逻辑视角下数学的正确排列。} % [cite: 222]
+
+\bilingual{There is not much that one mathematician can teach another about that, except to warn that as the size of the job increases, its complexity increases in frightening proportion.}
+{关于这一点，一个数学家能教给另一个数学家的东西不多，只能警告说：随着工作规模的增加，其复杂性会以惊人的比例增加。} % [cite: 223]
+
+\bilingual{At one stage of writing a 300-page book, I had 1000 sheets of paper, each with a mathematical statement on it, a theorem, a lemma, or even a minor comment, complete with proof.}
+{在写一本 300 页的书的某个阶段，我手头有 1000 张纸，每张纸上都有一个数学陈述、一个定理、一个引理，甚至是一个小评论，并附有完整的证明。} % [cite: 224]
+
+\bilingual{The sheets were numbered, any which way. My job was to indicate on each sheet the numbers of the sheets whose statement must logically come before, and then to arrange the sheets in linear order so that no sheet comes after one on which it's mentioned.}
+{这些纸被随意编号。我的工作是在每张纸上标出在逻辑上必须排在它前面的那些纸的编号，然后将这些纸按线性顺序排列，确保没有任何一张纸出现在引用它的纸之后。} % [cite: 225]
+
+\bilingual{That problem had, apparently, uncountably many solutions; the difficulty was to pick one that was as efficient and pleasant as possible.}
+{显然，这个问题有不可数个解；困难在于挑选出一个尽可能高效且令人愉悦的解。} % [cite: 226]
+
+
+\section*{8. WRITE GOOD ENGLISH / 8. 写地道的英文} %
+
+\bilingual{Everything I've said so far has to do with writing in the large, global sense; it is time to turn to the local aspects of the subject.}
+{到目前为止，我所说的一切都与宏观、全局意义上的写作有关；现在是时候转向这个主题的局部细节了。} %
+
+\bilingual{Why shouldn't an author spell "continuous" as "continous"? There is no chance at all that it will be misunderstood, and it is one letter shorter, so why not?}
+{为什么作者不应该把“continuous”拼成“continous”？它根本不可能被误解，而且还少了一个字母，为什么不这么做呢？} %
+
+\bilingual{The answer that probably everyone would agree on, even the most libertarian among modern linguists, is that whenever the "reform" is introduced it is bound to cause distraction, and therefore a waste of time, and the "saving" is not worth it.}
+{可能每个人（甚至现代语言学家中最崇尚自由主义的人）都会同意的答案是：每当引入这种“改革”时，它必然会导致分心，从而浪费时间，这种“节省”是不值得的。} %
+
+\bilingual{A random example such as this one is probably not convincing; more people would agree that an entire book written in reformed spelling, with, for instance, "izi" for "easy" is not likely to be an effective teaching instrument for mathematics.}
+{像这样一个随意的例子可能没有说服力；更多的人会同意，整本书如果都用改革后的拼写方式来写（例如，把“easy”拼成“izi”），不太可能成为一本有效的数学教学工具。} %
+
+\bilingual{Whatever the merits of spelling reform may be, words that are misspelled according to currently accepted dictionary standards detract from the good a book can do: they delay and distract the reader, and possibly confuse or anger him.}
+{无论拼写改革有什么优点，根据目前公认的字典标准拼写错误的单词，都会削弱一本书所能带来的好处：它们会拖延并分散读者的注意力，甚至可能使读者感到困惑或愤怒。} %
+
+\bilingual{The reason for mentioning spelling is not that it is a common danger or a serious one for most authors, but that it serves to illustrate and emphasize a much more important point.}
+{之所以提到拼写，并不是因为这对大多数作者来说是一个常见的或严重的危险，而是因为它有助于说明并强调一个重要得多的观点。} %
+
+\bilingual{I should like to argue that it is important that mathematical books (and papers, and letters, and lectures) be written in good English style, where good means "correct" according to currently and commonly accepted public standards.}
+{我想指出，数学书籍（以及论文、信件和讲义）必须用良好的英文文风来撰写，这里的“良好”是指符合当前普遍接受的公共标准的“正确”。} %
+
+\bilingual{(French, Japanese, or Russian authors please substitute "French", "Japanese", or "Russian" for "English".) I do not mean that the style is to be pedantic, or heavy-handed, or formal, or bureaucratic, or flowery, or academic jargon.}
+{（法国、日本或俄罗斯的作者请将“英文”替换为“法文”、“日文”或“俄文”。）我并不是说文风要迂腐、笨重、刻板、官僚、华而不实或满是学术黑话。} %
+
+\bilingual{I do mean that it should be completely unobtrusive, like good background music for a movie, so that the reader may proceed with no conscious or unconscious blocks caused by the instrument of communication and not its content.}
+{我的确是说它应该完全不张扬，就像电影里优秀的背景音乐一样，这样读者在阅读时，就不会因为沟通工具（而不是沟通内容）本身产生任何有意识或无意识的障碍。} %
+
+\bilingual{Good English style implies correct grammar, correct choice of words, correct punctuation, and, perhaps above all, common sense.}
+{良好的英文文风意味着正确的语法、正确的用词、正确的标点符号，也许最重要的是，常识。} %
+
+\bilingual{There is a difference between "that" and "which", and "less" and "fewer" are not the same, and a good mathematical author must know such things.}
+{“that”和“which”之间是有区别的，“less”和“fewer”也不一样，一个优秀的数学作者必须知道这些事情。} %
+
+\bilingual{The reader may not be able to define the difference, but a hundred pages of colloquial misusage, or worse, has a cumulative abrasive effect that the author surely does not want to produce.}
+{读者可能无法准确定义这种差异，但如果出现了一百页的口语化误用或更糟的情况，就会产生一种累积的摩擦效应，这绝对是作者不希望看到的。} %
+
+\bilingual{Fowler [4], Roget [8], and Webster [10] are next to Dunford-Schwartz on my desk; they belong in a similar position on every author's desk.}
+{在我的书桌上，福勒（Fowler）[4]、罗热（Roget）[8] 和韦伯斯特（Webster）[10] 就放在邓福德-施瓦茨（Dunford-Schwartz）的泛函分析旁边；它们也应该放在每位作者书桌上的类似位置。} %
+
+\bilingual{It is unlikely that a single missing comma will convert a correct proof into a wrong one, but consistent mistreatment of such small things has large effects.}
+{漏掉一个逗号不太可能把一个正确的证明变成错误的，但如果一直错误对待这些小细节，就会产生很大的影响。} %
+
+\bilingual{The English language can be a beautiful and powerful instrument for interesting, clear, and completely precise information, and I have faith that the same is true for French or Japanese or Russian.}
+{英语可以成为传达有趣、清晰且极其精确的信息的一种优美而强大的工具，我相信法语、日语或俄语也是如此。} %
+
+\bilingual{It is just as important for an expositor to familiarize himself with that instrument as for a surgeon to know his tools.}
+{对于阐述者来说，熟悉这种工具就如同外科医生了解他的手术器械一样重要。} %
+
+\bilingual{Euclid can be explained in bad grammar and bad diction, and a vermiform appendix can be removed with a rusty pocket knife, but the victim, even if he is unconscious of the reason for his discomfort, would surely prefer better treatment than that.}
+{欧几里得也可以用糟糕的语法和措辞来解释，阑尾也可以用生锈的折叠刀切除，但受害者即使没有意识到他不适的原因，也肯定更希望得到比这更好的待遇。} %
+
+\bilingual{All mathematicians, even very young students very near the beginning of their mathematical learning, know that mathematics has a language of its own (in fact it is one), and an author must have thorough mastery of the grammar and vocabulary of that language as well as of the vernacular.}
+{所有的数学家，哪怕是刚开始学习数学的非常年轻的学生，都知道数学有它自己的语言（实际上它本身就是一种语言），而作者必须彻底掌握这种语言以及日常白话的语法和词汇。} %
+
+\bilingual{There is no Berlitz course for the language of mathematics; apparently the only way to learn it is to live with it for years.}
+{数学语言没有贝立兹（Berlitz）速成班；显然，学习它的唯一方法就是与它共处多年。} %
+
+\bilingual{What follows is not, it cannot be, a mathematical analogue of Fowler, Roget, and Webster, but it may perhaps serve to indicate a dozen or two of the thousands of items that those analogues would contain.}
+{接下来的内容不是，也不可能是福勒、罗热和韦伯斯特等词典在数学领域的翻版，但它或许可以作为那几千个条目中的一二十个示例。} %
+
+\section*{9. HONESTY IS THE BEST POLICY / 9. 诚实为上策} %
+
+\bilingual{The purpose of using good mathematical language is, of course, to make the understanding of the subject easy for the reader, and perhaps even pleasant.}
+{使用良好数学语言的目的，当然是为了让读者更容易理解这个主题，甚至可能让这个过程变得令人愉悦。} %
+
+\bilingual{The style should be good not in the sense of flashy brilliance, but good in the sense of perfect unobtrusiveness.}
+{这种文风的“好”，不应体现在卖弄浮华的才气上，而应体现在完美的不张扬上。} %
+
+\bilingual{The purpose is to smooth the reader's way, to anticipate his difficulties and to forestall them.}
+{其目的是为读者铺平道路，预见他们的困难并防患于未然。} %
+
+\bilingual{Clarity is what's wanted, not pedantry; understanding, not fuss.}
+{我们想要的是清晰，而不是迂腐；是理解，而不是故弄玄虚。} %
+
+\bilingual{The emphasis in the preceding paragraph, while perhaps necessary, might seem to point in an undesirable direction, and I hasten to correct a possible misinterpretation.}
+{前一段的强调虽然也许是必要的，但似乎可能指向一个不太好的方向，因此我赶忙来纠正一个可能的误解。} %
+
+\bilingual{While avoiding pedantry and fuss, I do not want to avoid rigor and precision; I believe that these aims are reconcilable.}
+{在避免迂腐和故弄玄虚的同时，我并不想抛弃严谨和精确；我相信这些目标是可以调和的。} %
+
+\bilingual{I do not mean to advise a young author to be ever so slightly but very very cleverly dishonest and to gloss over difficulties.}
+{我并不是建议年轻作者哪怕只是极其轻微、但却非常非常“巧妙”地去表现得不诚实，从而掩盖困难。} %
+
+\bilingual{Sometimes, for instance, there may be no better way to get a result than a cumbersome computation.}
+{例如，有时候，要得出一个结果可能除了繁琐的计算之外别无他法。} %
+
+\bilingual{In that case it is the author's duty to carry it out, in public; the best he can do to alleviate it is to extend his sympathy to the reader by some phrase such as "unfortunately the only known proof is the following cumbersome computation".}
+{在这种情况下，作者有义务在读者面前公开地进行计算；为了缓解读者的情绪，他所能做的最好方式，就是用诸如“不幸的是，目前唯一已知的证明就是以下这段繁琐的计算”之类的句子，向读者表达同情。} %
+
+\bilingual{Here is the sort of thing I mean by less than complete honesty.}
+{下面我要举的例子，就是我所说的“不够完全诚实”的情况。} %
+
+\bilingual{At a certain point, having proudly proved a proposition $p$, you feel moved to say: "Note, however, that $p$ does not imply $q$", and then, thinking that you've done a good expository job, go happily on to other things.}
+{在某个时刻，当你自豪地证明了命题 $p$ 之后，你可能忍不住想说：“然而请注意，$p$ 并不蕴涵 $q$”，然后你觉得自己做了一个很好的阐述，就开开心心地写其他内容去了。} %
+
+\bilingual{Your motives may be perfectly pure, but the reader may feel cheated just the same.}
+{你的动机也许绝对纯洁，但读者可能依然会觉得上当受骗了。} %
+
+\bilingual{If he knew all about the subject, he wouldn't be reading you; for him the non-implication is, quite likely, unsupported.}
+{如果他对这个主题无所不知，他压根就不会来读你的书；对他而言，这个“不蕴涵”的关系很可能是毫无根据的。} %
+
+\bilingual{Is it obvious? (Say so.) Will a counterexample be supplied later? (Promise it now.)}
+{它很显然吗？（那就说出来。）稍后会提供反例吗？（现在就给出承诺。）} %
+
+\bilingual{Is it a standard but for present purposes irrelevant part of the literature? (Give a reference.)}
+{它是文献中标准的内容，只是与当前目的无关吗？（给出一个参考文献。）} %
+
+\bilingual{Or, horribile dictu, do you merely mean that you have tried to derive $q$ from $p$, you failed, and you don't in fact know whether $p$ implies $q$?}
+{或者，说起来有些可怕（horribile dictu），你是否仅仅意味着你曾试图从 $p$ 推导出 $q$，但你失败了，并且你实际上并不知道 $p$ 是否蕴涵 $q$？} %
+
+\bilingual{(Confess immediately!) In any event: take the reader into your confidence.}
+{（请立刻坦白！）无论如何：要把读者当成你的知心人。} %
+
+\bilingual{There is nothing wrong with the often derided "obvious" and "easy to see", but there are certain minimal rules to their use.}
+{经常遭到嘲笑的“显然（obvious）”和“易见（easy to see）”本身并没有什么错，但使用它们有一些最低限度的规则。} %
+
+\bilingual{Surely when you wrote that something was obvious, you thought it was.}
+{当你在写下某件事很“显然”的时候，你心里肯定是这么想的。} %
+
+\bilingual{When, a month, or two months, or six months later, you picked up the manuscript and re-read it, did you still think that that something was obvious?}
+{但是，一个月、两个月或六个月后，当你拿起手稿重新阅读时，你是否依然觉得那件事很显然？} %
+
+\bilingual{(A few months' ripening always improves manuscripts.)}
+{（几个月的“沉淀”总能让手稿变得更好。）} %
+
+\bilingual{When you explained it to a friend, or to a seminar, was the something at issue accepted as obvious?}
+{当你向朋友或在研讨会上解释它时，这个有争议的问题被大家接受为“显然”了吗？} %
+
+\bilingual{(Or did someone question it and subside, muttering, when you reassured him? Did your assurance consist of demonstration or intimidation?)}
+{（还是有人提出了质疑，而在你向他保证后，他小声嘟囔着退缩了？你的“保证”到底是出于逻辑推演，还是出于气势上的恐吓？）} %
+
+\bilingual{The obvious answers to these rhetorical questions are among the rules that should control the use of "obvious".}
+{这些反问句的“显然”答案，正是应该用来控制“显然”一词使用频率的规则之一。} %
+
+\bilingual{There is another rule, the major one, and everybody knows it, the one whose violation is the most frequent source of mathematical error: make sure that the "obvious" is true.}
+{还有另一条规则，这也是最主要的一条，每个人都知道它，违反这条规则是数学错误最常见的根源：要确保那些“显然”的事情确实是真的。} %
+
+\bilingual{It should go without saying that you are not setting out to hide facts from the reader; you are writing to uncover them.}
+{不言而喻，你写作的初衷不是向读者隐瞒事实；你是为了揭示事实。} %
+
+\bilingual{What I am saying now is that you should not hide the status of your statements and your attitude toward them either.}
+{我现在要说的是，你也不应该隐瞒你陈述的状态，以及你对这些陈述的态度。} %
+
+\bilingual{Whenever you tell him something, tell him where it stands: this has been proved, that hasn't, this will be proved, that won't.}
+{每当你告诉读者某件事时，告诉他这件事处于什么地位：这个已经被证明了，那个还没有；这个将要被证明，那个不会。} %
+
+\bilingual{Emphasize the important and minimize the trivial. There are many good reasons for making obvious statements every now and then; the reason for saying that they are obvious is to put them in proper perspective for the uninitiate.}
+{强调重要的东西，淡化琐碎的东西。我们有很多充分的理由时不时地做出一些显而易见的陈述；之所以说它们是“显然”的，是为了让初学者能够以正确的视角来看待它们。} %
+
+\bilingual{Even if your saying so makes an occasional reader angry at you, a good purpose is served by your telling him how you view the matter.}
+{即使你这么说偶尔会惹怒某位读者，但告诉他你是如何看待这件事的，依然达到了一个很好的目的。} %
+
+\bilingual{But, of course, you must obey the rules. Don't let the reader down; he wants to believe in you.}
+{但是，当然，你必须遵守规则。不要让读者失望；他很想相信你。} %
+
+\bilingual{Pretentiousness, bluff, and concealment may not get caught out immediately, but most readers will soon sense that there is something wrong, and they will blame neither the facts nor themselves, but, quite properly, the author.}
+{自命不凡、虚张声势和刻意隐瞒可能不会立刻被识破，但大多数读者很快就会察觉到哪里不对劲，他们既不会责怪事实，也不会责怪自己，而是会非常合情合理地责怪作者。} %
+
+\bilingual{Complete honesty makes for greatest clarity.}
+{完全的诚实才能带来最大的清晰度。} %
+
+
+\section*{10. DOWN WITH THE IRRELEVANT AND THE TRIVIAL / 10. 摒弃无关与琐碎} %
+
+\bilingual{Sometimes a proposition can be so obvious that it needn't even be called obvious and still the sentence that announces it is bad exposition, bad because it makes for confusion, misdirection, delay.}
+{有时一个命题可能极其显然，甚至不需要称其为“显然”，但宣告它的句子仍然是糟糕的阐述；之所以糟糕，是因为它会导致困惑、误导和拖延。} %
+
+\bilingual{I mean something like this: "If $R$ is a commutative semisimple ring with unit and if $x$ and $y$ are in $R$, then $x^{2}-y^{2}=(x-y)(x+y)$."}
+{我的意思是像这样：“如果 $R$ 是一个带有单位元的交换半单环，并且 $x$ 和 $y$ 都在 $R$ 中，那么 $x^{2}-y^{2}=(x-y)(x+y)$。”} %
+
+\bilingual{The alert reader will ask himself what semisimplicity and a unit have to do with what he had always thought was obvious.}
+{警觉的读者会问自己，半单性和单位元与他一直认为显然的事情究竟有什么关系。} %
+
+\bilingual{Irrelevant assumptions wantonly dragged in, incorrect emphasis, or even just the absence of correct emphasis can wreak havoc.}
+{肆意扯入无关的假设、不正确的强调，甚至仅仅是缺乏正确的强调，都会造成严重的破坏。} %
+
+\bilingual{Just as distracting as an irrelevant assumption and the cause of just as much wasted time is an author's failure to gain the reader's confidence by explicitly mentioning trivial cases and excluding them if need be.}
+{和无关假设一样令人分心，并且同样会导致浪费大量时间的，是作者未能通过明确提及平凡（琐碎）情形并在必要时排除它们，从而赢得读者的信任。} %
+
+\bilingual{Every complex number is the product of a non-negative number and a number of modulus 1.}
+{每一个复数都是一个非负数和一个模为 1 的数的乘积。} %
+
+\bilingual{That is true, but the reader will feel cheated and insecure if soon after first being told that fact (or being reminded of it on some other occasion, perhaps preparatory to a generalization being sprung on him) he is not told that there is something fishy about 0 (the trivial case).}
+{这固然是事实，但如果在初次被告知这个事实（或在其他场合被提醒，也许是为了向他抛出一个推广做准备）之后不久，读者没有被告知 0（这个平凡情形）有点猫腻，他就会感到被欺骗和缺乏安全感。} %
+
+\bilingual{The point is not that failure to treat the trivial cases separately may sometimes be a mathematical error; I am not just saying "do not make mistakes".}
+{关键不在于未将平凡情形单独处理有时可能是一个数学错误；我不仅仅是在说“不要犯错”。} %
+
+\bilingual{The point is that insistence on legalistically correct but insufficiently explicit explanations ("The statement is correct as it stands-what else do you want?") is misleading, bad exposition, bad psychology.}
+{关键在于，坚持那种在法理上正确但不够明确的解释（“这个陈述本身是正确的——你还想怎样？”）是具有误导性的，是糟糕的阐述，也是糟糕的心理学。} %
+
+\bilingual{It may also be almost bad mathematics.}
+{它也几乎可以说是糟糕的数学。} %
+
+\bilingual{If, for instance, the author is preparing to discuss the theorem that, under suitable hypotheses, every linear transformation is the product of a dilatation and a rotation, then his ignoring of 0 in the 1-dimensional case leads to the reader's misunderstanding of the behavior of singular linear transformations in the general case.}
+{例如，如果作者准备讨论这样一个定理：在适当的假设下，每个线性变换都是一个伸缩变换和一个旋转变换的乘积，那么他在一维情况中忽略 0，就会导致读者在一般情况中对奇异线性变换的行为产生误解。} %
+
+\bilingual{This may be the right place to say a few words about the statements of theorems: there, more than anywhere else, irrelevancies must be avoided.}
+{这里也许正是谈论定理陈述的合适地方：在那里，比在其他任何地方都更必须避免无关紧要的内容。} %
+
+\bilingual{The first question is where the theorem should be stated, and my answer is: first.}
+{第一个问题是定理应该在什么地方陈述，我的回答是：最前面。} %
+
+\bilingual{Don't ramble on in a leisurely way, not telling the reader where you are going, and then suddenly announce "Thus we have proved that ...".}
+{不要慢条斯理地漫谈，不告诉读者你要去哪里，然后突然宣布“因此我们证明了……”。} %
+
+\bilingual{The reader can pay closer attention to the proof if he knows what you are proving, and he can see better where the hypotheses are used if he knows in advance what they are.}
+{如果读者知道你要证明什么，他就能更密切地关注证明过程；如果他事先知道假设是什么，他就能更好地看清这些假设是在哪里被使用的。} %
+
+\bilingual{(The rambling approach frequently leads to the "hanging" theorem, which I think is ugly. I mean something like: "Thus we have proved THEOREM 2... ".)}
+{（这种漫谈的方式经常会导致“悬空”的定理，我认为这很丑陋。我的意思是像这样：“因此我们证明了…… 定理 2……”）} %
+
+\bilingual{The indentation, which is after all a sort of invisible punctuation mark, makes a jarring separation in the sentence, and, after the reader has collected his wits and caught on to the trick that was played on him, it makes an undesirable separation between the statement of the theorem and its official label.}
+{缩进毕竟是一种无形的标点符号，它在句子中造成了令人不悦的割裂；当读者回过神来，识破了这套把戏之后，它又在定理的陈述与其正式标签之间造成了不希望出现的隔离。} %
+
+\bilingual{This is not to say that the theorem is to appear with no introductory comments, preliminary definitions, and helpful motivations.}
+{这并不是说定理的出现不需要任何介绍性的评论、初步的定义和有用的动机铺垫。} %
+
+\bilingual{All that comes first; the statement comes next; and the proof comes last.}
+{所有这些都要放在最前面；陈述紧随其后；最后才是证明。} %
+
+\bilingual{The statement of the theorem should consist of one sentence whenever possible: a simple implication, or, assuming that some universal hypotheses were stated before and are still in force, a simple declaration.}
+{定理的陈述应尽可能由一个句子组成：一个简单的蕴涵式，或者，假设之前已经陈述过某些通用假设且它们仍然有效，则为一个简单的声明。} %
+
+\bilingual{Leave the chit-chat out: "Without loss of generality we may assume " and "Moreover it follows from Theorem 1 that..." do not belong in the statement of a theorem.}
+{把闲聊去掉：“不失一般性，我们可以假设……”以及“此外，由定理 1 可知……”都不属于定理陈述应该包含的内容。} %
+
+\bilingual{Ideally the statement of a theorem is not only one sentence, but a short one at that.}
+{理想情况下，定理的陈述不仅应该只有一个句子，而且还应该很短。} %
+
+\bilingual{Theorems whose statement fills almost a whole page (or more!) are hard to absorb, harder than they should be; they indicate that the author did not think the material through and did not organize it as he should have done.}
+{那些陈述占据了几乎一整页（甚至更多！）的定理很难被吸收，难度超过了应有的限度；这表明作者没有把材料想透彻，也没有按应有的方式对其进行组织。} %
+
+\bilingual{A list of eight hypotheses (even if carefully so labelled) and a list of six conclusions do not a theorem make; they are a badly expounded theory.}
+{列出八个假设（即使很仔细地加上了标签）和六个结论并不能构成一个定理；那是一个阐述得很糟糕的理论。} %
+
+\bilingual{Are all the hypotheses needed for each conclusion ?}
+{对于每个结论，是否所有的假设都是必需的？} %
+
+\bilingual{If the answer is no, the badness of the statement is evident; if the answer is yes, then the hypotheses probably describe a general concept that deserves to be isolated, named, and studied.}
+{如果答案是否定的，那么这个陈述的糟糕程度显而易见；如果答案是肯定的，那么这些假设很可能描述了一个值得被分离出来、命名并深入研究的一般性概念。} %
+
+\section*{11. DO AND DO NOT REPEAT / 11. 重复与不重复} % [cite: 319]
+
+\bilingual{One important rule of good mathematical style calls for repetition and another calls for its avoidance.}
+{优秀数学文风的一条重要规则要求重复，而另一条规则却要求避免重复。} % [cite: 320]
+
+\bilingual{By repetition in the first sense I do not mean the saying of the same thing several times in different words.}
+{我所说的第一种意义上的重复，并不是指用不同的词语把同一件事说上好几遍。} % [cite: 321]
+
+\bilingual{What I do mean, in the exposition of a precise subject such as mathematics, is the word-for-word repetition of a phrase, or even many phrases, with the purpose of emphasizing a slight change in a neighboring phrase.}
+{我的真正意思是，在阐述像数学这样一门精确的学科时，逐字逐句地重复一个甚至许多个短语，目的是为了强调相邻短语中的微小变化。} % [cite: 322]
+
+\bilingual{If you have defined something, or stated something, or proved something in Chapter 1, and if in Chapter 2 you want to treat a parallel theory or a more general one, it is a big help to the reader if you use the same words in the same order for as long as possible, and then, with a proper roll of drums, emphasize the difference.}
+{如果你在第一章定义、陈述或证明了某件事，而你想在第二章探讨一个平行的理论或更一般性的理论，那么如果你能尽可能长时间地使用相同的词语和相同的语序，然后伴随着适当的“击鼓铺垫”（隆重提示），来强调它们之间的不同之处，那将对读者有极大的帮助。} % [cite: 323]
+
+\bilingual{The roll of drums is important. It is not enough to list six adjectives in one definition, and re-list five of them, with a diminished sixth, in the second.}
+{这种“击鼓铺垫”很重要。仅仅在一个定义中列出六个形容词，然后在第二个定义中重新列出其中五个，并削弱第六个是不够的。} % [cite: 324]
+
+\bilingual{That's the thing to do, but what helps is to say, in addition: "Note that the first five conditions in the definitions of $p$ and $q$ are the same; what makes them different is the weakening of the sixth."}
+{事情确实该这么做，但更有帮助的做法是补充一句：“请注意，在 $p$ 和 $q$ 的定义中，前五个条件是相同的；使它们不同的是第六个条件的弱化。”} % [cite: 325, 329, 330]
+
+\bilingual{Often in order to be able to make such an emphasis in Chapter 2 you'll have to go back to Chapter 1 and rewrite what you thought you had already written well enough, but this time so that its parallelism with the relevant part of Chapter 2 is brought out by the repetition device.}
+{通常，为了能够在第二章中做出这样的强调，你必须回到第一章，重写你原本以为已经写得足够好的内容，但这一次要通过重复的手法，将其与第二章相关部分的平行关系凸显出来。} % [cite: 331]
+
+\bilingual{This is another illustration of why the spiral plan of writing is unavoidable, and it is another aspect of what I call the organization of the material.}
+{这再次说明了为什么螺旋式写作计划是不可避免的，这也是我所谓的“组织材料”的另一个方面。} % [cite: 332]
+
+\bilingual{The preceding paragraphs describe an important kind of mathematical repetition, the good kind; there are two other kinds, which are bad.}
+{前面的段落描述了数学中一种重要的重复，即好的那种重复；还有另外两种重复则是坏的。} % [cite: 333, 334]
+
+\bilingual{One sense in which repetition is frequently regarded as a device of good teaching is that the oftener you say the same thing, in exactly the same words, or else with slight differences each time, the more likely you are to drive the point home.}
+{人们常常把重复视为一种良好的教学手段，其依据是：你越是频繁地（用完全相同的词语，或者每次略有不同地）重复同一件事，就越有可能把观点讲透。} % [cite: 335]
+
+\bilingual{I disagree. The second time you say something, even the vaguest reader will dimly recall that there was a first time, and he'll wonder if what he is now learning is exactly the same as what he should have learned before, or just similar but different.}
+{我不同意。当你第二次说某件事时，即使是最糊涂的读者也会隐约想起还有第一次，他会纳闷他现在正在学的东西，和以前应该学的到底是一模一样，还是仅仅相似但有区别。} % [cite: 336]
+
+\bilingual{(If you tell him "I am now saying exactly what I first said on p. 3" that helps.) Even the dimmest such wonder is bad. Anything is bad that unnecessarily frightens, irrelevantly amuses, or in any other way distracts.}
+{（如果你告诉他“我现在说的，跟我最初在第 3 页说的一模一样”，这会有所帮助。）哪怕是这种最轻微的纳闷也是糟糕的。任何不必要地吓唬人、无关紧要地逗乐，或以其他任何方式分散注意力的东西都是糟糕的。} % [cite: 337]
+
+\bilingual{(Unintended double meanings are the woe of many an author's life.) Besides, good organization, and, in particular, the spiral plan of organization discussed before is a substitute for repetition, a substitute that works much better.}
+{（无意中产生的双关语是许多作者一生的悲哀。）此外，良好的组织，特别是前面讨论过的螺旋式组织计划，是重复的替代品，而且效果要好得多。} % [cite: 337]
+
+\bilingual{Another sense in which repetition is bad is summed up in the short and only partially inaccurate precept: never repeat a proof.}
+{另一种糟糕的重复可以概括为一条简短且只有部分不准确的格言：永远不要重复一个证明。} % [cite: 338]
+
+\bilingual{If several steps in the proof of Theorem 2 bear a very close resemblance to parts of the proof of Theorem 1, that's a signal that something may be less than completely understood.}
+{如果定理 2 证明中的几个步骤与定理 1 证明的某些部分极其相似，这就是一个信号，表明可能有什么东西还没有被完全理解。} % [cite: 339]
+
+\bilingual{Other symptoms of the same disease are: "by the same technique (or method, or device, or trick) as in the proof of Theorem 1 ...", or, brutally, "see the proof of Theorem 1".}
+{同一病症的其他症状是：“采用与定理 1 证明中相同的技术（或方法、手段、技巧）……”，或者，极其粗暴地说：“见定理 1 的证明”。} % [cite: 340]
+
+\bilingual{When that happens the chances are very good that there is a lemma that is worth finding, formulating, and proving, a lemma from which both Theorem 1 and Theorem 2 are more easily and more clearly deduced.}
+{当这种情况发生时，极有可能存在一个值得去寻找、表述并证明的引理，从这个引理出发，定理 1 和定理 2 都能更容易、更清晰地被推导出来。} % [cite: 340]
+
+\section*{12. THE EDITORIAL WE IS NOT ALL BAD / 12. 官方的“我们”并不全是坏事} %
+
+\bilingual{One aspect of expository style that frequently bothers beginning authors is the use of the editorial "we", as opposed to the singular "I", or the neutral "one".}
+{阐述文风中经常困扰初学作者的一个方面，是使用官方的（编辑部的）“我们”，而不是单数的“我”，或是中立的“人们（one）”。} %
+
+\bilingual{It is in matters like this that common sense is most important.}
+{在这样的问题上，常识是最重要的。} %
+
+\bilingual{For what it's worth, I present here my recommendation.}
+{不管价值如何，我在这里提出我的建议。} %
+
+\bilingual{Since the best expository style is the least obtrusive one, I tend nowadays to prefer the neutral approach.}
+{既然最好的阐述风格是最不张扬的，我如今更倾向于中立的做法。} %
+
+\bilingual{That does not mean using "one" often, or ever; sentences like "one has thus proved that..." are awful.}
+{这并不意味着要经常（或者曾经）使用“one”；像“one has thus proved that...（人们由此证明了……）”这样的句子是很糟糕的。} %
+
+\bilingual{It does mean the complete avoidance of first person pronouns in either singular or plural.}
+{它确实意味着要完全避免使用单数或复数的第一人称代词。} %
+
+\bilingual{"Since $p$, it follows that $q$." "This implies $p$." "An application of $p$ to $q$ yields $r$."}
+{“因为 $p$，所以得出 $q$。”“这意味着 $p$。”“将 $p$ 应用于 $q$ 得到 $r$。”} %
+
+\bilingual{Most (all?) mathematical writing is (should be ?) factual; simple declarative sentences are the best for communicating facts.}
+{大多数（所有的？）数学写作都是（应该是？）陈述事实的；简单的陈述句是传达事实的最佳方式。} %
+
+\bilingual{A frequently effective and time-saving device is the use of the imperative. "To find $p$, multiply $q$ by $r$."}
+{一种通常有效且省时的手段是使用祈使句。“为了求 $p$，将 $q$ 乘以 $r$。”} %
+
+\bilingual{"Given $p$, put $q$ equal to $r$." (Two digressions about "given". (1) Do not use it when it means nothing. Example: "For any given $p$ there is a $q$." (2) Remember that it comes from an active verb and resist the temptation to leave it dangling. Example: Not "Given $p$, there is a $q$", but "Given $p$, find $q$")}
+{“给定 $p$，令 $q$ 等于 $r$。”（这里关于“给定（given）”说两句题外话。(1) 当它毫无意义时不要使用它。例如：“对于任意给定的 $p$，存在一个 $q$。” (2) 记住它来源于一个主动动词，要忍住让它悬垂（缺乏逻辑主语）的诱惑。例如：不要写“给定 $p$，存在一个 $q$”，而应写“给定 $p$，求 $q$”。）} %
+
+\bilingual{There is nothing wrong with the editorial "we", but if you like it, do not misuse it.}
+{官方的“我们”本身并没有错，但如果你喜欢用它，请不要滥用。} %
+
+\bilingual{Let "we" mean "the author and the reader" (or "the lecturer and the audience").}
+{让“我们”代表“作者和读者”（或者“讲演者和听众”）。} %
+
+\bilingual{Thus, it is fine to say "Using Lemma 2 we can generalize Theorem 1", or "Lemma 3 gives us a technique for proving Theorem 4".}
+{因此，说“使用引理 2，我们可以推广定理 1”，或者“引理 3 为我们提供了一种证明定理 4 的技术”是很好的。} %
+
+\bilingual{It is not good to say "Our work on this result was done in 1969" (unless the voice is that of two authors, or more, speaking in unison), and "We thank our wife for her help with the typing" is always bad.}
+{说“我们对这一结果的研究是在 1969 年完成的”就不太好了（除非这是两位或更多作者异口同声的表达），而“我们感谢我们的妻子在打字方面的帮助”则总是很糟糕的。} %
+
+\bilingual{The use of "I", and especially its overuse, sometimes has a repellent effect, as arrogance or ex-cathedra preaching, and, for that reason, I like to avoid it whenever possible.}
+{使用“我”，尤其是过度使用，有时会产生一种令人反感的效果，显得傲慢或像是在进行权威式的说教，出于这个原因，我喜欢尽可能地避免使用它。} %
+
+\bilingual{In short notes, obviously in personal historical remarks, and, perhaps, in essays such as this, it has its place.}
+{在简短的笔记中，显然在个人的历史性评论中，也许还有在像这样的一篇散文中，它是有其用武之地的。} %
+
+\section*{13. USE WORDS CORRECTLY / 13. 正确使用词语} %
+
+\bilingual{The next smallest units of communication, after the whole concept, the major chapters, the paragraphs, and the sentences are the words.}
+{在整个概念、主要章节、段落和句子之后，下一个最小的沟通单位就是词语。} %
+
+\bilingual{The preceding section about pronouns was about words, in a sense, although, in a more legitimate sense, it was about global stylistic policy.}
+{上一节关于代词的讨论，在某种意义上就是关于词语的，尽管在更合理的意义上，它是关于全局文风策略的。} %
+
+\bilingual{What I am now going to say is not just "use words correctly"; that should go without saying.}
+{我现在要说的不仅仅是“正确使用词语”；那是不言而喻的。} %
+
+\bilingual{What I do mean to emphasize is the need to think about and use with care the small words of common sense and intuitive logic, and the specifically mathematical words (technical terms) that can have a profound effect on mathematical meaning.}
+{我要强调的是，我们需要仔细思考并谨慎使用那些代表常识和直觉逻辑的小词，以及那些能对数学意义产生深远影响的特定数学词汇（专业术语）。} %
+
+\bilingual{The general rule is to use the words of logic and mathematics correctly.}
+{一般规则是：正确使用逻辑和数学的词汇。} %
+
+\bilingual{The emphasis, as in the case of sentence-writing, is not encouraging pedantry;}
+{正如句子写作的情况一样，这里的强调并不是在鼓励迂腐；} %
+
+\bilingual{I am not suggesting a proliferation of technical terms with hairline distinctions among them. Just the opposite;}
+{我并不是建议创造大量只有细微差别的专业术语。恰恰相反；} %
+
+\bilingual{the emphasis is on craftsmanship so meticulous that it is not only correct, but unobtrusively so.}
+{这里的重点在于一种极其细致的工匠精神，它不仅是正确的，而且正确得不露痕迹。} %
+
+\bilingual{Here is a sample: "Prove that any complex number is the product of a non-negative number and a number of modulus 1."}
+{这里有一个例子：“证明任何（any）复数都是一个非负数和一个模为 1 的数的乘积。”} %
+
+\bilingual{I have had students who would have offered the following proof: "$-4i$ is a complex number, and it is the product of $4$, which is non-negative, and $-i$, which has modulus 1; q.e.d."}
+{我曾遇到过给出如下证明的学生：“$-4i$ 是一个复数，它是非负数 $4$ 与模为 1 的数 $-i$ 的乘积；证明完毕。”} %
+
+\bilingual{The point is that in everyday English "any" is an ambiguous word;}
+{问题在于，在日常英语中，“any”是一个有歧义的词；} %
+
+\bilingual{depending on context it may hint at an existential quantifier ("have you any wool?", "if anyone can do it, he can") or a universal one ("any number can play").}
+{根据上下文，它可能暗示一个存在量词（“你有一些（any）羊毛吗？”，“如果有人（anyone）能做到，那他就能”），也可能暗示一个全称量词（“任何人（any number）都可以玩”）。} %
+
+\bilingual{Conclusion: never use "any" in mathematical writing. Replace it by "each" or "every", or recast the whole sentence.}
+{结论：永远不要在数学写作中使用“any”。把它替换为“each”或“every”，或者重写整个句子。} %
+
+\bilingual{One way to recast the sample sentence of the preceding paragraph is to establish the convention that all "individual variables" range over the set of complex numbers and then write something like}
+{重写上一段示例句子的一种方法是，建立一个约定：所有的“个体变量”都在复数集上取值，然后写成类似下面的样子：} %
+
+\bilingual{$\forall z \exists p \exists u [(p \ge 0) \land (|u|=1) \land (z=pu)]$.}
+{$\forall z \exists p \exists u [(p \ge 0) \land (|u|=1) \land (z=pu)]。$} %
+
+\bilingual{I recommend against it. The symbolism of formal logic is indispensable in the discussion of the logic of mathematics, but used as a means of transmitting ideas from one mortal to another it becomes a cumbersome code.}
+{我不建议这么做。形式逻辑的符号在讨论数学逻辑时是不可或缺的，但如果把它作为凡人之间传递思想的手段，它就变成了一种累赘的密码。} %
+
+\bilingual{The author had to code his thoughts in it (I deny that anybody thinks in terms of $\exists$, $\forall$, $\land$, and the like), and the reader has to decode what the author wrote;}
+{作者不得不把他的思想用它编码（我不相信有任何人是直接用 $\exists$、$\forall$、$\land$ 等符号来思考的），而读者又不得不对作者写的东西进行解码；} %
+
+\bilingual{both steps are a waste of time and an obstruction to understanding.}
+{这两个步骤都是浪费时间，并且构成了理解的障碍。} %
+
+\bilingual{Symbolic presentation, in the sense of either the modern logician or the classical epsilontist, is something that machines can write and few but machines can read.}
+{无论是在现代逻辑学家还是经典 $\epsilon$ 论者的意义上，符号化的呈现方式都是机器能写出的东西，且除了机器以外几乎没几个人能读懂。} %
+
+\bilingual{So much for "any". Other offenders, charged with lesser crimes, are "where", and "equivalent", and "if ... then ... if ... then".}
+{关于“any”就说这么多。其他犯下较轻罪行的“罪犯”还有：“where（其中）”、“equivalent（等价的）”以及“if ... then ... if ... then（如果……那么……如果……那么）”。} %
+
+\bilingual{"Where" is usually a sign of a lazy afterthought that should have been thought through before.}
+{“Where”通常是一个懒惰的事后补充的标志，而这本该在之前就想清楚。} %
+
+\bilingual{"If $n$ is sufficiently large, then $|a_{n}|<\epsilon$, where $\epsilon$ is a preassigned positive number"; both disease and cure are clear.}
+{“如果 $n$ 足够大，那么 $|a_{n}|<\epsilon$，其中 $\epsilon$ 是一个预先指定的正数”；这里的病症和解药都很明显。} %
+
+\bilingual{"Equivalent" for theorems is logical nonsense. (By "theorem" I mean a mathematical truth, something that has been proved. A meaningful statement can be false, but a theorem cannot; "a false theorem" is self-contradictory).}
+{对于定理而言，“等价”在逻辑上是毫无意义的。（我所说的“定理”是指数学真理，是已经被证明的东西。一个有意义的陈述可能是错的，但定理不可能是错的；“一个错误的定理”是自相矛盾的。）} %
+
+\bilingual{What sense does it make to say that the completeness of $L^{2}$ is equivalent to the representation theorem for linear functionals on $L^{2}$?}
+{说 $L^{2}$ 的完备性与 $L^{2}$ 上线性泛函的表示定理“等价”，这有什么意义呢？} %
+
+\bilingual{What is meant is that the proofs of both theorems are moderately hard, but once one of them has been proved, either one, the other can be proved with relatively much less work.}
+{其实际意思是，这两个定理的证明都有中等难度，但一旦其中一个被证明了（无论哪一个），另一个就能以相对少得多的工作量被证明出来。} %
+
+\bilingual{The logically precise word "equivalent" is not a good word for that.}
+{“等价”这个逻辑上极其精确的词，并不适合用来表达这层意思。} %
+
+\bilingual{As for "if ... then ... if... then", that is just a frequent stylistic bobble committed by quick writers and rued by slow readers.}
+{至于“if ... then ... if ... then”，这只是一些写得快的作者经常犯的文风失误，却让读得慢的读者叫苦不迭。} %
+
+\bilingual{"If $p$, then if $q$, then $r$." Logically all is well $(p\Rightarrow(q\Rightarrow r))$, but psychologically it is just another pebble to stumble over, unnecessarily.}
+{“如果 $p$，那么如果 $q$，那么 $r$。”逻辑上这完全没问题 $(p\Rightarrow(q\Rightarrow r))$，但在心理上，它只是一块让人毫无必要地绊一跤的石头。} %
+
+\bilingual{Usually all that is needed to avoid it is to recast the sentence, but no universally good recasting exists; what is best depends on what is important in the case at hand.}
+{通常，为了避免它，只需要重写句子即可，但并不存在一种普遍适用的完美重写方式；哪种方式最好，取决于当前情况中什么才是重要的。} %
+
+\bilingual{It could be "If $p$ and $q$, then $r$", or "In the presence of $p$, the hypothesis $q$ implies the conclusion $r$", or many other versions.}
+{它可以是“如果 $p$ 且 $q$，那么 $r$”，也可以是“在 $p$ 存在的条件下，假设 $q$ 蕴涵结论 $r$”，或者许多其他版本。} %
+
+\section*{14. USE TECHNICAL TERMS CORRECTLY / 14. 正确使用专业术语} %
+
+\bilingual{The examples of mathematical diction mentioned so far were really logical matters.}
+{到目前为止提到的数学措辞例子实际上都是逻辑问题。} %
+
+\bilingual{To illustrate the possibilities of the unobtrusive use of precise language in the everyday sense of the working mathematician, I briefly mention three examples: function, sequence, and contain.}
+{为了说明在工作数学家的日常意义上不张扬地使用精确语言的可能性，我简要提及三个例子：函数（function）、序列（sequence）和包含（contain）。} %
+
+\bilingual{I belong to the school that believes that functions and their values are sufficiently different that the distinction should be maintained.}
+{我属于这样一派：认为函数及其（函数）值有足够大的区别，应当保持这种区分。} %
+
+\bilingual{No fuss is necessary, or at least no visible, public fuss;}
+{没有必要大惊小怪，或者至少没有必要在公开场合大做文章；} %
+
+\bilingual{just refrain from saying things like "the function $z^{2}+1$ is even".}
+{只要避免说诸如“函数 $z^{2}+1$ 是偶的”这样的话就可以了。} %
+
+\bilingual{It takes a little longer to say "the function $f$ defined by $f(z)=z^{2}+1$ is even", or, what is from many points of view preferable, "the function $z\rightarrow z^{2}+1$ is even", but it is a good habit that can sometimes save the reader (and the author) from serious blunder and that always makes for smoother reading.}
+{说“由 $f(z)=z^{2}+1$ 定义的函数 $f$ 是偶函数”，或者（从许多角度来看更好的说法）“函数 $z\rightarrow z^{2}+1$ 是偶函数”，会稍微多花一点时间，但这是一个好习惯，有时可以使读者（和作者）免犯严重的错误，并且总是能让阅读更顺畅。} %
+
+\bilingual{"Sequence" means "function whose domain is the set of natural numbers".}
+{“序列（sequence）”的意思是“定义域为自然数集的函数”。} %
+
+\bilingual{When an author writes "the union of a sequence of measurable sets is measurable" he is guiding the reader's attention to where it doesn't belong.}
+{当作者写下“一个可测集序列的并集是可测的”时，他把读者的注意力引向了不该去的地方。} %
+
+\bilingual{The theorem has nothing to do with the firstness of the first set, the secondness of the second, and so on; the sequence is irrelevant.}
+{这个定理与第一个集合的“第一性”、第二个集合的“第二性”等等毫无关系；序列是无关紧要的。} %
+
+\bilingual{The correct statement is that "the union of a countable set of measurable sets is measurable" (or, if a different emphasis is wanted, "the union of a countably infinite set of measurable sets is measurable").}
+{正确的陈述是“一个可测集的可数集合的并集是可测的”（或者，如果想强调不同点，可以说是“一个可测集的可数无限集合的并集是可测的”）。} %
+
+\bilingual{The theorem that "the limit of a sequence of measurable functions is measurable" is a very different thing;}
+{而“一个可测函数序列的极限是可测的”这个定理则是截然不同的一码事；} %
+
+\bilingual{there "sequence" is correctly used.}
+{在那里“序列”一词被正确使用了。} %
+
+\bilingual{If a reader knows what a sequence is, if he feels the definition in his bones, then the misuse of the word will distract him and slow his reading down, if ever so slightly;}
+{如果读者知道序列是什么，如果他对这个定义刻骨铭心，那么对这个词的误用就会分散他的注意力，哪怕只是极其轻微地拖慢他的阅读速度；} %
+
+\bilingual{if he doesn't really know, then the misuse will seriously postpone his ultimate understanding.}
+{如果他并不真正了解，那么这种误用将严重推迟他最终的理解。} %
+
+\bilingual{"Contain" and "include" are almost always used as synonyms, often by the same people who carefully coach their students that $\in$ and $\subset$ are not the same thing at all.}
+{“Contain（含有）”和“include（包含）”几乎总是被用作同义词，往往就是那些认真教导学生 $\in$ 和 $\subset$ 完全不是一回事的同一批人（在混用它们）。} %
+
+\bilingual{It is extremely unlikely that the interchangeable use of contain and include will lead to confusion.}
+{交替使用 contain 和 include 极不可能导致混乱。} %
+
+\bilingual{Still, some years ago I started an experiment, and I am still trying it: I have systematically and always, in spoken word and written, used "contain" for $\in$ and "include" for $\subset$.}
+{尽管如此，几年前我开始了一项实验，并且我至今仍在尝试：无论是在口头还是书面上，我都有系统地、始终如一地用“contain”来表示 $\in$，用“include”来表示 $\subset$。} %
+
+\bilingual{I don't say that I have proved anything by this, but I can report that (a) it is very easy to get used to, (b) it does no harm whatever, and (c) I don't think that anybody ever noticed it.}
+{我并不是说我借此证明了什么，但我可以报告：(a) 这很容易习惯，(b) 这没有任何坏处，(c) 我认为从来没有人注意到过这一点。} %
+
+\bilingual{I suspect, but that is not likely to be provable, that this kind of terminological consistency (with no fuss made about it) might nevertheless contribute to the reader's (and listener's) comfort.}
+{我怀疑（但这不太可能被证明），这种术语上的一致性（且不对此大做文章）可能还是会有助于提高读者（和听众）的舒适度。} %
+
+\bilingual{Consistency, by the way, is a major virtue and its opposite is a cardinal sin in exposition.}
+{顺便说一句，一致性是一种主要的美德，而它的反面则是阐述中的一项不可饶恕的罪过。} %
+
+\bilingual{Consistency is important in language, in notation, in references, in typography it is important everywhere, and its absence can cause anything from mild irritation to severe misinformation.}
+{一致性在语言、符号、参考文献、排版中都很重要——它在任何地方都很重要，它的缺失可能会引起从轻微的不满到严重的误导等各种后果。} %
+
+\bilingual{My advice about the use of words can be summed up as follows.}
+{我关于文字使用的建议可以总结如下。} %
+
+\bilingual{(1) Avoid technical terms, and especially the creation of new ones, whenever possible.}
+{(1) 只要可能，尽量避免使用专业术语，特别是要避免创造新术语。} %
+
+\bilingual{(2) Think hard about the new ones that you must create; consult Roget; and make them as appropriate as possible.}
+{(2) 仔细推敲你必须创造的新术语；查阅《罗热同义词词典（Roget）》；并使它们尽可能地贴切。} %
+
+\bilingual{(3) Use the old ones correctly and consistently, but with a minimum of obtrusive pedantry.}
+{(3) 正确且一致地使用旧术语，但要把那种惹眼的迂腐降到最低。} %
+
+\section*{15. RESIST SYMBOLS / 15. 抵制符号} %
+
+\bilingual{Everything said about words applies, mutatis mutandis, to the even smaller units of mathematical writing, the mathematical symbols.}
+{之前关于词语所说的一切，在作必要的修改后，同样适用于数学写作中更小的单位：数学符号。} %
+
+\bilingual{The best notation is no notation; whenever it is possible to avoid the use of a complicated alphabetic apparatus, avoid it.}
+{最好的符号就是没有符号；只要有可能避免使用复杂的字母系统，就尽量避免。} %
+
+\bilingual{A good attitude to the preparation of written mathematical exposition is to pretend that it is spoken.}
+{准备书面数学阐述的一个好态度，是假装它是在口头表达。} %
+
+\bilingual{Pretend that you are explaining the subject to a friend on a long walk in the woods, with no paper available; fall back on symbolism only when it is really necessary.}
+{假装你正在树林里漫步，手头没有纸，正在向朋友解释这个主题；只有在真正必要时才求助于符号。} %
+
+\bilingual{A corollary to the principle that the less there is of notation the better it is, and in analogy with the principle of omitting irrelevant assumptions, avoid the use of irrelevant symbols.}
+{由“符号越少越好”这一原则可以得出一个推论，并且类比于“省略无关假设”的原则，那就是：避免使用无关的符号。} %
+
+\bilingual{Example: "On a compact space every real-valued continuous function $f$ is bounded." What does the symbol "$f$" contribute to the clarity of that statement?}
+{例如：“在一个紧致空间上，每一个实值连续函数 $f$ 都是有界的。” 符号“$f$”对这个陈述的清晰度有什么贡献呢？} %
+
+\bilingual{Another example: "If $0 \le \lim_{n}{\alpha_{n}}^{1/n} = \rho \le 1$, then $\lim \alpha_{n}=0$." What does "$\rho$" contribute here?}
+{另一个例子：“如果 $0 \le \lim_{n}{\alpha_{n}}^{1/n} = \rho \le 1$，那么 $\lim \alpha_{n}=0$。”这里的“$\rho$”有什么贡献呢？} %
+
+\bilingual{The answer is the same in both cases (nothing), but the reasons for the presence of the irrelevant symbols may be different.}
+{这两种情况下的答案都是一样的（毫无贡献），但出现这些无关符号的原因可能不同。} %
+
+\bilingual{In the first case "$f$" may be just a nervous habit; in the second case "$\rho$" is probably a preparation for the proof. The nervous habit is easy to break.}
+{在第一种情况中，“$f$”可能只是一种紧张的习惯；在第二种情况中，“$\rho$”可能是为证明做准备。紧张的习惯很容易改掉。} %
+
+\bilingual{The other is harder, because it involves more work for the author. Without the "$\rho$" in the statement, the proof will take a half line longer; it will have to begin with something like "Write $\rho = \lim_{n}{\alpha_{n}}^{1/n}$."}
+{后者则比较难，因为这需要作者付出更多的工作。如果在陈述中没有“$\rho$”，证明的篇幅就要多出半行；它必须以类似于“记 $\rho = \lim_{n}{\alpha_{n}}^{1/n}$”这样的话开头。} %
+
+\bilingual{The repetition (of "$\lim_{n}{\alpha_{n}}^{1/n}$") is worth the trouble; both statement and proof read more easily and more naturally.}
+{但这种重复（指重复“$\lim_{n}{\alpha_{n}}^{1/n}$”）是值得的；它使得陈述和证明读起来都更容易、更自然。} %
+
+\bilingual{A showy way to say "use no superfluous letters" is to say "use no letter only once".}
+{表达“不要使用多余字母”的一种卖弄的说法是：“不要只使用一次某个字母”。} %
+
+\bilingual{What I am referring to here is what logicians would express by saying "leave no variable free".}
+{我这里指的，就是逻辑学家们所说的“不要留下自由变量”。} %
+
+\bilingual{In the example above, the one about continuous functions, "$f$" was a free variable. The best way to eliminate that particular "$f$" is to omit it; an occasionally preferable alternative is to convert it from free to bound.}
+{在上面的连续函数的例子中，“$f$”就是一个自由变量。消除那个特定“$f$”最好的方法是省略它；一种偶尔更好的替代方法是将其从自由变量转换为约束变量。} %
+
+\bilingual{Most mathematicians would do that by saying "If $f$ is a real-valued continuous function on a compact space, then $f$ is bounded."}
+{大多数数学家会通过这样说来做到这一点：“如果 $f$ 是紧致空间上的实值连续函数，那么 $f$ 是有界的。”} %
+
+\bilingual{Some logicians would insist on pointing out that "$f$" is still free in the new sentence (twice), and technically they would be right.}
+{一些逻辑学家会坚持指出，“$f$”在新句子中仍然是自由的（出现了两次），从技术上讲他们是对的。} %
+
+\bilingual{To make it bound, it would be necessary to insert "for all $f$" at some grammatically appropriate point, but the customary way mathematicians handle the problem is to refer (tacitly) to the (tacit) convention that every sentence is preceded by all the universal quantifiers that are needed to convert all its variables into bound ones.}
+{为了使其成为约束变量，必须在语法上的适当位置插入“对于所有的 $f$”，但数学家处理这个问题的习惯方式是（心照不宣地）求助于一个（心照不宣的）约定：在每一个句子前面，都默认包含了所有需要的全称量词，从而将它里面所有的变量转换为约束变量。} %
+
+\bilingual{The rule of never leaving a free variable in a sentence, like many of the rules I am stating, is sometimes better to break than to obey.}
+{“永远不在句子中留下自由变量”这条规则，就像我正在陈述的许多其他规则一样，有时打破它比遵守它更好。} %
+
+\bilingual{The sentence, after all, is an arbitrary unit, and if you want a free "$f$" dangling in one sentence so that you may refer to it in a later sentence in, say, the same paragraph, I don't think you should necessarily be drummed out of the regiment.}
+{毕竟，句子是一个人为划分的单位，如果你想在一个句子里悬置一个自由变量“$f$”，以便在后面（比如同一段落内）的句子中引用它，我不认为你就必然该被踢出这个队伍。} %
+
+\bilingual{The rule is essentially sound, just the same, and while it may be bent sometimes, it does not deserve to be shattered into smithereens.}
+{尽管如此，这条规则本质上还是合理的，虽然它有时可以被变通，但也不应该被粉碎得连渣都不剩。} %
+
+\bilingual{There are other symbolic logical hairs that can lead to obfuscation, or, at best, temporary bewilderment, unless they are carefully split.}
+{除非仔细区分（“吹毛求疵”地处理），否则还有其他一些符号逻辑上的细枝末节可能会导致混淆，或者往好里说，导致暂时的困惑。} %
+
+\bilingual{Suppose, for an example, that somewhere you have displayed the relation (*): $\int_{0}^{1}|f(x)|^{2}dx<\infty$ as, say, a theorem proved about some particular $f$.}
+{例如，假设你在某处将关系式 $\int_{0}^{1}|f(x)|^{2}dx<\infty$ 作为展示公式 (*)，比如说，作为关于某个特定 $f$ 已经证明的定理。} %
+
+\bilingual{If, later, you run across another function $g$ with what looks like the same property, you should resist the temptation to say "$g$ also satisfies (*)".}
+{如果稍后你遇到了另一个看起来具有相同性质的函数 $g$，你应该忍住说出“$g$ 也满足 (*)”的诱惑。} %
+
+\bilingual{That's logical and alphabetical nonsense. Say instead "(*) remains satisfied if $f$ is replaced by $g$", or, better, give (*) a name (in this case it has a customary one) and say "$g$ also belongs to $L^{2}(0,1)$".}
+{那是逻辑和字母系统上的废话。相反，你应该说“如果把 $f$ 替换为 $g$，(*) 依然成立”，或者，更好的做法是给 (*) 命名（在这个例子中它有一个惯用的名称），然后说“$g$ 也属于 $L^{2}(0,1)$”。} %
+
+\bilingual{What about "inequality (*)", or "equation (7)", or "formula (iii)"; should all displays be labelled or numbered? My answer is no.}
+{那么“不等式 (*)”、“方程 (7)”或“公式 (iii)”呢；是否所有的展示公式都应该被贴上标签或编号？我的答案是否定的。} %
+
+\bilingual{Reason: just as you shouldn't mention irrelevant assumptions or name irrelevant concepts, you also shouldn't attach irrelevant labels.}
+{理由：正如你不该提及无关假设或命名无关概念一样，你也不应该贴上无关的标签。} %
+
+\bilingual{Some small part of the reader's attention is attracted to the label, and some small part of his mind will wonder why the label is there.}
+{读者的一小部分注意力会被这个标签吸引，他的一小部分心思会纳闷为什么那里有个标签。} %
+
+\bilingual{If there is a reason, then the wonder serves a healthy purpose by way of preparation, with no fuss, for a future reference to the same idea; if there is no reason, then the attention and the wonder were wasted.}
+{如果有理由，那么这种纳闷就起到了健康的作用，它悄无声息地为将来引用同一个想法做好了铺垫；如果没有理由，那么这份注意力和纳闷就被浪费了。} %
+
+\bilingual{It's good to be stingy in the use of labels, but parsimony also can be carried to extremes.}
+{在标签的使用上吝啬是一件好事，但这种节俭也可能会走向极端。} %
+
+\bilingual{I do not recommend that you do what Dickson once did [2]. On p. 89 he says: "Then ... we have (1)... "-but p. 89 is the beginning of a new chapter, and happens to contain no display at all, let alone one bearing the label (1).}
+{我不建议你学狄克逊（Dickson）曾经的做法 [2]。在第 89 页他说：“那么……我们有 (1)……”——但是第 89 页是新一章的开始，而且碰巧根本没有任何展示公式，更不用说带有标签 (1) 的公式了。} %
+
+\bilingual{The display labelled (1) occurs on p. 90, overleaf, and I never thought of looking for it there.}
+{带有标签 (1) 的展示公式出现在第 90 页，也就是翻过去的那一页，而我从未想过要去那里找它。} %
+
+\bilingual{That trick gave me a helpless and bewildered five minutes. When I finally saw the light, I felt both stupid and cheated, and I have never forgiven Dickson.}
+{那个把戏让我经历了无助和困惑的五分钟。当我最终恍然大悟时，我觉得自己既愚蠢又被骗了，我至今都没原谅狄克逊。} %
+
+\bilingual{One place where cumbersome notation quite often enters is in mathematical induction. Sometimes it is unavoidable.}
+{数学归纳法是一个经常引入繁琐符号的地方。有时候这是不可避免的。} %
+
+\bilingual{More often, however, I think that indicating the step from 1 to 2 and following it by an airy "and so on" is as rigorously unexceptionable as the detailed computation, and much more understandable and convincing.}
+{然而，更多时候，我认为展示出从 1 到 2 的步骤，接着轻松地说一句“依此类推”，和详细的计算一样在严谨性上无可指责，而且更容易让人理解，也更有说服力。} %
+
+\bilingual{Similarly, a general statement about $n\times n$ matrices is frequently best proved not by the exhibition of many $a_{ij}$, accompanied by triples of dots laid out in rows and columns and diagonals, but by the proof of a typical (say $3\times3$) special case.}
+{同样，证明关于 $n\times n$ 矩阵的一般性陈述，最好的方法通常不是展示许多个 $a_{ij}$ 以及排列在行、列和对角线上的三个点（省略号），而是通过证明一个典型的（比如 $3\times3$）特例。} %
+
+\bilingual{There is a pattern in all these injunctions about the avoidance of notation.}
+{在所有这些关于避免使用符号的告诫中，存在着一个共同的模式。} %
+
+\bilingual{The point is that the rigorous concept of a mathematical proof can be taught to a stupid computing machine in one way only, but to a human being endowed with geometric intuition, with daily increasing experience, and with the impatient inability to concentrate on repetitious detail for very long, that way is a bad way.}
+{关键在于，数学证明的严谨概念只能用一种方式教给愚蠢的计算机，但对于一个具有几何直觉、经验与日俱增、并且因为急躁而无法长时间集中注意力于重复细节的人类来说，那种方式就是一种糟糕的方式。} %
+
+\bilingual{Another illustration of this is a proof that consists of a chain of expressions separated by equal signs.}
+{这方面的另一个例证是：由一连串被等号隔开的表达式组成的证明。} %
+
+\bilingual{Such a proof is easy to write. The author starts from the first equation, makes a natural substitution to get the second, collects terms, permutes, inserts and immediately cancels an inspired factor, and by steps such as these proceeds till he gets the last equation.}
+{这种证明很容易写。作者从第一个方程开始，做一个自然的代换得到第二个方程，合并同类项，交换顺序，插入并立刻消去一个灵光一现的因子，通过这样的步骤不断进行，直到得出最后一个方程。} %
+
+\bilingual{This is, once again, coding, and the reader is forced not only to learn as he goes, but, at the same time, to decode as he goes.}
+{这又一次是“编码”，而读者被迫在边读边学的同时，还要边读边“解码”。} %
+
+\bilingual{The double effort is needless. By spending another ten minutes writing a carefully worded paragraph, the author can save each of his readers half an hour and a lot of confusion.}
+{这种双重努力是不必要的。作者只需多花十分钟写一段措辞严谨的段落，就能为他的每个读者节省半个小时的时间和大量的困惑。} %
+
+\bilingual{The paragraph should be a recipe for action, to replace the unhelpful code that merely reports the results of the act and leaves the reader to guess how they were obtained.}
+{这段话应该是一个操作配方，用来取代那些毫无帮助、只报告操作结果并留给读者去猜测结果是如何得出的密码。} %
+
+\bilingual{The paragraph would say something like this: "For the proof, first substitute $p$ for $q$, then collect terms, permute the factors, and, finally, insert and cancel a factor $r$."}
+{这段话可以说类似于这样的话：“为了证明，首先把 $q$ 替换为 $p$，然后合并同类项，交换因子的顺序，最后插入并消去一个因子 $r$。”} %
+
+\bilingual{A familiar trick of bad teaching is to begin a proof by saying: "Given $\epsilon$, let $\delta$ be $(\frac{\epsilon}{3M^{2}+2})^{1/2+\epsilon}$."}
+{糟糕教学中一个常见的把戏，就是以这样一句话开始一个证明：“给定 $\epsilon$，令 $\delta$ 为 $(\frac{\epsilon}{3M^{2}+2})^{1/2+\epsilon}$。”} %
+
+\bilingual{This is the traditional backward proof-writing of classical analysis.}
+{这就是经典分析中传统的“倒推式”证明写法。} %
+
+\bilingual{It has the advantage of being easily verifiable by a machine (as opposed to understandable by a human being), and it has the dubious advantage that something at the end comes out to be less than $\epsilon$, instead of less than, say, $(\frac{(3M^{2}+7)\epsilon}{24})^{1/3}$.}
+{它的优点是很容易被机器验证（而非被人类理解），而且它还有一个可疑的优点，那就是在结尾处得出的东西刚好小于 $\epsilon$，而不是小于比如说 $(\frac{(3M^{2}+7)\epsilon}{24})^{1/3}$。} %
+
+\bilingual{The way to make the human reader's task less demanding is obvious: write the proof forward.}
+{让阅读此文的人类读者的任务变得不那么艰巨的方法是显而易见的：把证明正着写（正向推导）。} %
+
+\bilingual{Start, as the author always starts, by putting something less than $\epsilon$, and then do what needs to be done - multiply by $3M^{2}+7$ at the right time and divide by 24 later, etc., etc. till you end up with what you end up with.}
+{像作者在草稿纸上总是那样开始，先让某个量小于 $\epsilon$，然后做该做的事——在合适的时候乘以 $3M^{2}+7$，稍后除以 24 等等，直到你得出你最终得出的结果。} %
+
+\bilingual{Neither arrangement is elegant, but the forward one is graspable and rememberable.}
+{这两种排版方式都不够优雅，但正向推导的方式是可以被理解和被记住的。} %
+
+\section*{16. USE SYMBOLS CORRECTLY / 16. 正确使用符号} %
+
+\bilingual{There is not much harm that can be done with non-alphabetical symbols, but there too consistency is good and so is the avoidance of individually unnoticed but collectively abrasive abuses.}
+{非字母符号造成的危害可能不大，但在那里，一致性也是好的，避免那些单独不易察觉但累积起来却很刺眼的滥用现象同样是好的。} %
+
+\bilingual{Thus, for instance, it is good to use a symbol so consistently that its verbal translation is always the same.}
+{例如，最好能如此一致地使用一个符号，以至于它的口头翻译始终是一样的。} %
+
+\bilingual{It is good, but it is probably impossible; nonetheless it's a better aim than no aim at all.}
+{这很好，但可能无法做到；不过，有这个目标总比没有目标要好。} %
+
+\bilingual{How are we to read "$\in$": as the verb phrase "is in" or as the preposition "in"?}
+{我们应该如何读“$\in$”：是读作动词短语“属于（is in）”还是介词“在……中（in）”？} %
+
+\bilingual{Is it correct to say: "For $x\in A$, we have $x\in B$," or "If $x\in A$, then $x\in B$"? I strongly prefer the latter (always read "$\in$" as "is in") and I doubly deplore the former (both usages occur in the same sentence).}
+{说“对于 $x\in A$，我们有 $x\in B$”正确，还是“如果 $x\in A$，那么 $x\in B$”正确？我强烈倾向于后者（始终将“$\in$”读作“属于”），并且我加倍地反对前者（同一种用法在同一个句子里出现了两种不同的含义）。} %
+
+\bilingual{It's easy to write and it's easy to read "For $x$ in $A$, we have $x\in B$"; all dissonance and all even momentary ambiguity is avoided.}
+{写成“对于 $A$ 中的 $x$（For $x$ in $A$），我们有 $x\in B$”既容易写又容易读；所有的不协调感以及哪怕是瞬间的歧义都被避免了。} %
+
+\bilingual{The same is true for "$\subset$" even though the verbal translation is longer, and even more true for "$\le$".}
+{对于“$\subset$”也是如此，尽管它的口头翻译更长；对于“$\le$”则更是如此。} %
+
+\bilingual{A sentence such as "Whenever a positive number is $\le3$, its square is $\le9$" is ugly.}
+{像“每当一个正数 $\le 3$，它的平方就 $\le 9$”这样的句子是很丑陋的。} %
+
+\bilingual{Not only paragraphs, sentences, words, letters, and mathematical symbols, but even the innocent looking symbols of standard prose can be the source of blemishes and misunderstandings; I refer to punctuation marks.}
+{不仅仅是段落、句子、单词、字母和数学符号，甚至连标准散文中看起来纯良无害的符号也可能成为瑕疵和误解的源头；我指的是标点符号。} %
+
+\bilingual{A couple of examples will suffice.}
+{举几个例子就足够了。} %
+
+\bilingual{First: an equation, or inequality, or inclusion, or any other mathematical clause is, in its informative content, equivalent to a clause in ordinary language, and, therefore, it demands just as much to be separated from its neighbors.}
+{第一：一个方程、不等式、包含关系或任何其他数学子句，在其信息内容上，等同于日常语言中的一个子句，因此，它同样需要与其相邻的部分分隔开来。} %
+
+\bilingual{In other words: punctuate symbolic sentences just as you would verbal ones.}
+{换句话说：像给文字句子加标点一样，给符号句子加标点。} %
+
+\bilingual{Second: don't overwork a small punctuation mark such as a period or a comma. They are easy for the reader to overlook, and the oversight causes backtracking, confusion, delay.}
+{第二：不要过度使用像句号或逗号这样的小标点符号。它们很容易被读者忽略，而这种忽略会导致回读、困惑和拖延。} %
+
+\bilingual{Example: "Assume that $a\in X$. $X$ belongs to the class $C,\dots$" The period between the two $X$'s is overworked, and so is this one: "Assume that $X$ vanishes. $X$ belongs to the class $C,\dots$"}
+{例如：“假设 $a\in X$。$X$ 属于类 $C,\dots$”这两个 $X$ 之间的句号被过度使用了，这个也是一样：“假设 $X$ 消失。$X$ 属于类 $C,\dots$”} %
+
+\bilingual{A good general rule is: never start a sentence with a symbol.}
+{一条很好的通用规则是：永远不要用符号来开始一个句子。} %
+
+\bilingual{If you insist on starting the sentence with a mention of the thing the symbol denotes, put the appropriate word in apposition, thus: "The set $X$ belongs to the class $C,\dots$"}
+{如果你坚持要以提及该符号所代表的事物来开始句子，请将适当的词作为同位语放进去，像这样：“集合 $X$ 属于类 $C,\dots$”} %
+
+\bilingual{The overworked period is no worse than the overworked comma.}
+{被过度使用的句号并不比被过度使用的逗号更糟。} %
+
+\bilingual{Not "For invertible $X$, $X^{*}$ also is invertible", but "For invertible $X$, the adjoint $X^{*}$ also is invertible".}
+{不要写“对于可逆的 $X$，$X^{*}$ 也是可逆的”，而应写“对于可逆的 $X$，其伴随矩阵 $X^{*}$ 也是可逆的”。} %
+
+\bilingual{Similarly, not "Since $p\ne0$, $p\in U$", but "Since $p\ne0$, it follows that $p\in U$".}
+{同样地，不要写“因为 $p\ne0$，$p\in U$”，而应写“因为 $p\ne0$，所以得出 $p\in U$”。} %
+
+\bilingual{Even the ordinary "If you don't like it, lump it" (or, rather, its mathematical relatives) is harder to digest than the stuffy-sounding "If you don't like it, then lump it"; I recommend "then" with "if" in all mathematical contexts.}
+{即便是普通的“如果你不喜欢，那就忍着吧”（或者更确切地说，它的数学亲戚们），也比听起来有些刻板的“如果你不喜欢，那么就忍着吧”更难消化；我建议在所有的数学语境中，“if（如果）”都要和“then（那么）”连用。} %
+
+\bilingual{The presence of "then" can never confuse; its absence can.}
+{“then（那么）”的存在永远不会引起混淆；它的缺失却会。} %
+
+\bilingual{A final technicality that can serve as an expository aid, and should be mentioned here, is in a sense smaller than even the punctuation marks, it is in a sense so small that it is invisible, and yet, in another sense, it's the most conspicuous aspect of the printed page.}
+{这里还应当提及最后一项可以作为阐述辅助手段的技术细节，在某种意义上它甚至比标点符号还要微小，小到看不见，但在另一种意义上，它又是印刷页面上最显眼的方面。} %
+
+\bilingual{What I am talking about is the layout, the architecture, the appearance of the page itself, of all the pages.}
+{我所说的是页面的布局、结构、以及每一页本身的外观。} %
+
+\bilingual{Experience with writing, or perhaps even with fully conscious and critical reading, should give you a feeling for how what you are now writing will look when it's printed.}
+{写作经验，或者哪怕是完全有意识且带有批判性的阅读经验，应该能让你对你现在正在写的东西印出来后会是什么样子有一种直觉。} %
+
+\bilingual{If it looks like solid prose, it will have a forbidding, sermony aspect; if it looks like computational hash, with a page full of symbols, it will have a frightening, complicated aspect.}
+{如果它看起来像密不透风的纯文字，它就会带有令人生畏的、说教般的面貌；如果它看起来像计算的大杂烩，满页都是符号，它就会呈现出令人恐惧、复杂难懂的面貌。} %
+
+\bilingual{The golden mean is golden. Break it up, but not too small; use prose, but not too much.}
+{中庸之道是宝贵的。把它打断（分段），但不要切得太碎；使用文字，但不要太多。} %
+
+\bilingual{Intersperse enough displays to give the eye a chance to help the brain; use symbols, but in the middle of enough prose to keep the mind from drowning in a morass of suffixes.}
+{穿插足够的展示公式，让眼睛有机会帮助大脑；使用符号，但要将其置于足够的文字中间，以免大脑淹没在后缀的泥沼中。} %
+
+\section*{17. ALL COMMUNICATION IS EXPOSITION / 17. 所有的沟通都是阐述} %
+
+\bilingual{I said before, and I'd like for emphasis to say again, that the differences among books, articles, lectures, and letters (and whatever other means of communication you can think of) are smaller than the similarities.}
+{我之前说过，为了强调我想再说一遍：书籍、文章、讲座和信件（以及你能想到的任何其他沟通方式）之间的差异，要小于它们之间的相似之处。} %
+
+\bilingual{When you are writing a research paper, the role of the "slips of paper" out of which a book outline can be constructed might be played by the theorems and the proofs that you have discovered;}
+{当你在写一篇研究论文时，那些用来构建书籍大纲的“小纸条”，其角色可能由你所发现的定理和证明来扮演；} %
+
+\bilingual{but the game of solitaire that you have to play with them is the same.}
+{但你必须用它们来玩的“单人纸牌”游戏却是一样的。} %
+
+\bilingual{A lecture is a little different. In the beginning a lecture is an expository paper;}
+{讲座有一点不同。在最开始，讲座也就是一篇阐述性的文章；} %
+
+\bilingual{you plan it and write it the same way. The difference is that you must keep the difficulties of oral presentation in mind.}
+{你以同样的方式规划它并写下它。不同之处在于，你必须把口头表达的困难牢记在心。} %
+
+\bilingual{The reader of a book can let his attention wander, and later, when he decides to, he can pick up the thread, with nothing lost except his own time;}
+{一本书的读者可以任由自己的注意力游离，稍后，当他决定继续时，他可以重新接上思路，除了他自己的时间之外没有任何损失；} %
+
+\bilingual{a member of a lecture audience cannot do that. The reader can try to prove your theorems for himself, and use your exposition as a check on his work;}
+{但讲座的听众做不到这一点。读者可以尝试自己去证明你的定理，并把你的阐述作为对他自己工作的检验；} %
+
+\bilingual{the hearer cannot do that. The reader's attention span is short enough; the hearer's is much shorter.}
+{但听众做不到。读者的注意力持续时间已经够短了；听众的则还要短得多。} %
+
+\bilingual{If computations are unavoidable, a reader can be subjected to them; a hearer must never be.}
+{如果计算是不可避免的，读者可以去经受这些计算；但绝不能让听众去经受。} %
+
+\bilingual{Half the art of good writing is the art of omission;}
+{优秀写作的艺术有一半是省略的艺术；} %
+
+\bilingual{in speaking, the art of omission is nine-tenths of the trick. These differences are not large.}
+{在演讲中，省略的艺术占据了技巧的十分之九。这些区别并不算大。} %
+
+\bilingual{To be sure, even a good expository paper, read out loud, would make an awful lecture-but not worse than some I have heard.}
+{诚然，即使是一篇优秀的阐述性文章，大声朗读出来也会变成一场糟糕的讲座——但绝不比我曾听过的一些讲座更糟。} %
+
+\bilingual{The appearance of the printed page is replaced, for a lecture, by the appearance of the blackboard, and the author's imagined audience is replaced for the lecturer by live people;}
+{对于讲座而言，印刷页面的外观被黑板的外观所取代，作者想象中的读者也被讲演者面前活生生的人所取代；} %
+
+\bilingual{these are big differences. As for the blackboard: it provides the opportunity to make something grow and come alive in a way that is not possible with the printed page.}
+{这些都是巨大的区别。至于黑板：它提供了一个机会，让事物以一种印刷页面不可能做到的方式生长并变得鲜活起来。} %
+
+\bilingual{(Lecturers who prepare a blackboard, cramming it full before they start speaking, are unwise and unkind to audiences.) As for live people: they provide an immediate feedback that every author dreams about but can never have.}
+{（那些提前准备好黑板、在开讲前就把它塞得满满当当的讲演者，是不明智的，对听众也不友好。）至于活生生的人：他们提供了每个作者梦寐以求却永远无法拥有的即时反馈。} %
+
+\bilingual{The basic problems of all expository communication are the same;}
+{所有阐述性沟通的基本问题都是相同的；} %
+
+\bilingual{they are the ones I have been describing in this essay.}
+{它们就是我在这篇文章中一直描述的那些问题。} %
+
+\bilingual{Content, aim and organization, plus the vitally important details of grammar, diction, and notation-they, not showmanship, are the essential ingredients of good lectures, as well as good books.}
+{内容、目标和组织，加上语法、措辞和符号等至关重要的细节——它们，而不是卖弄的表演技巧，才是优秀讲座以及优秀书籍不可或缺的要素。} %
+
+\section*{18. DEFEND YOUR STYLE / 18. 捍卫你的文风} %
+
+\bilingual{Smooth, consistent, effective communication has enemies; they are called editorial assistants or copyreaders.}
+{流畅、一致、有效的沟通是有敌人的；他们被称为编辑助理或文字校对员。} %
+
+\bilingual{An editor can be a very great help to a writer.}
+{编辑可以为作者提供极大的帮助。} %
+
+\bilingual{Mathematical writers must usually live without this help, because the editor of a mathematical book must be a mathematician, and there are very few mathematical editors.}
+{数学作者通常必须在没有这种帮助的情况下生存，因为数学书籍的编辑必须是数学家，而数学编辑少之又少。} %
+
+\bilingual{The ideal editor, who must potentially understand every detail of the author's subject, can give the author an inside but nonetheless unbiased view of the work that the author himself cannot have.}
+{理想的编辑，必须能够理解作者主题的每一个细节，他能给作者提供一种内部的、但又是不带偏见的关于这部作品的观点，而这正是作者本人所无法拥有的。} %
+
+\bilingual{The ideal editor is the union of the friend, wife, student, and expert junior-grade whose contribution to writing I described earlier.}
+{理想的编辑就是我之前描述过的对写作有贡献的朋友、妻子、学生和初级专家的结合体。} %
+
+\bilingual{The mathematical editors of book series and journals don't even come near to the ideal.}
+{丛书和期刊的数学编辑甚至离这个理想状态差得很远。} %
+
+\bilingual{Their editorial work is but a small fraction of their life, whereas to be a good editor is a full-time job.}
+{他们的编辑工作只是他们生活的一小部分，然而要成为一名好编辑是一份全职工作。} %
+
+\bilingual{The ideal mathematical editor does not exist; the friend-wife-etc. combination is only an almost ideal substitute.}
+{理想的数学编辑并不存在；朋友-妻子等组合只是一个近乎理想的替代品。} %
+
+\bilingual{The editorial assistant is a full-time worker whose job is to catch your inconsistencies, your grammatical slips, your errors of diction, your misspellings-everything that you can do wrong, short of the mathematical content.}
+{编辑助理是一名全职工作者，他的工作是揪出你的不一致之处、语法错误、措辞不当、拼写错误——除了数学内容之外你可能做错的一切。} %
+
+\bilingual{The trouble is that the editorial assistant does not regard himself as an extension of the author, and he usually degenerates into a mechanical misapplier of mechanical rules.}
+{问题在于，编辑助理并不认为自己是作者的延伸，他通常会退化成机械规则的机械误用者。} %
+
+\bilingual{Let me give some examples.}
+{让我举几个例子。} %
+
+\bilingual{I once studied certain transformations called "measure-preserving".}
+{我曾经研究过一些被称为“保测度（measure-preserving）”的变换。} %
+
+\bilingual{(Note the hyphen: it plays an important role, by making a single word, an adjective, out of two words.)}
+{（注意这里的连字符：它起着重要作用，把两个词变成了一个词，一个形容词。）} %
+
+\bilingual{Some transformations pertinent to that study failed to deserve the name; their failure was indicated, of course, by the prefix "non".}
+{与那项研究相关的一些变换不配拥有这个名字；当然，它们的失败由前缀“non”来表示。} %
+
+\bilingual{After a long sequence of misunderstood instructions, the printed version spoke of a "nonmeasure preserving transformation".}
+{在经历了一长串被误解的指令后，印刷版本印成了“非测度保变换（nonmeasure preserving transformation）”。} %
+
+\bilingual{That is nonsense, of course, amusing nonsense, but, as such, it is distracting and confusing nonsense.}
+{这当然是胡言乱语，尽管好笑，但作为胡言乱语，它令人分心且困惑。} %
+
+\bilingual{A mathematician friend reports that in the manuscript of a book of his he wrote something like "$p$ or $q$ holds according as $x$ is negative or positive".}
+{一位数学家朋友告诉我，在他一本书的手稿中，他写了类似“$p$ 或 $q$ 成立，取决于 $x$ 是负的还是正的”这样的话。} %
+
+\bilingual{The editorial assistant changed that to "$p$ or $q$ holds according as $x$ is positive or negative", on the grounds that it sounds better that way.}
+{编辑助理将其改成了“$p$ 或 $q$ 成立，取决于 $x$ 是正的还是负的”，理由是这样听起来更好。} %
+
+\bilingual{That could be funny if it weren't sad, and, of course, very very wrong.}
+{如果这不让人感到悲哀的话，它本可以是个笑话，当然，这也是非常非常错误的。} %
+
+\bilingual{A common complaint of anyone who has ever discussed quotation marks with the enemy concerns their relation to other punctuation.}
+{任何与这些“敌人”讨论过引号的人，一个共同的抱怨是关于引号与其他标点符号的关系。} %
+
+\bilingual{There appears to be an international typographical decree according to which a period or a comma immediately to the right of a quotation is "ugly".}
+{似乎有一条国际排版法令规定，紧挨着引号右边的句号或逗号是“丑陋”的。} %
+
+\bilingual{(As here: the editorial assistant would have changed that to "ugly." if I had let him.)}
+{（就像这里：如果我任由他改的话，编辑助理会把它改成 "ugly." 。）} %
+
+\bilingual{From the point of view of the logical mathematician (and even more the mathematical logician) the decree makes no sense; the comma or period should come where the logic of the situation forces it to come.}
+{从逻辑数学家（尤其是数理逻辑学家）的角度来看，这条法令毫无意义；逗号或句号应该放在逻辑上强制它出现的地方。} %
+
+\bilingual{Thus, He said: "The comma is ugly." Here, clearly, the period belongs inside the quote;}
+{因此，他说：“逗号很丑陋。”显然，这里的句号属于引号内部；} %
+
+\bilingual{the two situations are different and no inelastic rule can apply to both.}
+{这两种情况是不同的，没有任何死板的规则可以同时适用于这两者。} %
+
+\bilingual{Moral: there are books on "style" (which frequently means typographical conventions), but their mechanical application by editorial assistants can be harmful.}
+{寓意：虽然有关于“文风”（通常指排版惯例）的书籍，但编辑助理对它们的机械应用可能是有害的。} %
+
+\bilingual{If you want to be an author, you must be prepared to defend your style; go forearmed into the battle.}
+{如果你想成为一名作者，你必须准备好捍卫你的文风；你要全副武装地投入这场战斗。} %
+\section*{19. STOP / 19. 停笔} %
+
+\bilingual{The battle against copyreaders is the author's last task, but it's not the one that most authors regard as the last.}
+{与文字校对员的战斗是作者的最后一项任务，但这并不是大多数作者心目中的最后一项。} %
+
+\bilingual{The subjectively last step comes just before; it is to finish the book itself to stop writing. That's hard.}
+{主观上的最后一步发生在此之前；那就是完成这本书本身——停止写作。这很难。} %
+
+\bilingual{There is always something left undone, always either something more to say, or a better way to say something, or, at the very least, a disturbing vague sense that the perfect addition or improvement is just around the corner, and the dread that its omission would be everlasting cause for regret.}
+{总会有一些未竟之事，总是有更多的话想说，或者有更好的表达方式，或者至少有一种令人不安的模糊感觉，觉得完美的补充或改进就在拐角处，并害怕它的遗漏会成为永远遗憾的根源。} %
+
+\bilingual{Even as I write this, I regret that I did not include a paragraph or two on the relevance of euphony and prosody to mathematical exposition.}
+{甚至就在我写下这句话的时候，我还遗憾自己没有用一两个段落来讨论语音的悦耳（euphony）与韵律（prosody）对数学阐述的相关性。} %
+
+\bilingual{Or, hold on a minute !, surely cannot stop without a discourse on the proper naming of concepts (why "commutator" is good and "set of first category" is bad) and the proper way to baptize theorems (why "the closed graph theorem" is good and "the Cauchy-Buniakowski-Schwarz theorem" is bad).}
+{或者，等一下！我当然不能就这么停下，我还得论述一下概念的正确命名（为什么“换位子”很好，而“第一类集”很糟糕），以及为定理洗礼的正确方式（为什么“闭图像定理”很好，而“柯西-布尼亚科夫斯基-施瓦茨定理”很糟糕）。} %
+
+\bilingual{And what about that sermonette that I haven't been able to phrase satisfactorily about following a model.}
+{还有那个关于如何效仿楷模的小说教，我还没能用令人满意的措辞写出来。} %
+
+\bilingual{Choose someone, I was going to say, whose writing can touch you and teach you, and adapt and modify his style to fit your personality and your subject-surely I must get that said somehow.}
+{我本来想说：选一个其作品能触动你并教导你的人，改编并修改他的文风，以适应你的个性和你的主题——我无论如何都必须把这句话说出来。} %
+
+\bilingual{There is no solution to this problem except the obvious one;}
+{这个问题的解决方案只有一个，那是显而易见的；} %
+
+\bilingual{the only way to stop is to be ruthless about it.}
+{停止的唯一方法，就是对自己狠一点（狠下心来）。} %
+
+\bilingual{You can postpone the agony a bit, and you should do so, by proofreading, by checking the computations, by letting the manuscript ripen, and then by reading the whole thing over in a gulp, but you won't want to stop any more then than before.}
+{你可以稍稍推迟这种痛苦（而且你也应该这样做）：通过校对，通过检查计算，通过让手稿“沉淀（ripen）”，然后一口气通读全篇，但到那时你并不会比之前更想停笔。} %
+
+\bilingual{When you've written everything you can think of, take a day or two to read over the manuscript quickly and to test it for the obvious major points that would first strike a stranger's eye.}
+{当你已经写下你能想到的一切时，花一两天时间快速读一遍手稿，并测试一下那些首先会吸引陌生人眼球的明显要点。} %
+
+\bilingual{Is the mathematics good, is the exposition interesting, is the language clear, is the format pleasant and easy to read?}
+{数学内容好吗？阐述有趣吗？语言清晰吗？排版格式令人愉悦且易读吗？} %
+
+\bilingual{Then proofread and check the computations; that's an obvious piece of advice, and no one needs to be told how to do it.}
+{然后校对并检查计算；这是一条显而易见的建议，不需要任何人教你怎么做。} %
+
+\bilingual{"Ripening" is easy to explain but not always easy to do: it means to put the manuscript out of sight and try to forget it for a few months.}
+{“沉淀（Ripening）”很容易解释，但并不总是容易做到：它的意思是把手稿放在视线之外，试着在几个月里忘记它。} %
+
+\bilingual{When you have done all that, and then re-read the whole work from a rested point of view, you have done all you can.}
+{当你做完了这一切，然后以一种充分休息后的视角重新阅读整部作品时，你已经尽了你所能做的一切。} %
+
+\bilingual{Don't wait and hope for one more result, and don't keep on polishing.}
+{不要再等待并期盼能多出一个结果，也不要再继续润色了。} %
+
+\bilingual{Even if you do get that result or do remove that sharp corner, you'll only discover another mirage just ahead.}
+{即使你真的得到了那个结果，或者确实磨平了那个尖角，你只会发现在正前方还有另一个海市蜃楼。} %
+
+\bilingual{To sum it all up: begin at the beginning, go on till you come to the end, and then, with no further ado, stop.}
+{总结起来就是：从开头开始，一直写到结尾，然后，不要再啰嗦，停下。} %
+\section*{20. THE LAST WORD / 20. 结语} %
+
+\bilingual{I have come to the end of all the advice on mathematical writing that I can compress into one essay.}
+{我已经说完了我能压缩进这一篇文章里的所有关于数学写作的建议。} %
+
+\bilingual{The recommendations I have been making are based partly on what I do, more on what I regret not having done, and most on what I wish others had done for me.}
+{我一直提出的这些建议，部分基于我所做的，更多基于我遗憾没有做的，绝大部分基于我希望别人曾为我做的。} %
+
+\bilingual{You may criticize what I've said on many grounds, but I ask that a comparison of my present advice with my past action not be one of them.}
+{你可以基于许多理由来批评我所说的话，但我请求，不要拿我现在的建议与我过去的行为作比较。} %
+
+\bilingual{Do, please, as I say, and not as I do, and you'll do better.}
+{请照我说的做，而不要照我做的做，这样你会做得更好。} %
+
+\bilingual{Then rewrite this essay and tell the next generation how to do better still.}
+{然后重写这篇文章，告诉下一代如何能做得更好。} %
+
+% ----- 参考文献部分 ----- %
+\renewcommand\refname{REFERENCES / 参考文献} %
+\begin{thebibliography}{99} %
+
+\bibitem{birkhoff} BIRKHOFF, G. D. Proof of the ergodic theorem, \textit{Proc. N.A.S., U.S.A.} 17 (1931) 656--660. %
+\bibitem{dickson} DICKSON, L. E., \textit{Modern algebraic theories}, Sanborn, Chicago (1926). %
+\bibitem{dunford} DUNFORD N. and SCHWARTZ J. T., \textit{Linear operators}, Interscience, New York (1958, 1963). %
+\bibitem{fowler} FOWLER H. W., \textit{Modern English usage} (Second edition, revised by Sir Ernest Gowers), Oxford, New York (1965). %
+\bibitem{heisel} HEISEL C. T., \textit{The circle squared beyond refutation}, Heisel, Cleveland (1934). %
+\bibitem{lefschetz} LEFSCHETZ, S. \textit{Algebraic topology}, A.M.S., New York (1942). %
+\bibitem{nelson} NELSON E. A proof of Liouville's theorem, \textit{Proc. A.M.S.} 12 (1961) 995. %
+\bibitem{roget} \textit{Roget's International Thesaurus}, Crowell, New York (1946). %
+\bibitem{thurber} THURBER J. and NUGENT E., \textit{The male animal}, Random House, New York (1940). %
+\bibitem{webster} \textit{Webster's New International Dictionary} (Second edition, unabridged), Merriam, Springfield (1951). %
+
+\end{thebibliography} %
+\end{document}

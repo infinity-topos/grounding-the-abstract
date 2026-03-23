@@ -3,6 +3,7 @@
 \usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
 \usepackage{mathrsfs}
 \usepackage{CJKutf8}
+\usepackage{bm}
 \usepackage[margin=1in]{geometry}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -123,32 +124,6 @@ is commutative and has exact rows. Prove that
     surjective.
 \end{solution}
 
-
-\section*{Lemmas for Problem 3}
-\begin{lemma}{A}
-Let $f: M \to M''$ be a surjective $R$-module homomorphism, and let $g: K \to M''$ be any homomorphism. The pullback of $f$ along $g$ is given by:
-\[ P = \{ (m, k) \in M \times K \mid f(m) = g(k) \} \]
-with the projection $\pi_K: P \to K, (m, k) \mapsto k$. Then $\pi_K$ is surjective.
-\end{lemma}
-
-\begin{proof}
-Let $k \in K$ be an arbitrary element. Consider the image $g(k) \in M''$. Since $f$ is surjective, there exists an element $m \in M$ such that $f(m) = g(k)$. By the definition of the pullback, the pair $(m, k)$ belongs to $P$. Furthermore, $\pi_K(m, k) = k$. Thus, $\pi_K$ is surjective.
-\end{proof}
-
-\begin{lemma}{B}
-Let $\mu: N' \to N$ be an injective $R$-module homomorphism, and let $h: N' \to L$ be any homomorphism. The pushout of $\mu$ along $h$ is given by:
-\[ Q = (N \oplus L) / \{ (\mu(n'), -h(n')) \mid n' \in N' \} \]
-with the induced map $\bar{h}: N \to Q, n \mapsto \overline{(n, 0)}$. Then the induced map $i_L: L \to Q, l \mapsto \overline{(0, l)}$ is injective.
-\end{lemma}
-
-\begin{proof}
-Suppose $l \in L$ such that $i_L(l) = \overline{(0, l)} = 0$ in $Q$. By the definition of the quotient module, this means $(0, l)$ must lie in the submodule $S = \{ (\mu(n'), -h(n')) \mid n' \in N' \}$. Thus, there exists $n' \in N'$ such that:
-\[ (0, l) = (\mu(n'), -h(n')) \]
-This implies $\mu(n') = 0$. Since $\mu$ is injective, we must have $n' = 0$. Consequently, $l = -h(n') = -h(0) = 0$. Therefore, $i_L$ is injective.
-\end{proof}
-
-
-
 \section*{Problem 3}
 (\textit{Snake Lemma}) Suppose that the following diagram of homomorphisms of $R$-modules
 \[\begin{tikzcd}
@@ -159,6 +134,82 @@ is commutative and has exact rows. Prove that
 \[ 0 \to \ker\varphi' \xrightarrow{\alpha'} \ker\varphi \xrightarrow{\beta'} \ker\varphi'' \xrightarrow{\delta} \operatorname{coker}\varphi' \xrightarrow{\mu'} \operatorname{coker}\varphi \xrightarrow{\nu'} \operatorname{coker}\varphi'' \to 0 \]
 is a long exact sequence, where $\alpha', \beta', \mu', \nu'$ are homomorphisms induced by $\alpha, \beta, \mu, \nu$, respectively. (Hint: for any $x \in \ker\varphi''$, take $y \in M$ such that $\beta(y) = x$, and take $z \in N'$ such that $\mu(z) = \varphi(y)$. Define $\delta(x) = \overline{z} = z + \operatorname{im}\varphi'$)
 \begin{solution}
-    x
+    \textbf{$\bm{\alpha'}$ is well-defined and injective}. Suppose $m'\in\ker(\varphi')$, since diagram commutes, we obtain that $\varphi\circ \alpha(m')=\mu\circ\varphi'(m')=0$ which implies $\alpha(m')\in\ker(\varphi)$. 
+    Therefore, $\alpha'= \alpha|_{\ker(\varphi')}:\ker(\varphi')\to \ker(\varphi)$ is well-defined. Hence, $\alpha'$ is injective since $\alpha$ is injective.
+    \textbf{$\bm{\beta'}$ is well-defined and $\bm{\textbf{Im}(\alpha')=\ker(\beta')}$.}  Let $m\in\ker(\varphi)$, then $\varphi''\circ\beta(m)=\nu\circ \varphi(m)=0$ yields well-definedness. Suppose $m'\in\ker(\varphi')$ then $\beta'\circ\alpha'(m')=\beta\circ\alpha(m')=0$ where $\beta\circ\alpha=0$ because of 
+    the exactness of the first row. Therefore, we obtain that $\text{Im}(\alpha')\subseteq\ker(\beta')$. Conversely, if $m\in\ker(\beta')$, then $\beta(m)=\beta'(m)=0$. By exactness, there exists $m'$ such that $\alpha(m')=m$. Hence, $m\in\ker(\varphi)$ implies that $\mu\circ\varphi'(m')= \varphi\circ\alpha(m')= \varphi(m)=0$. 
+    Because $\mu$ is injective, then we obtain that $m'\in\ker(\varphi')$. Therefore, for an arbitrary element $m\in\ker(\beta')$ there exists $m'\in\ker(\varphi')$ such that $m=\alpha'(m')$ meaning that $\ker(\beta')\subseteq\text{Im}(\alpha')$.
+    \textbf{$\bm{\delta}$ is well-defined.}
+    Because $\beta$ is surjective then for any $x\in \ker(\varphi'')$ there exists an element $y\in M$ such that $\beta(y)=x$.
+    Since $x\in\ker(\varphi'')$, we obtain that $\nu\circ\varphi(y)= \varphi''(x)=0$, which implies $\varphi(y)\in\ker(\nu)$. By exactness, 
+    there exists an element $z\in N'$ such that $\mu(z)=\varphi(y)$.
+    Let $y_0,y_1\in M $ be arbitrary two elements such that $\beta(y_0)=\beta(y_1)=x$. Let $z_0,z_1\in N'$ be arbitrary two elements such that $\mu(z_0)=\varphi(y_0)$ and $\mu(z_1)=\varphi(y_1)$.
+    Because $\beta(y_1-y_0)= 0$, then there exists an element $m'\in M'$ such that $\alpha(m')=y_1-y_0$. Therefore, 
+    \begin{align*}
+        \mu(\varphi'(m')-z_1+z_0)&= \mu\circ \varphi'(m')-\mu(z_1-z_0) \\
+        &= \varphi\circ\alpha(m')-\mu(z_1-z_0) \\
+        &= \varphi(y_1-y_0) - \mu(z_1-z_0)=0
+    \end{align*}
+    implies $\varphi'(m')=z_1-z_0$ since $\mu$ is injective. Equivalently, we obtain that $\overline{z_1-z_0}=0$ which yields the well-definedness of $\delta$.
+    \textbf{$\bm{\textbf{Im}(\beta')=\ker(\delta)}$}. Suppose $m\in\ker(\varphi)$, then we can select $z=0\in N'$ because $\mu(z)=\varphi(m)=0$ which implies $\delta\circ\beta'(m)=0$.
+    Therefore, $\text{Im}(\beta')\subseteq \ker(\delta)$. Suppose $m''\in\ker(\delta)$, then there exists $m\in M$ and $n'\in N'$ such that $\beta(m)=m''$ and $\varphi(m)=\mu(n')$.
+    Hence $\delta(m'')=0$ implies there exists an element $m'\in M'$ such that $\varphi'(m')=n'$.  I claim that $m-\alpha(m')\in \ker(\varphi)$ and thus $\beta'(m-\alpha(m'))=\beta(m)-\beta\circ\alpha(m')=m''$ implies 
+    that $\ker(\delta)\subseteq\text{Im}(\beta')$. To see that, we consider $\varphi(m-\alpha(m')) = \varphi(m) -\mu\circ\varphi'(m') = \varphi(m)-\mu(n')=0$.
+    \textbf{$\bm{\mu'}$ is well-defined and $\bm{\textbf{Im}(\delta)=\ker(\mu')}$.} Since the diagram commutes, $\mu\circ\varphi' = \varphi\circ\alpha$ implies $\mu(\text{Im}(\varphi'))\subseteq \text{Im}(\varphi)$ which 
+    yields well-definedness. Let $m''$ be an arbitrary element in $\ker(\varphi'')$ then there exists $m\in M$ and $n'\in N'$ such that $\beta(m) = m''$ and $\varphi(m)=\mu(n')$. Then we have $\mu'\circ\delta(m'') = \mu'(n'+\text{Im}(\varphi')) = \mu(n') + \text{Im}(\varphi)=0\in\text{coker}(\varphi)$,
+    which implies $\text{Im}(\delta)\subseteq \ker(\mu')$. For an arbitrary element $\overline{n'}\in\ker(\mu')$, then we have 
+    $\mu(n')\in\text{Im}(\varphi)$, which implies there exists an element $m\in M$ such that $\varphi(m)=\mu(n')$. Let $m'' = \beta(m)$ and I claim that $m''\in \ker(\varphi'')$
+    and thus $\delta(m'') = \overline{n'}$ implies $\ker(\mu')\subseteq \text{Im}(\delta)$. To see that, just consider $\varphi''(m'')=\nu\circ\varphi(m) = \nu\circ\mu(n')=0$.
+    \textbf{$\bm{\nu'}$ is well-defined and $\bm{\ker(\nu')=\textbf{Im}(\mu')}$.} Similarily, because diagram commutes, then $\nu\circ\varphi = \varphi''\circ\beta$ implies that $\nu(\text{Im}(\varphi))\subseteq \text{Im}(\varphi'')$
+    meaning that $\nu'$ is well-defined. Let $\overline{n'}$ be an arbitrary element in $\text{coker}(\varphi')$, then $\nu'\circ\mu'(\overline{n'}) = \nu'(\mu(n')+\text{Im}(\varphi))= \nu\circ\mu (n') + \text{Im}(\varphi'') = 0\in \text{coker}(\varphi'')$.
+    Therefore, $\text{Im}(\mu')\subseteq \ker(\nu')$. Let $\overline{n}$ be an arbitrary element such that $\nu'(\overline{n})=0$, equivalently $\nu(n)\in \text{Im}(\varphi'')$. Then there exists
+    an element $m''\in M''$ such that $\varphi''(m'')=\nu(n)$. Since $\beta$ is surjective, then there exists an element $m\in M$ such that $\beta(m)=m''$. I claim that 
+    $n-\varphi(m)\in\ker(\nu)$ and thus there exists an element $n'\in N'$ such that $\mu(n')= n-\varphi(m)$, which implies that $\mu'(\overline{n'}) = \overline{n}$ meaning that $\ker(\nu')\subseteq\text{Im}(\mu')$.
+    To see that, we consider $\nu(n-\varphi(m)) = \nu(n)-\varphi''\circ\beta(m)=\nu(n)-\varphi''(m)=0$.
+    \textbf{$\bm\nu'$ is surjective.} It is directly because $\nu'$ is well-defined and induced by surjection $\nu$. Explicitly, for any arbitrary element $\overline{n''}\in\text{coker}(\varphi'')$, there exists an element $n\in N$ such that 
+    $\nu(n)=n''$. Since $\nu(\text{Im}(\varphi))\subseteq \text{Im}(\varphi'')$ we have discussed, then we have $\nu'(\overline{n})=n''+\text{Im}(\varphi'')=\overline{n''}$. 
 \end{solution}
+
+\pagebreak
+
+
+
+\section*{Lemmas for Problem 3}
+
+\begin{lemma}{A}
+Let $f: M \to M''$ and $g: K \to M''$ be $R$-module homomorphisms. Let $P = M \times_{M''} K$ be the pullback of $f$ along $g$, defined explicitly by the subset of the direct sum:
+\[ P = \{ (m, k) \in M \times K \mid f(m) = g(k) \} \]
+equipped with the canonical projections $\pi_M: P \to M, (m, k) \mapsto m$ and $\pi_K: P \to K, (m, k) \mapsto k$. Then the following properties hold:
+\begin{enumerate}
+    \item If $f$ is surjective, then the projection $\pi_K$ is surjective.
+    \item If $f$ is injective, then the projection $\pi_K$ is injective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(1)} Suppose $f$ is surjective. Let $k \in K$ be an arbitrary element.
+Because $f$ is surjective, then there exists an element $m\in M$ such that $f(m)=g(k)$, which implies $(m,k)\in P$ then $k=\pi_{K}(m,k)$ implies surjectivity.
+
+
+\textbf{(2)} Suppose $f$ is injective. Suppose $(m,k)\in P$ such that $\pi_K(m,k)=0$. 
+ Then we obtain that $f\circ \pi_M(m,k) = f(m) =g(k)= g\circ \pi_K(m,k) = 0$. The injectivity of $f$ implies $m=0$. Hence, $k=\pi_{K}(m,k)=0$ implies the injectivity of $\pi_K$.
+\end{proof}
+
+\begin{lemma}{B}
+Let $\mu: N' \to N$ and $h: N' \to L$ be $R$-module homomorphisms. Let $Q = N \oplus_{N'} L$ be the pushout of $\mu$ along $h$, defined explicitly as the quotient module of the direct sum:
+\[ Q = (N \oplus L) / W \]
+where $W = \{(\mu(n'), -h(n')) \mid n' \in N'\}$. The induced maps are given by $\bar{h}: N \to Q, n \mapsto \overline{(n, 0)}$ and $i_L: L \to Q, l \mapsto \overline{(0, l)}$. Then the following properties hold:
+\begin{enumerate}
+    \item If $\mu$ is surjective, then the induced map $i_L$ is surjective.
+    \item If $\mu$ is injective, then the induced map $i_L$ is injective.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{(1)} Suppose $\mu$ is surjective. It suffices to prove that any pair with form $\overline{(n,0)}$ has preimage because $\overline{(n,l)} = \overline{(n,0)}+\overline{(0,l)}$ and $\overline{(0,l)}$ has preimage.
+Because $\mu$ is surjective, then there exists $n'\in N'$ such that $\mu(n')=n$. I claim that $\overline{(n,0)} = \overline{(0,h(n'))}= i_L(h(n'))$ and thus surjectivity of $i_L$ holds.
+To see that, we consider $\overline{(n,0)}-\overline{(0,h(n'))} = \overline{(n,-h(n'))}=0$ since $n=\mu(n')$.
+
+\textbf{(2)} Suppose $\mu$ is injective. Let $l\in L$ be an arbitrary element such that $i_L(l)= \overline{(0,l)}=0$, or equivalently there exists $n'\in N'$ such that $\mu(n')=0$ and $-h(n')=l$.
+The injectivity of $\mu$ implies $n'=0$ and hence $l=-h(n')=0$. Therefore, $i_L$ is injective.
+\end{proof}
 \end{document}
