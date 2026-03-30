@@ -1,0 +1,139 @@
+{\begingroup
+\newcommand{\rep}{\operatorname{rep}}
+\newcommand{\icoh}{\operatorname{IndCoh}}
+\newcommand{\qcoh}{\operatorname{QCoh}}
+\newcommand{\coh}{\operatorname{Coh}}
+\newcommand{\dmod}{\operatorname{D-mod}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\ug}{U(\mathfrak{g})}
+\newcommand{\gmod}{\mathfrak{g}\text{-mod}}
+\newcommand{\dr}{\text{dR}}
+\newcommand{\spec}{\operatorname{Spec}}
+
+\chapter{Motivation}
+
+\section{Ind-coherent sheaves}
+An important method to study modern representation theory is algebro-geometric. Specifically,
+For linear algebraic group $G$, \textbf{\color{blue} the category of algebraic representation $\rep(G)$ can be interpreted as 
+the category of quasi-coherent sheaves on the classifying stack $BG$.} In this view, many useful functors or operations on $G$ are naturally
+correspond to the sheaf level. Explicit formulas do not work well when modern representation theory are inevitably involved in higher category.
+
+The most significant mathematic object in this book is Ind-coherent sheaves. Before we define it, we should know the reason to drop 
+the Quasi-coherent sheaves that Lurie used in his higher algebra. 
+
+To see the reason, let $\g$ be the Lie algebra of $G$ with associated formal group $\exp(\g)$.   
+Interpret $\gmod$ as modules over $\ug$ and $\rep(G)$ as modules of compactly supported distributions $\mathcal{E}'(G)$.
+In this sense, The restriction functor 
+\begin{align*}
+    \rep(G) \to \gmod
+\end{align*}
+can be interpreted as the pullback functor along the map
+\begin{align*}
+    B(\exp(\g)) \to BG
+\end{align*}
+Since one can prove that the category $\gmod$ is canonically equivalent to $\qcoh(B(\exp(\g)))$. 
+Let us now be given a homomorphism $\alpha:\g'\to\g$. The functor of restriction $\gmod\to\mathfrak{g}'\text{-mod}$ is the pullback functor of 
+\begin{align*}
+    f_\alpha:B(\exp(\g')) \to B(\exp(\g)). \tag{$\bigstar$}
+\end{align*}
+However the left adjoint to restriction functor is induction functor which cannot correspond to the direct image along $(\bigstar)$.
+More explicitly speaking, in the sense of representation theory, the direct image functor as the right adjoint of pullback functor of $(\bigstar)$ is coinduction functor.
+In the case of infinite dimension, \textbf{\color{blue}the Frobenius Reciprocity $\text{Ind}\cong\text{Coind}$ fails to hold and thus the geometric realization of induction functor fades.}
+
+
+The birth of ind-coherent sheaves is aim to deal with the situation that Frobenius Reciprocity fails. For the case of Frobenius Reciprocity holds, for example classical Lie algebra\footnote{Here, "classical" means finite dimensional}, the ind-coherent sheaves are equivalent to quasi-coherent sheaves.
+
+In the sense of ind-coherent sheaves, the restriction functor along the homomorphism $\alpha$ is given by the $!$-pullback functor
+\begin{align*}
+    (f_\alpha)^!:\icoh(B(\exp(\g)))\to \icoh(B(\exp(\g')))
+\end{align*} 
+the functor of induction $\g'\text{-mod}\to \gmod$ will be given by the functor of IndCoh direct image 
+\begin{align*}
+    (f_\alpha)_*^{\text{IndCoh}}:\icoh(B(\exp(\g')))\to \icoh(B(\exp(\g))).
+\end{align*}
+An analytical analogy is \textbf{\color{blue} $\qcoh$ behaves more like functions on a space, while $\icoh$ behaves more like measures.}
+
+For every scheme of finite type $X$, its de Rham prestack $X_{\text{dR}}$ is a inf-scheme, one can prove that 
+\begin{align*}
+    \text{IndCoh}(X_{dR}) \cong \text{D-mod}(X)
+\end{align*}
+Then for an arbitrary inf-scheme $\mathcal{X}$, the ind-coherent sheaf can be given by 
+\begin{align*}
+    \icoh(\mathcal{X}) = \lim_{Z\to\mathcal{X}}\icoh(Z).
+\end{align*}
+Hence, one can prove that for any proper map $f:\mathcal{X}'\to\mathcal{X}$, the pair of functor $(f_*^{\icoh},f^!)$ is adjoint.
+There are several examples to illustrate its advantages.
+\begin{example}
+    Take $f:X\to X_{\text{dR}}$ be canonical projection, then the adjoint pair identifies with the pair
+    \begin{align*}
+        \textbf{ind}_{\text{D-mod}}:\icoh(X)\rightleftarrows \dmod(X): \textbf{ind}_{\dmod}.
+    \end{align*}
+\end{example}
+\begin{example}
+    Take $f:Y_{\text{dR}}\to X_{\text{dR}}$, then $f_*^{\icoh}$ and $f^!$ are correspond to the functors
+    \begin{align*}
+        g_{*,\dmod}:\dmod(Y) \to \dmod(X) \text{\quad and\quad}
+        g_{\dmod}^!:\dmod(X) \to \dmod(Y)
+    \end{align*}
+    of D-module push-forward and pullback respectively.
+\end{example}
+
+\begin{example}
+    Consider Lie algebra $\g$ acts on a scheme $X$. In this case, we have a diagram 
+    \begin{align*}
+        B(\exp(\g))\xleftarrow{f_1} B_X(\exp(\g)) \xrightarrow{f_2} X_\dr.
+    \end{align*}
+    Then the composite functor 
+    \begin{align*}
+        (f_2)^{\icoh}_*\circ (f_1)^!:\icoh(B(\exp(\g)))\to \icoh(X_\dr)
+    \end{align*}
+    identifies with the localization functor $\gmod\to \dmod(X)$. 
+\end{example}
+
+\begin{remark}
+    $BG$ manifests as a geometric representable functor 
+    \begin{align*}
+        BG: \mathrm{dSch}^{\mathrm{op}} \to \infty\text{-}\mathrm{Grpd} \quad X\mapsto \text{Bun}_G(X).
+    \end{align*}
+    From an operadic perspective, 
+    \begin{align*}
+        \text{Bun}_G(X) \simeq \text{Alg}_{X}(BG) \simeq  \mathrm{Map}_{\mathrm{PreStk}}(X, BG)
+    \end{align*}
+    where we interpret $X$ as an unary $\infty$-operad and $\text{Bun}_G(X)$ as the category of $BG$-valued algebras over $X_{\mathrm{dR}}$.
+    When we consider the de Rham prestack $X_\dr$, we obtain that
+    \begin{align*}
+         \text{LocSys}_G(X) \simeq \text{Alg}_{X_\dr}(BG) \simeq  \mathrm{Map}_{\mathrm{PreStk}}(X_{\text{dR}}, BG).
+    \end{align*}
+    $B_X(G)$  is the $\infty$-categorical relative tensor product $X\otimes_{G} *$.
+\end{remark}
+\section{Construction of ind-coherent sheaves}
+There is a heuristic formula we have presented 
+\begin{align*}
+    \icoh(\mathcal{X}) = \lim_{Z\to\mathcal{X}}\icoh(Z) \tag{$\bigstar$}
+\end{align*}
+In what sense is this limit taken? In triangulated categories, colimits and limits are not well-behaved. 
+
+We do it in the $\infty$-category of presentable $k$-linear stable $\infty$-categories, or equivalently, in the $\infty$-category of differential graded categories:
+categories enriched over the category of chain complexes of $k$-modules, such that the differential satisfies the Leibniz rule with respect to composition.
+We denote it by DGCat.
+
+For a scheme $Z$, the category $\icoh(Z)$ is the renormalization of $\qcoh(Z)$. 
+One can prove that ind-coherent sheaves have the following properties:
+\begin{itemize}
+    \item[a.] DG category $\icoh(Z)$ contains all infinite coproducts
+    \item[b.] For a map $Z'\xrightarrow{f}Z$, the functor $\icoh(Z')\xrightarrow{f^!}\icoh(Z)$ preserves all infinite coproducts.
+\end{itemize}
+We can see that the shriek pullback functor $f^{!,\qcoh}$ fails to satisfy property (b) even in the case that $f$ is proper.
+This is because the direct image functor $f_*$ as the left adjoint of $f^{!,\qcoh}$ does not preserve compactness, and thus its right adjoint does not preserve infinite coproducts according to Brown representability. Indeed, $f_*$ does not necessarily
+send perfect complexes on $Z'$ to perfect complexes on $Z$ unless $f$ is of finite Tor-dimension.
+An easy example is $f:\spec(k)\to \spec(k[t]/t^2)$. The perfect complex $k$ does not has finit resolution as a $k[t]/t^2$-module.
+
+Fortunately, when $f$ is proper, the direct image functor $f_*$ sends the category of bounded coherent complexes $\coh^b(Z')$ to $\coh^b(Z)$ and we define ind-coherent sheaves as the ind-completion of $\coh^b(-)$
+\begin{align*}
+    \mathrm{IndCoh}(-) := \mathrm{Ind}(\mathrm{Coh}^b(-))
+\end{align*}
+The compact objects in the category $\icoh(Z)$ are exactly all bounded coherent complexes, and therefore $f_*$ is well-behaved.
+
+
+
+\endgroup}
