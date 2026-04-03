@@ -1,8 +1,11 @@
 {\begingroup
+
 \newcommand{\rep}{\operatorname{rep}}
 \newcommand{\icoh}{\operatorname{IndCoh}}
 \newcommand{\qcoh}{\operatorname{QCoh}}
 \newcommand{\coh}{\operatorname{Coh}}
+\newcommand{\sch}{\operatorname{Sch}}
+\newcommand{\op}{\operatorname{op}}
 \newcommand{\dmod}{\operatorname{D-mod}}
 \newcommand{\g}{\mathfrak{g}}
 \newcommand{\ug}{U(\mathfrak{g})}
@@ -134,6 +137,77 @@ Fortunately, when $f$ is proper, the direct image functor $f_*$ sends the catego
 \end{align*}
 The compact objects in the category $\icoh(Z)$ are exactly all bounded coherent complexes, and therefore $f_*$ is well-behaved.
 
+The difference of $\qcoh$ and $\icoh$ is quite small to some extend. More clearly, the tautological embedding $\coh(Z)\hookrightarrow \qcoh(Z)$ induces 
+\begin{align*}
+    \Psi_Z: \icoh(Z) \to \qcoh(Z)
+\end{align*}
+and the ususal $t$-structure on $\coh(Z)$ induces one on $\icoh(Z)$. One can prove that $\Psi_Z$
+is $t$-exact resulting 
+\begin{align*}
+    \icoh(Z)^{\ge -n} \to \qcoh(Z)^{\ge -n}
+\end{align*}
+is an equivalent. Therefore, the difference occure only at $-\infty$.
+The difference of $f_*^{\icoh}$ and $f_*$ is also small. Explicitly, $f_*^{\icoh}$ is the unique factor that perserves infinite direct sums and makes the diagram
 
 
+\[
+\begin{tikzcd}[column sep=4em, row sep=3em, ampersand replacement=\&]
+\text{IndCoh}(Z')^{\ge -n} \ar[r, "\Psi_{Z'}", "\sim"'] \ar[d, "f_*^{\text{IndCoh}}"'] 
+\& \text{QCoh}(Z')^{\ge -n} \ar[d, "f_*"] \\
+\text{IndCoh}(Z)^{\ge -n} \ar[r, "\Psi_Z", "\sim"'] 
+\& \text{QCoh}(Z)^{\ge -n}
+\end{tikzcd}
+\]
+commutes for every $n$. 
+
+The main object of this book is the functor 
+\begin{align*}
+    \icoh_{\sch}^!:(\sch)^{\op} \to \text{DGCat}. \tag{\Gemini}
+\end{align*}
+The construction of it as follows. For a morphism $f:Z'\to Z$, we can factor it as 
+\begin{align*}
+    Z'\xrightarrow{f_1} \overline{Z'}\xrightarrow{f_2}Z
+\end{align*}
+where $f_1$ is an open embedding and $f_2$ is proper. Then we can define 
+\begin{align*}
+    f^!:=f_1^!\circ f_2^!:\icoh(Z)\to \icoh(Z') 
+\end{align*}
+where $f_2^!$ is the right adjoint of $(f_2)^{\icoh}_*$ and $f_1^!$ is the left adjoint of $(f_1)^{\icoh}_*$.
+
+Since we are discuss in the sense of infinite categories, we need to supply the assignment 
+\begin{align*}
+    f \leadsto f^!
+\end{align*}
+with a homotopy-coherent system of compatibilities for $n$-fold composition of morphism.
+In a word, we need to show the functoriality in the sense of $\infty$-categories.
+
+For example, we need to consider the compatibility betweend functor (\Gemini) and functor
+\begin{align*}
+    \icoh: \sch \to \text{DGCat} \quad
+    Z \leadsto \icoh(Z) \quad (Z'\xrightarrow{f}Z)\leadsto(\icoh(Z')\xrightarrow{f_*^{\icoh}}\icoh(Z)).
+\end{align*}
+Namely, we need to show whenever we have a Cartesian square
+\begin{center}
+    \begin{tikzcd}[row sep=huge, column sep=huge]
+    Z'_1 \arrow[r, "g'"] \arrow[d, "f_1"'] & Z' \arrow[d, "f"] \\
+    Z_1 \arrow[r, "g"'] & Z
+\end{tikzcd}
+\end{center}
+There is a canonical isomorphsim of functors, called base change:
+\begin{align*}
+    (f_1)_*^{\icoh}\circ (g')^!\cong g^!\circ f_*^{\icoh}.
+\end{align*}
+
+The appearance of the Cartesian square make us inevitably use $\infty$-categories. For example, consider the diagram
+\begin{center}
+\begin{tikzcd}
+\text{pt} \times_{\mathbb{A}^1} \text{pt} \arrow[r] \arrow[d] & \text{pt} \arrow[d] \\
+\text{pt} \arrow[r] & \mathbb{A}^1
+\end{tikzcd}
+\end{center}
+the fiber product $\text{pt} \times_{\mathbb{A}^1} \text{pt}$  cannot be taken to be the point-scheme.
+Rather it makes sense in the derived setting:
+\begin{align*}
+    k \otimes_{k[t]} k = k[\varepsilon] \quad \deg(\varepsilon)=-1.
+\end{align*}
 \endgroup}

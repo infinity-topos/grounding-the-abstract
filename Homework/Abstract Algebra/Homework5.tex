@@ -1,0 +1,201 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 6}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Are the following statements correct?
+\begin{enumerate}
+    \item[(1)] Any submodule of a semisimple module is also semisimple.
+    \item[(2)] Any semisimple Noetherian module is Artinian.
+\end{enumerate}
+
+\begin{solution}
+    Both statements are correct.
+    (1) Suppose $N$ is an arbitrary submodule of semisimple module $M$. Then by discussion in our class, there exists simple submodules $\{M_i\}_{i\in I}$
+    such that 
+    \begin{align*}
+        M = \bigoplus_{i\in I} M_i 
+    \end{align*}
+    and subindex set $J$ of $I$ such that 
+    \begin{align*}
+        M= N\oplus  \left(\bigoplus_{j\in J} M_j\right)
+    \end{align*}
+    Consider the canonical projection $M\to N$ then by isomorphism theorem we obtain that 
+    \begin{align*}
+        N \cong M\left/ \left(\bigoplus_{j\in J} M_j\right) \right .\cong \bigoplus_{i\in I\setminus J} M_i 
+    \end{align*}
+    meaning that $N$ is semisimple.
+
+    (2) Suppose $M$ is an arbitrary semisimple Noetherian module with direct sum decomposition
+    \begin{align*}
+        M = \bigoplus_{i\in I} M_i.
+    \end{align*}
+    Noetherian implies that $M$ is finite-gernerated. Without lose of gernerality, we can suppose that $x_1,\dots,x_n$ are gernerators and $x_j\in M_j$.
+    Then $M$ admits a finite decomposition
+    \begin{align*}
+        M = \bigoplus_{j\in J} M_j.
+    \end{align*}
+    where $J=\{1,\dots,n\}$ is finite. Therefore $M$ has a finite composition series meaning that $M$ is Artinian.
+\end{solution}
+
+\section*{Problem 2}
+Prove that: the following conditions on an $R$-module $V$ with composition series are equivalent.
+\begin{enumerate}
+    \item[(1)] $V$ is semisimple.
+    \item[(2)] Every irreducible submodule of $V$ is a direct summand of $V$.
+    \item[(3)] Every maximal submodule of $V$ is a direct summand of $V$.
+\end{enumerate}
+\begin{solution}
+    (1) implies (2) and (3) just by equivalent definition of semisimple module we have discussed in our class.
+    
+    Next, we prove that (2) implies (1).
+    Suppose $V \neq \langle 0 \rangle$, otherwise it is trivially semisimple. Since $V$ has a composition series, it must contain an irreducible submodule. let us denote it by $V_1$.
+    Then by (2), we can let $V=V_1\oplus V'_1$. We claim that for every irreducible submodule of $V_1'$ also is a direct summand of $V'_1$. To see that, we suppose $V_2$ is an irreducible submodule of $V_1$ and hence 
+    it is also an irreducible submodule of $V$, then we can suppose that $V=V_2\oplus V'_2$. Then we claim that 
+    \begin{align*}
+        V'_1 = V_2\oplus (V_2'\cap V'_1).
+    \end{align*}
+    It is obvious that $V_2\cap(V_2'\cap V'_1)=0$ and $V_2\oplus (V_2'\cap V'_1) \subseteq V'_1$. For $x\in V'_1$, we can suppose that $x=y+z$ where $y\in V_2,z\in V'_2$.
+    Since $x,y\in V_1'$ then $z=x-y\in V'_1$ which implies that $V'_1\subseteq V_2\oplus (V_2'\cap V'_1)$. 
+    Continuing this process we obtain a decomposition
+    \begin{align*}
+        V = V_1\oplus V_2\oplus \dots \oplus V_k \oplus W_k
+    \end{align*}
+    where $V_1,\dots,V_k$ are irreducible. Suppose that the length of composition series of $V$ is $n$, then we obtain that $W_n=0$, because in this case we have a strict ascending chain 
+    \begin{align*}
+        \langle 0\rangle \subsetneq V_1\subsetneq \dots \subsetneq V_1\oplus V_2\oplus \dots \oplus V_n
+    \end{align*} 
+    which implies that 
+    \begin{align*}
+        V = \bigoplus_{i=1}^n V_i
+    \end{align*}
+    and $W_n=\langle 0 \rangle$. Then $V$ is semisimple.
+
+    We now show that (3) implies (1). Similarly, we suppose that $V'_1$ is an arbitrary maximal submodule of $V$.
+    Then we suppose that $V=V_1\oplus V'_1$ and $V_1\cong V/V_1'$ implies that $V_1$ is irreducible.
+    We claim that every maximal submodule of $V_1'$, denoted by $V'_2$, is a direct summand of $V'_1$. To see that, we note that $V_1\oplus V_2'$ is a maximal submodule of $V$ since 
+    \begin{align*}
+        V/(V_1\oplus V_2')\cong (V_1\oplus V_1')/(V_1\oplus V_2')\cong V_1'/V_2'.
+    \end{align*}
+    Let $V'_1= V_2\oplus V_2'$ and continuing this process, then we obtain a decomposition
+    \begin{align*}
+         V = V_1\oplus V_2\oplus \dots \oplus V_n \oplus W_n
+    \end{align*}
+    and by same reason we have discussed $W_n=\langle 0 \rangle$ and $V$ is semisimple.
+\end{solution}
+
+
+
+\section*{Problem 3}
+Prove: $\operatorname{Soc}(U \oplus V) = \operatorname{Soc}(U) \oplus \operatorname{Soc}(V)$.
+\begin{solution}
+    It is obvious that
+    \begin{align*}
+        \operatorname{Soc}(U \oplus V) \supseteq \operatorname{Soc}(U) \oplus \operatorname{Soc}(V).
+    \end{align*}
+    Because if $M$ is an irreducible submodule of $U$ or $V$, it is also an irreducible submodule of $U\oplus V$.
+    Conversely, suppose that $M$ is a nonzero irreducible submodule of $U\oplus V$. 
+    Then we obtain that 
+    \begin{align*}
+        M\subseteq M_1 \oplus M_2
+    \end{align*}
+    where $M_i=p_i(M)$ and $p_1:U \oplus V\to U$ and $p_2:U \oplus V\to V$ are canonical projections. 
+    I claim that $M_i$ is also irreducible since by isomorphism theorem $M_i\cong M/\ker(p_i|_{M})$ and $\ker(p_i|_{M})$ as submodule of $M$ must
+    equal to zero or $M$, then $M_i$ is isomorphic to zero or $M$ meaning $M_i$ is either the zero module or irreducible.
+    Then we obtain that
+    \begin{align*}
+        \operatorname{Soc}(U \oplus V) \subseteq \operatorname{Soc}(U) \oplus \operatorname{Soc}(V).
+    \end{align*}
+    Therefore, the statement is true.
+\end{solution}
+
+
+\section*{Problem 4}
+Let $R$ be an arbitrary ring. Then every 2-sided ideal of the matrix ring $M_n(R)$ can be expressed in the form $M_n(I)$, where $I$ is a 2-sided ideal of $R$. In particular, $R$ is simple if and only if $M_n(R)$ is simple. [Hint: For an ideal $L$ of $M_n(R)$, let $I$ be the set of (1,1)-entries of $L$. Show that $I$ is an ideal of $R$ and $L = M_n(I)$.]
+
+\begin{solution}
+    Use notations above.
+    First we need to show $I$ is an ideal. 
+    For an arbitrary element $r\in R$, let $\text{diag}(r)$ denote diagonal matrix setting diagonal elements to be $r$.
+    By our definition for any $s\in I$, there exists $A_s\in L$ such that the $(1,1)$-entry of $A_s$ is $s$.
+    Since $L$ is an ideal of $M_n(R)$,
+    we obtain that 
+    \begin{align*}
+        \text{diag}(r)\cdot  A_s\in L\text{ and }A_s\cdot\text{diag}(r)  \in L,
+    \end{align*} 
+    which implies that $r\cdot s\in I$ and $s\cdot r\in I$.
+    Furthermore, for any $s_1, s_2 \in I$, there exist $A_{s_1}, A_{s_2} \in L$ whose $(1,1)$-entries are $s_1$ and $s_2$, respectively. Since $L$ is an additive subgroup, $A_{s_1} - A_{s_2} \in L$, and its $(1,1)$-entry is $s_1 - s_2$, meaning $s_1 - s_2 \in I$.
+    Thus, $I$ is an ideal. 
+    Next, we need to prove that $L=M_n(I)$. Let $E_{ij}$ denote the matrix whose $(i,j)$-entry is $1$ and other entries are $0$. $\{E_{ij}\}$ form a basis of $M_n(R)$. 
+    Suppose that $B$ is an arbitrary matrix in $L$. Then we can suppose that 
+    \begin{align*}
+        B = \sum_{i,j} b_{ij} E_{ij}
+    \end{align*}
+    Since $L$ is an ideal then by 
+    \begin{align*}
+        E_{1k}\cdot B\cdot E_{l1} = b_{kl}E_{11}\in L
+    \end{align*}
+    we know that arbitrary entry $b_{kl}$ is contained in $I$. Therefore, we obtain that $L\subseteq M_n(I)$.
+    Conversely, suppose $B$ is an arbitrary matrix in $M_n(I)$. Then for $(i,j)$-entry of $B$, denoted by $b_{ij}$, there exists a matrix $A_{ij}\in L$ such
+    that the $(1,1)$-entry of $A_{ij}$ is $b_{ij}$. Then by 
+    \begin{align*}
+        B = \sum_{i,j} E_{i,1}\cdot A_{ij}\cdot E_{1,j}
+    \end{align*}
+    we obtain that $M_n(I)\subseteq L$. 
+    Therefore, $M_n(R)$ has no proper ideals if and only if $R$ has no proper ideals. Equivalently, $M_n(R)$ is simple if and only if $R$ is simple.
+\end{solution}
+
+\section*{Problem 5}
+If $W$ is a submodule of a semisimple module $V$, then $W$ and $V/W$ are also semisimple.
+\begin{solution}
+    We first show that for an arbitrary submodule of $W$, it is a direct summand of $W$ and thus $W$ is semisimple.
+    Let $U$ be an arbitrary submodule of $W$. 
+    Since $W \subseteq V$, $U$ is also a submodule of $V$. 
+    Because $V$ is semisimple, $U$ is a direct summand of $V$. 
+    Thus, there exists a submodule $U'$ of $V$ such that
+$$V = U \oplus U'.$$
+Intersecting both sides with $W$, we get
+$$W = V \cap W = (U \oplus U') \cap W.$$
+Since $U \subseteq W$, we can apply Dedekind's modular law to obtain
+$$W = U \oplus (U' \cap W).$$
+Note that $U' \cap W$ is a submodule of $W$. This shows that any submodule $U$ of $W$ is a direct summand of $W$.
+
+Next, we show that $V/W$ is semisimple.
+Since $W$ is a submodule of the semisimple module $V$, it is a direct summand of $V$. Therefore, there exists a submodule $W'$ of $V$ such that
+$$V = W \oplus W'.$$
+By the First Isomorphism Theorem, we have
+$$V/W = (W \oplus W')/W \cong W'.$$
+Since $W'$ is a submodule of the semisimple module $V$, by the conclusion from above, $W'$ is also semisimple. Because $V/W$ is isomorphic to a semisimple module $W'$, it follows that $V/W$ itself is semisimple. 
+\end{solution}
+\end{document}

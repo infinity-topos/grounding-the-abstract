@@ -1,0 +1,51 @@
+{\begingroup
+\newcommand{\spc}{\text{Spc}}
+\newcommand{\cat}{\text{1-Cat}}
+\newcommand{\ordn}{\text{ordn}}
+\renewcommand{\c}{\textbf{c}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\maps}{\operatorname{Maps}}
+\newcommand{\fun}{\operatorname{Funct}}
+\newcounter{paranum} 
+\newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
+
+\chapter{Derived Algebraic Geometry}
+Let us revisit concepts from Derived Algebraic Geometry.
+
+\np 1-Cat denote the $(\infty,1)$-category of $(\infty,1)$-categories.
+
+\np $\spc$ denote the $(\infty,1)$-category of spaces. There is a canonical faithful embedding 
+\begin{align*}
+    \text{Set} \hookrightarrow \spc
+\end{align*}
+with a left adjoint
+\begin{align*}
+    \mathcal{S} \mapsto \pi_0(\mathcal{S}).
+\end{align*}
+
+\np $\spc\hookrightarrow\text{1-Cat}$ is a full subcategory with a right adjoint 
+\begin{align*}
+    \textbf{C}\mapsto \textbf{C}^\spc,
+\end{align*}
+which discarding non-invertible morphisms.
+
+\np For $\c_0,\c_1$ are objects of $\C\in\text{1-Cat}$. The mapping space denoted by $\maps_\C(\c_0,\c_1)\in\spc$.
+
+\np Let $\C^\ordn$ denotes the homotopy category $\text{Ho}(\C)$. Let $\text{1-Cat}_{\ordn}$  form by ordinary categories.
+
+\np a map $\phi:\c_0\to \c_1$ is said to be an isomorphsim if $\pi_0(\phi)$ is an isomorphsim.
+
+\np Let $\fun(\D,\C)$ denotes $(\infty,1)$-category of functors. We have 
+\begin{align*}
+    \fun(*,\C)\cong \C
+\end{align*}
+and 
+\begin{align*}
+    \maps_{\cat}(\D,\C) = \fun(\D,\C)^{\spc}.
+\end{align*}
+
+\np A functor $F:\C\to\D$ is said to be an equivalence if it induces an isomorphsim in $(\cat)^{\ordn}$.
+
+\np For 
+\endgroup}
