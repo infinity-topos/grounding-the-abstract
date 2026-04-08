@@ -1,4 +1,4 @@
-                                                                     \documentclass[12pt, a4paper]{article}
+ \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{CJKutf8}
@@ -134,5 +134,64 @@ x(m), & \text{if } m \in \tau^\perp \\
     \end{align*}
     where $\overline{O}_\sigma$ denotes the closure in $U_\tau$. And therefore we obtain that $\sigma=\tau$, equivalently, $O_\tau$ is the unique closed $T_N$-orbit in $U_\tau$.
 \end{solution}
+
+\section*{Problem 4}
+
+If $\Delta$ is an infinite fan, show that $X(\Delta)$ is never compact, even if $|\Delta| = N_{\mathbb{R}}$ and all $\lambda_v(z)$ have limits in $X(\Delta)$.
+
+\begin{solution}
+    Suppose that $X(\Delta)$ is compact. Consider open cover 
+    \begin{align*}
+        X(\Delta) = \bigcup_{\sigma\in \Delta} U_{\sigma}.
+    \end{align*}
+    Compactness implies that there exists finite subcover, then we can write 
+    \begin{align*}
+        X(\Delta) = \bigcup_{i=1}^n U_{\sigma_i}.
+    \end{align*}
+    Consider orbits decomposition for each $U_\sigma$ we find that 
+    \begin{align*}
+        X(\Delta) = \bigcup_{i=1}^n \bigcup_{\tau\preceq \sigma_i}O_{\tau}.
+    \end{align*}
+    Since each $U_{\sigma}$ only contains finite faces, it means that $X(\Delta)$ yields a finite orbit decomposition. 
+    It is impossible since $\Delta$ is infinite.
+\end{solution}
+
+\section*{Problem 5}
+Suppose $0 \to N' \to N \to N'' \to 0$ is an exact sequence of lattices, and suppose $\Delta', \Delta$, and $\Delta''$ are fans in $N', N$, and $N''$ that are compatible with these mappings as in Problem 2, giving rise to maps
+\[
+X(\Delta') \to X(\Delta) \to X(\Delta'').
+\]
+Suppose there is a fan $\widetilde{\Delta}''$ in $N$ that lifts $\Delta''$, i.e., each cone in $\Delta''$ is the isomorphic image of a unique cone in $\widetilde{\Delta}''$, such that the cones $\sigma$ in $\Delta$ are of the form
+\[
+\sigma = \sigma' + \sigma'' = \{v' + v'' : v' \in \sigma', v'' \in \sigma''\}
+\]
+for $\sigma'$ a cone in $\Delta'$ and $\sigma''$ a cone in $\widetilde{\Delta}''$. Show that the above sequence is a locally trivial fibration, that is, for each point $y \in X(\Delta'')$, there exists an open neighborhood $U$ of $y$ such that the preimage of $U$ is isomorphic to the product $U \times X(\Delta')$.
+\begin{solution}
+    According to our condition, for every cone $\sigma\in \Delta$, it must have the form $\sigma=\sigma'+\sigma''$ where $\sigma''\in \widetilde{\Delta}''$ and $\sigma'\in \Delta'$.
+    I claim this decomposition is unique since $\sigma'\cap\sigma''=0$. Suppose that $x\in \sigma'\cap\sigma''$, then we have $\varphi(x)=0$ due to the exactness and $x\in N'$.
+    Hence by our condition, $\sigma''\to \varphi(\sigma'')$ is isomorphic then $x$ has to be zero.
+    Let $\varphi$ denote the morphism from $N$ to $N''$ and $\varphi_*$ be the induced morphism on varieties.
+    Suppose that $y\in O_\tau$, we consider the preimage of $U_\tau$.
+    By property of toric morphism we have 
+    \begin{align*}
+        \varphi_*^{-1}(U_\tau) = \bigcup_{\varphi(\sigma)\preceq \tau} U_{\sigma}.
+    \end{align*}
+    Since $\sigma = \sigma'+\sigma''$ has a decomposition and $\varphi(\sigma)\preceq \tau$ if and only if $\varphi(\sigma'')\preceq \tau$ by exactness.
+    Let $\tau^*$ denote the preimage of $\tau$ in $\widetilde{\Delta}''$, according to our condition $\varphi(\sigma'')\preceq \tau$ if and only if $\sigma''\preceq \tau^*$ then we obtain that 
+    \begin{align*}
+        \varphi_*^{-1}(U_\tau)= \bigcup_{\sigma'\in\Delta'}\bigcup_{\sigma''\preceq \tau^*} U_{\sigma'+\sigma''}.
+    \end{align*}
+    Equivalently, we have $\varphi_*^{-1}(U_\tau)=X(\Delta_0)$ where 
+    \begin{align*}
+        \Delta_0=\{\sigma'+\sigma''|\sigma'\in \Delta'\text{ and }\sigma''\preceq \tau^*\}.
+    \end{align*}
+    Since $N''$ is a lattice, the exact sequence is split which induces an isomorphism $N'\oplus N''\simeq N$.
+    Then the unique decomposition $\sigma = \sigma' + \sigma''$ geometrically corresponds to the direct product of cones $\sigma \simeq \sigma' \times \sigma''$.
+    It yields $\Delta_0\simeq \Delta'\times \tau^*$ and then 
+    \begin{align*}
+        \varphi_*^{-1}(U_\tau) \simeq X(\Delta')\times U_{\tau^*}\simeq X(\Delta')\times U_\tau.
+    \end{align*}
+\end{solution}
+
 
 \end{document}

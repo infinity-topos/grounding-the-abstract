@@ -1,17 +1,24 @@
 {\begingroup
+\newcommand{\tw}{\text{Tw}}
+\newcommand{\op}{\text{op}}
 \newcommand{\spc}{\text{Spc}}
 \newcommand{\cat}{\text{1-Cat}}
 \newcommand{\ordn}{\text{ordn}}
 \renewcommand{\c}{\textbf{c}}
+\renewcommand{\d}{\textbf{d}}
+\renewcommand{\hom}{\operatorname{Hom}}
 \newcommand{\C}{\textbf{C}}
+\newcommand{\I}{\textbf{I}}
 \newcommand{\D}{\textbf{D}}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\bar}{\overline}
 \newcommand{\maps}{\operatorname{Maps}}
 \newcommand{\fun}{\operatorname{Funct}}
 \newcounter{paranum} 
 \newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
 
 \chapter{Derived Algebraic Geometry}
-Let us revisit concepts from Derived Algebraic Geometry.
+Let us review concepts from Derived Algebraic Geometry.
 
 \np 1-Cat denote the $(\infty,1)$-category of $(\infty,1)$-categories.
 
@@ -24,6 +31,20 @@ with a left adjoint
     \mathcal{S} \mapsto \pi_0(\mathcal{S}).
 \end{align*}
 
+\np $\spc$ also can be defined by the $\infty$-category of $\infty$-groupoids. Since the singular functor 
+\begin{align*}
+    X \leadsto \text{Sing}(X)
+\end{align*} 
+assigns an $\infty$-groupoid $\text{Sing}(X)$ to a topological space $X$. However, it kills non-homotopic information.
+Formally, we can see that the inverse image functor
+\begin{align*}
+    \text{Psh}(\text{Sing}(X)) \to \text{Psh}(\text{Open}(X))
+\end{align*}
+is not an equivalence in $\infty$-categories.
+Indeed, $\text{Psh}(\text{Sing}(X))$ is the locally constant $\infty$-sheaves on $X$.
+Therefore, one can refer to $\spc$ as Anima to imply the difference with topological spaces.
+
+
 \np $\spc\hookrightarrow\text{1-Cat}$ is a full subcategory with a right adjoint 
 \begin{align*}
     \textbf{C}\mapsto \textbf{C}^\spc,
@@ -34,7 +55,8 @@ which discarding non-invertible morphisms.
 
 \np Let $\C^\ordn$ denotes the homotopy category $\text{Ho}(\C)$. Let $\text{1-Cat}_{\ordn}$  form by ordinary categories.
 
-\np a map $\phi:\c_0\to \c_1$ is said to be an isomorphsim if $\pi_0(\phi)$ is an isomorphsim.
+\np a map $\phi:\c_0\to \c_1$ is said to be an isomorphism if $\pi_0(\phi)$ is an isomorphism.
+
 
 \np Let $\fun(\D,\C)$ denotes $(\infty,1)$-category of functors. We have 
 \begin{align*}
@@ -45,7 +67,241 @@ and
     \maps_{\cat}(\D,\C) = \fun(\D,\C)^{\spc}.
 \end{align*}
 
-\np A functor $F:\C\to\D$ is said to be an equivalence if it induces an isomorphsim in $(\cat)^{\ordn}$.
 
-\np For 
+
+\np A functor $F:\C\to\D$ is said to be an equivalence if it induces an isomorphism in $(\cat)^{\ordn}$.
+Equivalently, we also can say $F$ is an isomorphism of $\cat$.
+
+\np For a diagram of categories 
+\[
+\begin{tikzcd}[cramped, sep=small]
+\mathbf{C}' \arrow[r] & \mathbf{C} & \mathbf{C}'' \arrow[l]
+\end{tikzcd},
+\]
+we can form their fiber product $\C'\times_{\C}\C''\in\cat$. Then we can give a definition of $\C^{\spc}$ by fiber product 
+\begin{align*}
+    \C^{\spc} =\C \times_{\C^{\ordn}} \C^{\ordn,\simeq} 
+\end{align*}
+where $\simeq$ means dicarding all non invertible 1-morphisms. 
+
+\np The mapping space of $\infty$-category $\fun(\D,\C)$ also can be defined as 
+\begin{align*}
+    \text{Maps}_{\text{Funct}(\D, \C)}(F, G) = \C^{\D\times \Delta^1}\times_{(\C^{\D}\times\C^{\D})} \Delta^0
+\end{align*}
+
+\np For $\mathcal{S}\in\spc$ with fixed point $s\in\mathcal{S}$, we define its loop space $\Omega\mathcal{S}:=*\times_{\mathcal{S}}*$ and homotopy groups $\pi_i(\mathcal{S},s)=\pi_{i-1}({\Omega(\mathcal{S})})$.
+
+\np $\cat$ carries a canonical involutive auto-equivalence $\C\to \C^{\op}$
+
+\np Let $[n]$ denote the category $\{0 \to 1 \to \dots \to n\}$. Let $[0]$ denote $*$.
+
+\np Let $\Delta$ denote the full subcategory of $\cat_{\ordn}$ spanned by the objects $[n]$. Then it carries a canonical involutive auto-equivalence
+\begin{align*}
+    \text{rev}:i\mapsto n-i.
+\end{align*}
+
+\np $F:\D\to\C$ is said to be fully faithful if for every $\d_1,\d_2\in\D$ the maps
+\begin{align*}
+    \maps_{\D}(\d_1,\d_2) \to \maps_{\C}(F(\d_1),F(\d_2))
+\end{align*}
+is an isomorphism in $\spc$.
+
+\np A map of spaces $F:\S_0\to \S_1$ is said to be monomorphism if $F$ is fully faithful as a functor.
+Equivalently, if $\pi_0(F)$ is injective and for every point $s_0\in\S_0$, the induced map 
+\begin{align*}
+    \pi_i(\S_0,s_0) \to \pi_i(\S_1,F(s_0))
+\end{align*}
+is an isomorphism for all $i>0$.
+
+\np For every full subcategory $\bar{\C'}$ of $\C^{\ordn}$, one can attach an $\infty$-category $\C'$ such that it is a 
+full subcategory of $\C$.
+
+\np A fully faithful functor is an equivalence onto a full subcategory.
+
+\np A full subspace of $\S$ is the same as a full subcategory of $\S$, which bijective to subsets of $\pi_0(\S)$.
+A connected component of $\S$ is a full subspace.
+
+\np A functor $F:\D\to \C$ is called 1-fully faithful if 
+\begin{align*}
+    \maps_{\D}(\d_1,\d_2) \to \maps_{\C}(F(\d_1),F(\d_2))
+\end{align*}
+is a monomorphism in $\spc$. If $\C,\D\in \text{1-Cat}_{\ordn}$, then $F$ induces an injection on $\hom$ sets.
+
+\np A 1-fully faithful functor $F:\D\to \C$ is said to be 1-replete if the connected components of $\maps_{\C}(F(\d_1),F(\d_2))$ that 
+correspond to isomorphisms are the image of $\maps_{\D}(\d_1,\d_2)$.
+Equivalently, if $\D^{\spc}\to \C^{\spc}$ is a monomorphism.
+
+\np Let $\bar{\C}$ be an ordinary category. a subcategory $\bar{\C}'$ is said to be a 1-full subcategory if $\hom_{\bar{\C}'}(\c_1,\c_2)$ 
+contains all isomorphism and is closed under compositions. Equivalently, the functor $\bar{\C}'\to \bar{\C}$ is 1-replete.
+
+\np a subcategory $\C'$ of $\C$ is said to be 1-full subcategory if thers exists a 1-full subcategory $\bar{\C}'$ of $\C^{\ordn}$ such that shares same
+objects and 
+\begin{align*}
+    \maps_{\C'}(\c_1,\c_2) = \maps_{\C}(\c_1,\c_2)\times_{\hom_{\C^{\ordn}}(\c_1,\c_2)} {\hom_{\bar{\C}'}(\c_1,\c_2)}.
+\end{align*}
+
+\np $\C^{\spc}$ is the minimal 1-full subcategory of $\C$ such that holds all objects in $\C$.
+
+\np Concepts above also can be defined by fiber product. A functor $F:\D\to\C$ is said to be 1-fully faithful if 
+\begin{align*}
+    \maps_{\D}(\d_1,\d_2)\times_{\maps_{\C}(F(\d_1),F(\d_2))}\maps_{\D}(\d_1,\d_2)\simeq \maps_{\D}(\d_1,\d_2);
+\end{align*}
+is said to be 1-replete if 
+\begin{align*}
+    \D \simeq \C\times_{\C^{\ordn}}\D^{\ordn}.
+\end{align*}
+
+
+\np In the above situation, for any $\D\in\cat$, the functor
+\begin{align*}
+    \fun(\D,\C') \to \fun(\D,\C)
+\end{align*}
+is 1-replete. Since functor $\fun(\D,-)$, as the right adjoint of functor $-\times \D$, keeps pullback.
+Therefore, if a functor $\D\to\C$ can be factored through $\C'$, it can be done in an essentially unique way.
+One can also prove this claim by the fact that
+\begin{align*}
+    \text{Maps}_{\text{Funct}(\mathbf{D}, \mathbf{C})}(F, G) \simeq \lim_{(c \to d) \in \text{Tw}(\mathbf{D})} \text{Maps}_{\mathbf{C}}(F(c), G(d))
+\end{align*}
+
+\np Inherite notation above. If functor $F:\D\to\C$ corresponds to functor $\D^{\ordn}\to \C^{\ordn}$ factors through $\bar{\C'}$, then $F$ gives rise to a well-defined functor $\D\to\bar{\C'}$.
+The functor $\D\to \C'$ is an equivalence in and only if $F$ is 1-replete and $\D^{\ordn}\to \bar{C}'$ is an equivalence.
+
+\np A functor $F:\D\to\C$ is said to be conservative if for an $\alpha\in\maps_{\D}(\d_0,\d_1)$ the fact that $F(\alpha)$ is an isomorphism implies that $\alpha$ is an isomorphism.
+Equivalently, if 
+\begin{align*}
+   \D^{\spc} \simeq \D\times_{\C}\C^{\spc}.
+\end{align*}
+
+\np Let $F:\D\to\C$ be a functor. we call a morphism $\d_0\xrightarrow{\alpha}\d_1$ is Cartesian over $\C$ if for every $\d'\in\D$, we have 
+\begin{align*}
+    \maps_{\D}(\d',\d_0)\to \maps_{\D}(\d',\d_1)\times_{\maps_{\C}(F(\d'),F(\d_1))} \maps_{\C}(F(\d'),F(\d_0))
+\end{align*}
+is an isomorphism. 
+
+\np Inherite notation above. Inteprete $\alpha:\maps_{\D}(-,\d_0)\to \maps_{\D}(-,\d_1)$ as a morphism in $\text{Psh}(\D)$. We call $\alpha$ is Cartesian if 
+\begin{align*}
+    \maps_{\D}(-,\d_0) \simeq \maps_{\D}(-,\d_1)\times_{\maps_{\C}(F(-),F(\d_1))} \maps_{\C}(F(-),F(\d_0))
+\end{align*}
+Here, for example $\maps_{\D}(-,\d_1)$ is regarded as a object in $\text{Psh}(\D)$. But by Grothendieck's construction it can be geometric realized to slice category $\D_{/\d_1}$, then fiber product is well-defined.
+
+\np Inherite notation above again. We can identify 
+\begin{align*}
+    \maps_{\D}(\d',\d_0) \simeq \text{Tw(\D)} \times_{(\D^{\op}\times \D)} {(\d',\d_0)}.
+\end{align*}
+We also can write
+\begin{align*}
+    \maps_{\D}(-,\d_0) \simeq \text{Tw(\D)} \times_{ \D} {\d_0}.
+\end{align*}
+It means that presheaf $\maps_{\D}(-,\d_0)$ is a fiber bundle on $\d_0$.
+Then $\alpha$ is Cartesian over $*$ if the pullback of fiber bundle $\maps_{\D}(-,\d_1)$ over $\d_1$ along $\alpha$ is equivalent to $\maps_{\D}(-,\d_0)$.
+In the relative case, the relative fiber bundle on $\d_0$ is 
+\begin{align*}
+    \text{Maps}_{\mathbf{C}}(F(-), F(\d_0))\simeq \text{Tw(\C)}\times_{\C}{\d_0}.
+\end{align*}
+Then $\alpha$ is Cartesian over $\C$ if fiber bundle $\maps_{\D}(-,\d_1)$ pullback along 
+\begin{align*}
+    \maps_{\C}(F(-),F(\d_0)) \to \maps_{\C}(F(-),F(\d_1))
+\end{align*}
+is equivalent to fiber bundle $\maps_{\D}(-,\d_0)$ on $\d_0$.
+
+\np A functor $F:\D\to\C$ is said to be a Cartesian fibration if for every morphism $\c_0\to \c_1$ and $\d_1$ such that $F(\d_1)\simeq \c_1$ there exists a 
+Cartesian morphism $\d_0\to\d_1$ that fits into a commutative diagram
+\begin{center}
+    \begin{tikzcd}[row sep=large, column sep=large]
+        F(\d_0) \arrow[r] \arrow[d, "\sim"'] & F(\d_1) \arrow[d, "\sim"] \\
+        \c_0 \arrow[r]                       & \c_1
+    \end{tikzcd}
+\end{center}
+We also call $\d_0\to\d_1$ the Cartesian lifting of $\c_0\to\c_1$.
+A functor is a Cartesian fibration if it admits Cartesian lifts for all morphisms in the base category.
+
+
+\np Inherite notation above. We say $F$ is a Cartesian fibration in spaces if it is a Cartesian fibration and every 
+\begin{align*}
+    \D_{\c}:= \D\times_{\C} \c
+\end{align*}
+is a space. We also call $F$ a right fibration if $F$ is a Cartesian fibration in spaces.
+
+\np We can see that $F:\D\to\C$ is a Cartesian fibration if and only if functor 
+\begin{align*}
+    \text{Tw}(\D) \to \text{Tw}(\C)\times_{\C}\D \tag{$\bigstar$}
+\end{align*}
+is a right fibration. To see that, we need to note that $F$ is Cartesian if and only if 
+\begin{align*}
+    \maps_{\D}(-,\d_0)\simeq \maps_{\C}(F(-),F(\d_0))\times_{(\tw(\C)\times_{\C}\D)} \tw(\D).
+\end{align*}
+One can prove that if $p:\mathcal{E}\to \mathcal{B}$ is a Right fibration if and only if
+\begin{align*}
+    \mathcal{E}_{/x} \longrightarrow \mathcal{E} \times_{\mathcal{B}} \mathcal{B}_{/p(x)}
+\end{align*}
+is an equivalence.
+Then prove $(\bigstar)$ is trivial.
+
+\np We call $F:\D\to\C$ a Cocartesian fibration if 
+\begin{align*}
+    \text{Tw}(\D) \to \D\times_{\C}\text{Tw}(\C) \tag{\Gemini}
+\end{align*}
+is a left fibration. Equivalently, if 
+\begin{align*}
+    \maps_{\D}(\d_1,-)\simeq \maps_{\C}(F(\d_1),F(-))\times_{\D\times_{\C}\text{Tw}(\C)} \tw(\D).
+\end{align*}
+In this case, the relative fiber bundle on $\d_1$ is a precosheaf 
+\begin{align*}
+    \maps_{\C}(F(\d_1),F(-))
+\end{align*}
+which is the pullback of (\Gemini) along $\d_1\to \D\times_{\C}\text{Tw}(\C)$.
+
+\np Given a functor $F:\I\to\C$ we define over-category 
+\begin{align*}
+    \C_{/F}:= \C\times_{\fun(\I,\C)}\fun([1]\times\I,\C)\times_{\fun(\I,\C)} \{F\}
+\end{align*}
+and under-category
+\begin{align*}
+    \C_{F/}:=\{F\} \times_{\fun(\I,\C)}\fun([1]\times\I,\C)\times_{\fun(\I,\C)} \C.
+\end{align*}
+If we take $\I=*$ and $F$ gives an object in $\C$, then we simply write $\C_{/\c}$ and $\C_{\c/}$.
+
+\np The forgetful functors 
+\begin{align*}
+    \C_{/F} \to \C\text{ and }\C_{F/} \to \C
+\end{align*}
+is right fibration and left fibration.
+
+\np Indeed we have 
+\begin{align*}
+    \maps_{\C}(\c_0,\c_1)\simeq \fun([1],\C)\times_{\C\times\C}(\c_0,\c_1)
+\end{align*}
+and thus 
+\begin{align*}
+    \C_{/\c}\simeq \maps_{\C}(-,\c) \text{ and }
+    \C_{\c/}\simeq \maps_{\C}(\c,-)
+\end{align*}
+with fiber 
+\begin{align*}
+    (\C_{/\c})_{\c'}\simeq \maps_{\C}(\c',\c) \text{ and }
+    (\C_{\c/})_{\c'}\simeq \maps_{\C}(\c,\c')
+\end{align*}
+
+\np Given by a functor $F:[1]\to \C$ such that $F(i)=\c_i$, we let $\C_{\c_0//\c_1}$ denotes 
+\begin{align*}
+    \fun([2],\C)\times_{\fun([1],\C)}\{F\}
+\end{align*}
+where $\fun([2],\C)\to \fun([1],\C)$ is induced by coface $\delta_1:[1]\to [2]$.
+
+\np Fix a $\infty$-category $\C$. Consider the category $\cat_{/\C}$ whose objects are pairs $(\D,F:\D\to\C)$.
+Let $\text{coCart}_{/\C}$ (resp. $\text{0-coCart}_{/\C}$) be the full subcategory of $\cat_{/\C}$ whose objects are those $(\D,F)$,
+for $F$ is a coCartesian fibration (resp. left fibration).
+Let $(\text{coCart}_{/\C})_{\text{strict}}$ be the 1-full subcategory of $\text{coCart}_{/\C}$, 
+where we allow as 1-morphisms those functors $\D_1\to\D_2$ over $\C$ that send coCartesian arrows to coCartesian arrows.
+
+\np Unstraightening
+
+\np There is a canonical equivalence between $(\text{coCart}_{/\C})_{\text{strict}}$ and $\fun(\C,\cat)$. Under this equivalence, the full subcategory 
+\begin{align*}
+    \text{0-coCart}_{/\C}\subset (\text{coCart}_{/\C})_{\text{strict}}
+\end{align*}
+corresponds to the full subcategory
+\begin{align*}
+    \fun(\C,\spc) \subset \fun(\C,\cat).
+\end{align*}
 \endgroup}
