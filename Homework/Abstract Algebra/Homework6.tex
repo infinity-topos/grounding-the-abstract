@@ -1,0 +1,189 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 7}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Let $D$ be a division ring and $n$ a positive integer.
+\begin{itemize}
+    \item[(a)] Show that the natural left $M_n(D)$-module, consisting of column vectors of length $n$ with entries in $D$, is a simple module.
+    \item[(b)] Show that $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+    \item[(c)] Show that every ring of the form
+    \[ M_{n_1}(D_1) \oplus \cdots \oplus M_{n_r}(D_r) \]
+    is semisimple, where $D_i$ are division rings.
+    \item[(d)] Show that $M_n(D)$ is a simple ring, namely, one in which the only 2-sided ideals are the zero ideal and the whole ring.
+\end{itemize}
+\begin{solution}
+(a) Let $x$ be an arbitrary nonzero $n$ dimensional column vector of $D$. Suppose that the $i$-entry of $x$ is nonzero and denoted by $x_i$. 
+Let $E_{ji}$ denote the $n\times n$ matrix such that the $(j,i)$ entry is the identity in $D$ and other entries are zero.
+Then we obtain that 
+\begin{align*}
+    (x_i^{-1}E_{ji})x = \varepsilon_j
+\end{align*}
+where $\varepsilon_j$ denotes the column vector whose $j$ entry is the identity in $D$ and other entries are zero.
+Since $\{\varepsilon_j\}$ forms a basis, we obtain that if a submodule contains a nonzero element $x$, then we can use $x$ to generate any vector. Therefore, the module of column vectors $D^n$ is a simple $M_n(D)$-module.
+
+(b) Let $A_j$ denotes the submodule of $M_n(D)$ consisting of matrices whose entries are zero except possibly in the $i^{\text{th}}$ column. Then we obtain that 
+\begin{align*}
+    M_n(D) = A_1\oplus \dots\oplus A_n.
+\end{align*} 
+Since each $A_j\simeq D^n$ and $D^n$ is simple by (a). Therefore, $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+
+(c) Let $R$ denote such a ring. I claim that each $M_{n_i}(D_i)$ is semisimple as a $R$-module.
+Without loss of generality, we prove it for $M_{n_1}(D_1)$. By definition, we know 
+\begin{align*}
+    \text{Ann}_R(M_{n_1}(D_1)) = M_{n_2}(D_2) \oplus \cdots \oplus M_{n_r}(D_r).
+\end{align*}
+Let $I$ denote this annilihator. Since $R/I\simeq M_{n_1}(D_1)$, $M_{n_1}(D_1)$ is semisimple as $R/I$-module by (b).
+According the discussion in our class, $M_{n_1}(D_1)$ is semisimple as $R/I$-module if and only if as $R$-module.
+Then each $M_{n_i}(D_i)$ is semisimple as $R$-module, hence $R$ is semisimple.
+
+(d) We use a conclusion from Homework 6: Every 2-sided ideal of the matrix ring $M_n(D)$ can be expressed in the form $M_n(I)$ where $I$ is a 2-sided ideal of $D$.
+Since $D$ is a division ring, the 2-sided ideals of $D$ are trivial. Therefore, $M_n(D)$ is a simple ring.
+\end{solution}
+
+
+
+
+\section*{Problem 2}
+
+Let $U$ be an $A$-module for a semisimple finite-dimensional algebra $A$ (over a field). Show that if $\text{End}_A(U)$ is a division ring then $U$ is simple.
+
+\begin{solution}
+   Since $A$ is a semisimple finite-dimensional algebra, every $A$-module is semisimple.
+   Therefore, we can suppose that 
+   \begin{align*}
+    U \simeq   S_1 \oplus \dots \oplus S_k.
+   \end{align*}
+The endomorphism ring is then given by $\text{End}_A(U) \cong \bigoplus_{p, q} \text{Hom}_A(S_p, S_q)$. If $U$ contained two non-isomorphic simple modules $S_i$ and $S_j$, $\text{End}_A(U)$ would have a non-trivial idempotent corresponding to the projection onto one of the components, contradicting the fact that $\text{End}_A(U)$ is a division ring.
+
+Thus, all simple components must be isomorphic to some simple module $S$, meaning $U \cong S^k$. According to the properties of endomorphism rings of semisimple modules:
+\[ \text{End}_A(U) \cong M_k(\text{End}_A(S)) \]
+By Schur's Lemma, $D' = \text{End}_A(S)$ is a division ring. Therefore, $\text{End}_A(U) \cong M_k(D')$. A matrix ring $M_k(D')$ over a division ring is itself a division ring if and only if $k = 1$. 
+Since if dimension greater than one, there exists non-invertible matrices. Consequently, we have 
+\begin{align*}
+    U\simeq S 
+\end{align*} 
+showing that $U$ is simple.
+\end{solution}
+
+\section*{Problem 3}
+
+Let $A$ be a ring. Then $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+
+\begin{solution}
+   Suppose that $A$ is a semisimple Artinian ring. We want to show that every $A$-module is projective.
+    For any arbitrary left $A$-module $N$, there exists a free $A$-module $F$ and an epimorphism $f: F \to N$. 
+    Since the free module $F$ is a direct sum of copies of semisimple module $_A A$, it follows that $F$ is also a semisimple module. 
+    Therefore, the kernel of the epimorphism $\ker(f)$ is a direct summand of $F$. This means the short exact sequence 
+$$ 0 \to \ker(f) \to F \xrightarrow{f} N \to 0 $$
+splits. Consequently, $F \cong \ker(f) \oplus N$, which implies that $N$ is isomorphic to a direct summand of the free module $F$ meaning that $N$ is projective.
+
+Conversely, suppose that every left $A$-module is projective. We want to show that $A$ is a semisimple Artinian ring.
+Let $I$ be an arbitrary left ideal of $A$. The quotient $A/I$ is naturally a left $A$-module. Consider the canonical short exact sequence:
+$$ 0 \to I \to A \xrightarrow{\pi} A/I \to 0 $$
+where $\pi$ is the natural projection. By our assumption, every $A$-module is projective, so $A/I$ is a projective module 
+and thus the short exact sequence splits. We obtain that 
+\begin{align*}
+    A \simeq I \oplus A/I.
+\end{align*}
+Therefore every submodule of $A$ splits $A$, we obtain that $A$ is semisimple. Since $A$ is semisimple ring, it is also Artinian. To see that, We may suppose that 
+\begin{align*}
+   _A A = \bigoplus_{i \in I} S_i
+\end{align*} 
+where $S_i$ is simple left ideal. Suppose that $1=e_1+\dots+e_n$ with $e_i\in S_i$ and therefore
+\begin{align*}
+    _A A = S_1 \oplus S_2 \oplus \dots \oplus S_n
+\end{align*}
+implying its Artinian.
+\end{solution}
+
+
+\section*{Problem 4}
+
+Let $k$ be a field. Suppose the group algebra $kG$ is semisimple, and the simple $kG$-modules are $S_1, \dots, S_r$ with degrees $d_i = \dim_k S_i$. Show that
+\[ \sum_{i=1}^{r} d_i^2 \geq |G| \]
+with equality if and only if $\text{End}_{kG}(S_i) = k$ for all $i$.
+
+\begin{solution}
+    According to Wedderburn-Artin theorem, we can suppose that 
+    \begin{align*}
+        kG \cong M_{n_1}(D_1) \oplus M_{n_2}(D_2) \oplus \dots \oplus M_{n_r}(D_r).
+    \end{align*}
+    Hence, we can suppose that $M_{n_i}(D_i)\simeq S_i^{n_i}$. Since $M_{n_i}(D_i)$ only consist of one simple module up to isomorphism and each simple module can be interpreted as the 
+    submodule of $kG$. Then for each simple module $S_j$, it can only be contained in one component in our decomposition meaning that our assumption is valid.
+    Therefore, we may assume that 
+    \begin{align*}
+        kG \cong S_1^{n_1}\oplus \dots \oplus S_r^{n_r}.
+    \end{align*}   
+    Hence we obtain that 
+    \begin{align*}
+        |G|=\dim_k(kG) = \sum_{i=1}^r n_i d_i.
+    \end{align*}
+    Since $S_i$ as a simple submodule of $M_{n_i}(D_i)$, then we can say $S_i\simeq D_i^{n_i}$ as $kG$-module isomorphism.
+    According to Schur's lemma, $\text{End}_{kG}(S_i)$ must be a division ring. It means that $\text{End}_{kG}(S_i)$ only
+    consists of the matrices of the form $dI_{n_i}$ where $d\in D_i$. Hence we can write 
+    \begin{align*}
+        \text{End}_{M_{n_i}(D_i)}(S_i)\simeq D_i^{\text{op}}.
+    \end{align*} 
+    We can rewrite our formula of dimension by 
+    \begin{align*}
+        n_i=\dim_{k}(S_i)/\dim_k(D_i).
+    \end{align*}
+    We obtain that 
+        \begin{align*}
+        |G|= \sum_{i=1}^r d^2_i/\dim_k(D_i).
+    \end{align*}
+    Therefore, the equality holds if and only if $\dim_k(\text{End}_{M_{n_i}(D_i)}(S_i))= \dim_k(D_i)=1$.
+    It also equivalently say $\text{End}_{M_{n_i}(D_i)}(S_i)\simeq k$.
+\end{solution}
+
+
+\section*{Problem 5}
+
+Suppose that we have $R$-module homomorphisms $U \xrightarrow{f} V \xrightarrow{g} W$. Show that: if $gf$ is an essential epimorphism and $f$ is an epimorphism, then both $f$ and $g$ are essential epimorphisms.
+\begin{solution}
+    Since $gf$ is an epimorphism, $g$ must be an epimorphism. Suppose that $f$ is not essential. Equivalently, there exists a proper submodule $N$ of $U$ such that $f|_{N}$ is an epimorphism. Since $g$ is an epimorphism, we now obtain that 
+    \begin{align*}
+        g \circ f|_N: N\to W 
+    \end{align*}  
+    is also an epimorphism. However, since $gf$ is essential, we obtain that $N=U$, which is a contradiction.
+    Therefore, $f$ is essential. 
+
+    Suppose that $g$ is not essential. Then we can find a proper submodule $M$ of $V$ such that $g(M)=W$.
+    Then we consider the submodule $Q = f^{-1}(M)$ of $U$. It is proper, since $f(Q)=M\subsetneq V$. 
+    Then we obtain that $gf(Q)=W$. Because $gf$ is essential, we find that $Q=U$, which is a contradiction. Therefore $g$ must be essential.
+    Our claim holds.
+\end{solution}
+\end{document}

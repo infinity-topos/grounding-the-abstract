@@ -1,0 +1,190 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+\newtheorem{lemma}{Lemma}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Lie Theory:Assignment 3}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Let $L$ be $\mathfrak{sl}(2, F)$. Then 
+$M = \mathfrak{sl}(3, F)$ contains a copy of $L$ in its upper left-hand $2 \times 2$ position. Write $M$ as direct sum of irreducible $L$-submodules ($M$ viewed as $L$-module via the adjoint representation): $V(0) \oplus V(1) \oplus V(1) \oplus V(2)$.
+\begin{solution}
+We choose standard Chevalley basis $\{h_1, h_2, e_1, e_2, e_3, f_1, f_2, f_3\}$ and identify $L$ as the subalgebra $\text{span}\{e_1, f_1, h_1\}$. 
+Next, we calculate the weight of each basis:
+\begin{align*}
+  h_1.h_1 = 0 \quad h_1.h_2=0\quad h_1.e_1=2e_1 \quad h_1.e_2=-e_2\\ h_1.e_3= e_3 \quad h_1.f_1=-2f_1
+  \quad h_1.f_2=f_2 \quad h_1.f_3=-f_3
+\end{align*}
+For finding the highest weight vector we consider $e_1$ acts on basis with non-negative weight:
+\begin{align*}
+  e_1.e_1 = 0 \quad e_1.e_3= 0 \quad e_1.f_2 = 0 \quad e_1.h_1 = -2e_1.
+\end{align*}
+We obtain that $e_1$ has a highest weight then we let $f_1$ acts on it:
+\begin{align*}
+  f_1.e_1 = -h_1 \quad f_1.h_1 = 2f_1\quad f_1.f_1 = 0
+\end{align*}
+then we obtain that an irreducible submodule
+\begin{align*}
+  \text{span}(e_1,h_1,f_1)\simeq V(2).
+\end{align*}
+Next we consider $f_1$ acts on $e_3$:
+\begin{align*}
+  f_1.e_3 = e_2\quad f_1.e_2 = 0
+\end{align*}
+then we obtain that an irreducible submodule
+\begin{align*}
+  \text{span}(e_3,e_2)\simeq V(1).
+\end{align*}
+Strat at $f_2$ with $f_1$ action:
+\begin{align*}
+  f_1.f_2 = -f_3 \quad f_1.f_3 = 0
+\end{align*} 
+then we obtain that an irreducible submodule
+\begin{align*}
+  \text{span}(f_2,f_3)\simeq V(1).
+\end{align*}
+Let $H=h_1+2h_2$, then we find $e_1.H = 0$ impling $H$ has the highest weight vector of weight 0, then we have 
+\begin{align*}
+  \text{span}(H)\simeq V(0)
+\end{align*}
+Therefore, we obtain that 
+\begin{align*}
+  M\simeq V(0) \oplus V(1) \oplus V(1) \oplus V(2).
+\end{align*}
+\end{solution}
+
+
+
+\section*{Problem 2}
+Let $L$ be $\mathfrak{sl}(2, F)$.
+Decompose the tensor product of the two $L$-modules $V(3), V(7)$ into the sum of irreducible submodules: $V(4) \oplus V(6) \oplus V(8) \oplus V(10)$. Try to develop a general formula for the decomposition of $V(m) \otimes V(n)$.
+\begin{solution}
+  Choose a standard Chevalley basis $\{h,e,f\}$ of $L$. 
+  Suppose that $x\in V(m)$ and $y\in V(n)$ with weights $a$ and $b$. Then we find that 
+  \begin{align*}
+    h.(x\otimes y) = h.x \otimes y+x\otimes(h.y)= (a+b)(x\otimes y) \tag{$\bigstar$}
+  \end{align*}
+  implying that $x\otimes y$ has weight $a+b$. I claim that 
+  \begin{align*}
+    V(m) \otimes V(n) \simeq \bigoplus_{k=0}^{\min(m,n)} V(m+n-2k).
+  \end{align*}
+  To see that, we can suppose that $\{x_{m},\dots,x_{-m}\}$ is a basis of $V(m)$ where $x_i$ has weight $i$. Similarly, we can set a basis $\{y_{n},\dots,y_{-n}\}$ for $V(n)$.
+  According to $(\bigstar)$, the weights of $V(m)\otimes V(n)$ are of form $m+n-2k$ for $k=0,\dots,m+n$. 
+  Let $V_{\lambda}$ denote the weight space of $V(m)\otimes V(n)$ of weight $\lambda$.
+  Now we count the dimension of $V_{m+n-2k}$. It is equvalent to count that the number of pairs $(i,j)$ such that $m-2i+n-2j = m+n-2k$, therefore the dimension of $V_{m+n-2k}$ is $k+1$.
+  Now I claim that for $k=\{0,\dots,\min(m,n)\}$ each irreducible submodule $V(m+n-2k)$ only emerge once.
+  To see that we first consider the highest weight $m+n$. Since the dimension of weight space of weight $m+n$ is 1, then $V(m+n)$ only emerge once.
+  Suppose that $V(m+n),V(m+n-2),\dots,V(m+n-2k+2)$ only emerge once then we find that 
+  \begin{align*}
+    \dim(V_{m+n-2k}\cap V(m+n)\cap\dots\cap V(m+n-2k+2)) = k+1-k=1
+  \end{align*} 
+  Then $V(m+n-2k)$ only emerge once. Therefore we can suppose that 
+  \begin{align*}
+     V(m) \otimes V(n) \simeq V(m+n)\oplus\dots \oplus V(m+n-2k)
+  \end{align*}
+  Since $\dim(V(m+n-2k)) = m+n-2k+1$ then we have 
+  \begin{align*}
+    (m+1)(n+1) = \sum_{i=0}^{k} (m+n-2i+1) = (k+1)(m+n+1-k)
+  \end{align*}
+  Solve this equation, we obtain that $k=m$ or $k=n$. 
+  However $k$ must be the $\min(m,n)$ since we need $m+n-2k\ge 0$ for well-definedness of $V(m+n-2k)$.
+  In the special case such that $m=3$ and $n=7$ we obtain that 
+  \begin{align*}
+    V(4) \oplus V(6) \oplus V(8) \oplus V(10).
+  \end{align*}
+\end{solution}
+
+
+
+\section*{Problem 3}
+If $L$ is a classical linear Lie algebra of type $A_\ell$, $B_\ell$, $C_\ell$, or $D_\ell$ (see (1.2)), prove that the set of all diagonal matrices in $L$ is a maximal toral subalgebra, of dimension $\ell$. (Cf. Exercise 2.8.)
+\begin{solution}
+  Clearly, The diagonal matrices are semisimple and communatative hence it form a toral subalgebra of each type. We now prove the maximality.
+  Let $D$ denote the subalgebra of diagonal matrices for each type and suppose that $D$ is contained in a strictly larger toral subalgebra $D'$.
+  
+  For type $A_\ell$, we may assume that $l\ge2$.
+  Since the case that $l=1$ is exactly $\mathfrak{sl}(2,F)$ and 
+  $D'$ contains a non-diagonal element and $h$ implying that $D'=\mathfrak{sl}(2,F)$ therefore $D$ is maximal in this case.
+  We choose a basis $\{h_1,\dots,h_l\}\cup \{E_{ij}\}_{i\neq j}$. Select an element $x\in D'\setminus D$, we suppose that 
+  \begin{align*}
+    x= \sum_{i=1}^l a_i h_i+\sum_{i\neq j}b_{ij}E_{ij}.
+  \end{align*}
+   
+  Without loss of generality, we can suppose that $b_{12}\neq 0$. Then we find that the $(1,2)$ entry of 
+  \begin{align*}
+    [h_1,x] = \sum_{i=1} b_{ij}E_{ij} - \sum_{i=l+1}b_{ij}E_{ij}- \sum_{j=1}b_{ij}E_{ij}+\sum_{j=l+1}b_{ij}E_{ij}
+  \end{align*}
+  is $b_{12}\neq 0$. It meaning that $x$ is not communatative with $h_1$, which contradicts to $D'$ is toral.
+
+  For type $B_\ell$, select an element $x\in D'\setminus D$, we suppose that 
+  \begin{align*}
+    x = \begin{pmatrix} 0 & -c^T & -b^T \\ b & m & n \\ c & p & -m^T \end{pmatrix}
+  \end{align*}
+  For arbitrary $y\in D$, we may suppose that $y=\text{diag}(0,d,-d)$. Then we have 
+  \begin{align*}
+    [y,x] = \begin{pmatrix} 0 & c^Td & -b^Td \\ db & dm-md & dn+nd \\ -dc & -dp-pd & dm^T-m^Td \end{pmatrix} = 0
+  \end{align*} 
+  Then we have $c=b=0$ since $db=0$ and $dc=0$. We can let $d=I_l$ then $dn+nd=dp+pd=0$ implies $n=p=0$.
+  Since $m$ communatative with all diagonal matrices, according our discussion on type $A_\ell$, $m$ have to be diagonal. Therefore, $x$ is diagonal, which contradicts to our assumption.
+
+  For type $C_\ell$, we can similarly suppose that 
+  \begin{align*}
+    x = \begin{pmatrix} a & b \\ c & -a^T \end{pmatrix}
+  \end{align*}
+  where $b=b^T$ and $c=c^T$. Let $y\in D$ and we suppose that $y=\text{diag}(d,-d^T)$. The commutator 
+  \begin{align*}
+    [y, x] = \begin{pmatrix} da - ad & db +bd \\ -dc - cd & da^T - a^T d \end{pmatrix}
+  \end{align*}
+  Select $d=I_l$, we obtain that $c=b=0$. Since $[a,d]=0$ for any diagonal matrix $d$, we obtain that $a$ is also diagonal.
+
+
+  For type $D_\ell$, we suppose that 
+  $$x = \begin{pmatrix} a & b \\ c & -a^T \end{pmatrix}, \quad b = -b^T, c = -c^T$$
+  and $y=\text{diag}(d,-d^T)$. Therefore we obtain that 
+  $$[y, x] = \begin{pmatrix} [d, a] & db + bd \\ -(dc + cd) & [d, a^T] \end{pmatrix}$$
+  By same reason, we obtain that $x$ is diagonal.
+\end{solution}
+
+
+
+\section*{Problem 4}
+Prove that no four, five or seven dimensional semisimple Lie algebras exist.
+
+\begin{solution}
+    Let $\g$ be a semisimple Lie algebra. Consider the root space decomposition 
+    \begin{align*}
+      \g = \h + \coprod_{\alpha\in \Phi} \g_\alpha
+    \end{align*}
+    where $\h$ is the cartan subalgebra of $\g$ and $\g_\alpha$ denotes the root space of root $\alpha$.
+    $\Phi$ is the root system of $\g$.
+    Then we have 
+    \begin{align*}
+      \dim(\g) = \dim(\h)+|\Phi|
+    \end{align*}
+    Since the root system $\Phi$ must span $\h^*$ and it also satisfy central symmetry,
+    the total number of roots must satisfy $|\Phi| \ge 2\dim(\h)$.
+    If $\dim(\h)=1$, then $\g^*$ is one dimension, therefore the only possible case about root system is $|\Phi|=2$.
+    If $\dim(\h)\ge 2$, then we have $|\Phi|\ge 4$ therefore we have $\dim(\g)\ge 6$.
+    The four,five dimensional semisimple Lie algebras does not exist.
+    If $\dim(\g)=7$ since $|\Phi|$ is even, the only possible case is $\dim(\h)\ge 3$, however in this case, we obtain that $|\Phi|\ge 6$, then we have $\dim(\g)\ge 9$.
+    The seven dimensional semisimple Lie algebras does not exist.
+\end{solution}
+\end{document}

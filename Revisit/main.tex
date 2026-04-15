@@ -1,0 +1,20 @@
+\documentclass[a4paper,11pt]{book}
+
+% 引入我们自定义的样式包
+\usepackage{dag-notes}
+\usepackage{fontawesome5}
+\usepackage{tikz-cd}
+\usepackage{marvosym}
+
+\title{\textbf{Revisit for AG,ANT and RT}}
+\date{\today}
+\begin{document}
+% 生成标题
+\maketitle
+% 导入各个章节
+% 使用 \input 可以保持紧凑排版（不会强制换页）
+% 如果想要每一章从新的一页开始，可以使用 \include
+
+\input{sections/ag.tex}
+
+\end{document}

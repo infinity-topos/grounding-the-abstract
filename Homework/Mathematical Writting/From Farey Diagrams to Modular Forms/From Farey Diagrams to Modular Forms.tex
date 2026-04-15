@@ -40,13 +40,13 @@
 % ==========================================
 % 定理环境设置 (Theorem Environments)
 % ==========================================
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
-
-\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 
@@ -68,21 +68,122 @@
 \section{Topology of Fractions: Farey's Diagram}
 Let $\infty = 1/0$ and $\hat{\Q}=\Q \cup \{\infty\}$.
 
-\begin{definition}[The Abstract Farey Graph]
-The abstract Farey graph $\mathcal{F}$ is a graph defined by the following combinatorial data:
-\begin{itemize}
-    \item \textbf{Vertices:} The vertex set $V$ is the extended rational numbers $\hat{\Q} = \Q \cup \{\infty\}$. Each rational number is written in its lowest terms as a fraction $\frac{a}{b}$ with $\gcd(a,b)=1$ and $b>0$. The point at infinity is represented formally as $\frac{1}{0}$ (and optionally $\frac{-1}{0}$).
-    \item \textbf{Edges:} Two distinct vertices $\frac{a}{b}$ and $\frac{c}{d}$ are connected by an undirected edge if and only if they satisfy the unimodular determinant condition:
-    $$|ad - bc| = 1.$$
-\end{itemize}
+\begin{definition}[Farey Sequence]
+    The Farey sequence $\{F_n\}$ is a sequence of subsets of $\mathbb{Q}$ defined by
+    \begin{align*}
+        F_n :=\{a/b \mid 0\le a \le b \le n \}.
+    \end{align*}
 \end{definition}
+
+\begin{definition}[Negative Farey Sequence]
+    The Farey sequence $\{G_n\}$ is a sequence of subsets of $\mathbb{Q}$ defined by
+    \begin{align*}
+        G_n :=\{-a/b \mid 0\le a < b \le n \}\cup\{1\}.
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Mediant Operation]
+    The Mediant Operation $\oplus$ is a combinatorial rule defined by 
+    \begin{align*}
+        \frac{a}{c} \oplus \frac{b}{d}:= \frac{a+b}{c+d}
+    \end{align*}
+    for $a/c$ and $b/d$ are redueced.
+\end{definition}
+
+\begin{definition}[Negative Mediant Operation]
+     The Negative Mediant Operation $\ominus$ is a combinatorial rule defined by 
+    \begin{align*}
+        \frac{a}{c} \ominus \frac{b}{d}:= \frac{-|a|-|b|}{c+d}
+    \end{align*}
+    for $a/c$ and $b/d$ are redueced.
+\end{definition}
+
+Observe that Farey sequence (resp. nagative) can be constructed by doing successively Mediant operation (resp. nagative).
+For example, 
+\begin{align*}
+    F_2 =\{0/1 ,0/1\oplus 1/1,1/1\}. 
+\end{align*}
+
+\begin{definition}[The Farey Diagram in the upper half-plane]
+    
+\end{definition}
+
+
+\begin{definition}[The Farey Diagram in the Poincaré Disk]
+    Cayley Transformation on the upper half-plane 
+    \begin{align*}
+        w = \frac{z-i}{z+i}
+    \end{align*}
+\end{definition}
+The Cayley transformation is a special case of Möbius transformation such that mapping the half-plane to the unit disk conformally.
+
+
+
+
+\begin{remark}[Pythagorean Coordinate]
+    The Cayley transformation on $p/q$ also can be done in the following way. 
+    Assigne each $p/q$ a Pythagorean triple $(2pq,p^2-q^2,p^2+q^2)$. Consider the Projectivization of this triple. Namely, we obtain an assignment 
+    \begin{align*}
+        p/q \mapsto  \left(\frac{p^2-q^2}{p^2+q^2},\frac{-2pq}{p^2+q^2}\right).
+    \end{align*}
+    This coordinate agree on Cayley transformation.
+    
+    In the perspective of Pythagorean Coordinate, the reduced rational number $p/q$ also can be interpreted as a integral point of quadratic cone defined by $x^2+y^2-z^2$.
+\end{remark}
+\begin{theorem}
+ There is a canonical isomorphism of algebraic varieties over $\mathbb{Q}$:
+ \begin{align*}
+    \mathbb{P}^1_{\mathbb{Q}} \cong \text{Proj} \left( \frac{\mathbb{Q}[X, Y, Z]}{(X^2 + Y^2 - Z^2)} \right)
+ \end{align*}
+\end{theorem}
+
+
+The curvilinear triangle in the Farey Diagram also called by ideal triangle.
+The ideal triangle containing vertices $\{0,1,\infty\}$ is called fundamental triangle.
+
+
+\begin{definition}[Conway's Topograph]
+    The Conway's Topograph is defined the dual graph of Farey tessellation in the unit disk. 
+\end{definition}
+Formally, the conway's topograph is an infinity tree of degree three. 
+
+\begin{definition}[Quadratic form on Conway's Topograph]
+    Consider valuation on edge on Conway's Topograph. 
+    It geometrically and uniquely corresponds to the a midpoint, a median and a reduced rational number $x/y$.
+    Then Quadratic form values such a  edge by $Q(x,y)$.
+\end{definition}
+
+
+
+
+
+
 \begin{figure}[htbp]
     \centering
     \input{figures/1.tex} % 引入图形代码
     \caption{The Farey Diagram in the Poincaré Disk Model.}
     \label{fig:farey_disk}
 \end{figure}
-\section{The Modular Group}
+\section{Modular Group}
+We are interested in the automorphism group on cusp point. 
+\begin{definition}[Modular Group]
+    Modular Group is defined by the automorphism of projective variety
+    \begin{align*}
+        \text{Aut}(\mathbb{P}_{\mathbb{Z}}^1)^+ \simeq \mathrm{PSL}_2(\mathbb{Z})
+    \end{align*}
+\end{definition}
+
+The modular group also gives the automorphism of ideal triangles.
+From the "functor of point", we can interpreted each ideal triangles $\Delta$ as the morphisim $g:\Delta_0\to \Delta\in   \mathrm{PSL}_2(\mathbb{Z})/(\mathbb{Z}/3\mathbb{Z})$.
+Hence, if we consider direction, the edge correspondence must be considerated, that is, each edge $e_i$ of an ideal triangle corresponds to the morphisim $h:e\to e_i\in \mathrm{PSL}_2(\mathbb{Z})/(\mathbb{Z}/2\mathbb{Z})$.
+
+The modular group has two generator 
+\begin{align*}
+    S = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \text{ and } T = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}
+\end{align*}
+Geometrically, $S$ corresponds to the "rotation of the standard triangle by an edge", namely, it represent the morphisim $\{0,1,\infty\}\to \{\infty,-1,0\}$ respectively.
+$T$ represent the shift operator $\{0,1,\infty\}\to \{1,2,\infty\}$. $R=TS$ represents the cyclic permutation of cusp point $\{0,1,\infty\}\to \{1,\infty,0\}$.
+
 \begin{proposition}[Free Product Structure of the Modular Group]
     The modular group $\Gamma = \mathrm{PSL}_2(\mathbb{Z})$ is isomorphic to the free product of two cyclic groups of orders $2$ and $3$. Explicitly,
     \begin{align*}
@@ -133,17 +234,69 @@ Here is our roadmap.
     \item[Step 4. Geometric Uniformization (The Emergence of $\mathbb{H}$)] 
     The universal cover $\mathbb{P}^1 \setminus \{0, 1, \infty\}$ is the \textbf{Hyperbolic Upper Half-Plane $\mathbb{H}$} with $\mathcal{T}$ as its symmetric geometric skeleton.
 \end{description}
+\begin{proposition}
+    The Riemann surface $X$ deformation retracts onto Bass-Serre Tree.
+\end{proposition}
 
 
 \section{Modular Forms}
-\begin{figure}[htbp] % h:当前位置, t:顶部, b:底部, p:独立一页
-    \centering % 图片居中
-    \includegraphics[width=0.7\textwidth]{figures/2.png} % 文件名不要带空格
-    \caption{tessellation of the $q$-disk } % 图片下方的文字
-\end{figure}
+We interpreted each point $\tau$ in the half-plane $\mathbb{H}$ as an elliptic curve by the construction:
+\begin{align*}
+    \Lambda_\tau = \{ m\tau + n \mid m,n \in \mathbb{Z} \}\quad   T_\tau = \mathbb{C} / \Lambda_\tau
+\end{align*}
+In this case, we call $X$ is the moduli space of elliptic curves.
+
+\begin{definition}[Isogeny]
+    Two elliptic curves $T_\tau, T_{\tau'}$ are said to be isogenous of degree $n$ if there exists $\alpha \in \mathbb{C}^\times$ such that $\alpha \Lambda_\tau \subseteq \Lambda_{\tau'}$ such that $[\Lambda_{\tau'}:\Lambda_{\tau}]=n$.
+\end{definition}
+
+
+Recalled that we interpreted each vertex in Bass-Serre tree as the element of $\Gamma$ with explicit form 
+\begin{align*}
+    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\end{align*}
+such that $|ad-bc|=1$. 
+Such elements represent isomorphisms of the underlying lattices.
+
+
+\begin{definition}[Hecke Congruence Subgroup]
+    The Hecke congruence subgroup $\Gamma_0(N)$ is the subgroup of $SL_2(\mathbb{Z})$ consisting of elements that preserve a cyclic isogeny of degree $N$. 
+    Equivalently, it is defined as:
+    \begin{align*}
+    \Gamma_0(N) = \left\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in SL_2(\mathbb{Z}) \mid c \equiv 0 \pmod N \right\}
+    \end{align*}
+\end{definition}
 
 
 
+
+\begin{definition}[Modular Curve]
+    The Modular Curve is defined by $\Gamma_0(N) \backslash X$.
+\end{definition}
+\begin{proposition}
+    The Modular Curve deformation retracts onto quotient graph $\Gamma_0(N) \backslash \mathcal{T}$.
+\end{proposition}
+
+\begin{definition}[Theta Function]
+    Let $Q(x, y)$ be a positive definite integral binary quadratic form. 
+    Let $R_m$ be the number of integer representations of $m$ by $Q$, that is,
+    \begin{align*}
+        R_m = \#\{(x,y) \in \mathbb{Z}^2 \mid Q(x,y) = m\}.
+    \end{align*}
+    The Theta function associated with $Q$ is defined by the generating function of the sequence 
+    $\{R_m\}$:
+    \begin{align*}
+        \Theta_Q(\tau) = \sum_{(x,y) \in \mathbb{Z}^2} e^{2\pi i Q(x,y)\tau} = \sum_{m=0}^{\infty} R_m q^m
+    \end{align*}
+    where $q = e^{2\pi i \tau}$ and $\tau \in \mathbb{H}$.
+
+
+\end{definition}
+\begin{definition}[Modular Forms]
+
+\end{definition}
+
+Weierstrass $\wp$-function
 \newpage
 \section{Hecke Operators}
 
