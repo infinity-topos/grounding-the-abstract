@@ -1,0 +1,119 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 9}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Let $A$ be a finite-dimensional algebra over a field. Suppose that $V$ is a f.g. $A$-module, and that a certain simple $A$-module $S$ occurs as a composition factor of $V$ with multiplicity 1. Suppose that there exist nonzero homomorphisms $S \to V$ and $V \to S$. Prove that $S$ is a direct summand of $V$.
+\begin{solution}
+    Let $\varphi$ and $\psi$ denote nonzero homomorphism $S\to V$ and $V\to S$ respectively.
+    Since $S$ is simple, we obtain that $\varphi$ must be injective. Otherwise, it should be a zero homomorphism which contradicts our conditions.
+    For the same reason, we obtain that $\psi$ must be surjective. Hence, I claim that $\psi\circ \varphi\in \text{End}_A(S)$ is an isomorphism or a zero homomorphism according to Schur's Lemma.
+    Suppose that $\psi\circ \varphi=0$. We obtain that a descending chain of submodules of $V$
+    \begin{align*}
+        V\supseteq \ker{\psi}\supseteq \text{im }\varphi\supseteq (0).
+    \end{align*}
+    Since $\varphi$ is injective, we obtain that $S\simeq \text{im }\varphi$. By the First Isomorphism Theorem for modules, we also have $S\simeq V/{\ker \psi}$.
+    It implies that $S$ occurs twice as a composition factor which is a contradiction. Therefore, $\psi\circ \varphi$ must be an isomorphism.
+    Let $f= (\psi\circ\varphi)^{-1}$ then we obtain that $\psi\circ(\varphi\circ f)=\text{id}_S$. It follows that the short exact sequence 
+    \begin{align*}
+        0\to \ker \psi \to V \xrightarrow{\psi} S\to 0
+    \end{align*}
+    is split. Equivalently, we say $V\simeq S\oplus \ker \psi$.
+\end{solution}
+
+
+
+\section*{Problem 2}
+Suppose that $U$, $V$ and $W$ are modules for a finite-dimensional algebra over a field and $P_W$ is the projective cover of $W$. Assume that these modules are finite-dimensional.
+\begin{itemize}
+    \item[(a)] Show that $U \to W$ is an essential epimorphism if and only if there is a surjective homomorphism $P_W \to U$ so that the composite $P_W \to U \to W$ is a projective cover of $W$. In this situation, show that $P_W \to U$ must be a projective cover of $U$.
+    \item[(b)] Prove the following ``extension and converse'' to Nakayama's Lemma: let $V$ be any submodule of $U$. Then $U \to U/V$ is an essential epimorphism if and only if $V \subseteq \operatorname{Rad} U$.
+\end{itemize}
+\begin{solution}
+    (a) Let $f$ denote the essential epimorphism $U\to W$. Let $g$ denote $P_W\to W$. According to the universal property of projective module, there exists a morphism $h:P_W\to U$ such that $g=f\circ h$. Then we can see $h$ is the homomorphism that we want.  
+    According to discussion in our class, both $f$ and $g$ are essential epimorphisms implies that $h$ is also an essential epimorphism. 
+    It follows that $h:P_W\to U$ is a projective cover.
+    Coversely, since $g$ is an essential epimorphism and $h$ is a surjection, according to our homework, we obtain that $f:U\to W$ and $h:P_W\to U$ are also essentially epimorphic.
+    It follows that $P_W\to U$ is a projective cover and $U\to W$ is an essential epimorphism.
+
+    (b) Let $f$ denote morphisim $U\to U/V$.
+    Suppose that $V \not \subseteq \text{Rad }U$, then there exists a maximal submodule $M$ such that $M+V= U$. By isomorphism Theorem of module, we obtain that $U/V \simeq M/(M\cap V)$. It implies that 
+    \begin{align*}
+        f|_M:M \to U/V\simeq M/(M\cap V)
+    \end{align*}
+    is an epimorphism. Equivalently, $f$ is not an essential epimorphism.
+
+
+    Suppose that $V\subseteq \text{Rad }U$. Suppose that $f$ is not essentially epimorphic, equivalently, there exists a proper submodule $M$ of $U$ such that $f|_{M}$ is epimorphic.
+    For an arbitrary element $x\in U$, $f|_M$ is epimorphic implies that there exists $m\in M$ and $v\in V$ such that $x=m+v$.
+    It means that $M+V=U$. However, by Nakayama's Lemma, since $V\subseteq \text{Rad }U$, it implies that $M=U$. It contradicts our assumption. Therefore, $f$ must be essentially epimorphic.
+
+\end{solution}
+
+\begin{remark}
+    There are some facts:
+    \begin{itemize}
+        \item Let $\text{Idem}(R) = \{e \in R \mid e^2 = e\}$ be the set of idempotents of a ring $R$, and let $\text{Summ}(M)$ be the set of all direct summands of $M$. There is a bijection:$$\Phi: \text{Idem}(\text{End}_A(M)) \xrightarrow{\sim} \text{Summ}(M)$$$$e \mapsto eM$$
+        \item  Let $f: M \to N$ be an essential epimorphism ($\text{Ker}(f) \subseteq \text{rad}(M)$). We define $$\mathcal{L}_N = \{ \bar{e} \in \text{Idem}(\text{End}_A(N)) \mid \exists e \in \text{Idem}(\text{End}_A(M)) \text{ s.t. } f \circ e = \bar{e} \circ f \}.$$
+        then there exists bijective correspondence $\Psi$ maps these idempotents to the set of essential covers of summands: $$\Psi: \mathcal{L}_N \xrightarrow{\sim} \{ f|_{eM} : eM \to \bar{e}N \mid e \in \text{Idem}(\text{End}_A(M)) \text{ is a lift of } \bar{e} \}$$$$\bar{e} \mapsto (f|_{eM} : eM \to \bar{e}N)$$
+        \item A ring $R$ is semiperfect if every finitely generated (left) $R$-module admits a projective cover.
+        It is equivalent to the following conditions:
+        \begin{itemize}
+            \item[a] The quotient $R/J(R)$ is a semisimple Artinian ring;
+            \item[b] Idempotents lift modulo $J(R)$.
+        \end{itemize}
+        \item  Let $\text{Top}(M) = M/\text{rad}(M)$ be its radical quotient. A module $M$ admits a projective cover if and only if $\text{Top}(M)$ admits a projective cover.
+    \end{itemize}
+\end{remark}
+
+\section*{Problem 3}
+The following holds for a valuation $v$ of $K$:
+\begin{itemize}
+    \item[(i)] $v(\pm 1) = 0$
+    \item[(ii)] $v(a) = v(-a)$
+    \item[(iii)] $v(a^{-1}) = -v(a)$
+    \item[(iv)] $v(b) < v(a) \Rightarrow v(a + b) = v(b)$.
+\end{itemize}
+
+\begin{solution}
+    (i) Since $v(1) = v(1^n) = n v(1)$ for any integer $n$. For equation holds, $v(1)=0$. Similarly, $v(-1)=v((-1)^{2n+1}) = (2n+1)v(-1)$ for any integer $n$, then we obtain that $v(-1)=0$.
+    (ii) Since (i), we obtain that $v(-a)=v(-1)+v(a) = v(a)$.
+    (iii) Consider that $0=v(1)=v(a\cdot a^{-1})=v(a)+v(a^{-1})$, then $v(a^{-1})=-v(a)$.
+    (iv) We note that by the strongly triangular inequality, we obtain that $v(a+b)\ge \min\{v(a),v(b)\}=v(b)$. By the same reason, we consider that 
+    \begin{align*}
+        v(b)=v(a+b-a)\ge \min\{v(a+b),v(a)\}.
+    \end{align*}
+    Since $v(b)<v(a)$, then it implies that $v(b)\ge v(a+b) $ for the inequality holds. Therefore, we claim that $v(a+b)=v(b)$ if $v(b)<v(a)$.
+\end{solution}
+\end{document}

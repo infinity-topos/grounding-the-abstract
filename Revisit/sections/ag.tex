@@ -3,9 +3,17 @@
 \newcommand{\fun}{\operatorname{Funct}}
 \newcommand{\sch}{\operatorname{Sch}}
 \newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\proj}{\operatorname{Proj}}
 \newcommand{\ring}{\operatorname{Ring}}
 \newcommand{\grp}{\operatorname{Ab}}
+\newcommand{\pic}{\operatorname{Pic}}
+\newcommand{\qcoh}{\operatorname{Qcoh}}
 \newcommand{\op}{\text{op}}
+\newcommand{\g}{\mathscr{G}}
+\renewcommand{\l}{\mathscr{L}}
+\newcommand{\f}{\mathscr{F}}
+\renewcommand{\o}{\mathcal{O}}
+\newcommand{\p}{\mathfrak{p}}
 \newcounter{paranum} 
 \newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
 
@@ -13,8 +21,123 @@
 Let us review concepts from  Algebraic Geometry.
 
 \np Let $A\in \ring$, then we have $\sch_{/{\spec(A)}}\simeq \ring_{A/}$.
+The correspondence is given by $(X\mapsto \spec(A))\leadsto A\to \Gamma(X,\o_X)$.
+
+\np If we consider $X\mapsto \mathbb{A}^1_{A}$, it corresponds to $A[t]\mapsto \Gamma(X,\o_X)$ which uniquely determined by the image of $t$.
+In this sense, we obtain that $(X\mapsto \mathbb{A}^1_{A})\leadsto \Gamma(X,\o_X)$. 
+Moreover, we have $\hom_{S}(X,\mathbb{A}_S^1)\simeq \hom_{\spec(\mathbb{Z})}(X,\mathbb{A}^1)\simeq \Gamma(X,\o_X)$.
+
+\np   Let $A$ be a ring, we have $\proj_{/\spec(A)}\simeq \text{Mod}_A$.
+
 
 \np Structure sheaf $O_X:X^\op\to \ring$.
 
-\np Sheaf of $O_X$-module: 
+\np Let $j_!$ denotes extension by zero and $U$ is an open subscheme of $X$ then we obtain that $\Gamma(U, \mathcal{F}) \cong \text{Hom}_{\mathcal{O}_X}(j_! \mathcal{O}_U, \mathcal{F})$.
+
+\np Serre’s criterion for Normality: A Noetherian ring $A$ is normal
+if and only if it has properties R1 and S2.
+R1 means $A_\mathfrak{p}$ is regular(smooth) for any codimension one prime ideal $\p$. 
+S2 means $\text{depth}(A_\p)=\min(2,\dim(A_\p))$ for any prime ideal.
+
+\np $\text{depth}(A_\p)$ means the maximal length of regular sequence $(a_1,a_2,\dots,)$ in $\p$.
+Regular means that $a_i$ is not a zero divsor in $A/(a_1,\dots,a_i)$.
+
+\np Sheaf of $O_X$-module:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+& \mathcal{M}od \arrow[d, "P"] \\
+\text{Open}(X)^{\text{op}} \arrow[ur, "\mathcal{F}"] \arrow[r, "\mathcal{O}_X"'] & \text{Ring}
+\end{tikzcd}
+\]
+
+\np $f:X\to Y$, then $f^*\g  = f^{-1}\g \otimes_{f^{-1}\o_Y}\o_X $
+
+\np Let $M$ be $A$-module and $X=\spec(A)$. Then $\widetilde{M}:=\underline{M}\otimes \o_X$ where $\underline{M}$ denotes the constant sheaf of $M$.
+
+\np Ideal sheaf is the kernal of $i^\#:\o_X\to i_*\o_Y$ induced by closed immersion $i:Y\to X$.
+
+\np We call a sheaf $\f$ is quasi-coherent if for any affine open subscheme $U$, there exist an $\o_X(U)$-module $M$ such that $\f|_{U}\simeq \widetilde{M}$.
+Hence, we call it coherent if $X$ is Noetherian.
+
+\np Let $X$ be any affine scheme and $\f$ be an arbitrary quasi-coherent sheaf. Then we obtain that $H^1(X,\f)=0$.
+It means that if we consider the exact sequence of ideal sheaf 
+\begin{align*}
+    0 \to \mathcal{I}_Y \to \mathcal{O}_X \to i_* \mathcal{O}_Y \to 0
+\end{align*}
+The global section functor is exact 
+\begin{align*}
+    0 \to \Gamma(X, \mathcal{I}_Y) \to \Gamma(X, \mathcal{O}_X) \to \Gamma(X, i_* \mathcal{O}_Y)\to H^1(X, \mathcal{I}_Y) = 0.
+\end{align*}
+Equivalently, we say any regular function on closed subscheme of $X$ can be extended to $X$.
+
+\np For any scheme $X$, S2 condition is equivalent to $j_*(\o_U)\simeq \o_X$ for any $\text{codim}(X\setminus U)\ge 2$
+
+\np For open subscheme $U$ of $X$, there is an exact sequence
+\begin{align*}
+    0 \to i_! \mathcal{O}_U \to \mathcal{O}_X \to j_* \mathcal{O}_Z \to 0
+\end{align*}
+where $i_!\o_U$ is the push-forward with compact support. The inclusion is due to the extension by zero.
+
+\np We also have exact sequence 
+$$0 \to \mathcal{H}^0_Z(\mathcal{O}_X) \to \mathcal{O}_X \to i_* \mathcal{O}_U \to \mathcal{H}^1_Z(\mathcal{O}_X) \to \dots$$
+where $\o_X\to i_*\o_U$ is restriction. $\mathcal{H}^0_Z(\mathcal{O}_X)$ means the sheaf of supporting on $Z$. 
+It also can be defined by the sheafication of presheaf functor $U\mapsto \Gamma_{Z}(X,\o_X)\cap U$ where $\Gamma_Z$ means supporting on $Z$.
+
+\np In the projective case, we have an similar exact sequence. Given that an projecitve shceme $X=\proj(S)$, then we interpret it as the open subscheme of $CX$ excluding zero.
+The exact sequence follows 
+\begin{align*}
+    0\to H^0_{\mathfrak{m}}(S) \to \Gamma(CX,\o_{CX})= S \to \Gamma_*(\o_X)\to  H^1_{\mathfrak{m}}(S) \to H^1(CX,\o_{CX})=0.
+\end{align*}
+
+\np Let $M$ be $R$-module, we define $\text{Ass}(M)=\{\text{Ann}_R(m)\}_{m\in M}\cap \spec(R)$. Then $\text{Supp}(M)=\bigcup_{\p\in \text{Ass}(M)}V(\p)$.
+To see that we consider if $\p=\text{Ann}_R(m)$ then $M_\p\neq 0$.
+
+\np Let $X=\spec(R)$ and $f\in R$, then $\text{Supp}(f)=V(\text{Ann}_R(f))$. Hence, if $f$ is not zero divsor, then $\text{Supp}(f)=X$.
+
+\np If we consider $_R R$, then $\text{Ass}(R)=\{\sqrt{\mathfrak{q}_1},\dots,\sqrt{\mathfrak{q}_n}\}$
+where $(0) = {\mathfrak{q}_1}\cap \dots\cap {\mathfrak{q}_n}$ be the primary decomposition of zero ideal.
+
+\np Suppse that $I$ is radical and $Z=V(I)$. We have $\mathcal{H}^0_Z(\mathcal{O}_X)=\{x\in\o_X\mid \sqrt{\text{Ann}_R(x)}\supseteq I\}$.
+Hence, we can obtain that $\mathcal{H}^0_Z(\mathcal{O}_X)=\bigcap_{\p_i\not\supseteq I}\mathfrak{q}_i$. 
+
+
+\np For a graded ring $S$ with $M$ is a graded $S$-module. Define $\widetilde{M}(D_+(f)):=\{m/f^n|\deg(m)=n\}$.
+
+\np Let $S$ be a graded ring, $S(n)$ denotes twisted module defined by $S(n)_{d}=S_{n+d}$. Define the twisted sheaf $\o_X(n):=\widetilde{S(n)}$ and twisted sheaf of module 
+$\f(n):=\f\otimes_{\o_X}\o_X(n)$.
+
+
+\np Let $S$ be the graded ring generated by $S_1$ as $S_0$-algebra. Let $X=\proj(S)$.
+Then
+\begin{itemize}
+    \item $\o_X(n)$ is an invertible sheaf on $X$;
+    \item $\widetilde{M}(n)\simeq \widetilde{M(n)}$;  
+    \item $\o_X(n)\otimes\o_X(m)\simeq \o_X(n+m)$
+\end{itemize}
+
+\np The section functor is given by $\Gamma_*(\f)= \bigoplus_{n\in \mathbb{Z}}\Gamma(X,\f(n))$. It is right adjoint functor of $\widetilde{(\cdot)}$.
+Hence if $S$ is a graded ring generated by $S_0$-algebra $S_1$ and $\f$ is quasi-coherent, then $\Gamma_*(\f)\simeq \f$.
+
+\np Extension of Sections: Let $X$ be a scheme and $\l\in \pic(X),\f\in\qcoh(X)$. 
+Suppose $X$ is quasi-compact and has a finite open cover $\{U_i\}$ such that $\l|_{U_i}$ is free and $U_i\cap U_j$ is quasi compact.
+Given that $t\in\Gamma(X_f,\f)$, then for some $n>0$, the section $f^nt\in\Gamma(X_f,\f\otimes \l^{\otimes n})$ can be extended to a global section of $\f\otimes \l^{\otimes n}$.
+
+\np we call a morphism $f:X\to Y$ is projective if $f$ can be factorized as form $X\to \mathbb{P}_{Y}^n\to Y$
+where $X\to\mathbb{P}_Y^n$ is a closed immersion. 
+In this case, we call $X$ is a projective scheme over $Y$.  If $Y=\spec(A)$, then exists a graded ring $S$ finitely generated by $A=S_0$-algebra $S_1$.
+
+\np we call a morphism is quasi projective if $X\to\mathbb{P}_Y^n$ is a locally closed immersion which means there exists closed subscheme $Z$ such that $X\to Z$ is an open immersion.  
+
+\np For any scheme $Y$, define twisting sheaf $\o(d)$ on $\mathbb{P}_Y^r$ by $g^*(\o(d))$ where $g:\mathbb{P}_Y^r \to \mathbb{P}_{\mathbb{Z}}^r$.
+
+\np $X$ is a shceme over $Y$. We call invertible sheaf $\l$ is very ample relative to $Y$ if there is a locally closed immersion $i:X \to \mathbb{P}_Y^r$ for some $r$ such that $i^*(\o(1))\simeq \l$. 
+
+
+\np We call $\f$ is generated by global sections if there is a family of global sections $\{s_i\}$ such that $\f_x$ is generated by $\{s_i(x)\}$.
+
+\np Let $A$ be a finitely generated $k$-algebra with graded structure. Let $X$ be projecitve over $\spec(A)$ and $\f$ is an arbitrary coherent sheaf. Then $\Gamma(X,\f)$ is a finitely generated $A$-module.
+
+\np Let $Y$ is quasi-projecitve over $\spec(A)$. Equivalently, $Y$ is a quasi-projecitve subscheme of $\mathbb{P}_{A}^n$. Then we have a very ample line bundle of $Y$ by pull-back $i^*(\o_{\mathbb{P}^n_A}(1))$.
+
+
 \endgroup}

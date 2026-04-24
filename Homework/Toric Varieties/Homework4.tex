@@ -1,0 +1,235 @@
+ \documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, patterns}
+\usepackage[margin=1in]{geometry}
+\newtheorem{lemma}{Lemma}
+
+ 
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Topics in Geometry and Topology:Assignment 4}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+% --- Problem 1 ---
+\section*{Problem 1}
+Let $\Delta$ be the complete fan in $\mathbb{Z}^2$ with edges along
+\[ v_1 = 2e_1 - e_2, \quad v_2 = -e_1 + 2e_2, \quad v_3 = -e_1 - e_2. \]
+Show that $a_1D_1 + a_2D_2 + a_3D_3$ is a Cartier divisor on $X = X(\Delta)$ if and only if
+\[ a_1 \equiv a_2 \equiv a_3 \pmod 3. \]
+Show that
+\begin{gather*}
+\text{Pic}(X) = \mathbb{Z} \cdot 3D_1 \cong \mathbb{Z}, \\
+\text{Cl}(X) = (\mathbb{Z} \cdot D_1 + \mathbb{Z} \cdot D_2)/\mathbb{Z} \cdot 3(D_1 - D_2) \cong \mathbb{Z} \oplus \mathbb{Z}/3\mathbb{Z}.
+\end{gather*}
+In particular, $\text{Cl}(X)$ can have torsion.
+
+\begin{solution}
+    The $\Delta$ consists of three maximal cone $\sigma_1=\langle v_1,v_2\rangle$, $\sigma_2=\langle v_2,v_3\rangle$ and $\sigma_3=\langle v_1,v_3\rangle$. 
+    Divisor is Cartier divisor means that for any maximal cone $\sigma_i$ there exists $m_{i}\in N$ such that $\langle m_i,v_{j}\rangle = -a_j$ where $v_j$ is the generator of $\sigma_i$.
+    It is equivalent to solve the equation below.
+    \begin{align*}
+        &\text{For $\sigma_1$:\quad } \langle (x_1, y_1), (2, -1) \rangle = 2x_1 - y_1 = -a_1 \quad \langle (x_1, y_1), (-1, 2) \rangle = -x_1 + 2y_1 = -a_2;\\
+        &\text{For $\sigma_2$:\quad } \langle (x_2, y_2), (-1, 2) \rangle = -x_2 + 2y_2 = -a_2 \quad  \langle (x_2, y_2), (-1, -1) \rangle = -x_2 - y_2 = -a_3;\\
+        &\text{For $\sigma_3$:\quad } \langle (x_3, y_3), (-1, -1) \rangle = -x_3 - y_3 = -a_3\quad \langle (x_3, y_3), (2, -1) \rangle = 2x_3 - y_3 = -a_1.
+    \end{align*}
+    And we obtain that 
+\[
+\left\{
+\begin{aligned}
+    x_1 &= -\frac{2a_1 + a_2}{3}, & y_1 &= -\frac{a_1 + 2a_2}{3} \\
+    x_2 &= \frac{a_2 + 2a_3}{3},  & y_2 &= \frac{a_3 - a_2}{3}  \\
+    x_3 &= \frac{a_3 - a_1}{3},  & y_3 &= \frac{a_1 + 2a_3}{3}
+\end{aligned}
+\right.
+\]
+All of $x_i,y_i$ must be integer, then we obtain that $a_1 \equiv a_2 \equiv a_3 \pmod 3$.
+
+For the class group, we conisder the exact sequence 
+\begin{align*}
+    M \xrightarrow{\phi} \bigoplus_{i=1}^3 \mathbb{Z} D_i \to \operatorname{Cl}(X) \to 0
+\end{align*}
+Then we consider the standard basis $\{e_1^*,e_2^*\}$ of $M$. Then we have 
+\begin{align*}
+    \phi(e_1^*) = 2D_1-D_2-D_3\text{ and }\phi(e_2^*) = -D_1+2D_2-D_3
+\end{align*} 
+The class group is given by 
+\begin{align*}
+    \text{Cl}(X) = (\mathbb{Z}\cdot D_1+\mathbb{Z}\cdot D_2+\mathbb{Z}\cdot D_3)/(\mathbb{Z}\cdot(2D_1-D_2-D_3)+\mathbb{Z}\cdot(-D_1+2D_2-D_3))
+\end{align*}
+Using relation $2D_1-D_2-D_3=0$, we can represent any divisor $a_1D_1+a_2D_2+a_3D_3$ to $b_1D_1+b_2D_2$.
+Hence combine with relation $-D_1+2D_2-D_3=0$, we obtain that $3D_1-3D_2=0$. Let $E_1=D_1+D_2$ and $E_2=D_1-D_2$, then we obtain that 
+\begin{align*}
+     \text{Cl}(X) = (\mathbb{Z}\cdot E_1+\mathbb{Z}\cdot E_2)/(3\mathbb{Z}\cdot E_2) \simeq \mathbb{Z}\oplus 3\mathbb{Z}
+\end{align*}
+
+Similarly, for any Cartier divisor $a_1D_1+a_2D_2+a_3D_3$ we can find $b_1D_1+b_2D_2$ to represent it.
+$b_1D_1+b_2D_2$ is also a Cartier divisor, then by relation $3D_1-3D_2=0$, we can reduce it to $c_1D_1$ where $c_1\in 3\mathbb{Z}$.
+Since $\{(3,0,0),(2,-1,-1),(-1,2,-1)\}$ is linearly independent, then for $c_1'\in 3\mathbb{Z}$ such that $c_1'\neq c_1$, the divisor $c_1D_1$ is not equivalent to 
+$c_1'D_1$. Therefore, we obtain that the Picard group 
+\begin{align*}
+    \text{Pic}(X) =\mathbb{Z} \cdot 3D_1 \simeq \mathbb{Z}.
+\end{align*}
+\end{solution}
+
+
+% --- Problem 2 ---
+\section*{Problem 2}
+Show that for each irreducible Weil divisor $D_\tau$ on an affine toric variety $U_\sigma$, there is an effective Cartier divisor that contains $D_\tau$ with coefficient one.
+\begin{solution}
+    The irreducible Weill divisor $D_\tau$ correspond to a primitive generator $v_\rho$ of a ray $\rho$.
+    Since $v_\rho$ is primitive, there exists $v_\rho^*\in M$ such that $\langle v_\rho^*,v_\rho \rangle=1$.
+    Hence, ray $\rho$ is a face of $\sigma$, it means that there exists $w\in M\cap \sigma^\vee$ such that $\rho = \sigma\cap w^{\perp}$.
+    And for any other ray $\rho'$ we have $\langle w,\rho \rangle\ge 1$. Therefore, exists a positive integer $k$ such that for any ray $\rho'$ different to $\rho$ in $\sigma$ such that $\langle w^k+v_\rho^*,v_{\rho'} \rangle\ge 0$ 
+    and $\langle w^k+v_\rho^*,v_{\rho} \rangle = 1$ which means that the divisor induced by $w^k+v_\rho^*$ is effective and contains $D_\tau$ with coefficient one.
+\end{solution}
+
+
+
+
+% --- Problem 3 ---
+\section*{Problem 3}
+Let $X = X(\Delta)$, where $\Delta$ is the fan in $\mathbb{Z}^3$ over the faces of the cube with vertices $(\pm 1, \pm 1, \pm 1)$, and $N$ is the sublattice of $\mathbb{Z}^3$ generated by these vertices.
+Show that $\text{Pic}(X) \cong \mathbb{Z}$, generated by a divisor that is the sum of the four irreducible divisors corresponding to the vertices of a face. Show that $\text{Cl}(X) \cong \mathbb{Z}^5$, and $\text{Cl}(X)/\text{Pic}(X) \cong \mathbb{Z}^4$.
+
+\begin{solution}
+    We first compute the dual of $N$. Since $N$ is generated by $(\pm 1, \pm 1, \pm 1)$, 
+    we obtain that 
+    \begin{align*}
+        M = \left\{ (p,q,r) \in \left(\frac{1}{2}\mathbb{Z}\right)^3 \ \middle| \ p+q+r \in \mathbb{Z} \right\}.
+    \end{align*}
+    Clearly, the pairing $\langle M,(1,1,1)\rangle\in \mathbb{Z}$ implies $M$ is well-defined for $(1,1,1)$. For other $a=(a_1,a_2,a_3)\in N$, we find that $\langle M,a-(1,1,1)\rangle\in 2p\mathbb{Z}+2q\mathbb{Z}+2r\mathbb{Z}$.
+    Therefore, we obtain that $(p,q,r) \in \left(\frac{1}{2}\mathbb{Z}\right)^3$. 
+    Now, we find that 
+    \begin{align*}
+        m_1 = \left(\frac{1}{2}, \frac{1}{2}, 0\right), \quad m_2 = \left(\frac{1}{2}, 0, \frac{1}{2}\right), \quad m_3 = \left(0, \frac{1}{2}, \frac{1}{2}\right)
+    \end{align*}
+    is a basis of $M$. Let $D_i$ denotes the divisor corresponding to ray $(\pm 1, \pm 1, \pm 1)$ lexicographically. 
+    We let $D_1$ correspond to $(1,1,1)$ and $D_2$ correspond to $(1,1,-1)$ and so on.
+    Consider the exact sequence 
+    \begin{align*}
+    M \xrightarrow{\phi} \bigoplus_{i=1}^8 \mathbb{Z} D_i \to \operatorname{Cl}(X) \to 0
+\end{align*}
+and we obtain that 
+\begin{align*}
+    \phi(m_1) = D_1 + D_2 - D_7 - D_8 \\ \phi(m_2) = D_1 + D_3 - D_6 - D_8\\ \phi(m_3) = D_1 - D_4 + D_5 - D_8
+\end{align*}
+Therefore, class group is given by 
+\begin{align*}
+    \text{Cl}(X)= \bigoplus_{i=1}^8 \mathbb{Z} D_i/\langle \phi(m_1),\phi(m_2),\phi(m_3) \rangle.
+\end{align*}
+By given any divisor, we can reduce it to the form $\bigoplus_{i=1}^5 \mathbb{Z} D_i$ by relations $\phi(m_i)=0$ in the class group.
+Each divisor in $\bigoplus_{i=1}^5 \mathbb{Z} D_i$ is not equivalent since we reduce all divisor to the form excluding $D_6,\dots,D_8$, it means that we can not 
+use $\phi(m_1)$ and $\varphi(m_2)$ since $D_6$ and $D_7$ expressed in it uniquely and respectively.
+Hence, we can not use $\phi(m_3)$ since $D_8$ appears and if we exclude $\phi(m_1)$ and $\phi(m_2)$ then only way to cancel $D_8$ is also exclude $\phi(m_3)$.
+Therefore we obtain that 
+\begin{align*}
+    \text{Cl}(X) = \bigoplus_{i=1}^5 \mathbb{Z} D_i \simeq \mathbb{Z}^5.
+\end{align*}
+
+Let $\sigma_1,\dots,\sigma_6$ correspond to the cone induced by the faces $x=1,x=-1,y=1,y=-1,z=1,z=-1$ respectively.
+A divisor $\sum_{i}a_i D_i$ is a Cartier divisor if and only if it is induced by a local date $(\sigma_i,m_i)$ such that $\langle m_i, v_j\rangle=-a_j$ where $v_j$ is the generator of $\sigma_i$. 
+Then we obtain the equation
+$$\left\{
+\begin{aligned}
+    \sigma_1: & \quad a_1 + a_4 = a_2 + a_3 \\
+    \sigma_2: & \quad a_5 + a_8 = a_6 + a_7 \\
+   \sigma_3: & \quad a_1 + a_6 = a_2 + a_5 \\
+    \sigma_4: & \quad a_3 + a_8 = a_4 + a_7 \\
+    \sigma_5: & \quad a_1 + a_7 = a_3 + a_5 \\
+    \sigma_6: & \quad a_2 + a_8 = a_4 + a_6
+\end{aligned}
+\right.$$
+We can use relation $\phi(m_i)$ to reduce $a_6,\dots,a_8$ to zero, then our equation is reduced to
+$$\left\{
+\begin{aligned}
+    &a_1 + a_4 = a_2 + a_3 \\
+    &a_5 = 0 \\
+    &a_1  = a_2 + a_5 \\
+    &a_3 = a_4 \\
+    &a_1  = a_3 + a_5 \\
+    &a_2  = a_4 
+\end{aligned}
+\right.$$
+Then we obtain that $a_1=a_2=a_3=a_4$ and $a_5=0$. Therefore, we obtain that 
+\begin{align*}
+    \text{Pic}(X) = \mathbb{Z}\cdot(D_1+\dots+D_4)
+\end{align*}
+and 
+\begin{align*}
+    \text{Cl}(X)/\text{Pic}(X) =\mathbb{Z}\cdot(D_1+D_2+D_3) + \mathbb{Z}\cdot(D_1+D_2)+ \mathbb{Z}\cdot(D_1)+\mathbb{Z}\cdot(D_5)\simeq \mathbb{Z}^4.
+\end{align*}
+\end{solution}
+
+
+
+
+% --- Problem 4 ---
+\section*{Problem 4}
+Let $\Delta$ be a fan such that all of its maximal cones are $n$-dimensional. Show that the following are equivalent:
+\begin{enumerate}
+    \item $\Delta$ is simplicial;
+    \item Every Weil divisor on $X(\Delta)$ is $\mathbb{Q}$-Cartier;
+    \item $\text{Pic}(X(\Delta)) \otimes \mathbb{Q} \longrightarrow \text{Cl}(X(\Delta)) \otimes \mathbb{Q}$ is an isomorphism;
+    \item $\text{rank}(\text{Pic}(X(\Delta))) = d - n$.
+\end{enumerate}
+
+\begin{solution}
+    We first show that (1) implies (2). Since $\Delta$ is simplicial, then for every maximal cone $\sigma\in\Delta$ it is generated by linearly independent rays $\{v_1,\dots,v_n\}$.
+    Moreover, those rays form a basis of $N_\mathbb{Q}$. Then we can find a dual basis $\{v_1^*,\dots,v_n^*\}$ of $M_\mathbb{Q}$. Then we given an arbitrary Weil divisor $\sum_i a_iD_i$ on $U_\sigma$ where $D_i$ is induced by ray $v_i$.
+    Then consider $m_\sigma = \sum_i -a_iv_i^*\in M_{\mathbb{Q}}$ which satisfies $\langle m_{\sigma},v_i \rangle = -a_i $. Since $m_\sigma\in M_{\mathbb{Q}}$, then we exists an integer $k_\sigma$ such that $k_\sigma\cdot m_\sigma\in M$.
+    Then divisor $ \sum_i k_\sigma a_i D_i$ is a Cartier divisor. It means that $\sum_i a_iD_i$ is $\mathbb{Q}$-Cartier on $U_\sigma$.
+    For every maximal cone $\sigma$ and a fixed divisor $\sum_i a_i D_i$ we obtain that a integer $k_\sigma$. Let $k=\prod k_\sigma$. Then on each $U_\sigma$, divisor $k\cdot\sum_i a_i D_i$ is generated by $k\cdot m_\sigma\in M$ which implies that it is a Cartier divisor.
+    Therefore every Weil divisor on $X(\Delta)$ is $\mathbb{Q}$-Cartier.
+
+    (2) implies (3). This map is clearly an injection since this map is induced by the canonical inclusion $\text{Pic}(X(\Delta))\to \text{Cl}(X(\Delta))$ and functor $\otimes\mathbb{Q}$ is exact.
+    Since every Weil divisor is $\mathbb{Q}$-Cartier, the surjectivity is also holds. Therefore, this map is an isomorphism.
+
+    (3) implies (4). It implies that $\text{rank}(\text{Pic}(X(\Delta)))=\text{rank}(\text{Cl}(X(\Delta)))$. Consider the exact sequence
+    \begin{align*}
+        0 \to M \to \mathbb{Z}^d \to \operatorname{Cl}(X) \to 0
+    \end{align*}
+    Then we obtain that 
+    \begin{align*}
+        \text{rank}(\text{Pic}(X(\Delta)))=\text{rank}(\text{Cl}(X(\Delta))) = d-n.
+    \end{align*}
+
+    (4) implies (1). We consider the exact sequence
+    \begin{align*}
+        0 \to M \to \operatorname{CDiv}_T(X) \to \operatorname{Pic}(X) \to 0
+    \end{align*}
+    act by exact functor $\otimes \mathbb{Q}$. Then we obtain that 
+    \begin{align*}
+        \dim_\mathbb{Q}(\operatorname{CDiv}_T(X)_\mathbb{Q}) = \dim_\mathbb{Q}(M_\mathbb{Q}) + \dim_\mathbb{Q}(\operatorname{Pic}(X)_\mathbb{Q}) = n + (d - n) = d
+    \end{align*}
+    Since $d$ is the number of rays, it means that $\dim_\mathbb{Q}(\operatorname{CDiv}_T(X)_\mathbb{Q})= \dim_\mathbb{Q}(\operatorname{Div}_T(X)_\mathbb{Q})$. 
+    Equivalently, it means that 
+    \begin{align*}
+        \operatorname{CDiv}_T(X)_\mathbb{Q} =\operatorname{Div}_T(X)_\mathbb{Q}.
+    \end{align*}
+    Restricting to any maximal cone $\sigma$, we obtain that 
+    \begin{align*}
+        \operatorname{CDiv}_T(U_\sigma)_\mathbb{Q} =\operatorname{Div}_T(U_\sigma)_\mathbb{Q}.
+    \end{align*}
+    On right hand side, we have $\dim_\mathbb{Q}(\operatorname{Div}_T(U_\sigma)_\mathbb{Q})=|\sigma(1)|$.
+    On left hand side, since $\sigma$ is a maximal cone, then $U_\sigma$ is affine. Cartier divisor on affine toric variety is principal.
+    Thus, we obtain that $\dim_\mathbb{Q}(\operatorname{CDiv}_T(U_\sigma)_\mathbb{Q})=\dim_\mathbb{Q}(M_\mathbb{Q})= \dim_\mathbb{Q}(N_\mathbb{Q})$.
+    It implies that the rays of $U_\sigma$ forms a basis. Therefore $\Delta$ is simplicial.
+\end{solution}
+
+
+
+
+\end{document}

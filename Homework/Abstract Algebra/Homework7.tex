@@ -1,0 +1,181 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 8}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% --- Problem 1 ---
+\section*{Problem 1}
+Let $V$ be an $A$-module.
+\begin{enumerate}
+    \item[(a)] Show that an endomorphism $e : V \to V$ is a projection onto a $A$-submodule $W$ if and only if $e$ is idempotent as an element of $\text{End}_A(V)$.
+    \item[(b)] Show that direct sum decompositions $V = W_1 \oplus W_2$ as $A$-modules are in bijection with idempotent decompositions $1 = e + f$ in $\text{End}_A(V)$.
+    \item[(c)] Show that $e \in \text{End}_A(V)$ is primitive if and only if $e(V)$ is indecomposable.
+    \item[(d)] Suppose that $V$ is semisimple with finitely many simple summands and let $e_1, e_2 \in \text{End}_A(V)$ be idempotents. Show that $e_1(V) \cong e_2(V)$ as $A$-modules if and only if $e_1$ and $e_2$ are conjugate by an invertible element of $\text{End}_A(V)$.
+    \item[(e)] Let $k$ be a field. Show that all primitive idempotent elements in $M_n(k)$ are conjugate under the action of the unit group $GL_n(k)$, which consists of all the invertible matrices in $M_n(k)$.
+\end{enumerate}
+
+\begin{solution}
+    (a) If $e$ is a projection, by definition, we can suppose that $V=W\oplus W'$ such that $e(W')=0$ and for an arbitrary element $w\in W$ we have $e(w)=w$.
+    Therefore, let $v$ be an arbitrary element in $V$ with unique decomposition $v=w+w'$ where $w\in W$ and $w'\in W'$, then we obtain that $e^2(v)=e^2(w+w')=e(w)=w$, which implies $e^2(v)=e(v)$ and thus $e$ is idempotent.
+    Conversely, let $f=1-e$, I claim that $V=\text{im}(e)\oplus \text{im}(f)$. Then for an arbitrary element $v$ we obtain that $v=e(v)+f(v)$ and thus $V=\text{im}(e)+\text{im}(f)$.
+    Let $v\in\text{im}(e)\cap \text{im}(f)$, it means that there exists an element $v'$ such that $v=f(v')$. Since $e$ is idempotent, we then have $v=e(v)=ef(v')=e(1-e)(v')=0$. Therefore we obtain that $V=\text{im}(e)\oplus\text{im}(f)$
+    and $e$ act as an identity on $\text{im}(e)$ and as null morphism on $\text{im}(f)$, which implies that $e$ is a projection.
+
+    (b) Let Dirsum and Idmdec denotes the set of direct sum decompositions and the set of idempotent decompositions respectively.
+    The process of (a) have shown that $\text{Idmdec}\to \text{Dirsum}$. Conversely, suppose that we have a direct sum decomposition $V=W_1\oplus W_2$. 
+    Then we let $e$ and $f$ be the canonical projection to $W_1$ and $W_2$ respectively. Clearly, $e+f=1$ satisfies our requirement.
+    To show bijectivity, given that an idempotent morphism $e$. Let $f=1-e$, we obtain that $V=\text{im}(e)\oplus \text{im}(f)$ according to (a).
+    Then $e$ and $f$ are identified as the canonical projection to $\text{im}(e)$ and $\text{im}(f)$ respectively. It means that $\text{Idmdec}\to \text{Dirsum}\to \text{Idmdec}$ is an identity.
+    Hence, given that direct sum decomposition $V=W_1\oplus W_2$, let $e$ and $f$ denotes the canonical projection to $W_1$ and $W_2$ respectively.
+    According to the definition of canonical projection, we know that $e$ is idempotent and $e+f=1$. 
+    Hence we have $W_1=\text{im}(e)$ and $W_2=\text{im}(f)$.
+    It means that $\text{Dirsum}\to \text{Idmdec}\to \text{Dirsum}$ is an identity.
+    Therefore $\text{Dirsum}\to \text{Idmdec}$ is a bijection.
+
+    (c) Let $W$ denote $e(V)$.
+     If $W$ is decomposable, according to (b) then there exists an idempotent decomposition $e|_{W}=\text{id}|_{W}=\varphi+\psi $. 
+     Let $i:W\to V$ be the canonical inclusion by considering the direct sum decomposition induced by idempotent decomposition $\text{id}|_V = e+(1-e)$. Let $\tilde{\varphi}=i\circ \varphi \circ e$ and $\tilde{\psi}=i\circ \psi \circ e$.
+     Both $\tilde{\varphi}$ and $\tilde{\psi}$ are an idempotent morphism on $V$. Clearly both of them act as null morphism on $\text{im}(1-e)=\ker(e)$ and for an arbitrary element $v\in\text{im}(e)$,
+    we have $\tilde{\varphi}^2(v)=i\circ \varphi\circ e \circ i \circ \varphi\circ e(v)= i\circ \varphi^2\circ e(v)=\tilde{\varphi}(v)$. Simlilar for $\tilde{\psi}$.
+    Therefore, we obtain idempotent decomposition $e = \tilde{\varphi}+\tilde{\psi}$.
+    Conversely, suppose that $e$ is not primitive, then there exists an idempotent decomposition $e=\varphi+\psi$. Both $\varphi$ and $\psi$ act idempotently on $W$. Therefore we obtain an idempotent decomposition on $W$ which is $e|_W =\text{id}|_W = \varphi|_W+\psi|_W $.
+    According to (b), it corresponds to a direct sum decomposition of $W$. Therefore, our claim holds.
+
+    (d) Suppose that $e_1$ and $e_2$ are conjugate by $a$. Namely, we assume that $e_1=ae_2a^{-1}$ it gives an isomorphism $e_2(V)\to e_1(V)$ by $v\mapsto a(v)$.
+    We just need to verify its well-definedness. Let $v$ be an arbitrary element of $e_2(V)$, it means that there exists an element $v'\in V$ such that $v=e_2(v')$.
+    Since $a$ is invertible, then we obtain that $v=e_2\circ a^{-1}\circ a(v')$. By our assumption, then we have $a(v) = e_1\circ a(v')\in e_1(V)$. Since $a$ is invertible on $V$,
+    the morphism $e_2(V)\to e_1(V)$ is an isomorphism.
+    Conversely, suppose there exists an isomorphism $a:e_2(V)\to e_1(V)$. I claim that there exists an morphism $\tilde{a}$ such that $\tilde{a}|_{e_2(V)}= a$ and $e_1=\tilde{a} e_2 \tilde{a}^{-1}$.
+    Since $V$ is semisimple, then we can assume that 
+    \begin{align*}
+         V\simeq e_1(V)\oplus W_1 \simeq e_2(V)\oplus W_2.
+    \end{align*}
+    where $W_1$ and $W_2$ are the complement of $V_1$ and $V_2$ induced by idempotent morphisms $e_1$ and $e_2$ respectively.
+    Because $e_1(V)\simeq e_2(V)$, we the have $W_1\simeq W_2$ by considering the simple module decomposition $V \cong \bigoplus_{i=1}^k S_i^{n_i}$.
+    Therefore, we let $b:W_2\to W_1$ be an arbitrary isomorphism and let $\tilde{a}=a\oplus b$, we find that $\tilde{a}|_{e_2(V)}=a$.
+    To see the equation $e_1=\tilde{a} e_2 \tilde{a}^{-1}$ holds, by given an arbitrary element $v\in V$, there exists decomposition $v=v_2+w_2$ and $\tilde{a}(v)=a(v_2)+b(w_2)$.
+    Then we obtain that 
+    \begin{align*}
+        (e_1\circ \tilde{a}-  \tilde{a}\circ e_2) (v) = e_1(a(v_2)+b(w_2))-\tilde{a}(v_2) = a(v_2)-a(v_2)=0.
+    \end{align*}
+    Our claim holds.
+
+    (e) Let $V=k^n$ be a $k$-module. According to Artin–Wedderburn theorem, we obtain that $\text{End}_k(V)= M_n(D)$ where $D=\text{End}_k(k)=k$. Given that two arbitrary primitive idempotent elements $e_1$ and $e_2$ in $M_n(k)$, we must have $e_1(V)\simeq e_2(V)\simeq k$ according to (c).
+    Hence, by (d), we obtain that $e_1$ and $e_2$ are conjugate by an invertible element of $M_n(k)$.
+    Therefore, all primitive idempotent elements are conjugate under the action of unit group $\text{GL}_n(k)$.
+
+    
+    
+\end{solution}
+
+
+% --- Problem 2 ---
+\section*{Problem 2}
+Prove: No non-zero idempotent $e$ of $A$ is contained in $J(A)$. [Hint: $e(1 - e) = 0$.]
+
+\begin{solution}
+    Suppose that there exists a non-zero idempotent element $e$ in $J(A)$. Then we know that $1-e$ is invertible.
+    Therefore, we can reduce $1-e$ on each sides of equation $e(1-e)=0$, we know obtain that $e=0$ is trivial contradicting our assumption.
+\end{solution}
+
+% --- Problem 3 ---
+\section*{Problem 3}
+Prove: Let $A$ be an Artinian ring with Artinian center $Z(A)$. Then $J(Z(A)) = J(A) \cap Z(A)$.
+\begin{solution}
+    Suppose that $x\in J(A)\cap Z(A)$. Then for arbitrary element $y\in Z(A)$, we obtain that $1-yx$ is invertible in $A$.
+    Since $1-yx$ is comunatative and therefore its inverse is included in $Z(A)$. It means that $x\in J(Z(A))$. 
+    Conversely, since $A$ and $Z(A)$ are Artinian, their Jacobson radicals are nilpotent ideals. Therefore, let $x$ be a nilpotent element in $Z(A)$, it is also nilpotent in $A$.
+    Of course, it is communatative.
+    Therefore we obtain $J(Z(A))\subseteq J(A)\cap Z(A)$.
+\end{solution}
+
+
+
+% --- Problem 4 ---
+\section*{Problem 4}
+Prove: Let $A = A_1 \oplus \dots \oplus A_n$ be a direct sum of 2-sided ideals. Then
+\begin{enumerate}
+    \item[(i)] $Z(A) = Z(A_1) \oplus Z(A_2) \oplus \dots \oplus Z(A_n)$.
+    \item[(ii)] $J(A) = J(A_1) \oplus J(A_2) \oplus \dots \oplus J(A_n)$.
+\end{enumerate}
+\begin{solution}
+    (i) Let $x\in Z(A)$. It admits a decomposition $x = \sum_i x_i$ where $x_i\in A_i$.
+    Since $A_i$ is double sided ideals, then we obtain that $A_iA_j\subseteq A_i\cap A_j = 0$ and $A_jA_i=0$. Therefore, 
+    for arbitrary $y_i\in A_i$, the equation $xy_i=y_ix$ implies that $x_iy_i=y_ix_i$. It means that $x_i\in Z(A_i)$ and thus $Z(A)\subseteq \bigoplus_i Z(A_i)$.
+    Conversely, suppose that $x_i\in Z(A_i)$ and $x=\sum_ix_i$ is clearly communatative. Then $Z(A)\supseteq \bigoplus_i Z(A_i)$ and thus the claim holds.
+
+    (ii) Given that $x\in J(A)$ with decomposition $x=\sum_i x_i$ and $y_i\in A_i$. We find that $1-y_ix=1-y_ix_i$ is invertible in $A$. Suppose that $u(1-y_ix)=1$ and $u$ admits a decomposition $u=\sum_i u_i$.
+    Suppose $1$ admits a decomposition $1=\sum_i e_i$, then we obtain that $u_i(e_i -y_ix_i)=e_i$. Therefore, $e_i-y_ix_i$ is invertible in $A_i$ and thus $J(A)\subseteq \bigoplus_i J(A_i)$.
+    Conversely, given that $x_i\in J(A_i)$ and an arbitrary element $y=\sum_i y_i\in A$. We consider that $1-yx=\sum_i (e_i-y_ix_i)$. Since $x_i\in J(A_i)$, we can suppose there exists $u_i\in A_i$ such that $u_i(e_i-y_ix_i)=e_i$.
+    Therefore, we obtain that $u(1-yx)=\sum_i u_i(1-y_ix_i)=\sum_i e_i = 1$ and thus $J(A)\supseteq \bigoplus_i J(A_i)$.
+    
+\end{solution}
+
+
+% --- Problem 5 ---
+\section*{Problem 5}
+Let $\phi : U \to V$ be a homomorphism of $A$-modules. Show that $\phi(\text{Soc } U) \subseteq \text{Soc } V$, and that if $\phi$ is an isomorphism then $\phi$ restricts to an isomorphism $\text{Soc } U \to \text{Soc } V$.
+\begin{solution}
+    I claim that $\phi(\text{Soc}(U))$ is semisimple. Since $\text{Soc}(U)$ is semisimple, we suppose that $\text{Soc}(U)=\bigoplus_{i\in I} U_i$.
+    Since $U_i$ is simple, then $\phi(U_i)$ must be zero module or isomorphic to $U_i$.
+    In any case, $\phi(U_i)$ must be either zero or simple. $\phi(\text{Soc}(U))\subseteq \sum_{i} \phi(U_i)$ implies that $\phi(\text{Soc}(U))$ as a submodule of 
+    semisimple module $ \sum_{i} \phi(U_i)$ is also semisimple. It means that $\phi(\text{Soc}(U)) \subseteq \text{Soc}(V)$.
+    Since $\phi$ is an isomorphism, for any non zere simple submodule $U_i$, then $\phi(U_i)$ is not zero submodule. For arbitrary two simple module $U_i$ and $U_j$, we then have $\phi(U_i)\cap \varphi(U_j)=\{0\}$.
+    Therefore we can suppose that 
+    \begin{align*}
+        \text{Soc}(U)= \bigoplus_{i\in I}U_i \text{ and }  \phi(\text{Soc}(U))= \bigoplus_{i\in I}\phi(U_i).
+    \end{align*}
+    Let $\text{Soc}(V) = \phi(\text{Soc}(U))\oplus \bigoplus_{j\in J}V_j$. By (i), we obtain that 
+    \begin{align*}
+        \phi^{-1}(\text{Soc}(V))=\text{Soc}(U)\oplus  \bigoplus_{j\in J}\phi^{-1}(V_j)\subseteq \text{Soc}(U).
+    \end{align*}
+    It means $V_j\simeq \phi^{-1}(V_j)\simeq (0)$. Equivalently, we obtain that $\text{Soc } U \to \text{Soc } V$ is an isomorphism.
+\end{solution}
+
+
+% --- Problem 6 ---
+\section*{Problem 6}
+If $\varphi : A \to A'$ is an epimorphism of rings, then $\varphi(J(A)) \subset J(A')$.
+\begin{solution}
+    By definition, we obtain that 
+    \begin{align*}
+        \varphi(J(A))=\varphi\left(\bigcap_{\mathfrak{m}\in \text{Spm}(A)}\mathfrak{m}\right)\subseteq  \bigcap_{\mathfrak{m}\in \text{Spm}(A)}\varphi(\mathfrak{m}).
+    \end{align*}
+    where Spm denotes the spectrum of maximal ideals.
+    Since $\varphi$ is surjective, it follows that every maximal ideal $\mathfrak{m}'$ in $A'$ corresponds to a maximal ideal $\mathfrak{m}$ in $A$
+    such that $\varphi(\mathfrak{m})=\mathfrak{m}'$. Therefore, we obtain that 
+    \begin{align*}
+        \varphi(J(A))\subseteq \bigcap_{\mathfrak{m}'\in \text{Spm}(A')}\mathfrak{m}' = J(A').
+    \end{align*}
+\end{solution}
+\end{document}

@@ -1,0 +1,48 @@
+{\begingroup
+
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\ol}{\mathcal{O}_L}
+\newcommand{\ok}{\mathcal{O}_K}
+\newcommand{\gal}{\operatorname{Gal}}
+\newcommand{\dics}{\operatorname{dics}}
+\renewcommand{\det}{\operatorname{det}}
+\renewcommand{\char}{\operatorname{char}}
+\newcounter{ant} 
+\newcommand{\np}{\stepcounter{ant}\noindent\textbf{\arabic{ant}.}\quad}
+
+\chapter{Algebraic Number Theory}
+First let we consider some basic extensions:
+\begin{itemize}
+    \item[Type A] Quadratic Extensions $[L:K]=2$;
+    \item[Type B] Cyclotomic Extensions $K(\zeta_n)/K$;
+    \item[Type C] Kummer Extensions $L=K(\sqrt[n]{a})$;
+    \item[Type D] Pure Cubic Extensions $L=K(\sqrt[3]{a})$;
+    \item[Type E] Cyclic Cubic Extensions $\text{Gal}(L/K) \cong C_3$;
+    \item[Type F] Biquadratic Extensions $L = K(\sqrt{a}, \sqrt{b})$;
+    \item[Type G] Quaternion Extensions $\text{Gal}(L/K) \cong Q_8$;
+    \item[Type H] Dihedral Extensions $\text{Gal}(L/K) \cong D_{2n}$;
+    \item[Type I] Complex Multiplication Fields $L = \mathbb{Q}(\zeta_n + \zeta_n^{-1})$;
+    \item[Type J] Eisenstein Extension $L =  \mathbb{Q}(\omega)$ where $\omega$ is a root of an Eisenstein polynomial.
+    \item[Type K] Artin-Schreier Extensions $L = K(y)$ with $y^p - y = a\in K$.
+\end{itemize}
+For Type C, the base field $K$ must contains the roots of unity $\mu_n=\langle\zeta_n\rangle$.
+For Type K, $\char(K)=p$.
+
+
+Let us review concepts from  Algebraic Number Theory.
+
+
+\np Let $L/K$ be a finite seperable extension. The trace operator $\tr$ is a bilinear form on $K$-vector space $L$.
+
+\np The trace ideal $\mathfrak{T}_{L/K}$ is defined by scale ideal $\mathfrak{s}(\mathcal{O}_L) = \langle \text{Tr}_{L/K}(xy) \mid x,y \in \mathcal{O}_L \rangle_{\mathcal{O}_K}$.
+The extension is tamely ramified if and only if $\mathfrak{T}_{L/F} = \ok$.
+
+\np The discriminant of field $L$ is given by $\dics(\langle\alpha_1,\dots,\alpha_n \rangle) = \det(\tr(\alpha_i\alpha_j))$ where $\{\alpha_i\}$ is an integral basis.
+
+\np We define the Different ideal $\mathfrak{D}_{L/K}$ by the inverse of dual lattice $(\ol^{\#})^{-1}$.
+
+\np 
+
+
+
+\endgroup}

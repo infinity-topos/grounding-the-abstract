@@ -1,0 +1,1220 @@
+% !TEX program = xelatex
+\documentclass[10pt,UTF8]{article}
+\usepackage{design_ASC}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{commutative-diagrams}
+\usepackage{thmtools}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\usepackage{mathdots}
+\usepackage[slantfont, boldfont]{xeCJK}
+
+\renewcommand{\qed}{\rightline{$\qedsymbol$}}
+
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\d}{{\rm d}}
+\renewcommand{\i}{{\rm i}}
+\newcommand{\id}{{\rm id}}
+\renewcommand{\div}{{\rm div}}
+\newcommand{\rot}{{\rm rot}}
+\newcommand{\D}{{\rm D}}
+\newcommand{\ad}{{\rm ad}}
+\newcommand{\Aut}{{\rm Aut}}
+\newcommand{\Int}{{\rm Int}}
+\newcommand{\End}{{\rm End}}
+\newcommand{\Ker}{{\rm Ker}}
+\newcommand{\Gal}{{\rm Gal}}
+\renewcommand{\Im}{{\rm Im}}
+\newcommand{\Irr}{{\rm Irr}}
+\newcommand{\Frac}{{\rm Frac}}
+\renewcommand{\char}{{\rm char}}
+\newcommand{\gen}[1]{\langle #1 \rangle}
+
+\newcommand{\ent}{\text{ent}}
+\newcommand{\iden}{\text{id}}
+\renewcommand{\R}{\mathcal{R}}
+\renewcommand{\N}{\text{N}}
+\newcommand{\T}{\text{T}}
+\newcommand{\gl}{\text{GL}}
+\renewcommand{\o}{\text{O}}
+\renewcommand{\so}{\text{SO}}
+\newcommand{\mso}{\text{MSO}}
+\renewcommand{\hom}{\text{Hom}}
+\newcommand{\spm}{\text{Spm}}
+\newcommand{\M}{\text{M}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\k}{\Bbbk}
+\renewcommand{\Z}{\mathbb{Z}}
+\renewcommand{\tr}{{\rm tr}}
+\newcommand{\sgn}{{\rm sgn}}
+\renewcommand{\mod}[1]{{\rm \ mod}\  #1}
+\renewcommand{\exp}[1]{ {\rm exp}  \left(#1 \right)}
+\newcommand{\e}{{\rm e}}
+\newcommand{\ord}{{\rm ord}}
+\newcommand{\jie}{~\\ \textbf{解}}
+\newcommand{\genlegendre}[4]{
+  \genfrac{(}{)}{}{#1}{#3}{#4}
+  \if\relax\detokenize{#2}\relax\else_{\!#2}\fi
+}
+\newcommand{\legendre}[3][]{\genlegendre{}{#1}{#2}{#3}}
+\newcommand{\dlegendre}[3][]{\genlegendre{0}{#1}{#2}{#3}}
+\newcommand{\tlegendre}[3][]{\genlegendre{1}{#1}{#2}{#3}}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\let\proof\relax
+\newtheorem*{proof}{Proof}
+
+
+\setlength\parindent{2em} 
+\title{The Decomposition of Non-Square Matrices} 
+\author{}
+\date{}
+
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  The Bruhat decomposition of the reductive group is an important theorem in algebraic group theory. Givn that 
+  a reductive group $G$, then it can be decomposed as the disjoint union of $BwB$ where $B$ is the Borel
+  subgroup and $w$ is a element of the Weyl group. Hence, if we consider the quotient group $G/B$ with the torus action $T$ 
+  on it, then it induces the cell decomposition of $G$ i.e. $G/B$ can be decomposed by the disjoint union of affine 
+  subvariety. The cell decomposition is actually the Białynicki-Birula decomposition.
+
+  In this paper, we firstly introduce the basic concepts of algebraic geometry and group theory. 
+  Accordingly, we present the Bruhat decomposition of non-square matrices $M$ over an algebraically closed field $k$ and 
+  verify the rationality of applying Białynicki-Birula decomposition on $M/B_m$. The main contribution of this paper is 
+  \begin{enumerate}
+    \item prove the Bruhat decomposition of non-square matrices;
+    \item constructing the quasi-flag from $M/B_m$;
+    \item prove that quasi-flag is a projective variety;
+    \item prove the smoothness of quasi-flag;
+    \item define a locally affine torus action on $M/B_m$.
+  \end{enumerate}
+  \textbf{keywords}: Non-square Matrices, Bruhat Decomposition, Błynicki-Birula Decomposition, Torus Action.
+\end{abstract}
+
+
+\begin{abstract}
+    约化群的 Bruhat 分解在代数群理论中是十分重要的。对于任意的约化群 $G$，可以将其分解为若干个形如 $BwB$ 的不交并，其中
+    $B$ 为约化群 $G$ 的博雷尔子群，$w$ 为外尔群中的元素。进一步考虑商群 $G/B$ 与商群上的代数环面作用，则有商群的胞腔分解，即
+    可以分解为若干个仿射子簇。该胞腔分解实际上是 $G/B$ 的 Białynicki-Birula 分解。
+
+    在本为中，我们首先介绍了代数几何与代数群的基本概念。基于此，我们给出了非方矩阵 $M$ 在代数闭域上的 Bruhat 分解。
+    我们还验证了 Białynicki-Birula 分解在 $M/B_m$ 的合理性。本文的主要贡献为
+    \begin{enumerate}
+      \item 证明了非方矩阵的 Bruhat 分解；
+      \item 定义了一个与 $M/B_m$ 等价的数学概念：仿旗 (Quasi-flag)；
+      \item 证明了仿旗是一个投影簇；
+      \item 证明了仿旗的光滑性；
+      \item 在仿旗上定义了一个局部仿射性的代数环面作用。
+    \end{enumerate}
+    \textbf{关键词}: 非方矩阵, Bruhat 分解, Błynicki-Birula 分解, 代数环面作用.
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+
+\setcounter{page}{1}
+\section{Introduction}
+
+In this paper we study two relative and classical decomposition: the Bruhat decomposition
+and Białynicki-Birula decomposition and try to apply it to non-square matrices.
+
+
+Recall that the Bruhat decomposition is defined on algebraic group which has good properties such as smoothness and 
+so on. Those good properties give a ample structure of algebraic group. For example, for any algebraic group, the lie algebra can 
+be naturally defined, which leads us define many similar concepts in algebraic group theory. 
+It contributes to the proof of Bruhat decomposition and understanding it's geometry meaning.
+However, it is really hard for us to do same thing in non-square matrices. 
+
+There are many works try to entend the Bruhat decomposition. For example, Pushkar\cite{pushkar2020enhanced} 
+defines the enhanced Bruhat decomposition on non-square matrices by fixed the flag of a linear space, which is 
+called enhanced linear space.
+
+Another interesting theory is developed Putcha and Renner \cite{putcha1988linear,renner2005linear}, the algebraic semigroup theory.
+They study the structure of algebraic moniod i.e. algebraic variety with the structure of moniod and try to extend the arguments of the 
+algebraic group theory. One of the most important works is that the anologe of Bruhat decomposition on the reductive moniod, which was
+presented by Renner\cite{renner1986analogue}. Renner proved that for any reductive moniod $M$, there are a decomposition
+\begin{align*}
+  M = \coprod_{x\in\mathcal{R}} BxB
+\end{align*}
+where $B$ denotes the Borel subgroup of unit group and the $\mathcal{R}$ is the Renner moniod of $M$. 
+The Renner moniod is defined by a Zariski closed of Weyl group of unit group. In the sense of square matrices,
+the Renner moniod is the rook matrices which has at most one non-zero element in each rows and columns and the non-zero 
+element must be 1. It is a fantastic method which use the Zariski closed to extend the concepts from algebraic group to
+moniod. 
+
+For the decomposition of a non-square matrices, there are basic views to consider it and relative concepts
+\begin{enumerate}
+  \item as a algebraic variety and consider the decomposition of variety
+  \item as a algebraic variety with a group action, and extend the decomposition of group to itself
+  \item as a algebraic variety with a algebra structure, do similar thing with algebraic moniod.
+\end{enumerate}
+
+Our discussion of this paper is basically based on the first idea which is the simplest. 
+For second idea, we view the non-square matrices as a variety with a algebraic group action. And this idea
+is not really clear now. May be we can refer to \cite{jelisiejew2019bialynicki}, which define a moniod action as 
+a extended group action.
+For the last idea, may be we can embed the non-square matrices into a algebraic group or semigroup and consider the decomposition of it.
+
+This paper is divided by three parts. On the first part, we give some basic concepts and important theorem of algebraic geometry and algebraic group theory.
+On the second part, we prove the Bruhat decomposition of non-square matrices.
+At last, we want to apply Białynicki-Birula decomposition to non-square matrices quoient by a Borel subgroup and verify its rationality.
+
+This paper is based on the algebraic geometry and algebraic group theory, which is extremely hard for me to understand.
+Therefore, the proof of some theorem may have some errors in details or not relatively strict, which 
+needs some refinement and correction in my future study.
+
+
+
+
+\newpage
+
+\section{Preliminaries}
+
+In this chapter, we give a brief introduction of some basic concepts to algebraic group theory.
+For details, we refer to \cite{roman2005advanced,axler1997linear} for linear algebra,\cite{hartshorne2013algebraic,bosch2022algebraic,harris2013algebraic} for algebraic geometry,
+\cite{milne2017algebraic,springer1994linear,geck2013introduction} for algebraic group theory.
+
+
+
+.
+
+
+\subsection{Some notations}
+In this section, we introduce some notations used in this paper.
+
+For any finite set $A$, $|A|$ denotes the order of set i.e. the number of elements in $A$.
+
+$\mathbb{N}_{\le n}$ denote the integer set $\{0,\cdots,n\}$, $\mathcal{N}_{d,n} := \{A\subseteq \mathbb{N}_{\le n}||A| = d\}$.
+Similarly, $\mathbb{N}^*_{\le n} := \{1,\cdots,n\}$ and $\mathcal{N}^*_{d,n} := \{|A| = d|A\subseteq \mathbb{N}^*_{\le n}\}$.
+
+For matrix $A$, $\text{ent}_{ij}(A)$ means $ij$ entry of matrix, $\text{ent}_{* j}(A)$ denotes the $j$th column of $A$ and 
+$\text{ent}_{i*}(A)$ denotes the $i$th row of $A$. Suppose $A$ has dimension $n\times m$, and $I\subseteq \mathbb{N}^*_{\le n}$ and $J\subseteq \mathbb{N}^*_{\le m}$, $\Delta_{I,J}(A)$ denotes the $IJ$ minors of $A$.
+ 
+\begin{definition}
+  The lexicographic order $L_d$ of $\mathcal{N}^*_{d,n}$ is given by
+\begin{align*}
+  L(I) = \sum_{i=1}^d \sum_{j=1}^{I_i}\binom{n-j}{d-i}.
+\end{align*}
+where $I=\{I_1<\cdots<I_d\}$.
+\end{definition}
+
+
+
+\subsection{Linear algebra and basic geometry}
+
+Let $V$ be the $n$-dimensional vector space over field $k$ with a basis $\{v_1,\cdots,v_n\}$.
+
+
+
+
+
+
+\subsubsection{Affine and projective space}
+\begin{definition}
+  The $n$-dimensional \textbf{affine space} over $k$ is the affine structure $\left\langle k^n,k^n,+ \right\rangle$, where $+:k^n\times k^n\to k^n$ is a transitive and free action, denoted by $\mathbb{A}^n_k$.
+\end{definition}
+
+
+
+\begin{definition}
+  The \textbf{projective space} of vector space $V$ is defined by 
+  \begin{align*}
+    \mathbb{P}(V) := V^*/k^*
+  \end{align*}
+  where $V^*=V\backslash \{0\},k^*=k\backslash \{0\}$. The $n$-dimensional projective sapce over $k$ is 
+  \begin{align*}
+    \mathbb{P}^n_k := \mathbb{A}_k^{n+1}\backslash\{0\}/k^*.
+  \end{align*}
+\end{definition}
+By definition, we have $\mathbb{P}(V)=\mathbb{P}^{n-1}_k$.
+\begin{remark}
+  We briefly write $\mathbb{P}^n$ and $\mathbb{A}^n$ as $\mathbb{P}_k^n$ and $\mathbb{A}_k^n$, if we fix the base field $k$.
+\end{remark}
+
+\begin{definition}
+  For point $p\in \mathbb{P}^n$, we give the \textbf{ homogeneous coordinates} as 
+  \begin{align*}
+    p = [p_0:p_1:\cdots:p_n] 
+  \end{align*}
+  where $(p_0,\cdots,p_n)\in \pi^{-1}(p)$ and $\pi:\mathbb{A}^{n+1}\to \mathbb{P}^{n}$ is natural homomorphism.
+\end{definition}
+
+For any $p\in \mathbb{P}^n$, the homogeneous coordinate is not uniquely determined. For example,
+\begin{align*}
+  [p_0:p_1:\cdots:p_n]  = [\lambda p_0:\lambda p_1:\cdots:\lambda p_n]
+\end{align*}
+However, if we fix one non-zero element in homogeneous coordinates then the other element is determined. 
+This is the idea of affine chart and affine coordinate of projective space.
+\begin{definition}
+  The standard \textbf{affine chart} of projective space $\mathbb{P}^n$ is the set $\{U_i\}_{i=0}^n$ where
+  \begin{align*}
+    U_i := \{[p_0:\cdots:p_n]|p_i\neq 0\} 
+  \end{align*}
+  with the coordinate function $\phi_i:U_i \to \mathbb{A}^{n}$ such that
+  \begin{align*}
+    [p_0:\cdots:p_n] \mapsto \left(\frac{p_0}{p_i},\cdots,\frac{p_{i-1}}{p_i},\frac{p_{i+1}}{p_i},\cdots,\frac{p_{n}}{p_i}\right)
+  \end{align*}
+  For $p\in U_i$, we say $\phi_i(p)$ is the \textbf{affine coordinate} of $p$ in the affine chart $U_i$.
+\end{definition}
+
+The coordinate function $\phi_i$ give the set isomorphism of $U_i\cong \mathbb{A}^n$. Hence, $\mathbb{P}^n$ can be viewed as 
+a union of $n+1$ copies of $\mathbb{A}^n$.
+ 
+\subsubsection{Exterior algebra of vector space}
+\begin{definition}
+  The \textbf{$l$th tensor power} of $V$ is given by the $l$ times tensor product of $V$:
+  \begin{align*}
+    T^l(V):=\underbrace{V\otimes \cdots \otimes V}_l.
+  \end{align*}
+  Specifically, $T^0(V)=k$.
+  The \textbf{tensor algebra} of $V$ is the direct sum of all tensor power of $V$:
+  \begin{align*}
+    T(V) := \bigoplus_{l=0}^{\infty} T^l(V).
+  \end{align*}
+\end{definition}
+
+
+
+
+
+\begin{definition}
+  The \textbf{exterior product}  of vector space $V$ is the construction on any finite order set of vector:
+  \begin{align*}
+    \{w_1,\cdots,w_l\} \stackrel{\text{construction}}{\longrightarrow} w_1\wedge \cdots \wedge w_l
+  \end{align*}
+  such that for any $w\in V$, $w \wedge w = 0$ and satisfy associative 
+  \begin{align*}
+    (w_1\wedge w_2) \wedge w_3 = w_1\wedge (w_2 \wedge w_3)
+  \end{align*}
+  and bilinear condition 
+  \begin{align*}
+    &(w_1+w_2) \wedge w_3 = w_1\wedge w_3 +w_2\wedge w_3\\
+    &w_3 \wedge (w_1+w_2)  = w_3\wedge w_1 +w_3\wedge w_2.
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  The \textbf{exterior algebra} of $V$ is the quotient algebra of the tensor algebra $T(V)$:
+  \begin{align*}
+    \bigwedge(V) := T(V)/(\{x\otimes x|x\in V\})
+  \end{align*}
+  with the exterior product.
+  As a vector space, it can be direct sum of all exterior power of $V$:
+  \begin{align*}
+    \bigwedge(V) = \bigoplus_{i=0}^{\infty} \bigwedge^i(V).
+  \end{align*}
+
+  The \textbf{$l$th exterior power} of $V$ is the linear subspace of exterior algebra of V such that
+  \begin{align*}
+    \bigwedge^l(V) := \text{span}(v_{i_1}\wedge\cdots\wedge v_{i_l}|\text{$\{i_j\}_{j=1}^l\in \mathcal{N}^*_{l,n}$ and $i_1\le\cdots\le i_l$}).
+  \end{align*}
+  Specifically, $\bigwedge^0(V)=k$.
+  The \textbf{$l$-sum exterior power} is the linear subspace of exterior algebra where 
+  \begin{align*}
+    \underline{\bigwedge^l}(V): = \bigoplus_{i=0}^{l} \bigwedge^i(V)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  For any $w\in \bigwedge^l(V)$, by definition, we have 
+\begin{align*}
+  w = \sum_{I\in \mathcal{N}^*_{l,n}} a_Iv_I
+\end{align*}
+where $v_I =v_{i_1}\wedge \cdots \wedge v_{i_l}$ if $I=\{i_1,\cdots,i_l\}$ and $a_I\in k$ called Plücker coordinate. Specially, when $l=0$, we let the Plücker coordinate of $w\in k$ be its own, denoted by
+$a_{\emptyset} $.
+\end{definition}
+
+
+
+
+
+Next,we claim some properties of exterior product.
+\begin{proposition}
+  Consider the exterior product over $V$, then \label{252}
+  \begin{enumerate}[a)]
+    \item $w\wedge v + v\wedge w = 0$ for all $w,v\in V$
+    \item $w_1\wedge\cdots\wedge w_d =0$ if and only if $\{w_1,\cdots,w_d\}$ is not linearly independent.
+    \item If $\{w_1,\cdots,w_n\}$ and $\{u_1,\cdots,u_n\}$ is linearly equivalence then 
+    \begin{align*}
+      w_1\wedge\cdots \wedge w_n = \det(B) u_1\wedge\cdots \wedge u_n 
+    \end{align*}
+    where $B$ is the base transformation matrix. 
+  \end{enumerate}
+\end{proposition}
+
+
+\begin{definition}
+  Suppose $w\in \bigwedge^l(V)$ and $v\in V$. We say $v$ \textbf{divides} $w$ if there exist $w'\in\bigwedge^{l-1}(V)$ such that $w=w'\wedge v$.
+\end{definition}
+\begin{proposition}
+  Let $V,v$ and $w$ be as above. $v$ divides $w$ if and only if $v\wedge w=0$
+\end{proposition}
+\begin{definition}
+  We say $w\in \bigwedge^l(V)$ is totally decomposable if there exists $\{w_1,\cdots,w_l\}\subseteq V$ such that 
+  \begin{align*}
+    w = w_1\wedge \cdots \wedge w_l.
+  \end{align*}
+\end{definition}
+Not all elements in exterior power is totally decomposable. We give the counter example as below.
+\begin{example}
+  Consider $e_1\wedge e_2 + e_2\wedge e_3\in \bigwedge^2(\mathbb{R}^3)$ is not totally decomposable.
+\end{example}
+\begin{proposition}
+  For any $w\in\bigwedge^l(V)$
+  The set $\{v\in V|w\wedge v=0\}$ is a linear subspace of $V$.
+\end{proposition}
+
+\begin{definition}
+  Define a map for $l$th exterior power
+  \begin{align*}
+    \varphi_l:  \bigwedge^{l}(V) &\to \hom\left(V,\bigwedge^{l+1}(V)\right) \\
+    \omega &\mapsto \varphi_l(\omega) 
+  \end{align*}
+  where $\varphi_l(w)(v) = w\wedge v$ for $v\in V$. 
+\end{definition}
+
+As usual, we choose the standard base $\{e_I\}_{I\in \mathcal{N}^*_{l,n}}$ of $\bigwedge^{l}(V)$ associated with the lexicographic order $L_l$.
+Suppose $w\in \bigwedge^{l}(V)$ have the Plücker coordinate $\{a_I\}_{I\in \mathcal{N}^*_{l,n}}$.
+Let $D_l(w)$ be the $\tbinom{n}{l+1}\times n$ matrices represent the homomorphism $\varphi_l(w)$.
+the $ij$-entry is given by
+\begin{align*}
+  d_{ij} = 
+  \begin{cases}
+    0 & j\notin L_{d+1}^{-1}(i)\\
+    (-1)^{\tau_{ij}}a_I & \text{otherwise}
+  \end{cases}
+\end{align*}
+where $L_d$ is the lexicographic order of $\{1,\cdots,d\}$, $I =L_{d+1}^{-1}(i)/\{j\} $ and 
+$\tau_{ij}= |\{I_k>j|I_k\in I\}|$.
+
+We have already given a several concepts on $l$th exterior power. By the construction of $l$sum exterior power, we can extend such concepts to $l$sum exterior power.
+\begin{definition}
+  For given $l$sum exterior power $\underline{\bigwedge}^l(V)$ of $V$
+  \begin{enumerate}[a)]
+    \item Define the projection $\pi_i:\underline{\bigwedge}^l(V) \to \bigwedge^i(V)$ for $i\le l$ as a linear transformation such that 
+    \begin{align*}
+      w = \sum_{|I|\le l,I\subseteq\{1,\cdots,n\}} a_Iv_I \mapsto \sum_{|I|= i,I\subseteq\{1,\cdots,n\}} a_Iv_I 
+    \end{align*}
+    \item For $w\in\underline{\bigwedge}^l(V)$, define the map $\tilde{\varphi}_i:\underline{\bigwedge}^l(V) \to \hom\left(V,\bigwedge^{i+1}(V)\right)$ such that $\tilde{\varphi}_i = \varphi_i \circ \pi_i$.
+    \item Define $\tilde{D}_i(w) =D_i\circ\pi_i(w) $.
+  \end{enumerate}
+\end{definition}
+
+
+\begin{remark}
+  Sometimes we remove the tilde of notation defined on $l$sum exterior power for convinence.
+\end{remark}
+
+\begin{proposition}
+  Let $\{w_i\}_{i=1}^l$ is a set of vector in $V$. Suppose
+  \begin{align*}
+    w_1\wedge \cdots \wedge w_l = \sum_{I\in \mathcal{N}_{l,n}} a_Iv_I
+  \end{align*}
+  where $a_I\in k$, $v_I = v_{I_1}\wedge\cdots \wedge v_{I_l}$ and $I=\{I_1<\cdots<I_l\}$. Let $W=[w_1,\cdots,w_l]$ as a matrix, then
+  \begin{align*}
+    a_{I} = \det(\Delta_{I,I}).
+  \end{align*}
+  where $\Delta$ denote the minors.
+\end{proposition}
+
+
+
+\subsection{Some algebraic geometry and algebraic group}
+
+Let $k$ be algebraically closed field and consider the polynomial ring $k[X_1,X_2,\cdots,X_n]$, where the $X_i$ are independent variables. 
+
+
+
+\begin{definition}
+  $X\subseteq k^n$ is \textbf{an affine variety} if $X$ is the set of common zeros of a finite collection of polynomials $S\subseteq k[X_1,\cdots,X_n]$.
+\end{definition}
+
+\begin{definition}
+  The topology on $k^n$ induced by which affine varieties is closed is called \textbf{Zariski topology}.
+\end{definition}
+
+
+\begin{definition}
+  \textbf{Affine space} in algebraic geometry is defined by 
+  \begin{align*}
+    \mathbb{A}^n := \text{spm}(k[X_1,\cdots,X_n]) 
+  \end{align*}
+  where $\text{spm}$ means the set of maximal ideals endowed with Zariski topology.
+\end{definition}
+
+
+\begin{definition}
+  An affine variety $X$ is \textbf{irreducible} if $X$ is irreducible with the induced subtopology i.e. it is not the union of two non-trivial closed subsets.
+\end{definition}
+
+\begin{definition}
+  Let $X$ be the affine variety of $k^n$ and $I(X)=\{f\in k[X_1,\cdots,X_n]|\forall x\in X,f(x)=0\}$. Obviously, $I(X)$ is an ideal of $k[X_1,\cdots,X_n]$. 
+  \begin{align*}
+    k[X_1,\cdots,X_n]/ I(X)
+  \end{align*}
+  is called the \textbf{coordinate ring} or affine algebra of $X$. It can be denoted by $\mathcal{O}(X)$.
+\end{definition}
+
+\begin{definition}
+  Let $X$ be an affine variety with coordinate ring $\mathcal{O}(X)$. A function $f:X\to k$ is \textbf{regular at point} $p\in X$ if there is an open neighbourhood $U$ and $g,h \in\mathcal{O}(X)$ such that $f=g/h$ on $U$.
+  We say $f$ is regular if it is regular at every point of $X$.
+\end{definition}
+
+
+\begin{definition}
+  Let $X\subseteq k^n$ and $Y\subseteq k^m$ be affine varieties. A map $\psi:X\to Y$ is a morphism if
+  \begin{align*}
+    \psi(x_1\cdots,x_n) = (\psi_1(x),\cdots,\psi_m(x))
+  \end{align*}
+  where $\psi_i \in \mathcal{O}(X)$ for $i=1,\cdots,n$ and $x=(x_1,\cdots,x_n)$. We also call this type of map as \textbf{regular map}.
+  A regular map whose inverse is also regular is called \textbf{biregular}. The \textbf{isomorphism} between two affine variety is regular and biregular.
+\end{definition}
+
+
+\begin{definition}
+  The Zariski topology on $\mathbb{P}^n$ is the topology whose open sets are the complements of 
+  projective algebraic sets.
+\end{definition}
+
+\begin{definition}
+  A projective variety is an irreducible algebraicset in $\mathbb{P}^n$ endowed with the Zariski topology. 
+\end{definition}
+
+
+
+\begin{definition}
+  Let $G$ be an affine algebraic variety over $k$ with group structure. If multiplicative function $m:G\times G\to G$ and inverse function$\tau:G\to G $ where $\tau(x)=x^{-1}$ are regular maps, then we call
+  $G$ \textbf{linear algebraic group}.
+\end{definition}
+\begin{definition}
+  The multiplicative group is $\mathbb{G}_m=(k^*,\cdot)$.
+\end{definition}
+\begin{definition}
+  \textbf{A morphism of algebraic groups} is a group homomorphsim and a morphism of varieties(regular map).
+\end{definition}
+
+\begin{definition}
+  For a finite-dimensional $k$-vector space $V$, let $\gl_V$ denote linear automorphism group of $V$ and $G$ be is a algebraic group.
+  A \textbf{representation} of $G$ is a homomorphsim $r:G\to \gl_V$.
+\end{definition}
+
+\begin{definition}
+  A homomorphsim of algebraic groups $\chi:G\to \mathbb{G}_m$ is called a (rational) \textbf{character}. Conversely, homomorphsim $\lambda:\mathbb{G}_m\to G$ called a cocharacter of $G$.
+\end{definition}
+
+It is easy to find that a character $\chi$ of $G$ can induce a representation $r$ of $G$ by
+\begin{align*}
+  r(g)v = \chi(g)v \quad  \forall g\in G, v\in V.
+\end{align*}
+
+We also say a cocharacter as a one-parameter subgroup of $G$.
+\begin{definition}
+  An algebraic group $G$ over $k$ is a \textbf{torus} if it is isomorphic to a product of copies of $\mathbb{G}_m$.
+\end{definition}
+
+
+\begin{definition}
+  Let $R(G)$ denote the radical of $G$ i.e. the largest connected sovable normal subgroup variety. We say $G$ is \textbf{semisimple} if $R(G) = e$.
+\end{definition}
+
+
+
+\begin{definition}
+  Let $G$ be a connected group over $k$. unipotent radical $R_u(G)$ of $G$ is the largest connected normal unipotent subgroup of $G$. 
+  $G$ is said to be \textbf{reductive} if $R_u(G)=e$.
+\end{definition}
+
+\begin{definition}
+  Let $X$ be a separated algebraic scheme over $k$ and $\varphi:\mathbb{A}^1\backslash\{0\}\to X$ a regular map.
+  If $\varphi$ extends to a regular map $\tilde{\varphi}:\mathbb{A}^1\to X$, then define
+  \begin{align*}
+    \lim_{t\to 0} \varphi(t)  = \tilde{\varphi}(0)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Let $G$ be an algebraic group and $\lambda:\mathbb{G}_m \to G$ a cocharacter of $G$. Then $\lambda$ defines an action of $\mathbb{G}_m$ on $G$ by
+  \begin{align*}
+    (t,g) \mapsto \lambda(t)g\lambda(t)^{-1}
+  \end{align*}
+  where $t\in \mathbb{G}_m,g\in G$, denoted by $t.g$.
+\end{definition}
+\begin{definition}
+  Let $G$ be a algebraic group over $k$ and $\lambda$ a cocharacter of $G$, define
+  \begin{align*}
+    &P_G(\lambda) = \{g\in G|\lim_{t\to 0} t.g\text{ exists}\}\\
+    &U_G(\lambda) = \{g\in P_G(\lambda)|\lim_{t\to 0} t.g = e\}\\
+    &Z_G(\lambda) = P_G(\lambda)\cap P_G(-\lambda)
+  \end{align*}
+\end{definition}
+
+
+
+
+\subsection{The Białynicki-Birula decomposition}
+
+\begin{definition}
+  Let $\mu:G\times X\to X$ be an action of a algebraic group on algebraic scheme $X$ over $k$.
+  Define the \textbf{fixed subscheme} of $X$ as a largest closed subscheme $X^G$ of $X$ on which
+  $G$ acts trivially.
+\end{definition}
+
+
+
+\begin{definition}
+  An action of a torus $T$ on a scheme $X$ over $k$ is \textbf{locally affine} if $X$ 
+  admits a covering by $T$-invarient open affine subschemes.
+\end{definition}
+
+
+
+\begin{theorem}
+  Let $X$ be a smooth algebraic variety over $k$ equipped with a locally affine action of $\mathbb{G}_m$.
+  Let $Z$ be a connected component of $X^{\mathbb{G}_m}$. There exist a unique smooth
+    subvariety $X(Z)$ of $X$ such that
+    \begin{align*}
+      X(Z) = \{y\in X|\lim_{t\to 0}ty\text{ exists and lie in }Z\}
+    \end{align*}
+    and a unique regular map $\gamma_Z:X(Z) \to Z$ sending $y\in X(Z)$ to the $\lim_{t\to 0}ty\in Z$.
+\end{theorem}
+
+\begin{theorem}
+  Let $X$ be a smooth connected scheme over $k$ with a locally affine action of $\mathbb{G}_m$ such that
+  $X^{\mathbb{G}_m}$ is finite and constant. For each $x\in X^{\mathbb{G}_m}$, there is a unique
+  smooth subscheme $X(x)$ of $X$ such that 
+  \begin{align*}
+    X(x) = \{y\in X|\lim_{t\to 0}ty\text{ exists and equals x}\}
+  \end{align*}
+\end{theorem}
+
+
+
+\subsection{The Bruhat decomposition}
+
+
+
+\begin{definition}
+  Let $G$ be a reductive algebraic group over $k$ with maximal torus $T$. The Weyl group of $G$ is defined by 
+  \begin{align*}
+    W(G,T) = {N_G(T)}/{C_G(T)} = {N_G(T)}/{T}
+  \end{align*}
+  which is a finite algebraic group. 
+\end{definition}
+
+\begin{definition}
+  A \textbf{Borel subgroup} $B$ of $G$ is a maximal connected solvable subgroup of $G$.
+\end{definition}
+
+\begin{theorem}
+  Let $(G,T)$ be a reductive group over $k$ with maximal torus and $B$ a Borel subgroup of $G$ containing $T$. 
+  There is Bruhat decomposition of $G$ that 
+  \begin{align*}
+     G = \coprod_{w\in W} BwB
+  \end{align*} 
+  where $W$ is Weyl group of $(G,T)$.
+\end{theorem}
+\begin{theorem}
+  Using previous notation, for $w\in W$, let $e_w = wB/B$ be a fixed point in $G/B$ under the action of torus $T$, i.e. $e_w \in (G/B)^T$, there is a unique smooth subvariety $Y(w)$ of $G/B$ such that 
+  \begin{align*}
+    Y(w) = \{x\in G/B|\lim_{t\to 0}\lambda(t)\cdot x = e_w\}
+  \end{align*}
+  which is an affine space and we have a decomposition
+  \begin{align*}
+    G/B = \coprod_{w\in W} Y(w).
+  \end{align*}
+\end{theorem}
+
+
+
+\subsection{Grassmannian, Plücker embedding and flag variety}
+\begin{definition}
+  Let ${G}_{d,V}$ be the set of $d$-dimensional $k$-vector subspace of $V$, named as Grassmannian.
+\end{definition}
+
+
+\begin{definition}
+  Let $\mathcal{P}_{d,V}:G_{d,V} \to \mathbb{P}\left( \bigwedge^d(V)\right)$ denotes the Plücker embedding of $G_{d,V}$ such that
+  \begin{align*}
+    W \mapsto \overline{w_1\wedge\cdots \wedge w_d}
+  \end{align*}
+  where $\{w_1,\cdots,w_d\}$ is a basis of linear subspace $W$. Specifically, when $d=0$, the Plücker embedding $\mathcal{P}_0$ give the 
+  \begin{align*}
+    0 \mapsto \overline{k}
+  \end{align*} 
+  where $\overline{k}$ is the single point of $\mathbb{P}^0$.
+\end{definition}
+
+
+\begin{remark}
+  Since we fix the vector space $V$ in following discussion, let $\mathcal{P}_d$ simply denotes $\mathcal{P}_{d,V}$.
+\end{remark}
+
+The Plücker embedding give a projective variety structure of Grassmannian. Therefore,
+\begin{proposition}
+  ${G}_{d,V}$ is a projective variety.
+\end{proposition}
+
+
+Here are a few propositions related to Plücker embedding.
+\begin{proposition}
+  $\mathcal{P}_d$ is injective. \label{2}
+\end{proposition}
+
+\begin{proposition}
+  $\mathcal{P}_d$ is a closed embedding.
+\end{proposition}
+
+\begin{definition}
+  The flag variety of linear space $V$ is 
+  \begin{align*}
+    \mathcal{F}(n_1,\cdots,n_r; V) = \{0\subseteq V_1 \subseteq \cdots \subseteq V_r \subseteq V|\dim(V_i) = n_i\}
+  \end{align*}
+  where $1\le n_1<\cdots<n_r\le n$ a sequence of integer.
+\end{definition}
+\begin{proposition}
+  Flag variety is a smooth projective variety. \label{fv}
+\end{proposition}
+
+
+\subsection{Segre embedding}
+\begin{definition}
+  The Segre embedding $ \mathscr{S}: \mathbb{P}^m \times \mathbb{P}^n \to \mathbb{P}^{(n+1)(m+1)-1}$ is defined as the map
+  \begin{align*}
+    ([x_0:\cdots:x_n],[y_0:\cdots:y_m]) \mapsto [x_0y_0:x_0y_1:\cdots:x_iy_j:\cdots:x_ny_m]
+  \end{align*}
+  where $x_iy_j$ are taken in lexicographical order. Hence, we let $\mathscr{S}_2= \mathscr{S}$ and for $d>2$
+  \begin{align*}
+    \mathscr{S}_d:\mathbb{P}^{m_1}\times\cdots\times \mathbb{P}^{m_d} &\to \mathbb{P}^{(m_1+1)\cdots(m_d+1)-1}\\
+    (p_1, \cdots ,p_d) &\mapsto \mathscr{S}(\mathscr{S}_{d-1}(p_1,\cdots,p_{d-1}),p_d)
+  \end{align*}
+\end{definition}
+
+\begin{proposition}
+  Segre embedding is a projective variety morphism.
+\end{proposition}
+
+
+\newpage
+
+\section{The Bruhat decomposition of non-square matrices}
+
+
+Recall that the Burhat decomposition of $\gl_n(k)$ is 
+\begin{align*}
+  \gl_n(k) = \coprod_{w\in W_n} B_nwB_n
+\end{align*}
+Where $B_n$ denotes the $n$-dimensional invertible upper triangular matrices as a Borel subgroup of $\gl_n(k)$ and $W$ denotes the $n$-dimensional permutation matrices
+as a Weyl group. 
+
+In this part, we claim that there are a similar decomposition of non-square matrices over $k$.
+Let $M$ be the $n\times m$ matries over $k$.
+
+\begin{definition}
+  The $0-1$ matrix of $M$ is the $n\times m$ matries which entries are only 1 or 0.
+\end{definition}
+
+\begin{definition}
+  Define the $n\times m$ rook matrices as 
+  \begin{align*}
+    \mathcal{R}_{n\times m} = \{g\in M| \text{$g$ is a 0-1 matrix at most one element in each row and column is 1}\}
+  \end{align*} 
+\end{definition}
+
+
+
+
+Before giving the proof of Bruhat decomposition, we define some new concepts.
+\begin{definition}
+  For $n\times m$ matrix $A$, the $ij$ partial rank of matrix $A$ is defined by
+  \begin{align*}
+    r_{ij}(A) := \rank(\Delta_{I,J}(A))
+  \end{align*}
+  where $\Delta_{I,J}$ means $I,J$ minors and $I=\{i,\cdots,n\},J=\{1,\cdots,j\}$.
+\end{definition}
+
+\begin{lemma}
+  Partial rank is invarient under $B_n$ and $B_m$ i.e. $r_{ij}(b_1A) = r_{ij}(A) = r_{ij}(Ab_2)$ for any $b_1\in B_n,b_2\in B_m$ and $A\in M$.  \label{pr}
+\end{lemma}
+\begin{proof}
+  By the definition of matrix product, $b_1A$ means that we add to each row of A a linear combination of the rows further below. 
+  This kind of row transformation is obviously not change the partial rank. It is similar for the column cases.
+
+  \qed
+\end{proof}
+
+\begin{lemma}
+  For any $w\in \mathcal{R}$, we have\label{rpr}
+  \begin{align*}
+    \ent_{ij}(w) = r_{ij}(w) -  r_{i(j-1)}(w) -  r_{(i+1)j}(w) + r_{(i+1)(j-1)}(w) \tag{$*$} 
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  Suppose that $r_{ij}(w) -  r_{i(j-1)}(w) =0$ then $\ent_{lj}(w)=0$ for any $i\le l\le n$ and 
+  $r_{(i+1)j}(w) - r_{(i+1)(j-1)}(w)=0$.
+  If $r_{ij}(w) -  r_{i(j-1)}(w) = 1$ and $\ent_{ij}(w)=0$, then exist $i<l\le n$ such that $\ent_{lj}(w)\neq 0$. 
+  As a consequence, $r_{(i+1)j}(w) - r_{(i+1)(j-1)}(w)=1$.
+  If $r_{ij}(w) -  r_{i(j-1)}(w) = 1$ and $\ent_{ij}(w)=1$, then for all $i<l\le n$,  $\ent_{lj}(w)= 0$.
+  Therefore, $(*)$ holds.
+
+  \qed
+\end{proof}
+
+
+\begin{theorem}
+  For $n,m\in \mathbb{N}^*$, $\mathcal{R}$ denotes the $n\times m$ rook matrix let $B_n$ denotes the invertible triangular matrices over $k$. Then
+  we have decomposition 
+  \begin{align*}
+    M = \coprod_{w\in \mathcal{R}} B_nwB_m.
+  \end{align*}
+  \end{theorem}
+  
+  
+  \begin{proof}
+    Firstly, we prove that the disjoint union is well-defined i.e. for $w_1,w_2\in \mathcal{R}$, $w_1\neq w_2\Rightarrow B_nw_1B_m \cap B_nw_2B_m = \emptyset$. 
+    Suppose $w_1\neq w_2$, if there exist $A_1\in B_nw_1B_m$ and $A_2\in B_nw_2B_m$ such that $A_1=A_2$.
+    By Lemma\ref{pr}, we have $A_1 = A_2 \Rightarrow r_{ij}(A_1)=r_{ij}(A_2) \Rightarrow r_{ij}(w_1)= r_{ij}(w_2)$.
+    By Lemma\ref{rpr}, every rook matrix can be reconstructed by the partial rank function, then $r_{ij}(w_1)= r_{ij}(w_2)\Rightarrow w_1 = w_2$
+    ,which is oppose to the assumption.
+    Therefore, the disjoint union is well-defined. 
+
+    Next, we need to proof the existence of decomposition i.e. for any $g\in M$ there exist $w\in \mathcal{R}$ such that
+    \begin{align*}
+      B_ngB_m = B_nwB_m.
+    \end{align*}
+
+    Consider the coset $gB_m$ we can find a representative $g'$ such that 
+    \begin{enumerate}[a)]
+      \item Each pivot is 1. (pivot is the bottommost nonzero entry of each nonzero column) 
+      \item the entries to right of each pivot within its row are all 0, and
+      \item there is at most one pivot in each row and at most one pivot in each column. 
+    \end{enumerate}
+    The algorithm which produces $g'$ from $g$ is: starting with the leftmost nonzero column, find its bottommost nonzero entry, and scale the column
+    to make this entry a 1, creating the pivot in this column.Now use this pivot to clear out all entries in its
+    row to its right, using column operations that subtract multiples of this column from later columns. Having
+    done this, move on to the next nonzero column to the right, and repeat, scaling to create a pivot, and using
+    it to eliminate entries to its right.
+
+    A similar algorithm using left multiplication by $B_n$ shows that $f\in B_ngB_m$.
+
+    \qed
+
+
+
+  \end{proof}
+
+
+
+\newpage
+
+\section{The Białynicki-Birula decomposition of non-square matrices}
+In this section we want to apply the Białynicki-Birula decomposition to $M/B_n$. 
+Recalled that Białynicki-Birula decomposition is 
+\begin{theorem}
+  If $X$ be a smooth algebraic variety over $k$ equipped with a locally affine action of $\mathbb{G}_m$.
+  Then
+    \item $Z$ be a connected component of $X^{\mathbb{G}_m}$. There exist a unique smooth subvariety $X(Z)$ of $X$ such that
+    \begin{align*}
+      X(Z) = \{y\in X|\lim_{t\to 0} ty\text{ exists and lies in }Z  \}
+    \end{align*}
+    and unique regular map $\gamma_Z:X(Z)\to Z$ sending $y\in X(Z)$ to the limit $\lim_{t\to 0}ty\in Z$
+\end{theorem}
+
+Another important lemma we used is 
+\begin{lemma}
+  Let $T$ be a torus and $(V,r)$ a finite-dimensional representation of $T$. There exists a cocharacter $\lambda:\mathbb{G}_m\to T$ such that $\mathbb{P}(V)^{\lambda(\mathbb{G}_m)}=\mathbb{P}(V)^T$
+\end{lemma}
+
+There are several question we need to answer
+\begin{enumerate}
+  \item Is $M/B_m$ a projective variety?
+  \item Is $M/B_m$ smooth?
+  \item Is there exist suitable torus action on $M/B_m$ which is locally affine?
+\end{enumerate}
+The answer of three question is yes.
+We prove it as follow.
+
+Let $k$ be a algebraically closed field, $M$ be the set of $n\times m$ matrices over $k$, 
+$B_m$ denotes the invertible upper triangular matrices over $k$ which is the ordinary Borel subgroup of $\gl_n(k)$.
+\subsection{$M/B_m$ is a projective variety}
+
+Similar to the $G/B$ which is identified as a flag, we identify $M/B_m$ as a quasi-flag.
+First of all, we give the construction of quasi-flag whcih is the generalization of ordinary flag.
+\begin{definition}
+  Let $V$ be the $n$ dimensional $k$-linear space. Define the $m$ quasi-flag of $V$ by 
+  \begin{align*}
+    \mathcal{F}(m,V) := \left\{  U_1\subseteq_{\text{linear}} \cdots \subseteq_{\text{linear}} U_m|\text{$U_i\subseteq_{\text{linear}} V$ and $\dim(U_i/U_{i-1})\le 1$ for $i\in\{2,\cdots,m\}$} \right\}.
+  \end{align*}
+\end{definition}
+
+Next, we give the reason why we can use quasi-flag to identify $M/B_m$.
+\begin{lemma}
+  $m$-quasi flag is one-to-one corresponding to the $M/B_m$. Hence, the correspondence is given by
+  \begin{align*}
+    gB_m \mapsto \{U_1\subseteq \cdots \subseteq U_m\}
+  \end{align*}
+  where $g\in M$ and $U_i =\text{span}\left(\text{ent}_{*1}(g),\cdots,\text{ent}_{*i}(g)\right)$.
+\end{lemma}
+\begin{proof}
+  First, we need to prove it is well-defined i.e. not depends on the choice of representation element $g\in M$.
+  Suppose there exists $g'\neq g$ such that $g'B_m=gB_m$, then exists $b\in B_m$ such that $g' = gb$. 
+  By definition, the image of $g'B$ is given by
+  \begin{align*}
+    U'_i = \text{span}\left(b_{11}\text{ent}_{*1}(g),\cdots,b_{1i}\text{ent}_{*1}(g)+\cdots+ b_{1i}\text{ent}_{*i}(g)\right)
+  \end{align*}
+  where $b_{jj}\neq 0$ for $j\in \mathbb{N}^*_{\le i}$. Since $\det(b)\neq 0$, then
+  it is linearly equivalence to the $\{\text{ent}_{*1}(g),\cdots,\text{ent}_{*i}(g)\}$, which implies for $i\in \mathbb{N}^*_{\le m}$, we have 
+  $U_{i}=U'_i$. Therefore, it is well-defined.
+
+  Next, we prove the surjective. Pick $u_1\in U_1\backslash \{0\}$ if $\dim(U_1)\neq 0$, otherwise, let $u_1=0$.
+  Hence, pick $u_i\in U_{i}/U_{i-1}$ if $\dim(U_{i}/U_{i-1})\neq 0$ or $u_i=0$. Clearly, we have $U_i=\text{span}(u_1,\cdots,u_i)$. So just let 
+  $g = [u_1,\cdots,u_m]$, the image of $gB_m$ is the given quasi-flag.
+
+  Finally, the injective is also be satisfied. For fixed quasi-flag $\{U_1\subseteq \cdots \subseteq U_m\}$, we recover the matrix $g$ through the method
+  we used in the proof of surjective. For any $g'B$ such that the image is same as the $gB$. Then for any $i\in \mathbb{N}^*_{\le m}$,
+  \begin{align}
+    \text{span}\left(\text{ent}_{*1}(g),\cdots,\text{ent}_{*i}(g)\right) = \text{span}\left(\text{ent}_{*1}(g'),\cdots,\text{ent}_{*i}(g')\right). \tag{$*$}
+  \end{align} 
+  ($*$) implies the fact that exists the $\{\lambda_{ji}\}_{j=1}^{i}$ such that 
+  \begin{align*}
+    \text{ent}_{*i}(g') = \lambda_{1i} \text{ent}_{*1}(g')+\cdots+\lambda_{ii} \text{ent}_{*i}(g')
+  \end{align*}
+  Suppose that $\lambda_{ii}=0$, then $U_i=U_{i-1}$. Hence, $\text{ent}_{*i}(g)$ can be linear represented by $\{\text{ent}_{*1}(g),\cdots,\text{ent}_{*(i-1)}(g)\}$ i.e.
+  exists $\{\mu_j\}_{j=1}^{i-1}$ such that
+  \begin{align*}
+    \text{ent}_{*i}(g) = \mu_1\text{ent}_{*1}(g)+\cdots \mu_{i-1}\text{ent}_{*(i-1)}(g)
+  \end{align*}
+  Then 
+  \begin{align*}
+    \text{ent}_{*i}(g') = (\lambda_{1i}-\mu_1) \text{ent}_{*1}(g')+\cdots+ \text{ent}_{*i}(g')
+  \end{align*}
+  and let $\lambda'_{ji} = \lambda_{ji}-\mu_j$. If $\lambda_{ii}\neq 0$ then just let $\lambda'_{ji}=\lambda_{ji}$.
+  Let $b\in B_m$ with the $ij$ entry $\lambda'_{ij}$ if $i\le j$, then $g'=gb\Rightarrow g'B_m=gB_m$.
+
+  \rightline{$\qedsymbol$}
+\end{proof}
+
+Before give the proof of quasi-flag is variety, we can consider another concepts which is more precise than quasi-flag.
+\begin{definition}
+  Define the Grassmannian $d$-sum of $V$ by
+  \begin{align*}
+    \tilde{G}_{d,V} = \{U\subseteq_{\text{linear}} V|\dim(U)\le d\}
+  \end{align*} 
+  the set of linear subspace of $V$ such that the dimension is lower than $d$.
+\end{definition}
+
+Obviously, we can embed quasi-flag $\mathcal{F}(m,V)$ in the cartesian product of Grassmannian sum by
+\begin{align*}
+  \mathcal{F}(m,V) \to \tilde{G}_{1,V} \times \cdots\times \tilde{G}_{\min\{n,i\},V}  \times \cdots \times \tilde{G}_{\min\{n,m\},V}
+\end{align*}
+Notice that quasi-flag require $\dim(U_{i}/U_{i-1})\le 1$,so $\dim(U_i)\le \min\{i,n\}$
+then copies of Grassmannian sum is large enough.
+
+\begin{definition}
+  Define the sum Plücker embedding $\tilde{\mathcal{P}}_d: \tilde{G}_{d,V}\to \mathbb{P}(\underline{\bigwedge}^d(V))$ such that for $0\le i\le d$ diagrams 
+
+
+\newcommand{\tpd}{\tilde{\mathcal{P}}_d}
+\newcommand{\pd}{{\mathcal{P}}_d}
+
+\begin{center}
+  \begin{codi}[tetragonal]
+  \obj[tetragonal=base 6em height 3em]
+  { |(A)|G_{{i},V}  & |(B)|  {\bigwedge}^{i}(V)& |(E)| \mathbb{P}({{\bigwedge}}^{i}(V))\\
+  &&
+  \\ |(C)|\tilde{G}_{{d},V} & |(D)| \mathbb{P}({\underline{\bigwedge}}^{d}(V))& \\ };
+  \mor A \rho:-> B \pi:-> D;
+  \mor A \iota:-> C;
+  \mor C \tpd:-> D;
+  \mor B \pi':-> E;
+  \mor E \iota:-> D;
+  \end{codi}
+\end{center}
+commute. Where 
+\begin{align*}
+  \rho:\tilde{G}_{{n},V} &\to {\underline{\bigwedge^{d}}}(V)\\
+  W &\mapsto w_1\wedge \cdots \wedge w_{\dim(W)}
+\end{align*}
+$\{w_1,\cdots,w_{\dim(W)}\}$ is a basis of linear subspace $W$ and $\pi,\pi'$ is the natural homomorphism from affine space to projective space. 
+$\iota$ denotes canonical injection.
+\end{definition}
+
+\begin{proposition}
+  $\tilde{\mathcal{P}}_d|_{G_{{i},V}}(G_{{i},V})$ is isomorphic to the image of Plücker embedding $\mathcal{P}_i(G_{{i},V})$.\label{1}
+\end{proposition}
+\begin{proof}
+  By definition, we can decomposite the Plücker embedding $\mathcal{P}_i =  \pi'\circ\rho $ and $\tilde{\mathcal{P}}_d|_{G_{{i},V}} =  \iota\circ \pi'\circ\rho$
+  Since canonical injection does't change the structure of variety i.e. It is regular and biregular because regular function has only $0$ and $\iden$.
+  So isomorphic  is been guarantee directly.
+
+  \qed
+\end{proof}
+
+
+\begin{theorem}
+  Sum Plücker embedding is a closed embedding in projective space.Therefore, Grassmannian $d$-sum is a projective variety.
+\end{theorem}
+\begin{proof}
+  We first claim that it is well-defined.
+  For any linear subspace $U$ of $V$, suppose that $\dim(U) = i$. Then we have
+  \begin{align*}
+    \tilde{\mathcal{P}}_d(U) =\mathcal{P}_i(U).
+  \end{align*}
+  Since $\mathcal{P}_i$ is well-defined, $\tilde{\mathcal{P}}_d$ is well-defined i.e. it does not depend on the choice of basis for any linear subspace of $V$.
+  Next, If there are linear subspaces $W_1,W_2$ such that $\tilde{\mathcal{P}}_d(W_1)=\tilde{\mathcal{P}}_d(W_2)= \overline{w}$ where  
+  \begin{align*}
+    \overline{w} = \overline{ w_1\wedge\cdots \wedge w_{l}}
+  \end{align*}
+  then $\dim(W_1)=\dim(W_2)= l$. According to Proposition \ref{1}, We have
+  \begin{align*}
+    \tilde{\mathcal{P}}_d(W_i) =\mathcal{P}_l(W_i).
+  \end{align*}
+  Hence, according to Proposition \ref{2}, $\mathcal{P}_l$ is injective. Then $W_1=W_2$ implies $\tilde{\mathcal{P}}$ is injective.
+  Plücker embedding $\mathcal{P}_l $ gives a closed subvariety structure in ${G}_{l,V}$, by \ref{1} we know $\tilde{\mathcal{P}}_d$ give the same structure i.e. there are isomorphic as projective variety.
+  By construction of sum Plücker embedding, we see $\tilde{\mathcal{P}}$ gives a closed subvariety structure as well.
+
+  \qed
+\end{proof}
+
+
+\begin{remark}
+  Actually, we can give the construction of polynomials on the ${\underline{\bigwedge}^{d}}(V)$ that common locus is the image of sum Plücker embedding.
+  \begin{align*}
+    \tilde{\mathcal{P}}_d(\tilde{G}_{d,V}) &=\\ &\mathcal{V}\left\{ \text{the $n-i+1$ minors of matrix $\tilde{D}_i,1 \le i \le d$}  \right\}
+    \cap \mathcal{V}\left\{ \text{$a_Ia_J=0 |$ for all $|I|\neq |J|$}  \right\}
+  \end{align*}
+  where $a_I$ denotes Plücker coordinates and $\tilde{D}_i$ is the matrix representation of $\tilde{\varphi}_i$.
+\end{remark}
+
+Let we back to the quasi-flag.
+
+\begin{definition}
+  Define quasi-flag embedding of $\mathcal{F}(m,V)$ by
+  \begin{align*}
+    \mathscr{P}: \mathcal{F}(m,V)  &\to \mathscr{S}_m \left(\prod_{i=1}^{m} \mathbb{P} \left(
+    \underline{\bigwedge}^{\min(i,n)}(V) \right)\right)   \\
+    \{U_1\subseteq \cdots \subseteq U_m\}  &\mapsto \mathscr{S}_m(\overline{u_{11}},\cdots,\overline{u_{m1}\wedge \cdots u_{m\dim(U_m)}} )
+   \end{align*}
+  where $\{u_{i1},\cdots,u_{i\dim(U_i)}\}$ is a basis of linear subspace $U_i$.
+  $\mathscr{S}_m$ denotes Segre embedding of $m$ copies of projective space.
+\end{definition}
+
+\begin{theorem}
+  Quasi-flag embedding is injective and has closed image in projective space, so quasi-flag is a projective variety. \label{qfp}
+\end{theorem}
+
+
+\begin{proof}
+  Proposition\ref{252} implies that if there are two different basis $\{u_i\}$ and $\{{u}'_i\}$ of the $l$-dimensional linear subspace $U$,by the Plücker embedding, $\overline{\{u_1\wedge\cdots\wedge u_l\}} = \overline{\{u'_1\wedge\cdots\wedge u'_l\}}$.
+  So the embedding of quasi-flag is well-defined as well.
+  Secondly, we need to porve that it is injective. Let 
+  \begin{align*}
+    \mathscr{P}':\mathcal{F}(m,V)&\to  \prod_{i=1}^{m} \mathbb{P}(\underline{\bigwedge}^{\min(i,n)}(V)) \\
+    \{U_1\subseteq \cdots \subseteq U_m\}  &\mapsto (\overline{u_{11}},\cdots,\overline{u_{m1}\wedge \cdots u_{m\dim(U_m)}} )
+  \end{align*}
+  If exists $U,U'\in \mathcal{F}(m,V)$ such that $\mathscr{P}'(U)=\mathscr{P}'(U')=\alpha$, then for all $i\in \{1,\cdots,m\}$ 
+  \begin{align*}
+    U_i=U'_i = \mathcal{P}_{\min\{i,n\}}^{-1}\circ \pi_{i} (\alpha) \ \tag{$*$}
+  \end{align*}
+  where $\pi_i$ denote the ordinary projection of $m$-tuples. ($*$) shows that $\mathscr{P}'$ is injective.
+  Recall that Segre embedding is also injective, then $\mathscr{P} = \mathscr{S}_m\circ \mathscr{P}'$ is injective.
+
+ 
+
+  Following the definition, there are only two conditions that quasi-flag need.
+  \begin{enumerate}[a)]
+    \item $U_{i-1}\subseteq U_{i}$
+    \item $\dim(U_i/U_{i-1}) \le 1$ for $i=\{2,\cdots,m\}$
+  \end{enumerate}
+  It is clear that quasi-flag is embeded in the $m$-tuples of Grassmannian sum which is closed because Segre embedding is morphism of projective varieties. 
+  All we need to prove is that quasi-flag is a closed subvariety of $m$-tuples of Grassmannian sum.
+  From the discussion of exterior power, 
+  \begin{align*}
+    U_{i-1}\subseteq U_{i}\Leftrightarrow u_{i1}\wedge\cdots u_{i\dim(U_i)}\wedge u_{(i-1)j} \tag{$*$}
+  \end{align*} 
+  where $\{u_{ij}\}_{j=1}^{\dim(U_i)}$ is a basis of $U_i$ and $\{u_{(i-1)j}\}_{j=1}^{\dim(U_{i-1})}$ is a basis of $U_{i-1}$. 
+  Hence, because it is totally decomposable, then we consider ($*$) is also equivalence to 
+  \begin{align*}
+    B_{u_i} u_{(i-1)j}=0 ,j\in\{1,\cdots,\dim(U_{i-1})\}
+  \end{align*}
+  Which are homogeneous polynomials.
+
+  For condition $b)$ Let $a_{Ij}$ denotes the Plücker coordinate $a_I$ in $j$th projective space. Then, the homogeneous coordinate is given by
+  \begin{align*}
+  [a_{\emptyset 1}\times\cdots\times a_{\emptyset m}:\cdots:a_{{I_1}1}\times\cdots\times a_{{I_m}m} :\cdots]
+  \end{align*}
+  If one entry $a_{{I_1}1}\times\cdots\times a_{{I_m}m} $
+  of homogeneous coordinate not equals to 0, then it can determine the rank sequence $ \{\rank{U_i}\}_{i=1}^n$
+  by $\rank{U_i} = |I_i|$, then we let the polynomials 
+  \begin{align*}
+    a_{{I_1}1}\times\cdots\times a_{{I_m}m} = 0
+  \end{align*}
+  If exists $i\in \mathbb{N}^*_{\le m-1}$ such that $|I_{i+1}|-|I_{i}|>1$.
+  Therefore, quasi-flag is a projective varieties.
+\end{proof}
+
+\subsection{The smoothness of $M/B_m$}
+Suppose the quasi-flag embedding  send $M/B$ to the projective space $\mathbb{P}(W)$.
+Our strategy of proving smoothness is find the appropriate smooth open cover of $M/B$ on $\mathbb{P}(W)$.
+Before find the cover, we give the proof of some useful lemma.
+
+\begin{definition}
+  Define the extended flag  of $V$ as:
+  \begin{align*}
+    \mathcal{F}(n_1,\cdots,n_r;V) = \{U_1\subseteq \cdots\subseteq U_r|U_i\subseteq_{\text{linear}} V ,\dim(U_i)=n_i\}
+  \end{align*}
+  where $1\le n_1\le\cdots \le n_r$ is a sequence of integer.
+\end{definition}
+
+\begin{lemma}
+  There exist a flag variety $\mathcal{F}(j_1,\cdots,j_q;V)$ such that it is isomorphic to 
+  extended flag $ \mathcal{F}(n_1,\cdots,n_r;V)$. \label{exfs}
+\end{lemma}
+\begin{proof}
+  Obviously holds by construction. 
+  \qed
+\end{proof}
+
+\begin{theorem}
+  $M/B_m$ is smooth.
+\end{theorem}
+\begin{proof}
+  Recall that the proof of Theorem\ref{qfp}, we represent quasi-flag which is identified to $M/B_m$ as the locus set of a group of polynomials. 
+  under the closed subvariety $\mathscr{S}(\tilde{G}_{1,V}\times\cdots\times \tilde{G}_{\min(n,m),V}) $. The construction of polynomials as follow.
+  \begin{align*}
+    &\{B_{u_i} u_{(i-1)j}=0 ,j\in\{1,\cdots,\dim(U_{i-1})\} \} \\
+    \cup&\{a_{{I_1}1}\times\cdots\times a_{{I_m}m} = 0|\text{If exists $i\in \mathbb{N}^*_{\le m-1}$ such that $|I_{i+1}|-|I_{i}|>1$}\}
+  \end{align*}
+  We consider the closed subvariety 
+  \begin{align*}
+    \mathscr{S}(\tilde{G}_{1,V}\times\cdots\times \tilde{G}_{\min(n,m),V})  \cap 
+    \mathcal{V}(B_{u_i} u_{(i-1)j}=0 ,j\in\{1,\cdots,\dim(U_{i-1})\})
+  \end{align*}
+  which includes the quasi-flag, and consider part of affine chart  
+  \begin{align*}
+    \{a_{{I_1}1}\times\cdots\times a_{{I_m}m} \neq 0|\text{$|I_i|$ is increasing} \}.
+  \end{align*}
+  It is a open cover of quasi-flag in a closed subvariety. Hence each open cover is corresponding to 
+  a extended flag variety because it satisfied the including condition i.e. 
+  \begin{align*}
+    \mathcal{V}(B_{u_i} u_{(i-1)j}=0 ,j\in\{1,\cdots,\dim(U_{i-1})\})
+  \end{align*}
+  Then we can recover the extended flag $\mathcal{F}(|I_1|,\cdots,|I_m|;V)$ which is smooth according to Lemma\ref{exfs}.
+\end{proof}
+
+
+\subsection{The torus action on $M/B_m$}
+
+Recall that the ordinary torus action on algebraic group is $t^{-1}gt$ where $t\in T$ and $g\in G$.
+However, There are a few question when we consider the torus action $M/B_m$. The most important thing is that we can't find the trous directly from $M$.
+All we can do is just keep the consistence in form.
+ 
+We define the torus action and $\mathbb{G}_m$ of $T$ firstly.
+\begin{definition}
+  Suppose $M$ is the $n\times m$ matrix over filed $k$, $T_j$ be the $j$-dimensional invertible diagonal matrix over $k$.
+  Define torus $T_{n+ m}$ action on $M$ by 
+  \begin{align*}
+    T_{n+ m} \times M &\to M\\
+    t\times g &\mapsto t_ngt_m
+  \end{align*}
+  where $t=t_n\times t_m\in T_{n+m}$ and $g\in M$.
+  
+  Define co-character $\lambda: \mathbb{G}_m \to T_n\times T_m$ such that 
+\begin{align*}
+  h \mapsto \text{diag}(h^{x_1},\cdots,h^{x_n}) \times \text{diag}(h^{y_1},\cdots,h^{y_m})
+\end{align*}
+
+where $x_i,y_i\in \mathbb{Z}$. Define the $\mathbb{G}_m$-action on $M$ through co-character $\lambda$ by
+\begin{align*}
+  h.g = \lambda_1(h)g\lambda_2(h)
+\end{align*}
+where $\lambda_i = \pi_i\circ\lambda$ and $\pi_i$ denotes projection.
+\end{definition}
+
+Because $M$ is a affine variety then the torus action is clearly locally affine.
+Further more, we want to give the torus action on the $M/B_m$.
+
+\begin{definition}
+  Define $T_n\times T_m$ torus action on $M/B_m$ by
+  \begin{align*}
+    t \times gB_m &\mapsto (t_ngt_m)B_m
+  \end{align*}
+  where $t=t_n\times t_m\in T_{n+m}$ and $g\in M$.
+  Define the $\mathbb{G}_m$-action on $M/B_m$ through co-character $\lambda$ by
+  \begin{align*}
+    h.gB_m = \lambda_1(h)g\lambda_2(h) B_m
+  \end{align*}
+  where $\lambda_i = \pi_i\circ\lambda$ and $\pi_i$ denotes projection.
+\end{definition}
+
+
+\begin{theorem}
+  $\mathbb{G}_m$-action is locally affine on $M/B_m$.
+\end{theorem}
+\begin{proof}
+  Consider the quasi-flag embedding of $M/B_m$, then the projective space we choice have the homogeneous
+  coordinates 
+  \begin{align*}
+    [a_{\emptyset 1}\times\cdots\times a_{\emptyset m}:\cdots:a_{{I_1}1}\times\cdots\times a_{{I_m}m} :\cdots]
+  \end{align*} 
+  with the affine chart $\{U_I|I=I_1\times \cdots \times I_m,I_i\subseteq \mathbb{N}_{\le i}^* \}$ which is isomorphic to affine space.
+  We choose part of affine chart whcih satisfy the increasing condition $|I_{i+1}|-|I_{i}|\le 1$. It is a open cover of $M/B_m$.
+  Finally,we claim that it is a $\mathbb{G}_m$-invarient. For fixd affine chart $U_I$ we have
+  \begin{align*}
+    a_{{I_1}1}\cdots a_{{I_m}m} \neq 0 \tag{$*$}
+  \end{align*}
+
+  Suppose $I\not=\{\emptyset\}\times \cdots \times\{\emptyset\}$, let $j_0=\min_{j}\{I_j\neq \emptyset\}$, $J^* = \{i||I_{i}|-|I_{i-1}|=1,i\ge j_0+1\} =\{j_1<\cdots<j_q\}$ and $J=\{j_0<\cdots<j_q\}$.
+  then for any $gB_m\in\mathscr{P}^{-1}(U_I)$ 
+  satisfied the conditions
+  \begin{enumerate}[a)]
+    \item $\text{ent}_{*l}(g) = 0 $ for $1\le l\le j_0 $
+    \item $|\Delta_{I_i,J(i)}|\neq 0$ where $i\ge j_0,J(i) = \{j_0,\cdots,j_{|I_i|-1}\}$
+    \item For $i\notin J$, 
+    let $J'(i) = \{j_0,\cdots,j_l,i\}$ where $l=\max_{l}\{j_l\le i\}$.
+    Any maximal minors $\Delta$ of $\Delta_{\mathbb{N}^*_{\le n},J'(i)}$ such that $|\Delta|=0$.
+  \end{enumerate}
+
+  Hence, it is sufficient. Suppose $gB_m\in M/B_m$ satisfy those conditions.
+  And consider the quasi-flag embedding in product of projective spaces
+  \begin{align*}
+    \mathscr{P}':\mathcal{F}(m,V)&\to  \prod_{i=1}^{m} \mathbb{P}(\underline{\bigwedge}^{\min(i,n)}(V))
+  \end{align*}
+  and $\tilde{g} = \mathscr{P}'(gB_n)$, $\pi_j:\prod_{i=1}^{m}\mathbb{P}(\underline{\bigwedge}^{\min(i,n)}(V))\to \mathbb{P}(\underline{\bigwedge}^{\min(j,n)}(V))$ is a projection.
+  Then a) implies $\pi_{l}(\tilde{g}) = a_{\emptyset l}$. Condition b) give a linear independent set of vector 
+  \begin{align*}
+    A = \{\text{ent}_{*j_0},\cdots,\text{ent}_{*j_q}\} 
+  \end{align*}
+Hence it is a basis of $g$ according conditions c) which implies that $A$ is maximally linearly independent.
+Then we have  $\pi_i(\tilde{g})\in \mathbb{P}({\bigwedge}^{l}(V))$, where $l=|\{j\le i|j\in J\}|$. For any $j_l \le i< j_{l+1}$ and $|I_k|=l$, 
+The Plücker coordinate in product space $a_{I_k,i}\neq 0$ which implies $a_{{I_1}1}\cdots a_{{I_m}m} \neq 0$.
+Then $g$ satisfy condition a),b),c) if and only if $gB_m\in\mathscr{P}^{-1}(U_I)$.
+
+It is easy to see that all the conditions is invarient of torus action because it not change $|\Delta|$ equals to $0$ or not.
+
+Finally, $\mathscr{P}^{-1}(U_I)$ is affine by construction of polynomials which is the determinnant minors of matrix.
+
+\qed
+\end{proof}
+
+
+
+
+
+\newpage 
+\bibliographystyle{siam}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,102 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+% ------ 宏包调用 ------
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{xcolor} % 用于设置字体颜色
+\usepackage{setspace} % 用于调整行距
+\usepackage{amsmath, amssymb} % 用于数学公式
+
+% ------ 中文字体设置 （必须用 XeLaTeX 编译） ------
+\usepackage[UTF8]{ctex}
+
+% ------ 自定义双语对照命令 ------
+% 语法: \bilingual{主句/原文}{对照句/翻译}
+\newcommand{\bilingual}[2]{
+    \begin{spacing}{1.15} % 稍微收紧了一点点行距，配合小字号
+        \noindent \normalsize #1 \\[-0.5ex] % 原文部分: 使用 \normalsize
+        \small \textcolor{blue!70!black}{#2} % 翻译部分: 使用 \small
+    \end{spacing}
+    \vspace{0.8em} % 段落间距
+}
+
+\begin{document}
+
+\section*{Exercise 1}
+
+\bilingual{We now show that the equation $p^{2}=2$ is not satisfied by any rational $p$.}{我们现在证明，方程 $p^{2}=2$ 不被任何有理数 $p$ 所满足。}
+
+\bilingual{If there were such a $p$, we could write $p=m/n$ where $m$ and $n$ are integers that are not both even.}{如果存在这样的 $p$，我们可以写成 $p=m/n$，其中 $m$ 和 $n$ 是不全为偶数的整数。}
+
+\bilingual{Let us assume this is done.}{我们假设这已经做到。}
+
+\bilingual{Then (1) implies (2) $m^{2}=2n^{2}$.}{那么 (1) 蕴含 (2) $m^{2}=2n^{2}$。}
+
+\bilingual{This shows that $m^{2}$ is even.}{这表明 $m^{2}$ 是偶数。}
+
+\bilingual{Hence $m$ is even (if $m$ were odd, $m^{2}$ would be odd), and so $m^{2}$ is divisible by $4$.}{因此 $m$ 是偶数（如果 $m$ 是奇数，$m^{2}$ 也会是奇数），所以 $m^{2}$ 能被 4 整除。}
+
+\bilingual{It follows that the right side of (2) is divisible by $4$, so that $n^{2}$ is even, which implies that $n$ is even.}{由此可见，(2) 的右边能被 4 整除，从而 $n^{2}$ 是偶数，这蕴含着 $n$ 也是偶数。}
+
+\bilingual{The assumption that (1) holds thus leads to the conclusion that both $m$ and $n$ are even, contrary to our choice of $m$ and $n$.}{因此，假设 (1) 成立会导致 $m$ 和 $n$ 都是偶数的结论，这与我们对 $m$ 和 $n$ 的选取相矛盾。}
+
+\bilingual{Hence (1) is impossible for rational $p$.}{因此，对于有理数 $p$ 来说，(1) 是不可能的。}
+
+\bilingual{We now examine this situation a little more closely.}{我们现在更仔细地考察一下这种情况。}
+
+\bilingual{Let $A$ be the set of all positive rationals $p$ such that $p^{2}<2$ and let $B$ consist of all positive rationals $p$ such that $p^{2}>2$.}{令 $A$ 为所有满足 $p^{2}<2$ 的正有理数 $p$ 组成的集合，并令 $B$ 由所有满足 $p^{2}>2$ 的正有理数 $p$ 组成。}
+
+\bilingual{We shall show that $A$ contains no largest number and $B$ contains no smallest.}{我们将证明 $A$ 中没有最大数，且 $B$ 中没有最小数。}
+
+\bilingual{More explicitly, for every $p$ in $A$ we can find a rational $q$ in $A$ such that $p<q$, and for every $p$ in $B$ we can find a rational $q$ in $B$ such that $q<p$.}{更明确地说，对于 $A$ 中的每个 $p$，我们都能在 $A$ 中找到一个有理数 $q$ 使得 $p<q$；对于 $B$ 中的每个 $p$，我们都能在 $B$ 中找到一个有理数 $q$ 使得 $q<p$。}
+
+\bilingual{To do this, we associate with each rational $p>0$ the number (3) $q=p-\frac{p^{2}-2}{p+2}=\frac{2p+2}{p+2}$.}{为此，我们将每个有理数 $p>0$ 与数字 (3) $q=p-\frac{p^{2}-2}{p+2}=\frac{2p+2}{p+2}$ 联系起来。}
+
+\bilingual{Then (4) $q^{2}-2=\frac{2(p^{2}-2)}{(p+2)^{2}}$.}{那么 (4) $q^{2}-2=\frac{2(p^{2}-2)}{(p+2)^{2}}$。}
+
+\bilingual{If $p$ is in $A$ then $p^{2}-2<0$, (3) shows that $q>p$, and (4) shows that $q^{2}<2$.}{如果 $p$ 在 $A$ 中，那么 $p^{2}-2<0$，(3) 表明 $q>p$，且 (4) 表明 $q^{2}<2$。}
+
+\bilingual{Thus $q$ is in $A$.}{因此 $q$ 在 $A$ 中。}
+
+\bilingual{If $p$ is in $B$ then $p^{2}-2>0$, (3) shows that $0<q<p$, and (4) shows that $q^{2}>2$.}{如果 $p$ 在 $B$ 中，那么 $p^{2}-2>0$，(3) 表明 $0<q<p$，且 (4) 表明 $q^{2}>2$。}
+
+\bilingual{Thus $q$ is in $B$.}{因此 $q$ 在 $B$ 中。}
+
+\bilingual{The purpose of the above discussion has been to show that the rational number system has certain gaps, in spite of the fact that between any two rationals there is another: If $r<s$ then $r<(r+s)/2<s$.}{上述讨论的目的是为了表明有理数系统存在某些缝隙，尽管在任意两个有理数之间总存在另一个有理数：如果 $r<s$，那么 $r<(r+s)/2<s$。}
+
+\bilingual{The real number system fills these gaps.}{实数系统填补了这些缝隙。}
+
+\bilingual{This is the principal reason for the fundamental role which it plays in analysis.}{这是它在分析学中扮演基础性角色的主要原因。}
+
+
+\vspace{1em}
+\section*{Exercise 2}
+
+\bilingual{定义2.1. 设 $A$ 是一个非空集，$P$ 是 $A$ 上的一个关系，若 $P$ 适合下列条件：}{Definition 2.1. Let $A$ be a non-empty set and $P$ be a relation on $A$. If $P$ satisfies the following conditions:}
+
+\bilingual{(1) 对任意的 $a\in A,(a,a)\in P;$}{(1) For any $a \in A$, $(a, a) \in P$;}
+
+\bilingual{(2) 若 $(a,b)\in P$ 且 $(b,a)\in P,$ 则 $a=b$;}{(2) If $(a, b) \in P$ and $(b, a) \in P$, then $a = b$;}
+
+\bilingual{(3) 若 $(a,b)\in P,(b,c)\in P,$ 则 $(a,c)\in P;$}{(3) If $(a, b) \in P$ and $(b, c) \in P$, then $(a, c) \in P$;}
+
+\bilingual{则称 $P$ 是 $A$ 上的一个偏序关系，带偏序关系的集合 $A$ 称为偏序集或半序集，若 $P$ 是 $A$ 上的偏序关系，我们用 $a\le b$ 来表示 $(a,b)\in P.$}{then $P$ is called a partial order relation on $A$. A set $A$ equipped with a partial order relation is called a partially ordered set (or poset). If $P$ is a partial order relation on $A$, we denote $(a, b) \in P$ by $a \le b$.}
+
+\bilingual{例1. 实数集上的小于等于关系是一个偏序关系。}{Example 1. The less-than-or-equal-to relation on the set of real numbers is a partial order relation.}
+
+\bilingual{例2. 设 $S$ 是集合，$\mathcal{P}(S)$ 是 $S$ 的所有子集构成的集合，定义 $\mathcal{P}(S)$ 中两个元素 $A\le B$ 当且仅当 $A$ 是 $B$ 的子集，即 $A\subseteq B$，则 $\mathcal{P}(S)$ 在这个关系下成为偏序集。}{Example 2. Let $S$ be a set and $\mathcal{P}(S)$ be the set of all subsets of $S$. For any two elements $A, B \in \mathcal{P}(S)$, define $A \le B$ if and only if $A$ is a subset of $B$, i.e., $A \subseteq B$. Then $\mathcal{P}(S)$ is a partially ordered set under this relation.}
+
+\bilingual{例3. 设 $\mathbb{N}$ 是正整数集，定义 $m\le n$ 当且仅当 $m$ 能整除 $n$，不难验证这是一个偏序关系，注意它不同于 $\mathbb{N}$ 上的自然序关系。}{Example 3. Let $\mathbb{N}$ be the set of positive integers. Define $m \le n$ if and only if $m$ divides $n$. It is easy to verify that this is a partial order relation. Note that it is different from the natural ordering on $\mathbb{N}$.}
+
+\bilingual{在偏序集中，并非任意两个元素之间都有序关系，比如例3中数2与数3互相间没有整除关系，但是有一类偏序集，其中任意两个元素均有序关系。}{In a partially ordered set, it is not necessarily the case that any two elements are comparable. For example, in Example 3, the numbers 2 and 3 do not divide each other. However, there is a class of partially ordered sets where any two elements have an order relation.}
+
+\bilingual{即若 $a, b\in S$，或者 $a\le b$，或者 $b\le a$，这样的偏序集称为全序集，一个偏序集中的全序子集称为该偏序集的一根“链”。例1是全序集。}{That is, if for any $a, b \in S$, either $a \le b$ or $b \le a$, such a set is called a totally ordered set. A totally ordered subset of a partially ordered set is called a "chain". Example 1 is a totally ordered set.}
+
+\bilingual{为方便起见，我们记 $b<a$ 为 $b\le a$ 且 $b\ne a.$}{For convenience, we denote $b \le a$ and $b \ne a$ by $b < a$.}
+
+\bilingual{偏序集中的一个元素 $c$ 称为是极大元，若不存在该集中的元素 $a$，使得 $c<a.$}{An element $c$ in a partially ordered set is called a maximal element if there is no element $a$ in the set such that $c < a$.}
+
+\bilingual{有限偏序集总存在极大元，无限集有可能没有极大元，如例1中的实数集就没有极大元。}{A finite partially ordered set always has a maximal element; an infinite set may not, for instance, the set of real numbers in Example 1 has no maximal element.}
+
+\end{document}

@@ -1,0 +1,229 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+% ------ 宏包调用 ------
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{xcolor} % 用于设置字体颜色
+\usepackage{setspace} % 用于调整行距
+\usepackage{amsmath, amssymb} % 用于数学公式
+
+% ------ 中文字体设置 （必须用 XeLaTeX 编译） ------
+\usepackage[UTF8]{ctex}
+
+% ------ 自定义双语对照命令 ------
+% 语法: \bilingual{主句/原文}{对照句/翻译}
+\newcommand{\bilingual}[2]{
+    \begin{spacing}{1.15} % 稍微收紧了一点点行距，配合小字号
+        \noindent \normalsize #1 \\[-0.5ex] % 原文部分: 使用 \normalsize
+        \small \textcolor{blue!70!black}{#2} % 翻译部分: 使用 \small
+    \end{spacing}
+    \vspace{0.8em} % 段落间距
+}
+
+\begin{document}
+\section*{\S 1. Notes on Technical Writing / 技术写作笔记}
+
+\bilingual{Stanford's library card catalog refers to more than 100 books about technical writing, including such titles as \textit{The Art of Technical Writing}, \textit{The Craft of Technical Writing}, \textit{The Teaching of Technical Writing}.}{斯坦福大学图书馆的卡片目录提到了100多本关于技术写作的书籍，其中包括《技术写作的艺术》、《技术写作的工艺》、《技术写作的教学》等书名。}
+
+\bilingual{There is even a journal devoted to the subject, the \textit{IEEE Transactions on Professional Communication}, published since 1958.}{甚至有一本专门讨论该主题的期刊，即自1958年开始出版的《IEEE专业通信汇刊》。}
+
+\bilingual{The American Chemical Society, the American Institute of Physics, the American Mathematical Society, and the Mathematical Association of America have each published ``manuals of style.''}{美国化学学会、美国物理学会、美国数学学会以及美国数学协会都各自出版了“风格手册”。}
+
+\bilingual{The last of these, \textit{Writing Mathematics Well} by Leonard Gillman, is one of the required texts for CS 209.}{其中最后一份，由 Leonard Gillman 编写的《写好数学》（Writing Mathematics Well），是 CS 209 课程的必读教材之一。}
+
+\bilingual{The nicest little reference for a quick tutorial is \textit{The Elements of Style}, by Strunk and White (Macmillan, 1979).}{最适合快速入门的优秀参考书是 Strunk 和 White 编写的《风格要素》（The Elements of Style，麦克米伦出版公司，1979年）。}
+
+\bilingual{Everybody should read this 85-page book, which tells about English prose writing in general.}{每个人都应该读一读这本只有85页的小书，它讲述了英语散文写作的通用规则。}
+
+\bilingual{But it isn't a required text---it's merely recommended.}{但它不是必读教材——仅仅是推荐阅读。}
+
+\bilingual{The other required text for CS 209 is \textit{A Handbook for Scholars} by Mary-Claire van Leunen (Knopf, 1978).}{CS 209 的另一本必读教材是 Mary-Claire van Leunen 编写的《学者手册》（A Handbook for Scholars，克诺普夫出版公司，1978年）。}
+
+\bilingual{This well-written book is a real pleasure to read, in spite of its unexciting title.}{尽管书名平淡无奇，但这本写得很好的书读起来真是一种享受。}
+
+\bilingual{It tells about footnotes, references, quotations, and such things, done correctly instead of the old-fashioned ``op.\ cit.'' way.}{它讲述了如何正确处理脚注、参考文献、引用等内容，而不是使用老式的“op. cit.”（同上引）方法。}
+
+\bilingual{Mathematical writing has certain peculiar problems that have rarely been discussed in the literature.}{数学写作具有某些独特的困难，而在文献中很少被讨论。}
+
+\bilingual{Gillman's book refers to the three previous classics in the field: An article by Harley Flanders, \textit{Amer.\ Math.\ Monthly}, 1971, pp.\ 1--10; another by R.\ P.\ Boas in the same journal, 1981, pp.\ 727--731.}{Gillman 的书提到了该领域之前的这三部经典之作：Harley Flanders 的一篇文章（《美国数学月刊》，1971年，第1-10页）；以及 R. P. Boas 在同一期刊上的另一篇文章（1981年，第727-731页）。}
+
+\bilingual{There's also a nice booklet called \textit{How to Write Mathematics}, published by the American Mathematical Society in 1973, especially the delightful essay by Paul R.\ Halmos on pp.\ 19--48.}{还有一本很好的小册子叫作《如何撰写数学》（How to Write Mathematics），由美国数学学会于1973年出版，特别是其中 Paul R. Halmos 撰写的那篇令人愉悦的文章（第19-48页）。}
+
+\bilingual{The following points are especially important, in your instructor's view:}{在你的导师看来，以下几点尤为重要：}
+
+\begin{enumerate}
+
+\item \bilingual{Symbols in different formulas must be separated by words .}{不同公式中的符号必须用文字分隔 。}
+\bilingual{Bad: Consider $S_{q}$, $q<p$ .}{错误示例：考虑 $S_{q}$, $q<p$ 。}
+\bilingual{Good: Consider $S_{q}$, where $q<p$ .}{正确示例：考虑 $S_{q}$，其中 $q<p$ 。}
+
+\item \bilingual{Don't start a sentence with a symbol .}{不要以符号开始一个句子 。}
+\bilingual{Bad: $x^{n}-a$ has $n$ distinct zeroes .}{错误示例：$x^{n}-a$ 有 $n$ 个不同的零点 。}
+\bilingual{Good: The polynomial $x^{n}-a$ has $n$ distinct zeroes .}{正确示例：多项式 $x^{n}-a$ 有 $n$ 个不同的零点 。}
+
+\item \bilingual{Don't use the symbols $\therefore$, $\Rightarrow$, $\forall$, $\exists$; replace them by the corresponding words. (Except in works on logic, of course.) }{不要使用符号 $\therefore, \Rightarrow, \forall, \exists$；请用相应的单词代替它们 。（当然，逻辑学著作除外。） }
+
+\item \bilingual{The statement just preceding a theorem, algorithm, etc., should be a complete sentence or should end with a colon .}{在定理、算法等之前的陈述应当是一个完整的句子，或以冒号结尾 。}
+\bilingual{Bad: We now have the following Theorem. $H(x)$ is continuous .}{错误示例：我们现在有如下 定理。$H(x)$ 是连续的 。}
+\bilingual{This is bad on three counts, including rule 2. It should be rewritten, for example, like this :}{这在三个方面都很糟糕，包括违反了准则 2。它应该被重写，例如像这样 ：}
+\bilingual{Good: We can now prove the following result. Theorem. The function $H(x)$ defined in (5) is continuous .}{正确示例：我们现在可以证明如下结果。定理：在 (5) 中定义的函数 $H(x)$ 是连续的 。}
+\bilingual{Even better would be to replace the first sentence by a more suggestive motivation, tying the theorem up with the previous discussion .}{如果能用更具启发性的动机说明来替换第一句话，将定理与之前的讨论联系起来，那就更好了 。}
+
+\item \bilingual{The statement of a theorem should usually be self-contained, not depending on the assumptions in the preceding text. (See the restatement of the theorem in point 4.) }{定理的内容陈述通常应当是自包含的，不依赖于前文的假设 。（参见第 4 点中对定理的重述。） }
+
+\item \bilingual{The word ``we'' is often useful to avoid passive voice ; the ``good'' first sentence of example 4 is much better than ``The following result can now be proved.'' }{使用“我们（we）”一词通常有助于避免被动语态 ；示例 4 中那个“好”的开头句子比“如下结果现在可以被证明”要好得多 。}
+\bilingual{But this use of ``we'' should be used in contexts where it means ``you and me together'', not a formal equivalent of ``I''. Think of a dialog between author and reader .}{但这种“我们”的使用应限于表达“你和我在一起”的语境，而不是作为“我（I）”的正式替代品 。可以将其想象成作者与读者之间的对话 。}
+\bilingual{In most technical writing, ``I'' should be avoided, unless the author's persona is relevant .}{在大多数技术写作中，应当避免使用“我”，除非作者的个人身份与内容相关 。}
+
+\item \bilingual{There is a definite rhythm in sentences. Read what you have written, and change the wording if it does not flow smoothly .}{句子中存在明确的节奏感。朗读你写下的内容，如果读起来不流畅，就修改措辞 。}
+\bilingual{For example, in the text \textit{Sorting and Searching} it was sometimes better to say ``merge patterns'' and sometimes better to say ``merging patterns'' .}{例如，在《排序与查找》一书中，有时说“merge patterns”更好，有时说“merging patterns”更好 。}
+\bilingual{There are many ways to say ``therefore'', but often only one has the correct rhythm .}{表达“因此（therefore）”的方法有很多种，但通常只有一种具有正确的节奏 。}
+
+\item \bilingual{Don't omit ``that'' when it helps the reader to parse the sentence .}{当“that”有助于读者解析句子结构时，不要省略它 。}
+\bilingual{Bad: Assume $A$ is a group .}{错误示例：假设 $A$ 是一个群 。}
+\bilingual{Good: Assume that $A$ is a group .}{正确示例：假设 $A$ 是一个群 。}
+\bilingual{The words ``assume'' and ``suppose'' should usually be followed by ``that'' unless another ``that'' appears nearby .}{“assume”和“suppose”这两个词后面通常应当跟着“that”，除非附近出现了另一个“that” 。}
+\bilingual{But never say ``We have that $x=y$,'' say ``We have $x=y$.'' }{但永远不要说“We have that $x=y$”，而要说“We have $x=y$” 。}
+
+\item \bilingual{Vary the sentence structure and the choice of words, to avoid monotony. But use parallelism when parallel concepts are being discussed.}{改变句子结构和词汇选择，以避免单调。但在讨论平行概念时，要使用平行结构。} % [cite: 226, 227]
+\bilingual{For example (Strunk and White \#15), don't say this:}{例如（Strunk 和 White 第15条），不要这样说：} % [cite: 227]
+\bilingual{Formerly, science was taught by the textbook method, while now the laboratory method is employed.}{以前，科学是通过教材方法讲授的，而现在则采用实验室方法。} % [cite: 229]
+\bilingual{Rather:}{而应该说：} % [cite: 228]
+\bilingual{Formerly, science was taught by the textbook method; now it is taught by the laboratory method.}{以前，科学是通过教材方法讲授的；现在则是通过实验室方法讲授的。} % [cite: 230]
+\bilingual{Avoid words like ``this'' or ``also'' in consecutive sentences; such words, as well as unusual or polysyllabic utterances, tend to stick in a reader's mind longer than other words, and good style will keep ``sticky'' words spaced well apart.}{避免在连续的句子中使用诸如“this”或“also”之类的词汇；这些词，以及不寻常的或多音节的表达，往往比其他词在读者脑海中停留的时间更长，良好的文风会将这些“粘性”词汇合理地隔开。} % [cite: 231]
+\bilingual{(For example, I'd better not say ``utterances'' any more in the rest of these notes.)}{（例如，在这些笔记的其余部分，我最好不要再使用“utterances/表达”这个词了。）} % [cite: 232]
+
+\item \bilingual{Don't use the style of homework papers, in which a sequence of formulas is merely listed .}{不要使用作业论文的风格——即仅仅列出一串公式 。}
+\bilingual{Tie the concepts together with a running commentary .}{要用连续的叙述将概念联系起来 。}
+
+\item \bilingual{Try to state things twice, in complementary ways, especially when giving a definition. This reinforces the reader's understanding.}{尝试用互补的方式将事情表述两遍，尤其是在给出定义时。这能加强读者的理解。} % [cite: 235]
+\bilingual{(Examples, see \S 2 below: $N^{n}$ is defined twice, $A_{n}$ is described as ``nonincreasing'', $L(C,P)$ is characterized as the smallest subset of a certain type.) All variables must be defined, at least informally, when they are first introduced.}{（例如，参见下文的第2节：$N^{n}$ 被定义了两次，$A_{n}$ 被描述为“非递增的”，$L(C,P)$ 被刻画为某种类型的最小子集。）所有变量在首次引入时，至少必须进行非正式的定义。} % [cite: 236]
+
+\item \bilingual{Motivate the reader for what follows. In the example of \S 2, Lemma 1 is motivated by the fact that its converse is true.}{引导读者进入后续内容。在第2节的例子中，引理1的动机在于它的逆命题为真。} % [cite: 238]
+\bilingual{Definition 1 is motivated only by decree; this is somewhat riskier.}{定义1的动机仅仅是出于规定；这多少有些风险。} % [cite: 239]
+\bilingual{Perhaps the most important principle of good writing is to keep the reader uppermost in mind: What does the reader know so far?}{好文章最重要的原则或许就是始终把读者放在首位：读者目前知道了什么？} % [cite: 240]
+\bilingual{What does the reader expect next and why?}{读者接下来的预期是什么，以及为什么？} % [cite: 241]
+\bilingual{When describing the work of other people it is sometimes safe to provide motivation by simply stating that it is ``interesting'' or ``remarkable'';}{在描述他人的工作时，有时通过简单地声明其“有趣”或“了不起”来提供动机是稳妥的；} % [cite: 242]
+\bilingual{but it is best to let the results speak for themselves or to give reasons why the things seem interesting or remarkable.}{但最好是让结果自己说话，或者给出这些事情为什么看起来有趣或了不起的理由。} % [cite: 243]
+\bilingual{When describing your own work, be humble and don't use superlatives of praise, either explicitly or implicitly, even if you are enthusiastic.}{当描述你自己的工作时，要保持谦逊，不要使用显式或隐式的最高级赞美词，即使你充满热情。} % [cite: 244]
+
+\item \bilingual{Many readers will skim over formulas on their first reading of your exposition.}{许多读者在初次阅读你的论述时会略过公式。} % [cite: 245]
+\bilingual{Therefore, your sentences should flow smoothly when all but the simplest formulas are replaced by ``blah'' or some other grunting noise.}{因此，当除了最简单的公式之外的所有公式都被替换为“啦啦啦（blah）”或其他咕哝声时，你的句子仍应读起来流畅。} % [cite: 246]
+
+\item \bilingual{Don't use the same notation for two different things.}{不要用同一种符号表示两种不同的事物。} % [cite: 247]
+\bilingual{Conversely, use consistent notation for the same thing when it appears in several places.}{反之，当同一事物出现在多个地方时，要使用一致的符号。} % [cite: 248]
+\bilingual{For example, don't say ``$A_{j}$ for $1\le j\le n$'' in one place and ``$A_{k}$ for $1\le k\le n$'' in another place unless there is a good reason. It is often useful to choose names for indices so that $i$ varies from 1 to $m$ and $j$ from 1 to $n$, say, and to stick to consistent usage. Typographic conventions (like lowercase letters for elements of sets and uppercase for sets) are also useful.}{例如，除非有充分的理由，否则不要在一个地方说“对于 $1\le j\le n$ 的 $A_{j}$”，而在另一个地方说“对于 $1\le k\le n$ 的 $A_{k}$”。为索引选择固定的名称（比如让 $i$ 从 1 变到 $m$，$j$ 从 1 变到 $n$）并坚持一致的用法，通常很有帮助。排版惯例（比如用小写字母表示集合的元素，大写字母表示集合）也很有用。} % [cite: 249]
+
+\item \bilingual{Don't get carried away by subscripts, especially when dealing with a set that doesn't need to be indexed;}{不要沉溺于下标，特别是在处理不需要带索引的集合时；} % [cite: 250]
+\bilingual{set element notation can be used to avoid subscripted subscripts.}{可以使用集合元素符号来避免使用多层下标（下标的下标）。} % [cite: 251]
+\bilingual{For example, it is often troublesome to start out with a definition like ``Let $X=\{x_{1},...,x_{n}\}$'' if you're going to need subsets of $X$, since the subset will have to defined as $\{x_{i_{1}},...,x_{i_{m}}\}$, say. Also you'll need to be speaking of elements $x_{i}$ and $x_{j}$ all the time. Don't name the elements of $X$ unless necessary. Then you can refer to elements $x$ and $y$ of $X$ in your subsequent discussion, without needing subscripts; or you can refer to $x_{1}$ and $x_{2}$ as specified elements of $X$.}{例如，如果你将需要用到 $X$ 的子集，那么以“设 $X=\{x_{1},...,x_{n}\}$”这样的定义开篇往往会带来麻烦，因为子集将不得不定义为例如 $\{x_{i_{1}},...,x_{i_{m}}\}$。而且你需要一直谈论元素 $x_{i}$ 和 $x_{j}$。除非必要，不要给 $X$ 的元素命名。这样你就可以在随后的讨论中直接提及 $X$ 的元素 $x$ 和 $y$，而不需要使用下标；或者你可以将 $x_{1}$ 和 $x_{2}$ 作为 $X$ 的特定元素来提及。} % [cite: 252]
+
+\item \bilingual{Display important formulas on a line by themselves. If you need to refer to some of these formulas from remote parts of the text, give reference numbers to all of the most important ones, even if they aren't referenced.}{将重要的公式单独占行显示。如果你需要从文本较远的地方引用这些公式中的某一些，请给所有最重要的公式加上参考编号，即使它们最终并没有被引用。} % [cite: 253]
+
+\item \bilingual{Sentences should be readable from left to right without ambiguity.}{句子应当能够从左到右阅读且不产生歧义。} % [cite: 254]
+\bilingual{Bad examples: ``Smith remarked in a paper about the scarcity of data.''}{错误示例：“Smith remarked in a paper about the scarcity of data.”（产生“史密斯在关于数据稀缺性的论文中谈到”与“史密斯在论文中谈到了数据稀缺性”的修饰歧义）} % [cite: 255]
+\bilingual{``In the theory of rings, groups and other algebraic structures are treated.''}{错误示例：“In the theory of rings, groups and other algebraic structures are treated.”（产生断句歧义，读者容易把 rings 和 groups 连着读）} % [cite: 256]
+
+\item \bilingual{Small numbers should be spelled out when used as adjectives, but not when used as names (i.e., when talking about numbers as numbers).}{较小的数字在用作形容词时应当拼写出来（如 two），但在用作名称时（即把数字当成数字本身来谈论时）则不需要。} % [cite: 257]
+\bilingual{Bad: The method requires 2 passes.}{错误示例：该方法需要 2 次遍历。（应写为 two）} % [cite: 258]
+\bilingual{Good: Method 2 is illustrated in Fig.\ 1; it requires 17 passes.}{正确示例：方法 2（Method 2）如图 1 所示；它需要 17 次遍历。} % [cite: 259]
+\bilingual{The count was increased by 2. The leftmost 2 in the sequence was changed to a 1.}{计数增加了 2。序列中最左边的 2 被改成了 1。} % [cite: 260]
+
+\item \bilingual{Capitalize names like Theorem 1, Lemma 2, Algorithm 3, Method 4.}{在提及“定理 1”、“引理 2”、“算法 3”、“方法 4”等特定名称时，首字母要大写。} % [cite: 261]
+
+\item \bilingual{Some handy maxims:}{一些实用的格言：} % [cite: 264]
+\bilingual{Watch out for prepositions that sentences end with.}{当心句子结尾用的介词。} % [cite: 265]
+\bilingual{When dangling, consider your participles.}{悬空时，考虑考虑你的分词。} % [cite: 266]
+\bilingual{About them sentence fragments.}{关于那些句子碎片。} % [cite: 267]
+\bilingual{Make each pronoun agree with their antecedent.}{让每个代词都与他们的先行词保持一致。} % [cite: 268]
+\bilingual{Don't use commas, which aren't necessary.}{不要使用逗号，那是不必要的。} % [cite: 269]
+\bilingual{Try to never split infinitives.}{尽量永远不要劈开不定式。} % [cite: 270]
+
+\item \bilingual{Some words frequently misspelled by computer scientists:}{计算机科学家经常拼错的一些单词：} %
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2} % 稍微拉开一点表格行距，看起来更舒服
+\begin{tabular}{ll}
+    implement (not impliment) & \small\textcolor{blue!70!black}{实现（而非 impliment）} \\
+    complement (not compliment) & \small\textcolor{blue!70!black}{互补/补码（而非表示赞美的 compliment）} \\
+    occurrence (not occurence) & \small\textcolor{blue!70!black}{发生/出现（而非 occurence）} \\
+    dependent (not dependant) & \small\textcolor{blue!70!black}{依赖的（而非 dependant）} \\
+    auxiliary (not auxillary) & \small\textcolor{blue!70!black}{辅助的（而非 auxillary）} \\
+    feasible (not feasable) & \small\textcolor{blue!70!black}{可行的（而非 feasable）} \\
+    preceding (not preceeding) & \small\textcolor{blue!70!black}{前述的（而非 preceeding）} \\
+    referring (not refering) & \small\textcolor{blue!70!black}{引用的（而非 refering）} \\
+    category (not catagory) & \small\textcolor{blue!70!black}{类别（而非 catagory）} \\
+    consistent (not consistant) & \small\textcolor{blue!70!black}{一致的（而非 consistant）} \\
+    PL/I (not PL/1) & \small\textcolor{blue!70!black}{PL/I 语言（而非 PL/1）} \\
+    descendant (noun) (not descendent) & \small\textcolor{blue!70!black}{后代/子节点（名词，而非 descendent）} \\
+    its (belonging to it) (not it's) & \small\textcolor{blue!70!black}{它的（物主代词，而非表示 it is 的 it's）} \\
+\end{tabular}
+\end{center}
+
+\bilingual{The following words are no longer being hyphenated in current literature: nonnegative, nonzero.}{在目前的文献中，以下单词不再使用连字符：nonnegative（非负）、nonzero（非零）。} %
+\item \bilingual{Don't say ``which'' when ``that'' sounds better. The general rule nowadays is to use ``which'' only when it is preceded by a comma or by a preposition, or when it is used interrogatively.}{当用“that”听起来更好时，不要说“which”。现在的通用规则是，仅在“which”前面有逗号、介词或是作为疑问词使用时才使用它。} % [cite: 276]
+\bilingual{Experiment to find out which is better, ``which'' or ``that'', and you'll understand this rule.}{试着对比一下“which”和“that”哪个更好，你就会理解这条规则了。} % [cite: 277]
+\bilingual{Bad: Don't use commas which aren't necessary.}{错误示例：不要使用那些并非必要的逗号。} % [cite: 278]
+\bilingual{Better: Don't use commas that aren't necessary.}{更好的表达：不要使用那些并非必要的逗号。} % [cite: 278]
+\bilingual{Another common error is to say ``less'' when the proper word is ``fewer''.}{另一个常见的错误是在该用“fewer（更少，修饰可数）”时用了“less（更少，修饰不可数）”。} % [cite: 279]
+
+\item \bilingual{In the example at the bottom of \S 2 below, note that the text preceding displayed equations (1) and (2) does not use any special punctuation.}{在下文第 2 节底部的示例中，请注意展示公式 (1) 和 (2) 之前的文本不使用任何特殊的标点符号。} % [cite: 280]
+
+\bilingual{Many people would have written}{许多人会写成这样：} % [cite: 281]
+
+\bilingual{... of ``nonincreasing'' vectors:}{……“非递增”向量：} % [cite: 282]
+\begin{equation}
+    A_{n}=\{(a_{1},...,a_{n})\in N^{n} \mid a_{1}\ge...\ge a_{n}\}.
+\end{equation} % [cite: 283, 284]
+
+\bilingual{If $C$ and $P$ are subsets of $N^{n}$, let:}{如果 $C$ 和 $P$ 是 $N^{n}$ 的子集，令：} % [cite: 285]
+\begin{equation*}
+    L(C,P)=... 
+\end{equation*} % [cite: 286]
+
+\bilingual{and those colons are wrong.}{而那些冒号是错误的。} % [cite: 287]
+
+\item \bilingual{The opening paragraph should be your best paragraph, and its first sentence should be your best sentence.}{24. 开篇段落应当是你写得最好的段落，而它的第一句话应当是你写得最好的一句。} % [cite: 290]
+\bilingual{If a paper starts badly, the reader will wince and be resigned to a difficult job of fighting with your prose.}{如果一篇文章的开头很糟糕，读者会感到退缩，并不得不硬着头皮去应付你的文字。} % [cite: 291]
+\bilingual{Conversely, if the beginning flows smoothly, the reader will be hooked and won't notice occasional lapses in the later parts.}{相反，如果开头行云流水，读者就会被吸引，甚至不会注意到后面偶尔出现的瑕疵。} % [cite: 292]
+\bilingual{Probably the worst way to start is with a sentence of the form ``An $x$ is $y$.'' For example,}{最糟糕的开头方式大概是使用“一个 $x$ 是 $y$”这种句式。例如：} % [cite: 293]
+\bilingual{Bad: An important method for internal sorting is quicksort.}{错误示例：一种重要的内部排序方法是快速排序。} % [cite: 294]
+\bilingual{Good: Quicksort is an important method for internal sorting, because ...}{正确示例：快速排序是内部排序的一种重要方法，因为……} % [cite: 294]
+\bilingual{Bad: A commonly used data structure is the priority queue.}{错误示例：一种常用的数据结构是优先队列。} % [cite: 294]
+\bilingual{Good: Priority queues are significant components of the data structures needed for many different applications.}{正确示例：优先队列是许多不同应用所需数据结构中的重要组成部分。} % [cite: 295]
+
+\item \bilingual{The normal style rules for English say that commas and periods should be placed inside quotation marks, but other punctuation (like colons, semicolons, question marks, exclamation marks) stay outside the quotation marks unless they are part of the quotation.}{25. 英语的标准风格规则规定，逗号和句号应当放在引号内部，而其他标点（如冒号、分号、问号、感叹号）则留在引号外部，除非它们本身就是引用内容的一部分。} % [cite: 296]
+\bilingual{It is generally best to go along with this illogical convention about commas and periods, because it is so well established, except when you are using quotation marks to describe some text as a specific string of symbols.}{通常最好遵循这种关于逗号和句号的、虽然不合逻辑但已约定俗成的惯例，除非你是用引号来将某些文本描述为特定的符号字符串。} % [cite: 297]
+\bilingual{Good: Always end your program with the word ``end''.}{正确示例：始终以单词“end”来结束你的程序。} % [cite: 299]
+\bilingual{On the other hand, punctuation should always be strictly logical with respect to parentheses and brackets.}{另一方面，标点符号在处理圆括号和方括号时应始终保持严格的逻辑性。} % [cite: 300]
+\bilingual{Put a period inside parentheses if and only if the sentence ending with that period is entirely within the parentheses.}{当且仅当以该句号结尾的句子完全在括号内时，才将句号放在括号内。} % [cite: 301]
+\bilingual{The punctuation outside the parentheses should be correct if the parenthesized statement would be removed.}{如果去掉括号内的陈述，括号外的标点符号仍应是正确的。} % [cite: 302]
+\bilingual{Bad: This is bad, (although intentionally so.)}{错误示例：这很糟糕，（虽然是故意为之。）} % [cite: 303]
+
+\item \bilingual{Resist the temptation to use long strings of nouns as adjectives: consider the packet switched data communication network protocol problem.}{26. 抵制使用长串名词作为形容词的诱惑：想想“分组交换数据通信网络协议问题”这个例子。} % [cite: 304]
+\bilingual{In general, don't use jargon unnecessarily. Even specialists in a field get more pleasure from papers that use a nonspecialist's vocabulary.}{总的来说，不要不必要地使用行话。即使是某一领域的专家，也更喜欢阅读那些使用非专业词汇的论文。} % [cite: 305]
+\bilingual{Bad: ``If $L^{+}(P,N_{0})$ is the set of functions $f:P\rightarrow N_{0}$ with the property that}{错误示例：“如果 $L^{+}(P,N_{0})$ 是函数 $f:P\rightarrow N_{0}$ 的集合，且具有性质} % [cite: 306]
+\begin{equation*}
+    \exists_{n_{0}\in N_{0}}\forall_{p\in P}p\ge n_{0}\Rightarrow f(p)=0
+\end{equation*} % [cite: 307]
+\bilingual{then there exists a bijection $N_{1}\rightarrow L^{+}(P,N_{0})$ such that if $n\mapsto f$ then}{那么存在一个双射 $N_{1}\rightarrow L^{+}(P,N_{0})$，使得若 $n\mapsto f$ 则} % [cite: 308]
+\begin{equation*}
+    n=\prod_{p\in P}p^{f(p)}.
+\end{equation*} % [cite: 309]
+\bilingual{Here P is the prime numbers and $N_{1}=N_{0}\setminus\{0\}$.''}{这里 P 是素数集，且 $N_{1}=N_{0}\setminus\{0\}$。”} % [cite: 310]
+\bilingual{Better: ``According to the `fundamental theorem of arithmetic' (proved in ex. 1.2.4-21), each positive integer $u$ can be expressed in the form}{更好的表达：“根据‘算术基本定理’（在习题 1.2.4-21 中证明），每个正整数 $u$ 都可以表示为如下形式} % [cite: 314]
+\begin{equation*}
+    u=2^{u_{2}}3^{u_{3}}5^{u_{5}}7^{u_{7}}11^{u_{11}}...=\prod_{p~\text{prime}}p^{u_{p}}
+\end{equation*} % [cite: 315]
+\bilingual{where the exponents $u_{2},u_{3},...$ are uniquely determined nonnegative integers, and where all but a finite number of the exponents are zero.''}{其中指数 $u_{2},u_{3},...$ 是唯一确定的非负整数，且除了有限个指数外，其余指数均为零。”} % [cite: 316]
+
+\item \bilingual{When in doubt, read \textit{The Art of Computer Programming} for outstanding examples of good style.}{27. 如有疑问，请阅读《计算机程序设计艺术》，以获取优秀风格的卓越范例。} % [cite: 319]
+\bilingual{[That was a joke. Humor is best used in technical writing when readers can understand the joke only when they also understand a technical point that is being made.]}{（那是个玩笑。当读者只有在理解了某个技术点时才能理解幽默时，幽默在技术写作中能发挥最佳效果。）} % [cite: 320]
+\bilingual{Here is another example from Linderholm:}{这里有另一个来自 Linderholm 的例子：} % [cite: 321]
+\bilingual{``... $\emptyset D=\emptyset$ and $N\emptyset=N$ which we may express by saying that $\emptyset$ is absorbing on the left and neutral on the right, like British toilet paper.''}{“……$\emptyset D=\emptyset$ 且 $N\emptyset=N$，我们可以将其表述为：$\emptyset$ 在左边是吸收性的，在右边是中性的，就像英国的厕纸一样。”} % [cite: 322]
+\bilingual{Try to restrict yourself to jokes that will not seem silly on second or third reading. And don't overuse exclamation points!]}{尽量将笑话限制在那些第二遍或第三遍阅读时不会显得愚蠢的范围内。并且不要过度使用感叹号！]} % [cite: 323, 324]
+\end{enumerate}
+
+
+\end{document}
