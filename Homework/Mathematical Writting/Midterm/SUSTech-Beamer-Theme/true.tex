@@ -1,0 +1,158 @@
+% !TeX program = xelatex
+\documentclass{beamer}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+
+% other packages
+\usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
+\usepackage{graphicx,pstricks,listings,stackengine}
+
+\author{Nie Jiaduo \and Wen Zijie \and Zhong Haoyu}
+\title{Writing Analysis and Error Correction}
+% \subtitle{Paper1: SafeSec Tropos: Joint security and safety requirements elicitation}
+\institute{Department of Mathematics, Sustech}
+\date{2026.4.26}
+\usepackage{SUSTech}
+
+% defs
+\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+\def\env#1{\texttt{\color{blue}\footnotesize #1}}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{halfgray}{gray}{0.55}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color{deepblue},
+    emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    numbers=left,
+    numberstyle=\small\color{halfgray},
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    frame=shadowbox,
+}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{figure}[htbp]
+        \begin{center}
+            \includegraphics[scale = 0.16]{pic/LOGO.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \tableofcontents[sectionstyle=show,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+\end{frame}
+
+\section{Article Overview}
+\begin{frame}{Article Overview}
+    % 使用 \small 稍微缩小字体，增加容错空间
+    \small 
+    % 调整行间距
+    \renewcommand{\arraystretch}{1.6} 
+    
+    % 第一列(标签)给 30% 宽度，第二列(内容)给 65% 宽度
+    \begin{tabular}{@{} p{0.3\textwidth} p{0.65\textwidth} @{}}
+        \textcolor{orange}{\textbf{Title}} & Projection, Measure, and Idempotent Relations: Independent Axioms and a Fixed-Point Coupling Law \\
+        
+        \textcolor{orange}{\textbf{Author}} & Yunbeom Yi \\
+        
+        \textcolor{orange}{\textbf{Field}} & Mathematical Logic \\
+        
+        \textcolor{orange}{\textbf{arXiv ID}} & 2604.18640 \\
+        
+        \textcolor{orange}{\textbf{Submission Date}} & April 19, 2026 \\
+        
+        \textcolor{orange}{\textbf{Mathematical Background}} & Category Theory, Measure Theory, Set Theory, and Operator Theory
+    \end{tabular}
+\end{frame}
+
+\section{Error Categories}
+
+\begin{frame}{Classification of Errors}
+    % 定义分类专属的高级色调
+    \definecolor{CatNavy}{HTML}{1E3A8A}
+    \definecolor{CatRust}{HTML}{9A3412}
+    \definecolor{CatForest}{HTML}{065F46}
+    \definecolor{CatRed}{HTML}{991B1B}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            % Category 1
+            \setbeamercolor{block title}{bg=CatNavy, fg=white}
+            \setbeamercolor{block body}{bg=CatNavy!5, fg=black}
+            \begin{block}{\small I. Language \& Punctuation}
+                \small
+                \textbf{Definition:} Violations of standard grammatical rules and typographical conventions.
+            \end{block}
+            
+            \vspace{4mm} % 稍微拉大间距，因为内容变少了
+            
+            % Category 2
+            \setbeamercolor{block title}{bg=CatRust, fg=white}
+            \setbeamercolor{block body}{bg=CatRust!5, fg=black}
+            \begin{block}{\small II. Style \& Architecture}
+                \small
+                \textbf{Definition:} Impediments to narrative flow and structural clarity of academic expression.
+            \end{block}
+        \end{column}
+
+        \begin{column}{0.48\textwidth}
+            % Category 3
+            \setbeamercolor{block title}{bg=CatForest, fg=white}
+            \setbeamercolor{block body}{bg=CatForest!5, fg=black}
+            \begin{block}{\small III. Math Formatting}
+                \small
+                \textbf{Definition:} Deviations from rigorous mathematical typesetting standards.
+            \end{block}
+            
+            \vspace{4mm}
+            
+            % Category 4
+            \setbeamercolor{block title}{bg=CatRed, fg=white}
+            \setbeamercolor{block body}{bg=CatRed!5, fg=black}
+            \begin{block}{\small IV. Logical Flaws}
+                \small
+                \textbf{Definition:} Fundamental breaches of mathematical reasoning and conceptual integrity.
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+\section{x}
+
+\subsection{xx}
+
+\begin{frame}
+    \begin{itemize}
+        \item x
+        \item y
+    \end{itemize}
+\end{frame}
+
+
+
+
+\section{Reference}
+
+\begin{frame}[allowframebreaks]
+    \bibliography{ref}
+    \bibliographystyle{alpha}
+    % 如果参考文献太多的话，可以像下面这样调整字体：
+    % \tiny\bibliographystyle{alpha}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        {\Huge\calligra Thanks!}
+    \end{center}
+\end{frame}
+
+\end{document}

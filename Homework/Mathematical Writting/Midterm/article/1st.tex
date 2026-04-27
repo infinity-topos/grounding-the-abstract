@@ -137,7 +137,8 @@ Yunbeom Yi\\[4pt]
     \centering
     \vspace*{2cm}
     
-    {\Huge \bfseries Review and Correction Documentation} \\[1.5cm]
+    {\Huge \bfseries Review and Correction Documentation\par} 
+    \vspace{1.5cm}
     
     % --- Section 1: Article Information ---
     \begin{flushleft}
@@ -151,7 +152,6 @@ Yunbeom Yi\\[4pt]
         \end{itemize}
     \end{flushleft}
     
-    \vspace{1cm}
     
     % --- Section 2: Error Category Legend ---
     \begin{flushleft}
@@ -159,11 +159,11 @@ Yunbeom Yi\\[4pt]
         \renewcommand{\arraystretch}{1.5}
         \begin{tabular}{|l|l|p{8.5cm}|}
             \hline
-            \rowcolor{gray!10} \textbf{Marker Color} & \textbf{Category} & \textbf{Description \& Rationale} \\ \hline
-            {\color{colorLang} \textbf{Navy Blue}} & \textbf{Language \& Punctuation} &  Includes subject-verb agreement, redundant punctuation (e.g., errant commas), typos, and formula spacing issues. \\ \hline
-            {\color{colorStyle} \textbf{Rust Orange}} & \textbf{Stylistic \& Structural} &  Includes academic fluff, keyword overloading, excessive sentence nesting, and lack of core focus. \\ \hline
-            {\color{colorMath} \textbf{Forest Green}} & \textbf{Mathematical Formatting} &  Includes missing punctuation at the end of display equations, incorrect hyphenation of technical terms, and non-standard proof transitions. \\ \hline
-            {\color{colorLogic} \textbf{Deep Red}} & \textbf{Axiomatic \& Logical Flaws} &  The most severe issues. Includes axiomatic redundancy, unstated cross-framework operations, and misleading terminology. \\ \hline
+            \rowcolor{gray!10} \textbf{Marker Color} & \textbf{Category} & \textbf{Definition \& Description} \\ \hline
+            {\color{colorLang} \textbf{Navy Blue}} & \textbf{Language \& Punctuation} &  \textbf{Violations of standard grammatical rules and typographical conventions.} This category encompasses basic syntactic deficiencies, redundant punctuation (e.g., errant commas), typos, and improper spacing within formulas. \\ \hline
+            {\color{colorStyle} \textbf{Rust Orange}} & \textbf{Stylistic \& Structural} & \textbf{Impediments to narrative flow and structural clarity of academic expression.} This category addresses stylistic inefficiencies, including academic fluff, keyword overloading, excessive sentence nesting, and a lack of core thematic focus. \\ \hline
+            {\color{colorMath} \textbf{Forest Green}} & \textbf{Mathematical Formatting} &  \textbf{Deviations from rigorous mathematical typesetting and exposition standards.} This category identifies missing punctuation in display equations, improper hyphenation of technical terms, and non-standard transitions within proofs.\\ \hline
+            {\color{colorLogic} \textbf{Deep Red}} & \textbf{Axiomatic \& Logical Flaws} & \textbf{Fundamental breaches of mathematical reasoning and conceptual integrity.} Representing the most severe class of errors, this encompasses axiomatic redundancy, unstated cross-framework operations, and misleading or inaccurate terminology.\\ \hline
         \end{tabular}
     \end{flushleft}
 \end{titlepage}
@@ -242,7 +242,8 @@ The key point is that these components coexist in one structure and are coupled 
 
 The axioms provide a common interface for several classical viewpoints:
 \begin{itemize}[nosep]
-  \item \textbf{Measure/Probability}: if one normalizes $\mu(X)=1$, the measure component can be read as a finitely additive probability.
+  \item \textbf{Measure/Probability}: if one normalizes $\mu(X)=1$, the measure component can be 
+  \reviewer[1]{read}{regarded} as a finitely additive probability.
   \item \textbf{Closure/Topology}: $G$ induces a closure/connectedness pattern via its idempotence.
   \item \textbf{Equivalence}: on each \reviewer[3]{$G$--connected}{$G$-connected} component, idempotence forces transitivity along \reviewer[3]{$G$--chains}{$G$-chains}.
   \item \textbf{Projection}: $\Pi_R$ preserves $\mu$ on measurable subsets of $R$ (Axiom~III).
@@ -1425,7 +1426,7 @@ We check \reviewer[1]{the four morphism axioms}{the four axioms of morphisms} fo
 \[
 \mu((\psi\circ\phi)^{-1}(B''))=\mu(\phi^{-1}(\psi^{-1}(B'')))=\mu'(\psi^{-1}(B''))=\mu''(B'').
 \]
-The \reviewer[3]{product--measure}{product-measure} identity follows analogously. \reviewer[1][2ex]{Identity morphism}{The identity morphism}  is trivial.
+The \reviewer[1]{product--measure}{product-measure} identity follows analogously. \reviewer[1][2ex]{Identity morphism}{The identity morphism}  is trivial.
 \end{proof}
 
 \subsection{Preservation of the coupling law}
@@ -1435,7 +1436,7 @@ Morphisms of structural models preserve not only \reviewer[1]{the listed data}{t
 \begin{proposition}[Coupling law is transported along exact pullback morphisms]\label{prop:coupling-preserved}
 Let $\phi:\mathcal M\to\mathcal M'$ be a morphism. Suppose $\mathcal M$ satisfies Axiom~III (coupling law). Then:
 \begin{enumerate}[label=\emph{(\roman*)},nosep]
-\item \reviewer[3]{\emph{(Source--side inequality)}}{Source-side inequality} Under the hypothesis $(\phi\times\phi)^{-1}(G')\subseteq G$, for every $B'\in\mathcal A'$,
+\item \reviewer[1]{\emph{(Source--side inequality)}}{Source-side} Under the hypothesis $(\phi\times\phi)^{-1}(G')\subseteq G$, for every $B'\in\mathcal A'$,
 \[
 \mu'^{\otimes2}\bigl((B'\times X')\cap G'\bigr)\ \le\ \mu^{\otimes2}\bigl((\phi^{-1}(B')\times X)\cap G\bigr),
 \]
@@ -1554,7 +1555,7 @@ defines a functor, where $\mathcal M|_R$ is the model with underlying set $R$, s
 \end{proposition}
 
 \begin{proof}
-We verify that $\mathcal M|_R$ satisfies Axioms~I--III, so that $\mathcal M|_R\in\mathbf{Struct}^{\mathrm{id}}_{\eta}$. The argument relies only on Proposition~\ref{prop:fiber-annihilation} (the \reviewer[1]{fiber--annihilation}{fiber-annihilation} consequence $\mu(X\setminus R)=0$ under the hypotheses defining $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$) and on Axioms~I--III for $\mathcal M$; it does not invoke Theorem~\ref{thm:quotient-factorization}.
+We verify that $\mathcal M|_R$ satisfies Axioms~I--III, so that $\mathcal M|_R\in\mathbf{Struct}^{\mathrm{id}}_{\eta}$. The argument relies only on Proposition~\ref{prop:fiber-annihilation} (the \reviewer[3]{fiber--annihilation}{fiber-annihilation} consequence $\mu(X\setminus R)=0$ under the hypotheses defining $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$) and on Axioms~I--III for $\mathcal M$; it does not invoke Theorem~\ref{thm:quotient-factorization}.
 
 \emph{Axiom I on $\mathcal M|_R$.} Immediate from $\Pi_{R|_R}=\mathrm{id}_R$: the retraction is idempotent, and $\Pi_{R|_R}|_R=\mathrm{id}_R$ trivially, with measurability of preimages holding on $\mathcal A\cap\mathcal P(R)$.
 
@@ -1597,7 +1598,7 @@ which is Axiom~III(c) for $\mathcal M|_R$.
 \end{proof}
 
 \begin{remark}[The restriction functor as a retraction of categories]\label{rem:restriction-retraction}
-The subcategory $\mathbf{Struct}^{\mathrm{id}}_{\eta}$ includes canonically into $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$ via the inclusion $\iota$ that regards an \reviewer[1]{identity--retraction}{identity-retraction} object as already satisfying the fiber hypotheses trivially (with $F_r=\{r\}$ for every $r\in R=X$). The composition $\rho\circ\iota$ is the identity on $\mathbf{Struct}^{\mathrm{id}}_{\eta}$: restricting an \reviewer[1]{identity--retraction}{identity-retraction} model to $R=X$ returns the model unchanged. In this precise sense, $\rho$ is a retraction of $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$ onto its subcategory $\mathbf{Struct}^{\mathrm{id}}_{\eta}$, mirroring at the categorical level the \reviewer[1]{object--level}{object-level} retraction $\Pi_R:X\to R$.
+The subcategory $\mathbf{Struct}^{\mathrm{id}}_{\eta}$ includes canonically into $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$ via the inclusion $\iota$ that regards an \reviewer[3]{identity--retraction}{identity-retraction} object as already satisfying the fiber hypotheses trivially (with $F_r=\{r\}$ for every $r\in R=X$). The composition $\rho\circ\iota$ is the identity on $\mathbf{Struct}^{\mathrm{id}}_{\eta}$: restricting an \reviewer[3]{identity--retraction}{identity-retraction} model to $R=X$ returns the model unchanged. In this precise sense, $\rho$ is a retraction of $\mathbf{Struct}_{\eta}^{\mathrm{fib}}$ onto its subcategory $\mathbf{Struct}^{\mathrm{id}}_{\eta}$, mirroring at the categorical level the \reviewer[1]{object--level}{object-level} retraction $\Pi_R:X\to R$.
 \end{remark}
 \begin{structuralreview}[2]{Overly dense.}
 \begin{remark}[Connection to the classification theorem]\label{rem:category-classification}
@@ -1607,7 +1608,7 @@ Within the full subcategory of $\mathbf{Struct}^{\mathrm{id}}_{\eta}$ whose obje
 \end{structuralreview}
 \subsection{Quotient factorization and structural reduction}\label{sec:quotient-factorization}
 
-We now sharpen the restriction functor of Proposition~\ref{prop:restriction-functor} into a structural reduction theorem: under fiber measurability and regularity hypotheses, all \reviewer[1]{curvature--load}{curvature-load} information relevant to Axioms~I--III reduces to the \reviewer[1]{identity--retraction}{identity-retraction} core $\mathcal M|_R$, and the coupling law on $\mathcal M$ is equivalent to the coupling law on $\mathcal M|_R$. This extends the classification theorem (Theorem~\ref{thm:pi-id-classification}), which addresses the case $\Pi_R=\mathrm{id}_X$, to the general case.
+We now sharpen the restriction functor of Proposition~\ref{prop:restriction-functor} into a structural reduction theorem: under fiber measurability and regularity hypotheses, all \reviewer[3]{curvature--load}{curvature-load} information relevant to Axioms~I--III reduces to the \reviewer[3]{identity--retraction}{identity-retraction} core $\mathcal M|_R$, and the coupling law on $\mathcal M$ is equivalent to the coupling law on $\mathcal M|_R$. This extends the classification theorem (Theorem~\ref{thm:pi-id-classification}), which addresses the case $\Pi_R=\mathrm{id}_X$, to the general case.
 
 Throughout this subsection let
 \[
@@ -1629,7 +1630,7 @@ The fiber decomposition is the \reviewer[1]{set--theoretic}{set-theoretic} quoti
 \reviewer[1]{Assume}{Assume that} Axiom~I holds. Assume moreover that $\{r\}\in\mathcal A$ and $F_r\in\mathcal A$ for every $r\in R$, and that one of the following global regularity hypotheses holds:
 \begin{itemize}[nosep]
 \item[\emph{(R--fin)}] \reviewer[1]{$R$ is finite; or}{Remove "or". Recommend that $R$-fin and $R$-ctbl.}
-\item[\emph{(R--ctbl)}] $R$ is countable and $\mu$ is \reviewer[1]{$\sigma$--additive}{$\sigma$-additive} on $\mathcal A$ (so $\mathcal A$ is assumed to be a $\sigma$--algebra).
+\item[\emph{(R--ctbl)}] $R$ is countable and $\mu$ is \reviewer[3]{$\sigma$--additive}{$\sigma$-additive} on $\mathcal A$ (so $\mathcal A$ is assumed to be a $\sigma$--algebra).
 \end{itemize}
 If Axiom~III(b) (projection--measure invariance) holds, then
 \[
@@ -1661,7 +1662,7 @@ Under (R--fin) this is a finite disjoint union of null sets, and finite additivi
 \end{proof}
 
 \begin{remark}[On the regularity hypothesis]\label{rem:regularity-hypothesis}
-Without either hypothesis (R--fin) or (R--ctbl), the \reviewer[1]{fiber--wise}{fiber-wise} conclusion $\mu(F_r\setminus\{r\})=0$ still holds for each individual $r\in R$, but the global conclusion $\mu(X\setminus R)=0$ may fail, since finite additivity alone does not control infinitely many null sets. A finitely additive measure on \reviewer[1]{an uncountable $R$}{an uncountable set $R$} may assign positive total mass to an uncountable disjoint union of null sets. 
+Without either hypothesis (R--fin) or (R--ctbl), the \reviewer[3]{fiber--wise}{fiber-wise} conclusion $\mu(F_r\setminus\{r\})=0$ still holds for each individual $r\in R$, but the global conclusion $\mu(X\setminus R)=0$ may fail, since finite additivity alone does not control infinitely many null sets. A finitely additive measure on \reviewer[1]{an uncountable $R$}{an uncountable set $R$} may assign positive total mass to an uncountable disjoint union of null sets. 
 \reviewer[1]{The hypotheses (R--fin), (R--ctbl)}{The hypotheses (R-fin) and (R-ctbl)} are the natural setting for the structural reduction theorem below; extensions to the uncountable $\sigma$--additive case require additional assumptions (e.g., \reviewer[1]{separability of $\mathcal A$}{the separability of $\mathcal A$}) which we do not pursue.
 \end{remark}
 
@@ -1683,7 +1684,7 @@ be a pre-structural datum (Definition~\ref{def:structural-datum}) with $\eta\in[
 \]
 \item (\emph{\reviewer{coupling}{Coupling} laws are equivalent}) If $\mathcal D$ satisfies Axiom~I and Axiom~III(b), then the coupling law (Axiom~III(c)) holds on $\mathcal D$ if and only if it holds on $\mathcal D|_R$.
 \item (\emph{\reviewer{admissibility}{Admissibility} reduces}) If $\mathcal D$ satisfies Axioms~I, II, III(a), and~III(b) as well as the full partition condition $X=R\sqcup I$, then $\mathcal D$ is an admissible structural model (i.e., an object of $\mathbf{Struct}_\eta$) if and only if $\mathcal D|_R$ is an admissible structural model (i.e., an object of $\mathbf{Struct}^{\mathrm{id}}_\eta$). In particular, whenever the restricted core $\mathcal D|_R$ also satisfies the full hypotheses of Theorem~\ref{thm:pi-id-classification}, the classification of admissible structural models reduces to the 
-\reviewer[1]{identity--retraction}{identity-retraction} classification of Theorem~\ref{thm:pi-id-classification}. (The hypothesis ``Axiom~III(b)'' is not redundant: the datum \reviewer[3]{$\mathcal D_{\neg\mathrm{III}}$}{Notaion flaw} of Proposition~\ref{prop:indep-III} satisfies Axioms~I, II, III(a), III(c), fiber measurability, (R--fin), and the full partition $X=R\sqcup I$, yet fails Axiom~III(b); its restriction $\mathcal D_{\neg\mathrm{III}}|_R$ is admissible while $\mathcal D_{\neg\mathrm{III}}$ itself is not, so the equivalence fails without~III(b).)
+\reviewer[3]{identity--retraction}{identity-retraction} classification of Theorem~\ref{thm:pi-id-classification}. (The hypothesis ``Axiom~III(b)'' is not redundant: the datum \reviewer[3]{$\mathcal D_{\neg\mathrm{III}}$}{Notaion flaw} of Proposition~\ref{prop:indep-III} satisfies Axioms~I, II, III(a), III(c), fiber measurability, (R--fin), and the full partition $X=R\sqcup I$, yet fails Axiom~III(b); its restriction $\mathcal D_{\neg\mathrm{III}}|_R$ is admissible while $\mathcal D_{\neg\mathrm{III}}$ itself is not, so the equivalence fails without~III(b).)
 \end{enumerate}
 \end{theorem}
 
@@ -1798,19 +1799,20 @@ that share the same structural type.
 The set $R$ collects canonical representatives of these types, and $\Pi_R$ retracts the
 full space $X$ onto the simpler representative space $R$ while preserving the chosen
 measure on $R$.
-The axioms formalize this pattern in a \reviewer[1]{ZFC--internal}{ZFC-internal} way.
+The axioms formalize this pattern in a \reviewer[3]{ZFC--internal}{ZFC-internal} way.
 \end{example}
 % -------------------------------------------------------
 \section{Conclusion}
 
-We have set up a minimal \reviewer[1]{ZFC--internal}{ZFC-internal} axiom system for admissible structural models — pre-structural data $(X,\mathcal A,\mu,\mu^{\otimes2},R,I,\Pi_R,G,E_0,\eta)$ satisfying Axioms~I, II, and~III — and studied its basic properties.
+We have set up a minimal \reviewer[3]{ZFC--internal}{ZFC-internal} axiom system for admissible structural models — pre-structural data $(X,\mathcal A,\mu,\mu^{\otimes2},R,I,\Pi_R,G,E_0,\eta)$ satisfying Axioms~I, II, and~III — and studied its basic properties.
 
 The axiom system is consistent in ZFC (Section~\ref{sec:models}), and its three axioms, together with the three subclauses of Axiom~III, are mutually independent (Theorem~\ref{thm:independence-main}, Corollary~\ref{cor:minimality}). The coupling law of Axiom~III admits an operator--theoretic reformulation as the unique bounded finitely additive solution of the Banach--contraction equation $f=T_\eta f$, with closed form $f_*(B)=\mu(B)+\tfrac{\eta}{1-\eta}\mu(\Pi_R^{-1}(B))$ (Theorem~\ref{thm:coupling-fixed-point}). Admissible structural models with \reviewer[1]{a common $\eta$}{a common value of $\eta$} form a category $\mathbf{Struct}_\eta$ (Section~\ref{sec:category}); under fiber measurability and either (R--fin) or (R--ctbl), the general admissibility problem reduces to the identity--retraction case (Theorem~\ref{thm:quotient-factorization}), where the classification of Theorem~\ref{thm:pi-id-classification} yields the block dichotomy $\mu(C_k)\in\{0,(1-\eta)^{-1}\}$. Under $\sigma$--additive probability normalization, the $B=X$ instance of the coupling law forces $\eta=0$ (Section~\ref{sec:sigma-additive}), so $\eta\neq 0$ families live in the finitely additive setting or among non--probability $\sigma$--additive measures.
 
+\begin{structuralreview}[2]{Recommend elevating the perspective: highlight macroscopic connections to other major mathematical branches rather than just internal generalizations.}
 \paragraph{Further directions.}
 Several extensions suggest themselves: replacing $\mathcal A$ by a $\sigma$--algebra under hypotheses giving a well--defined product charge; enriching $G$ to a weighted kernel $K:X\times X\to[0,\infty)$ and comparing with graph limits \cite{Lovasz}; further categorical development, in particular an adjoint characterization of the restriction $\rho:\mathbf{Struct}_\eta^{\mathrm{fib}}\to\mathbf{Struct}^{\mathrm{id}}_\eta$ \cite{MacLane,Riehl}; operator--theoretic variants replacing $\mu$ by a state or trace; and scaling limits $X_n\to X$ controlled by local instances of the coupling law. Removing the fiber hypotheses in the quotient--factorization reduction, for instance in the uncountable $\sigma$--additive case, also requires further assumptions such as 
 \reviewer[1]{separability of $\mathcal A$}{the separability of $\mathcal A$}.
-
+\end{structuralreview}
 % -------------------------------------------------------
 
 \begin{thebibliography}{99}
