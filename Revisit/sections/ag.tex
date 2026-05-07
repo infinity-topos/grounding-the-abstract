@@ -1,5 +1,9 @@
 {\begingroup
 \renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\tM}{\widetilde{M}}
+\newcommand{\ann}{\operatorname{Ann}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\supp}{\operatorname{supp}}
 \newcommand{\fun}{\operatorname{Funct}}
 \newcommand{\sch}{\operatorname{Sch}}
 \newcommand{\spec}{\operatorname{Spec}}
@@ -9,11 +13,16 @@
 \newcommand{\pic}{\operatorname{Pic}}
 \newcommand{\qcoh}{\operatorname{Qcoh}}
 \newcommand{\op}{\text{op}}
+\newcommand{\pt}{\text{pt}}
 \newcommand{\g}{\mathscr{G}}
 \renewcommand{\l}{\mathscr{L}}
 \newcommand{\f}{\mathscr{F}}
 \renewcommand{\o}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
 \newcommand{\p}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcounter{paranum} 
 \newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
 
@@ -137,7 +146,118 @@ In this case, we call $X$ is a projective scheme over $Y$.  If $Y=\spec(A)$, the
 
 \np Let $A$ be a finitely generated $k$-algebra with graded structure. Let $X$ be projecitve over $\spec(A)$ and $\f$ is an arbitrary coherent sheaf. Then $\Gamma(X,\f)$ is a finitely generated $A$-module.
 
-\np Let $Y$ is quasi-projecitve over $\spec(A)$. Equivalently, $Y$ is a quasi-projecitve subscheme of $\mathbb{P}_{A}^n$. Then we have a very ample line bundle of $Y$ by pull-back $i^*(\o_{\mathbb{P}^n_A}(1))$.
+\np Let $Y$ is quasi-projecitve over $\spec(A)$. Equivalently, $Y$ is a quasi-projecitve subscheme of $\mathbb{P}_{A}^n$. Then we have a very ample line bundle o
+
+
+
+\np Flasque sheaf is a sheaf such that for any two $V\subseteq U$, we have 
+\begin{align*}
+    \rho_{U,V}:U\to V
+\end{align*}
+is surjective. An example is consider $i:\pt \to X$ and the sheaf $i_*(\o_\pt)$ is a Flasque sheaf of $X$.
+
+\np Every finite type affine $k$-scheme is quasi-projective.
+
+\np Let $X=\spec R$ with a sheaf of module $\tM$. Then we have 
+\begin{align*}
+    V(\ann_R(M)) = \supp_X(\tM).
+\end{align*}
+Let $R=k[x]$ and $R=k[x]/(x^2)$. Then the support of $M$ is given by 
+\begin{align*}
+    Y = \spec(k[x]/(x^2))
+\end{align*}
+But its topological support is $Y_{\text{red}}$.
+
+\np Let $B = A[x_1,\cdots,x_n]/I$. The Kähler differential is given by 
+\begin{align*}
+    \Omega_{B/A} = \left(\bigoplus_{i=1}^n B dx\right)/\langle df,f\in I \rangle.
+\end{align*}
+
+
+
+\np Let $A\to B\to C$ be rings. There First exact sequence of Kähler differential is 
+\begin{align*}
+    \Omega_{B/A}\otimes_B C \to \Omega_{C/A} \to  \Omega_{C/B} \to 0
+\end{align*}
+
+Actually, we have 
+\begin{align*}
+    \Omega_{B/A} = \Omega_{B/\C}/\langle dg,g\in A \rangle 
+\end{align*}
+
+If we let $C=B/I$ then we obtain a second exact sequence 
+\begin{align*}
+    I/I^2 \xrightarrow{\delta} \Omega_{B/A}\otimes_B C \to \Omega_{C/A} \to 0.
+\end{align*}
+
+Where $I/I^2$ is conormal module. The normal module is the dual of conormal module which define by 
+\begin{align*}
+    N_{C/A} = \hom_{C}(I/I^2,C).
+\end{align*}
+
+The tangent bundle is given by 
+\begin{align*}
+    T_{C/A} = \hom_{C}(\Omega_{C/A},C).
+\end{align*}
+
+Let $X=\spec(A)$ and $Y=\spec(A/I)$ and smooth.
+We have the exact sequence 
+\begin{align*}
+    0\to N^\vee _Y \xrightarrow{\delta} \Omega_{X}\otimes_{\o_X} \o_Y \to \Omega_{Y} \to 0.
+\end{align*}
+where $N^\vee _{Y/X}$ denotes the sheaf induced by conormal module $I/I^2$. Dualize we then have 
+\begin{align*}
+    0\to T_Y \to  T_X\otimes_{\o_X} \o_Y \to N_{Y/X} \to 0.
+\end{align*}
+
+\[
+X=\mathbb A^2_{\mathbb C}=\spec\mathbb C[x,y],\quad Y=V(y-x^2),\quad I=(y-x^2),\quad \mathcal O_Y\simeq\mathbb C[x].
+\]
+\[
+\Omega_X|_Y=\mathcal O_Ydx\oplus\mathcal O_Ydy,\qquad 
+\Omega_Y\simeq(\mathcal O_Ydx\oplus\mathcal O_Ydy)/(dy-2x\,dx),\qquad T_Y=\mathcal O_Y\left(\partial_x+2x\partial_y\right).
+\]
+\[
+I/I^2\simeq d(y-x^2)=dy-2x\,dx. \quad 
+N_{Y/X}\simeq
+(\mathcal O_Y\partial_x\oplus\mathcal O_Y\partial_y)/
+\mathcal O_Y(\partial_x+2x\partial_y).
+\]
+
+\np In local we also have an exact sequence
+\begin{align*}
+    0\to \m_x/\m_x^2 \to \o_{X,x} \to \o_{X,x}/{\m_x} \to 0 
+\end{align*}
+where $\m_x/\m_x^2$ is fiber of conormal sheaf.
+
+\np We define canonical sheaf of $X$ by $\omega_X=\bigwedge^n\Omega_{X/k}$.
+If $X$ is normal(integrally closed) let $\eta\in \omega_X$, we define canonical divsor by 
+\begin{align*}
+    K_X = \sum \ord_D(\eta) \cdot D.
+\end{align*}
+Then $\o_X(K_X) = w_X$.
+
+\np Let $H=V(x_0)$ be a hyperplane of $\P^n$. Then $\pic(\P^n)=\langle H \rangle$.
+
+\np Consider $\o_{\P^{2}}(-1)$ as tautology line bundle. 
+
+We actually have 
+\begin{align*}
+    \o(-1)(U_0) = \C[\frac{x_1}{x_0},\frac{x_2}{x_0}]\cdot x_0^{-1} = \C[x_1,x_2]
+\end{align*}
+
+\np Let $Y=\spec A$ and let $X=\P^n_A$. Then there is an exact sequence of sheaves.
+\begin{align*}
+    0\to \Omega_{X/Y} \to \o_X(-1)^{\oplus (n+1)}\to \o_X\to 0.
+\end{align*}
+
+We can check by take $Y=\spec\C$ and $X=\P^2_\C$. Consider the $U_0$, then we obtain that 
+\begin{align*}
+    \Omega_{X/Y}(U_0) \simeq \C[\frac{x_1}{x_0},\frac{x_2}{x_0}] d(x_1/x_0)\oplus \C[\frac{x_1}{x_0},\frac{x_2}{x_0}] d(x_2/x_0) \\
+    \o_X(-1)^{\oplus 3}(U_0) \simeq \bigoplus_{i=1}^3 \C[\frac{x_1}{x_0},\frac{x_2}{x_0}]\cdot x_0^{-1}\\
+\end{align*}
+
 
 
 \endgroup}
+

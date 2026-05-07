@@ -1,0 +1,118 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\qz}{\mathbb{Q}/\mathbb{Z}}
+\newcommand{\z}{\mathbb{Z}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 10}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Then the following holds:
+\begin{itemize}
+    \item[(i)] $(a_n)$ is a Cauchy sequence $\Leftrightarrow \lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    \item[(ii)] If $\lim_{n\to\infty} a_n = a \neq 0$, then $\varphi(a_n) = \varphi(a)$ for a sufficiently large $n$.
+\end{itemize}
+\begin{solution}
+    (i) Suppose that $(a_n)$ is a Cauchy sequence. Then for any $\varepsilon>0$, there exists $N\in \mathbb{Z}_{>0}$ such that 
+    \begin{align*}
+        \varphi(a_m-a_n)<\varepsilon \text{ for any }m,n>N.
+    \end{align*}
+    We take $m=n+1$, then we obtain that $\varphi(a_{n+1}-a_n)<\varepsilon$ for any $n>N$. Equivalently, we can say $\lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    Conversely, suppose that $\varphi(a_{n+1} - a_n) = 0$, it means that for any $\varepsilon>0$ there exists an positive integer $N$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_{n+1}-a_n)<\varepsilon.
+    \end{align*}
+    Consider the strongly triangular inequality, then we have 
+    \begin{align*}
+        \varphi(a_{n+m}-a_n)=\varphi\left(\sum_{i=0}^{m-1}(a_{n+i+1}-a_{n+i})\right) = \max_{i}\{\varphi(a_{n+i+1}-a_{n+i})\}<\varepsilon.
+    \end{align*}
+    Therefore, we obtain that $(a_n)$ is a Cauchy sequence.
+
+    (ii) Since $a_n-a$ converge to zero, then there exists $N>0$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_n-a)<\varphi(a)/2.
+    \end{align*}
+    Similarly, since $a_n$ converge to $a$, then there exists $M>0$ such that for any $n>M$ we have 
+    \begin{align*}
+        \varphi(a_n)>\varphi(a)/2.
+    \end{align*}
+    We can choose $N\ge M$, then we have $\varphi(a_n)>\varphi(a_n-a)$. It implies that 
+    \begin{align*}
+        \varphi(a)=\varphi(a-a_n+a_n)= \max\{\varphi(a-a_n),\varphi(a_n)\}=\varphi(a_n).
+    \end{align*}
+    Our claim holds.
+\end{solution}
+
+
+\section*{Problem 2}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Let $V$ be a finite dimensional $K$-space with basis $u_1, \ldots, u_n$. For $v = a_1 u_1 + \cdots + a_n u_n \in V$, define $\|v\|_0$ by
+$$\|v\|_0 = \max\{\varphi(a_i); 1 \leq i \leq n\}.$$
+Then this is a norm on $V$. Moreover, the following holds concerning the metric induced by this norm.
+\begin{itemize}
+    \item[(i)] Let $v_r = a_{r1}u_1 + \cdots + a_{rn}u_n \in V$ be given for $r = 1, 2, \ldots$. Then the sequence $(v_r)$ is a Cauchy sequence if and only if the sequence $(a_{ri})_r$ in $K$ is so for all $i$. Also $\lim_{r\to\infty} v_r = \sum_{i=1}^n a_i u_i$ if and only if $\lim_{r\to\infty} a_{ri} = a_i$ for all $i$.
+    \item[(ii)] If $K$ is complete, then so is $V$.
+\end{itemize}
+
+\begin{solution}
+    (i) Suppose that $(v_r)_r$ is a Cauchy sequence. It means that for any $\varepsilon>0$, there exists $N>0$ such that for any $r>N$ and index $i$ we have 
+    \begin{align*}
+       0\le \varphi(a_{r+1,i}-a_{ri})\le \|v_{r+1}-v_r\|_0  <\varepsilon.
+    \end{align*}
+    It implies that $\lim_{r\to\infty}\varphi(a_{r+1,i}-a_{ri}) = 0$. According to Problem 1.(i), we then have $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    
+    Conversely, suppose that $(a_{ri})_r$ is a Cauchy sequence. Then for every $\varepsilon>0$, there exists an integer $N$ such that for any $r>N$, an integer $m$ and index $i$ satisfy 
+    \begin{align*}
+        \varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    Hence, we have 
+    \begin{align*}
+        \|v_{r+m}-v_r\|_0 = \max_{i}\varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    It shows $(v_r)_r$ is a Cauchy sequence.
+
+    For next statement, it is suffice to show that $v_r \to 0$ iff. $a_{ri}\to 0$. 
+    Because we just let $w_r = v_r - \sum a_iu_i$, and the statement $w_r\to 0$ iff. $(a_{ri}-a_i) \to 0$ is equivalent to the statement we need to prove.
+    Suppose that $v_r$ converge to zero. It means that for any $\varepsilon>0$, we have $N>0$ and for any $r>N$ and index $i$ the inequality
+    \begin{align*}
+        0\le \varphi(a_{ri})\le \|v_r\|_0<\varepsilon
+    \end{align*}
+    Which implies that $\varphi(a_{ri})\to 0$ and $a_{ri}\to 0$ follows. Conversely, $a_{ri}\to 0$ implies $\varphi(a_{ri})\to 0$ and thus we have $\|v_r\|_0\to 0$. And $v_r\to 0$ follows.
+    Therefore, our claim holds.
+
+
+    (ii) Let $(v_r)_r$ be an arbitrary Cauchy sequence. According to (i), it is equivalent to $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    Since $K$ is complete, it means that there exists $a_i\in K$ such that $(a_{ri}-a_i)_r$ converge to zero. According to our discussion above, it is equivalent to 
+    $(v_r-\sum a_iu_i)_r$ converge to zero. Therefore, $V$ is complete as well. 
+\end{solution}
+
+\end{document}

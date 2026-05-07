@@ -1,14 +1,43 @@
 {\begingroup
-
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\ihom}{\operatorname{\underline{Hom}}}
 \newcommand{\tr}{\operatorname{Tr}}
 \newcommand{\ol}{\mathcal{O}_L}
 \newcommand{\ok}{\mathcal{O}_K}
+\newcommand{\ab}{\text{ab}}
+\newcommand{\ov}{\mathcal{O}_v}
+\newcommand{\cont}{\operatorname{cont}}
+\renewcommand{\o}{\mathcal{O}}
 \newcommand{\gal}{\operatorname{Gal}}
 \newcommand{\dics}{\operatorname{dics}}
+\newcommand{\br}{\operatorname{Br}}
 \renewcommand{\det}{\operatorname{det}}
 \renewcommand{\char}{\operatorname{char}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\p}{\mathfrak{p}}
+\renewcommand{\d}{\mathfrak{d}}
+\newcommand{\D}{\mathfrak{D}}
+\renewcommand{\v}{\mathfrak{v}}
+\newcommand{\f}{\mathfrak{f}}
+\renewcommand{\a}{\mathfrak{a}}
+\renewcommand{\b}{\mathfrak{b}}
+\renewcommand{\P}{\mathfrak{P}}
+\newcommand{\J}{\mathfrak{J}}
+\newcommand{\N}{\operatorname{N}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\legendre}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
 \newcounter{ant} 
 \newcommand{\np}{\stepcounter{ant}\noindent\textbf{\arabic{ant}.}\quad}
+\newcounter{prob} 
+\newcommand{\prob}{\stepcounter{prob}\noindent\textbf{\arabic{prob}.}\quad}
+
+
+
 
 \chapter{Algebraic Number Theory}
 First let we consider some basic extensions:
@@ -31,17 +60,1666 @@ For Type K, $\char(K)=p$.
 
 Let us review concepts from  Algebraic Number Theory.
 
+\section*{Lattice over Dedekind domain}
 
-\np Let $L/K$ be a finite seperable extension. The trace operator $\tr$ is a bilinear form on $K$-vector space $L$.
+Lattice is the most important concept in Algebraic Number Theorem. Let we give some examples.
+\begin{enumerate}
+    \item $\ol$ as $\ok$-lattice equipped with with $\tr_{L/K}$ as the bilinear form.
+    \item The Value Group $v(K^*)$ is a one-dimension lattice.
+    \item $L\otimes_K K_v$ is a $K_v$-vector space.
+    \item Residue Field $\kappa(\P)$ is a $\kappa(\p)$-vector space.
+    \item The valuation of idele $\log(A_K^{\times})$ produces lattice structure.
+    \item The Unit Lattice $\log:\ok^\times\to \R^{r_1+r_2}$ and Minkowski Lattice $\ok\to \R^{r_1}\times \C^{r_2}$.
+\end{enumerate}
 
-\np The trace ideal $\mathfrak{T}_{L/K}$ is defined by scale ideal $\mathfrak{s}(\mathcal{O}_L) = \langle \text{Tr}_{L/K}(xy) \mid x,y \in \mathcal{O}_L \rangle_{\mathcal{O}_K}$.
-The extension is tamely ramified if and only if $\mathfrak{T}_{L/F} = \ok$.
+There are several important concepts about lattice over Dedekind domain.
+\begin{definition}[Trace Ideal]
+    The trace ideal $\mathfrak{T}_{L/K}$ is defined by scale ideal $\mathfrak{s}(\mathcal{O}_L) = \langle \text{Tr}_{L/K}(xy) \mid x,y \in \mathcal{O}_L \rangle_{\mathcal{O}_K}$.
+\end{definition}
 
-\np The discriminant of field $L$ is given by $\dics(\langle\alpha_1,\dots,\alpha_n \rangle) = \det(\tr(\alpha_i\alpha_j))$ where $\{\alpha_i\}$ is an integral basis.
+\begin{definition}[Discriminant of Field]
+    The discriminant of field $L$ is given by $\dics(\langle\alpha_1,\dots,\alpha_n \rangle) = \det(\tr(\alpha_i\alpha_j))$ where $\{\alpha_i\}$ is an integral basis.
+\end{definition}
 
-\np We define the Different ideal $\mathfrak{D}_{L/K}$ by the inverse of dual lattice $(\ol^{\#})^{-1}$.
+\begin{definition}[Inverse Different and Different]
+    The inverse different is given by the dual lattice $\ol^{\#}$. And the different $\D_{L/K}$ is $(\ol^{\#})^{-1}$.
+\end{definition}
 
-\np 
+\begin{definition}[Different of an element]
+    Let $L/K$ be a finitely algebraic extension with a minimal polynomial $f(x)$. Then the different of an element $\alpha$ is $f'(\alpha)\cdot \ol$.
+\end{definition}
+
+\begin{theorem}[Different Deduced by Different of Elements]
+    We have an isomorphism 
+    \begin{align*}
+        \D_{L/K}\simeq  (f'(\alpha))_{\alpha\in L}
+    \end{align*}
+\end{theorem}
+
+When $\ok$ is not PID, then $\ol$ is not a free $\ok$-module. In this situation, we use Steinitz class to delineate it.
+\begin{theorem}[Steinitz Class]
+    There exist a basis $\{e_1, \dots, e_n\}$ of $L$ over $K$ and fractional ideals $\mathfrak{a}_1, \dots, \mathfrak{a}_n$ of $\mathcal{O}_K$ such that:$$\mathcal{O}_L = \mathfrak{a}_1 e_1 \oplus \mathfrak{a}_2 e_2 \oplus \cdots \oplus \mathfrak{a}_n e_n$$Furthermore, for any non-zero $\mathcal{O}_L$-ideal $\mathfrak{I}$, there exist fractional ideals $\mathfrak{b}_1, \dots, \mathfrak{b}_n$ of $\mathcal{O}_K$ such that:$$\mathfrak{I} = \mathfrak{b}_1 e_1 \oplus \mathfrak{b}_2 e_2 \oplus \cdots \oplus \mathfrak{b}_n e_n.$$
+\end{theorem}
+
+\begin{definition}[Norm and Discriminant of an Ideal]
+    The norm of an ideal $\J$ is given by 
+    \begin{align*}
+        \N_{L/K}(\J) = \frac{\b_1\cdots \b_n}{\a_1\cdots \a_n}.
+    \end{align*}
+    The Discriminant of it is given by 
+    \begin{align*}
+        \d(\J) = \det(\tr_{L/K}(e_ie_j))\cdot {(\b_1\cdots \b_n)^2}.
+    \end{align*}
+   Actually, it is just the volume as an $\ok$-lattice. 
+\end{definition}
+
+\begin{theorem}[Relation of Different and Discriminant]
+    We have an isomorphism 
+    \begin{align*}
+        \d_{L/K} = \N_{L/K}(\D_{L/K}).
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}[Discriminant of an order]
+    $$(\Delta_{L/K}(\theta)) = [\mathcal{O}_L : \mathcal{O}_K[\theta]]_{\mathcal{O}_K}^2 \cdot \Delta_{L/K}$$
+\end{theorem}
+
+
+\begin{definition}[Conductor of an Order]
+    Given an order $\o$, its conductor is given by 
+    \begin{align*}
+        \f(\o) = \{x\in \ok| x\cdot \ok \in \o\}.
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[Resultant and Field Norm for Non-Monic Minimal Polynomials]
+Let $K = \mathbb{Q}(\alpha)$ be a number field of degree $n$, and let
+
+\[
+f(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_0 \in \mathbb{Z}[x]
+\]
+be the minimal polynomial of $\alpha$ over $\mathbb{Q}$ with leading coefficient $a_n \neq 0$.
+Let $g(x) \in \mathbb{Q}[x]$ be a polynomial of degree $m$, and set $\beta = g(\alpha) \in K$.
+
+Then the field norm of $\beta$ over $\mathbb{Q}$ satisfies
+
+\[
+N_{K/\mathbb{Q}}(\beta) = \frac{1}{a_n^m} \,\mathrm{Res}(f, g),
+\]
+where $\mathrm{Res}(f, g)$ denotes the resultant of $f$ and $g$.
+\end{theorem}
+
+
+
+\section*{Valuation}
+
+
+
+
+\np Consider algebraic number field $L/\Q$. Let $\p$ lies over $p$. Then we have the ideal norm
+\begin{align*}
+    N(\p) = [\ol:\p] = \det(\p/\ol) = p^{f(\p)}.
+\end{align*}
+where $f(\p)$ is inertia degree.
+
+\section*{Local to Global Principle}
+
+Consider algebraic field extension $L/K$ with a valuation $v$ of $K$.
+Moreover we require $L/K$ is finite and seperable.
+The Local-to-Global Principle is basically consider the $K$-embedding to $\bar{K}_v$ of $L$.
+Given by an embedding $\sigma:L\to \bar{K}_v$, we then have an induced valuation $w_{\sigma}:=\bar{v}\circ\sigma$ where $\bar{v}$ is uniquely determined by $v$ since $K_v$ is Henselian.
+We let $L_{w}$ denote the completion of $L$ corresponding to the valuation $w$.
+
+
+There are some facts about this process.
+
+\np Every extension $w$ of $v$ is identified with $\bar{v}\circ \sigma$ for a embedding $\sigma$.
+
+\np Two extension $\bar{v}\circ \sigma$ and $\bar{v}\circ \sigma'$ are equal if and only if $\sigma$ and $\sigma'$ are conjugate over $K_v$.
+
+\np Suppose that $L=K(\alpha)$ with minimal polynomial $f(x)$. Then the extensions of valuation are 1-1 corresponds to the irreducible factors $f_i$ in 
+\begin{align*}
+    f(x) = f_1(x)\dots f_n(x)
+\end{align*}
+of $f$ over $K_v$.
+
+\np we have a useful fact that 
+\begin{align*}
+L\otimes K_v\simeq K[x]/f(x)    \otimes_K K_v\simeq K_v[x]/f(x)\simeq \prod_{w|v} K_v[x]/f_w(x)\simeq  \prod_{w|v} L_w.
+\end{align*} 
+We should notice that the decomposition $f(x)=\prod f_w(x)$ relies on seperality of $L/K$.
+
+\np We also have the norm and trace formula 
+\begin{align*}
+    \N_{L/K}(\alpha) = \prod_{w|v} \N_{L_w/K_v}(\alpha) \text{ and }  \tr_{L/K}(\alpha) = \sum_{w|v}\tr_{L_w/K_v}(\alpha).
+\end{align*}
+
+
+\section*{Newton Polygon and Hensel's Lemma}
+\begin{definition}[Newton Polygon]
+Let $K$ be a field with a discrete valuation $v$, and let
+
+\[
+f(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n \in K[x]
+\]
+be a polynomial with $a_0, a_n \neq 0$. The \emph{Newton polygon} of $f$ 
+with respect to $v$ is the lower convex hull of the set of points
+
+\[
+\bigl\{ (i, v(a_i)) : 0 \leq i \leq n,\ a_i \neq 0 \bigr\} \subset \mathbb{R}^2.
+\]
+\end{definition}
+\begin{theorem}[Newton Polygon Decomposition]
+Let $(K, v)$ be a Henselian valued field and $f(x) \in K[x]$ a monic 
+polynomial. Suppose the Newton polygon of $f$ consists of segments with 
+slopes $-\lambda_1 < -\lambda_2 < \cdots < -\lambda_r$ and horizontal 
+lengths $\ell_1, \ell_2, \ldots, \ell_r$. Then $f$ factors uniquely in 
+$K[x]$ as
+
+\[
+f(x) = f_1(x) \cdot f_2(x) \cdots f_r(x),
+\]
+where each $f_i(x) \in K[x]$ is monic of degree $\ell_i$, and every root 
+of $f_i$ in $\overline{K}$ has valuation $\lambda_i$.
+\end{theorem}
+
+\begin{lemma}[Hensel's Lemma]
+If a primitive polynomial $f(x) \in \mathcal{O}[x]$ admits modulo $\mathfrak{p}$ 
+a factorization
+
+$$
+f(x) \equiv \bar{g}(x)\bar{h}(x) \bmod \mathfrak{p}
+$$
+into relatively prime polynomials $\bar{g}, \bar{h} \in \kappa[x]$, then $f(x)$ 
+admits a factorization
+
+$$
+f(x) = g(x)h(x)
+$$
+into polynomials $g, h \in \mathcal{O}[x]$ such that $\deg(g) = \deg(\bar{g})$ and
+
+$$
+g(x) \equiv \bar{g}(x) \bmod \mathfrak{p} \quad \text{and} \quad 
+h(x) \equiv \bar{h}(x) \bmod \mathfrak{p}.
+$$
+\end{lemma}
+
+There is a very useful corollary about Hensel's lemma.
+\begin{corollary}[Lift of Simple root]
+    Suppose that $K$ is a henselian field with a valuation $v$. Let $\kappa(\p)$ denote the residue field of $\ov$.
+    Let $f(x)\in\ov[x]$ and $\bar{f} = f\bmod\p$.
+    If there exists $\bar{a}\in\kappa(\p)$ such that 
+    \begin{align*}
+        \bar{f}(\bar{a}) = 0 \text{ and } \bar{f}'(\bar{a}) \neq 0.
+    \end{align*}
+    Then there exists a unique lift $a\in\ov$ such that $\bar{a} = a\bmod \p$ and $f(a)=0$.
+\end{corollary}
+
+\begin{theorem}[Dumas's Criterion]
+Let $K$ be a field equipped with a discrete valuation $v$. Let 
+\[
+    f(x) = a_n x^n + a_{n-1}x^{n-1} + \dots + a_1 x + a_0 \in K[x]
+\]
+be a polynomial of degree $n$ with $a_n a_0 \neq 0$. 
+If the Newton polygon of $f(x)$ consists of a single line segment connecting the points $(0, v(a_0))$ and $(n, v(a_n))$, and if the horizontal length and vertical length of this segment are coprime, i.e.,
+\[
+    \gcd(n, |v(a_n) - v(a_0)|) = 1,
+\]
+then $f(x)$ is irreducible over $K$.
+\end{theorem}
+
+
+
+
+
+\section*{Ramification}
+\begin{definition}[Tamely Ramification]
+    We call $\P$ is tamely ramified over $\p$ if $\kappa(\P)/\kappa(\p)$ is seperable and  $\text{gcd}(e(\P/\p),\char(\kappa(\p)))=1$.
+\end{definition}
+ 
+
+We give a equivalent describtion when $K$ is Henselian.
+\begin{theorem}[Tamely Ramification]
+    A finite extension $L|K$ is tamely ramified if and only if the extension 
+$L|T$ is generated by radicals
+
+\[
+L = T\!\left(\sqrt[m_1]{a_1},\, \ldots,\, \sqrt[m_r]{a_r}\right)
+\]
+such that $(m_i, p) = 1$. In this case the fundamental identity always holds:
+
+\[
+[L : K] = ef.
+\]
+\end{theorem}
+
+
+\begin{proposition}[Different and Tame Ramification]
+Let $L|K$ be a finite separable extension of Henselian fields.
+ Then
+
+\[
+v_L(\mathfrak{d}_{L|K}) \geq e - 1,
+\]
+with equality if and only if $\mathfrak{P}/\mathfrak{p}$ is tamely ramified:
+
+\[
+\mathfrak{P}/\mathfrak{p} \text{ is tamely ramified} 
+\iff v_L(\mathfrak{d}_{L|K}) = e - 1.
+\]
+Equivalently, in terms of ideals,
+
+\[
+\mathfrak{d}_{L|K} = \mathfrak{P}^{e-1} 
+\iff \mathfrak{P}/\mathfrak{p} \text{ is tamely ramified}.
+\]
+In the wildly ramified case, $v_L(\mathfrak{d}_{L|K}) \geq e$.
+\end{proposition}
+
+
+\begin{proposition}[Trace and Tame Ramification]
+    The extension is tamely ramified if and only if the trace ideal $\mathfrak{T}_{L/F} = \ok$.
+\end{proposition}
+
+\begin{theorem}[Dedekind-Kummer Theorem]
+    Assume $L = K(\alpha)$ and $\alpha \in \ol$, let $f \in \ok[x]$ be the minimal polynomial of $\alpha$.
+    Assume that $\char(\kappa(\p))\nmid N(\ok[\alpha])$. Suppose $g_1, \dots, g_r \in \ok[x]$ are monic polynomials for which
+\[
+\bar{f} = \bar{g}_1^{e_1} \cdots \bar{g}_r^{e_r}
+\]
+is a complete factorization of $\bar{f} \in (\ok/\mathfrak{p})[x]$, where $\bar{\cdot}$ denotes reduction modulo $\mathfrak{p}$, and let $\mathfrak{q}_i := (\mathfrak{p}, g_i(\alpha))$ be the $\ol$-ideal generated by $\mathfrak{p}$ and $g_i(\alpha)$. Then
+\[
+\mathfrak{p}\ol = \mathfrak{q}_1^{e_1} \cdots \mathfrak{q}_r^{e_r},
+\]
+is the prime factorization of $\mathfrak{p}\ol$ in $\ol$ and the residue degree of $\mathfrak{q}_i$ is $f_i := \deg g_i$.
+
+\end{theorem}
+
+The condition $\char(\kappa(\p))\nmid N(\ok[\alpha])$ holds iff. any prime ideal $\P$ lying over $\p$ not contains conductor $\f$.
+Therefore we have 
+\begin{align*}
+    \ol\otimes_{\ok} \o_{K,\p} \simeq \ok[\alpha]\otimes_{\ok} \o_{K,\p}
+\end{align*}
+Tensor product each side by $\hat{\o}_{K,\p}$, then we obtain that
+\begin{align*}
+    \ol\otimes_{\ok} \hat{\o}_{K,\p}\simeq \ok[\alpha]\otimes_{\ok}  \hat{\o}_{K,\p} \simeq  \hat{\o}_{K,\p}[x]/f(x).
+\end{align*}
+Since $ \hat{\o}_{K,\p}$ shares the same residue field with $\ok$ over $\p$, the decomposition of $\bar{f}$ then can be lift to the 
+local ring $\hat{\o}_{K,\p}$. 
+Using CRT on the right hand side, we then have 
+\begin{align*}
+    \ol\otimes_{\ok}  \hat{\o}_{K,\p}\simeq \prod_{i=1}^{r}  \hat{\o}_{K,\p}[x]/(g_i^{e_i})
+\end{align*}
+There for we just need to consider the decomposition of $\p$ on each $\hat{\o}_{K,\p}[x]/(g_i^{e_i})$.
+
+
+
+
+
+maximal unramif
+Kummer Theory
+\section*{Ideal Class Group}
+
+We consdier algebraic number field $L/\Q$.
+
+\np The Minkowski embedding just given by canonical embedding $L\to L\otimes \R$.
+Given a primitive element and minimal polynomial, it can be explicitly described by 
+\begin{align*}
+    \R[x]/f(x) \simeq \bigoplus_{i=1}^{r_1} \R[x]/(x-{a_i}) \oplus \bigoplus_{j=1}^{r_2} \R[x]/(x^2+b_jx+c_j) = \bigoplus_{i=1}^{r_1} \R \oplus \bigoplus_{j=1}^{r_2} \C
+\end{align*}
+Therefore, the image of the ring of integers $\mathcal{O}_L$ under this embedding forms a $\mathbb{Z}$-lattice of rank $r_1 + 2r_2$ inside this space.
+
+\np Dirichlet Unit Theorem: $K^*\simeq \pi(K)\times \mathbb{Z}^{r_1+r_2-1}$.
+
+\np The Minkowski constant of $L$ is given by 
+\begin{align*}
+    M(L) = (\frac{4}{\pi})^{r_2}\frac{n!}{n^n}|d(K)|^{1/2}
+\end{align*}
+
+A quick method to find the roots of unity for $\ok$. Consider $\p$ is a prime ideal with residue field $\F_q$. Then the canonical isomorphism impose that 
+\begin{align*}
+    |W_K|\mid  q-1.
+\end{align*}
+Therefore, we can find some prime ideals to minimize our search.
+
+
+\section*{Hilbert's Ramification Tower}
+
+\begin{definition}[Decomposition Group and Decomposition Field]
+    If $\P$ is a prime ideal of $\o$, then the subgroup 
+    \begin{align*}
+        G_\P =\{\sigma|\sigma(\P)=\P\}
+    \end{align*}
+    is called the decomposition group of $\P$ over $K$. The fixed field $Z_\P$ is called the decomposition field. 
+\end{definition}
+
+\begin{definition}[Inertia Group and Inertia Field]
+    The Inertia group of $\P$ is given by the kernel of homomorphism
+    \begin{align*}
+        G_\P \to G(\kappa(\P)/\kappa(\p)).
+    \end{align*}
+    The fixed field $I_\P$ is called the inertia field. 
+\end{definition}
+
+We have a tower of field extension by 
+\begin{align*}
+    K\xrightarrow{\text{split}} Z_\P \xrightarrow{\text{inertia extension}} T_\P \xrightarrow{\text{ramification}} L
+\end{align*}
+
+If $L/K$ is unramified, it means that $I_\P$ is trivial and thus we have an isomorphism 
+\begin{align*}
+    G_\P \simeq G(\kappa(\P)/\kappa(\p))
+\end{align*}
+
+\begin{definition}[Frobenius Element]
+    Let $L/K$ be a Galois extension of number fields, and let $\mathfrak{P}$ be a prime of $L$ lying over $\mathfrak{p}$ of $K$. Assume $\mathfrak{P}$ is unramified over $\mathfrak{p}$. The Frobenius element $\text{Frob}_{\mathfrak{P}}$ is the unique element in the Galois group $\text{Gal}(L/K)$ such that for all $\alpha \in \mathcal{O}_L$:$$\text{Frob}_{\mathfrak{P}}(\alpha) \equiv \alpha^{N_{K/\Q}(\mathfrak{p})} \pmod{\mathfrak{P}}$$
+\end{definition}
+
+The frobenius map of residue field over $\P$ is defined by $x\mapsto x^{N_{K/\Q}(\p)}$ since we want to fix the base field $K$.
+
+
+\section*{Calssification of extension over a local field}
+
+Suppose we consider the algebraic extension $L/\Q_p$ with degree $n$. 
+The degree admits an decomposition 
+    \begin{align*}
+        n=  f \cdot e_0 \cdot p^k.
+    \end{align*} 
+
+The inertia degree $f$ corresponds unramified extensions $L^{\text{umf}}/\Q_p$. And we have 
+\begin{align*}
+    L^{\text{umf}}=\Q_p(\zeta_{p^f-1}).
+\end{align*}
+It is uniquely determined.
+
+The tamely ramified index $e_0$ corresponds tamely ramified extensions $L^{1}/L^{\text{umf}}$. It has the form 
+\begin{align*}
+    L^{1} \simeq L^{\text{umf}}(\sqrt[e_0]{\pi})
+\end{align*}
+where $\pi$ is the uniformizer of $L^{\text{umf}}$. If $L^{\text{umf}}=\Q_p$, the uniformizer is exactly $p$.
+
+The residue index $p^k$ corresponds wild ramified extensions $L/L^1$.
+
+Actually, we can see more explicitly from the decomposition 
+\begin{align*}
+    \Q_p^\times\simeq \Z \times \Z^\times_p \simeq \Z\times (1+p\Z_p) \times \mu_{p-1}
+\end{align*}
+
+This decomposition is conisder by canonical homomorphism 
+\begin{align*}
+    \Z_p \to \F_p
+\end{align*}
+which induces 
+\begin{align*}
+    \Z_p^\times/(1+p\Z_p) \simeq \F_p^\times.
+\end{align*}
+
+
+
+
+\section*{Class Field Theory}
+
+
+
+\begin{definition}[Local Artin Map]
+    Let $K$ be a local field,then there is a canonical homomorphism
+    \begin{align*}
+        \theta_{K}: K^\times \to \gal(K^\ab/K).
+    \end{align*}
+    where $K^\ab$ denotes the maximal abelian extension of $K$.
+\end{definition}
+The general construction of local artin map is quite complicated. Mainly, it has two different way. The one is Lubin-Tate formal group and the other is 
+Tate cohomology. We focus on cohomological way later.
+
+
+Now let we consider a finite abelian extension $L/K$ over local field $K$. The Artin map induces a canonical epimorphism
+\begin{align*}
+    \theta_{L/K}: K^\times \to \gal(L/K).
+\end{align*}
+with kernel $N_{L/K}(K^\times)$. Therefore, we have an isomorphism 
+\begin{align*}
+    K^\times/N_{L/K}(L^\times)\simeq  \gal(L/K).
+\end{align*}
+
+
+\begin{definition}[Idele and Idele class group]
+    The Idele group of a field $V$ is defined by 
+$$\mathbb{I}_L = \prod_{v} \nolimits' L_v^\times = \{ (\alpha_v)_{v} \mid  \text{ All but finitely many } \alpha_v \in \o_v^\times \}.$$
+Idele class group $C_L$ is defined by $\I_L/L^\times$.
+\end{definition}
+
+If we consider the field extension $L/K$, then we have 
+$$\mathbb{I}_L = \prod_{v}\nolimits' \left( \prod_{w|v} L_w^\times \right)$$
+
+\begin{definition}[Global Artin Map]
+    The global artin map of a global field $K$ is given by 
+    \begin{align*}
+        \theta_K : \I_K &\to \gal(K^{\ab}/K)\\
+        (\alpha_v)_v&\mapsto \prod_{v}\theta_{K_v}(\alpha_v)
+    \end{align*}
+    Since $\I_K$ is defined by restriced direct product, our definition is well-defined.
+\end{definition}
+
+\begin{definition}[Relative Artin Map]
+    Consider a finite abelian extension $L/K$ of a global field $K$. The Relative Artin map is given by 
+    \begin{align*}
+        \theta_{L/K}: \I_K &\to \gal(L/K)\\
+        (\alpha_v)_v&\mapsto \prod_{v}\theta_{L_w/K_v}(\alpha_v).
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[Artin Reciprocity Law]
+    The relative Artin map of $L/K$ is surjective and with kernel $$\ker(\theta_{L/K}) = K^\times \cdot N_{L/K}(\mathbb{I}_L).$$
+    It induces an isomorphism 
+    \begin{align*}
+         \I_K/(K^\times \cdot N_{L/K}(\mathbb{I}_L)) \simeq \gal(L/K).
+    \end{align*}
+    We can also write 
+    \begin{align*}
+        C_K/N_{L/K}(C_L) \simeq \gal(L/K).
+    \end{align*}
+\end{theorem}
+
+Now we consider the "the functor of point" perspective in Class Field Theory.  Mainly, we interpret an element $a\in K$ as the representation of absolute galois group $G_K$.
+
+To show that, we consider Kummer Theory. Let $K$ be a field contains $\mu_n$. Let $a$ be an arbitrary nonzero element of $K$.
+We consider the spliting field of $x^n-a$.
+In algebraically closed field $\bar{K}$, we must have the decomposition
+\begin{align*}
+    (x-\sqrt[n]{a})(x-\zeta_n\cdot \sqrt[n]{a})\cdots (x-\zeta_n^{n-1}\cdot \sqrt[n]{a})
+\end{align*}
+Let $\sigma$ be an arbitrary element of $G_K$, then we consider 
+\begin{align*}
+    \frac{\sigma(\sqrt[n]{a})}{\sqrt[n]{a}} = \zeta^{k}
+\end{align*}
+for some $k$. Actually, we use a type of polynomials $x^n-y$ induces the character
+\begin{align*}
+    K^\times \to \hom_{\text{grp}}(G_K,\mu_n).
+\end{align*}
+
+Actually, if we consider galois cohomology, then $G_K$ act trivially on $\mu_n$ since $\mu_n\subseteq K$.
+In this sense we have 
+\begin{align*}
+    H^1(G_K,\mu_n) \simeq \hom_{\text{cont}}(G_K,\mu_n)
+\end{align*}
+
+Then kummer exact sequence 
+\begin{align*}
+    1\to \mu_n(K) \to K^\times \xrightarrow{(\cdot)^n} K^{\times} \to 1
+\end{align*} 
+induces a long exact sequence 
+\begin{align*}
+    1\to \mu_n(K) \to K^\times \xrightarrow{(\cdot)^n} K^{\times} \to H^1(G_K,\mu_n(K)) \to H^1(G_K,K^\times) \to \cdots
+\end{align*}
+Hilbert's 90 implies that $H^1(G_K,K^\times)=0$ then we have the following corollary.
+\begin{corollary}[Kummer Isomorphism]
+    Let $K$ be an arbitrary field contains $\mu_n$. Then we have an isomorphism 
+    \begin{align*}
+        K^\times/K^{\times n} \simeq H^1(G_K,\mu_n) \simeq \hom_{\text{cont}}(G_K,\mu_n). 
+    \end{align*}
+\end{corollary}
+
+We have bijection 
+\begin{center}
+    \{Finite abelian extension $L/K$\} $\leftrightarrow$  \{Finite subgroups of $G_K^\vee$\}
+\end{center}
+
+
+Another $G_K$-module we usually consider in Class Field Theory is $\bar{K}^\times$.
+Here, we must notice that $K$ is a local field.
+So what the element of $K$ stand for in this sense? 
+Let we consider $K$ acts on the Pontryagin dual group $G_{K}^\vee$, which defined by 
+\begin{align*}
+    a: G_K^\vee &\to \Q/\Z\\
+    \chi&\mapsto \chi(\theta_K(a)).
+\end{align*}
+where $\theta_K$ means artin map.
+
+Actually, it is the Tate-Nakayami duality. We first intepret $a$ as an element of $H^0(G_K,\bar{K}^\times)$ and $\chi$ as an element 
+\begin{align*}
+    H^1(G_K,\Q/\Z) \simeq G_K^\vee. 
+\end{align*}
+
+The exact sequence 
+\begin{align*}
+    0\to \Z \to \Q \to \Q/\Z \to 0
+\end{align*}
+
+We notice that $H^i(G_K,\Q)$ since $H^i(G,\Q)=0$ for $i>0$ and any finite group $G$.
+
+Then know that 
+\begin{align*}
+    H^1(G_K,\Q/\Z) \simeq H^2(G_K,\Z).
+\end{align*}
+
+We consider the cup product 
+\begin{align*}
+    H^2(G_K,\Z) \cup H^0(G_K,\bar{K}^\times) \to  H^2(G_K,\Z\otimes_\Z \bar{K}^\times)
+\end{align*}
+
+Therefore we have 
+\begin{align*}
+    \delta(\chi) \cup a \in H^2(G_K,\bar{K}^\times)
+\end{align*}
+
+The Hasse invariant map tells 
+\begin{align*}
+    \text{inv}:H^2(G_K,\bar{K}^\times) \xrightarrow{\simeq} \Q/\Z.
+\end{align*}
+
+
+
+
+
+Now we turns to the global situation. Given an element $a\in \I_K$ and $\chi \in G_K^\vee$ we define pairing 
+\begin{align*}
+    \langle \chi,(a_v)_v \rangle:= \sum_{v} \text{inv}_v(\delta(\chi_v)\cup a_v) \in \Q/\Z
+\end{align*}
+
+We also call the second cohomology group as Brauer group $\br(K) = H^2(G_K,\bar{K}^\times)$. 
+An important exact sequence to give the well-definedness of this pairing is following theorem.
+
+\begin{theorem}[Hasse exact sequence]
+    Let we consider global field $K$. Then we have a exact sequence of Brauer group 
+    \begin{align*}
+        0\to \br(K) \to \bigoplus_{v}\br(K_v) \xrightarrow{\sum_v \text{inv}} \Q/\Z \to 0
+    \end{align*}
+\end{theorem}
+
+The exact sequence implies that if $(a_v)_v$ is principle i.e. $(a_v)_v \in K^\times$, we then have 
+\begin{align*}
+    \langle \chi,(a_v)_v \rangle =0.
+\end{align*}
+
+Then we obtain that the pairing of global field
+\begin{align*}
+    C_K \times H^1(G_K,\Q/\Z) \to \Q/\Z. 
+\end{align*}
+
+
+
+
+
+Now let we return to Kummer theorem again. Let $K$ be a field containing $\mu_n$. We can interpret 
+$\mu_n$ as torsion submodule of $\bar{K}^\times$.
+
+
+
+In this case, the Hilbert symbol over $K_v$ is defined by 
+\begin{align*}
+    (\chi_a,b)_v &\mapsto \frac{\theta_b(\sqrt[n]{a})}{\sqrt[n]{a}}
+\end{align*}
+where $\chi_a\in K_v^\times/(K_v^{\times n})$ is Kummer character given by Kummer exact sequence
+and $b$ is an element of $K_v$. $\theta_b$ is $\theta(b)$ the image of local artin map.
+
+The global case of Hilbert reciprocity law is 
+\begin{align*}
+    \prod_v(a,b)_v = 1
+\end{align*}
+
+Now we give the definition of local artin map over $\Q_\p$. Consider the fintie abelian extension $K/\Q_p$. Let $x=up^m\in\Q_p^\times$.
+The artin map is given by
+\begin{align*}
+    \theta_{\Q_p}(p) = \text{Frob}_p.
+\end{align*}
+and 
+\begin{align*}
+    \theta_{\Q_p}(u)(\zeta_{p^r}) = \zeta_{p^r}^{u \bmod p^r}
+\end{align*}
+
+
+The calculation of quadratic Hilbert symbol. 
+Let $p$ be odd prime number.
+Consider $\Q_p$ and $a=p^\alpha u, b = p^\beta v$. Then the Hilbert sysmbol is given by 
+\begin{align*}
+    (a,b)_p = (-1)^{\alpha\beta\frac{p-1}{2}} \legendre{\bar{u}}{p}^\beta \legendre{\bar{v}}{p}^\alpha 
+\end{align*}
+where $\bar{u},\bar{v}\in \F_p$.
+The legendre symbol is defined by 
+\begin{align*}
+    \legendre{a}{p} = a^{\frac{p-1}{2}}\bmod p
+\end{align*}
+
+We also have
+\begin{align*}
+    \legendre{2}{p} = (-1)^{\frac{p^2-1}{2}}.
+\end{align*} 
+
+The reprocity law 
+\begin{align*}
+    \legendre{q}{p}\legendre{p}{q} = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}.
+\end{align*}
+
+Also we should know 
+\begin{align*}
+    (a,b)_{\infty} = -1 \text{ if }a,b<0
+\end{align*}
+
+
+The Hilbert symbol has good properties: 
+\begin{enumerate}
+    \item[bilinear] $(aa',b) = (a,b)(a',b)$
+    \item[skew-sysmetric] $(a,b)(b,a)=1$
+    \item[non-degenerated] $(a,b)=1$ for all $b$ iff. $a\in K^{\times n}$  
+\end{enumerate}
+
+
+\section*{Problems}
+\prob  Let $D$ be a square-free integer, $D\neq 0,1$. For a prime number $l$, prove that if $l\mid D$, then $l$ is ramified in $\Q(\sqrt{D})$.
+
+Since $D$ be a square-free integer and $l\mid D$, then we must have $v(D)=1$. Then we have $v(\sqrt{D})=1/2$ implies it is ramified.
+
+\prob Analysis Cyclotomic extension $\Q(\zeta_n)$.
+
+The cyclotomic polynomial are given by 
+\begin{align*}
+    \Phi(x) = \sum_{k=1,(n,k)=1}(x-\zeta_n^k).
+\end{align*}
+Therefore $[\Q(\zeta_n):\Q]=\varphi(n)$. The Euler function $\varphi(p^k)=p^k-p^{k-1}$. 
+The galois group of this extension is given by  $(\Z/n\Z)^\times$. We need to notice that $|(\Z/p^k\Z)^\times|=\varphi(p^k)$.
+
+\prob Every quadratic extension over $\Q$ must have the form $\Q(\sqrt{D})$. It is Galois and its roots of unity only have three types.
+
+Clealy, Consider $\Q(\alpha)$ where $\alpha$ with minimal polynomial $f(x)$. 
+According to the Vieta's formulas, we must have $\beta = \alpha^{-1}c/a$. It is the split field of $f(x)$ and hence it is galois.
+
+The galois group must have order two, it should be $\Z/2\Z$.
+
+Let $D$ be the the square-free part of the square of determinant $\sqrt{\Delta}$ of $f(x)$, then we can check that $\Q(\alpha)=\Q(\sqrt{D})$.
+
+Suppose that $\Q(\zeta_{p^m})\subseteq \Q(\alpha)$. Since $[\Q(\zeta_{p^m}):\Q] = \varphi(p^m) = p^{m-1}(p-1)$. Then inequality 
+\begin{align*}
+    p^{m-1}(p-1)\le 2
+\end{align*}
+tell us it only can be the case: 
+\begin{enumerate}
+    \item $p=3,m=1$.
+    \item $p=2,m=1$.
+    \item $p=2,m=2$.
+\end{enumerate}
+It corresponds to the the roots of unity $W_k$
+\begin{enumerate}
+    \item $\langle -1,\omega,\omega^2 \rangle$
+    \item $\langle -1 \rangle$
+    \item $\langle -1,i \rangle$
+\end{enumerate}
+Clearly $D>0$ then we have $W_k = \langle -1\rangle$. If $D=-3$, then we find that $\Q(\frac{\sqrt{-3}+1}{2})=\Q(\zeta_3)$. 
+If $D=-1$, it must be $\Q(i)$. And others situation must have root of unity $\langle -1\rangle$.
+
+\prob The roots of unity over $\F_{p^t}$. 
+
+Since every element $x\in \F_{p^t}$ we have $x^{p^t-1}=1.$ Then $x^n=1$ and $(n,p)=1$ iff. $n|p^t-1$.
+If $p\mid n$, then we find that $x^{kp^s}-1=(x^k-1)^{p^s}=0$.
+
+\prob Kronecker-Weber Theorem state that every Abel number field is a subfield of a cyclotomic number field. Find this field for quadratic extension $\Q(\sqrt{D})$.
+
+Let we consider the determinant $\Delta$ of $f(x)$ which is the minimal polynomial of $\sqrt{D}$.
+Then consider $\Q(\zeta_{|\Delta|})$.
+
+
+
+\prob Classical Group in Galois Theory.
+
+There are several classical group we need to know.
+\begin{enumerate}
+    \item Symmetric group $S_n$
+    \item Alternating Group $A_n$
+    \item Cyclic Groups $\Z/n\Z$
+    \item Dihedral Groups $D_n = \Z/n\Z \rtimes \Z/2\Z.$
+    \item Klein Four Group $V_4 = (\Z/2\Z)^2$
+    \item Frobenius Groups $\text{AGL}(1,p)= \Z/p\Z \rtimes (\Z/p\Z)^\times.$
+\end{enumerate}
+
+
+
+\prob Discriminant of $x^n+ax+b$.
+
+We use the fact that $\Delta(f)=(-1)^{n(n-1)/2}\text{Res}(f,f')$. And 
+$$\text{Res}(f,f')=(-1)^{n-1}(n-1)^{n-1}a^n+n^nb^{n-1}.$$
+
+\prob Consider $\Q(\alpha)$ and with $f(x)=x^3-x+1$. Calculate the norm of $\alpha+2$.
+
+We compute the discriminant of $f$ by 
+\begin{align*}
+    \Delta(f) = (-1)\text{Res}(f,f') =-23. 
+\end{align*}
+Let $g(x)=x+2$, then we have 
+\begin{align*}
+    \N_{L/K}(\alpha+2) =  \text{Res}(f,g).
+\end{align*}
+
+Also we can find the spliting field of $f(x)$ is $\Q(\alpha,\sqrt{23})$. 
+Then $\sqrt{23}\cdot \ok $ lying over $23\cdot \Q$. We next compute the 
+\begin{align*}
+    \N_{L/K}(\alpha) = \text{Res}(f,x) = -1.
+\end{align*} 
+
+\prob Verify the integral closure of $\Z[\alpha]$. 
+
+Since $\Delta(f) = -23$ is square-free, it means that $\Z[\alpha]$ is integral. 
+
+\prob Let $K(\sqrt{D})$ with $D$ is square-free. Prove that $\ok=\Z[\sqrt{D}]$ if $D\equiv 2,3\bmod 4$ and $\ok=\Z[\frac{1+\sqrt{D}}{2}]$ if $D\equiv 1\bmod 4$. 
+
+Consider the discriminant of an order $\Z[\sqrt{D}]$ is given by 
+\begin{align*}
+    \d(\Z[\sqrt{D}]) = 4D
+\end{align*}
+The only value of $[\ok:\Z[\sqrt{D}]]$ is 1 or 2.
+Suppose that $D\equiv 2,3\bmod 4$ with $[\ok:\Z[\sqrt{D}]]=2$. Then we have an element
+\begin{align*}
+    y = \frac{a+b\sqrt{D}}{2}
+\end{align*}
+is intergral. We have a minimal polynomial
+\begin{align*}
+    f(x) = (x-y)(x-\sigma(y)) = x^2-ax+\frac{a^2-b^2 D}{4}
+\end{align*}
+It must have $\frac{a^2-bD}{4}$ be an integer. It is impossible.
+
+\prob Find the Galois group of $\Q(\alpha,\sqrt{-23})/\Q$.
+
+Clearly it permutes the roots of $f$. Since $f(x)$ is irreducible then it must be transitive.
+The transitive subgroup of $S_3$ are $A_3$ or $S_3$. It can not be $A_3$ since $[\Q[\alpha,\sqrt{-23}]:\Q]=6$.
+Also, the determinant $d=-23$ implies it admits two complex roots. consider the conjugate action, it is a odd permutation.
+Therefore, the galois group cannot be $A_3$.
+
+
+
+
+
+\prob Analysis the integrality of $M=\Z[\alpha,\frac{1+\sqrt{-23}}{2}]$.
+
+We consider the field extension $\Q(\alpha,\sqrt{-23})/\Q(\alpha)$ with minimal polynomial $g(x)=x^2-x+6$.
+We consdier the determinant of $g$ is given by 
+\begin{align*}
+    \Delta = -23
+\end{align*}
+Therefore the determinant of $M$ is given by calculate the determinant of $\{\alpha,\alpha^2,\alpha^3,\omega\cdot \alpha,\dots\}$
+where we let $\omega = \frac{1+\sqrt{-23}}{2}$. Then we have 
+\begin{align*}
+    \Delta_{M} = (-23)^{2} \cdot (-23)^{3} = -23^5.
+\end{align*}
+
+Let $L=\Q(\alpha,\sqrt{-23})$, $K_1=\Q(\sqrt{-23})$, $K_2=\Q(\alpha)$.
+Now we compute the determinant of field extension. I claim that the field extension $\Q(\alpha,\sqrt{-23})/\Q(\sqrt{-23})$
+is unramified. Then $\D(L/K_1)=\ol$ and thus $\d(L/K_1)=\o_{K_1}$. Consider the tower of Different 
+\begin{align*}
+    \D(L/\Q) = \D(L/K_1)\cdot \D(K_1/\Q)
+\end{align*}
+and act on $N_{L/\Q}$ on both side.
+We then have 
+\begin{align*}
+    \d(L/\Q)=N_{K_1/\Q}(\d(L/K_1))\cdot \d(K_1/\Q)^{[L:K_1]}.
+\end{align*}
+And we have 
+\begin{align*}
+    \d(L/\Q)= (-23)^3
+\end{align*}
+
+Now we prove our claim.  
+
+First, you can check $K_1/\Q$ and $K_2/\Q$ are only ramified at $23$. Therefore $L/Q$ only ramified at $23$.
+
+
+
+
+Then you check $\Q_{23}(\alpha,\sqrt{-23})/\Q_{23}$ has degree $2$. It implies that ramification index cannot larger than 2.
+Therefore $L/K_1$ is unramified.
+
+\prob Analysis the decomposition of $(23)$ from the tower $\Q\to K_1\to L$.
+
+Consider $\Q_{23}(\sqrt{-23})/\Q_{23}$ with a minimal polynomial $g(x)$. The newton polygon of $g(x)$ tells its ramification index is 2.
+And since $K_1/\Q$ is quadratic extension, it must be totally ramified at $(23)$ over $K_1$. Now suppose that 
+\begin{align*}
+    23\cdot K_1 = \p^2.
+\end{align*}
+We then consider the $K_1(\alpha)_\p/(K_1)_\p$ with a minimal polynomial $f(x)$. 
+Consider the polynomial over residue field 
+\begin{align*}
+    x^3-x+1 \mod \p.
+\end{align*}
+Since $f(3)\equiv 0\mod \p$ and $f'(3) = 26\not\equiv 0\mod\p $. We obtain that $x=3$ be the simple root of $f(x)$ according to Hensel's lemma.
+According to the symmetric of galois extension we then have 
+\begin{align*}
+    23\cdot \ol = (\P_1\P_2\P_3)^2
+\end{align*}
+
+\prob Analysis the decomposition of $(23)$ by using $L\otimes_{\Q}\Q_{23}$.
+
+Basically, we use the fact that 
+\begin{align*}
+    L\otimes_{\Q}\Q_{23}  = (K_1\otimes_\Q \Q_{23})\otimes_{\Q_{23}}(K_2\otimes_\Q \Q_{23})
+\end{align*}
+Analysis $K_1/\Q$ we now that $g(x)$ split over residue field. Then we obtain that 
+\begin{align*}
+    K_1\otimes_\Q \Q_{23}  = \Q_{23}(\sqrt{-23}).
+\end{align*}
+
+Next we consider $K_2/\Q$ since 
+\begin{align*}
+    f(x)\equiv (x-3)(x-10)^2 \bmod 23
+\end{align*}
+
+Let $x=y+10$, we find that 
+\begin{align*}
+    f(y)  = x^3+30x^2+299x+991
+\end{align*}
+with Newton polygon
+\begin{align*}
+    (0,1) \to (0,1) \to (0,0) \to (0,0)
+\end{align*}
+It menas that $K_2/\Q$ must ramified, then we obtain that 
+\begin{align*}
+    K_2\otimes_\Q \Q_{23} \simeq \Q_{23} \times E_2 
+\end{align*}
+Where $E_2$ denotes an totally ramified extension of $\Q_{23}$ with $e=2,f=1$.
+According to the calssification of local field extension, we claim it is equivalent to $\Q_{23}(\sqrt{-23})$.
+Therefore we then have 
+\begin{align*}
+    L\otimes_{\Q}\Q_{23} &= \Q_{23}(\sqrt{-23})\otimes_{\Q_{23}} (\Q_{23}\times \Q_{23}(\sqrt{-23}))\\
+    &=\Q_{23}(\sqrt{-23}) \times \Q_{23}(\sqrt{-23}) \times \Q_{23}(\sqrt{-23}).
+\end{align*} 
+
+\prob Analysis the decomposition group and inerita group of $(23)$.
+
+We have 
+\begin{align*}
+    D_\P = \gal(\Q_{23}(\sqrt{-23})/\Q_{23}) = \Z/2\Z
+\end{align*}
+and exact sequence 
+\begin{align*}
+    0\to I_\P \to D_\P \to \gal(\kappa(\P)/\F_{23}) \to 0
+\end{align*}
+Since $\kappa(\P)/\F_{23}$ is trivial then we have $I_\P=D_\P=\Z/2\Z$.
+
+
+
+\prob Analysis the decomposition of $(2)$.
+
+We consider $L\otimes_{\Q}\Q_{2}$. Since $g(x)$ split over $\F_2$, it menas that 
+\begin{align*}
+    K_1\otimes_\Q \Q_2 = \Q_2\times \Q_2.
+\end{align*}
+Since $x^3-x+1$ has not root. It means that the inertia degrre $f=3$. Therefore we have 
+\begin{align*}
+    K_2 \otimes_\Q \Q_2 = \Q_{2^3}.
+\end{align*}
+Then we have 
+\begin{align*}
+    L\otimes_\Q \Q_2 = \Q_{2^3} \times \Q_{2^3}.
+\end{align*}
+
+\prob Calculate the frobenius element corresponding to (2).
+
+We find it over extension $\Q_{2^3}/\Q_{2}.$ Consider its residue field is $\F_{2^3}$. 
+The frobenius map $x\mapsto x^2$ has order 3 in this residue field. 
+It menas $\text{Frob}_\P$ in $\text{Gal}(L/\Q)$ must have order 3. The only case is (123).
+
+\prob Analysis the decomposition of $(59)$ over $L$.
+
+Similarly, we again Consider $\Q_{59}(\alpha,\sqrt{-23})/\Q_{59}$. Consider that 
+\begin{align*}
+    f(x) \equiv (x-4)(x-13)(x-42)\mod 59  
+\end{align*}
+and we have 
+\begin{align*}
+    g(x) = (x-3)(x+3) \mod 59.
+\end{align*}
+It means that $f(\Q_{59}(\alpha)/\Q_{59})=f(\Q_{59}(\sqrt{-23})/\Q_{59})=1$. 
+Consider that it is unramified, then we obtain it is totally split.
+
+\prob The extension $\Q_l(\zeta_p)/\Q_l$ is unramified for $l\neq p$.
+
+Consider that $\zeta_p^{p}=1$, then we have $v(\zeta_p^p)=0$, which menas that the value group is not change.
+
+\prob The extension $\Q_p(\zeta_p)/\Q_p$ is totally ramified.
+
+Since $x^p-1\equiv (x-1)^p\bmod p$, it means that $f=1$.
+
+Hence we consider that 
+\begin{align*}
+    x^{p-1} + \binom{p}{1}x^{p-1}+\binom{p}{2}x^{p-2}+\dots+p
+\end{align*}
+It is irreducible over $\Q_p$ according to Dumas's criterion. It implies that the extension of local field is totally ramified.
+
+
+\prob Let $K=\Q(\sqrt[3]{m})$ with $m=ab^2$. Let $\alpha=\sqrt[3]{ab^2}$ and $\beta=\sqrt[3]{a^2b}$. Calculate the determinant of field $K$.
+
+We use a fact that $K/\Q$ ramified over $p$ iff. $p|d_K$. Consider $K=\Q(\alpha)=\Q(\beta)$ with minimal polynomials $f(x)= x^3-ab^2$ and $g(x)=x^3-a^2b$.
+Newtow polygon tells every prime number $p$ such that $p|ab$ is totally ramified.
+Therefore $d_K$ must contains factors $a,b$. We consider the determinant of an order 
+\begin{align*}
+    d(1,\alpha,\beta) = -27a^2b^2
+\end{align*}
+Since $a,b$ are square free and the different between the discriminant of an order and field is squre factor. Therefore, we claim there are two possibility 
+\begin{align*}
+    d_K = -27a^2b^2\text{ or }-3a^2b^2.
+\end{align*}
+
+When $3|a$ then  3 is totally ramified. One fact that we have is 
+\begin{align*}
+    3\nmid [\ok:\Z[\alpha]].
+\end{align*}
+Suppose that $(3) =\p^3$ and $v_\p(\alpha)=k$. Then we have 
+\begin{align*}
+    3v_\p(\alpha) = v_\p(a)=3.
+\end{align*}
+Suppose that $[\ok:\Z[\alpha]]=3g$, then we have 
+$$(3g)^{-1}\Z[\alpha]\subseteq \ok$$  
+which is impossible. 
+
+For same reason, if $3|b$, we also have 
+\begin{align*}
+    3\nmid [\ok:\Z[\beta]].
+\end{align*}
+
+Consider that 
+\begin{align*}
+    [\ok:\Z[\alpha,\beta]] | [[\ok:\Z[\alpha]]] 
+\end{align*}
+or 
+\begin{align*}
+    [\ok:\Z[\alpha,\beta]] | [[\ok:\Z[\beta]]].
+\end{align*}
+we have 
+\begin{align*}
+    3\nmid [\ok:\Z[\alpha,\beta]]. 
+\end{align*}
+Since $[\ok:\Z[\alpha,\beta]]$ must equal to 1 or 3 and 3 is impossible.
+Then we find that if $3|ab$ then $d_K = -27a^2b^2$.
+
+\prob Prove that $\Q(\zeta_n+\zeta_n^{-1})$ is the maximal real subfield of $\Q(\zeta_n)$.
+
+Consdier that $\zeta_n$ is the locus of 
+\begin{align*}
+    x^2-(\zeta_n+\zeta_n^{-1})x+1 
+\end{align*}
+
+\prob The decomposition of cyclotomic polynomial
+$$\Phi_n(x) = \prod_{d \mid n} (x^{n/d} - 1)^{\mu(d)}$$
+an examples:
+$x^6 - 1 = \Phi_1(x)\Phi_2(x)\Phi_3(x)\Phi_6(x).$
+
+\prob Give the relation between the number of complex embedding $r_2$ with determinant of $f$.
+
+Let $\Delta$ be the determinant then we have
+\begin{align*}
+    \Delta = \prod(\alpha_i-\alpha_j)^2
+\end{align*}
+We have $(\alpha_i-\bar{\alpha_i})<0$, therefore we then have 
+\begin{align*}
+    \text{sgn}(\Delta) = (-1)^{r_2}
+\end{align*}
+
+
+
+\prob Calculate the class group of $\Q(\sqrt{-5})$.
+
+Since $-5\equiv 2\bmod 4$, we have $d_K = 4D$ and 
+\begin{align*}
+    \ok = \Z[\sqrt{-5}].
+\end{align*}
+It has $r_1=0$ and $r_2=2$. 
+We calculate the Minkowski bound 
+$$M_K = \frac{n!}{n^n} \left(\frac{4}{\pi}\right)^{r_2} \sqrt{|d_K|} \approx 2.84$$
+
+Therefore, we just need to consider $(2)$. According to Dedekind-Kummer theorem, the decomposition of 
+\begin{align*}
+    x^2+5 \equiv (x+1)^2 \bmod 2
+\end{align*}
+implies that $(2)$ is totally ramified 
+\begin{align*}
+    (2) = \p^2
+\end{align*}
+Where $\p=(2,1+\sqrt{-5})$. Therefore $\Cl(K)$ is generated by $[\p]$. We just need to show that $\p$
+is not principle. Suppose that 
+\begin{align*}
+    (a+b\sqrt{-5}) = \p
+\end{align*}
+Act on norm on both side we have 
+\begin{align*}
+    2= a^2+5b^2.
+\end{align*}
+It has no integer solution. Therefore we have $\Cl(K)=\Z/2\Z$. 
+
+
+\prob Suppose that $N(\p)=l$ where $\p$ is a prime ideal and $l$ is a prime number. Then if $N(\alpha) = l$, then we have 
+\begin{align*}
+    (\alpha) = \p.
+\end{align*}
+
+
+\prob Consider the transitive subgroup of $S_4$.
+
+It only contains 
+
+\prob Consider the Kummer extension of $\Q_p$
+
+\prob Find the fundamental 
+
+\section*{Class Field Theory}
+\textbf{Idele class group}
+
+The Idele group is defined by 
+$$\mathbb{I}_L = \prod_{v \in V} \nolimits' L_v^\times = \{ (\alpha_v)_{v \in V} \mid \alpha_v \in K_v^\times, \text{all but finitely many } v, \alpha_v \in U_v \}$$
+
+If we consider the field extension $L/K$, then we have 
+$$\mathbb{I}_L = \prod_{v \in V_K} \left( \prod_{w|v} L_w^\times \right)$$
+
+Idele class group is defined by $\I_L/L^\times$.
+
+There is a exact sequence 
+\begin{align*}
+    1\to L^{\times} \to \I_L \to C_L \to 1.
+\end{align*}
+
+\textbf{invariant functor}
+
+Let $G_K$ be the absolute galois group. Invariant functor $(\cdot)^{G_K}$ can be written by 
+\begin{align*}
+    (M)^{G_K} = \hom_{\Z[G_K]}(\Z,M).
+\end{align*}
+for arbitrary $G_K$-module $M$.
+
+
+\textbf{Kummer exact sequence}
+
+Let $K$ be a field such that $\char(K)\nmid n$. We have Kummer exact sequence 
+\begin{align*}
+    1\to \mu_n(K) \to \bar{K}^\times \xrightarrow{(\cdot)^n} \bar{K}^{\times} \to 1
+\end{align*} 
+and 
+\begin{align*}
+    1\to \mu_n(K) \to \o_{\bar{K}}^\times \xrightarrow{(\cdot)^n} \o_{\bar{K}}^{\times} \to 1.
+\end{align*} 
+
+It induces long exact sequences given by 
+\begin{align*}
+    1\to \mu_n(K) \to \bar{K}^\times \xrightarrow{(\cdot)^n} \bar{K}^{\times} \to H^1(G_K,\mu_n(K)) \to H^1(G_K,\bar{K}^\times) \to \cdots
+\end{align*}
+and 
+\begin{align*}
+    1\to \mu_n(K) \to \o_{\bar{K}}^\times \xrightarrow{(\cdot)^n} \o_{\bar{K}}^{\times}  \to H^1(G_K,\mu_n(K)) \to H^1(G_K, \o_{\bar{K}}^\times) \to \cdots
+\end{align*}
+
+\textbf{Hilbert's 90 theorem}
+
+We have Hilbert's 90 theorem.
+\begin{enumerate}
+    \item $H^1(G_K,\bar{K}^\times)=0$.
+    \item $L/K$ be the finite galois extension over a local field $K$. Then we have $H^1(G, L^\times) = 0.$
+    \item Addtivit form above. we have $H^i(G, L) = 0$ for all $i\ge 1$.
+    \item If $L/K$ is the fintie galois extension over global field. we have $H^1(G, L^\times) = 0.$
+    \item We have $H^1(G, \I_L) = 0$ and $H^1(G, C_L) = 0$.
+\end{enumerate}
+
+
+\textbf{Shapiro's Lemma}
+
+Shapiro's lemma claim that 
+
+$$H^i(G, \mathrm{Ind}_H^G(M)) \cong H^i(H, M) \quad (\forall i \ge 0)$$
+
+therefore we have 
+$$H^i(G, \I_L) \cong \bigoplus_{v} H^i(D_\P, L_w^\times) \quad (\forall i \ge 0)$$
+
+\textbf{The dimension of cohomology}
+
+Consider $K$ is a local nonarchimedean field with finite $G_K$-module $M$.
+Then 
+\begin{align*}
+    H^i(G_K,M) = 0
+\end{align*}
+for $i\ge 3$.
+
+\textbf{The meaning of cohomology}
+
+The zero order cohomology
+\begin{align*}
+    H^0(G_K,M) = M^{G_K}
+\end{align*}
+means the element of $M$ which is contained over base field.
+
+
+\textbf{Tate Duality}
+
+We consider local field $K$. 
+\begin{align*}
+    \mu_n = \{\zeta\in\bar{K}^\times\mid \zeta^n=1\}
+\end{align*}
+Let $\mu_\infty$ be the inductive limit of $\mu_n$.
+
+
+Let $M$ be a finite $G_K$-module. Define Cartier duality by
+\begin{align*}
+    M^\vee = \ihom_{\Z}(M,\mu_{\infty})
+\end{align*}
+
+For $f\in M^\vee$, we have $\sigma \cdot f= \sigma f \sigma^{-1}$.
+As a set it is equal to $\hom_{\Z}(M,\mu_{\infty}).$
+
+
+\textbf{Hilbert Symbol and Artin Reciprocity Law}
+
+The Hilbert Symbol and artin Reciprocity law are two essential and basic concept of Class Field Theory.
+
+
+
+
+Consider local field $K$ with $\mu_n\subseteq K$. The Hilbert symbol is defined by 
+\begin{align*}
+    (\cdot,\cdot)_K: (K^\times/K^{\times n}) \times (K^\times/K^{\times n}) &\to \mu_n\\
+    (a,b)_K &\mapsto \frac{\sigma_b(\sqrt[n]{a})}{\sqrt[n]{a}}
+\end{align*}
+where 
+\begin{align*}
+    \sigma_b:K^\times \to G_K^{\ab}
+\end{align*}
+is the Artin map. 
+
+
+
+
+The meaning of Hilbert symbol is quite simple. That is 
+\begin{align*}
+    (a,b)_K=1\Longleftrightarrow a\in N_{L/K}(L^\times)\Longleftrightarrow  \text{The equation }x^n-a=0\text{ has solution over }L
+\end{align*}
+where $L=K(\sqrt[n]{b})$
+
+
+local/global class field, tate duality, Hilbert class, reprocity, gal cohomology, kummer exact sequence
+Herbrand
+
+The formula 
+
+\prob Prove that $x^2+5=y^3$ does not has a integer solution.
+
+\prob Consider the quadratic Hilbert symbol, prove that $(-1,-1)_2 = -1$ and $(2,5)_2 = -1$.
+
+Suppose that $(2,5)=1$. It means the norm function 
+\begin{align*}
+    a^2-2b^2= 5
+\end{align*}
+has a solution over $\Q_2$. First $a,b\in \Z_2$, if not we obtain that $v_2(5)<0$. 
+Therefore we can consider mod 8. The only quadratic element mod 8 are 1 or 4. The only possible mod 8 of LHS are 0,1,2,4,6,7. 
+The same as $(-1,-1)_2$.
+
+
+\prob Consider the decomposition of $\Q_2^\times$ and $\Q_2^\times/\Q_2^{\times 2}$. Deduce the Hilbert symbol for $\Q_2$.
+
+We has 
+\begin{align*}
+    \Q_2^\times\simeq \Z\times \Z_2^\times \simeq \Z\times (1+4\Z_2)\times \mu_2.
+\end{align*}
+
+Therefore we have 
+\begin{align*}
+    \Q_2^\times/\Q_2^{\times 2} = \langle -1,3,5 \rangle \simeq (\Z/2\Z)^3.
+\end{align*}
+
+
+\prob Let \(L=\mathbf Q(\sqrt 2)\). Determine whether the norm equation
+$N_{L/\mathbf Q}(z)=3$
+has a solution \(z\in L^\times\). Equivalently, decide whether
+$x^2-2y^2=3$
+has a solution in \(\mathbf Q\). Use local Hilbert symbols.
+
+Since \(L/\mathbf Q\) is cyclic, the Hasse norm theorem says
+\[
+3\in N_{L/\mathbf Q}(L^\times)
+\iff
+3\in N_{L_v/\mathbf Q_v}(L_v^\times)
+\quad\text{for all places }v.
+\]
+For the quadratic extension \(L=\mathbf Q(\sqrt2)\), the local norm condition is
+\[
+3\in N_{\mathbf Q_v(\sqrt2)/\mathbf Q_v}
+\bigl(\mathbf Q_v(\sqrt2)^\times\bigr)
+\iff
+(2,3)_v=1.
+\]
+
+We compute \((2,3)_v\). For odd \(p\), write
+\[
+a=p^\alpha u,\qquad b=p^\beta v,
+\]
+with \(u,v\in\mathbf Z_p^\times\). Then
+\[
+(a,b)_p
+=
+(-1)^{\alpha\beta\frac{p-1}{2}}
+\left(\frac{\bar u}{p}\right)^\beta
+\left(\frac{\bar v}{p}\right)^\alpha.
+\]
+
+If \(p\neq 2,3\), then \(2,3\in\mathbf Z_p^\times\), so
+\[
+(2,3)_p=1.
+\]
+
+For \(p=3\),
+\[
+2=3^0\cdot 2,\qquad 3=3^1\cdot 1,
+\]
+hence
+\[
+(2,3)_3=\left(\frac{2}{3}\right)=-1.
+\]
+
+For \(p=2\), use the formula
+\[
+(a,b)_2
+=
+(-1)^{
+\epsilon(u)\epsilon(v)
++\alpha\omega(v)
++\beta\omega(u)
+},
+\]
+where
+\[
+\epsilon(u)=\frac{u-1}{2}\pmod 2,
+\qquad
+\omega(u)=\frac{u^2-1}{8}\pmod 2.
+\]
+Since
+\[
+2=2^1\cdot 1,\qquad 3=2^0\cdot 3,
+\]
+we get
+\[
+(2,3)_2
+=
+(-1)^{\omega(3)}
+=
+(-1)^{(9-1)/8}
+=
+-1.
+\]
+
+At the real place,
+\[
+(2,3)_\infty=1
+\]
+because \(2>0\) and \(3>0\).
+
+Therefore
+\[
+(2,3)_2=(2,3)_3=-1,
+\qquad
+(2,3)_v=1\quad\text{for }v\neq 2,3.
+\]
+In particular,
+\[
+(2,3)_2\neq 1,
+\]
+so \(3\) is not a local norm from \(\mathbf Q_2(\sqrt2)\). Hence it is not a global norm.
+
+Thus
+\[
+\boxed{
+N_{\mathbf Q(\sqrt2)/\mathbf Q}(z)=3
+\text{ has no solution in } \mathbf Q(\sqrt2)^\times.
+}
+\]
+
+Equivalently,
+\[
+\boxed{
+x^2-2y^2=3
+\text{ has no solution in } \mathbf Q.
+}
+\]
+
+Finally, Hilbert reciprocity is still satisfied:
+\[
+\prod_v(2,3)_v
+=
+(2,3)_2(2,3)_3
+=
+(-1)(-1)=1.
+\]
+
+
+\np Let \(K=\mathbf Q_3\), and let
+\[
+L=K(\sqrt 2).
+\]
+Let
+\[
+\chi\in H^1(G_K,\mathbf Q/\mathbf Z)
+=
+\operatorname{Hom}_{\mathrm{cont}}(G_K,\mathbf Q/\mathbf Z)
+\]
+be the quadratic character corresponding to \(L/K\), normalized so that the
+nontrivial element has value \(1/2\in \mathbf Q/\mathbf Z\).
+
+Using the cohomological Artin reciprocity pairing
+\[
+H^1(G_K,\mathbf Q/\mathbf Z)\times K^\times
+\longrightarrow \mathbf Q/\mathbf Z,
+\]
+\[
+(\chi,b)\longmapsto
+\operatorname{inv}_K\bigl(\delta(\chi)\cup b\bigr),
+\]
+where
+\[
+\delta(\chi)\in H^2(G_K,\mathbf Z)
+\]
+comes from
+\[
+0\to \mathbf Z\to \mathbf Q\to \mathbf Q/\mathbf Z\to 0,
+\]
+and
+\[
+\delta(\chi)\cup b\in
+H^2(G_K,\bar K^\times)=\operatorname{Br}(K),
+\]
+compute
+\[
+\operatorname{inv}_K\bigl(\delta(\chi)\cup 3\bigr).
+\]
+Then compare your answer with
+\[
+\chi(\operatorname{Art}_K(3)).
+\]
+
+\[
+\textbf{Solution.}
+\]
+Since \(2\) is not a square modulo \(3\), the extension
+\[
+L=\mathbf Q_3(\sqrt 2)
+\]
+is the unramified quadratic extension of \(\mathbf Q_3\).
+
+By local Artin reciprocity, if we choose the convention
+\[
+\operatorname{Art}_K(3)=\operatorname{Frob}_3,
+\]
+then \(\operatorname{Art}_K(3)\) is the nontrivial element of
+\[
+\operatorname{Gal}(L/K)\cong \mathbf Z/2\mathbf Z.
+\]
+Therefore
+\[
+\chi(\operatorname{Art}_K(3))=\frac12.
+\]
+
+Now compute the cohomological side. The class
+\[
+\delta(\chi)\cup 3
+\in H^2(G_K,\bar K^\times)
+=
+\operatorname{Br}(K)
+\]
+is the Brauer class corresponding to the quadratic Hilbert symbol
+\[
+(2,3)_3.
+\]
+For odd \(p\), if
+\[
+a=p^\alpha u,\qquad b=p^\beta v,
+\]
+with \(u,v\in \mathbf Z_p^\times\), then
+\[
+(a,b)_p
+=
+(-1)^{\alpha\beta\frac{p-1}{2}}
+\left(\frac{\bar u}{p}\right)^\beta
+\left(\frac{\bar v}{p}\right)^\alpha.
+\]
+Here
+\[
+2=3^0\cdot 2,\qquad 3=3^1\cdot 1.
+\]
+Hence
+\[
+(2,3)_3
+=
+\left(\frac{2}{3}\right)
+=
+-1.
+\]
+The value \(-1\in \mu_2\) corresponds to
+\[
+\frac12\in \frac12\mathbf Z/\mathbf Z
+\subset \mathbf Q/\mathbf Z.
+\]
+Therefore
+\[
+\operatorname{inv}_K\bigl(\delta(\chi)\cup 3\bigr)
+=
+\frac12.
+\]
+
+Thus
+\[
+\boxed{
+\operatorname{inv}_K\bigl(\delta(\chi)\cup 3\bigr)
+=
+\chi(\operatorname{Art}_K(3))
+=
+\frac12.
+}
+\]
+
+This verifies the cohomological form of local Artin reciprocity in this example:
+\[
+\boxed{
+\operatorname{inv}_K(\delta(\chi)\cup b)
+=
+\chi(\operatorname{Art}_K(b)).
+}
+\]
+
+
+\[
+\textbf{Problem.}
+\]
+Let
+\[
+L=\mathbf Q(\zeta_7)^+
+\]
+be the maximal real subfield of \(\mathbf Q(\zeta_7)\). Then
+\[
+[L:\mathbf Q]=3
+\]
+and
+\[
+\operatorname{Gal}(L/\mathbf Q)\cong \mathbf Z/3\mathbf Z.
+\]
+
+This extension is not a Kummer extension over \(\mathbf Q\), since
+\[
+\mu_3\not\subset \mathbf Q.
+\]
+
+\[
+\textbf{(1)}
+\]
+Use global class field theory to compute
+\[
+C_{\mathbf Q}/N_{L/\mathbf Q}C_L.
+\]
+
+\[
+\textbf{(2)}
+\]
+Interpret this quotient using Tate cohomology.
+
+\[
+\textbf{(3)}
+\]
+Determine the Artin symbols of the primes \(2\) and \(13\), and decide whether
+\[
+2,\ 13\in N_{L/\mathbf Q}(L^\times).
+\]
+
+\[
+\textbf{Solution.}
+\]
+
+Since
+\[
+L=\mathbf Q(\zeta_7)^+
+\]
+is the real subfield of the cyclotomic field \(\mathbf Q(\zeta_7)\), we have
+\[
+\operatorname{Gal}(L/\mathbf Q)
+\cong
+(\mathbf Z/7\mathbf Z)^\times/\{\pm1\}.
+\]
+But
+\[
+(\mathbf Z/7\mathbf Z)^\times
+=
+\{1,2,3,4,5,6\}
+\cong \mathbf Z/6\mathbf Z,
+\]
+so
+\[
+(\mathbf Z/7\mathbf Z)^\times/\{\pm1\}
+\cong \mathbf Z/3\mathbf Z.
+\]
+
+By global class field theory, the Artin reciprocity map gives an isomorphism
+\[
+C_{\mathbf Q}/N_{L/\mathbf Q}C_L
+\xrightarrow{\sim}
+\operatorname{Gal}(L/\mathbf Q).
+\]
+Therefore
+\[
+\boxed{
+C_{\mathbf Q}/N_{L/\mathbf Q}C_L
+\cong
+\mathbf Z/3\mathbf Z.
+}
+\]
+
+Now let
+\[
+G=\operatorname{Gal}(L/\mathbf Q).
+\]
+Tate cohomology gives
+\[
+\widehat H^0(G,C_L)
+=
+C_{\mathbf Q}/N_{L/\mathbf Q}C_L.
+\]
+The fundamental class
+\[
+u_{L/\mathbf Q}\in H^2(G,C_L)
+\]
+induces, by Tate--Nakayama duality, an isomorphism
+\[
+\widehat H^{-2}(G,\mathbf Z)
+\xrightarrow{\;\cup u_{L/\mathbf Q}\;}
+\widehat H^0(G,C_L).
+\]
+But
+\[
+\widehat H^{-2}(G,\mathbf Z)
+\cong
+H_1(G,\mathbf Z)
+\cong
+G^{\mathrm{ab}}.
+\]
+Since \(G\) is already abelian,
+\[
+G^{\mathrm{ab}}=G.
+\]
+Hence
+\[
+\widehat H^0(G,C_L)
+\cong
+G.
+\]
+This recovers the class field theory isomorphism
+\[
+C_{\mathbf Q}/N_{L/\mathbf Q}C_L
+\cong
+\operatorname{Gal}(L/\mathbf Q).
+\]
+
+Now compute Frobenius elements. For a prime \(\ell\neq 7\), the Artin symbol is given by
+\[
+\operatorname{Frob}_\ell
+=
+[\ell]\in
+(\mathbf Z/7\mathbf Z)^\times/\{\pm1\}.
+\]
+
+For \(\ell=2\),
+\[
+2\not\equiv \pm1\pmod 7.
+\]
+The class of \(2\) has order \(3\) in
+\[
+(\mathbf Z/7\mathbf Z)^\times/\{\pm1\}.
+\]
+Thus
+\[
+\operatorname{Frob}_2
+\]
+is a generator of
+\[
+\operatorname{Gal}(L/\mathbf Q)\cong \mathbf Z/3\mathbf Z.
+\]
+Hence \(2\) does not split completely in \(L\).
+
+For \(\ell=13\),
+\[
+13\equiv -1\pmod 7.
+\]
+Thus the class of \(13\) is trivial in
+\[
+(\mathbf Z/7\mathbf Z)^\times/\{\pm1\}.
+\]
+Therefore
+\[
+\operatorname{Frob}_{13}=1.
+\]
+Hence \(13\) splits completely in \(L\).
+
+Finally, since \(L/\mathbf Q\) is cyclic, the Hasse norm theorem applies:
+\[
+a\in N_{L/\mathbf Q}(L^\times)
+\iff
+a\in N_{L_w/\mathbf Q_v}(L_w^\times)
+\quad\text{for all }v.
+\]
+
+For a rational prime \(\ell\neq 7\), the local norm condition at \(\ell\) forces the valuation \(v_\ell(\ell)=1\) to be divisible by the residue degree \(f_\ell\). Thus \(\ell\) can be a local norm at \(\ell\) only if
+\[
+f_\ell=1,
+\]
+i.e. only if \(\ell\) splits completely in \(L\).
+
+Since \(2\) does not split completely,
+\[
+\boxed{
+2\notin N_{L/\mathbf Q}(L^\times).
+}
+\]
+
+Since \(13\) splits completely and is locally a norm at every place, the Hasse norm theorem gives
+\[
+\boxed{
+13\in N_{L/\mathbf Q}(L^\times).
+}
+\]
+
+Thus this example uses global class field theory and Tate cohomology, but not Kummer theory.
+
+
+
+
+
+
+
+
 
 
 
