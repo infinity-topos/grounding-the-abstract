@@ -7,8 +7,11 @@
 \newcommand{\spec}{\operatorname{Spec}}
 \newcommand{\spa}{\operatorname{Span}}
 \newcommand{\p}{\mathfrak{p}}
+\renewcommand{\a}{\mathfrak{a}}
+\renewcommand{\b}{\mathfrak{b}}
 \newcommand{\z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\q}{\mathfrak{q}}
 \newcommand{\tr}{\text{Tr}}
 \renewcommand{\o}{\mathcal{O}}
@@ -34,8 +37,6 @@
 \newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
 
 \section*{Some Examples}
-Minkowski Bound
-
 Let $R$ be an integral domian with fraction field $F$. Let $K$ be a field extension $F$ and let $V$ be a finite dimensional $K$-vector space.
 
 \np $L$ is an $R$-submodule of $F\otimes_{R} L$. To anlysis, we can consider 
@@ -602,7 +603,32 @@ Let $J$ be an integral ideal of a Dedekind domain $R$. Prove that for every frac
 \subsection*{Exercise 5.3}
 Prove that the existence statement in Thm.1.2.27 can be deduced from Thm.1.2.39.
 \begin{solution}
-    
+    Let $\{x_1,\cdots,x_n\}$ be the generators of torsion $R$-module $M$. We consider the homomorphism 
+    \begin{align*}
+        R^{n} &\to M \\
+        (r_i)_i&\mapsto \sum r_ix_i
+    \end{align*}
+    which is a epimorphism. Suppose its kernel is $N$. Clearly, $N$ is a torsion-free module with finite generators since $R$ is Noetherian. Therefore $N$ is a projective $R$-module.
+    Consider the short exact sequence 
+    \begin{align*}
+        0\to N \to R^n \to M \to 0
+    \end{align*}
+    It implies that 
+    \begin{align*}
+        K^n \simeq N \otimes_R K.
+    \end{align*}
+    Since functor $\otimes_R K$ is exact and $M\otimes_R K$ is zero.
+
+    Then there is a basis such that 
+    \begin{align*}
+        R^n = \a_1y_1 +\a_2y_2 +\cdots+ \a_ny_n\\
+        N = \a_1\b_1y_1+\a_2\b_2y_2+\cdots + \a_n\b_ny_n
+    \end{align*}
+    and $\b_i\supseteq \b_{i+1}$.
+    Then we obtain that 
+    \begin{align*}
+        R^n/N \simeq \bigoplus_i \a_i/(\a_i\b_i) \simeq  \bigoplus_i R/\b_i.
+    \end{align*}
 \end{solution}
 
 \subsection*{Exercise 5.4}
@@ -947,5 +973,28 @@ Let $(K, |\cdot|)$ be a henselian (non-archimedean valued) field.
     (2) Let $a_2= Q(x),a_0=Q(y)$ and $a_1= \langle x, y \rangle_Q$. 
     Then $Q(Tx+y) = a_2T^2+a_1T+a_0$. Since $V$ is anisotropic, then $Q(Tx+y)$ is irreducible over $K$.
     Then according to (1) is what we want.
+\end{solution}
+
+
+\section*{Homework 10}
+
+\subsection*{Exercise 10.1}
+Let $K = \mathbb{R}$ or $K = \mathbb{C}$, and let $|\cdot|$ be the usual absolute value on $K$. Let $s$ be a positive real number. Prove that $|\cdot|^s$ is an absolute value on $K$ if and only if $0 < s \leq 1$.
+
+\begin{solution}
+    AV1 and AV2 is quite clear. We just show AV3.
+    Suppose that $|\cdot|^s$ is an absolute value, we consider that 
+    \begin{align*}
+        2\ge 2^s
+    \end{align*}
+    It menas that $0<s\le 1$. Suppose that $0<s\le 1$, we just need to prove that 
+    \begin{align*}
+        1+x^s\ge (1+x)^s
+    \end{align*}
+    for $0<x< 1$. Consider function $g(x)=1+x^s-(1+x)^s$ with 
+    \begin{align*}
+        g'(x) = sx^{s-1} - s(1+x)^{s-1}>0
+    \end{align*}
+    Therefore $g(x)>g(0)=0$. Our claim holds.
 \end{solution}
 \end{document}

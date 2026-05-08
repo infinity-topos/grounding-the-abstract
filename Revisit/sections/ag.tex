@@ -1,6 +1,8 @@
 {\begingroup
 \renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\calH}{\mathcal{H}}
 \newcommand{\tM}{\widetilde{M}}
+\renewcommand{\div}{\operatorname{Div}}
 \newcommand{\ann}{\operatorname{Ann}}
 \newcommand{\ord}{\operatorname{ord}}
 \newcommand{\supp}{\operatorname{supp}}
@@ -18,6 +20,7 @@
 \renewcommand{\l}{\mathscr{L}}
 \newcommand{\f}{\mathscr{F}}
 \renewcommand{\o}{\mathcal{O}}
+\newcommand{\A}{\mathbb{A}}
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\p}{\mathfrak{p}}
 \newcommand{\m}{\mathfrak{m}}
@@ -243,8 +246,14 @@ Then $\o_X(K_X) = w_X$.
 
 We actually have 
 \begin{align*}
-    \o(-1)(U_0) = \C[\frac{x_1}{x_0},\frac{x_2}{x_0}]\cdot x_0^{-1} = \C[x_1,x_2]
+    \o(-1)(U_0) = \C[\frac{x_1}{x_0},\frac{x_2}{x_0}]\cdot x_0^{-1} 
 \end{align*}
+One should notice that here $x_0^{-1}$ just record the information of local frame. 
+We can see that $x_1^{-1}=(x_1^{-1}x_0)x_0^{-1}$
+
+\np Actually Consider $H^0(X,\f)$ a $k$-linear space, the local frame for open subscheme $U$ is a group of elements $\{x_1,\cdots,x_n\}\subseteq \f(U)$ forms a $\o_X(U)$-basis of $\f(U)$.
+
+
 
 \np Let $Y=\spec A$ and let $X=\P^n_A$. Then there is an exact sequence of sheaves.
 \begin{align*}
@@ -256,8 +265,133 @@ We can check by take $Y=\spec\C$ and $X=\P^2_\C$. Consider the $U_0$, then we ob
     \Omega_{X/Y}(U_0) \simeq \C[\frac{x_1}{x_0},\frac{x_2}{x_0}] d(x_1/x_0)\oplus \C[\frac{x_1}{x_0},\frac{x_2}{x_0}] d(x_2/x_0) \\
     \o_X(-1)^{\oplus 3}(U_0) \simeq \bigoplus_{i=1}^3 \C[\frac{x_1}{x_0},\frac{x_2}{x_0}]\cdot x_0^{-1}\\
 \end{align*}
+The first homomorphism is given by 
+\begin{align*}
+    d(x_1/x_0) = d(x_1)/x_0-x_1d(x_0)/x_0^2 \mapsto (1,x_1/x_0,0)
+\end{align*}
+and similarly
+\begin{align*}
+     d(x_2/x_0)  \mapsto (1,0,x_1/x_0).
+\end{align*}
+
+The second homomorphism is 
+\begin{align*}
+    (f,g,h)\mapsto  x_0^{-1}(f+g+h)
+\end{align*}
+Then we can verify this sequence is exact over $U_0$. The same as $U_1,U_2$. Then we obtain that this sequence exact as a whole space.
+
+There also have a exact sequence of tangent sheaf 
+\begin{align*}
+    0\to \o_X\to \o_X(1)^{\oplus (n+1)} \to T_{X} \to 0
+\end{align*}
+
+We call this type of sequence Euler sequence. 
+
+\np Euler sequence give a way to find canonical sheaf. We use the fact that 
+\begin{align*}
+    \det(\o_X(-1)^{\oplus(n+1)}) \simeq \det(\Omega_X)\otimes \det(\o_X)
+\end{align*}
+Therefore we obtain that 
+\begin{align*}
+    \det(\Omega_X)=\omega_X = \o_X(-n-1).
+\end{align*}
+
+\np 
 
 
+\np The Serre's Theorem for affiness. Let $X$ be a Noetherian scheme. Then $X$ is affine iff. $H^i(X,\f)=0$ for all quasi-coherent sheaves and $i>0$.
+
+We first consider that $\A^2\setminus \{0,0\}$ with open cover $D(x),D(y)$.
+The Čech complex is given by 
+\begin{align*}
+    0 \to k[x,y]_x \oplus k[x,y]_y \xrightarrow{d} k[x,y]_{x,y} \to 0 
+\end{align*}
+where $d(f,g) = f-g$. Therefore, we find that 
+\begin{align*}
+    H^1(X,\o_X) = \frac{k[x,y]_{x,y}}{ k[x,y]_x + k[x,y]_y}
+\end{align*}
+
+We find that $[x^{-1}y^{-1}]\neq 0$.
+
+\np The cohomolog of Projective space. Let we conisder $X=\P_A^r$
+and we know that 
+\begin{enumerate}
+    \item $H^{i}(X,\o_X(n))=0$ for $0<i<r$;
+    \item $H^r(X,\o_X(-r-1))\simeq A$;
+    \item $H^0(X,\o_X(n))\times H^r(X,\o_X(-n-r-1))\to H^r(X,\o_X(-r-1))$ is a perfect paring.
+\end{enumerate}
+
+Let we check for $\P^2$ and sheaf $\o(1)$. We give cech complex 
+\begin{align*}
+    0\to \C[x_1/x_0,x_2/x_0]\cdot x_0\oplus \C[x_0/x_1,x_2/x_1]\cdot x_1 \oplus \C[x_0/x_2,x_1/x_2]\cdot x_2 
+    \\ \xrightarrow{d^0} \C[x_1/x_0,x_2/x_0,x_0/x_1]\cdot x_0 \oplus \C[x_1/x_0,x_2/x_0,x_0/x_2]\cdot x_0 \oplus \C[x_0/x_1,x_2/x_1,x_1/x_2]\cdot x_1
+    \\ \xrightarrow{d^1} \C[x_1/x_0,x_2/x_0,x_0/x_1,x_0/x_2]\cdot x_0 
+    \\ \xrightarrow{d^2} 0
+\end{align*}
+where we have 
+\begin{align*}
+    d^0(fx_0,gx_1,hx_2) &= \big((x_1x_0^{-1}g-f)\cdot x_0,(x_2x_0^{-1}h-f)\cdot x_0, (x_2x_1^{-1}h-g)\cdot x_1\big)\\
+    d^1(fx_0,gx_0,hx_1) &= (f-g+x_1x_0^{-1}h)\cdot x_0 \\
+\end{align*}
+
+We consider 
+\begin{align*}
+    &H^1(X,\o(1))= \frac{\langle (fx_0,fx_0,0), (0,hx_1,hx_1)\rangle}{\langle(-fx_0,-fx_0,0 ),(gx_1,0,-gx_1),(0,hx_2,hx_2)\rangle} =0\\
+    &H^2(X,\o(-3)) = \frac{f\cdot x_0^{-3}}{\langle (f-g+x_1^{-3}x_0^3h)\cdot x_0^{-3} \rangle} \simeq \C\cdot \left[\frac{1}{x_0x_1x_2}\right]
+\end{align*}
+
+We also know that 
+\begin{align*}
+    H^0(X,\o_X(n))\simeq \C[x_0,\cdots,x_2]_n\\
+    H^2(X,\o_X(-n-r-1)) = \langle x_0^{a_0}x_1^{a_1}x_2^{a_2}\mid a_0+a_1+a_2=-n\rangle_{\C}
+\end{align*}
+
+The paring is given by multiplication.
+
+\np Hartogs Extension Theorem. Consider $U$ as a open subscheme of $X$ let $Z=X\setminus U$.
+We let 
+\begin{align*}
+    \calH^0_Z(\f):=\ker(\f\to j_*j^*\f)
+\end{align*}
+then we obtain a short exact sequence
+\begin{align*}
+    0\to \calH^0_Z(\o_X) \to \o_X \to j_*\o_U 
+\end{align*}
+Acting on global section functor, we then have a long exact sequence 
+\begin{align*}
+    0\to H^0_Z(X,\o_X) \to H^0(X,\o_X) \to H^0(X,j_*\o_U) \to  H^1_Z(X,\o_X)
+\end{align*}
+
+A global section of $\o_U$ can be extended to a global section of $\o_X$ is equivalent to say 
+\begin{align*}
+    H^0(X,\o_X) \to H^0(X,j_*\o_U)
+\end{align*}
+is surjective.
+It require that 
+\begin{align*}
+    H^1_Z(X,\o_X) = 0.
+\end{align*}
+
+When we require $X$ is normal, then we obtain what we want.
+
+\np Computation of Picard Group
+We have divisor sequence which is given by 
+\begin{align*}
+    0 \to \o_X^\times\to K_X^\times \to\div_X \to 0\
+\end{align*}
+It induces a long exact sequence 
+\begin{align*}
+    0 \to H^0(X,\o_X^\times) \to H^0(X,K_X^\times) \to H^0(X,\div_X)\to H^1(X,\o_X^\times) \to H^1(X,K_X^\times)
+\end{align*}
+Since $K_X^\times$ is Flasque then it annilihate at $H^1$. Then we obtain that 
+\begin{align*}
+    K_X^\times \to \div_X \to \pic(X) \to 0 
+\end{align*}
+
+Similarly, if we consider $U$ is an open scheme of $X$, we can from this short exact sequence 
+\begin{align*}
+    0\to \o_X^\times \to j_*\o_U^\times \to 0
+\end{align*}
 
 \endgroup}
 
