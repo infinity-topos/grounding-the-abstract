@@ -1,0 +1,95 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\qz}{\mathbb{Q}/\mathbb{Z}}
+\newcommand{\z}{\mathbb{Z}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 10}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+Let $R$ be a ring and $V$ be an $R$-module. Let $I$ be an ideal of $R$. Suppose that $d_I$ is defined on $V$ and on $R$. Then
+\begin{enumerate}
+    \item[(i)] Addition is continuous from $V \times V$ to $V$.
+    \item[(ii)] Multiplication is continuous from $R \times V$ to $V$.
+    \item[(iii)] If $d_I$ is defined on the $R$-module $W$ and $f \in \mathrm{Hom}_R(V,W)$, then $f$ is continuous.
+\end{enumerate}
+
+\begin{solution}
+    (1) Let the addition map be $f: V \times V \to V$, where $f(x, y) = x + y$.
+    Let $O$ be an arbitrary open set in the target space $V$.
+    We need to prove that its preimage $f^{-1}(O)$ is an open set in $V \times V$.
+    If $f^{-1}(O)$ is empty, it is trivially open.
+    If $f^{-1}(O)$ is non-empty, pick an arbitrary point $(x, y) \in f^{-1}(O)$.
+    It means $x + y \in O$.
+    Since $O$ is an open set in $V$, there exists an integer $n$ such that:$$(x + y) + I^n V \subseteq O.$$
+    Let $U_x = x + I^n V$ and $U_y = y + I^n V$ be the open neighborhood of $x,y$ respectively. Then $U_x \times U_y$ is an open neighborhood of $(x, y)$ in $V \times V$.
+    Since $$f(U_x \times U_y) = U_x + U_y = (x + I^n V) + (y + I^n V) = x + y + I^n V$$
+    we have $f(U_x \times U_y) \subseteq O$ which implies $$U_x \times U_y \subseteq f^{-1}(O).$$
+    Therefore, for arbitrary $(x,y)\in f^{-1}(O)$, we have an open neighborhood $U_x\times U_y$ contained in $f^{-1}(O)$. It turns out that $f^{-1}(O)$ is open and thus $f$ is continuous. 
+
+    (2) Let the multiplication map be $g : R \times V \to V$, where $g(r,v) = rv$. Let $O$ be an arbitrary open set in the target space $V$. We need to prove that its preimage $g^{-1}(O)$ is an open set in $R \times V$. If $g^{-1}(O)$ is empty, it is trivially open. If $g^{-1}(O)$ is non-empty, pick an arbitrary point $(r,v) \in g^{-1}(O)$. It means $rv \in O$. Since $O$ is an open set in $V$, there exists an integer $n$ such that:$$rv + I^n V \subseteq O.$$Let $U_r = r + I^n$ and $U_v = v + I^n V$ be the open neighborhood of $r, v$ respectively. Then $U_r \times U_v$ is an open neighborhood of $(r,v)$ in $R \times V$. Since$$g(U_r \times U_v) = U_r U_v = (r + I^n)(v + I^n V) \subseteq rv + r(I^n V) + (I^n)v + I^{2n}V \subseteq rv + I^n V$$we have $g(U_r \times U_v) \subseteq O$ which implies$$U_r \times U_v \subseteq g^{-1}(O).$$Therefore, for arbitrary $(r,v) \in g^{-1}(O)$, we have an open neighborhood $U_r \times U_v$ contained in $g^{-1}(O)$. It turns out that $g^{-1}(O)$ is open and thus $g$ is continuous.
+
+    (3) Let $O$ be an arbitrary open set in the target space $W$. We need to prove that its preimage $f^{-1}(O)$ is an open set in $V$. If $f^{-1}(O)$ is empty, it is trivially open. If $f^{-1}(O)$ is non-empty, pick an arbitrary point $v \in f^{-1}(O)$. It means $f(v) \in O$. Since $O$ is an open set in $W$, there exists an integer $n$ such that:$$f(v) + I^n W \subseteq O.$$Let $U_v = v + I^n V$ be the open neighborhood of $v$ in $V$. Since $f$ is an $R$-module homomorphism, we have $f(I^n V) = I^n f(V) \subseteq I^n W$. Then$$f(U_v) = f(v + I^n V) = f(v) + f(I^n V) \subseteq f(v) + I^n W$$we have $f(U_v) \subseteq O$ which implies$$U_v \subseteq f^{-1}(O).$$Therefore, for arbitrary $v \in f^{-1}(O)$, we have an open neighborhood $U_v$ contained in $f^{-1}(O)$. It turns out that $f^{-1}(O)$ is open and thus $f$ is continuous.
+\end{solution}
+
+
+\section*{Problem 2}
+The following algebra isomorphisms hold for $R$-algebras $A$ and $B$, where $R$ is a commutative ring.
+\begin{enumerate}
+    \item[(i)] $M_n(A) \otimes_R B \simeq M_n(A \otimes_R B)$.
+    \item[(ii)] $M_n(A) \otimes_R M_m(B) \simeq M_{nm}(A \otimes_R B)$.
+\end{enumerate}
+\begin{solution}
+    (i) Let 
+    \begin{align*}
+        \phi : M_n(A) \times B &\to M_n(A \otimes_R B)\\
+        ((a_{ij}), b)&\mapsto (a_{ij} \otimes b)
+    \end{align*}
+    Since $\phi$ is $R$-bilinear, it induces a well-defined $R$-linear map 
+    \begin{align*}
+        \Phi : M_n(A) \otimes_R B &\to M_n(A \otimes_R B)\\
+        (a_{ij}) \otimes b &\mapsto (a_{ij} \otimes b)
+    \end{align*}
+    For any $(a_{ij}), (c_{ij}) \in M_n(A)$ and $b, d \in B$, we have$$\Phi(((a_{ij}) \otimes b)((c_{ij}) \otimes d)) = \Phi((a_{ij})(c_{ij}) \otimes bd) = \left(\sum_k a_{ik}c_{kj} \otimes bd\right).$$On the other hand,$$\Phi((a_{ij}) \otimes b)\Phi((c_{ij}) \otimes d) = (a_{ij} \otimes b)(c_{ij} \otimes d) = \left(\sum_k (a_{ik} \otimes b)(c_{kj} \otimes d)\right) = \left(\sum_k a_{ik}c_{kj} \otimes bd\right).$$Thus $\Phi$ preserves multiplication and is an algebra homomorphism. 
+    The map 
+    \begin{align*}
+        \Psi: M_n(A \otimes_R B) &\to M_n(A) \otimes_R B \\
+        (a \otimes b)E_{ij} &\mapsto aE_{ij} \otimes b
+    \end{align*}
+    provides a two-sided inverse to $\Phi$. Therefore, we obtain that $$M_n(A) \otimes_R B \simeq M_n(A \otimes_R B).$$
+    
+    (ii) By applying the isomorphism from (i) and treating $M_m(B)$ as an $R$-algebra, we have $$M_n(A) \otimes_R M_m(B) \simeq M_n(A \otimes_R M_m(B)).$$
+     Since $R$ is commutative, the tensor product is symmetric up to isomorphism, yielding $$A \otimes_R M_m(B) \simeq M_m(B) \otimes_R A.$$ Applying (i) again to $M_m(B) \otimes_R A$, we get $$M_m(B \otimes_R A) \simeq M_m(A \otimes_R B).$$ Substituting this sequence of isomorphisms back gives:$$M_n(A \otimes_R M_m(B)) \simeq M_n(M_m(A \otimes_R B)).$$For any ring $S$, there is a natural ring isomorphism $M_n(M_m(S)) \simeq M_{nm}(S)$ given by viewing an $n \times n$ block matrix of $m \times m$ matrices as an $nm \times nm$ matrix. Letting $S = A \otimes_R B$, we conclude $$M_n(A) \otimes_R M_m(B) \simeq M_{nm}(A \otimes_R B).$$
+\end{solution}
+
+
+
+\end{document}

@@ -328,34 +328,21 @@ Suppose further that every nonzero prime ideal of $R$ is maximal.
     \item Prove that $R$ is a Dedekind domain.
 \end{enumerate}
 \begin{solution}
-(1.a) First I claim that there exists $v\in\Omega$ such that $v(z)<0$. If not, then for every $v\in \Omega$ we have
-$v(z)\ge 0$. In this case, we have $v(zR_z)\ge 0$ and therefore  
+(1.a) Let $\Gamma =\{v\in \Omega|v(z)<0\}$. According to (R2), it is finite. Hence, it cannot be emptyset since if so then $z^{-1}R\cap R = R \subseteq \p$ is impossible.
+We have 
 \begin{align*}
-    R_v\subseteq z^{-1}R_v.
+    R\cap z^{-1}R = \{r\in R|v(r)\ge -v(z)\text{ for any }v\in \Gamma\}.
 \end{align*}
-Hence we find that 
+If our claim is not hold, that is, for any $v\in \Gamma$ we then have $\p\neq R\cap \p_v$.
+We obtain pairwise coprime ideals $\p,\p_i$ (Here we can suppose that $\p_i\cap R\neq \p_j\cap R$ by discarding the same ideals and choose the maximal valuation on $z$)
+and consider CRT by 
 \begin{align*}
-    \p\supseteq R \cap z^{-1}R =R\cap\left(\bigcap_{v\in\Omega} z^{-1}R_v\right) \supseteq R\cap \left(\bigcap_{v\in\Omega} R_v\right) = R
+    r \equiv 1 \bmod \p \quad r\equiv  0 \bmod (\p_{v_i}\cap R)^{-v_i(z)}
 \end{align*}
-which is a contradiction. Let 
-\begin{align*}
-    A = \{v\in\Omega\mid v(z)<0\}.
-\end{align*}
-By (R2), $A$ is a finite set, then we say $A=\{v_1,\dots,v_n\}$.
-We suppose that $v_i(z)=-a_i$, then we find that 
-\begin{align*}
-    R\cap z^{-1}R = \{x\in K\mid v_i(x)\ge a_i,v(x)\ge 0\text{ for any }v\in\Omega\}.
-\end{align*}
-And therefore 
-\begin{align*}
-    R\cap z^{-1}R = \left(\bigcap_{v_i\in A}R\cap \p_{v_i}^{a_i}\right).
-\end{align*}
-Since the product of ideals is always contained in their intersection, we have:
-$$\prod_{v_i \in A} (R \cap \mathfrak{p}_{v_i})^{a_i} \subseteq \bigcap_{v_i \in A} (R \cap \mathfrak{p}_{v_i}^{a_i}) = R \cap z^{-1}R \subseteq \mathfrak{p}$$
-Thus, there exists some $i$ such that $R \cap \mathfrak{p}_{v_i} \subseteq \mathfrak{p}$.
-Because $v_i$ is non-trivial, $R \cap \mathfrak{p}_{v_i}$ is a non-zero prime ideal, and hence maximal by our assumption. Since $\mathfrak{p}$ is also maximal, we must have exactly:
-$$\mathfrak{p} = R \cap \mathfrak{p}_{v_i}$$
-(1.b) Suppose that $\Omega_{\p}$ is an infinite set and for arbitrary $v\in\Omega_\p$ we have
+Then we find that $r\in R\cap z^{-1}R$ and $r\notin \p$. It is a contradiction.
+
+(1.b)
+Suppose that $\Omega_{\p}$ is an infinite set and for arbitrary $v\in\Omega_\p$ we can have
 \begin{align*}
     \p_v\cap R_\p = \p R_\p.
 \end{align*}
@@ -366,7 +353,12 @@ Therefore
 \end{align*}
 For arbitrary nonzero element $x\in\p R_\p$ and $v\in\Omega_\p$, we have $v(x)\neq 0$ which contradicts to (R2) since we suppose $\Omega_\p$ is an infinite set.
 
+
 (1.c)
+
+Choose $z^{-1}\in\p$ and (1.a) implies that there exists $v$ such that $\p=R\cap \p_v$ and $v(z)<0$. 
+It implies that $R_v\supseteq R_\p$. Therefore $\Omega_\p$ is not an emptyset.
+
 First I claim that 
 \begin{align*}
     R_\p = \bigcap_{v\in\Omega_\p} R_v.
@@ -483,7 +475,7 @@ Let $R$ be a Dedekind domain, and let $M \neq 0$ be a finitely generated $R$-mod
     \begin{align*}
         0\to M_{\text{tros}} \to M \to M_{\text{tros}}\to 0
     \end{align*} 
-    split. We then have $M = M/M_{\text{tros}}\otimes M_{\text{tros}}$.
+    split. We then have $M = M/M_{\text{tros}}\oplus M_{\text{tros}}$.
 
     (2) Let $M\simeq M'$. We have $M_{\text{tros}}\simeq M'_{\text{tros}}$ and $M/M_{\text{tros}}\simeq  M'/M'_{\text{tros}}$.
     The torsion-free part is uniquely determined by its Steinitz class and dimension.
@@ -544,7 +536,9 @@ Prove that for any nonzero $x \in L$ the following are equivalent:
     \begin{align*}
         0\to Rx \to L \to L/Rx\to 0 
     \end{align*}
-    splits and $L\simeq Rx\oplus L/Rx$. If $L/Rx$ is torsion-free, then $L$ has a torsion element, then $L$ a torsion element. Consequently, it cannot be a $R$-lattice.
+    splits and $L\simeq Rx\oplus L/Rx$. If $L/Rx$ is not torsion-free,
+    then there exists $r\in R$ and $y\in L/Rx$ such that $ry\in Rx$, the direct sum implies that $ry=0$. 
+    then $L$ has a torsion element. Consequently, it cannot be a $R$-lattice.
 
     (2) also implies (1). Since $L/Rx$ as a $R$-lattice, it is projective $R$-module, and thus the exact sequence splits.
 
@@ -648,7 +642,7 @@ Prove that the existence statement in Thm.1.2.27 can be deduced from Thm.1.2.39.
     (2) Suppose that $V$ and $V'$ are metabolic. Clearly, $V\perp V'$ is not singular of even dimension. Let $W$ and $W'$ be the totally isotropic subspace of $V$ and $V'$ respectively and 
     hance have half dimension. Then $W\perp W'$ also be the totally isotropic subspace of $V\perp V'$ with a half of dimension. Therefore, $V\perp V'$ is totally isotropic.
 
-    Suppose that $V$ and $V\perp V'$ is totally isotropic. Then we have $\dim(V')= \dim(V\perp V')-\dim(V)$ is even.
+    Suppose that $V$ and $V\perp V'$ is metabolic. Then we have $\dim(V')= \dim(V\perp V')-\dim(V)$ is even.
     And $V'$ must be not singular. Otherwise, $V\perp V'$ will be singular. Let $W$ be the totally isotropic subspace of $V\perp V'$ with a half dimension.
     Then we have $W = (W\cap V)\perp (W\cap V')$. I claim that $\dim(W\cap V)\le \dim(V)/2$. If $\dim(W\cap V)> \dim(V)/2$, then we choose a basis of $W\cap V$ and extend it to be a basis of $V$.
     Let we denote it by $\{e_1,\dots,e_n,\dots,e_{2n}\}$. Write the Gram matrix over this basis and using Laplace expension, we deduce that $V$ is singular.
@@ -657,7 +651,10 @@ Prove that the existence statement in Thm.1.2.27 can be deduced from Thm.1.2.39.
     (3) Let $e_i$ be a standard basis of $(V,b)$. Then it is also a standard basis of $(V,-b)$. 
     Consider the basis $(e_i,e_i),(e_i,-e_i)$ of $V\oplus V$. Check subspace generated by $(e_i,e_i)$ is totally isomorphic subspace with half dimension of $(V,b)\perp (V,-b)$.
 
-    (4) If it is isotropic, then it has Gram matrix $$ \begin{pmatrix} 0 & a \\ a & 0 \end{pmatrix} $$ with $a\in F^*$. It is a hyperbolic and thus is a metabolic.
+    (4) If it is isotropic, then it has Gram matrix $$ \begin{pmatrix} 0 & a \\ a & c \end{pmatrix} $$ with $a\in F^*$. 
+    Consider base change matrix 
+    
+    It is a hyperbolic and thus is a metabolic.
     Conversely, if it is a metabolic, it has the Gram matrix $$ \begin{pmatrix} 0 & a \\ a & c \end{pmatrix} $$
     It implies that $V$ is isotropic.
 
@@ -858,7 +855,7 @@ Prove that $L$ cannot be decomposed as an orthogonal sum of two 1-dimensional la
 
     (1) Let $\bar{A}$ denote the topological closure of $A$. Let $||$ denote the absolute valuate determined by $v$.
     Let $(x_i)$ be a Cauchy sequence over $K$. Suppose that $(x_i)\in \hat{A}$, it means that $\lim_{n\to\infty}|x_n|\le 1$. 
-    Then it is to said that there exists an integer $N>0$ for any $n>N$ we have $x_n\in A$.  The we consider constant sequences $(x_{N+k})_i$.
+    Then it is to said that there exists an integer $N>0$ for any $n>N$ we have $x_n\in A$ since stability.  The we consider constant sequences $(x_{N+k})_i$.
     For arbitrary $\varepsilon>0$, there exists an integer $N$ such that for $n>N$ we have 
     \begin{align*}
         |x_n-x_{N+k}|<\varepsilon

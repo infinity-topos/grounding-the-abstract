@@ -1,15 +1,22 @@
-\documentclass[11pt, a4paper]{article}
-
+\documentclass[10pt, a4paper]{article}
 % ==========================================
 % 宏包调用 (Packages)
 % ==========================================
+\usepackage{authblk}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{enumitem}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{geometry}
-\usepackage{hyperref}
+% \usepackage{hyperref}
+\usepackage{float}
 \usepackage{graphicx}
-\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm} % 设置适合 12 页阅读的页边距
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm} % 设置适合 12 页阅读的页边距
 
 % 数学与符号宏包
 \usepackage{amsmath, amsthm, amssymb, mathrsfs, mathtools}
@@ -30,20 +37,23 @@
 % 自定义命令与数学符号 (Custom Commands)
 % ==========================================
 \newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{\mathbb{P}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\D}{\mathbb{D}}
 \newcommand{\HH}{\mathbb{H}} % 上半平面 (避免与通常的 \H 冲突)
-\newcommand{\SL}{\mathrm{SL}_2(\Z)}
-\newcommand{\PSL}{\mathrm{PSL}_2(\Z)}
-
+\newcommand{\SL}{\operatorname{SL}_2(\Z)}
+\newcommand{\GL}{\operatorname{GL}_2(\Z)}
+\newcommand{\PSL}{\operatorname{PSL}_2(\Z)}
+\renewcommand{\Im}{\operatorname{Im}}
 % ==========================================
 % 定理环境设置 (Theorem Environments)
 % ==========================================
 
 
 \theoremstyle{definition}
-\newtheorem{theorem}{theorem}[section]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -56,248 +66,973 @@
 \newtheorem{construction}{Construction}[section]
 
 \title{From Farey Diagrams to Modular Forms: A Geometric Introduction}
-\author{}
-\date{\today}
+
+\author{
+  Nie JiaDuo$^1$\thanks{Email: \texttt{12532006@mail.sustech.edu.cn}} \quad 
+  Wen ZiJie$^1$\thanks{Email: \texttt{12532016@mail.sustech.edu.cn}} \quad 
+  Zhong HaoYu$^2$\thanks{Email: \texttt{252221001@stu.gbu.edu.cn}} \\
+  \vspace{0.2cm}
+  \small $^1$ Southern University of Science And Technology \\
+  \small $^2$ Great Bay University
+}
+\date{}
 
 \begin{document}
 
 \maketitle
+
+\begin{abstract}
+This paper explains the basic structures behind modular forms from a combinatorial and geometric point of view. We begin with continued fractions and Farey sequences, using them to introduce the Farey graph. The mediant operation is used to describe adjacency relations between rational cusps. In the disk model, the Farey graph gives an ideal triangulation whose dual graph is Conway's Topograph. By inserting new vertices on the edges of the Topograph, one obtains the Bass--Serre tree corresponding to the free product decomposition
+\[
+\mathrm{PSL}_2(\mathbb Z)\cong C_2*C_3 .
+\]
+In this way, the action of the modular group can be understood as the natural symmetry of the adjacency structure of ideal triangles.
+
+We then discuss the hyperbolic geometry of the upper half-plane. Using dessins d'enfants and the Belyi correspondence, we explain that finite quotients of the Bass--Serre tree, viewed as ribbon bipartite graphs, can be regarded as dessins d'enfants and that the corresponding Belyi map is given by the normalized \(j\)-function. This shows that the upper half-plane is a natural geometric model for realizing the Farey graph.
+
+Finally, we turn to modular forms. We introduce Eisenstein series, the modular discriminant, Hecke operators, and modular symbols and explain how the Farey graph and the Bass--Serre tree provide a unified framework for understanding the arithmetic and geometric structures of modular forms.
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+Farey graph; Bass--Serre tree; hyperbolic geometry; Belyi map; modular forms; Hecke operators
+
+
+\tableofcontents
+
+
+\section*{Notation}
+\addcontentsline{toc}{section}{List of Notation}
+
+\begingroup
+\small
+\setlength{\columnsep}{2em}
+\begin{multicols}{2}
+
+\subsection*{Basic notation}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(\mathbb R,\mathbb C,\mathbb Z,\mathbb Q\)]
+The sets of real numbers, complex numbers, integers, and rational numbers, respectively.
+
+\item[\(\mathbb D,\mathbb H\)]
+The unit disk and the upper half-plane, where
+\(\mathbb H=\{z\in\mathbb C:\operatorname{Im}z>0\}\).
+
+\item[\(\partial\mathbb H\)]
+The real boundary of the upper half-plane.
+
+\item[\(\mathbb P^1(F)\)]
+The projective line over a field \(F\); in particular,
+\(\mathbb P^1(\mathbb Q)=\mathbb Q\cup\{\infty\}\).
+
+\item[\(a/b\)]
+A rational number written in lowest terms.
+
+\item[\(\operatorname{Im}(z)\)]
+The imaginary part of a complex number \(z\).
+
+\item[\(\gcd(a,b)\)]
+The greatest common divisor of the integers \(a,b\).
+
+\item[\(\operatorname{sgn}(x)\)]
+The sign function.
+
+\end{description}
+
+\subsection*{Continued fractions and matrices}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[{\([a_0;a_1,\ldots,a_n]\)}]
+A continued fraction, where \(a_i\in\mathbb {Z}_{>0}\) for \(i>0\).
+
+\item[\(x_i=p_i/q_i\)]
+The \(i\)-th convergent of a continued fraction.
+
+\item[\(M_a\)]
+The basic matrix for continued fractions,
+\(M_a=\begin{pmatrix}a&1\\1&0\end{pmatrix}\).
+
+\item[\(A\)]
+An integral matrix
+\(\begin{pmatrix}p&r\\q&s\end{pmatrix}\in\mathrm{GL}_2(\mathbb Z)\).
+
+\end{description}
+
+\subsection*{Groups and actions}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(\mathrm{GL}_2(\mathbb Z)\)]
+The general linear group over the integers.
+
+\item[\(\mathrm{SL}_2(\mathbb Z)\)]
+The special linear group over the integers.
+
+\item[\(\mathrm{PSL}_2(\mathbb Z)\)]
+The modular group,
+\(\mathrm{SL}_2(\mathbb Z)/\{\pm I_2\}\).
+
+\item[\(\Gamma\)]
+Usually denotes \(\mathrm{PSL}_2(\mathbb Z)\).
+
+\item[\(\Gamma_0\)]
+A finite-index subgroup of \(\Gamma\).
+
+\item[\(\Gamma_\infty\)]
+The stabilizer of the cusp \(\infty\).
+
+\item[\(\mathcal T\)]
+The Bass--Serre tree.
+
+\item[\(D_{\Gamma_0}\)]
+The quotient dessin, \(D_{\Gamma_0}=\Gamma_0\backslash\mathcal T\).
+
+\end{description}
+
+\subsection*{Modular forms and Hecke operators}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(M_k(\Gamma)\)]
+The space of modular forms of weight \(k\).
+
+\item[\(S_k(\Gamma)\)]
+The space of cusp forms of weight \(k\).
+
+\item[\(\mathcal E_k(\Gamma)\)]
+The space of Eisenstein series of weight \(k\).
+
+\item[\(E_k,G_k\)]
+Eisenstein series and lattice Eisenstein series.
+
+\item[\(B_k\)]
+The \(k\)-th Bernoulli number.
+
+\item[\(\sigma_{k-1}(n)\)]
+The divisor sum function
+\[\sigma_{k-1}(n)=\sum_{d\mid n}d^{k-1}.\]
+
+\item[\(\Delta(\tau)\)]
+The modular discriminant
+\[\Delta(\tau)=\sum_{n\geq1}\tau(n)q^n.\]
+
+\item[\(\tau(n)\)]
+The Ramanujan \(\tau\)-function.
+
+\item[\(T_n\)]
+The \(n\)-th Hecke operator.
+
+\item[\(\mathbb T\)]
+The Hecke algebra.
+
+\item[\(V_k(\mathbb C)\)]
+The coefficient space for modular symbols
+\(V_k(\mathbb C)=\operatorname{Sym}^{k-2}(\mathbb C^2)\).
+
+\item[\(\Delta^0\)]
+The group of degree-zero divisors on the projective line \(\mathbb P^1(\mathbb Q)\).
+
+\item[\(H^1(\Gamma,V_k)\)]
+Group cohomology.
+
+\item[\(H_c^1(\Gamma,V_k)\)]
+Compactly supported cohomology.
+
+\item[\(\phi_k(f)\)]
+The Eichler--Shimura integration map.
+
+\end{description}
+
+\end{multicols}
+\endgroup
+\newpage
 \section{Introduction}
-\newpage 
 
-\section{Topology of Fractions: Farey's Diagram}
-Let $\infty = 1/0$ and $\hat{\Q}=\Q \cup \{\infty\}$.
+Modular forms are central objects at the intersection of number theory, algebraic geometry, and hyperbolic geometry. In the classical definition, a modular form is a holomorphic function on the upper half-plane
+\[
+\mathbb H=\{z\in\mathbb C:\operatorname{Im}(z)>0\}
+\]
+satisfying a certain transformation rule under the action of the modular group
+\[
+\mathrm{PSL}_2(\mathbb Z).
+\]
+However, if one starts directly from this definition, it is not easy for a beginner to see the combinatorial and geometric intuition behind the action of \(\operatorname{PSL}_2(\mathbb Z)\). In fact, this intuition can be built from a simple determinant condition between rational numbers. This is the starting point of the Farey graph. The aim of this paper is to explain the natural origin of these objects from a more combinatorial and geometric point of view.
 
-\begin{definition}[Farey Sequence]
-    The Farey sequence $\{F_n\}$ is a sequence of subsets of $\mathbb{Q}$ defined by
-    \begin{align*}
-        F_n :=\{a/b \mid 0\le a \le b \le n \}.
-    \end{align*}
-\end{definition}
+The starting point of this paper is the Farey graph. Its vertices are the rational numbers together with the point at infinity
+\[
+\mathbb P^1(\mathbb Q)=\mathbb Q\cup\{\infty\},
+\]
+and adjacency between cusps is described by a determinant condition. On the one hand, this adjacency relation arises naturally from continued fractions and the mediant operation. On the other hand, it can be visualized in the upper half-plane or in the disk model as an ideal triangulation. Thus the Farey graph provides a bridge from elementary number-theoretic objects to hyperbolic geometry.
 
-\begin{definition}[Negative Farey Sequence]
-    The Farey sequence $\{G_n\}$ is a sequence of subsets of $\mathbb{Q}$ defined by
-    \begin{align*}
-        G_n :=\{-a/b \mid 0\le a < b \le n \}\cup\{1\}.
-    \end{align*}
-\end{definition}
+From the ideal triangulation given by the Farey graph, we then consider its dual graph, namely Conway's Topograph. The Topograph regards ideal triangles as vertices and common edges as edges, turning the topological structure of the Farey tessellation into a trivalent tree. To record more precisely the incidence relation between triangles and edges, we insert new vertices on the edges of the Topograph and obtain a bipartite tree. This bipartite tree is exactly the Bass--Serre tree corresponding to the decomposition
+\[
+\mathrm{PSL}_2(\mathbb Z)
+\cong C_2*C_3 .
+\]
+In this way, the modular group is no longer only an algebraic group made of matrices; it can also be understood as the group of transformations preserving the combinatorial structure of the Farey triangulation.
 
-\begin{definition}[Mediant Operation]
-    The Mediant Operation $\oplus$ is a combinatorial rule defined by 
-    \begin{align*}
-        \frac{a}{c} \oplus \frac{b}{d}:= \frac{a+b}{c+d}
-    \end{align*}
-    for $a/c$ and $b/d$ are redueced.
-\end{definition}
+From this point of view, the upper half-plane is not just an arbitrary geometric background. We first recall the hyperbolic metric
+\[
+ds^2=\frac{dx^2+dy^2}{y^2}
+\]
+and its geodesics, explaining why the semicircles and vertical lines in the Farey graph are hyperbolic geodesics. We then use dessins d'enfants and the Belyi correspondence to explain the canonical role of the upper half-plane. More precisely, finite quotients of the Bass--Serre tree can be viewed as ribbon bipartite graphs, hence as dessins d'enfants. By the Belyi correspondence, such a dessin corresponds to a Belyi map; in the case of modular curves, this map is given by the normalized \(j\)-function. This shows that the Farey graph and the Bass--Serre tree are not merely tools for visualization, but also lead from combinatorial structures to the geometry of modular curves and the upper half-plane.
 
-\begin{definition}[Negative Mediant Operation]
-     The Negative Mediant Operation $\ominus$ is a combinatorial rule defined by 
-    \begin{align*}
-        \frac{a}{c} \ominus \frac{b}{d}:= \frac{-|a|-|b|}{c+d}
-    \end{align*}
-    for $a/c$ and $b/d$ are redueced.
-\end{definition}
+Finally, we return to modular forms themselves. We introduce the basic definition of a modular form and discuss two central examples: Eisenstein series and the modular discriminant \(\Delta\). We then introduce Hecke operators and explain their definition from three perspectives: averaging constructions, double coset decompositions, and correspondences of lattices. Through modular symbols and the Eichler--Shimura isomorphism, we  see a deep relation between edges in the Farey graph, paths in the Bass--Serre tree, homology on modular curves, and Hecke operators acting on modular forms.
 
-Observe that Farey sequence (resp. nagative) can be constructed by doing successively Mediant operation (resp. nagative).
-For example, 
+Thus the main line of this paper can be summarized as
+\[
+\begin{aligned}
+\text{continued fractions}
+&\longrightarrow \text{Farey graph}
+\longrightarrow \text{Topograph}
+\longrightarrow \text{Bass--Serre tree} \\
+&\longrightarrow \text{upper half-plane and modular curves}
+\longrightarrow \text{modular forms and Hecke operators}.
+\end{aligned}
+\]
+Following this route, we aim to show that modular forms are not artificial functions defined in isolation on the upper half-plane. Rather, they arise naturally from the interaction between the Farey graph, the action of the modular group, hyperbolic geometry, and algebraic curves. This gives a geometric and combinatorial way to understand modular forms.
+
+
+\section{The Farey Graph}\label{sec:farey}
+
+In this chapter, we introduce the Farey graph and some related notions. For the material on the Farey graph below, we refer to \cite{HatcherTopologyOfNumbers}.
+
+\subsection{Continued Fractions}
+
+First we briefly recall the notion of continued fractions. Let \(\{a_0,\dots,a_n\}\) be a set of positive integers. A continued fraction
+\([a_0; a_1, a_2, \dots, a_n]\) represents the rational number constructed by the following recursive process:
 \begin{align*}
-    F_2 =\{0/1 ,0/1\oplus 1/1,1/1\}. 
+    a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots}} .
+\end{align*}
+Let \(x_i=[a_0;a_1,\dots,a_i]\) be the \(i\)-th convergent of the continued fraction. Then the construction of continued fractions can be described by the following matrix product:
+$$
+\begin{pmatrix} p_i & p_{i-1} \\ q_i & q_{i-1} \end{pmatrix}
+=
+\begin{pmatrix} a_0 & 1 \\ 1 & 0 \end{pmatrix}
+\cdots
+\begin{pmatrix} a_i & 1 \\ 1 & 0 \end{pmatrix},
+$$
+where \(x_i=p_i/q_i\). If we write
+\begin{align*}
+    M_a = \begin{pmatrix} a & 1 \\ 1 & 0 \end{pmatrix},
+\end{align*}
+then the family \(\{M_a\}_{a\in\Z}\) is in fact a set of generators of \(\GL\). In other words, if
+$$
+A = \begin{pmatrix} p & r \\ q & s \end{pmatrix} \in \GL,
+$$
+then there exist integers \(\{a_0,a_1,\cdots,a_n\}\) such that
+\(A=M_{a_0}M_{a_1}\cdots M_{a_n}\).
+
+Roughly speaking, if a pair of rational numbers \(p/q\) and \(r/s\) forms an integral matrix \(A\in\GL\), then we regard this pair of rational numbers as being ``adjacent'' in some sense. The main idea of the Farey graph is to visualize this adjacency relation.
+
+\subsection{Farey Sequences}
+
+We first give some basic definitions.
+
+\begin{definition}[Farey sequence]
+    Let \(n\) be a positive integer. We define two sets of rational numbers \(F_n\) and \(G_n\) by
+    \begin{align*}
+        F_n &:=\{a/b\in\Q \mid 0\le a \le b \le n,(a,b)=1\},\\
+        G_n &:= \{-a/b\in\Q \mid 0\le a \le b \le n,(a,b)=1\}.
+    \end{align*}
+    We call the sequence of rational sets \(\{F_n\}_{n=1}^{\infty}\) the Farey sequence and \(\{G_n\}_{n=1}^\infty\) the negative Farey sequence.
+\end{definition}
+
+By definition, the first four terms of the Farey sequence are
+\begin{align*}
+    F_1 &= \left\{ \frac{0}{1}, \frac{1}{1} \right\},\\
+    F_2 &= \left\{ \frac{0}{1}, \frac{1}{2}, \frac{1}{1} \right\},\\
+    F_3 &= \left\{ \frac{0}{1}, \frac{1}{3}, \frac{1}{2}, \frac{2}{3}, \frac{1}{1} \right\},\\
+    F_4 &= \left\{ \frac{0}{1}, \frac{1}{4}, \frac{1}{3}, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \frac{1}{1} \right\}.
 \end{align*}
 
-\begin{definition}[The Farey Diagram in the upper half-plane]
-    
-\end{definition}
+To describe the rule by which Farey sequences are generated, we introduce the following operation.
 
-
-\begin{definition}[The Farey Diagram in the Poincaré Disk]
-    Cayley Transformation on the upper half-plane 
+\begin{definition}[Mediant operation]
+    Let \(a/b\) and \(c/d\) be two reduced rational numbers. We define their mediant operation \(\oplus\) and negative mediant operation \(\ominus\) by
     \begin{align*}
-        w = \frac{z-i}{z+i}
+        \frac{a}{b} \oplus \frac{c}{d}:= \frac{a+c}{b+d}, \qquad
+        \frac{a}{b} \ominus \frac{c}{d}:= \frac{-|a|-|c|}{|b|+|d|}.
     \end{align*}
 \end{definition}
-The Cayley transformation is a special case of Möbius transformation such that mapping the half-plane to the unit disk conformally.
 
+It is not hard to see that the term \(F_{n+1}\) can be generated from elements of \(F_n\) using the mediant operation. Of course, the mediant of two arbitrary elements of \(F_n\) need not lie in \(F_{n+1}\). For example, in \(F_3\), we have
+\(1/3\oplus 1/2=1/5\notin F_4\).
+The terms \(G_{n+1}\) and \(G_n\) satisfy a similar relation, except that here we consider the negative mediant operation.
 
+Let's take \(F_1\) and \(F_2\) as an example. The number \(1/2\) is the rational number that appears in \(F_2\) but not in \(F_1\) and it is obtained from the two rational numbers in \(F_1\) by the mediant operation:
+\begin{align*}
+    \frac{1}{2} = \frac{0}{1} \oplus \frac{1}{1}.
+\end{align*}
+From the matrix point of view, the mediant operation is just the following operation:
+\begin{align*}
+    \begin{pmatrix} a & c \\ b & d \end{pmatrix}
+    \begin{pmatrix} 1\\1 \end{pmatrix}
+    =
+    \begin{pmatrix} a+c\\b+d \end{pmatrix}.
+\end{align*}
 
+The following combinatorial property of Farey sequences is worth noting.
 
-\begin{remark}[Pythagorean Coordinate]
-    The Cayley transformation on $p/q$ also can be done in the following way. 
-    Assigne each $p/q$ a Pythagorean triple $(2pq,p^2-q^2,p^2+q^2)$. Consider the Projectivization of this triple. Namely, we obtain an assignment 
+\begin{proposition} \label{1}
+    Let \(a/b\in\Q\) be a reduced rational number. Assume that \(a,b\) are positive integers. Then for every positive integer \(n\ge b\), we have
     \begin{align*}
-        p/q \mapsto  \left(\frac{p^2-q^2}{p^2+q^2},\frac{-2pq}{p^2+q^2}\right).
+        a/b\in F_n.
     \end{align*}
-    This coordinate agree on Cayley transformation.
-    
-    In the perspective of Pythagorean Coordinate, the reduced rational number $p/q$ also can be interpreted as a integral point of quadratic cone defined by $x^2+y^2-z^2$.
-\end{remark}
-\begin{theorem}
- There is a canonical isomorphism of algebraic varieties over $\mathbb{Q}$:
- \begin{align*}
-    \mathbb{P}^1_{\mathbb{Q}} \cong \text{Proj} \left( \frac{\mathbb{Q}[X, Y, Z]}{(X^2 + Y^2 - Z^2)} \right)
- \end{align*}
-\end{theorem}
+    In \(F_b\), there are exactly two rational numbers \(p_1/q_1\) and \(p_2/q_2\) such that
+    \begin{align*}
+        \begin{vmatrix}
+            a & p_i \\
+            b & q_i
+        \end{vmatrix} = \pm 1
+    \end{align*}
+    holds.
+\end{proposition}
 
+\subsection{The Farey Graph}
 
-The curvilinear triangle in the Farey Diagram also called by ideal triangle.
-The ideal triangle containing vertices $\{0,1,\infty\}$ is called fundamental triangle.
+We now introduce the Farey graph. We write \(\infty=1/0\) and set
+\(\P^1(\Q):=\Q\cup\{\infty\}\). We also call elements of \(\P^1(\Q)\) cusps.
 
-
-\begin{definition}[Conway's Topograph]
-    The Conway's Topograph is defined the dual graph of Farey tessellation in the unit disk. 
+\begin{definition}[Farey graph]
+    The Farey graph is an undirected graph \((V,E)\). Its vertex set is
+    \(V=\Q\cup\{\infty\}\). Two vertices \(a/b\) and \(c/d\) are adjacent if and only if their determinant satisfies
+    \begin{align*}
+        \begin{vmatrix}
+            a & c \\
+            b & d
+        \end{vmatrix} = \pm 1.
+    \end{align*}
+    The edge set is defined by this adjacency relation.
 \end{definition}
-Formally, the conway's topograph is an infinity tree of degree three. 
 
-\begin{definition}[Quadratic form on Conway's Topograph]
-    Consider valuation on edge on Conway's Topograph. 
-    It geometrically and uniquely corresponds to the a midpoint, a median and a reduced rational number $x/y$.
-    Then Quadratic form values such a  edge by $Q(x,y)$.
+By Proposition \ref{1}, the adjacency relation of a reduced rational number \(a/b\), ignoring the point \(\infty\), is described by Farey sequences. More precisely, suppose \(c\ge b\). Then \(a/b\) and \(d/c\) are adjacent in the Farey graph if and only if they are adjacent in \(F_c\). Thus Farey sequences give us a way to visualize the Farey graph.
+
+The geometric space we consider is the upper half-plane defined as follows.
+
+\begin{definition}[Upper half-plane]
+    The upper half-plane in the complex numbers is defined by
+    \begin{align*}
+        \HH = \{z\in\C\mid \Im(z)>0\}.
+    \end{align*}
+    We denote by \(\partial \HH\) the boundary of \(\HH\) in \(\C\), namely
+    \begin{align*}
+        \partial \HH = \{z\in\C\mid \Im(z)=0\}.
+    \end{align*}
 \end{definition}
 
+If we ignore \(\infty\), the Farey graph can be visualized in the upper half-plane model. The construction is as follows: We regard the rational numbers in the vertex set \(\P^1(\Q)\) as points on \(\partial\HH\) and then connect adjacent vertices one by one by semicircles in the upper half-plane according to the Farey sequence.
 
+\begin{figure}[H]
+    \centering
+    \input{figures/2.tex} % 引入图形代码
+    \caption{The upper half-plane Farey graph on the interval \([0,1]\)}
+    \label{fig:farey_uhp}
+\end{figure}
 
+If we want to include \(\infty\), we need to take the one-point compactification of \(\partial\HH\) and then use the Cayley transform to pass to the disk model.
 
+\begin{definition}[Cayley transform]
+    The Cayley transform is a holomorphic map of the Riemann sphere \(\P^1(\C)\) given explicitly by
+    \begin{align*}
+        z \mapsto  \frac{z-i}{z+i},
+    \end{align*}
+    with the convention that \(\infty\) is sent to \(1\).
+\end{definition}
 
+This is an automorphism of the Riemann sphere \(\P^1(\C)\). It is easy to check that the Cayley transform satisfies
+\begin{align*}
+    \phi(\HH) = \D,
+\end{align*}
+where
+\begin{align*}
+    \D:= \{z\in\C: |z|<1\}
+\end{align*}
+is the unit disk in the Riemann sphere.
 
-\begin{figure}[htbp]
+Thus the disk model of the Farey graph is the image of the upper half-plane model under the Cayley transform after one-point compactification. More precisely, we consider
+\begin{align*}
+    z\mapsto i\cdot\phi(z).
+\end{align*}
+Then \(\infty\) is mapped to \(i\).
+
+\begin{figure}[H]
     \centering
     \input{figures/1.tex} % 引入图形代码
-    \caption{The Farey Diagram in the Poincaré Disk Model.}
+    \caption{The disk model of the Farey graph}
     \label{fig:farey_disk}
 \end{figure}
-\section{Modular Group}
-We are interested in the automorphism group on cusp point. 
-\begin{definition}[Modular Group]
-    Modular Group is defined by the automorphism of projective variety
+
+From the disk model, we see that the Farey graph gives a triangular tessellation of the unit disk \(\D\). Understanding the topological relations between these triangles is in fact the key to understanding continued fractions. We first give a precise definition of these ``triangles''.
+
+\begin{definition}[Ideal triangle]
+    A \(3\)-cycle in the Farey graph is called an ideal triangle. The ideal triangle with vertices \(\{0,1,\infty\}\) is called the fundamental triangle.
+\end{definition}
+
+Intuitively, it is also harmless to think of these as curved triangles in the disk model. The following proposition describes the topological relations between ideal triangles.
+
+\begin{proposition}\label{2}
+Let \(\mathcal F=(V,E)\) be the Farey graph and let \(\mathcal I\) denote the set of all ideal triangles in \(\mathcal F\). Let
+$
+p\in \mathbb P^1(\mathbb Q)\setminus\{0,\infty\}
+$
+be a cusp. Then the following statements hold:
+\begin{enumerate}
+    \item For any edge \(e\in E\), set
+    \(
+        \mathcal I(e):=\{\Delta\in\mathcal I\mid e\subset \Delta\}.
+    \)
+    Then
+    \(
+        |\mathcal I(e)|=2.
+    \)
+    In other words, every edge of the Farey graph is contained in exactly two ideal triangles.
+
+    \item If \(e_1,e_2\in E\) and \(e_1\neq e_2\), then
+    \(
+        \mathcal I(e_1)\neq \mathcal I(e_2).
+    \)
+    Thus two distinct edges cannot be contained in the same pair of ideal triangles.
+
+    \item For any ideal triangle \(\Delta\in\mathcal I\), define
+    \[
+        \mathcal N(\Delta)
+        :=
+        \{\Delta'\in\mathcal I\mid \Delta'\neq \Delta,\ 
+        \Delta\cap\Delta' \text{ is an edge of } \mathcal F\}.
+    \]
+    Then
+    \(
+        |\mathcal N(\Delta)|=3.
+    \)
+    That is, every ideal triangle has exactly three ideal triangles adjacent to it along an edge.
+
+    \item For the cusp \(p\), there exists a unique ideal triangle
+    \(
+        \Delta_p=\{p,s,t\}\in\mathcal I
+    \)
+    such that
+    \[
+        p=
+        \begin{cases}
+        s\oplus t, & p>0,\\
+        s\ominus t, & p<0,
+        \end{cases}
+    \]
+    with
+    \(
+        \operatorname{sgn}(s)=\operatorname{sgn}(t)=\operatorname{sgn}(p).
+    \)
+\end{enumerate}
+\end{proposition}
+
+By Proposition \ref{2}, the ideal triangles in the Farey graph have a clear edge-sharing structure. We can therefore consider the dual graph of the Farey tessellation: Each ideal triangle is regarded as a vertex and two vertices are adjacent if and only if the corresponding ideal triangles share an edge. The graph obtained in this way is called Conway's Topograph.
+
+\begin{definition}[Conway's Topograph]
+The dual graph of the Farey tessellation is called Conway's Topograph. More explicitly, Conway's Topograph is the graph
+\[
+    \mathcal T_{\mathrm{Top}}=(\mathcal I,E_{\mathrm{Top}}),
+\]
+where the vertex set is the set \(\mathcal I\) of ideal triangles and the edge set \(E_{\mathrm{Top}}\) is defined by the following adjacency relation:
+\[
+    \Delta\sim \Delta'
+    \quad\Longleftrightarrow\quad
+    \Delta\neq \Delta'
+    \text{ and }
+    \Delta\cap\Delta'
+    \text{ is an edge of the Farey graph}.
+\]
+\end{definition}
+
+In what follows, we simply call it the Topograph. Since the Farey graph gives a planar tessellation of the disk, its dual graph can be constructed geometrically as follows: Choose one point inside each ideal triangle and connect the points corresponding to ideal triangles that share an edge. The graph obtained in this way is the Topograph.
+
+\begin{figure}[H]
+    \centering
+    \input{figures/4.tex} % 引入图形代码
+    \caption{Conway's Topograph}
+    \label{fig:farey_disk}
+\end{figure}
+
+Let \(\Lambda\) be the set of points forming the Topograph in \(\D\). The closure of each connected component of \(\D\setminus\Lambda\) contains a unique cusp. Conversely, every cusp is contained in the closure of some connected component. We define a connected component of \(\D\setminus\Lambda\) to be a face of the Topograph. Based on this, we can define quadratic forms on the Topograph.
+
+\begin{definition}[Quadratic form on the Topograph]
+    If \(q\) is an integral quadratic form on \(\Z^2\), then \(q\) induces a quadratic form on the Topograph:
     \begin{align*}
-        \text{Aut}(\mathbb{P}_{\mathbb{Z}}^1)^+ \simeq \mathrm{PSL}_2(\mathbb{Z})
+        Q: \text{Faces} &\to \Z,\\
+        w &\mapsto q(x,y),
+    \end{align*}
+    where Faces denotes the set of faces of the Topograph and \(x/y\in\Q\) is the cusp uniquely determined by the face \(w\).
+\end{definition}
+
+\subsection{Visualizing Continued Fractions}
+
+Finally, we show an example of using the mediant operation to find the continued fraction of a rational number. Our goal is to find the continued fraction of \(3/8\). The method is very simple: We keep comparing \(3/8\) with the mediant.
+
+First, we successively use the Farey sequences \(F_n\) for comparison. For each \(F_n\), we choose a pair of adjacent rational numbers \(a_n/b_n>c_n/d_n\) such that
+$$
+\frac{a_n}{b_n}\ge \frac{3}{8}\ge \frac{c_n}{d_n},
+$$
+where \(a_n/b_n\) is the upper bound and \(c_n/d_n\) is the lower bound. We record these bounds in the matrix
+$$
+A_n=
+\begin{pmatrix}
+a_n & c_n \\
+b_n & d_n
+\end{pmatrix}.
+$$
+For \(3/8\), the matrices we find are
+\begin{align*}
+    A_0= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\quad
+    A_1 = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix},\quad
+    A_2 = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix},\quad
+    A_3 = \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix}, \quad
+    A_4 = \begin{pmatrix} 2 & 1 \\ 5 & 3 \end{pmatrix}, \quad
+    A_5 = \begin{pmatrix} 3 & 1 \\ 8 & 3 \end{pmatrix}.
+\end{align*}
+Here \(A_0\) represents \(0/1<3/8<1/0\). In this process, we successively replace the lower bound twice, the upper bound once, and the lower bound twice again. It is easy to check that
+\begin{align*}
+    3/8 = [0;2,1,2].
+\end{align*}
+The same method also applies to irrational numbers. For the golden ratio, we have
+\begin{align*}
+    \frac{1+\sqrt{5}}{2} = [1;1,1,\cdots].
+\end{align*}
+
+The process of finding the continued fraction of \(3/8\) can be shown very clearly on the Farey graph. Replacing the upper bound and replacing the lower bound correspond respectively to crossing the right side and the left side of a curved triangle. In fact, replacing the bounds means flipping ideal triangles. Geometrically, the approximation process of continued fractions is a sequence of transformations between ideal triangles.
+
+\begin{figure}[H]
+    \centering
+    \input{figures/3.tex} % 引入图形代码
+    \caption{The approximation process for \(3/8\)}
+\end{figure}
+
+
+\section{The Modular Group}\label{sec: modular group}
+
+In this section, we start from the viewpoint of the Topograph and look for maps that preserve the topological structure of the triangular tessellation. We will see that the group formed by these maps is the modular group. For the material on trees and the modular group below, we refer to \cite{SerreTrees}.
+
+\subsection{The Bass--Serre Tree}
+
+Let's recall the definition of a tree and some related notions.
+
+\begin{definition}[Tree]
+    If an undirected graph \((V,E)\) is connected and has no cycles, then we call it a tree. If each vertex is connected to exactly \(n\) distinct vertices, then we call the tree \((V,E)\) an \(n\)-regular tree.
+\end{definition}
+
+\begin{definition}[Bipartite tree]
+   We call a tree \((V,E)\) a bipartite tree if the vertex set can be written as \(V= V_1\coprod V_2\) such that every edge \(\{e,f\}\in E\) satisfies \(\{e,f\}\setminus V_i \neq \emptyset.\)
+   If every vertex in \(V_1\) is connected to exactly \(m\) distinct vertices and every vertex in \(V_2\) is connected to exactly \(n\) distinct vertices, then we call it an \((m,n)\)-bipartite tree.
+\end{definition}
+
+\begin{definition}[Simple path]
+    In a graph \(G = (V, E)\), a path \((p_1, \dots, p_k)\) is called a simple path if and only if all vertices \(p_1, \dots, p_k\) on the path are distinct.
+\end{definition}
+
+\begin{proposition}
+    Between any two vertices of a tree, there is a unique simple path.
+\end{proposition}
+
+By Proposition {\ref{2}}, we can describe the edge-sharing relation between ideal triangles in the following graph-theoretic language.
+
+\begin{proposition}
+    The Topograph is a \(3\)-regular tree.
+\end{proposition}
+
+We want to find maps that preserve the topological relations between ideal triangles and express them in the Topograph. In particular, we want such maps to be orientation-preserving.
+Let \(\mathcal{F}\) be the triangulation of \(\D\) given by the Farey graph.
+Given a holomorphic orientation-preserving map \(\phi\) on \(\D\) satisfying \(\phi(\mathcal{F})= \mathcal{F}\), the map \(\phi\) induces a bijection on the vertices of the Topograph, which we denote by \(\bar{\phi}\).
+We claim that \(\bar{\phi}\) should be determined by the images \(\bar{\phi}(\Delta_{1}),\bar{\phi}(\Delta_{2})\) of \(\Delta_1,\Delta_2\), where \(\Delta_1\) and \(\Delta_2\) are the ideal triangles corresponding to the cusps \(1\) and \(2\).
+
+Suppose that \(\phi\) fixes \(\Delta_1\). That is, \(\phi(\Delta_1) = \Delta_1. \) But we do not require \(\phi|_{\Delta_1}\) to be the identity map.
+Since adjacency is preserved, the map \(\phi\) gives a permutation of the ordered set \((\Delta_{1/2},\Delta_{2},\Delta_{-1})\). In particular, in order to preserve orientation, the map \(\phi\) should give an even permutation.
+This even permutation is determined by \(\phi(\Delta_2)\). If the fundamental triangle is not fixed, suppose instead that \(\phi(\Delta_1)=\Delta_p\) and that the three ideal triangles adjacent to \(\Delta_p\) give the ordered set \((\Delta_r,\Delta_s,\Delta_t)\).
+Since \(\phi\) preserves adjacency, it gives a map from the ordered set \((\Delta_{1/2},\Delta_{2},\Delta_{-1})\) to \((\Delta_r,\Delta_s,\Delta_t)\). In order to preserve orientation, the subset \(\phi(\Delta_2)\) determines the map between these two ordered sets.
+Strictly speaking, there exists an even permutation \(\sigma\) such that
+\begin{align*}
+    \sigma(\phi(\Delta_{1/2}),\phi(\Delta_{2}),\phi(\Delta_{-1})) = (\Delta_r,\Delta_s,\Delta_t). 
+\end{align*} 
+Thus the fundamental triangle and its three adjacent ideal triangles have already been determined.
+
+What about the other triangles? Notice that \(\Delta_1\) and \(\Delta_2\) are adjacent to each other, which means that the three ideal triangles adjacent to \(\Delta_2\) are also determined.
+Continuing in this way, for every other ideal triangle, we can determine its image under \(\phi\) in finitely many steps. Therefore the whole map \(\bar{\phi}\) on the Topograph is also determined.
+
+The main point is how to represent \(\bar{\phi}\) in the Topograph. More precisely, we want to use the vertex set \(V\) or the edge set \(E\) of the Topograph to put in one-to-one correspondence with a holomorphic orientation-preserving map \(\phi\) preserving the triangulation.
+However, this is impossible. For the vertex set, the vertex \(\Delta_1\) cannot distinguish the rotations of its adjacent ideal triangles. For the edge set, the lack of orientation means that it cannot distinguish the flip of two ideal triangles across their common edge.
+
+To include the description of oriented edges, we insert a new vertex \(e_{p,q}\) between every two vertices \(\Delta_p,\Delta_q\) of the Topograph to represent the common edge of the adjacent ideal triangles and we replace the edge set by the family of sets of the form \(\{\Delta_p,e_{p,q}\}\).
+We may choose \(\{\Delta_1,e_{1,2}\}\) as the base edge. By our discussion, each edge \(\{\Delta_p,e_{p,q}\}\) represents the holomorphic orientation-preserving map \(\phi\) that sends \(\Delta_1,\Delta_2\) to \(\Delta_p,\Delta_q\), respectively.
+The new graph obtained in this way is the Bass--Serre tree defined below.
+
+\begin{definition}[Bass--Serre tree]
+    Let \(\Gamma = H \star K\), where \(\star\) denotes the free product. We define a graph \(\mathcal{G} = (V,E)\) as follows:
+    \begin{enumerate}
+        \item The vertex set \(V\) contains two types of vertices: \(V=\{gH,gK: g \in\Gamma\}\);
+        \item The edge set \(E\) is \(\Gamma\);
+        \item The two endpoints of the edge \(g\in E\) are \(gH\) and \(gK\).
+    \end{enumerate}
+    The graph defined in this way is called the Bass--Serre tree.
+\end{definition}
+
+Given an element \(g\) of the group \(\Gamma\), we obtain an automorphism of the graph \(\mathcal{F}\):
+\begin{align*}
+    g: V \to V ,\quad g'K \mapsto gg'K ,\quad g'H \mapsto gg'H.
+\end{align*} 
+We then consider the action of the free product \(\Gamma\) on the graph \(\mathcal{F}\).
+
+If we take \(H=\mathbb{Z}/2\mathbb{Z}\) and \(K=\mathbb{Z}/3\mathbb{Z}\), then it is not hard to prove that the graph \(\mathcal{F}\) constructed from \(\Gamma= H \star K \) is exactly the tree obtained by inserting a vertex into each edge of the Topograph.
+Here the coset represented by the fundamental triangle \(\Delta_1\) is \(\mathbb{Z}/3\mathbb{Z}\) and the coset represented by the vertex \(e_{1,2}\) is \(\mathbb{Z}/2\mathbb{Z}\).
+More generally, we consider
+\begin{align*}
+    G = \{\bar{\phi}\in \text{Aut}(\mathcal{F})| \phi\text{ is a holomorphic orientation-preserving automorphism of the triangulation}\}.
+\end{align*}
+Then, by the discussion above, there is a bijection of sets \(E\to G\), where \(E\) is the edge set of the Bass--Serre tree. For any \(\{\Delta_p,e_{p,q}\}\in E\), it corresponds uniquely to an element \(g\in G\). Consider the map
+\begin{align*}
+    \Delta_p \mapsto g K \quad e_{p,q}\mapsto gH.
+\end{align*}
+This map gives the coset construction of the Bass--Serre tree. In fact, the group \(\Gamma\) that we are considering is precisely the modular group \(\PSL\).
+
+\begin{definition}[Modular group]
+    The modular group is defined by
+    \begin{align*}
+        \PSL := \SL/\pm I_2.
     \end{align*}
 \end{definition}
 
-The modular group also gives the automorphism of ideal triangles.
-From the "functor of point", we can interpreted each ideal triangles $\Delta$ as the morphisim $g:\Delta_0\to \Delta\in   \mathrm{PSL}_2(\mathbb{Z})/(\mathbb{Z}/3\mathbb{Z})$.
-Hence, if we consider direction, the edge correspondence must be considerated, that is, each edge $e_i$ of an ideal triangle corresponds to the morphisim $h:e\to e_i\in \mathrm{PSL}_2(\mathbb{Z})/(\mathbb{Z}/2\mathbb{Z})$.
-
-The modular group has two generator 
-\begin{align*}
-    S = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \text{ and } T = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}
-\end{align*}
-Geometrically, $S$ corresponds to the "rotation of the standard triangle by an edge", namely, it represent the morphisim $\{0,1,\infty\}\to \{\infty,-1,0\}$ respectively.
-$T$ represent the shift operator $\{0,1,\infty\}\to \{1,2,\infty\}$. $R=TS$ represents the cyclic permutation of cusp point $\{0,1,\infty\}\to \{1,\infty,0\}$.
-
-\begin{proposition}[Free Product Structure of the Modular Group]
-    The modular group $\Gamma = \mathrm{PSL}_2(\mathbb{Z})$ is isomorphic to the free product of two cyclic groups of orders $2$ and $3$. Explicitly,
+\begin{proposition}
+    The modular group has the following isomorphism:
     \begin{align*}
-        \Gamma \cong \mathbb{Z}/2\mathbb{Z} * \mathbb{Z}/3\mathbb{Z}.
+        \PSL \simeq \mathbb{Z}/3\mathbb{Z}\star \mathbb{Z}/2\mathbb{Z}.
     \end{align*}
 \end{proposition}
 
-\begin{construction}
-    Let $G = H \star K$ be a free product. We define a graph $\Gamma$ as follows.
-    \begin{enumerate}
-        \item The vertex set $V$ consists of two types $H$ and $K$: $V = \{gH, gK : g \in G\}$.
-        \item The edge set $E$ consists of all group elements in $G$.
-        \item The edge $g \in E = G$ connects $gH$ and $gK$.
-    \end{enumerate}
+\subsection{Maps of Cusps}
 
-    Then $G$ acts on $\Gamma$: each element $g \in G$ sends $xH$ to $gxH$ and $xK$ to $gxK$. The edge relation is preserved. So $G$ acts on $\Gamma$ by graph isomorphism.
-\end{construction}
+In the discussion above, we avoided the strict construction and existence of \(\phi\). More precisely, for the fundamental triangle \(\Delta_1\) and an arbitrary ideal triangle \(\Delta_p\), does there exist a \(\phi\) such that \(\phi(\Delta_1) = \Delta_p\)?
+In Proposition {\ref{2}}, we already discussed the bijection between the set of cusps \(\P^1(\Q)\setminus\{0,\infty\}\) and the set of ideal triangles. This suggests that if we want to consider automorphisms of the triangulation, it is enough to discuss maps between cusps.
 
-\begin{theorem}[Bass-Serre Trees for free products]
-    The graph $\Gamma$ is a tree so that the degree of vertex of type $H$ (resp. $K$) equals $\#H$ (resp. $\#K$).
+Let's represent ideal triangles by matrices. Suppose \(0<p\in\Q\). It corresponds uniquely to an ideal triangle \[\Delta_p=\{p,a_p/b_p,c_p/d_p\}.\]
+Here \(a_p,c_p,b_p,d_p\) are integers satisfying
+\begin{align*}
+    p = \frac{a_p+d_p}{b_p+c_p}. 
+\end{align*}
+Suppose without loss of generality that \(a_p/b_p>c_p/d_p\). Then we define
+\begin{align*}
+    A_p = \begin{pmatrix} a_p & c_p \\ b_p & d_p \end{pmatrix} \mod \pm I_2.
+\end{align*}
+Here \(I_2\) denotes the identity matrix. Taking the quotient modulo \(\pm I_2\) accounts for the possibility of changing the signs of \(a_p,c_p,b_p,d_p\) simultaneously. Notice that the set formed by the \(A_p\) is in fact the modular group \(\PSL\).
+In what follows, whenever we write down the matrix \(A_p\), we are choosing one representative of it in \(\SL\).
 
-Moreover, the action of $G$ on $\Gamma$ has trivial edge stabilizers and vertices stabilizers of type $H$ and $K$ conjugated to $H$ and $K$ respectively so that the quotient is an interval.
-\end{theorem}
+By construction, we obtain a bijection between \(\PSL\) and the set of ideal triangles \(\{\Delta_p\}\). Matrices can also represent adjacency relations between ideal triangles.
+Given an ideal triangle \(\Delta_p =\{p,s,t\}\). Suppose without loss of generality that \(s>p>t>0\) and \(p=s\oplus t\). Then there are only three possible ideal triangles sharing an edge with it:
+\begin{align*}
+    \Delta_{s\oplus p},\quad \Delta_{t\oplus p},\quad \Delta_q,
+\end{align*}
+where \(q\) satisfies \(t=q\oplus s\). Translated into the language of matrices, this is
+\begin{align*}
+    A_{s\oplus p} =  A_p\cdot A_2, \quad  A_{t\oplus p} = A_p\cdot A_{1/2},\quad A_q = A_p\cdot A_{-1},
+\end{align*}
+where
+\begin{align*}
+    A_1 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\quad 
+    A_{1/2} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix},\quad
+    A_{2} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix},\quad
+    A_{-1} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}\quad
+\end{align*}
+represent the fundamental triangle \(\Delta_1\) and the three ideal triangles adjacent to it, namely \(\Delta_{1/2},\Delta_{2},\Delta_{-1}\), in matrix form. The case in which \(p<0\) is similar, so we do not discuss it further.
+Therefore all adjacency relations can be described by the matrices \(A_{1/2},A_{2},A_{-1}\).
+Also notice that
+\begin{align*}
+    A^{-1}_{1/2} = A^{-1}_2\cdot A_{-1} \mod \pm I_2, 
+\end{align*}
+so in the end our adjacency relations can be reduced to \(A_2,A_{-1}\). Thus we have found two generators of the modular group. Here \(A_{-1}\) represents the flip of the fundamental triangle along an edge, namely \((0,1,\infty)\to (\infty,-1,0)\). Here we use ordered sets to record the one-to-one correspondence of elements under the map.
+The matrix \(A_2\) represents the translation of the fundamental triangle, namely \((0,1,\infty)\to (1,2,\infty)\). Finally, \(A_2A_{-1}\) represents the cyclic permutation of the cusps, namely \((0,1,\infty)\to (1,\infty,0)\).
+
+For each cusp \(p\), define the Möbius transformation
+\begin{align*}
+    \psi_p(z) = \frac{a_p+c_p \cdot z}{b_p+d_p\cdot z}.
+\end{align*}
+It is easy to verify that its automorphism of the triangulation of \(\D\) agrees with the matrix correspondence discussed above. This is the basis of the first half of this chapter, namely the following proposition.
 
 
-Refer to \url{http://faculty.bicmr.pku.edu.cn/~wyang/ggt/BassSerre.pdf}
 
-
-\begin{theorem}
-    the Bass-Serre tree $\Gamma$ is the \textbf{incidence graph} of the dual of the Farey graph.
-\end{theorem}
-
-\section{Hyperbolic Geometry}
-We aim to demonstrate that the upper half-plane and hyperbolic geometry represent the \textbf{canonical geometric realization} of this structure.
-Here is our roadmap.
-\begin{description}
-    \item[Step 1. Algebraic Structure] 
-    The modular group $G = PSL_2(\mathbb{Z})\cong C_2 \star C_3$ and its \textbf{Bass-Serre tree} $\mathcal{T}$ which is a $(2,3)$-regular bipartite graph whose vertices represent the cosets of the stabilizers $C_2$ (black nodes) and $C_3$ (white nodes).
-
-    \item[Step 2. Gluing Riemann Surfaces] 
-    Realize $\mathcal{T}$ by gluing a collection of ideal triangles. 
-    At each white node (degree 3), we join the vertices of three triangles; at each black node (degree 2), we glue two triangle edges together. This assembly process yields a continuous, oriented \textbf{Riemann surface $X$}.
-
-    \item[Step 3. Arithmetic Mapping (The Dessin d'Enfant)] 
-    According to \textbf{Grothendieck's Theory of Dessins d'Enfants}, Riemann surface $X$ admits a \textbf{Belyi map} $\beta: X \to \mathbb{P}^1$. 
-    This holomorphic map projects $X$ onto the Riemann sphere, ramified only over $\{0, 1, \infty\}$, such that the original tree $\mathcal{T}$ is recovered as the pre-image of the unit interval: $\mathcal{T} = \beta^{-1}([0, 1])$.
-
-    \item[Step 4. Geometric Uniformization (The Emergence of $\mathbb{H}$)] 
-    The universal cover $\mathbb{P}^1 \setminus \{0, 1, \infty\}$ is the \textbf{Hyperbolic Upper Half-Plane $\mathbb{H}$} with $\mathcal{T}$ as its symmetric geometric skeleton.
-\end{description}
 \begin{proposition}
-    The Riemann surface $X$ deformation retracts onto Bass-Serre Tree.
+The action of \(\mathrm{PSL}_2(\mathbb Z)\) on the edge set of the Bass--Serre tree is free and transitive. Its action on the vertex set has stabilizers conjugate to \(C_2\) and \(C_3\).
 \end{proposition}
+
+\section{The Geometry of the Upper Half-Plane and Its Canonical Role}
+
+The definition of the Farey graph is purely combinatorial and in the process of visualizing it we chose, without further explanation, the upper half-plane \(\HH\) and the unit disk \(\D\) as the geometric models for our discussion. In the construction, we also used informal mathematical expressions such as ``draw a semicircle''.
+This ``semicircle'' is in fact a geodesic in hyperbolic space.
+
+\subsection{Hyperbolic Geometry}
+
+The material on hyperbolic geometry in this subsection follows from \cite{RatcliffeHyperbolicManifolds}.
+
+To make these notions precise, we first introduce tangent vector fields and Riemannian metrics.
+In multivariable calculus, the directional derivative describes the rate of change of a function along a given line. From the viewpoint of modern differential geometry, we identify such derivation operators acting on smooth functions \(f \in C^\infty(\mathbb{R}^2)\) directly with tangent vectors.
+More precisely, for any point \(p=(x,y)\) in \(\mathbb{R}^2\), the tangent space \(T_p\mathbb{R}^2\) is a two-dimensional vector space spanned by the natural basis \(\{\partial_x, \partial_y\}\).
+Every tangent vector \(v\) at this point can be written as \(v = v_1 \partial_x + v_2 \partial_y\) with uniquely determined $v_1,v_2$. Tangent vectors locally describe the direction and speed of motion in the space.
+
+To measure lengths and angles quantitatively on a manifold, we need to define a Riemannian metric on the tangent spaces. A Riemannian metric \(g\) assigns to each tangent space \(T_p M\) a smoothly varying positive definite symmetric bilinear form.
+For example, on \(\mathbb{R}^2\), the most natural choice is the standard Euclidean metric.
+If we introduce the dual basis \(\{dx, dy\}\) of the cotangent space \(T_p^*\mathbb{R}^2\), the Euclidean metric is usually written in terms of its associated quadratic form as $$ds^2 = dx^2 + dy^2.$$ At this point, the squared length of a tangent vector \(v\) is naturally given by the inner product: \(\|v\|^2 = g(v,v) = v_1^2 + v_2^2\).
+
+With a Riemannian metric, we can compute the length of any smooth curve on a manifold precisely by integrating the length of its tangent vector.
+In Riemannian geometry, the shortest paths between two points in a space, or more precisely the local extremals of the length functional, are called geodesics.
+Geodesics naturally generalize the familiar idea that in flat space the shortest path between two points is a line segment.
+For example, under the Euclidean metric, the geodesics on \(\mathbb{R}^2\) are exactly ordinary straight lines.
+
+On the upper half-plane \(\HH\), the Riemannian metric we use is the hyperbolic metric
+\begin{align*}
+     ds^2 = \frac{dx^2 + dy^2}{y^2}.
+\end{align*}
+
+The geodesics in the upper half-plane \(\mathbb{H}\) have only the following two geometric forms.
+\begin{enumerate}
+    \item Rays perpendicular to the real axis: Their equations are \(x = c\) and \(y > 0\), where \(c \in \mathbb{R}\) is a constant.
+    \item Semicircles whose centers lie on the real axis: Their equations are \((x-a)^2 + y^2 = R^2\) and \(y > 0\), where \(a \in \mathbb{R}\) is the center and \(R > 0\) is the radius.
+\end{enumerate}
+
+In the Farey graph, rays perpendicular to the real axis correspond to edges \(\{\infty,n\}, \) where \(n\) is an arbitrary integer. Semicircles correspond to edges \(\{p,q\}, \) where \(p,q\) are cusps different from \(\infty\).
+
+\subsection{The Canonical Role of the Upper Half-Plane}
+
+In fact, we can explain the natural role of the hyperbolic space \(\HH\) from a purely combinatorial and algebraic point of view, without referring to a choice of metric. The relevant theory is Grothendieck's theory of dessins d'enfants.
+For the material on dessins d'enfants below, we refer to \cite{GirondoGonzalezDiez2012}.
+
+\begin{definition}[Dessin d'enfant]
+Let \(S\) be a compact connected oriented topological surface. A dessin d'enfant is a finite connected bipartite graph \(D\subseteq S\) satisfying
+\begin{align*}
+    S\setminus D = \coprod_{i=1}^n F_i, 
+\end{align*}
+where each \(F_i\) is homeomorphic to an open disk. We call \((D,S)\) a dessin d'enfant pair.
+\end{definition}
+
+\begin{definition}[Belyi map]
+    Let \(X\) be a compact Riemann surface. If a holomorphic map \(\beta:X\to \P^1\) is ramified only over \(\{0,1,\infty\}\), then \(\beta\) is called a Belyi map.
+    We call \((X,\beta)\) a Belyi pair.
+\end{definition}
+
+\begin{proposition}[Dessin d'enfant of a Belyi map]
+    Let \(\beta:X\to \P^1\) be a Belyi map. Then \(\beta^{-1}([0,1])\) is a dessin d'enfant.
+    The vertices of the graph can be divided into
+    \begin{align*}
+        V = \beta^{-1}(0)\sqcup \beta^{-1}(1).
+    \end{align*}
+    The edges of the graph are given by \(\beta^{-1}((0, 1))\).
+\end{proposition}
+
+\begin{theorem}[Belyi correspondence]{\label{Belyi}}
+There exists a bijection between equivalence classes of Belyi pairs \(\{(X,\beta)\}\) and equivalence classes of dessin d'enfant pairs \((D,S)\).
+In particular, a Belyi pair \((X,\beta)\) is sent to the dessin d'enfant induced by the Belyi map.
+\end{theorem}
+
+Let \(\mathcal{T}\) be a Bass--Serre tree. Let \(\Gamma_0\) be a finite-index subgroup of the modular group \(\Gamma\). Then the quotient graph
+\begin{align*}
+    D_{\Gamma_0} = \Gamma_0 \backslash \mathcal{T}
+\end{align*}
+is a finite connected bipartite graph. Moreover, the orientation of the cusps of each ideal triangle gives the Bass--Serre tree a ribbon structure, which ensures that the Bass--Serre tree can be embedded into a compact Riemann surface.
+Therefore it is a dessin d'enfant.
+By Theorem \ref{Belyi}, it corresponds uniquely to a class of Belyi pairs \((X,\beta)\). One can prove that
+\begin{align*}
+    X \simeq \Gamma_0 \backslash \HH^*, 
+\end{align*}
+where \(\HH^*= \HH\cup \P^1(\Q)\) is the compactification of the upper half-plane. In this case, the Belyi map \(\beta:X\to \P^1\) is given by the \(j\)-function:
+\begin{align*}
+    \beta([z]) = \frac{j(z)}{1728}.
+\end{align*}
+Here the Belyi map is the map on the quotient space induced by \(j/1728:\HH \to \P^1\).
 
 
 \section{Modular Forms}
-We interpreted each point $\tau$ in the half-plane $\mathbb{H}$ as an elliptic curve by the construction:
-\begin{align*}
-    \Lambda_\tau = \{ m\tau + n \mid m,n \in \mathbb{Z} \}\quad   T_\tau = \mathbb{C} / \Lambda_\tau
-\end{align*}
-In this case, we call $X$ is the moduli space of elliptic curves.
 
-\begin{definition}[Isogeny]
-    Two elliptic curves $T_\tau, T_{\tau'}$ are said to be isogenous of degree $n$ if there exists $\alpha \in \mathbb{C}^\times$ such that $\alpha \Lambda_\tau \subseteq \Lambda_{\tau'}$ such that $[\Lambda_{\tau'}:\Lambda_{\tau}]=n$.
-\end{definition}
+Following the geometric realization of the modular group and its Bass–Serre tree in the upper half-plane, we now look for natural holomorphic functions on $\HH$ that are preserved under the action of $\PSL$.
 
+\subsection{From the upper half–plane to the moduli of elliptic curves}
+\label{sec:elliptic_moduli}
 
-Recalled that we interpreted each vertex in Bass-Serre tree as the element of $\Gamma$ with explicit form 
-\begin{align*}
-    \begin{pmatrix} a & b \\ c & d \end{pmatrix}
-\end{align*}
-such that $|ad-bc|=1$. 
-Such elements represent isomorphisms of the underlying lattices.
+Recall that the upper half‑plane $\HH = \{\tau\in\C : \Im(\tau)>0\}$ carries a transitive action of $\Gamma = \PSL$ via Möbius transformations
+\[
+\gamma\,\tau = \frac{a\tau+b}{c\tau+d}, \qquad \gamma = \pm\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\SL.
+\]
 
-
-\begin{definition}[Hecke Congruence Subgroup]
-    The Hecke congruence subgroup $\Gamma_0(N)$ is the subgroup of $SL_2(\mathbb{Z})$ consisting of elements that preserve a cyclic isogeny of degree $N$. 
-    Equivalently, it is defined as:
-    \begin{align*}
-    \Gamma_0(N) = \left\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in SL_2(\mathbb{Z}) \mid c \equiv 0 \pmod N \right\}
-    \end{align*}
-\end{definition}
-
-
-
-
-\begin{definition}[Modular Curve]
-    The Modular Curve is defined by $\Gamma_0(N) \backslash X$.
-\end{definition}
-\begin{proposition}
-    The Modular Curve deformation retracts onto quotient graph $\Gamma_0(N) \backslash \mathcal{T}$.
+\begin{proposition}[Uniformization of elliptic curves]
+Every lattice $\Lambda\subset\C$ of rank $2$ can be scaled and rotated so that $\Lambda = \Lambda_\tau = \Z\oplus\tau\Z$ for a $\tau\in\HH$ is unique up to the action of $\Gamma$. This gives a bijection
+\[
+\HH / \Gamma \;\longleftrightarrow\; \{\text{isomorphism classes of elliptic curves } \C/\Lambda_\tau\}.
+\]
+The quotient $\HH/\Gamma$ is a Riemann surface (the \emph{modular curve}), and its compactification $\HH/\Gamma\cup\{\infty\}$ is isomorphic to $\mathbb P^1$.\cite{DiamondShurman2005}
 \end{proposition}
 
-\begin{definition}[Theta Function]
-    Let $Q(x, y)$ be a positive definite integral binary quadratic form. 
-    Let $R_m$ be the number of integer representations of $m$ by $Q$, that is,
-    \begin{align*}
-        R_m = \#\{(x,y) \in \mathbb{Z}^2 \mid Q(x,y) = m\}.
-    \end{align*}
-    The Theta function associated with $Q$ is defined by the generating function of the sequence 
-    $\{R_m\}$:
-    \begin{align*}
-        \Theta_Q(\tau) = \sum_{(x,y) \in \mathbb{Z}^2} e^{2\pi i Q(x,y)\tau} = \sum_{m=0}^{\infty} R_m q^m
-    \end{align*}
-    where $q = e^{2\pi i \tau}$ and $\tau \in \mathbb{H}$.
+\begin{remark}
+very point on $\HH$ not only corresponds to a lattice $\Lambda_\tau$, but also lies in the interior of an ideal triangle of the Farey graph.
+When we glue different $\tau$ together via the $\Gamma$-action, we essentially glue all ideal triangles of the Farey tessellation into a modular curve.
+In this way, each ideal triangle of the Farey graph becomes a model of a fundamental domain on the modular curve.
+\end{remark}
+
+The Bass-Serré tree $\mathcal{T}$ of \S3 is the incidence graph of the dual of this triangulation; hence, the combinatorial skeleton of $\mathcal{F}$ and the continuous geometry of $\HH$ are two aspects of the same object.
+
+\subsection{Modular forms}
 
 
+
+\begin{definition}[Modular form]\cite{Serre1973}
+Let $k\in\Z$. A holomorphic function $f:\HH\to\C$ is a \emph{modular form of weight $k$} for $\Gamma$ if
+\begin{enumerate}
+    \item $f\!\big(\frac{a\tau+b}{c\tau+d}\big) = (c\tau+d)^k f(\tau)$ for all $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\SL$.
+    \item $f$ is \emph{holomorphic at the cusp}, i.e., its Fourier expansion contains only non‑negative powers of $q = e^{2\pi i\tau}$.
+\end{enumerate}
+If the constant term vanishes, $f$ is a \emph{cusp form}.
 \end{definition}
-\begin{definition}[Modular Forms]
 
-\end{definition}
 
-Weierstrass $\wp$-function
-\newpage
+
+\subsection{Two fundamental examples}
+
+\subsubsection{Eisenstein series}
+\label{subsec:Eisenstein_series}
+
+The Farey graph and the action of $\Gamma=\PSL$ on $\HH$ suggest a natural averaging construction.
+Recall from linear algebra how we obtain a vector stabilized under group action: given a finite group $G$ acting on a vector space and a vector $v_0$ whose stabilizer $H$ has finite index, one obtains an invariant vector by summing over cosets.\cite{Zagier2008}
+\[
+v \;=\; \sum_{g\,\in\,H\backslash G} v_0|g .
+\]
+Following the same idea under the action of the modular group, which is a infinite group, we start with a holomorphic function $f_0(\tau)=1$, which is already invariant under the stabilizer $\Gamma_\infty$ of the cusp $\infty$, and average it over the remaining cosets.
+
+This yields the \emph{Eisenstein series of weight $k$}:
+\[
+E_k(\tau) \;\coloneqq\; \sum_{\gamma\,\in\,\Gamma_\infty\backslash\Gamma} 1\big|_k\gamma
+        \;=\; \frac{1}{2}\!\!\sum_{\substack{c,d\in\Z\\ \gcd(c,d)=1}} \frac{1}{(c\tau+d)^k}.
+\]
+Clearly, when $k > 2$, $E_k$ is absolutely convergent. Furthermore, $E_k \not = 0$ if and only if $k$ is even.  
+Equivalently, summing over all non‑zero lattice points gives
+\[
+G_k(\tau) \;=\; \sum_{(m,n)\in\Z^2\setminus\{(0,0)\}} \frac{1}{(m\tau+n)^k}
+        \;=\; 2\zeta(k)\,E_k(\tau),
+\]
+and both are modular forms of weight $k$.
+Their $q$‑expansions are
+\[
+E_k(\tau) \;=\; 1 - \frac{2k}{B_k}\sum_{n=1}^\infty \sigma_{k-1}(n)\,q^n,
+\qquad q=e^{2\pi i\tau},
+\]
+where $B_k$ are Bernoulli numbers and $\sigma_{k-1}(n)=\sum_{d\mid n}d^{k-1}$.
+
+
+The proof of the equivalence of the three definitions above is left to the reader.
+
+
+The averaging operator $\mathcal{A}: f \mapsto \sum_{\gamma\in\Gamma_\infty\backslash\Gamma} f|_k\gamma$ projects a $\Gamma_\infty$‑invariant function onto the $\Gamma$‑invariants, exactly as one projects onto the trivial representation in finite groups.
+
+\subsubsection{The discriminant $\Delta$}
+
+
+\begin{theorem}[Structure of the ring of modular forms]\cite{Apostol1990}
+The graded ring of modular forms for $\PSL$ is freely generated by the Eisenstein series of weights $4$ and $6$:
+\[
+\bigoplus_{k} M_k(\Gamma) = \C[E_4, E_6].
+\]
+The \emph{modular discriminant}
+\[
+\Delta(\tau) \coloneqq \frac{E_4(\tau)^3 - E_6(\tau)^2}{1728}
+\]
+is the unique (up to scale) cusp form of weight $12$. Its Fourier expansion defines the Ramanujan $\tau$‑function:
+\[
+\Delta(\tau) = \sum_{n=1}^\infty \tau(n) q^n = q - 24q^2 + 252q^3 - 1472q^4 + 4830q^5 - \cdots = q\prod_{n=1}^\infty (1-q^n)^{24}.
+\]
+\end{theorem}
+
+Geometrically, $E_4$ vanishes at the order‑$2$ elliptic point $\tau=i$, $E_6$ at the order‑$3$ point $\tau=\rho = e^{2\pi i/3}$, and $\Delta$ has a simple zero only at the cusp.
+
+
 \section{Hecke Operators}
 
+\subsection{From averaging to correspondences}
+
+Eisenstein series are built by averaging over single cosets $\Gamma_\infty\backslash\Gamma$, projecting onto the $\Gamma$‑invariants. Hecke operators generalise this by summing over double cosets $\Gamma g \Gamma$ ($g\in\mathrm{GL}_2^+(\Q)$), producing commuting endomorphisms of $M_k(\Gamma)$. The passage from single to double cosets is the algebraic step that gives Hecke operators their multiplicative arithmetic nature.
+
+\subsection{Definitions and first equivalences}
+
+\begin{proposition}[Hecke operators: three viewpoints]
+For a fixed weight $k$ and integer $n\geq 1$, the following expressions define the same operator $T_n$ on functions $f:\HH\to\C$:
+\begin{enumerate}
+    \item \textbf{Classical formula:} 
+    $\displaystyle (T_n f)(\tau) = n^{k-1}\sum_{\substack{a,d>0\\ ad=n}} d^{-k}\sum_{b\bmod d} f\!\left(\frac{a\tau+b}{d}\right)$.
+    \item \textbf{Double coset sum:} 
+    $\displaystyle T_n f = n^{\frac{k}{2}-1}\sum_{\substack{\gamma\in\Gamma\setminus M_n\\ \det\gamma=n}} f|_k\gamma$, 
+    where $M_n = \left\{ \begin{pmatrix}a&b\\0&d\end{pmatrix} : ad=n,\; a,d>0,\; 0\leq b<d \right\}$.
+    \item \textbf{Lattice correspondence:} For a homogeneous function $F$ of weight $-k$ on lattices,
+    $\displaystyle (T_n F)(\Lambda) = n^{k-1}\sum_{\substack{\Lambda'\subset\Lambda\\ [\Lambda:\Lambda']=n}} F(\Lambda')$.
+\end{enumerate}
+The operators obtained from (1) and (2) agree up to a constant; the equivalence with (3) follows by identifying $\tau$ with $\Lambda_\tau = \Z\oplus\tau\Z$.
+\end{proposition}
+
+\begin{example}
+For a prime $p$, there are $p+1$ sublattices of index $p$ in $\Lambda$, corresponding to the $p+1$ points of $\mathbb P^1(\mathbb F_p)$. Hence
+\[
+(T_p f)(\tau) = p^{k-1} f(p\tau) + \frac1p\sum_{b=0}^{p-1} f\!\left(\frac{\tau+b}{p}\right).
+\]
+\end{example}
+
+\subsection{Algebraic structure of the Hecke algebra}
+
+The operators $\{T_n\}_{n\geq 1}$ generate a commutative $\Z$-algebra $\mathbb T \subset \operatorname{End}_{\C}(M_k(\Gamma))$, the \emph{Hecke algebra}.
+
+\begin{theorem}[Multiplicativity]
+For all $m,n$:
+\begin{enumerate}
+    \item $T_m T_n = T_n T_m$, \quad $T_1 = \operatorname{id}$;
+    \item If $\gcd(m,n)=1$, then $T_{mn} = T_m T_n$;
+    \item For $p$ prime and $r\geq 1$, $T_{p^r} T_p = T_{p^{r+1}} + p^{k-1} T_{p^{r-1}}$.
+\end{enumerate}
+\end{theorem}
+
+Thus the Hecke algebra is completely determined by the $T_p$ ($p$ prime), and the spaces $M_k$ and $S_k$ admit a basis of simultaneous eigenforms.
+
+\subsection{Eigenforms and arithmetic multiplicativity}
+
+\begin{corollary}[Hecke eigenvalues are Fourier coefficients]
+Let $f = \sum a_n q^n \in M_k(\Gamma)$ be a Hecke eigenform, normalised so that $a_1=1$. Then $T_n f = a_n f$ for all $n$, and the coefficients are multiplicative:
+\[
+a_m a_n = a_{mn} \quad (\gcd(m,n)=1),\qquad
+a_{p^{r+1}} = a_p a_{p^r} - p^{k-1} a_{p^{r-1}}.
+\]
+\end{corollary}
+
+\begin{example}[Ramanujan's $\tau$]
+The discriminant $\Delta = \sum \tau(n) q^n$ spans the one‑dimensional space $S_{12}$, hence is a Hecke eigenform. Its coefficients satisfy Ramanujan's identities (1916): $\tau(m)\tau(n)=\tau(mn)$ for coprime $m,n$, and $\tau(p^{r+1}) = \tau(p)\tau(p^r) - p^{11}\tau(p^{r-1})$.
+\end{example}
+
+\subsection{Hecke operators on the Farey graph and modular symbols}
+\label{subsec:farey_hecke}
+
+The matrices in $M_n$ send the Farey edge $[0,\infty]$ to other edges in the Farey triangulation; summing over $M_n$ is therefore a weighted average over neighbours in the Farey graph at distance related to $n$. Dually, on the Bass–Serre tree, $T_n$ averages over a finite neighbourhood that projects to a correspondence on the modular curve. This unifies the combinatorial, geometric, and arithmetic pictures.
+
+\begin{definition}[Modular symbol]
+Let $V_k(\C) = \operatorname{Sym}^{k-2}(\C^2)$ with the natural $\Gamma$‑action, and let $\Delta^0$ be the group of degree‑zero divisors on $\mathbb P^1(\Q)$. A \emph{modular symbol} is a $\Gamma$‑equivariant homomorphism $\phi : \Delta^0 \to V_k(\C)$. A generator $[s]-[r]$ is an oriented edge of the Farey graph.
+\end{definition}
+
+Modular symbols coincide with the compactly supported cohomology $H^1_c(\Gamma, V_k(\C))$; their image in $H^1(\Gamma, V_k(\C))$ is the interior cohomology that contains cusp forms. The Hecke action is
+\[
+(\phi|_{\Gamma g\Gamma})(D) = \sum_i \phi(g_i D)\cdot g_i \qquad (\Gamma g\Gamma = \bigsqcup_i \Gamma g_i).
+\]
+
+\begin{theorem}[Eichler–Shimura isomorphism]
+The map
+\[
+\phi_k(f)([s]-[r])(P) = \int_r^s f(z)\, P(z,1)\, dz
+\]
+induces a Hecke‑equivariant isomorphism
+\[
+S_k(\Gamma) \oplus \overline{S_k(\Gamma)} \oplus \mathcal{E}_k(\Gamma) \;\stackrel{\sim}{\longrightarrow}\; H^1(\Gamma, \operatorname{Sym}^{k-2}(\C^2)),
+\]
+where $\mathcal{E}_k$ is the space of Eisenstein series and $\overline{S_k}$ is the space of anti‑holomorphic cusp forms.
+\end{theorem}
+
+This single statement links the three vantage points: Hecke operators on modular forms, on the Farey graph (through symbols), and on the cohomology of the modular curve are simply different incarnations of the same underlying correspondences.
+
+\begin{remark}[Further topics]
+The Hecke algebra spectrum leads to the Petersson inner product, the multiplicity‑one theorem for newforms, and the construction of Galois representations attached to Hecke eigenforms — the cornerstone of Wiles’ proof of Fermat’s Last Theorem.
+\end{remark}
+
+\bibliographystyle{plain}
+\bibliography{ref}       
 \end{document}

@@ -393,5 +393,58 @@ Similarly, if we consider $U$ is an open scheme of $X$, we can from this short e
     0\to \o_X^\times \to j_*\o_U^\times \to 0
 \end{align*}
 
+\np Riemann-Roch Theorem 
+\begin{align*}
+    h^0(D)-h^0(K-D) = \deg(D)+1-g
+\end{align*}
+We want to calculate $h^0(D)$.
+
+
+
+When $X=\P^n$, we have $\deg(K-D)<0$ then $h^0(K-D)=0$.
+
+Consider $X$ be projective curve over $\P^2$, then we have 
+\begin{align*}
+    g= \frac{(d-1)(d-2)}{2}
+\end{align*}
+and 
+\begin{align*}
+    K_X = \o_X(d-r-1) 
+\end{align*}
+Since we have 
+\begin{align*}
+    \deg(\o_X(m)) = m\cdot \deg(X)
+\end{align*}
+therefore we have $\deg(K_X) = 2g-2= d(d-3)$.
+
+If 
+\begin{align*}
+    \deg(K_X-D)<0
+\end{align*}
+then we have 
+\begin{align*}
+    h^0(D) = \deg(D)+1-g.
+\end{align*}
+
+
+Example: let $D=P_1+\cdots +P_k$ be $k$ distinct divisor over projecitve curve $X$ in $\P^2$ with degree $4$.
+Prove that $P_i$ on a same line if $h^0(X,D)=2$, if not $h^0(X,D)=1$.
+
+Actually it means that there is a section $s$ of $O_X(1)$ such that $P_i\in \supp(s)$.
+We have 
+\begin{align*}
+    K_X = \o_X(1)
+\end{align*} 
+Therefore we then must prove that 
+\begin{align*}
+    h^0(X,K_X-D)\ge 1
+\end{align*}
+According to Riemann-Roch we then have 
+\begin{align*}
+    h^0(X,K_X-D) = h^0(X,D)-\deg(D)+2
+\end{align*}
+
+
+
 \endgroup}
 

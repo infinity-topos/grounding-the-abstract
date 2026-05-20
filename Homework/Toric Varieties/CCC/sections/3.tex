@@ -1,0 +1,765 @@
+{\begingroup
+
+
+
+\section{Categorical and Sheaf-Theoretic Preliminaries}
+
+The coherent--constructible correspondence is an equivalence between
+two derived categories of sheaves.  On the coherent side one considers
+equivariant coherent sheaves on a toric variety, while on the
+constructible side one considers constructible sheaves whose singular
+support is constrained by a conic Lagrangian subset determined by the
+fan.  Since morphisms in these categories are naturally derived
+morphisms, it is not sufficient to regard them merely as ordinary
+categories.  We will therefore use the language of categories enriched
+over complexes, or equivalently dg categories, in order to keep track of
+Hom-complexes, shifts, cones, and derived equivalences.
+
+The purpose of this section is only to fix the categorical conventions
+needed later.  We recall the notion of an enriched category, specialize
+to dg categories, and explain how their homotopy categories recover the
+triangulated categories appearing in the statement of the CCC.  We then
+review the sheaf-theoretic categories used on both sides of the
+correspondence: coherent and equivariant coherent sheaves, constructible
+sheaves, standard and costandard sheaves, singular support, and sheaves
+with prescribed singular support.
+
+\subsection{dg Categories}
+We first recall the notion of an enriched category.  In an ordinary
+category, the morphisms between two objects form a set.  In many
+geometric situations, however, the morphisms carry additional structure.
+For example, in derived categories the morphisms are naturally organized
+into complexes, whose cohomology groups give the corresponding Ext
+groups.  This motivates the notion of a category enriched over a
+monoidal category.
+
+
+A \textbi{monoidal category} is a category $\mathcal V$ together
+with a bifunctor
+\[
+\otimes:\mathcal V\times \mathcal V\longrightarrow \mathcal V,
+\]
+an object $\mathbf 1\in \mathcal V$, called the unit object, and natural
+isomorphisms
+\[
+(X\otimes Y)\otimes Z \simeq X\otimes (Y\otimes Z),
+\qquad
+\mathbf 1\otimes X\simeq X,
+\qquad
+X\otimes \mathbf 1\simeq X,
+\]
+satisfying  pentagon axiom
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+{((W\otimes X)\otimes Y)\otimes Z}
+    \arrow[r, "\alpha_{W\otimes X,Y,Z}"]
+    \arrow[d, "\alpha_{W,X,Y}\otimes \operatorname{id}_Z"']
+&
+{(W\otimes X)\otimes (Y\otimes Z)}
+    \arrow[r, "\alpha_{W,X,Y\otimes Z}"]
+&
+{W\otimes (X\otimes (Y\otimes Z))}
+\\
+{(W\otimes (X\otimes Y))\otimes Z}
+    \arrow[r, "\alpha_{W,X\otimes Y,Z}"']
+&
+{W\otimes ((X\otimes Y)\otimes Z)}
+    \arrow[ru, "\operatorname{id}_W\otimes \alpha_{X,Y,Z}"']
+&
+\end{tikzcd}
+\]
+and triangle axiom
+
+
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+{(X\otimes \mathbf 1)\otimes Y}
+    \arrow[rr, "\alpha_{X,\mathbf 1,Y}"]
+    \arrow[dr, "\rho_X\otimes \operatorname{id}_Y"']
+&&
+{X\otimes (\mathbf 1\otimes Y)}
+    \arrow[dl, "\operatorname{id}_X\otimes \lambda_Y"]
+\\
+&
+{X\otimes Y}
+&
+\end{tikzcd}
+\]
+The bifunctor $\otimes$ is
+called the \textbi{tensor product}.
+
+The basic examples of monoidal categories are $\mathbf{Set}$ with the cartesian product,
+$\mathbf{Ab}$ with the tensor product of abelian groups, and
+$\operatorname{Ch}(k)$ with the tensor product of complexes of
+$k$-modules.  In the last example, the unit object is the complex $k$
+concentrated in degree zero.
+
+
+A \textbi{category enriched in \(\mathcal V\)}, or a
+\textbi{\(\mathcal V\)-enriched category}, is a category-like object whose morphisms are
+not sets, but objects of \(\mathcal V\). More precisely, a \(\mathcal V\)-enriched category \(\mathcal C\) consists of:
+\begin{enumerate}
+    \item a collection of objects \(\operatorname{Ob}(\mathcal C)\);
+
+    \item for every pair of objects \(A,B\in \mathcal C\), an object
+    \[
+    \operatorname{Hom}_{\mathcal C}(A,B)\in \mathcal V;
+    \]
+
+    \item for every triple \(A,B,C\in\mathcal C\), a composition morphism in
+    \(\mathcal V\)
+    \[
+    \operatorname{Hom}_{\mathcal C}(B,C)
+    \otimes
+    \operatorname{Hom}_{\mathcal C}(A,B)
+    \longrightarrow
+    \operatorname{Hom}_{\mathcal C}(A,C);
+    \]
+
+    \item for every object \(A\in\mathcal C\), a unit morphism
+    \[
+    \mathbf 1\longrightarrow \operatorname{Hom}_{\mathcal C}(A,A).
+    \]
+\end{enumerate}
+
+These data are required to satisfy the usual associativity and unit axioms,
+written using the monoidal structure of \(\mathcal V\).
+
+
+
+Ordinary categories are recovered by taking
+\[
+\mathcal V=\operatorname{Set}
+\]
+with its Cartesian monoidal structure. In this case,
+\(\operatorname{Hom}_{\mathcal C}(A,B)\) is just a set.
+
+A \textbi{simplicial category} is a category enriched in simplicial sets:
+\[
+\mathcal V=\operatorname{sSet}.
+\]
+Thus its morphisms are mapping spaces.
+
+A \textbi{dg category}, short for \textbi{differential graded category}, over a field \(k\) is a category enriched in cochain complexes of
+\(k\)-vector spaces:
+\[
+\mathcal V=\operatorname{Ch}(k).
+\]
+
+For a dg category \(\mathcal C\), its \textbi{homotopy category}
+\(H^0(\mathcal C)\) is the ordinary category with the same objects as
+\(\mathcal C\), and with morphism spaces
+\[
+\operatorname{Hom}_{H^0(\mathcal C)}(A,B)
+=
+H^0\operatorname{Hom}_{\mathcal C}^{\bullet}(A,B).
+\]
+
+A \textbi{dg functor} between dg categories is a functor compatible with
+the dg structures; that is, it sends objects to objects and induces
+morphisms of complexes
+\[
+\operatorname{Hom}_{\mathcal C}^{\bullet}(A,B)
+\longrightarrow
+\operatorname{Hom}_{\mathcal D}^{\bullet}(F(A),F(B))
+\]
+compatible with composition and units.
+
+
+A dg functor \(F:\mathcal C\to\mathcal D\) is called a \textbi{quasi-equivalence} if the
+induced morphism of complexes
+\[
+\operatorname{Hom}_{\mathcal C}^{\bullet}(A,B)
+\longrightarrow
+\operatorname{Hom}_{\mathcal D}^{\bullet}(F(A),F(B))
+\]
+is a quasi-isomorphism for all objects \(A,B\in\mathcal C\), and if the induced
+functor
+\[
+H^0(F):H^0(\mathcal C)\to H^0(\mathcal D)
+\]
+is essentially surjective; i.e., for every object \(D\in\mathcal D\),
+there exists an object \(C\in\mathcal C\) such that \(F(C)\cong D\) in
+\(H^0(\mathcal D)\).
+
+A \textbi{right dg module}
+over \(\mathcal C\) is a dg functor
+\[
+M:\mathcal C^{op}\longrightarrow \operatorname{Ch}(k).
+\]
+Equivalently, it assigns to each object \(A\in\mathcal C\) a complex
+\(M(A)\), and to each pair of objects \(A,B\in\mathcal C\) a morphism of
+complexes
+\[
+M(B)\otimes \operatorname{Hom}_{\mathcal C}^{\bullet}(A,B)
+\longrightarrow M(A),
+\]
+compatible with composition and units. 
+We denote by
+$\operatorname{Mod}_{dg}(\mathcal C)$
+the dg category of right dg modules over \(\mathcal C\).
+For each object \(A\in\mathcal C\), there is a right dg module
+\[
+h_A:=\operatorname{Hom}_{\mathcal C}^{\bullet}(-,A).
+\]
+This is called the \textbi{right representable dg module} associated to
+\(A\).  Explicitly, it sends an object \(X\in\mathcal C\) to the complex
+\[
+h_A(X)=\operatorname{Hom}_{\mathcal C}^{\bullet}(X,A).
+\]
+A morphism \(u:X\to Y\) acts by precomposition:
+\[
+\operatorname{Hom}_{\mathcal C}^{\bullet}(Y,A)
+\longrightarrow
+\operatorname{Hom}_{\mathcal C}^{\bullet}(X,A),
+\qquad
+g\longmapsto g\circ u.
+\]
+
+If \(V^\bullet\) is a cochain complex, its
+\textbi{shift} \(V[1]\) is defined by
+\[
+V[1]^i=V^{i+1},
+\qquad
+d_{V[1]}^i=-d_V^{i+1}.
+\]
+If \(f:V^\bullet\to W^\bullet\) is a morphism of complexes, its \textbi{cone} is
+the complex
+\[
+\operatorname{Cone}(f)^i=W^i\oplus V^{i+1},
+\qquad
+d(w,v)=(d_Ww+f(v),-d_Vv).
+\]
+
+The dg category \(\operatorname{Mod}_{dg}(\mathcal C)\) has shifts and
+cones defined objectwise.  For example,
+\[
+M[1](A)=M(A)[1],
+\]
+and if \(\varphi:M\to N\) is a closed degree-zero morphism of dg modules,
+then
+\[
+\operatorname{Cone}(\varphi)(A)
+=
+\operatorname{Cone}(M(A)\to N(A)).
+\]
+
+
+A dg category \(\mathcal C\) is called \textbi{pretriangulated} if shifts
+and cones of representable dg modules are again representable.  More
+precisely, for every \(A\in\mathcal C\), the shifted module \(h_A[1]\)
+is represented by an object of \(\mathcal C\), and for every closed
+degree-zero morphism \(f:A\to B\), the cone of the induced morphism
+\[
+h_A\longrightarrow h_B
+\]
+is also represented by an object of \(\mathcal C\).  In this case,
+\(H^0(\mathcal C)\) becomes a triangulated category.
+
+Not every dg category is pretriangulated. Let \(\mathcal C\) be the dg category with one object \(*\) and
+endomorphism
+\[
+\operatorname{Hom}_{\mathcal C}(*,*)=k,
+\]
+where \(k\) is regarded as a complex concentrated in degree \(0\).  The
+unique representable right dg module is
+\[
+h_*=\operatorname{Hom}_{\mathcal C}(-,*)\simeq k.
+\]
+However, the shifted module
+\[
+h_*[1]\simeq k[1]
+\]
+is not representable by an object of \(\mathcal C\), since \(\mathcal C\)
+has only the object \(*\), whose representable module is \(k\), not
+\(k[1]\).  Therefore \(\mathcal C\) is not pretriangulated.
+
+
+
+The \textbi{dg Yoneda embedding} of dg category \(\mathcal C\) is the dg functor
+\[
+Y:\mathcal C\to \operatorname{Mod}_{dg}(\mathcal C),
+\qquad
+A\longmapsto \operatorname{Hom}_{\mathcal C}^{\bullet}(-,A).
+\]
+The \textbi{pretriangulated envelope} of
+\(\mathcal C\), denoted \(\operatorname{Pretr}(\mathcal C)\), is the
+smallest full dg subcategory of \(\operatorname{Mod}_{dg}(\mathcal C)\)
+which contains all representable dg modules \(h_A\) and is closed under
+finite direct sums, shifts, and cones.
+
+Let $\mathcal{C}=\{*\}$ have the same endomorphism complex \(k\) as above. The pretriangulated
+envelope of $\mathcal{C}$ is obtained by adjoining formal shifts, cones, and finite
+direct sums:
+\[
+\operatorname{Pretr}(\mathcal C)\simeq \operatorname{Perf}(k).
+\]
+Here \(\operatorname{Perf}(k)\) denotes the dg category of perfect
+complexes over \(k\).
+
+
+
+
+Let \(\mathcal C\) be a pretriangulated dg category.  A full dg
+subcategory \(\mathcal A\subset \mathcal C\) is called \textbi{thick} if
+\(H^0(\mathcal A)\) is a full triangulated subcategory of
+\(H^0(\mathcal C)\) closed under direct summands.  Equivalently, if
+\(X\in H^0(\mathcal A)\) and \(Y\) is a retract of \(X\) in
+\(H^0(\mathcal C)\), then \(Y\in H^0(\mathcal A)\).
+
+Let \(\mathcal S\subset \operatorname{Ob}(\mathcal C)\).  We denote by
+\[
+\langle \mathcal S\rangle
+\]
+the smallest full dg subcategory of \(\mathcal C\) whose homotopy
+category is a thick triangulated subcategory of \(H^0(\mathcal C)\)
+containing \(\mathcal S\).  
+
+Let \(\mathcal C\) and \(\mathcal D\) be pretriangulated dg categories.
+A dg functor
+\[
+F:\mathcal C\longrightarrow \mathcal D
+\]
+is called \textbi{exact} if the induced functor
+\[
+H^0(F):H^0(\mathcal C)\longrightarrow H^0(\mathcal D)
+\]
+is an exact functor of triangulated categories.  Equivalently, it
+commutes with shifts up to isomorphism and sends distinguished triangles
+to distinguished triangles.
+
+In practice, we will use the following criterion. 
+
+
+\begin{theorem}[Generator Criterion for Quasi-Equivalences]
+Let
+$
+F:\mathcal C\longrightarrow \mathcal D
+$
+be an exact dg functor between pretriangulated dg categories.  Let
+\(\mathcal S\subset \operatorname{Ob}(\mathcal C)\) be a collection of
+objects such that
+$
+\langle \mathcal S\rangle=\mathcal C
+$
+and 
+$
+\langle F(\mathcal S)\rangle=\mathcal D.
+$
+Suppose that, for all \(A,B\in\mathcal S\), the induced morphism of
+complexes
+\[
+\operatorname{Hom}_{\mathcal C}^{\bullet}(A,B)
+\longrightarrow
+\operatorname{Hom}_{\mathcal D}^{\bullet}(F(A),F(B))
+\]
+is a quasi-isomorphism.  Then \(F\) is a quasi-equivalence.
+\end{theorem}
+
+Therefore, the proof of a dg quasi-equivalence can be reduced to two tasks:
+\begin{enumerate}
+    \item Compare the Hom complexes on a set of generators;
+    \item prove that these generator generate both sides.
+\end{enumerate}
+
+
+
+\subsection{Coherent and Equivariant Coherent Sheaves}
+
+Let \(X\) be a locally Noetherian scheme.  We denote by
+\(\operatorname{Coh}(X)\) the abelian category of coherent
+\(\mathcal O_X\)-modules.  Let
+\[
+\operatorname{Ch}^b(\operatorname{Coh}(X))
+\]
+be the category of bounded complexes of coherent sheaves and let
+\[
+K^b(\operatorname{Coh}(X))
+\]
+be its homotopy category.  It has the same objects as \(\operatorname{Ch}^b(\operatorname{Coh}(X))\),
+but its morphisms are chain maps modulo chain homotopy.
+
+The \textbi{bounded derived category} of coherent sheaves is the Verdier
+localization
+\[
+D^b(\operatorname{Coh}(X))
+=
+K^b(\operatorname{Coh}(X))[\mathcal W^{-1}],
+\]
+where \(K^b(\operatorname{Coh}(X))\) is the homotopy category of bounded
+complexes of coherent sheaves and \(\mathcal W\) is the class of
+quasi-isomorphisms.
+
+
+
+Now suppose that an algebraic group \(G\) acts on \(X\).  Let
+\[
+a:G\times X\longrightarrow X,
+\qquad
+p_X:G\times X\longrightarrow X
+\]
+be the action map and the projection to \(X\).  Let
+\[
+\mu:G\times G\longrightarrow G
+\]
+be the multiplication map.  On \(G\times G\times X\), define
+\[
+q_X:G\times G\times X\longrightarrow X,
+\qquad
+(g,h,x)\longmapsto x,
+\]
+\[
+q_{23}:G\times G\times X\longrightarrow G\times X,
+\qquad
+(g,h,x)\longmapsto (h,x),
+\]
+and
+\[
+\operatorname{id}_G\times a:G\times G\times X\longrightarrow G\times X,
+\qquad
+(g,h,x)\longmapsto (g,hx).
+\]
+We also regard
+\[
+\mu\times \operatorname{id}_X:G\times G\times X\longrightarrow G\times X,
+\qquad
+(g,h,x)\longmapsto (gh,x).
+\]
+
+A \textbi{\(G\)-equivariant coherent sheaf} on \(X\) is a coherent sheaf
+\(\mathcal F\) together with an isomorphism
+\[
+\phi:p_X^*\mathcal F\xrightarrow{\sim}a^*\mathcal F
+\]
+satisfying the following cocycle condition:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+q_X^*\mathcal F
+    \arrow[r, "q_{23}^*\phi"]
+    \arrow[dr, "{(\mu\times \operatorname{id}_X)^*\phi}"']
+&
+(a\circ q_{23})^*\mathcal F
+    \arrow[d, "{(\operatorname{id}_G\times a)^*\phi}"]
+\\
+&
+(a\circ(\operatorname{id}_G\times a))^*\mathcal F .
+\end{tikzcd}
+\]
+Here we use the equality
+\[
+a\circ(\operatorname{id}_G\times a)
+=
+a\circ(\mu\times \operatorname{id}_X)
+\]
+as maps \(G\times G\times X\to X\).
+
+
+
+We denote by
+\[
+\operatorname{Coh}_G(X)
+\]
+the \textbi{abelian category of \(G\)-equivariant coherent sheaves on \(X\)}, and
+by
+\[
+D^b\operatorname{Coh}_G(X)
+\]
+its \textbi{bounded equivariant derived category}.
+
+A complex \(\mathcal E^\bullet\) of \(\mathcal O_X\)-modules is called
+\textbi{perfect} if it is locally quasi-isomorphic to a bounded complex of
+finite rank locally free sheaves.  We write
+\[
+\operatorname{Perf}(X)
+\]
+for the \textbi{dg category of perfect complexes on \(X\)}.  If \(G\) acts on
+\(X\), we similarly write
+\[
+\operatorname{Perf}_G(X)
+\]
+for the \textbi{dg category of \(G\)-equivariant perfect complexes}.
+
+The following standard fact explains why perfect complexes provide the
+correct dg model for the coherent side of the correspondence.  In the
+smooth case, bounded coherent complexes can be represented by perfect
+complexes.  In the equivariant setting, the same statement holds provided
+that there are sufficiently many equivariant vector bundles.
+
+\begin{theorem}
+Let \(X\) be a smooth Noetherian scheme over a field \(k\).
+\begin{enumerate}
+    \item The dg category \(\operatorname{Perf}(X)\) is a dg enhancement
+    of \(D^b(\operatorname{Coh}(X))\).  Equivalently,
+    \[
+    H^0(\operatorname{Perf}(X))
+    \simeq
+    D^b(\operatorname{Coh}(X)).
+    \]
+
+    \item Let \(G\) be an algebraic group acting on \(X\).  If \(X\) has
+    the equivariant resolution property, then
+    \(\operatorname{Perf}_G(X)\) is a dg enhancement of
+    \(D^b(\operatorname{Coh}_G(X))\).  Equivalently,
+    \[
+    H^0(\operatorname{Perf}_G(X))
+    \simeq
+    D^b(\operatorname{Coh}_G(X)).
+    \]
+\end{enumerate}
+\end{theorem}
+
+Here, We say that
+\(X\) has the \textbi{equivariant resolution property} if every
+\(G\)-equivariant coherent sheaf \(\mathcal F\in \operatorname{Coh}_G(X)\)
+admits a surjection
+\[
+\mathcal E\twoheadrightarrow \mathcal F,
+\]
+where \(\mathcal E\) is a \(G\)-equivariant vector bundle on \(X\).
+
+
+
+\subsection{Constructible Sheaves}
+
+Let \(M\) be a real analytic manifold, and let \(k\) be a fixed field of
+coefficients.  We denote by
+\[
+Sh(M)
+\]
+the \textbi{dg category of complexes of sheaves of \(k\)-vector spaces on \(M\)}.
+Equivalently, \(Sh(M)\) may be regarded as a dg enhancement of the
+derived category of sheaves of \(k\)-vector spaces on \(M\).
+
+We first recall the notion of a locally constant sheaf.  A sheaf
+\(\mathcal F\) of \(k\)-vector spaces on \(M\) is called
+\textbi{locally constant} if every point \(x\in M\) has an open
+neighborhood \(U\) such that
+\[
+\mathcal F|_U\simeq k_U^{\oplus r}
+\]
+for some integer \(r\) depending on \(U\).  A \textbi{local system} is a
+locally constant sheaf whose stalks are finite-dimensional
+\(k\)-vector spaces.
+
+A \textbi{stratification} of \(M\) is a locally finite decomposition
+\[
+M=\bigsqcup_{\alpha} S_\alpha
+\]
+into locally closed smooth submanifolds.  We say that
+A sheaf \(\mathcal F\) is \textbi{constructible} with respect to
+this stratification if each restriction
+\[
+\mathcal F|_{S_\alpha}
+\]
+is a local system.
+We denote by
+\[
+Sh_c(M)
+\]
+the full dg subcategory of \(Sh(M)\) consisting of constructible
+complexes.  More precisely, a complex \(\mathcal F^\bullet\in Sh(M)\) is
+\textbi{constructible} if each cohomology sheaf \(H^i(\mathcal F^\bullet)\) is
+constructible and \(H^i(\mathcal F^\bullet)=0\) for all but finitely many
+\(i\).
+
+We write
+\[
+Sh_{cc}(M)
+\]
+for \textbi{the full dg subcategory of \(Sh_c(M)\) consisting of constructible
+complexes with compact support}.  Here the \textbi{support of a complex}
+\(\mathcal F^\bullet\) is the union of the supports of its cohomology
+sheaves.
+
+We write
+\[
+D^b_{\mathcal S}(M;k)
+\]
+for the \textbi{bounded derived category of \(k\)-sheaves constructible with
+respect to the stratification \(\mathcal S=\{S_\alpha\}_{\alpha\in A}\)}.
+
+Let
+\[
+j:U\hookrightarrow M
+\]
+be the inclusion of a locally closed subset.  The \textbi{standard sheaf
+associated to \(U\)} is
+\[
+j_!k_U,
+\]
+where \(j_!\) denotes extension by zero.  The \textbi{costandard sheaf
+associated to \(U\)} is
+\[
+j_*k_U.
+\]
+Here \(k_U\) denotes the constant sheaf on \(U\) with coefficients in the
+field \(k\).
+
+These sheaves are basic building blocks of constructible categories.  In
+many situations, constructible sheaves are generated by standard or
+costandard sheaves associated to the strata of a chosen stratification.
+
+
+
+\begin{theorem}[Generation by standard and costandard sheaves]
+Let \(M\) be a real analytic manifold, and let
+\[
+M=\bigsqcup_{\alpha\in A}S_\alpha
+\]
+be a finite stratification by locally closed submanifolds.  Let
+\(j_\alpha:S_\alpha\hookrightarrow M\) denote the inclusion.  Then
+\[
+D^b_{\mathcal S}(M;k)
+=
+\left\langle
+j_{\alpha !}L
+\;\middle|\;
+\alpha\in A,\ 
+L \text{ a finite-dimensional local system on }S_\alpha
+\right\rangle.
+\]
+Equivalently,
+\[
+D^b_{\mathcal S}(M;k)
+=
+\left\langle
+j_{\alpha *}L
+\;\middle|\;
+\alpha\in A,\ 
+L \text{ a finite-dimensional local system on }S_\alpha
+\right\rangle.
+\]
+In particular, if every stratum \(S_\alpha\) is contractible, then
+\[
+D^b_{\mathcal S}(M;k)
+=
+\left\langle
+j_{\alpha !}k_{S_\alpha}
+\;\middle|\;
+\alpha\in A
+\right\rangle
+=
+\left\langle
+j_{\alpha *}k_{S_\alpha}
+\;\middle|\;
+\alpha\in A
+\right\rangle.
+\]
+\end{theorem}
+
+\subsection{Singular Support}
+
+Let \(M\) be a real analytic manifold, and let \(T^*M\) denote its
+cotangent bundle.  The cotangent bundle carries a natural action of
+\(\mathbb R_{>0}\) by dilation along the fibers:
+\[
+t\cdot (x,\xi)=(x,t\xi),
+\qquad t\in \mathbb R_{>0}.
+\]
+A subset \(\Lambda\subset T^*M\) is called \textbi{conic} if it is invariant
+under this action; equivalently,
+\[
+(x,\xi)\in\Lambda
+\quad\Longrightarrow\quad
+(x,t\xi)\in\Lambda
+\quad\text{for all }t\in\mathbb R_{>0}.
+\]
+
+
+For a constructible complex of sheaves \(\mathcal F\in Sh_c(M)\), its
+\textbi{singular support}, also called its \textbi{microsupport}, is a closed
+conic subset
+\[
+SS(\mathcal F)\subset T^*M.
+\]
+
+The singular support is a microlocal refinement of the ordinary support.
+A covector \((x_0,\xi_0)\in T^*M\) is not contained in
+\(SS(\mathcal F)\) if there exists a conic open neighborhood
+\(U\subset T^*M\) of \((x_0,\xi_0)\) such that, for every \(C^1\)-function
+\(\varphi\) defined near \(x_0\) satisfying
+\[
+\varphi(x_0)=0,
+\qquad
+(x_0,d\varphi_{x_0})\in U,
+\]
+one has
+\[
+\bigl(R\Gamma_{\{\varphi\geq 0\}}(\mathcal F)\bigr)_{x_0}=0.
+\]
+Here \(R\Gamma_Z(\mathcal F)\) denotes the derived functor of sections
+with support in a closed subset \(Z\subset M\).  Thus
+\[
+\bigl(R\Gamma_{\{\varphi\geq 0\}}(\mathcal F)\bigr)_{x_0}
+\]
+is the local cohomology complex of \(\mathcal F\) at \(x_0\) with
+support in the half-space \(\{\varphi\geq 0\}\).
+
+
+
+Equivalently, \(SS(\mathcal F)\) is the closed conic subset of \(T^*M\)
+consisting of covectors along which such local cohomological vanishing
+fails.  It records the cotangent directions in which sections of
+\(\mathcal F\) cannot be propagated microlocally.
+
+
+
+If \(\mathcal F\) is locally constant on \(M\), then it has no nonzero
+singular directions.  Hence
+\[
+SS(\mathcal F)\subset T_M^*M,
+\]
+where \(T_M^*M\subset T^*M\) denotes the zero section.
+
+Let \(S\subset M\) be a locally closed submanifold.  The \textbi{conormal bundle
+of \(S\) in \(M\)} is
+\[
+T_S^*M
+=
+\{(x,\xi)\in T^*M\mid x\in S,\ \xi|_{T_xS}=0\}.
+\]
+If \(\mathcal F\) is constructible with respect to a stratification
+\[
+M=\bigsqcup_{\alpha\in A}S_\alpha,
+\]
+then its singular support is contained in the union of the conormal
+bundles to the strata:
+\[
+SS(\mathcal F)\subset \bigcup_{\alpha\in A}T^*_{S_\alpha}M.
+\]
+This gives the basic geometric control on the singularities of a
+constructible sheaf.
+
+
+Suppose that  
+$
+\Lambda\subset T^*M
+$
+be a closed conic subset.  We define
+\[
+Sh_\Lambda(M):=\{\mathcal F\in Sh_c(M)\mid SS(\mathcal F)\subset \Lambda\}.
+\]
+to be the \textbi{full dg subcategory of \(Sh_c(M)\) consisting of constructible
+complexes whose singular support is contained in \(\Lambda\)}.
+
+
+Thus \(\Lambda\) imposes a microlocal constraint on constructible
+sheaves.  Instead of allowing arbitrary constructible singularities, one
+only allows singular behavior in the cotangent directions prescribed by
+\(\Lambda\).
+
+\begin{theorem}
+Let \(\Lambda\subset T^*M\) be a closed conic subset.  The full
+subcategory
+\[
+Sh_\Lambda(M)\subset Sh_c(M)
+\]
+is closed under shifts, cones, finite direct sums, and retracts.
+Consequently, its homotopy category
+\[
+H^0(Sh_\Lambda(M))
+\]
+is a triangulated subcategory of \(H^0(Sh_c(M))\).
+\end{theorem}
+
+\endgroup}

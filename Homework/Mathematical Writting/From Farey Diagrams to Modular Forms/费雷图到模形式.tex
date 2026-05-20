@@ -1,0 +1,1042 @@
+% !TEX program = xelatex
+
+%\documentclass[11pt, a4paper]{article}
+\documentclass[10pt,UTF8]{ctexart}
+% ==========================================
+% 宏包调用 (Packages)
+% ==========================================
+\usepackage{authblk}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+% \usepackage{hyperref}
+\usepackage{float}
+\usepackage{graphicx}
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm} % 设置适合 12 页阅读的页边距
+
+% 数学与符号宏包
+\usepackage{amsmath, amsthm, amssymb, mathrsfs, mathtools}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=red,
+}
+
+% 绘图宏包 (核心)
+\usepackage{tikz}
+\usetikzlibrary{calc, math, arrows.meta, backgrounds}
+\usetikzlibrary{decorations.pathreplacing}
+% ==========================================
+% 自定义命令与数学符号 (Custom Commands)
+% ==========================================
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\HH}{\mathbb{H}} % 上半平面 (避免与通常的 \H 冲突)
+\newcommand{\SL}{\operatorname{SL}_2(\Z)}
+\newcommand{\GL}{\operatorname{GL}_2(\Z)}
+\newcommand{\PSL}{\operatorname{PSL}_2(\Z)}
+\renewcommand{\Im}{\operatorname{Im}}
+% ==========================================
+% 定理环境设置 (Theorem Environments)
+% ==========================================
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}[theorem]{例子}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{construction}{Construction}[section]
+
+\title{Farey图：从几何角度理解模形式}
+
+\author{
+  聂家多$^1$\thanks{Email: \texttt{12532006@mail.sustech.edu.cn}} \quad 
+  文子杰$^1$\thanks{Email: \texttt{12532016@mail.sustech.edu.cn}} \quad 
+  钟皓宇$^2$\thanks{Email: \texttt{252221001@stu.gbu.edu.cn}} \\
+  \vspace{0.2cm}
+  \small $^1$ 南方科技大学 \\
+  \small $^2$ 大湾区大学
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本文旨在从组合与几何的角度解释模形式背后的基本结构. 我们首先由连分数与 Farey 序列引入 Farey 图，并通过 Mediant 运算刻画有理尖点之间的相邻关系. Farey 图在圆盘模型中给出理想三角剖分，其对偶图即 Conway's Topograph. 进一步地，通过在 Topograph 的边上插入新的顶点，可以得到与自由积分解
+\[
+\mathrm{PSL}_2(\mathbb Z)\cong C_2*C_3
+\]
+相对应的 Bass--Serre 树，从而将模群的作用解释为理想三角形邻接结构上的自然对称性. 随后，本文讨论上半平面的双曲几何模型，并利用 Dessins d'Enfants 与 Belyi 对应说明：Bass--Serre 树的有限商作为带状二分图可视为 dessin d'enfant，其对应的 Belyi 映射由归一化的 \(j\)-函数给出. 这显示了上半平面作为Farey 图的几何实现模型的典范性. 
+最后，本文转向模形式本身，介绍 Eisenstein 级数、模判别式、Hecke 算子以及模符号，并展示 Farey 图与 Bass--Serre 树如何为理解模形式的算术与几何结构提供统一框架.
+\end{abstract}
+\noindent\textbf{关键词：}
+Farey 图；Bass--Serre 树；双曲几何；Belyi 映射；模形式；Hecke 算子
+
+
+
+\tableofcontents
+
+
+
+
+\section*{符号表}
+\addcontentsline{toc}{section}{符号表}
+
+\begingroup
+\small
+\setlength{\columnsep}{2em}
+\begin{multicols}{2}
+
+\subsection*{基础记号}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(\mathbb R,\mathbb C,\mathbb Z,\mathbb Q\)]
+实数、复数、整数、有理数集。
+
+\item[\(\mathbb D,\mathbb H\)]
+单位圆盘与上半平面，\(\mathbb H=\{z\in\mathbb C:\operatorname{Im}z>0\}\)。
+
+\item[\(\partial\mathbb H\)]
+上半平面的实轴边界。
+
+\item[\(\mathbb P^1(F)\)]
+域 \(F\) 上的射影直线；特别地，\(\mathbb P^1(\mathbb Q)=\mathbb Q\cup\{\infty\}\)。
+
+\item[\(a/b\)]
+既约有理数。
+
+\item[\(\operatorname{Im}(z)\)]
+复数 \(z\) 的虚部。
+
+\item[\(\gcd(a,b)\)]
+整数 \(a,b\) 的最大公因数。
+
+\item[\(\operatorname{sgn}(x)\)]
+符号函数。
+
+\end{description}
+
+\subsection*{连分数与矩阵}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[$a_0;a_1,\ldots,a_n$]
+连分数，其中 \(a_i\in\mathbb {Z}_{>0}\) 对 \(i>0\)。
+
+\item[\(x_i=p_i/q_i\)]
+连分数的第 \(i\) 个渐近分数。
+
+\item[\(M_a\)]
+连分数基本矩阵，\(M_a=\begin{pmatrix}a&1\\1&0\end{pmatrix}\)。
+
+\item[\(A\)]
+整数矩阵 \(A=\begin{pmatrix}p&r\\q&s\end{pmatrix}\in\mathrm{GL}_2(\mathbb Z)\)。
+
+\end{description}
+
+\subsection*{群与作用}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(\mathrm{GL}_2(\mathbb Z)\)]
+整系数一般线性群。
+
+\item[\(\mathrm{SL}_2(\mathbb Z)\)]
+整系数特殊线性群。
+
+\item[\(\mathrm{PSL}_2(\mathbb Z)\)]
+模群，\(\mathrm{PSL}_2(\mathbb Z)=\mathrm{SL}_2(\mathbb Z)/\{\pm I_2\}\)。
+
+\item[\(\Gamma\)]
+通常表示 \(\mathrm{PSL}_2(\mathbb Z)\)。
+
+\item[\(\Gamma_0\)]
+\(\Gamma\) 的有限指数子群。
+
+\item[\(\Gamma_\infty\)]
+尖点 \(\infty\) 的稳定子。
+
+\item[\(\mathcal T\)]
+Bass--Serre 树。
+
+\item[\(D_{\Gamma_0}\)]
+商 dessin，\(D_{\Gamma_0}=\Gamma_0\backslash\mathcal T\)。
+
+\end{description}
+
+\subsection*{模形式与 Hecke 算子}
+\begin{description}[leftmargin=2.8cm, labelwidth=2.5cm, style=nextline]
+
+\item[\(M_k(\Gamma)\)]
+权 \(k\) 模形式空间。
+
+\item[\(S_k(\Gamma)\)]
+权 \(k\) 尖点形式空间。
+
+\item[\(\mathcal E_k(\Gamma)\)]
+权 \(k\) Eisenstein 级数空间。
+
+\item[\(E_k,G_k\)]
+Eisenstein 级数与格点 Eisenstein 级数。
+
+\item[\(B_k\)]
+第 \(k\) 个伯努利数。
+
+\item[\(\sigma_{k-1}(n)\)]
+除数和函数，\(\sigma_{k-1}(n)=\sum_{d\mid n}d^{k-1}\)。
+
+\item[\(\Delta(\tau)\)]
+模判别式，\(\Delta(\tau)=\sum_{n\geq1}\tau(n)q^n\)。
+
+\item[\(\tau(n)\)]
+Ramanujan \(\tau\)-函数。
+
+\item[\(T_n\)]
+第 \(n\) 个 Hecke 算子。
+
+\item[\(\mathbb T\)]
+Hecke 代数。
+
+\item[\(V_k(\mathbb C)\)]
+模符号系数空间，\(V_k(\mathbb C)=\operatorname{Sym}^{k-2}(\mathbb C^2)\)。
+
+\item[\(\Delta^0\)]
+\(\mathbb P^1(\mathbb Q)\) 上的零次除子群。
+
+\item[\(H^1(\Gamma,V_k)\)]
+群上同调。
+
+\item[\(H_c^1(\Gamma,V_k)\)]
+紧支上同调。
+
+\item[\(\phi_k(f)\)]
+Eichler--Shimura 积分映射。
+
+\end{description}
+
+\end{multicols}
+\endgroup
+
+\newpage
+\section{引言}
+
+
+
+模形式是数论、代数几何与双曲几何交汇处的核心对象.经典定义中，模形式是定义在上半平面
+\[
+\mathbb H=\{z\in\mathbb C:\operatorname{Im}(z)>0\}
+\]
+上的全纯函数，并且在模群
+\[
+\mathrm{PSL}_2(\mathbb Z)
+\]
+的作用下满足特定的变换规律. 然而，如果直接从这个定义出发，使得初学者难以立刻看清模群 $\operatorname{PSL}_2(\mathbb Z)$ 作用背后的组合与几何直觉. 事实上，这种直觉可以仅由有理数之间朴素的行列式相邻关系建立起来——这便是 Farey 图的出发点. 本文的目标是从更加组合化和几何化的角度解释这些对象的自然来源.
+
+本文的出发点是 Farey 图. Farey 图以有理数与无穷远点
+\[
+\mathbb P^1(\mathbb Q)=\mathbb Q\cup\{\infty\}
+\]
+为顶点，并通过行列式条件刻画尖点之间的相邻关系.这个相邻关系一方面可以由连分数与 Mediant 运算自然生成，另一方面又可以在上半平面或圆盘模型中可视化为理想三角剖分. 因此，Farey 图提供了从初等数论对象进入双曲几何的桥梁.
+
+在 Farey 图给出的理想三角剖分中，我们进一步考虑其对偶图，即 Conway's Topograph.Topograph 将理想三角形视作顶点，将共边关系视作边，从而把 Farey 镶嵌的拓扑结构转化为一棵三正则树. 为了更精细地记录三角形与边的关联关系，我们在 Topograph 的边上插入新的顶点，得到一个二分树.这个二分树正是模群
+\[
+\mathrm{PSL}_2(\mathbb Z)
+\cong C_2*C_3
+\]
+对应的 Bass-Serre 树. 由此，模群不再只是由矩阵组成的代数群，而可以理解为保持 Farey 三角剖分组合结构的变换群.
+
+在这一观点下，上半平面模型也不是任意选择的几何背景. 我们首先回顾双曲度量
+\[
+ds^2=\frac{dx^2+dy^2}{y^2}
+\]
+及其测地线，从而解释 Farey 图中半圆和垂直线作为双曲测地线的含义. 随后，我们进一步通过 Dessins d'Enfants 与 Belyi 对应说明上半平面的典范性. 具体而言，Bass-Serre 树的有限商可以看作带状二分图，从而给出 dessin d'enfant. 根据 Belyi 对应，它对应一个 Belyi 映射；在模曲线的情形中，该映射由归一化的 \(j\)-函数给出. 这个过程说明，Farey 图与 Bass-Serre 树不仅是可视化工具，而且能够从组合结构通向模曲线与上半平面的几何结构.
+
+最后，本文回到模形式本身. 我们将介绍模形式的基本定义，并讨论两个核心例子：Eisenstein 级数与模判别式 \(\Delta\). 随后引入 Hecke 算子，从平均构造、双陪集分解以及格对应三个角度解释其定义.通过模符号与 Eichler-Shimura 同构，我们还可以看到 Farey 图上的边、Bass--Serre 树上的路径、模曲线上的同调以及模形式上的 Hecke 算子之间存在深刻联系.
+
+因此，本文的主线可以概括为：
+\[
+\text{连分数}
+\longrightarrow
+\text{Farey 图}
+\longrightarrow
+\text{Topograph}
+\longrightarrow
+\text{Bass--Serre 树}
+\longrightarrow
+\text{上半平面与模曲线}
+\longrightarrow
+\text{模形式与 Hecke 算子}.
+\]
+通过这条路线，我们希望说明：模形式并不是人为地孤立地定义在上半平面上的函数，而是 Farey 图、模群作用、双曲几何与代数曲线之间相互作用的自然产物.以此从几何化组合化的角度，给予读者一个新的理解模形式的视角.
+
+
+
+\section{Farey图}\label{sec:farey}
+在本章中，我们介绍了 Farey 图以及相关概念. 以下关于 Farey 图的内容，我们参考的是\cite{HatcherTopologyOfNumbers}.
+
+\subsection{连分数}
+我们首先简要回顾一下连分数的概念. 设 $\{a_0,\dots,a_n\}$ 是由正整数构成的一个集合.一个连分数 $[a_0; a_1, a_2, \dots, a_n]$ 代表着如下由递归过程构造的有理数:
+\begin{align*}
+    a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots}}
+\end{align*}
+记 $x_{i}=[a_0;a_1,\dots,a_i]$ 为连分数的第 $i$ 个渐近分数，那么连分数的构造过程可以由如下矩阵乘法给出
+$$\begin{pmatrix} p_i & p_{i-1} \\ q_i & q_{i-1} \end{pmatrix} = \begin{pmatrix} a_0 & 1 \\ 1 & 0 \end{pmatrix} \cdots \begin{pmatrix} a_i & 1 \\ 1 & 0 \end{pmatrix},$$
+其中 $x_i = p_i/q_i$.  如果我们记 
+\begin{align*}
+    M_a = \begin{pmatrix} a & 1 \\ 1 & 0 \end{pmatrix},
+\end{align*}
+那么 $\{M_a\}_{a\in\Z}$ 实际上是 $\GL$ 的一组生成元.换句话来讲，如果我们有矩阵 
+$$A = \begin{pmatrix} p & r \\ q & s \end{pmatrix} \in \GL,$$
+那么存在一组整数$\{a_0,a_1,\cdots,a_n\}$ 使得 $A = M_{a_0}M_{a_1}\dots M_{a_n}.$ 
+
+不严格地讲，如果一对有理数 $p/q$ 和 $r/s$ 构成的整数矩阵 $A\in \GL$，那么我们认为这对有理数在某种程度上是“相邻”的. 这里 Farey 图的核心想法就是考虑怎么可视化如上的“相邻关系”.
+\subsection{Farey 序列}
+首先我们给出一些基础概念的定义.
+\begin{definition}[Farey序列]
+    设 $n$ 是一个正整数，我们定义由有理数构成的集合 $F_n$ 和 $G_n$ 为
+    \begin{align*}
+        F_n &:=\{a/b\in\Q \mid 0\le a \le b \le n,(a,b)=1\}\\
+        G_n &:= \{-a/b\in\Q \mid 0\le a \le b \le n,(a,b)=1\}.
+    \end{align*}
+    我们称有理数集合的序列 $\{F_n\}_{n=1}^{\infty}$ 为Farey序列，称 $\{G_n\}_{n=1}^\infty$ 为负 Farey 序列. 
+\end{definition}
+根据定义，我们可以写出Farey序列的前4项:
+\begin{align*}
+    F_1 &= \left\{ \frac{0}{1}, \frac{1}{1} \right\}\\ 
+    F_2 &= \left\{ \frac{0}{1}, \frac{1}{2}, \frac{1}{1} \right\} \\
+    F_3 &= \left\{ \frac{0}{1}, \frac{1}{3}, \frac{1}{2}, \frac{2}{3}, \frac{1}{1} \right\}\\
+    F_4 &= \left\{ \frac{0}{1}, \frac{1}{4}, \frac{1}{3}, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \frac{1}{1} \right\}.
+\end{align*}
+
+为了描述 Farey 序列的生成规律，我们引入如下的运算
+
+
+\begin{definition}[Mediant 运算]
+    令 $a/b$ 与 $c/d$ 是两个约化的有理数. 定义它们的 Mediant 运算 $\oplus$ 和 负Mediant 运算 $\ominus$为
+        \begin{align*}
+        \frac{a}{b} \oplus \frac{c}{d}:= \frac{a+c}{b+d} \qquad 
+        \frac{a}{b} \ominus \frac{c}{d}:= \frac{-|a|-|c|}{|b|+|d|}.
+    \end{align*}
+\end{definition}
+
+不难发现，项 $F_{n+1}$ 可以由项 $F_{n}$ 中的元素 Mediant 运算生成. 当然不是每两个 $F_n$ 中的元素进行 Mediant 运算都在 $F_{n+1}$里头的. 
+比如说在 $F_3$ 中，我们有 $1/3\oplus 1/2 =1/5 \notin F_4$.
+项 $G_{n+1}$ 和项 $G_n$ 也有类似的关系，只不过我们这时考虑的是负 Mediant 运算.我们以 $F_1$ 和 $F_2$ 作为例子，数字 $1/2$ 是 $F_2$ 比 $F_1$ 多出来的有理数，而这个有理数
+\begin{align*}
+    \frac{1}{2} = \frac{0}{1} &\oplus \frac{1}{1}
+\end{align*}
+是由 $F_1$ 的两个有理数做 Mediant 运算得出来的. 
+如果拿矩阵的视角去看的话，实际上 Mediant 运算就等价于做如下的操作
+\begin{align*}
+    \begin{pmatrix} a & c \\ b & d \end{pmatrix} \begin{pmatrix} 1\\1 \end{pmatrix}  = \begin{pmatrix} a+c\\b+d \end{pmatrix}.
+\end{align*}
+
+一个值得我们注意的 Farey 序列的组合性质是 
+\begin{proposition} \label{1}
+    设 $a/b\in\Q$ 是一个约化的有理数. 我们假设 $a,b$ 都是正整数. 那么对于任意的正整数 $n\ge b$ 我们有 
+    \begin{align*}
+        a/b\in F_n.
+    \end{align*}
+    在 $F_b$ 中只有唯二的有理数 $p_1/q_1$ 和 $p_2/q_2$ 使得 
+    \begin{align*}
+        \begin{vmatrix}
+            a & p_i \\
+            b & q_i
+        \end{vmatrix} = \pm 1
+    \end{align*}
+    成立.
+\end{proposition}
+\subsection{Farey 图}
+现在我们来引入 Farey 图. 我们约定 $\infty = 1/0$ 并且约定 $\P^1(\Q):=\Q\cup \{\infty\}$. 我们也称 $\P^1(\Q)$ 中的元素为尖点.
+\begin{definition}[Farey 图]
+    Farey 图是一个无向图 $(V,E)$. 其中顶点集为 $V=\Q\cup \{\infty\}$. 
+    两个顶点 $a/b$ 与 $c/d$ 相邻当且仅当其行列式满足 
+    \begin{align*}
+        \begin{vmatrix}
+            a & c \\
+            b & d
+        \end{vmatrix} = \pm 1.
+    \end{align*}
+    边集由这个相邻关系所定义. 
+\end{definition}
+
+
+
+
+
+由命题 \ref{1} 可知，一个约化的有理数 $a/b$（在不考虑 $\infty$的情况下）的相邻关系有 Farey 序列所描述. 具体来讲，不妨假设 $c\ge b$，那么 $a/b$ 与 $d/c$ 在Farey 图上相邻当且仅当其在 $F_{c}$ 上相邻. 
+所以 Farey 序列给出了我们可视化 Farey 图的方法. 
+
+我们考虑的几何空间为上半平面，具体的定义如下.
+\begin{definition}[上半平面]
+    定义复数域的上半平面为 
+    \begin{align*}
+        \HH = \{z\in\C\mid \Im(z)>0\}.
+    \end{align*}
+    我们记 $\partial \HH$ 为 上半平面 $\HH$ 在 $\C$ 上的边界，也就是说 
+    \begin{align*}
+        \partial \HH = \{z\in\C\mid \Im(z)=0\}.
+    \end{align*}
+\end{definition}
+在不考虑 $\infty$ 的情况下，Farey 图可以由上半平面模型可视化. 
+过程如下： 将顶点集 $\P^1(\Q)$ 中的 $\Q$ 视为 $\partial\HH$ 上的点，
+然后根据 Farey 序列逐一的将有相邻关系的两个顶点通过上半平面的半圆连接起来. 
+
+
+\begin{figure}[H]
+    \centering
+    \input{figures/2.tex} % 引入图形代码
+    \caption{区间 $[0,1]$ 内的上半平面 Farey 图}
+    \label{fig:farey_uhp}
+\end{figure}
+
+如果需要考虑 $\infty$ 的情况，我们需要将 $\partial \HH$ 单点紧化并利用 Cayley 变换转化为圆盘模型. 
+\begin{definition}[Cayley 变换]
+    Cayley 变换是黎曼球面 $\P^1(\C)$的全纯映射，其具体形式为 
+    \begin{align*}
+        z \mapsto  \frac{z-i}{z+i}
+    \end{align*}
+    并且约定将 $\infty$ 映到 $1$.
+\end{definition}
+这是黎曼球面 $\P^1(\C)$的自同构. 
+不难验证，Cayley 变换满足
+\begin{align*}
+    \phi(\HH) = \D, 
+\end{align*}
+其中
+\begin{align*}
+    \D:= \{z\in\C: |z|<1\}
+\end{align*}
+为黎曼球面的单位圆盘. 
+
+所以 Farey 图的圆盘模型就是圆盘模型经过单点紧化后 Cayley 变换下的像. 具体来讲，我们实际上考虑的是 
+\begin{align*}
+    z\mapsto i\cdot\phi(z).
+\end{align*}
+此时，我们将$\infty$映到 $i$. 
+
+\begin{figure}[H]
+    \centering
+    \input{figures/1.tex} % 引入图形代码
+    \caption{Farey 图的圆盘模型}
+    \label{fig:farey_disk}
+\end{figure}
+
+
+
+
+
+观察圆盘模型，Farey 图给出了单位圆盘 $\D$ 的一个三角镶嵌.
+理解这些三角形的拓扑关系实际上是理解连分数的关键. 
+我们先给出"三角形"的严格定义. 
+\begin{definition}[理想三角形]
+    我们称Farey 图中 的 $3$-圈为 理想三角形. 定义由顶点 $\{0,1,\infty\}$ 构成的理想三角形为基本三角形.
+\end{definition}
+
+从直观上来讲，读者将其理解为圆盘模型上的曲边三角形也是没有任何问题的. 
+以下命题说明了理想三角形的拓扑关系. 
+
+
+
+
+\begin{proposition}{\label{2}}
+设 \(\mathcal F=(V,E)\) 为 Farey 图，设 \(\mathcal I\) 表示 \(\mathcal F\) 中所有理想三角形构成的集合。令
+\[
+p\in \mathbb P^1(\mathbb Q)\setminus\{0,\infty\}
+\]
+为一个尖点。则有如下性质：
+\begin{enumerate}
+    \item 对任意边 \(e\in E\)，记
+    \[
+        \mathcal I(e):=\{\Delta\in\mathcal I\mid e\subset \Delta\}.
+    \]
+    则
+    \[
+        |\mathcal I(e)|=2.
+    \]
+    换言之，Farey 图中的每一条边恰好包含在两个理想三角形中。
+
+    \item 若 \(e_1,e_2\in E\) 且 \(e_1\neq e_2\)，则
+    \[
+        \mathcal I(e_1)\neq \mathcal I(e_2).
+    \]
+    因此，不同的边不可能同时包含在同一对理想三角形中。
+
+    \item 对任意理想三角形 \(\Delta\in\mathcal I\)，定义
+    \[
+        \mathcal N(\Delta)
+        :=
+        \{\Delta'\in\mathcal I\mid \Delta'\neq \Delta,\ 
+        \Delta\cap\Delta' \text{ 是 } \mathcal F \text{ 的一条边}\}.
+    \]
+    则
+    \[
+        |\mathcal N(\Delta)|=3.
+    \]
+    也就是说，每个理想三角形恰好有三个与其共边的理想三角形。
+
+    \item 对于尖点 \(p\)，存在唯一的理想三角形
+    \[
+        \Delta_p=\{p,s,t\}\in\mathcal I
+    \]
+    使得
+    \[
+        p=
+        \begin{cases}
+        s\oplus t, & p>0,\\
+        s\ominus t, & p<0,
+        \end{cases}
+    \]
+    并且满足
+    \[
+        \operatorname{sgn}(s)=\operatorname{sgn}(t)=\operatorname{sgn}(p).
+    \]
+\end{enumerate}
+\end{proposition}
+
+由命题 \ref{2} 可知，Farey 图中的理想三角形具有清晰的共边结构。因此，我们可以考虑 Farey 镶嵌的对偶图：将每个理想三角形视为一个顶点，并规定两个顶点相邻当且仅当对应的两个理想三角形共享一条边。由此得到的图称为 Conway's Topograph。
+
+\begin{definition}[Conway's Topograph]
+定义 Farey 镶嵌的对偶图为 Conway's Topograph。更具体地说，Conway's Topograph 是图
+\[
+    \mathcal T_{\mathrm{Top}}=(\mathcal I,E_{\mathrm{Top}}),
+\]
+其中顶点集为理想三角形集合 \(\mathcal I\)，而边集 \(E_{\mathrm{Top}}\) 由如下相邻关系给出：
+\[
+    \Delta\sim \Delta'
+    \quad\Longleftrightarrow\quad
+    \Delta\neq \Delta'
+    \text{ 且 }
+    \Delta\cap\Delta'
+    \text{ 是 Farey 图中的一条边}.
+\]
+\end{definition}
+
+在下文中，我们简称其为 Topograph。由于 Farey 图给出了圆盘上的平面镶嵌，其对偶图可以在几何上如下构造：在每个理想三角形内部选取一个点，并将共边的理想三角形内部的点连接起来。这样得到的图即为 Topograph。
+
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \input{figures/4.tex} % 引入图形代码
+    \caption{Conway's Topograph}
+    \label{fig:farey_disk}
+\end{figure}
+
+记 $\Lambda$ 为 $\D$ 上的 Topograph 所构成的点集. 每个 $\D\setminus \Lambda$ 中的连通分支的闭包将会包含唯一的一个尖点. 
+反之，每一个尖点也都包含在某个连通分支的闭包中. 我们定义 $\D\setminus \Lambda$ 中的连通分支为 Topograph 的一个面. 
+基于此，我们能在 Topograph 中定义二次型.
+\begin{definition}[Topograph 的二次型]
+    如果 $q$ 为 $\Z^2$ 上的整系数二次型，那么 $q$ 可以诱导出 Topograph 的二次型 
+    \begin{align*}
+        Q: \text{Faces} &\to \Z,\\
+        w &\mapsto q(x,y),
+    \end{align*}
+    其中 Faces 表示 Topograph 中面所构成的集合，而 $x/y\in\Q$ 是面 $w$ 所唯一确定的尖点.  
+\end{definition}
+
+\subsection{连分数的可视化}
+最后我们展示一个利用 Mediant 运算找有理数的连分式的例子. 
+我们的目标不妨设为找到 $3/8$ 的连分式. 方法非常简单，就是不断让 $3/8$ 和中值比大小. 
+首先，我们依次放入 Farey 序列 $F_n$ 做比较，对每个 $F_n$ 取出一对相邻的有理数 $a_n/b_n > c_n/d_n$ 使得 $$\frac{a_n}{b_n} \ge \frac{3}{8} \ge \frac{c_n}{d_n}$$（注：设 $a_n/b_n$ 为上界，而 $c_n/d_n$ 为下界）并设记录边界的矩阵为：
+$$A_n = \begin{pmatrix} a_n & c_n \\ b_n & d_n \end{pmatrix}.$$
+对于 $3/8$ 而言，我们的寻找的矩阵如下 
+\begin{align*}
+    A_0= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\quad A_1 = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix},\quad A_2 = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix},\quad A_3 = \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix}, \quad A_4 = \begin{pmatrix} 2 & 1 \\ 5 & 3 \end{pmatrix}, \quad A_5 = \begin{pmatrix} 3 & 1 \\ 8 & 3 \end{pmatrix} 
+\end{align*}
+这里 $A_0$ 表示 $0/1<3/8<1/0$. 这里依次进行了 两次替换下界，一次替换上界，两次替换下界. 我们不难验证 
+\begin{align*}
+    3/8 = [0;2,1,2]. 
+\end{align*}
+这个方法同样也适合无理数，对于黄金分割而言我们有 
+\begin{align*}
+    \frac{1+\sqrt{5}}{2} = [1;1,1,\cdots].
+\end{align*}
+求 3/8 的连分式的过程可以很直观地呈现在Farey图上，替换上界与替换下界分别对应于穿过曲边三角形的右边和左边.
+实际上替换上下界意味着理想三角形的翻转，连分式的逼近过程在几何上就是理想三角形之间的变换. 
+\begin{figure}[H]
+    \centering
+    \input{figures/3.tex} % 引入图形代码
+    \caption{3/8的逼近过程}
+\end{figure}
+
+
+
+
+
+\section{模群}\label{sec: modular group}
+本章节中，我们从Topograph的角度出发，希望找到维持三角形镶嵌拓扑结构的映射.
+最后我们发现这些映射构成的群就是模群. 以下关于树及模群的部分，我们参考的是\cite{SerreTrees}.
+\subsection{Bass-Serre 树}
+让我们回顾一下树的定义以及相关概念. 
+\begin{definition}[树]
+    如果无向图 $(V,E)$ 是连通且无环的，那么我们就称无向图是一棵树. 如果每个顶点都只跟 $n$ 个不同的顶点连通，我们称树 $(V,E)$ 为 $n$-正则树.
+\end{definition}
+
+\begin{definition}[二分树]
+   我们称树 $(V,E)$ 为二分树，当顶点集可以写成 $V= V_1\coprod V_2$ 使得对任意的边 $\{e,f\}\in E$ 满足 $\{e,f\}\setminus V_i \neq \emptyset.$ 
+   如果顶点集 $V_1$ 的顶点都只跟 $m$ 个不同的顶点连通，顶点集 $V_2$ 的顶点都只跟 $n$ 个不同的顶点连通，则我们称之为 $(m,n)$-二分树. 
+\end{definition}
+
+\begin{definition}[简单路径]
+    在一个图 $G = (V, E)$ 中，一个路径 $(p_1, \dots, p_k)$ 被称为简单路径，当且仅当该路径上的所有顶点 $p_1, \dots, p_k$ 都是互不相同的.
+\end{definition}
+
+
+\begin{proposition}
+    树中任意两个顶点之间只有唯一的一条简单路径. 
+\end{proposition}
+
+根据命题 { \ref{2}}，我们可以用如下图论的语言去描述理想三角形的共边关系. 
+
+\begin{proposition}
+    Topograph 是3-正则树.  
+\end{proposition}
+
+
+我们希望找到保持理想三角形拓扑关系的映射并且在 Topograph 中体现出来. 特别地，我们希望这个映射是保向的. 
+设 $\mathcal{F}$ 为 $\D$ 中的由Farey 图给出的三角剖分. 
+给定 $\D$ 上的一个全纯保向映射 $\phi$ 且满足 $\phi(\mathcal{F})= \mathcal{F}$. 那么映射 $\phi$ 将诱导出 Topograph 中顶点的双射，记为 $\bar{\phi}$.
+我们断言 $\bar{\phi}$ 应该由 $\Delta_1,\Delta_2$ 的像 $\bar{\phi}(\Delta_{1}),\bar{\phi}(\Delta_{2})$ 所确定，其中 $\Delta_1$ 和 $\Delta_2$ 为对应尖点 1 和 2 的理想三角形. 
+
+不妨假设 $\phi$ 固定 $\Delta_1$. 也就是说 $\phi(\Delta_1) = \Delta_1. $ 但我们不要求 $\phi|_{\Delta_1}$ 是单位映射. 
+由于保持邻接关系，所以 $\phi$ 给出了有序集合 $(\Delta_{1/2},\Delta_{2},\Delta_{-1})$ 的一个置换. 特别的，为了保证定向，映射 $\phi$ 应该是一个偶置换. 
+而这个偶置换是由 $\phi(\Delta_2)$ 所确定的. 如果不固定基本三角形，不妨设 $\phi(\Delta_1)=\Delta_p$ 并且 $\Delta_p$ 的三个邻接的理想三角形给出了有序集合 $(\Delta_r,\Delta_s,\Delta_t)$.
+由于 $\phi$ 保持邻接关系，那么 $\phi$ 给出了有序集合 $(\Delta_{1/2},\Delta_{2},\Delta_{-1})$  到 $(\Delta_r,\Delta_s,\Delta_t)$ 的映射. 为了保证定向，$\phi(\Delta_2)$ 决定了 $\phi$ 在两个有序集合之间的映射. 
+严格来说，存在一个偶置换 $\sigma$ 使得 
+\begin{align*}
+    \sigma(\phi(\Delta_{1/2}),\phi(\Delta_{2}),\phi(\Delta_{-1})) = (\Delta_r,\Delta_s,\Delta_t). 
+\end{align*} 
+所以，基本三角形及其三个相邻的理想三角形就已经被确定了. 
+
+
+
+那对于其它三角形呢？注意到 $\Delta_1$ 和 $\Delta_2$ 是互相邻近的，也就意味着 $\Delta_2$ 的三个邻近的理想三角形也被确认下来了. 
+以此类推，对于其它的理想三角形，我们总能在有限步骤内确定其在 $\phi$ 的像. 所以 $\bar{\phi}$ 在 Topograph 的整个映射也被确认下来了. 
+
+
+
+重点是如何在 Topograph 中表示出 $\bar{\phi}$. 更清晰的讲，是利用Topograph 的顶点集 $V$ 或者 边集 $E$ 来 一一对应一个保持三角剖分的保向全纯映射 $\phi$.
+然而这是不可能的. 对于顶点集而言，顶点 $\Delta_1$ 无法区分对相邻理想三角形的轮换. 对于边集而言，无法区分方向意味着无法区分共边三角形的翻转. 
+
+为了加入定向边的描述，我们将在每两个 Topograph 顶点 $\Delta_p,\Delta_q$ 之间加入一个顶点 $e_{p,q}$ 用以表示相邻理想三角形的共边，并且将边集改为由集合 $\{\Delta_p,e_{p,q}\}$ 构成的集族. 
+我们可以选择 $\{\Delta_1,e_{1,2}\}$ 为基准边，根据上面的讨论，每一个边 $\{\Delta_p,e_{p,q}\}$ 代表着将 $\Delta_1,\Delta_2$ 分别映为 $\Delta_p,\Delta_q$ 的保向全纯映射 $\phi$.
+这样得到的新的图就是 Bass-Serre 树，定义如下. 
+
+\begin{definition}[Bass-Serre 树]
+    令 $\Gamma = H \star K$, 其中 $\star$ 表示自由积. 我们定义图 $\mathcal{G} = (V,E)$ 为
+    \begin{enumerate}
+        \item 顶点集 $V$ 包含两个类型的顶点：$V=\{gH,gK: g \in\Gamma\}$;
+        \item 边集 $E$ 为 $\Gamma$;
+        \item 边 $g\in E$的两个端点为 $gH$ 和 $gK$.
+    \end{enumerate}
+    如此定义出来的图，我们称之为 Bass-Serre 树.
+\end{definition}
+
+给定一个群 $\Gamma$ 中的元素 $g$, 可以给出图$\mathcal{F}$的自同构 
+\begin{align*}
+    g: V \to V \quad g'K \mapsto gg'K \quad g'H \mapsto gg'H.
+\end{align*} 
+进一步我们考虑自由积$\Gamma$ 对图 $\mathcal{F}$ 的作用. 
+
+如果我们令 $H=\mathbb{Z}/2\mathbb{Z},K=\mathbb{Z}/3\mathbb{Z}$, 那么不难证明由
+$\Gamma= H \star K $ 构造出来的图 $\mathcal{F}$ 正是我们在 Topograph 的边中插入节点所生成的树. 
+其中，基本三角形 $\Delta_1$ 所代表的陪集是 $\mathbb{Z}/3\mathbb{Z}$, 顶点 $e_{1,2}$ 所代表的陪集是 $\mathbb{Z}/2\mathbb{Z}$. 
+更一般的，我们考虑 
+\begin{align*}
+    G = \{\bar{\phi}\in \text{Aut}(\mathcal{F})| \phi\text{ 是三角剖分的保向全纯自同构}\}.
+\end{align*}
+那么根据我们的讨论，存在集合之间的双射 $E\to G$， 其中 $E$ 为Bass-Serre 树的边集. 取任意的 $\{\Delta_p,e_{p,q}\}\in E$，其唯一对应于一个群元 $g\in G$. 考虑映射 
+\begin{align*}
+    \Delta_p \mapsto g K \quad e_{p,q}\mapsto gH.
+\end{align*}
+这个映射就给出了 Bass-Serre 树的陪集构造. 实际上，我们考虑的 $\Gamma$ 正是模群 $\PSL$.
+
+\begin{definition}[模群]
+    定义模群为
+    \begin{align*}
+        \PSL := \SL/\pm I_2.
+    \end{align*}
+\end{definition}
+\begin{proposition}
+    模群有如下同构 
+    \begin{align*}
+        \PSL \simeq \mathbb{Z}/3\mathbb{Z}\star \mathbb{Z}/2\mathbb{Z}.
+    \end{align*}
+\end{proposition}
+\subsection{尖点的映射}
+在上面的讨论中，我们回避了 $\phi$ 的严格构造以及存在性. 具体来讲，对于基本三角形 $\Delta_1$ 和任意的理想三角形 $\Delta_p$ 而言，是否存在 $\phi$ 使得 $\phi(\Delta_1) = \Delta_p$ 呢？ 
+我们早在命题 { \ref{2}} 讨论了尖点的集合 $\P^1(\Q)\setminus\{0,\infty\}$ 与 理想三角形的双射，这暗示我们如果想考虑三角剖分的自同构的话，只需要讨论尖点之间的映射即可. 
+
+让我们用矩阵来表示理想三角形. 假设 $0<p\in\Q$, 其唯一对应一个理想三角形 $\Delta_p=\{p,a_p/b_p,c_p/d_p\}$.
+其中 $a_p,c_p,b_p,d_p$ 取为整数 且满足 
+\begin{align*}
+    p = \frac{a_p+d_p}{b_p+c_p}. 
+\end{align*}
+不妨设 $a_p/b_p>c_p/d_p$, 那么我们令 
+\begin{align*}
+    A_p = \begin{pmatrix} a_p & c_p \\ b_p & d_p \end{pmatrix} \mod \pm I_2.
+\end{align*}
+这里 $I_2$表示 单位矩阵. 模 $I_2$ 是考虑了同时给 $a_p,c_p,b_p,d_p$ 取符号的问题. 注意到由 $A_p$ 构成的集合实际上就是模群 $\PSL$.
+在下文中，当我们写出 $A_p$ 的矩阵时，实际上是选择了它在 $\SL$中 的一个代表元. 
+
+根据构造，我们给出了 $\PSL$ 与 理想三角形集合 $\{\Delta_p\}$ 的一个双射. 矩阵还可以表示理想三角形的邻接关系. 
+给定一个理想三角形 $\Delta_p =\{p,s,t\}$. 不妨假设 $s>p>t>0$ 且有 $p=s\oplus t$, 那么与它共边的理想三角形只有三种可能
+\begin{align*}
+    \Delta_{s\oplus p},\quad \Delta_{t\oplus p},\quad \Delta_q,
+\end{align*}
+其中 $q$ 满足 $t=q\oplus s$. 翻译成矩阵的语言就是 
+\begin{align*}
+    A_{s\oplus p} =  A_p\cdot A_2, \quad  A_{t\oplus p} = A_p\cdot A_{1/2},\quad A_q = A_p\cdot A_{-1},
+\end{align*}
+其中 
+\begin{align*}
+    A_1 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\quad 
+    A_{1/2} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix},\quad
+    A_{2} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix},\quad
+    A_{-1} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}\quad
+\end{align*}
+表示基本三角形 $\Delta_1$ 以及与它相邻的三个理想三角形 $\Delta_{1/2},\Delta_{2},\Delta_{-1}$ 的矩阵形式. 对于 $p<0$ 的情况同样也如此，我们不多做赘述.
+所以所有的邻接关系都可以由矩阵 $A_{1/2},A_{2},A_{-1}$ 所描述.
+又注意到 
+\begin{align*}
+    A^{-1}_{1/2} = A^{-1}_2\cdot A_{-1} \mod \pm I_2, 
+\end{align*}
+所以最终我们的邻接关系可以归结到 $A_2,A_{-1}$. 所以我们找到了模群的两个生成元，其中 $A_{-1}$ 表示基本三角形的沿着边进行翻转，也就是 $(0,1,\infty)\to (\infty,-1,0)$. 这里我们使用的是有序集表示元素在映射下的一一对应. 
+而 $A_2$ 则表示基本三角形的平移，也就是 $(0,1,\infty)\to (1,2,\infty)$. 最后 $A_2A_{-1}$ 则代表着尖点之间的轮换，即 $(0,1,\infty)\to (1,\infty,0)$. 
+
+对每一个尖点 $p$ 定义 Möbius 变换 
+\begin{align*}
+    \psi_p(z) = \frac{a_p+c_p \cdot z}{b_p+d_p\cdot z}.
+\end{align*}
+容易验证其在 $\D$ 上三角形剖分的自同构与前面讨论的矩阵对应相吻合. 这就是在本章节前半部分讨论的基础，也就是如下命题. 
+\begin{proposition}
+    模群$\PSL$ 在 Bass-Serre 树的作用是自由、可迁的.
+\end{proposition}
+
+\section{上半平面的几何及其典范性}
+
+Farey 图的定义是纯组合的，并且在对其可视化的过程中我们不加说明的选择了上半平面 $\HH$ 与单位圆盘 $\D$ 作为我们讨论的几何模型. 并且在构造过程中，我们使用了诸如 “画一个半圆” 非严格的数学表达. 
+这个“半圆” 实际上是双曲空间上的测地线. 
+
+\subsection{双曲几何}
+以下关于双曲几何的内容参考的是 \cite{RatcliffeHyperbolicManifolds}. 
+
+为了严格化这些概念，我们首先引入切向量场与黎曼度量的概念.
+在多元微积分中，方向导数描述了函数沿某一直线的变化率. 在现代微分几何的视角下，我们将这种作用于光滑函数 $f \in C^\infty(\mathbb{R}^2)$ 的求导算子直接等同于切向量.
+具体而言，对于 $\mathbb{R}^2$ 中的任意一点 $p=(x,y)$，其切空间 $T_p\mathbb{R}^2$ 是一个二维的线性空间，由自然基底 $\{\partial_x, \partial_y\}$ 张成.
+该点处的任意切向量 $v$ 均可唯一表示为 $v = v_1 \partial_x + v_2 \partial_y$. 切向量在局部刻画了空间的运动方向与速率.
+
+为了在流形上进行长度和角度的定量测量，我们需要在切空间定义黎曼度量. 黎曼度量 $g$ 是赋予流形上每一个切空间 $T_p M$ 的一个平滑变化的正定对称双线性形式. 
+以 $\mathbb{R}^2$ 为例，最自然的选择是标准的欧几里得度量. 
+若我们引入余切空间 $T_p^*\mathbb{R}^2$ 的对偶基底 $\{dx, dy\}$, 欧氏度量通常通过其对应的二次型表示为 $$ds^2 = dx^2 + dy^2.$$此时，切向量 $v$ 的长度平方即由内积自然导出：$\|v\|^2 = g(v,v) = v_1^2 + v_2^2$. 
+
+有了黎曼度量，我们便可以通过对切向量的长度进行积分，来精确计算流形上任意一条光滑曲线的长度. 
+在黎曼几何中，连接空间中两点的最短路径（或更严格地说，长度泛函的局部极值曲线）被称为测地线. 
+测地线自然地推广了平直空间中“两点之间线段最短”的概念. 
+例如，在欧氏度量下，$\mathbb{R}^2$ 上的测地线正是我们熟知的普通直线.
+
+在上半平面 $\HH$ 中，我们使用的 黎曼度量是双曲度量 
+\begin{align*}
+     ds^2 = \frac{dx^2 + dy^2}{y^2}.
+\end{align*}
+
+上半平面 $\mathbb{H}$ 中的测地线仅有以下两种几何形态.
+\begin{enumerate}
+    \item 垂直于实轴的射线：方程为 $x = c$ 且 $y > 0$，其中 $c \in \mathbb{R}$ 为常数.
+    \item 圆心位于实轴上的半圆：方程为 $(x-a)^2 + y^2 = R^2$ 且 $y > 0$，其中 $a \in \mathbb{R}$ 为圆心， $R > 0$ 为半径.
+\end{enumerate}
+
+在 Farey 图中，垂直于实轴的射线对应边 $\{\infty,n\}, $ 其中 $n$ 为任意整数. 而半圆则对应着边 $\{p,q\}, $ 其中 $p,q$ 是不为 $\infty$ 的尖点. 
+
+\subsection{上半平面的典范性}
+实际上，我们可以从纯组合与代数的，不涉及到度量的选择的角度来说明双曲空间 $\HH$ 的自然性. 与之相关的理论是 Grothendieck 的 Dessins d'Enfants 理论.
+以下关于Dessin d'enfant 理论的部分，我们参考的是 \cite{GirondoGonzalezDiez2012}.
+
+\begin{definition}[Dessin d'enfant]
+另 $S$ 为一个紧连通定向拓扑曲面. 一个dessin d'enfant 是一个有限连通二分图 $D\subseteq S$ 满足 
+\begin{align*}
+    S\setminus D = \coprod_{i=1}^n F_i, 
+\end{align*}
+其中每个 $F_i$ 同胚于开圆盘. 我们称 $(D,S)$ 为 Dessin d'enfant pair.
+\end{definition}
+
+\begin{definition}[Belyi 映射]
+    令 $X$ 为一个紧黎曼面. 如果全纯映射 $\beta:X\to \P^1$ 只在 $\{0,1,\infty\}$ 上分歧，那么称 $f$ 为Belyi 映射. 
+    我们称 $(X,\beta)$ 为 Belyi pair.
+\end{definition}
+
+\begin{proposition}[Belyi 映射的Dessin d'enfant]
+    设 $\beta:X\to \P^1$ 是一个Belyi 映射. 那么 $\beta^{-1}([0,1])$ 是一个 Dessin d'enfant. 
+    其中，图的顶点可以二分为 
+    \begin{align*}
+        V = \beta^{-1}(0)\coprod \beta^{-1}(1).
+    \end{align*}
+    并且图的边由 $\beta^{-1}((0, 1))$ 给出. 
+\end{proposition}
+
+
+
+\begin{theorem}[Belyi 对应]{\label{Belyi}}
+存在 Belyi pairs $\{(X,\beta)\}$ 等价类与 Dessin d'enfant pair $(D,S)$ 等价类之间的双射.
+特别的，我们将 $(X,\beta)$ 映为 有 Belyi 映射诱导的 Dessin d'enfant. 
+\end{theorem}
+
+
+设 $\mathcal{T}$ 为一个 Bass-Serre 树. 取 $\Gamma_0$ 为模群 $\Gamma$ 的某个有限指数子群. 那么商图
+\begin{align*}
+    D_{\Gamma_0} = \Gamma_0 \backslash \mathcal{T}
+\end{align*}
+是一个有限连通的二分图. 且每个理想三角形的尖点定向给予了Bass-Serre 树的带状结构，保证了 Bass-Serre 树可以嵌入到某个紧黎曼面.
+ 所以它是一个 Dessin d'enfant. 
+根据定理 \ref{Belyi}，它就唯一对应一类 Belyi pair $(X,\beta)$. 可以证明的是 
+\begin{align*}
+    X \simeq \Gamma_0 \backslash \HH^*, 
+\end{align*}
+其中 $\HH^*= \HH\cup \P^1(\Q)$ 为上半平面的紧化. 此时 Belyi 映射 $\beta:X\to \P^1$ 由 $j$ 函数给出: 
+\begin{align*}
+    \beta([z]) = \frac{j(z)}{1728}.
+\end{align*}
+这里 Belyi 映射是由 $j/1728:\HH \to \P^1$ 所诱导的商空间的映射. 
+
+
+
+\section{模形式}\label{sec:modular Forms}
+
+前文中我们讨论了模群的几何化，以及它在上半平面的 Bass-Serre 树的定义. 自然地，我们考虑那些关于椭圆曲线的全纯函数，即那些在$\PSL$的作用下不变的定义在$\HH$的全纯函数. 
+
+\subsection{从上半平面到椭圆曲线的模空间}
+\label{sec:elliptic_moduli}
+
+回顾上半平面 $\HH = \{\tau\in\C : \Im(\tau)>0\}$ 在模群 $\Gamma = \PSL$ 通过莫比乌斯变换定义的作用:
+$$
+\gamma\,\tau = \frac{a\tau+b}{c\tau+d}, \qquad \gamma = \pm\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\SL.
+$$
+
+\begin{proposition}[椭圆曲线的单值化]
+每一个秩为 $2$ 的格 $\Lambda\subset\C$ 都可以经缩放和旋转，使得
+$\Lambda = \Lambda_\tau = \Z\oplus\tau\Z$, 
+其中 $\tau\in\HH$ 在 $\Gamma$ 的作用下唯一确定.
+这就给出了双射
+\[
+\HH / \Gamma \;\longleftrightarrow\; \{\text{椭圆曲线 }\C/\Lambda_\tau\text{ 的同构类}\}.
+\]
+商空间 $\HH/\Gamma$ 是一个黎曼曲面（称为\emph{模曲线}），
+它的紧化 $\HH/\Gamma\cup\{\infty\}$ 同构于 $\mathbb P^1$. 
+\end{proposition}
+
+虽然可能对于一个无限图来说，对偶这事很奇怪，Bass–Serre 树 $\mathcal{T}$ 正是此三角剖分的对偶图的关联图. 因此，$\mathcal{F}$ 的组合骨架与 $\HH$ 的连续几何乃是同一对象的两个侧面. 
+
+\subsection{模形式的定义}
+
+\begin{definition}[模形式]
+设 $k\in\Z$, 全纯函数 $f:\HH\to\C$ 称为群 $\Gamma$ 上的 \emph{权 $k$ 模形式}，若满足如下条件：
+\begin{enumerate}
+    \item 对任意 $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\SL$，有 $f\!\big(\frac{a\tau+b}{c\tau+d}\big) = (c\tau+d)^k f(\tau)$；
+    \item $f$ \emph{在尖点处全纯}，即其傅里叶展开仅包含 $q = e^{2\pi i\tau}$ 的非负幂次项. 
+\end{enumerate}
+若傅里叶展开的常数项为零，则称 $f$ 为 \emph{尖点形式}. 
+\end{definition}
+
+
+
+
+\section{模形式的两个基本例子}
+
+\subsection{爱森斯坦级数}
+\label{subsec:Eisenstein_series}
+
+Farey图（Farey graph）以及群 $\Gamma = \PSL$ 在 $\HH$ 上的作用，自然引出了一种平均构造方法.
+
+回顾线性代数中的结论：给定一个作用在向量空间上的有限群 $G$, 以及一个向量 $v_0$，若其稳定子群 $H$ 在 $G$ 中具有有限指数，则我们可以通过对陪集求和得到一个不变向量：
+\[
+v \;=\; \sum_{g\,\in\,H\backslash G} v_0|g .
+\]
+
+遵循同样的思路，我们从全纯函数 $f_0(\tau) = 1$ 开始——该函数在尖点 $\infty$ 的稳定子群 $\Gamma_\infty = \left\{ \begin{pmatrix} a & b \\ 0 & d \end{pmatrix} \in \mathrm{SL}_2(\mathbb{Z}) \right\}$ 作用下不变——然后对 $\Gamma_\infty$ 在 $\Gamma=\SL$ 中的其余陪集进行平均. 
+
+对于偶数 $k\geq 4$, 这就得到了全模群上的\emph{权 $k$ 艾森斯坦级数}：
+\[
+E_k(\tau) \;\coloneqq\; \sum_{\gamma\,\in\,\Gamma_\infty\backslash\Gamma} 1\big|_k\gamma
+        \;=\; \frac{1}{2}\!\!\sum_{\substack{c,d\in\Z\\ \gcd(c,d)=1}} \frac{1}{(c\tau+d)^k}.
+\]
+
+等价地，如果我们将求和取平均的对象换成模群作用轨道上的所有非零格点，可得
+\[
+G_k(\tau) \;=\; \sum_{(m,n)\in\Z^2\setminus\{(0,0)\}} \frac{1}{(m\tau+n)^k}，
+\]
+两者都是权 $k$ 模形式. 
+
+它们的 $q$ 展开式（傅立叶展开）\cite{Zagier2008}为
+\[
+E_k(\tau) \;=\; 1 - \frac{2k}{B_k}\sum_{n=1}^\infty \sigma_{k-1}(n)\,q^n,
+\qquad q=e^{2\pi i\tau},
+\]
+其中 $B_k$ 为伯努利数，$\sigma_{k-1}(n)=\sum_{d\mid n}d^{k-1}$ 为除数和函数. 
+
+读者有兴趣可以尝试证明以上三个对于爱森斯坦级数的构造是线性相关的，即只差常数倍. 
+
+平均算子 $\mathcal{A}: f \mapsto \sum_{\gamma\in\Gamma_\infty\backslash\Gamma} f|_k\gamma$ 将一个 $\Gamma_\infty$ 不变函数投影到 $\Gamma$ 不变函数空间上，这与有限群中投影到平凡表示的过程完全一致. 
+
+\subsection{判别式 $\Delta$}
+
+\begin{theorem}[模形式环的结构]
+$\PSL$ 的分次模形式环由权 $4$ 和权 $6$ 的艾森斯坦级数自由生成：
+\[
+\bigoplus_{k} M_k(\Gamma) = \C[E_4, E_6].
+\]
+\emph{模判别式}
+\[
+\Delta(\tau) \coloneqq \frac{E_4(\tau)^3 - E_6(\tau)^2}{1728}
+\]
+是权 $12$ 的唯一（相差常数倍意义下）尖点形式. 其傅里叶展开定义了拉马努金 $\tau$ 函数：
+\[
+\Delta(\tau) = \sum_{n=1}^\infty \tau(n) q^n = q - 24q^2 + 252q^3 - 1472q^4 + 4830q^5 - \cdots = q\prod_{n=1}^\infty (1-q^n)^{24}.
+\]
+\end{theorem}
+
+几何上，$E_4$ 在 $2$ 阶椭圆点 $\tau=i$ 处为零，$E_6$ 在 $3$ 阶椭圆点 $\tau=\rho$ 处为零. 
+
+模形式环的代数结构虽然已经完全由 $E_4$ 和 $E_6$ 刻画，但要深入研究尖点形式空间的精细结构，特别是理解拉马努金 $\tau$ 函数的神秘算术性质（例如著名的拉马努金猜想 $\vert\tau(p)\vert\leq 2p^{11/2}$），我们需要引入一类作用在模形式空间上的重要算子--Hecke算子（Hecke operators）.
+这些算子不仅保持模形式的权不变，而且彼此交换，使得我们可以通过它们的共同特征子空间来分解模形式空间. 
+
+
+
+\section{Hecke算子}
+
+\subsection{从平均构造到对应关系}
+
+艾森斯坦级数是通过对单陪集 $\Gamma_\infty\backslash\Gamma$ 进行平均构造的，这一过程将函数投影到 $\Gamma$ 不变量空间. Hecke算子通过对双陪集 $\Gamma g \Gamma$（其中 $g\in\mathrm{GL}_2^+(\Q)$）求和来推广这一构造，生成模形式空间 $M_k(\Gamma)$ 上一族交换的自同态. 原来的构造是利用单陪集，但可惜，单陪集对于构造Hecke算子来说太大了，我们不妨考虑一下双陪集. 
+
+
+\subsection{Hecke算子的定义}
+
+
+
+\begin{definition}[经典公式视角]
+对于固定的权 $k$ 和整数 $n\geq 1$, Hecke算子 $T_n$ 的经典定义 是上半平面函数空间 $f:\HH\to\C$ 上的自同态，定义为：
+\[
+\displaystyle (T_n f)(\tau) = n^{k-1}\sum_{\substack{a,d>0\\ ad=n}} d^{-k}\sum_{b\bmod d} f\!\left(\frac{a\tau+b}{d}\right).
+\]
+
+\end{definition}
+
+该定义提供了直接计算傅里叶系数的数值方法. 经典公式虽然便于计算，但并未揭示Hecke算子为何具有如此良好的代数性质. 如果我们回顾上一节从艾森斯坦级数发展而来的平均构造思想，就会发现Hecke算子其实是单陪集平均的自然推广到Hecke算子上. 
+
+\begin{definition}[双陪集求和视角]
+对于固定的权 $k$ 和整数 $n\geq 1$，Hecke算子 $T_n$ 定义为：
+\[
+\displaystyle T_n f = n^{\frac{k}{2}-1}\sum_{\substack{\gamma\in\Gamma\setminus M_n\\ \det\gamma=n}} f|_k\gamma,
+\]
+其中 $M_n = \left\{ \begin{pmatrix}a&b\\0&d\end{pmatrix} : ad=n,\; a,d>0,\; 0\leq b<d \right\}$ 是双陪集 $\Gamma\backslash\mathrm{GL}_2^+(\Q)/\Gamma$ 中行列式为 $n$ 的代表元集合. 
+
+\end{definition}
+
+这一定义揭示了Hecke算子作为"广义平均算子"的代数本质，正是因为它本质上是双陪集求和的结果，所以才会自然而然地具有保权性与交换性. 该观点完美地解释了Hecke算子的代数性质，但要理解其深刻的算术意义，不妨让我们跳出纯群论的框架，进入模形式的几何世界——复格的世界. 
+
+\begin{definition}[格对应视角]
+对于固定的权 $k$ 和整数 $n\geq 1$，Hecke算子 $T_n$ 的定义 通过复格的子格结构给出：设 $F$ 是格上权为 $-k$ 的齐次函数，则
+\[
+\displaystyle (T_n F)(\Lambda) = n^{k-1}\sum_{\substack{\Lambda'\subset\Lambda\\ [\Lambda:\Lambda']=n}} F(\Lambda').
+\]
+\end{definition}
+
+\begin{proposition}[定义等价性]
+上述三种定义给出的算子本质上是同一个：
+\begin{enumerate}
+    \item 定义1与定义2仅相差一个全局常数因子；
+    \item 定义2与定义3的等价性通过上半平面点与复格的自然对应 $\tau \leftrightarrow \Lambda_\tau = \Z\oplus\tau\Z$ 建立. 
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[素数阶Hecke算子]
+对于素数 $p$, 任意格 $\Lambda$ 中恰好存在 $p+1$ 个指数为 $p$ 的子格，对应于有限域射影直线 $\mathbb P^1(\mathbb F_p)$ 的 $p+1$ 个点. 因此，素数阶Hecke算子具有特别简洁的形式：
+\[
+(T_p f)(\tau) = p^{k-1} f(p\tau) + \frac1p\sum_{b=0}^{p-1} f\!\left(\frac{\tau+b}{p}\right).
+\]
+\end{example}
+
+\subsection{Hecke代数的代数结构}
+
+算子族 $\{T_n\}_{n\geq 1}$ 生成一个交换 $\mathbb{Z}$-代数 $\mathbb{T} \subset \operatorname{End}_{\C}(M_k(\Gamma))$, 称为 Hecke代数.
+
+\begin{theorem}[乘法性]
+对任意整数 $m,n$, 有：
+\begin{enumerate}
+    \item $T_m T_n = T_n T_m$，且 $T_1 = \operatorname{id}$;
+    \item 若 $\gcd(m,n)=1$，则 $T_{mn} = T_m T_n$;
+    \item 对素数 $p$ 和整数 $r\geq 1$，有 $T_{p^r} T_p = T_{p^{r+1}} + p^{k-1} T_{p^{r-1}}$. 
+\end{enumerate}
+\end{theorem}
+
+因此 Hecke 代数完全由素数阶Hecke算子 $T_p$ 决定，且模形式空间 $M_k$ 和尖点形式空间 $S_k$ 都存在由类似于特征形式构成的基.
+
+\subsection{特征形式与算术乘法性}
+
+\begin{corollary}[Hecke特征值即傅里叶系数]
+设 $f = \sum a_n q^n \in M_k(\Gamma)$ 是一个Hecke特征形式，且标准化为 $a_1=1$. 则对所有 $n$ 有 $T_n f = a_n f$，且其傅里叶系数满足乘法性：
+\[
+a_m a_n = a_{mn} \quad (\gcd(m,n)=1),\qquad
+a_{p^{r+1}} = a_p a_{p^r} - p^{k-1} a_{p^{r-1}}.
+\]
+\end{corollary}
+
+
+
+\subsection{Farey图与模符号上的Hecke算子}
+\label{subsec:farey_hecke}
+
+如果我们将集合 $M_n$ 中的矩阵将Farey边 $[0,\infty]$ 映射为Farey三角剖分中的其他边；此时我们对 $M_n$ 求和等价于在Farey图中对与 $n$ 相关距离的邻域进行加权平均. 那么对偶地，相当于我们在Bass–Serre树上，$T_n$ 对一个有限邻域进行平均. 
+
+\begin{definition}[模符号]
+设 $V_k(\C) = \operatorname{Sym}^{k-2}(\C^2)$ 带有自然的 $\Gamma$ 作用，$\Delta^0$ 是 $\mathbb P^1(\Q)$ 上的零次除子群. 一个模符号是一个 $\Gamma$-等变同态 $\phi : \Delta^0 \to V_k(\C)$.生成元 $[s]-[r]$ 对应Farey图的一条有向边. 
+\end{definition}
+
+模符号与紧支上同调 $H^1_c(\Gamma, V_k(\C))$ 一致；它们在 $H^1(\Gamma, V_k(\C))$ 中的像就是包含尖点形式的内上同调. Hecke函子在模符号上的作用由下式给出：
+\[
+(\phi|_{\Gamma g\Gamma})(D) = \sum_i \phi(g_i D)\cdot g_i \qquad (\Gamma g\Gamma = \bigsqcup_i \Gamma g_i).
+\]
+
+这样，就会有一个有趣的对应，一个从模形式到模符号的对应. 这个对应的工作由Eichler–Shimura在1959年给出\cite{shimura1959}.
+
+\begin{theorem}[Eichler–Shimura同构]
+映射
+\[
+\phi_k(f)([s]-[r])(P) = \int_r^s f(z)\, P(z,1)\, dz
+\]
+诱导一个Hecke等变同构：
+\[
+S_k(\Gamma) \oplus \overline{S_k(\Gamma)} \oplus \mathcal{E}_k(\Gamma) \;\stackrel{\sim}{\longrightarrow}\; H^1(\Gamma, \operatorname{Sym}^{k-2}(\C^2)),
+\]
+其中 $\mathcal{E}_k(\Gamma)$ 是艾森斯坦级数空间，$\overline{S_k(\Gamma)}$ 是反全纯尖点形式空间. 
+\end{theorem}
+
+于是，模形式上的Hecke算子、Farey图上的Hecke算子，以及模曲线上的同调群上的Hecke算子，本质上都是同一种逻辑. 
+\newpage
+% 生成参考文献列表
+\bibliographystyle{plain}
+\bibliography{ref}       
+\end{document}

@@ -1,0 +1,83 @@
+\begin{tikzpicture}[x=16cm, y=16cm, >=Stealth, scale = 0.5]
+
+    % ==========================================
+    % 1. 绘制基础坐标系与边界
+    % ==========================================
+    % X轴 (底边)
+    \draw[thick] (0,0) -- (1,0);
+    
+    % 两侧垂直向上的线 (通向 infinity)
+    \draw[thick] (0,0) -- (0,0.65);
+    \draw[thick] (1,0) -- (1,0.65);
+    
+    % 顶部的 1/0 标签
+    \node[left] at (0, 0.6) {\Large $\frac{1}{0}$};
+    \node[right] at (1, 0.6) {\Large $\frac{1}{0}$};
+
+    % ==========================================
+    % 2. 绘制 Farey 序列的半圆弧
+    % ==========================================
+    % 定义一个宏来画连接两个分数的半圆
+    \newcommand{\fareyarc}[4]{
+        \pgfmathsetmacro{\xone}{#1/#2}
+        \pgfmathsetmacro{\xtwo}{#3/#4}
+        \pgfmathsetmacro{\radius}{abs(\xtwo-\xone)/2}
+        % 始终从右侧的点开始画半圆 (0到180度)
+        \draw (\xtwo, 0) arc (0:180:\radius);
+    }
+
+    % 按照 Farey 序列的层级逐层绘制半圆
+    % Level 1
+    \fareyarc{0}{1}{1}{1}
+    % Level 2
+    \fareyarc{0}{1}{1}{2}  \fareyarc{1}{2}{1}{1}
+    % Level 3
+    \fareyarc{0}{1}{1}{3}  \fareyarc{1}{3}{1}{2}  
+    \fareyarc{1}{2}{2}{3}  \fareyarc{2}{3}{1}{1}
+    % Level 4
+    \fareyarc{0}{1}{1}{4}  \fareyarc{1}{4}{1}{3}  
+    \fareyarc{2}{3}{3}{4}  \fareyarc{3}{4}{1}{1}
+    % Level 5
+    \fareyarc{0}{1}{1}{5}  \fareyarc{1}{5}{1}{4}  
+    \fareyarc{1}{3}{2}{5}  \fareyarc{2}{5}{1}{2}  
+    \fareyarc{1}{2}{3}{5}  \fareyarc{3}{5}{2}{3}  
+    \fareyarc{3}{4}{4}{5}  \fareyarc{4}{5}{1}{1}
+    
+    % 专门为目标点 3/8 补充的底层小半圆
+    \fareyarc{1}{3}{3}{8}  \fareyarc{3}{8}{2}{5}
+
+    % ==========================================
+    % 3. 底部刻度与分数标签
+    % ==========================================
+    \foreach \n/\d in {0/1, 1/5, 1/4, 1/3, 2/5, 1/2, 3/5, 2/3, 3/4, 4/5, 1/1} {
+        \draw (\n/\d, 0) -- (\n/\d, -0.015);
+        \node[below, yshift=-2pt] at (\n/\d, -0.015) {$\frac{\n}{\d}$};
+    }
+    
+    % 目标点 3/8 的刻度与底部箭头标记
+    \pgfmathsetmacro{\target}{3/8}
+    \draw (\target, 0) -- (\target, -0.015);
+    \draw[<-, thick] (\target, -0.02) -- (\target, -0.08) node[below] {$3/8$};
+
+    % ==========================================
+    % 4. 绘制寻找 3/8 的加粗寻路轨迹 (Dual Graph Path)
+    % ==========================================
+    % 左侧向下的箭头 (表示从无穷远出发)
+    \draw[very thick, ->] (0, 0.55) -- (0, 0.28);
+    
+    % 轨迹第1段：从 y轴 跨越 (0,1) 的大半圆
+    \draw[very thick, -Stealth] (0, 0.42) to[out=-20, in=135] (0.1, 0.3);
+    
+    % 轨迹第2段：跨越 (0,1/2) 的半圆
+    \draw[very thick, -Stealth] (0.1, 0.3) to[out=-45, in=155] (0.22, 0.248);
+    
+    % 轨迹第3段：跨越 (1/3,1/2) 的半圆
+    \draw[very thick, -Stealth] (0.22, 0.248) to[out=-25, in=145] (0.36, 0.061);
+    
+    % 轨迹第4段：跨越 (1/3,2/5) 的半圆
+    \draw[very thick, -Stealth] (0.36, 0.061) to[out=-35, in=110] (0.37, 0.033);
+    
+    % 轨迹第5段：扎入终点 3/8
+    \draw[very thick, -Stealth] (0.37, 0.033) to[out=-70, in=100] (0.374, 0.002);
+
+\end{tikzpicture}
