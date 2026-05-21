@@ -1,84 +1,123 @@
-\begin{tikzpicture}[scale=0.4]
-    % 定义圆盘的半径
-    \def\R{5}
-    
-    % --- 宏：计算并绘制分数节点 ---
-    \newcommand{\fnode}[2]{
-        % 角度变换映射：2 * arctan(y/x)
-        \pgfmathsetmacro{\ang}{2*atan2(#1, #2)}
-        \node[font=\scriptsize, inner sep=1pt] at (\ang:\R+0.45) {$#1/#2$};
-    }
-    
-    % --- 宏：计算并绘制两条测地线之间的双曲圆弧 ---
-    \newcommand{\drawgeodesic}[4]{
-        \pgfmathsetmacro{\angA}{2*atan2(#1, #2)}
-        \pgfmathsetmacro{\angB}{2*atan2(#3, #4)}
-        \pgfmathsetmacro{\diff}{abs(\angA - \angB)}
-        
-        % 判断是否为穿过圆心的直线（即角度差为 180 度）
-        \pgfmathparse{\diff < 179.9 && \diff > 0.1 ? 1 : 0}
-        \ifnum\pgfmathresult=1
-            % 计算正交圆的圆心和半径
-            \pgfmathsetmacro{\midang}{(\angA + \angB)/2}
-            \pgfmathsetmacro{\halfang}{(\angA - \angB)/2}
-            \pgfmathsetmacro{\rad}{\R * abs(tan(\halfang))}
-            \pgfmathsetmacro{\cx}{\R * cos(\midang)/cos(\halfang)}
-            \pgfmathsetmacro{\cy}{\R * sin(\midang)/cos(\halfang)}
-            \draw[semithick] (\cx,\cy) circle (\rad);
-        \else
-            % 如果是直线，直接连接两个点
-            \draw[thick] (\R*cos \angA, \R*sin \angA) -- (\R*cos \angB, \R*sin \angB);
-        \fi
-    }
-    
-    % --- 宏：递归生成 Farey 序列并绘制网格 ---
-    \newcommand{\farey}[5]{
-        % #1/#2 和 #3/#4 是端点，#5 是递归深度
-        \ifnum#5>0
-            % 计算 Farey 中间分数
-            \pgfmathtruncatemacro{\p}{#1+#3}
-            \pgfmathtruncatemacro{\q}{#2+#4}
-            
-            % 绘制连线
-            \drawgeodesic{#1}{#2}{\p}{\q}
-            \drawgeodesic{\p}{\q}{#3}{#4}
-            \fnode{\p}{\q} % 绘制节点数字
-            
-            % 向下递归
-            \pgfmathtruncatemacro{\newdepth}{#5-1}
-            \farey{#1}{#2}{\p}{\q}{\newdepth}
-            \farey{\p}{\q}{#3}{#4}{\newdepth}
-        \fi
-    }
-    
-    % --- 绘图主体 ---
-    \begin{scope}
-        % 限制所有线条在基本圆盘内部
-        \clip (0,0) circle (\R);
-        
-        % 绘制作为基础框架的 4 条基准线
-        \drawgeodesic{1}{0}{0}{1}
-        \drawgeodesic{0}{1}{1}{1}
-        \drawgeodesic{1}{1}{1}{0}
-        \drawgeodesic{-1}{0}{-1}{1} % 注意: -1/0 对应几何上的 1/0
-        \drawgeodesic{-1}{1}{0}{1}
-        
-        % 递归深度设置为 4，刚好对应你原图中的分数密度
-        \farey{0}{1}{1}{1}{4}
-        \farey{1}{1}{1}{0}{4}
-        \farey{-1}{0}{-1}{1}{4}
-        \farey{-1}{1}{0}{1}{4}
-    \end{scope}
-    
-    % 绘制最外侧的边界圆（加粗）
-    \draw[thick] (0,0) circle (\R);
-    
-    % 绘制 4 个最基础的极点节点
-    \fnode{0}{1}
-    \fnode{1}{1}
-    \fnode{1}{0}
-    \fnode{-1}{1}
-    \fnode{-3}{1}
-    \fnode{-1}{2}
-    
+\begin{tikzpicture}[
+    scale=1.7,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\scriptsize, inner sep=1pt}
+]
+\def\R{1.75}
+
+%--------------------------------
+% boundary points on the circle
+% real number t is sent to angle 2 arctan(t)-90
+%--------------------------------
+\newcommand{\silentcusp}[2]{%
+  \pgfmathsetmacro{\angtmp}{2*atan(#2)-90}%
+  \expandafter\xdef\csname ang@#1\endcsname{\angtmp}%
+  \coordinate (#1) at ({\angtmp}:\R);
+}
+
+\newcommand{\labeledcusp}[4]{%
+  \pgfmathsetmacro{\angtmp}{2*atan(#2)-90}%
+  \expandafter\xdef\csname ang@#1\endcsname{\angtmp}%
+  \coordinate (#1) at ({\angtmp}:\R);
+  \node[#4] at ({\angtmp}:1.08*\R) {$#3$};
+}
+
+% geodesic in the disk model:
+% circle orthogonal to the boundary circle
+\newcommand{\geodesic}[2]{%
+  \pgfmathsetmacro{\A}{\csname ang@#1\endcsname}%
+  \pgfmathsetmacro{\B}{\csname ang@#2\endcsname}%
+  \pgfmathsetmacro{\m}{(\A+\B)/2}%
+  \pgfmathsetmacro{\d}{abs(\B-\A)/2}%
+  \pgfmathsetmacro{\c}{\R/cos(\d)}%
+  \pgfmathsetmacro{\rho}{\R*tan(\d)}%
+  \begin{scope}
+    \clip (0,0) circle (\R);
+    \draw[line width=0.35pt] ($(0,0)+(\m:\c)$) circle (\rho);
+  \end{scope}
+}
+
+%--------------------------------
+% outer boundary
+%--------------------------------
+\draw[line width=0.5pt] (0,0) circle (\R);
+
+%--------------------------------
+% cusps
+%--------------------------------
+% infinity
+\coordinate (inf) at (90:\R);
+\expandafter\xdef\csname ang@inf\endcsname{90}
+\node[above] at (90:1.08*\R) {$\infty$};
+
+% labeled cusps
+\labeledcusp{mthree}{-3}{-3/1}{left}
+\labeledcusp{mtwo}{-2}{-2/1}{left}
+\labeledcusp{mone}{-1}{-1/1}{left}
+\labeledcusp{mhalf}{-0.5}{-1/2}{below left}
+\labeledcusp{zero}{0}{0/1}{below}
+\labeledcusp{half}{0.5}{1/2}{below right}
+\labeledcusp{one}{1}{1/1}{right}
+\labeledcusp{two}{2}{2/1}{right}
+\labeledcusp{three}{3}{3/1}{right}
+
+% extra unlabeled cusps to make the figure denser
+\silentcusp{mthreetwo}{-1.5}
+\silentcusp{mtthird}{-0.6666667}
+\silentcusp{mthird}{-0.3333333}
+\silentcusp{third}{0.3333333}
+\silentcusp{tthird}{0.6666667}
+\silentcusp{threetwo}{1.5}
+
+% draw cusp points
+\foreach \P in {inf,mthree,mtwo,mone,mthreetwo,mtthird,mhalf,mthird,zero,third,half,tthird,one,threetwo,two,three}
+  \fill (\P) circle (0.55pt);
+
+%--------------------------------
+% main Farey edges
+%--------------------------------
+
+% edges from infinity to integers
+\draw[line width=0.35pt] (inf) -- (zero); % diameter
+\geodesic{inf}{mthree}
+\geodesic{inf}{mtwo}
+\geodesic{inf}{mone}
+\geodesic{inf}{one}
+\geodesic{inf}{two}
+\geodesic{inf}{three}
+
+% edges from 0 to reciprocals
+\geodesic{zero}{mone}
+\geodesic{zero}{mhalf}
+\geodesic{zero}{mthird}
+\geodesic{zero}{third}
+\geodesic{zero}{half}
+\geodesic{zero}{one}
+
+% neighboring finite cusps (gives the small boundary arcs)
+\geodesic{mthree}{mtwo}
+\geodesic{mtwo}{mone}
+\geodesic{mone}{mhalf}
+\geodesic{mhalf}{zero}
+\geodesic{zero}{half}
+\geodesic{half}{one}
+\geodesic{one}{two}
+\geodesic{two}{three}
+
+% extra edges for a denser tessellation
+\geodesic{mthreetwo}{mtwo}
+\geodesic{mthreetwo}{mone}
+\geodesic{mtthird}{mone}
+\geodesic{mtthird}{mhalf}
+\geodesic{mthird}{mhalf}
+\geodesic{mthird}{zero}
+
+\geodesic{third}{zero}
+\geodesic{third}{half}
+\geodesic{tthird}{half}
+\geodesic{tthird}{one}
+\geodesic{threetwo}{one}
+\geodesic{threetwo}{two}
+
 \end{tikzpicture}

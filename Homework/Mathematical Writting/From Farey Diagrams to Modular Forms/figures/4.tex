@@ -2,88 +2,198 @@
 \usetikzlibrary{calc}
 
 
-\begin{tikzpicture}[scale=1, thick]
+\begin{tikzpicture}[
+    scale=1.7,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\scriptsize, inner sep=1pt}
+]
+\def\R{1.75}
 
-    % --- 颜色定义 ---
-    \colorlet{fareyedge}{cyan!70!blue}      % Farey 曲边三角形的测地线
-    \colorlet{toponode}{red!80!black}       % Topograph 的节点
-    \colorlet{topoedge}{red!70!orange}      % Topograph 的树边
-    \colorlet{regiontext}{blue!70!black}    % 区域/有理数标签
+%--------------------------------
+% boundary points on the circle
+% real number t is sent to angle 2 arctan(t)-90
+%--------------------------------
+\newcommand{\silentcusp}[2]{%
+  \pgfmathsetmacro{\angtmp}{2*atan(#2)-90}%
+  \expandafter\xdef\csname ang@#1\endcsname{\angtmp}%
+  \coordinate (#1) at ({\angtmp}:\R);
+}
 
-    % --- 绝对边界 (Poincaré Disk Boundary) ---
-    \draw[gray!40, dashed, thin] (0,0) circle (2);
-    
-    % --- 定义理想边界上的顶点 (Farey 尖点) ---
-    % 主三角形顶点
-    \coordinate (Pinf)  at (90:2);   % 1/0
-    \coordinate (P0)    at (210:2);  % 0/1
-    \coordinate (P1)    at (-30:2);  % 1/1
-    
-    % 外围邻接三角形顶点
-    \coordinate (P-1)   at (150:2);  % -1/1
-    \coordinate (P2)    at (30:2);   % 2/1
-    \coordinate (Phalf) at (270:2);  % 1/2
+\newcommand{\labeledcusp}[4]{%
+  \pgfmathsetmacro{\angtmp}{2*atan(#2)-90}%
+  \expandafter\xdef\csname ang@#1\endcsname{\angtmp}%
+  \coordinate (#1) at ({\angtmp}:\R);
+  \node[#4] at ({\angtmp}:1.08*\R) {$#3$};
+}
 
-    % --- 1. 绘制 Farey 图：曲边三角形 (底层图) ---
-    % 填充中央主三角形作为视觉引导
-    \fill[cyan!5] (Pinf) to[bend left=26] (P0) to[bend left=26] (P1) to[bend left=26] cycle;
+% geodesic in the disk model:
+% circle orthogonal to the boundary circle
+\newcommand{\geodesic}[2]{%
+  \pgfmathsetmacro{\A}{\csname ang@#1\endcsname}%
+  \pgfmathsetmacro{\B}{\csname ang@#2\endcsname}%
+  \pgfmathsetmacro{\m}{(\A+\B)/2}%
+  \pgfmathsetmacro{\d}{abs(\B-\A)/2}%
+  \pgfmathsetmacro{\c}{\R/cos(\d)}%
+  \pgfmathsetmacro{\rho}{\R*tan(\d)}%
+  \begin{scope}
+    \clip (0,0) circle (\R);
+    \draw[line width=0.35pt] ($(0,0)+(\m:\c)$) circle (\rho);
+  \end{scope}
+}
 
-    % 中央主三角形的三条双曲边
-    \draw[fareyedge] (Pinf) to[bend left=26] (P0);
-    \draw[fareyedge] (P0)   to[bend left=26] (P1);
-    \draw[fareyedge] (P1)   to[bend left=26] (Pinf);
+%--------------------------------
+% outer boundary
+%--------------------------------
+\draw[line width=0.5pt] (0,0) circle (\R);
 
-    % 外围三个邻接曲边三角形
-    \draw[fareyedge] (Pinf) to[bend left=20] (P-1) to[bend left=20] (P0);
-    \draw[fareyedge] (Pinf) to[bend right=20] (P2) to[bend right=20] (P1);
-    \draw[fareyedge] (P0)   to[bend right=20] (Phalf) to[bend right=20] (P1);
+%--------------------------------
+% cusps
+%--------------------------------
+\coordinate (O) at (0,0);
 
-    % --- 2. 绘制 Conway Topograph：对偶树 (上层图) ---
-    % 确定各个曲边三角形的“中点” (对偶节点)
-    \coordinate (C0) at (0,0);       % 主三角形中点
-    \coordinate (CL) at (150:0.85);  % 左上三角形中点
-    \coordinate (CR) at (30:0.85);   % 右上三角形中点
-    \coordinate (CB) at (270:0.85);  % 底部三角形中点
+% infinity
+\coordinate (inf) at (90:\R);
+\expandafter\xdef\csname ang@inf\endcsname{90}
+\node[above] at (90:1.08*\R) {$\infty$};
 
-    % 模拟更外层的 3-度正则发散树枝
-    \coordinate (CL1) at (132:1.35);
-    \coordinate (CL2) at (168:1.35);
-    \coordinate (CR1) at (12:1.35);
-    \coordinate (CR2) at (48:1.35);
-    \coordinate (CB1) at (252:1.35);
-    \coordinate (CB2) at (288:1.35);
+% labeled cusps
+\labeledcusp{mthree}{-3}{-3/1}{left}
+\labeledcusp{mtwo}{-2}{-2/1}{left}
+\labeledcusp{mone}{-1}{-1/1}{left}
+\labeledcusp{mhalf}{-0.5}{-1/2}{below left}
+\labeledcusp{zero}{0}{0/1}{below}
+\labeledcusp{half}{0.5}{1/2}{below right}
+\labeledcusp{one}{1}{1/1}{right}
+\labeledcusp{two}{2}{2/1}{right}
+\labeledcusp{three}{3}{3/1}{right}
 
-    % 连接相邻三角形的中点 (正交穿过蓝色曲边)
-    \draw[topoedge, very thick] (C0) -- (CL);
-    \draw[topoedge, very thick] (C0) -- (CR);
-    \draw[topoedge, very thick] (C0) -- (CB);
+% extra unlabeled cusps to make the figure denser
+\silentcusp{mthreetwo}{-1.5}
+\silentcusp{mtthird}{-0.6666667}
+\silentcusp{mthird}{-0.3333333}
+\silentcusp{third}{0.3333333}
+\silentcusp{tthird}{0.6666667}
+\silentcusp{threetwo}{1.5}
 
-    % 绘制向外无限发散的虚线树枝
-    \draw[topoedge, thick, dashed] (CL) -- (CL1);
-    \draw[topoedge, thick, dashed] (CL) -- (CL2);
-    \draw[topoedge, thick, dashed] (CR) -- (CR1);
-    \draw[topoedge, thick, dashed] (CR) -- (CR2);
-    \draw[topoedge, thick, dashed] (CB) -- (CB1);
-    \draw[topoedge, thick, dashed] (CB) -- (CB2);
+% draw cusp points
+\foreach \P in {inf,mthree,mtwo,mone,mthreetwo,mtthird,mhalf,mthird,zero,third,half,tthird,one,threetwo,two,three}
+  \fill (\P) circle (0.55pt);
 
-    % 强调显示中点 (节点)
-    \fill[toponode] (C0) circle (2pt);
-    \fill[toponode] (CL) circle (2pt);
-    \fill[toponode] (CR) circle (2pt);
-    \fill[toponode] (CB) circle (2pt);
+%--------------------------------
+% main Farey edges
+%--------------------------------
 
-    % --- 3. 添加数学符号与对偶字典映射标签 ---
-    % 顶点对应的有理数
-    \node[above, font=\small, regiontext]       at (Pinf)  {$1/0$};
-    \node[below left, font=\small, regiontext]  at (P0)    {$0/1$};
-    \node[below right, font=\small, regiontext] at (P1)    {$1/1$};
-    \node[above left, font=\footnotesize, regiontext]  at (P-1)   {$-1/1$};
-    \node[above right, font=\footnotesize, regiontext] at (P2)    {$2/1$};
-    \node[below, font=\footnotesize, regiontext]       at (Phalf) {$1/2$};
+% edges from infinity to integers
+\draw[line width=0.35pt] (inf) -- (zero); % diameter
+\geodesic{inf}{mthree}
+\geodesic{inf}{mtwo}
+\geodesic{inf}{mone}
+\geodesic{inf}{one}
+\geodesic{inf}{two}
+\geodesic{inf}{three}
 
-    % 在 Topograph 中，原图顶点对应的是被树枝环绕的“区域 (Region)”
-    \node[regiontext, font=\footnotesize] at (90:1.3)  {};
-    \node[regiontext, font=\footnotesize] at (210:1.3) {};
-    \node[regiontext, font=\footnotesize] at (-30:1.3) {};
+% edges from 0 to reciprocals
+\geodesic{zero}{mone}
+\geodesic{zero}{mhalf}
+\geodesic{zero}{mthird}
+\geodesic{zero}{third}
+\geodesic{zero}{half}
+\geodesic{zero}{one}
+
+% neighboring finite cusps
+\geodesic{mthree}{mtwo}
+\geodesic{mtwo}{mone}
+\geodesic{mone}{mhalf}
+\geodesic{mhalf}{zero}
+\geodesic{zero}{half}
+\geodesic{half}{one}
+\geodesic{one}{two}
+\geodesic{two}{three}
+
+% extra edges for a denser tessellation
+\geodesic{mthreetwo}{mtwo}
+\geodesic{mthreetwo}{mone}
+\geodesic{mtthird}{mone}
+\geodesic{mtthird}{mhalf}
+\geodesic{mthird}{mhalf}
+\geodesic{mthird}{zero}
+
+\geodesic{third}{zero}
+\geodesic{third}{half}
+\geodesic{tthird}{half}
+\geodesic{tthird}{one}
+\geodesic{threetwo}{one}
+\geodesic{threetwo}{two}
+
+%--------------------------------
+% Conway's Topograph overlay
+% choose representative points strictly inside ideal triangles
+%--------------------------------
+
+% central two triangles
+\coordinate (A) at (-0.52, 0.00);   % inside {inf,-1,0}
+\coordinate (B) at ( 0.52, 0.00);   % inside {inf,0,1}
+
+% first layer: move them more inward
+\coordinate (AU) at (-0.88,  0.46); % inside {inf,-2,-1}
+\coordinate (AD) at (-0.88, -0.46); % inside {-1,-1/2,0}
+
+\coordinate (BU) at ( 0.88,  0.46); % inside {inf,1,2}
+\coordinate (BD) at ( 0.88, -0.46); % inside {0,1/2,1}
+
+% second layer: also keep them inside the triangles, not too close to boundary
+\coordinate (AUU) at (-0.9,  1.1); % toward infinity
+\coordinate (AUS) at (-1.28,  0.50); % toward -1
+
+\coordinate (ADD) at (-0.72, -1.10); % toward 0
+\coordinate (ADS) at (-1.28, -0.5); % toward -1
+
+\coordinate (BUU) at (0.9,  1.1); % toward infinity
+\coordinate (BUS) at (1.28,  0.50); % toward 1
+
+\coordinate (BDD) at ( 0.72, -1.10); % toward 0
+\coordinate (BDS) at ( 1.28, -0.5); % toward 1
+
+% Topograph edges (solid)
+\draw[line width=0.75pt] (A)--(B);
+
+\draw[line width=0.75pt] (A)--(AU);
+\draw[line width=0.75pt] (A)--(AD);
+
+\draw[line width=0.75pt] (B)--(BU);
+\draw[line width=0.75pt] (B)--(BD);
+
+\draw[line width=0.75pt] (AU)--(AUU);
+\draw[line width=0.75pt] (AU)--(AUS);
+
+\draw[line width=0.75pt] (AD)--(ADD);
+\draw[line width=0.75pt] (AD)--(ADS);
+
+\draw[line width=0.75pt] (BU)--(BUU);
+\draw[line width=0.75pt] (BU)--(BUS);
+
+\draw[line width=0.75pt] (BD)--(BDD);
+\draw[line width=0.75pt] (BD)--(BDS);
+
+% dashed continuations toward cusps
+\draw[densely dashed, line width=0.42pt] (AUU)--($(AUU)!0.45!(inf)$);
+\draw[densely dashed, line width=0.42pt] (BUU)--($(BUU)!0.45!(inf)$);
+
+\draw[densely dashed, line width=0.42pt] (ADD)--($(ADD)!0.45!(zero)$);
+\draw[densely dashed, line width=0.42pt] (BDD)--($(BDD)!0.45!(zero)$);
+
+\draw[densely dashed, line width=0.42pt] (AUS)--($(AUS)!0.35!(mone)$);
+\draw[densely dashed, line width=0.42pt] (ADS)--($(ADS)!0.35!(mone)$);
+
+\draw[densely dashed, line width=0.42pt] (BUS)--($(BUS)!0.35!(one)$);
+\draw[densely dashed, line width=0.42pt] (BDS)--($(BDS)!0.35!(one)$);
+
+% draw Topograph vertices
+\foreach \P in {A,B,AU,AD,BU,BD,AUU,AUS,ADD,ADS,BUU,BUS,BDD,BDS}
+  \fill[white] (\P) circle (1.25pt);
+
+\foreach \P in {A,B,AU,AD,BU,BD,AUU,AUS,ADD,ADS,BUU,BUS,BDD,BDS}
+  \fill (\P) circle (0.78pt);
 
 \end{tikzpicture}
