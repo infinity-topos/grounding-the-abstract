@@ -994,4 +994,600 @@ Let $K = \mathbb{R}$ or $K = \mathbb{C}$, and let $|\cdot|$ be the usual absolut
     \end{align*}
     Therefore $g(x)>g(0)=0$. Our claim holds.
 \end{solution}
+
+\section*{Homework 11}
+
+\subsection*{Exercise A.11.1}
+
+Let $\mathbb{F}$ be a finite field.
+
+\begin{enumerate}
+    \item Prove that every quadratic space of dimension $\geq 3$ over $\mathbb{F}$ is isotropic.
+
+    You should not use Proposition 4.2.7 for this proof.
+
+    \item Prove that $\mathbb{F}$ has separable $2$-dimension $\leq 1$; cf. Definition 4.2.5.
+\end{enumerate}
+
+The above statements hold even if $\operatorname{char}(\mathbb{F})=2$. If you like, you can only treat the case $\operatorname{char}(\mathbb{F})\neq 2$.
+
+\begin{solution}
+    We assume that $\operatorname{char}(\mathbb{F})\neq 2$ and $q=|\mathbb{F}|$.
+
+    (1)First we prove a simple counting lemma. Let $a,b\in \mathbb{F}^{\times}$. Then the binary quadratic form $ax^2+by^2$ represents every element of $\mathbb{F}$. Indeed, fix $t\in \mathbb{F}$ and consider \[ A=\{ax^2:x\in \mathbb{F}\},\qquad B=\{t-by^2:y\in \mathbb{F}\}. \] Since $\mathbb{F}$ has odd cardinality, the set of squares in $\mathbb{F}$, including $0$, has cardinality $(q+1)/2$. Hence $|A|=|B|=(q+1)/2$. Since $|A|+|B|=q+1>q$, the two subsets $A$ and $B$ must intersect. Thus there exist $x,y\in \mathbb{F}$ such that $ax^2=t-by^2$, or equivalently $ax^2+by^2=t$.
+    
+    Now let $(V,Q)$ be a quadratic space over $\mathbb{F}$ with $\dim V\geq 3$. Since $\operatorname{char}(\mathbb{F})\neq 2$, the quadratic form $Q$ is diagonalizable. Thus, for a suitable basis, we may write \[ Q\simeq \langle a_1,\dots,a_r,0,\dots,0\rangle \] with $a_i\in \mathbb{F}^{\times}$. If a zero coefficient occurs, then the corresponding basis vector is a nonzero isotropic vector, so $Q$ is isotropic. Hence we may assume that no zero coefficient occurs. Since $\dim V\geq 3$, the restriction of $Q$ to the subspace spanned by the first three basis vectors has the form \[ ax^2+by^2+cz^2 \] with $a,b,c\in \mathbb{F}^{\times}$. By the counting fact above, the binary form $ax^2+by^2$ represents $-c$. Therefore there exist $x,y\in \mathbb{F}$ such that $ax^2+by^2=-c$. It follows that \[ Q(x,y,1,0,\dots,0)=ax^2+by^2+c=0. \] The vector $(x,y,1,0,\dots,0)$ is nonzero, so $Q$ is isotropic. This proves that every quadratic space of dimension at least $3$ over $\mathbb{F}$ is isotropic. 
+    
+    
+    (2)It remains to prove that $\operatorname{sd}_2(\mathbb F)\leq 1$. Let
+$L/\mathbb F$ be a finite separable extension, and let $E/L$ be a quadratic
+separable extension. Since $\mathbb F$ is finite, $L$ is again a finite field.
+Assume $\operatorname{char}(\mathbb F)\neq 2$. Then $E=L(\sqrt d)$ for some
+$d\in L^\times\setminus L^{\times 2}$.
+
+We show that $N_{E/L}:E^\times\to L^\times$ is surjective. Let
+$a\in L^\times$. Consider the quadratic form
+\[
+q(x,y,z)=x^2-dy^2-az^2
+\]
+over $L$. By the first part, this three-dimensional quadratic form is
+isotropic. Hence there exists a nonzero vector $(x,y,z)\in L^3$ such that
+\[
+x^2-dy^2=az^2.
+\]
+We claim that $z\neq 0$. If $z=0$, then $x^2=dy^2$. Since
+$d\notin L^{\times 2}$, this forces $x=y=0$, contradicting that
+$(x,y,z)$ is nonzero. Thus $z\neq 0$, and after dividing by $z^2$ we get
+\[
+\left(\frac{x}{z}\right)^2
+-
+d\left(\frac{y}{z}\right)^2
+=a.
+\]
+But the left-hand side is
+\[
+N_{E/L}\left(\frac{x}{z}+\frac{y}{z}\sqrt d\right).
+\]
+Therefore $a$ lies in the image of $N_{E/L}$. Since $a\in L^\times$ was
+arbitrary, the norm map is surjective. Hence, by Definition 4.2.5,
+$\operatorname{sd}_2(\mathbb F)\leq 1$.
+\end{solution}
+
+\subsection*{Exercise A.11.2}
+
+Let $K$ be a field of characteristic $\neq 2$, and let $(V,\varphi)$, $(U,\psi)$ be nonsingular quadratic spaces of positive dimension over $K$.
+
+\begin{enumerate}
+    \item Prove that $(V,\varphi)$ is hyperbolic if and only if $\dim V$ is even and there exists a totally isotropic subspace $W\subseteq V$ such that $\dim V=2\dim W$.
+
+    \item Prove that the quadratic space $(U,\psi)\perp (U,-\psi)$ is hyperbolic.
+
+    \item Prove that $(V,\varphi)\cong (U,\psi)$ if and only if $(V,\varphi)\perp (U,-\psi)$ is hyperbolic.
+\end{enumerate}
+\begin{solution}
+    (1) Let $B(x,y)=\varphi(x+y)-\varphi(x)-\varphi(y)$. Since $(V,\varphi)$ is nonsingular and $\operatorname{char}K\neq 2$, $B$ is nondegenerate. Suppose first that $(V,\varphi)$ is hyperbolic. Then $V=H_1\perp\cdots\perp H_n$, where each $H_i$ is a hyperbolic plane. Choose a hyperbolic basis $e_i,f_i$ of $H_i$. Then $W=\langle e_1,\dots,e_n\rangle$ is totally isotropic, and $\dim V=2n=2\dim W$. 
+    
+    Conversely, suppose that $W\subseteq V$ is totally isotropic and $\dim V=2\dim W$. Since $\varphi|_W=0$ and $\operatorname{char}K\neq 2$, one has $B|_{W}=0$, hence $W\subseteq W^\perp$. By nondegeneracy, $\dim W^\perp=\dim V-\dim W=\dim W$, so $W=W^\perp$. We prove that $V$ is hyperbolic by induction on $\dim W$. Choose $0\neq e\in W$. Since $B$ is nondegenerate, there exists $y\in V$ with $B(e,y)\neq 0$. For any $a\in K$, $\varphi(y+ae)=\varphi(y)+aB(y,e)$, because $\varphi(e)=0$. Taking $a=-\varphi(y)/B(y,e)$, we get $f=y+ae$ with $\varphi(f)=0$ and $B(e,f)\neq 0$. After scaling $f$, assume $B(e,f)=1$. Thus $H=\langle e,f\rangle$ is a hyperbolic plane. Since $H$ is nonsingular, $V=H\perp H^\perp$. Set $W'=W\cap H^\perp=\{w\in W:B(w,f)=0\}$. The map $W\to K$, $w\mapsto B(w,f)$, is nonzero because $B(e,f)=1$; hence $\dim W'=\dim W-1$. Also $W'$ is totally isotropic and $\dim H^\perp=\dim V-2=2(\dim W-1)=2\dim W'$. By induction, $H^\perp$ is hyperbolic. Therefore $V=H\perp H^\perp$ is hyperbolic.
+
+    (2)Consider $(U,\psi)\perp (U,-\psi)$ on $U\oplus U$. Its quadratic form is \[ q(u_1,u_2)=\psi(u_1)-\psi(u_2). \] Let \[ \Delta=\{(u,u):u\in U\}\subseteq U\oplus U. \] Then $q(u,u)=0$ for all $u\in U$. Moreover, for the associated bilinear form, \[ B_q((u,u),(v,v))=B_\psi(u,v)-B_\psi(u,v)=0, \] so $\Delta$ is totally isotropic. Also \[ \dim(U\oplus U)=2\dim U=2\dim \Delta. \] By part $(1)$, $(U,\psi)\perp (U,-\psi)$ is hyperbolic.
+
+    (3) Assume additionally that $\dim V=\dim U$.
+
+If $(V,\varphi)\cong (U,\psi)$, then
+\[
+(V,\varphi)\perp (U,-\psi)
+\cong
+(U,\psi)\perp (U,-\psi),
+\]
+which is hyperbolic by part $(2)$.
+
+Conversely, suppose that $(V,\varphi)\perp (U,-\psi)$ is hyperbolic. Then
+$(V,\varphi)$ and $(U,\psi)$ have the same Witt class. By the Witt
+decomposition theorem, their anisotropic parts are isomorphic. Hence we may
+write
+\[
+(V,\varphi)\cong H^r\perp A,\qquad
+(U,\psi)\cong H^s\perp A,
+\]
+where $H$ is a hyperbolic plane and $A$ is anisotropic. Since
+$\dim V=\dim U$, we have
+\[
+2r+\dim A=2s+\dim A,
+\]
+so $r=s$. Therefore $(V,\varphi)\cong (U,\psi)$.
+\end{solution}
+
+
+\subsection*{Exercise A.11.3}
+
+Let $K$ be a field of characteristic $\neq 2$.
+
+\begin{enumerate}
+    \item Prove that for any two nonsingular quadratic spaces $(U,\psi)$, $(V,\varphi)$ over $K$, one has
+    \[
+        \operatorname{disc}\bigl((U,\psi)\perp (V,\varphi)\bigr)
+        =
+        (-1)^{\dim U \dim V}
+        \operatorname{disc}(U,\psi)\operatorname{disc}(V,\varphi)
+        \in K^{\times}/K^{\times 2}.
+    \]
+
+    \item Let $(V,\varphi)$ be a nonsingular quadratic space of dimension $2$ over $K$. Prove that $(V,\varphi)$ is hyperbolic if and only if $\operatorname{disc}(V,\varphi)=1\in K^{\times}/K^{\times 2}$.
+\end{enumerate}
+
+\begin{solution}
+    We use the convention that, if $(V,\varphi)$ has dimension $n$ and Gram matrix $A$, then \[ \operatorname{disc}(V,\varphi) = (-1)^{n(n-1)/2}\det(A) \in K^\times/K^{\times 2}. \] For the first statement, let $\dim U=m$ and $\dim V=n$. Choose Gram matrices $A$ and $B$ for $(U,\psi)$ and $(V,\varphi)$ respectively. Then the Gram matrix of $(U,\psi)\perp (V,\varphi)$ is \[ \begin{pmatrix} A & 0\\ 0 & B \end{pmatrix}. \] Hence \[ \operatorname{disc}\bigl((U,\psi)\perp (V,\varphi)\bigr) = (-1)^{(m+n)(m+n-1)/2}\det(A)\det(B). \] On the other hand, \[ \operatorname{disc}(U,\psi)\operatorname{disc}(V,\varphi) = (-1)^{m(m-1)/2+n(n-1)/2}\det(A)\det(B). \] Since \[ \frac{(m+n)(m+n-1)}{2} - \frac{m(m-1)}{2} - \frac{n(n-1)}{2} = mn, \] we get \[ \operatorname{disc}\bigl((U,\psi)\perp (V,\varphi)\bigr) = (-1)^{mn} \operatorname{disc}(U,\psi)\operatorname{disc}(V,\varphi). \] For the second statement, since $\operatorname{char}K\neq 2$, we may write \[ (V,\varphi)\cong \langle a,b\rangle \] with $a,b\in K^\times$. Then \[ \operatorname{disc}(V,\varphi)=-ab\in K^\times/K^{\times 2}. \] If $(V,\varphi)$ is hyperbolic, then $(V,\varphi)\cong \langle 1,-1\rangle$, so \[ \operatorname{disc}(V,\varphi)=-(1)(-1)=1. \] Conversely, suppose that $\operatorname{disc}(V,\varphi)=1$. Then $-ab\in K^{\times 2}$, so there exists $c\in K^\times$ such that $-ab=c^2$. Thus \[ b=-\frac{c^2}{a}=-a\left(\frac{c}{a}\right)^2. \] Therefore \[ \langle a,b\rangle = \left\langle a,-\frac{c^2}{a}\right\rangle \cong \langle a,-a\rangle. \] The vector $(1,1)$ is isotropic for $\langle a,-a\rangle$. Since $\langle a,-a\rangle$ is nonsingular of dimension $2$, it is hyperbolic. Hence $(V,\varphi)$ is hyperbolic.
+\end{solution}
+
+\subsection*{Exercise A.11.4}
+
+Let $F$ be a henselian discrete valuation field with residue field $k$. Assume $\operatorname{char}(k)\neq 2$. Let $u_1,\cdots,u_r,w_1,\cdots,w_r\in \mathcal{O}_F^{\times}$, and put
+\[
+    \varphi=\langle u_1,\cdots,u_r\rangle,
+    \qquad
+    \psi=\langle w_1,\cdots,w_r\rangle.
+\]
+
+\begin{enumerate}
+    \item Prove that $\varphi\perp -\psi$ is hyperbolic over $F$ if and only if $\overline{\varphi}\perp -\overline{\psi}$ is hyperbolic over $k$.
+
+    \item Prove that $\varphi$ and $\psi$ are isomorphic over $F$ if and only if $\overline{\varphi}$ and $\overline{\psi}$ are isomorphic over $k$.
+\end{enumerate}
+\begin{solution}
+    We use the following consequence of Springer's theorem: if $q=\langle a_1,\dots,a_n\rangle$ with all $a_i\in \mathcal O_F^\times$, then $q$ is hyperbolic over $F$ if and only if its reduction $\overline q=\langle \overline a_1,\dots,\overline a_n\rangle$ is hyperbolic over $k$. Equivalently, the reduction map on unit forms detects the zero class in the Witt group. Now \[ \varphi\perp -\psi = \langle u_1,\dots,u_r,-w_1,\dots,-w_r\rangle \] is a unit form over $F$, and its reduction is \[ \overline\varphi\perp -\overline\psi = \langle \overline u_1,\dots,\overline u_r, -\overline w_1,\dots,-\overline w_r\rangle . \] Therefore, by Springer's theorem, \[ \varphi\perp -\psi \text{ is hyperbolic over } F \quad\Longleftrightarrow\quad \overline\varphi\perp -\overline\psi \text{ is hyperbolic over } k. \] This proves the first statement. For the second statement, since $\varphi$ and $\psi$ have the same dimension, Exercise A.11.2(3) gives \[ \varphi\cong \psi \quad\Longleftrightarrow\quad \varphi\perp -\psi \text{ is hyperbolic over } F. \] Similarly, \[ \overline\varphi\cong \overline\psi \quad\Longleftrightarrow\quad \overline\varphi\perp -\overline\psi \text{ is hyperbolic over } k. \] By the first statement, the two hyperbolicity conditions are equivalent. Hence \[ \varphi\cong \psi \quad\Longleftrightarrow\quad \overline\varphi\cong \overline\psi . \]
+\end{solution}
+
+
+
+\subsection*{Exercise A.11.5}
+
+Let $\mathbb{F}$ be a finite field of characteristic $\neq 2$. Prove that up to isomorphism there is one and only one anisotropic binary quadratic space over $\mathbb{F}$.
+
+\begin{solution}
+
+Let $\delta\in \mathbb F^\times$ be a nonsquare. We claim that
+\[
+\langle 1,-\delta\rangle
+\]
+is the unique anisotropic binary quadratic space over $\mathbb F$ up to
+isomorphism.
+
+First, $\langle 1,-\delta\rangle$ is anisotropic. Indeed, if
+$x^2-\delta y^2=0$ and $y\neq 0$, then $\delta=(x/y)^2$, contradicting that
+$\delta$ is a nonsquare. Hence $y=0$, and then $x=0$.
+
+Now let $(V,q)$ be any anisotropic binary quadratic space over $\mathbb F$.
+Since $\operatorname{char}\mathbb F\neq 2$, we may diagonalize
+\[
+(V,q)\cong \langle a,b\rangle
+\]
+with $a,b\in \mathbb F^\times$. By Exercise A.11.3(2), a nonsingular binary
+form is hyperbolic if and only if its discriminant is $1$. Since $(V,q)$ is
+anisotropic, it is not hyperbolic, so
+\[
+\operatorname{disc}(V,q)=-ab
+\]
+is the nontrivial square class in $\mathbb F^\times/\mathbb F^{\times 2}$.
+Thus $-ab=\delta$ in $\mathbb F^\times/\mathbb F^{\times 2}$, and hence
+\[
+\langle a,b\rangle \cong \left\langle a,-\frac{\delta}{a}\right\rangle .
+\]
+
+It remains to compare this form with $\langle 1,-\delta\rangle$. Since
+$\mathbb F(\sqrt{\delta})/\mathbb F$ is a quadratic extension of finite fields,
+its norm map is surjective. Hence the norm form
+\[
+x^2-\delta y^2
+\]
+represents $a$. Therefore
+\[
+\langle 1,-\delta\rangle \cong \langle a,c\rangle
+\]
+for some $c\in\mathbb F^\times$. Comparing discriminants gives
+\[
+-ac=\delta \quad \text{in } \mathbb F^\times/\mathbb F^{\times 2},
+\]
+so $c$ differs from $-\delta/a$ by a square factor. Hence
+\[
+\langle a,c\rangle \cong \left\langle a,-\frac{\delta}{a}\right\rangle .
+\]
+Therefore
+\[
+(V,q)\cong \langle 1,-\delta\rangle .
+\]
+Thus, up to isomorphism, there is exactly one anisotropic binary quadratic
+space over $\mathbb F$.
+\end{solution}
+
+\subsection*{Exercise A.11.6}
+
+Let $F$ be a henselian discrete valuation field of characteristic $\neq 2$. Prove that $F^{\times 2}$ is an open and closed subgroup of $F^{\times}$. Here of course, the topology on $F^{\times}$ is the subspace topology induced from $F$.
+
+\begin{solution}
+    Let $v$ be the discrete valuation on $F$, let $\mathcal O=\mathcal O_F$, and let $\mathfrak m$ be its maximal ideal. Put $e=v(2)$, and choose an integer $N>2e$. We first prove that \[ 1+\mathfrak m^N\subseteq F^{\times 2}. \] Let $u\in 1+\mathfrak m^N$. If $u=1$, there is nothing to prove. Otherwise write $u=1+t$ with $v(t)\geq N$. We want to solve $X^2=u$. Put $X=1+Y$. Then this is equivalent to \[ Y^2+2Y-t=0. \] Consider \[ g(Y)=Y^2+2Y-t. \] The relevant points of its Newton polygon are \[ (0,v(t)),\qquad (1,e),\qquad (2,0). \] Since $v(t)\geq N>2e$, the point $(1,e)$ lies strictly below the line joining $(0,v(t))$ and $(2,0)$. Hence the Newton polygon has two sides, \[ (0,v(t))\to (1,e),\qquad (1,e)\to (2,0). \] The first side has horizontal length $1$ and slope $e-v(t)$. By the Newton polygon theorem over a henselian discrete valuation field, $g$ has a root $Y\in F$ with \[ v(Y)=v(t)-e>0. \] Thus $X=1+Y\in F^\times$ satisfies $X^2=u$. Therefore \[ 1+\mathfrak m^N\subseteq F^{\times 2}. \] It follows that $F^{\times 2}$ is open in $F^\times$. Indeed, for every $a^2\in F^{\times 2}$, the set \[ a^2(1+\mathfrak m^N) \] is an open neighborhood of $a^2$ contained in $F^{\times 2}$. Finally, $F^{\times 2}$ is a subgroup of the topological group $F^\times$. Every coset of an open subgroup is open, so the complement of $F^{\times 2}$ is a union of open cosets. Hence $F^{\times 2}$ is closed. Therefore $F^{\times 2}$ is an open and closed subgroup of $F^\times$.
+\end{solution}
+
+
+\section*{Homework 12}
+
+In this section, let $F$ be a henselian discrete valuation field of
+characteristic $\neq 2$, let $\pi\in \mathcal O_F$ be a uniformizer and
+$k=\mathcal O_F/\pi\mathcal O_F$. The normalized discrete valuation on $F$ is
+denoted by $v$ or $v_F$.
+
+\subsection*{Exercise A.12.1} Let $\mathfrak a$ be a fractional ideal of $F$. 
+\begin{enumerate} 
+    \item For any $\alpha,\beta\in F^\times$, let us write $\alpha\simeq \beta$ if $\alpha\beta^{-1}\in \mathcal O_F^{\times 2}$. 
+        \begin{enumerate} 
+            \item Prove that the above relation $\simeq$ is an equivalence relation on the set $F^\times$. 
+            \item Show that for any $\alpha,\beta\in F^\times$, we have \[ \alpha\simeq \beta \Longleftrightarrow \alpha\beta^{-1}\in \mathcal O_F^\times \text{ and } \mathfrak d(\alpha\beta^{-1})=0. \] 
+        \end{enumerate} 
+        \item For any $\alpha,\beta\in F^\times$, let us write $\alpha\simeq \beta \pmod{\mathfrak a}$ if $\alpha\beta^{-1}\in \mathcal O_F^\times$ and \[ \alpha=\beta\varepsilon^2 \pmod{\mathfrak a} \] for some $\varepsilon\in \mathcal O_F^\times$. 
+            \begin{enumerate} 
+                \item Prove that the above congruence relation modulo $\mathfrak a$ is an equivalence relation on $F^\times$. 
+                \item Show that if $\alpha,\beta\in F^\times$ satisfies $\alpha\simeq \beta\pmod{\mathfrak a}$, then \[ \mathfrak d(\alpha\beta^{-1})\subseteq \beta^{-1}\mathfrak a. \] 
+            \end{enumerate} 
+        \item Assume $k$ is perfect of characteristic $2$. Let $\alpha,\beta\in F^\times$. 
+            \begin{enumerate} 
+                \item Prove that the relation $\alpha\simeq \beta\pmod{\mathfrak a}$ holds if and only if $\alpha\beta^{-1}\in \mathcal O_F^\times$ and \[ \mathfrak d(\alpha\beta^{-1})\subseteq \beta^{-1}\mathfrak a. \] 
+                \item Show that if $\alpha\beta^{-1}\in \mathcal O_F^\times$, then \[ \alpha\simeq \beta \pmod{\alpha\pi\mathcal O_F}. \] 
+            \end{enumerate} 
+\end{enumerate}
+\begin{solution}
+
+Write $\mathcal O=\mathcal O_F$. We use the following description of the
+quadratic defect:
+\[
+    \mathfrak d(c)=\bigcap_{x\in F}(c-x^2)\mathcal O .
+\]
+Thus $\mathfrak d(c)\subseteq (c-x^2)\mathcal O$ for every $x\in F$.
+
+\paragraph*{(1.a)}
+The relation $\simeq$ is the equivalence relation induced by the subgroup
+$\mathcal O^{\times 2}\subseteq F^\times$. Indeed,
+$\alpha\alpha^{-1}=1\in\mathcal O^{\times 2}$, if
+$\alpha\beta^{-1}\in\mathcal O^{\times 2}$ then
+$\beta\alpha^{-1}=(\alpha\beta^{-1})^{-1}\in\mathcal O^{\times 2}$, and if
+$\alpha\beta^{-1},\beta\gamma^{-1}\in\mathcal O^{\times 2}$, then
+$\alpha\gamma^{-1}=(\alpha\beta^{-1})(\beta\gamma^{-1})\in
+\mathcal O^{\times 2}$.
+
+\paragraph*{(1.b)}
+Put $c=\alpha\beta^{-1}$. If $\alpha\simeq\beta$, then
+$c\in\mathcal O^{\times 2}$, hence $c\in\mathcal O^\times$ and
+$\mathfrak d(c)=0$.
+
+Conversely, suppose $c\in\mathcal O^\times$ and $\mathfrak d(c)=0$. Then $c$
+can be approximated arbitrarily closely by squares. Choose $x\in F$ such that
+$v(c-x^2)>2v(2)$. Since $c\in\mathcal O^\times$, this forces $x\in\mathcal
+O^\times$. Applying Hensel's lemma to $T^2-c$ at $x$, we get $c\in F^{\times
+2}$. Since $v(c)=0$, its square root is a unit. Hence
+$c\in\mathcal O^{\times 2}$, so $\alpha\simeq\beta$.
+
+\paragraph*{(2.a)}
+Reflexivity is clear by taking $\varepsilon=1$. For symmetry, suppose
+$\alpha=\beta\varepsilon^2 \pmod{\mathfrak a}$. Then
+\[
+    \beta=\alpha\varepsilon^{-2}\pmod{\mathfrak a},
+\]
+because $\varepsilon^{-2}\in\mathcal O^\times$ and $\mathfrak a$ is an
+$\mathcal O$-submodule of $F$. Also $\beta\alpha^{-1}\in\mathcal O^\times$.
+Hence $\beta\simeq\alpha\pmod{\mathfrak a}$.
+
+For transitivity, suppose
+\[
+    \alpha=\beta\varepsilon^2\pmod{\mathfrak a},
+    \qquad
+    \beta=\gamma\eta^2\pmod{\mathfrak a}.
+\]
+Then
+\[
+    \alpha=\gamma(\eta\varepsilon)^2\pmod{\mathfrak a},
+\]
+and $\alpha\gamma^{-1}\in\mathcal O^\times$. Hence
+$\alpha\simeq\gamma\pmod{\mathfrak a}$.
+
+\paragraph*{(2.b)}
+Put $c=\alpha\beta^{-1}$. Since
+$\alpha\simeq\beta\pmod{\mathfrak a}$, there exists
+$\varepsilon\in\mathcal O^\times$ such that
+\[
+    \alpha-\beta\varepsilon^2\in\mathfrak a.
+\]
+Equivalently,
+\[
+    c-\varepsilon^2\in\beta^{-1}\mathfrak a.
+\]
+By the definition of quadratic defect,
+\[
+    \mathfrak d(c)\subseteq (c-\varepsilon^2)\mathcal O
+    \subseteq \beta^{-1}\mathfrak a.
+\]
+Thus
+\[
+    \mathfrak d(\alpha\beta^{-1})\subseteq\beta^{-1}\mathfrak a.
+\]
+
+\paragraph*{(3.a)}
+Put $c=\alpha\beta^{-1}$. The implication
+\[
+    \alpha\simeq\beta\pmod{\mathfrak a}
+    \Longrightarrow
+    c\in\mathcal O^\times
+    \text{ and }
+    \mathfrak d(c)\subseteq\beta^{-1}\mathfrak a
+\]
+is exactly (2.b).
+
+Conversely, suppose $c\in\mathcal O^\times$ and
+$\mathfrak d(c)\subseteq\beta^{-1}\mathfrak a$. Since $k$ is perfect of
+characteristic $2$, every element of $k^\times$ is a square. Hence $c$ is
+congruent modulo $\pi\mathcal O$ to a unit square. Therefore, by discreteness
+of the valuation, there exists $\varepsilon\in\mathcal O^\times$ such that
+\[
+    \mathfrak d(c)=(c-\varepsilon^2)\mathcal O .
+\]
+Thus
+\[
+    c-\varepsilon^2\in \mathfrak d(c)\subseteq \beta^{-1}\mathfrak a.
+\]
+Multiplying by $\beta$, we get
+\[
+    \alpha-\beta\varepsilon^2\in\mathfrak a.
+\]
+Hence
+\[
+    \alpha\simeq\beta\pmod{\mathfrak a}.
+\]
+
+\paragraph*{(3.b)}
+Put $c=\alpha\beta^{-1}\in\mathcal O^\times$. Since $k$ is perfect of
+characteristic $2$, choose $\varepsilon\in\mathcal O^\times$ such that
+\[
+    c\equiv \varepsilon^2\pmod{\pi\mathcal O}.
+\]
+Then
+\[
+    c-\varepsilon^2\in\pi\mathcal O=c\pi\mathcal O,
+\]
+because $c$ is a unit. Multiplying by $\beta$, we obtain
+\[
+    \alpha-\beta\varepsilon^2\in \beta c\pi\mathcal O
+    =
+    \alpha\pi\mathcal O.
+\]
+Therefore
+\[
+    \alpha\simeq\beta\pmod{\alpha\pi\mathcal O}.
+\]
+\end{solution}
+
+
+\subsection*{Exercise A.12.2}
+
+For a nonempty subset $S\subseteq F$, define
+\[
+    \operatorname{ord}(S):=
+    \inf\{v(x)\mid x\in S\}\in \mathbb Z\cup\{\pm\infty\}.
+\]
+
+For any $a\in F^\times$ we define its \emph{relative quadratic defect} as
+\[
+    \operatorname{dft}(a):=
+    \operatorname{ord}\bigl(a^{-1}\mathfrak d(a)\bigr)
+    \in \mathbb Z\cup\{+\infty\}.
+\]
+
+Prove that $\operatorname{dft}(a)\in \mathbb N\cup\{+\infty\}$ for all
+$a\in F^\times$, and that there is a well-defined map
+\[
+    \operatorname{dft}:F^\times/F^{\times 2}
+    \longrightarrow
+    \mathbb N\cup\{+\infty\},
+    \qquad
+    aF^{\times 2}\longmapsto \operatorname{dft}(a).
+\]
+
+Let $a\in F^\times$ and put $\varepsilon=a\pi^{-v(a)}$. Prove
+\[
+    \operatorname{dft}(a)=
+    \begin{cases}
+        0, & \text{if } v(a)=R \text{ is odd},\\
+        \operatorname{dft}(\varepsilon)
+        =\operatorname{ord}\bigl(\mathfrak d(\varepsilon)\bigr),
+        & \text{if } v(a)=R \text{ is even}.
+    \end{cases}
+\]
+
+\begin{solution}
+We use the definition
+\[
+    \mathfrak d(a)=\bigcap_{x\in F}(a-x^2)\mathcal O_F .
+\]
+Since the term with $x=0$ occurs in the intersection, we have
+\[
+    \mathfrak d(a)\subseteq a\mathcal O_F.
+\]
+Hence
+\[
+    a^{-1}\mathfrak d(a)\subseteq \mathcal O_F,
+\]
+so
+\[
+    \operatorname{dft}(a)
+    =
+    \operatorname{ord}\bigl(a^{-1}\mathfrak d(a)\bigr)
+    \in \mathbb N\cup\{+\infty\}.
+\]
+
+We next show that $\operatorname{dft}(a)$ only depends on the square class of
+$a$. Let $b\in F^\times$. Then
+\[
+    \mathfrak d(ab^2)
+    =
+    \bigcap_{x\in F}(ab^2-x^2)\mathcal O_F.
+\]
+Writing $x=by$, we get
+\[
+    ab^2-x^2=b^2(a-y^2).
+\]
+Since $y$ also runs through all of $F$, it follows that
+\[
+    \mathfrak d(ab^2)=b^2\mathfrak d(a).
+\]
+Therefore
+\[
+    (ab^2)^{-1}\mathfrak d(ab^2)
+    =
+    a^{-1}\mathfrak d(a),
+\]
+and hence
+\[
+    \operatorname{dft}(ab^2)=\operatorname{dft}(a).
+\]
+Thus
+\[
+    \operatorname{dft}:F^\times/F^{\times 2}
+    \longrightarrow
+    \mathbb N\cup\{+\infty\}
+\]
+is well-defined.
+
+Now let $a\in F^\times$ and put
+\[
+    R=v(a),\qquad \varepsilon=a\pi^{-R}.
+\]
+Then $\varepsilon\in\mathcal O_F^\times$.
+
+If $R$ is odd, then for every $x\in F$, the two valuations $v(a)=R$ and
+$v(x^2)=2v(x)$ are distinct. Hence
+\[
+    v(a-x^2)=\min\{R,2v(x)\}\leq R.
+\]
+Taking $x=0$ gives equality, so
+\[
+    \operatorname{ord}(\mathfrak d(a))=R.
+\]
+Therefore
+\[
+    \operatorname{dft}(a)
+    =
+    \operatorname{ord}\bigl(a^{-1}\mathfrak d(a)\bigr)
+    =
+    R-R
+    =
+    0.
+\]
+
+If $R$ is even, write $R=2s$. Then
+\[
+    a=\pi^{2s}\varepsilon.
+\]
+For $x\in F$, write $x=\pi^s y$. Then
+\[
+    a-x^2
+    =
+    \pi^{2s}(\varepsilon-y^2).
+\]
+Since $y$ runs through all of $F$, we get
+\[
+    \mathfrak d(a)=\pi^{2s}\mathfrak d(\varepsilon).
+\]
+Hence
+\[
+    a^{-1}\mathfrak d(a)
+    =
+    \varepsilon^{-1}\mathfrak d(\varepsilon).
+\]
+Because $\varepsilon$ is a unit,
+\[
+    \operatorname{dft}(a)
+    =
+    \operatorname{dft}(\varepsilon)
+    =
+    \operatorname{ord}\bigl(\mathfrak d(\varepsilon)\bigr).
+\]
+Thus
+\[
+    \operatorname{dft}(a)=
+    \begin{cases}
+        0, & \text{if } v(a) \text{ is odd},\\
+        \operatorname{dft}(\varepsilon)
+        =
+        \operatorname{ord}\bigl(\mathfrak d(\varepsilon)\bigr),
+        & \text{if } v(a) \text{ is even}.
+    \end{cases}
+\]
+\end{solution}
+
+\subsection*{Exercise A.12.3}
+
+With notation as in Exercise A.12.2, now assume further that the residue field
+$k$ is a perfect field of characteristic $2$ which has a unique quadratic
+extension. Let $\Delta\in \mathcal O_F^\times$ be chosen such that
+\[
+    \mathfrak d(\Delta)=4\mathcal O_F
+\]
+(cf. Lemma 4.2.12). Let $e=v_F(2)$.
+
+Prove
+\[
+    \operatorname{dft}(F^\times)
+    =
+    \{0,2e,+\infty\}
+    \cup
+    \{2j-1\mid j\in [1,e]\}.
+\]
+
+Show that for any $a\in F^\times$, we have the following equivalences:
+\[
+    \operatorname{dft}(a)=0
+    \Longleftrightarrow
+    v(a)\text{ is odd},
+\]
+\[
+    \operatorname{dft}(a)\geq 1
+    \Longleftrightarrow
+    v(a)\text{ is even},
+\]
+\[
+    \operatorname{dft}(a)=2e
+    \Longleftrightarrow
+    aF^{\times 2}=\Delta F^{\times 2},
+\]
+\[
+    \operatorname{dft}(a)=+\infty
+    \Longleftrightarrow
+    a\in F^{\times 2}.
+\]
+
+For any $a,b\in F^\times$, prove that
+\[
+    \begin{cases}
+        \operatorname{dft}(ab)=0
+        =
+        \min\{\operatorname{dft}(a),\operatorname{dft}(b)\},
+        & \text{if } v(a)\not\equiv v(b)\pmod 2,\\
+        \operatorname{dft}(ab)=0
+        =
+        \operatorname{dft}(a)=\operatorname{dft}(b),
+        & \text{if } v(a)\equiv v(b)\equiv 1\pmod 2,
+    \end{cases}
+\]
+and that we have the \emph{domination principle}
+\[
+    \operatorname{dft}(ab)
+    \geq
+    \min\{\operatorname{dft}(a),\operatorname{dft}(b)\},
+\]
+and if $\operatorname{dft}(a)\neq \operatorname{dft}(b)$, then
+\[
+    \operatorname{dft}(ab)
+    =
+    \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}.
+\]
+\begin{solution}
+    Let $\mathcal O=\mathcal O_F$ and let $e=v(2)$. We use the following standard consequence of Lemma 4.2.12. For $u\in \mathcal O^\times$, \[ \operatorname{dft}(u)\in \{1,3,\dots,2e-1,2e,+\infty\}. \] Moreover, \[ \operatorname{dft}(u)=+\infty \Longleftrightarrow u\in F^{\times 2}, \] and \[ \operatorname{dft}(u)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2}. \] The values $1,3,\dots,2e-1$ occur, for instance, on suitable unit classes represented by elements of the form $1+c\pi^{2j-1}$. By Exercise A.12.2, if $v(a)$ is odd, then \[ \operatorname{dft}(a)=0. \] If $v(a)$ is even, write $a=\pi^{2s}u$ with $u\in\mathcal O^\times$. Since $\pi^{2s}$ is a square, $a$ and $u$ have the same square class, and \[ \operatorname{dft}(a)=\operatorname{dft}(u). \] Therefore \[ \operatorname{dft}(F^\times) = \{0,2e,+\infty\} \cup \{2j-1\mid 1\leq j\leq e\}. \] Next we prove the stated equivalences. The first two follow immediately from Exercise A.12.2 and the unit classification above: \[ \operatorname{dft}(a)=0 \Longleftrightarrow v(a)\text{ is odd}, \] and \[ \operatorname{dft}(a)\geq 1 \Longleftrightarrow v(a)\text{ is even}. \] If $v(a)$ is even, then $aF^{\times 2}=uF^{\times 2}$ for some $u\in\mathcal O^\times$. Hence \[ \operatorname{dft}(a)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2} \Longleftrightarrow aF^{\times 2}=\Delta F^{\times 2}. \] Similarly, \[ \operatorname{dft}(a)=+\infty \Longleftrightarrow a\in F^{\times 2}. \] It remains to prove the domination principle. Since $\operatorname{dft}$ only depends on square classes, we may multiply $a$ and $b$ by squares whenever convenient. If $v(a)\not\equiv v(b)\pmod 2$, then $v(ab)$ is odd. Hence, by Exercise A.12.2, \[ \operatorname{dft}(ab)=0 = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] If $v(a)\equiv v(b)\equiv 1\pmod 2$, then \[ \operatorname{dft}(a)=\operatorname{dft}(b)=0. \] In this case one only gets $\operatorname{dft}(ab)\geq 0$ in general. Now assume $v(a)$ and $v(b)$ are both even. After multiplying by squares, we may assume $a,b\in\mathcal O^\times$. Put \[ r=\operatorname{dft}(a), \qquad s=\operatorname{dft}(b), \qquad m=\min\{r,s\}. \] If one of $r,s$ is $+\infty$, the assertion is immediate from the fact that squares do not change square classes. Thus assume $r,s<+\infty$. By Exercise A.12.1(3.a), there exist $\varepsilon,\eta\in\mathcal O^\times$ such that \[ a\equiv \varepsilon^2 \pmod{a\pi^r\mathcal O}, \qquad b\equiv \eta^2 \pmod{b\pi^s\mathcal O}. \] Since $a,b,\varepsilon,\eta$ are units, multiplying the two congruences gives \[ ab\equiv (\varepsilon\eta)^2 \pmod{ab\pi^m\mathcal O}. \] Again by Exercise A.12.1(3.a), \[ \operatorname{dft}(ab)\geq m. \] Thus \[ \operatorname{dft}(ab) \geq \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] Finally assume $\operatorname{dft}(a)\neq\operatorname{dft}(b)$. Without loss of generality, let $r<s$. The domination principle gives \[ \operatorname{dft}(ab)\geq r. \] If $\operatorname{dft}(ab)>r$, then applying the domination principle to $a=(ab)b^{-1}$ gives \[ r=\operatorname{dft}(a) = \operatorname{dft}((ab)b^{-1}) \geq \min\{\operatorname{dft}(ab),\operatorname{dft}(b^{-1})\}. \] Since $\operatorname{dft}(b^{-1})=\operatorname{dft}(b)=s$ and both $\operatorname{dft}(ab)$ and $s$ are strictly larger than $r$, this is a contradiction. Hence \[ \operatorname{dft}(ab)=r = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \]
+\end{solution}
+
 \end{document}

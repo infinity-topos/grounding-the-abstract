@@ -1,0 +1,327 @@
+\section{Fukaya-Theoretic Interpretation}
+The coherent--constructible correspondence proved in the previous section was
+formulated entirely in terms of coherent sheaves and constructible sheaves.
+The proof used the FLTZ skeleton as a singular-support condition and avoided
+any explicit use of Fukaya categories. Nevertheless, the constructible side
+has a natural symplectic interpretation: constructible sheaves on
+\(M_{\mathbb R}\) with prescribed singular support may be regarded as a
+sheaf-theoretic model for a Fukaya category of the cotangent bundle
+\(T^*M_{\mathbb R}\).
+
+The purpose of this section is to explain this interpretation. We will not
+construct the Fukaya category from first principles. Instead, we use the
+microlocal sheaf--Fukaya correspondence as a guiding principle: a conic
+Lagrangian subset of a cotangent bundle controls both singular supports of
+constructible sheaves and asymptotic supports of Lagrangian branes. In our
+case, the relevant conic Lagrangian is precisely the FLTZ skeleton
+\(\Lambda_\Sigma\).
+
+Thus the toric CCC may be viewed as part of a larger triangle of
+correspondences:
+\[
+\operatorname{Perf}_T(X_\Sigma)
+\simeq
+Sh_{\Lambda_\Sigma}(M_{\mathbb R})
+\simeq
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty),
+\]
+where the right-hand side denotes a wrapped or partially wrapped Fukaya
+category with stop determined by the contact boundary
+\(\Lambda_\Sigma^\infty\) of the FLTZ skeleton. This equivalence should be
+understood up to the usual conventions concerning compact objects, brane
+structures, and possible opposite categories.
+
+In this sense, the constructible side is not merely a combinatorial
+replacement for coherent sheaves. It is also a microlocal model for the
+Fukaya-theoretic mirror of the toric variety. The following subsections
+explain how the singular-support condition becomes a Lagrangian support
+condition, how microlocal sheaves are related to wrapped Fukaya categories,
+and how the theta sheaves appearing in the CCC may be interpreted as
+Lagrangian branes.
+
+
+\subsection{From Singular Support to Lagrangian Support}
+
+In Section 4, the FLTZ skeleton
+\(\Lambda_\Sigma\subset T^*M_{\mathbb R}\) was introduced as the
+singular-support condition defining the constructible side of the CCC. The
+purpose of this subsection is to explain how the same subset is interpreted
+on the Fukaya-theoretic side.
+
+\begin{definition}[Cotangent symplectic structure]
+Let \(Y\) be a smooth real manifold. The cotangent bundle \(T^*Y\) carries
+its canonical Liouville one-form \(\lambda\). Its exterior derivative
+\[
+\omega=d\lambda
+\]
+is the canonical exact symplectic form on \(T^*Y\).
+\end{definition}
+
+\begin{definition}[Lagrangian submanifold]
+Let \((X,\omega)\) be a symplectic manifold. A submanifold
+\(L\subset X\) is called Lagrangian if \(\omega|_L=0\) and
+\(\dim L=\frac{1}{2}\dim X\). In particular, a Lagrangian submanifold of
+\(T^*Y\) has dimension \(\dim Y\).
+\end{definition}
+
+\begin{definition}[Lagrangian brane]
+In Fukaya theory, one usually works not merely with Lagrangian
+submanifolds, but with Lagrangians equipped with additional structures such
+as orientations, gradings, spin structures, and local systems. Such an
+enhanced Lagrangian is called a Lagrangian brane. In this section, the word
+``brane'' will be used only in this sense.
+\end{definition}
+
+\begin{definition}[Boundary at infinity of a conic subset]
+Let \(\Lambda\subset T^*Y\) be a conic subset, namely a subset invariant
+under positive scaling in the cotangent fibers. Its boundary at infinity is
+\[
+\Lambda^\infty
+:=
+(\Lambda\setminus T_Y^*Y)/\mathbb R_{>0}
+\subset S^*Y,
+\]
+where \(T_Y^*Y\) denotes the zero section and
+\[
+S^*Y:=(T^*Y\setminus T_Y^*Y)/\mathbb R_{>0}
+\]
+is the cosphere bundle.
+\end{definition}
+
+For \(Y=M_{\mathbb R}\), we have the identification
+\(T^*M_{\mathbb R}\simeq M_{\mathbb R}\times N_{\mathbb R}\). Under this
+identification, the fiberwise scaling action is the scaling action on the
+\(N_{\mathbb R}\)-factor. By Proposition 4.2, the FLTZ skeleton
+\(\Lambda_\Sigma\) is conic. Hence its boundary at infinity
+\[
+\Lambda_\Sigma^\infty
+:=
+(\Lambda_\Sigma\setminus T^*_{M_{\mathbb R}}M_{\mathbb R})/\mathbb R_{>0}
+\subset S^*M_{\mathbb R}
+\]
+is well-defined.
+
+On the sheaf-theoretic side, a constructible sheaf \(F\) has singular
+support \(SS(F)\subset T^*M_{\mathbb R}\). This subset records the cotangent
+directions in which local sections of \(F\) fail to propagate. Therefore the
+condition
+\[
+SS(F)\subset \Lambda_\Sigma
+\]
+means that \(F\) is allowed to have singular behavior only in the
+microlocal directions prescribed by the FLTZ skeleton.
+
+On the Fukaya-theoretic side, the analogous restriction is imposed on
+Lagrangian branes in \(T^*M_{\mathbb R}\). The subset
+\(\Lambda_\Sigma^\infty\subset S^*M_{\mathbb R}\) records the directions at
+infinity determined by the FLTZ skeleton. In wrapped Fukaya theory, such a
+subset is used as a stop: it restricts the allowed wrapping behavior of
+Lagrangian branes at infinity.
+
+Thus the same geometric object has two interpretations. On the
+constructible side, \(\Lambda_\Sigma\) is a singular-support constraint. On
+the Fukaya side, \(\Lambda_\Sigma^\infty\) is an asymptotic Lagrangian
+constraint. This is the basic bridge from constructible sheaves to Fukaya
+categories; the precise categorical form of this bridge will be recalled in
+the next subsection.
+
+\subsection{Microlocal Sheaves and Wrapped Fukaya Categories}
+
+We now recall the external theorem relating constructible sheaves to Fukaya
+categories. The terminology concerning conic subsets, their boundary at
+infinity, and stops was fixed in the previous subsection. This theorem is
+not proved in this paper; it is used only to interpret the constructible side
+of the CCC as a Fukaya-theoretic category.
+
+Let \(Y\) be a real analytic manifold, and let
+\(\Lambda\subset T^*Y\) be a closed conic subanalytic Lagrangian subset.
+We write \(Sh_\Lambda(Y;k)^c\) for the compact objects in the dg category of
+constructible \(k\)-sheaves on \(Y\) whose singular support is contained in
+\(\Lambda\). We write
+\(\mathcal W(T^*Y,\Lambda^\infty;k)\) for the partially wrapped Fukaya
+category of \(T^*Y\) stopped at \(\Lambda^\infty\), with the brane and
+grading conventions fixed.
+
+\begin{theorem}[Microlocal sheaf--Fukaya correspondence, quoted form]
+With the notation above, there is an equivalence of dg categories
+\[
+Sh_\Lambda(Y;k)^c
+\simeq
+\mathcal W(T^*Y,\Lambda^\infty;k).
+\]
+\end{theorem}
+
+We use this theorem as an external input. Depending on the convention for
+Fukaya morphisms and for standard versus costandard sheaves, the right-hand
+side may have to be replaced by its opposite category. This convention does
+not affect the role of the theorem here.
+
+Applying the theorem to \(Y=M_{\mathbb R}\) and
+\(\Lambda=\Lambda_\Sigma\), we obtain
+\[
+Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)^c
+\simeq
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k).
+\]
+Thus the constructible side of the toric CCC may be viewed as a microlocal
+sheaf model for the stopped wrapped Fukaya category determined by the FLTZ
+skeleton.
+
+\subsection{Theta Sheaves as Branes}
+
+We now apply the microlocal sheaf--Fukaya correspondence from the previous
+subsection to the theta sheaves appearing in the CCC. Let
+\[
+\Phi_\Sigma:
+Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)^c
+\xrightarrow{\sim}
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k)
+\]
+be an equivalence as in Theorem 6.1. We use this equivalence to transport
+the constructible theta objects to the Fukaya side.
+
+\begin{lemma}
+For every \(\sigma\in\Sigma\) and \(\bar\chi\in M_\sigma\), the theta sheaf
+\(\Theta(\sigma,\bar\chi)\) has singular support contained in
+\(\Lambda_\Sigma\). Hence it defines an object of
+\(Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)\).
+\end{lemma}
+
+\begin{proof}
+By definition, \(\Theta(\sigma,\bar\chi)\) is the costandard sheaf supported
+on the closed convex polyhedron
+\(P_{\sigma,\bar\chi}=\bar\chi+\sigma^\vee\). The singular support of such a
+costandard polyhedral sheaf is controlled by the conormal cones to the faces
+of \(P_{\sigma,\bar\chi}\). These conormal directions are precisely the
+directions appearing in the FLTZ skeleton. Therefore
+\(SS(\Theta(\sigma,\bar\chi))\subset\Lambda_\Sigma\).
+\end{proof}
+
+\begin{definition}
+The elementary theta brane associated to \((\sigma,\bar\chi)\) is the Fukaya
+object
+\[
+L_{\sigma,\bar\chi}
+:=
+\Phi_\Sigma\bigl(\Theta(\sigma,\bar\chi)\bigr)
+\in
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k).
+\]
+\end{definition}
+
+Thus \(L_{\sigma,\bar\chi}\) is not introduced by an independent Floer-theoretic
+construction in this paper. It is defined as the Fukaya object corresponding
+to the theta sheaf under the microlocal sheaf--Fukaya equivalence. The
+polyhedron \(P_{\sigma,\bar\chi}\) records the base support of the sheaf,
+while the conormal geometry of its faces records the Lagrangian directions
+controlled by the FLTZ skeleton.
+
+\begin{proposition}[Morphisms between elementary theta branes]
+Let \(\sigma,\tau\in\Sigma\), \(\bar\chi\in M_\sigma\), and
+\(\bar\psi\in M_\tau\). Then
+\[
+\operatorname{RHom}_{\mathcal W}
+\bigl(L_{\sigma,\bar\chi},L_{\tau,\bar\psi}\bigr)
+\simeq
+\operatorname{RHom}
+\bigl(\Theta(\sigma,\bar\chi),\Theta(\tau,\bar\psi)\bigr).
+\]
+Consequently,
+\[
+\operatorname{RHom}_{\mathcal W}
+\bigl(L_{\sigma,\bar\chi},L_{\tau,\bar\psi}\bigr)
+\simeq
+\begin{cases}
+k, & P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+In the nonzero case, the complex is concentrated in degree zero.
+\end{proposition}
+
+\begin{proof}
+The first quasi-isomorphism follows from the fact that
+\(\Phi_\Sigma\) is an equivalence of dg categories. The explicit computation
+then follows from the Hom-complex calculation for constructible theta
+sheaves proved in Section 5.2.
+\end{proof}
+
+Thus the theta sheaves become elementary Fukaya branes under the microlocal
+sheaf--Fukaya correspondence. In the sheaf-theoretic proof of the CCC, the
+objects \(\Theta(\sigma,\bar\chi)\) generate the constructible side. In the
+Fukaya-theoretic interpretation, the corresponding objects
+\(L_{\sigma,\bar\chi}\) form the elementary branes whose asymptotic behavior
+is governed by \(\Lambda_\Sigma^\infty\).
+\subsection{The Fukaya-Theoretic Form of the CCC}
+We now combine the toric CCC with the microlocal sheaf--Fukaya
+correspondence recalled in Section 6.2. The CCC proved in Section 5 gives an
+equivalence between the equivariant coherent category of the toric variety
+and the constructible category with singular support in the FLTZ skeleton.
+The microlocal sheaf--Fukaya correspondence identifies this constructible
+category with a stopped wrapped Fukaya category of the cotangent bundle.
+
+\begin{corollary}[Fukaya-theoretic form of the toric CCC]
+Let \(X_\Sigma\) be a smooth toric variety, and let
+\(\Lambda_\Sigma\subset T^*M_{\mathbb R}\) be the FLTZ skeleton. After fixing
+the Fukaya-theoretic brane and grading conventions, there is an equivalence
+of dg categories
+\[
+\operatorname{Perf}_T(X_\Sigma)
+\simeq
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k).
+\]
+Equivalently, one has a chain of equivalences
+\[
+\operatorname{Perf}_T(X_\Sigma)
+\simeq
+Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)^c
+\simeq
+\mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k).
+\]
+\end{corollary}
+
+\begin{proof}
+The first equivalence in the chain is the compact form of the toric
+coherent--constructible correspondence proved in Section 5. The second
+equivalence is the microlocal sheaf--Fukaya correspondence from Theorem 6.1,
+applied to \(Y=M_{\mathbb R}\) and
+\(\Lambda=\Lambda_\Sigma\). Composing these equivalences gives the desired
+Fukaya-theoretic form of the CCC.
+\end{proof}
+
+Thus the equivariant coherent category of the toric variety can be interpreted
+as a stopped wrapped Fukaya category of the cotangent bundle
+\(T^*M_{\mathbb R}\). Under this interpretation, the FLTZ skeleton plays the
+role of the stop at infinity. On the constructible side, it appears as the
+singular-support condition
+\[
+SS(F)\subset\Lambda_\Sigma.
+\]
+On the Fukaya side, its boundary at infinity
+\(\Lambda_\Sigma^\infty\subset S^*M_{\mathbb R}\) controls the allowed
+asymptotic behavior of Lagrangian branes.
+
+The theta objects also admit a Fukaya-theoretic interpretation. The coherent
+theta object \(\Theta'(\sigma,\bar\chi)\) corresponds under the CCC to the
+constructible theta sheaf \(\Theta(\sigma,\bar\chi)\), and under the
+microlocal sheaf--Fukaya correspondence this object corresponds to the
+elementary theta brane \(L_{\sigma,\bar\chi}\). Therefore the correspondence
+on generators can be summarized as
+\[
+\Theta'(\sigma,\bar\chi)
+\longleftrightarrow
+\Theta(\sigma,\bar\chi)
+\longleftrightarrow
+L_{\sigma,\bar\chi}.
+\]
+In this way, the Fukaya-theoretic form of the CCC identifies coherent theta
+objects with elementary Lagrangian branes governed by the same polyhedral
+data.
+
+This formulation explains the role of the symplectic material from the
+beginning of the paper. The moment map and moment polytope describe how
+convex geometry arises naturally from toric symplectic geometry, while the
+FLTZ skeleton gives the corresponding microlocal Lagrangian support condition
+inside \(T^*M_{\mathbb R}\). The sheaf-theoretic CCC can therefore be viewed
+as a bridge between equivariant coherent sheaves on \(X_\Sigma\) and Fukaya
+objects controlled by the FLTZ skeleton.

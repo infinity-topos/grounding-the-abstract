@@ -1,0 +1,636 @@
+\section{Generalizations of the Coherent--Constructible Correspondence}
+
+The previous sections focused on the coherent--constructible correspondence for
+smooth toric varieties. In that setting, the input is a fan
+\(\Sigma\subset N_{\mathbb R}\), the coherent side is modeled by
+\(\mathrm{Perf}_T(X_\Sigma)\), and the constructible side is the category of
+constructible sheaves on \(M_{\mathbb R}\) whose singular support is contained
+in the FLTZ skeleton \(\Lambda_\Sigma\). The key mechanism is the correspondence
+between coherent theta objects and constructible theta sheaves:
+\[
+\Theta'(\sigma,\chi)
+\longleftrightarrow
+\Theta(\sigma,\chi).
+\]
+The Hom-complex comparison is then controlled by inclusions of polyhedra
+\[
+\chi+\sigma^\vee\subset \psi+\tau^\vee.
+\]
+
+The purpose of this section is to indicate several directions in which this
+picture can be generalized. We will not give complete proofs of these
+generalizations. Instead, we explain how the basic objects of the toric CCC are
+modified, and how the same organizing principle remains visible.
+
+There are three generalizations that are especially relevant for the present
+discussion. The first replaces toric varieties by toric Deligne--Mumford stacks.
+In this case, the fan is replaced by a stacky fan. The constructible side is
+still controlled by a conic subset of \(T^*M_{\mathbb R}\), but the lattice data
+are modified by the stacky structure. This changes the indexing of theta
+objects and records finite stabilizer information.
+
+The second generalization concerns toric fibrations. Instead of considering a
+single toric variety over a point, one considers a family whose fibers are
+toric varieties with fixed fan. The coherent side becomes a category of sheaves
+on a relative toric space over a base, while the constructible side is no
+longer just a single sheaf category on \(M_{\mathbb R}\). It is naturally
+described in terms of a sheaf, or local system, of categories over the base.
+
+The third generalization concerns Fourier--Mukai transforms. In the usual
+coherent setting, Fourier--Mukai kernels define functors between derived
+categories of coherent sheaves. Through the CCC, such functors can be translated
+into operations on constructible sheaves. This gives a constructible
+interpretation of certain derived equivalences and birational transformations
+in toric geometry.
+
+Thus, the guiding question of this chapter is not whether the formula for the
+CCC remains exactly the same. Rather, it is how each part of the correspondence
+changes:
+\[
+\text{fan}
+\quad\rightsquigarrow\quad
+\text{modified combinatorial input},
+\]
+\[
+\mathrm{Perf}_T(X_\Sigma)
+\quad\rightsquigarrow\quad
+\text{coherent category in the new setting},
+\]
+\[
+Sh_{\Lambda_\Sigma}(M_{\mathbb R})
+\quad\rightsquigarrow\quad
+\text{constructible or microlocal category with modified support condition}.
+\]
+In each case, the same basic philosophy remains: algebraic data on the coherent
+side are translated into constructible sheaves with prescribed microlocal
+behavior.
+
+
+\subsection{Stacky Fans and Toric Deligne--Mumford Stacks}
+
+The first generalization replaces toric varieties by toric Deligne--Mumford
+stacks. The main change is not the form of the correspondence, but the
+combinatorial input. Instead of an ordinary fan \(\Sigma\subset N_{\mathbb R}\),
+one uses a stacky fan
+\[
+\boldsymbol\Sigma=(N,\Sigma,\beta).
+\]
+Here \(\Sigma\) still records the real cone directions, while \(\beta\) records
+the stacky lattice data along the rays. Thus the constructible side is still
+controlled by a conic subset of \(T^*M_{\mathbb R}\), but the indexing of theta
+objects is modified by the stacky structure.
+
+The basic mechanism remains the same. Coherent theta objects are matched with
+constructible theta sheaves,
+\[
+\Theta'(\sigma,\chi)\longleftrightarrow \Theta(\sigma,\chi),
+\]
+and Hom-complexes are still controlled by inclusions of polyhedra. What changes
+is the meaning of the character \(\chi\). In the stacky case, the local lattice
+attached to a cone may be different from the ordinary lattice coming from the
+coarse toric variety.
+
+We illustrate this by the weighted projective line \(\mathbb P(1,2)\). Its
+coarse moduli space is \(\mathbb P^1\), but it has a stacky point of order
+\(2\). We describe it by the following stacky fan. Let \(N=\mathbb Z\), and let
+\(\Sigma\) be the complete fan in \(N_{\mathbb R}=\mathbb R\), with rays
+\[
+\rho_+=\mathbb R_{\ge 0},
+\qquad
+\rho_-=\mathbb R_{\le 0}.
+\]
+The stacky vectors are chosen to be
+\[
+b_+=1,\qquad b_-=-2.
+\]
+Equivalently, the map \(\beta:\mathbb Z^2\to N\) sends the two standard basis
+vectors to \(1\) and \(-2\). The nonprimitive vector \(-2\) records the stacky
+structure at one torus fixed point.
+
+We now compute the corresponding FLTZ skeleton. The zero cone contributes the
+zero section
+\[
+\mathbb R\times\{0\}\subset T^*\mathbb R.
+\]
+For the ray \(\rho_+\), the local lattice is generated by \(b_+=1\), so the
+corresponding character lattice is the ordinary lattice \(\mathbb Z\). Hence
+\(\rho_+\) contributes negative conormal rays over the integral points:
+\[
+\bigcup_{a\in\mathbb Z}\{a\}\times\mathbb R_{\le 0}.
+\]
+For the ray \(\rho_-\), the local lattice is generated by \(b_-=-2\). Its dual
+lattice is naturally identified with \(\frac{1}{2}\mathbb Z\subset\mathbb R\).
+Therefore \(\rho_-\) contributes positive conormal rays over the half-integral
+points:
+\[
+\bigcup_{b\in \frac{1}{2}\mathbb Z}\{b\}\times\mathbb R_{\ge 0}.
+\]
+Thus
+\[
+\Lambda_{\boldsymbol\Sigma}
+=
+\mathbb R\times\{0\}
+\cup
+\bigcup_{a\in\mathbb Z}\{a\}\times\mathbb R_{\le 0}
+\cup
+\bigcup_{b\in \frac{1}{2}\mathbb Z}\{b\}\times\mathbb R_{\ge 0}.
+\]
+Compared with the ordinary \(\mathbb P^1\), the new feature is the appearance
+of half-integral base points in one conormal direction. This is the
+constructible trace of the stacky stabilizer of order \(2\).
+
+The theta sheaves are described in the same way as before, but with the
+modified indexing set. For \(a\in\mathbb Z\), the ray \(\rho_+\) gives
+\[
+P_{\rho_+,a}=[a,\infty),
+\qquad
+\Theta(\rho_+,a)
+=
+(i_{[a,\infty)})_*\omega_{[a,\infty)}.
+\]
+For \(b\in \frac{1}{2}\mathbb Z\), the ray \(\rho_-\) gives
+\[
+P_{\rho_-,b}=(-\infty,b],
+\qquad
+\Theta(\rho_-,b)
+=
+(i_{(-\infty,b]})_*\omega_{(-\infty,b]}.
+\]
+Thus the stacky structure does not change the fact that theta sheaves are
+costandard sheaves on half-lines, but it changes where their endpoints are
+allowed to lie.
+
+The Hom-complex calculation has the same form as in the ordinary toric case.
+For \(a,a'\in\mathbb Z\),
+\[
+\mathrm{RHom}(\Theta(\rho_+,a),\Theta(\rho_+,a'))
+\simeq
+\begin{cases}
+k, & a\ge a',\\
+0, & a<a',
+\end{cases}
+\]
+because \([a,\infty)\subset [a',\infty)\) if and only if \(a\ge a'\). For
+\(b,b'\in \frac{1}{2}\mathbb Z\),
+\[
+\mathrm{RHom}(\Theta(\rho_-,b),\Theta(\rho_-,b'))
+\simeq
+\begin{cases}
+k, & b\le b',\\
+0, & b>b',
+\end{cases}
+\]
+because \((-\infty,b]\subset(-\infty,b']\) if and only if \(b\le b'\).
+
+This example shows the basic point of the stacky generalization. The formula
+for the Hom-complex is unchanged; it is still governed by inclusion of
+polyhedra. What changes is the lattice of allowed translations. In the ordinary
+\(\mathbb P^1\) case, both families of endpoints lie in \(\mathbb Z\). For the
+weighted projective line \(\mathbb P(1,2)\), one family still lies in
+\(\mathbb Z\), while the other lies in \(\frac{1}{2}\mathbb Z\). The fractional
+positions in the FLTZ skeleton encode the stacky structure.
+
+\subsection{Toric Fibrations}
+
+
+The second generalization replaces a single toric variety by a toric fibration.
+The guiding idea is that the fan still controls the toric directions, while
+the base of the fibration contributes coefficients to the Hom-complexes.
+
+Let \(B\) be a smooth variety, let \(T\) be an algebraic torus, and let
+\(P\to B\) be a principal \(T\)-bundle. Given a fan \(\Sigma\) for a toric
+variety \(X_\Sigma\), one can form the associated toric fibration
+\[
+X_{\Sigma,P}:=P\times_T X_\Sigma \longrightarrow B.
+\]
+The fiber over each point of \(B\) is isomorphic to \(X_\Sigma\). Thus the
+toric geometry is constant along the base, but the gluing over \(B\) may be
+twisted by the principal \(T\)-bundle.
+
+The constructible side should be viewed as a relative version of the ordinary
+constructible category. The FLTZ skeleton is still determined by the fan
+\(\Sigma\), so the microlocal directions in \(T^*M_{\mathbb R}\) are the same
+as in the toric variety case. What changes is that the constructible sheaves
+now carry coefficients coming from the base \(B\). Equivalently, the ordinary
+condition
+\[
+SS(F)\subset \Lambda_\Sigma
+\]
+is kept, but the values of the sheaves are allowed to remember objects on
+\(B\), such as perfect complexes or line bundles associated to the principal
+\(T\)-bundle.
+
+The coherent theta objects are also modified in a simple way. For a character
+\(\lambda\in M\), the principal \(T\)-bundle \(P\to B\) determines an associated
+line bundle
+\[
+\mathcal L_\lambda:=P\times_T \mathbb C_\lambda
+\]
+on \(B\), where \(\mathbb C_\lambda\) denotes the one-dimensional
+\(T\)-representation of weight \(\lambda\). Thus a monomial of weight
+\(\lambda\) no longer contributes only a scalar; it contributes the line bundle
+\(\mathcal L_\lambda\) on the base. This is the main new feature of the
+fibration case.
+
+We illustrate this in the simplest example. Let \(T=\mathbb G_m\), let
+\(P\to B\) be a principal \(\mathbb G_m\)-bundle, and take \(X_\Sigma=\mathbb P^1\).
+The associated space
+\[
+X_{\Sigma,P}=P\times_{\mathbb G_m}\mathbb P^1
+\]
+is a \(\mathbb P^1\)-bundle over \(B\).
+
+The fan is the complete fan in \(N_{\mathbb R}=\mathbb R\), with rays
+\[
+\rho_+=\mathbb R_{\ge 0},
+\qquad
+\rho_-=\mathbb R_{\le 0}.
+\]
+Therefore the FLTZ skeleton is the same one as for \(\mathbb P^1\):
+\[
+\Lambda_\Sigma
+=
+\mathbb R\times\{0\}
+\cup
+\bigcup_{a\in\mathbb Z}\{a\}\times\mathbb R_{\le 0}
+\cup
+\bigcup_{a\in\mathbb Z}\{a\}\times\mathbb R_{\ge 0}.
+\]
+Thus the allowed singular directions are unchanged. The difference is that the
+theta sheaves now carry coefficients from \(B\).
+
+For \(a\in\mathbb Z\), the ray \(\rho_+\) gives the half-line
+\[
+P_{\rho_+,a}=[a,\infty),
+\]
+and the corresponding constructible theta object is still modeled on
+\[
+(i_{[a,\infty)})_*\omega_{[a,\infty)}.
+\]
+Similarly, the ray \(\rho_-\) gives theta objects supported on half-lines of
+the form \((-\infty,a]\). Hence the polyhedral part of the construction is the
+same as before.
+
+Now consider the Hom-complex. In the ordinary toric case, one has
+\[
+\mathrm{RHom}(\Theta(\rho_+,a),\Theta(\rho_+,b))
+\simeq
+\begin{cases}
+k, & a\ge b,\\
+0, & a<b.
+\end{cases}
+\]
+For the toric fibration, the same inclusion condition remains, but the
+nonzero term is replaced by cohomology on the base. With the convention above,
+a morphism from weight \(a\) to weight \(b\) is represented by a monomial of
+weight \(a-b\). Therefore
+\[
+\mathrm{RHom}_{X_{\Sigma,P}}
+(\Theta'_P(\rho_+,a),\Theta'_P(\rho_+,b))
+\simeq
+\begin{cases}
+\mathrm{R}\Gamma(B,\mathcal L_{a-b}), & a\ge b,\\
+0, & a<b.
+\end{cases}
+\]
+The condition \(a\ge b\) is exactly the same condition as
+\[
+[a,\infty)\subset [b,\infty).
+\]
+Thus the polyhedral inclusion still determines whether the Hom-complex
+vanishes, while the base \(B\) determines the value of the nonzero
+Hom-complex.
+
+The same calculation applies to the other ray:
+\[
+\mathrm{RHom}_{X_{\Sigma,P}}
+(\Theta'_P(\rho_-,a),\Theta'_P(\rho_-,b))
+\simeq
+\begin{cases}
+\mathrm{R}\Gamma(B,\mathcal L_{a-b}), & a\le b,\\
+0, & a>b.
+\end{cases}
+\]
+Here the inequality is reversed because
+\[
+(-\infty,a]\subset(-\infty,b]
+\]
+if and only if \(a\le b\).
+
+This example shows the main point of the toric fibration version of the CCC.
+The fan and the FLTZ skeleton still control the microlocal directions. The
+theta sheaves are still supported on the same polyhedra in \(M_{\mathbb R}\).
+The Hom-complex is still governed by inclusion of these polyhedra. What changes
+is the coefficient of a nonzero Hom-complex: instead of obtaining \(k\), one
+obtains the derived global sections of an associated line bundle on the base.
+
+In this sense, the toric fibration version is a relative form of the ordinary
+toric CCC:
+\[
+\text{polyhedral inclusion}
+\quad\Longleftrightarrow\quad
+\text{regular monomial direction},
+\]
+but the monomial direction now carries the additional coefficient
+\(\mathcal L_\lambda\) coming from the principal torus bundle over \(B\).
+When \(B=\operatorname{Spec}\mathbb C\), all associated line bundles have
+one-dimensional spaces of global sections, and the ordinary toric CCC is
+recovered.
+
+
+
+\subsection{Fourier--Mukai Transforms from the Constructible Viewpoint}
+
+The third generalization concerns Fourier--Mukai transforms. In the coherent
+setting, a Fourier--Mukai transform is a way to describe a functor between
+derived categories by using a kernel on a product. This should be understood
+as a categorical form of correspondence. Instead of studying only ordinary maps
+\(X\to Y\), one studies objects on \(X\times Y\), which act as generalized
+relations between \(X\) and \(Y\).
+
+Let \(X\) and \(Y\) be smooth projective varieties, and let
+\[
+K\in \mathrm{Perf}(X\times Y).
+\]
+We regard \(K\) as a kernel from \(X\) to \(Y\). It defines a functor
+\[
+\Phi_K:\mathrm{Perf}(X)\longrightarrow \mathrm{Perf}(Y)
+\]
+by
+\[
+\Phi_K(E)
+=
+\mathrm{R}p_{Y*}\bigl(p_X^*E\otimes^{\mathrm L}K\bigr),
+\]
+where \(p_X:X\times Y\to X\) and \(p_Y:X\times Y\to Y\) are the two projections.
+Thus the construction has three steps: pull \(E\) back to \(X\times Y\), tensor
+it with the kernel \(K\), and then push the result forward to \(Y\).
+
+The reason that \(K\) may be viewed as a correspondence is already visible for
+ordinary morphisms. If \(f:X\to Y\) is a morphism, its graph
+\[
+\Gamma_f\subset X\times Y
+\]
+is a subvariety of the product. The structure sheaf \(\mathcal O_{\Gamma_f}\)
+is a kernel, and the associated Fourier--Mukai transform recovers the derived
+pushforward:
+\[
+\Phi_{\mathcal O_{\Gamma_f}}(E)
+\simeq
+\mathrm{R}f_*E.
+\]
+Thus an ordinary map gives a special kind of kernel. Fourier--Mukai transforms
+generalize this by allowing kernels that do not necessarily come from graphs.
+
+Several standard functors are of Fourier--Mukai type. We record the basic
+examples that will be useful for comparison.
+
+\begin{enumerate}
+    \item The identity functor is given by the diagonal kernel. If
+    \(\Delta:X\hookrightarrow X\times X\) is the diagonal embedding, then
+    \[
+    K=\Delta_*\mathcal O_X
+    \]
+    defines
+    \[
+    \Phi_K\simeq \mathrm{id}_{\mathrm{Perf}(X)}.
+    \]
+    Thus the diagonal plays the role of the identity correspondence.
+
+    \item Tensoring by a line bundle is also a Fourier--Mukai transform. If
+    \(L\) is a line bundle on \(X\), then the kernel
+    \[
+    K=\Delta_*L\in \mathrm{Perf}(X\times X)
+    \]
+    defines the functor
+    \[
+    E\longmapsto E\otimes L.
+    \]
+    This is the example that we will compute below in the toric setting.
+
+    \item Pushforward along a morphism is obtained from the graph kernel. Let
+    \(f:X\to Y\) be a morphism, and let
+    \[
+    \Gamma_f\subset X\times Y
+    \]
+    be its graph. Then
+    \[
+    K=\mathcal O_{\Gamma_f}\in \mathrm{Perf}(X\times Y)
+    \]
+    defines
+    \[
+    \Phi_K(E)\simeq \mathrm{R}f_*E.
+    \]
+    Hence an ordinary map \(f:X\to Y\) is a special case of a
+    Fourier--Mukai correspondence.
+
+    \item Pullback along a morphism is obtained from the same graph, but with
+    the two factors reversed. If \(f:X\to Y\), then we regard
+    \(\Gamma_f\) as a subvariety of \(Y\times X\). The corresponding kernel
+    gives a functor
+    \[
+    \mathrm{Perf}(Y)\longrightarrow \mathrm{Perf}(X),
+    \]
+    which is identified, under the usual derived convention, with
+    \[
+    F\longmapsto \mathrm{L}f^*F.
+    \]
+    Thus pullback is also represented by a kernel, provided the derived
+    pullback is defined in the chosen category.
+
+    \item More generally, a geometric correspondence gives a Fourier--Mukai
+    type functor. Suppose that
+    \[
+    X \xleftarrow{p} Z \xrightarrow{q} Y
+    \]
+    is a correspondence and that \(F\in \mathrm{Perf}(Z)\). If
+    \((p,q):Z\to X\times Y\), then the kernel
+    \[
+    K=\mathrm{R}(p,q)_*F
+    \]
+    defines a functor of the form
+    \[
+    E\longmapsto \mathrm{R}q_*(p^*E\otimes^{\mathrm L}F),
+    \]
+    whenever these operations are well-defined. Thus a Fourier--Mukai kernel
+    can be viewed as a categorical correspondence between \(X\) and \(Y\).
+\end{enumerate}
+
+The word ``Fourier'' is most visible in the classical case of abelian varieties:
+there the kernel is the Poincaré line bundle on \(A\times \widehat A\), where
+\(\widehat A\) is the dual abelian variety. This kernel plays the role of the
+exponential kernel in the classical Fourier transform. In modern usage,
+however, the term Fourier--Mukai transform is used more generally for functors
+defined by kernels.
+
+From the point of view of the coherent--constructible correspondence, the
+natural question is how such kernel functors appear on the constructible side.
+Since the CCC identifies coherent theta objects with constructible theta
+sheaves,
+\[
+\Theta'(\sigma,\chi)\longleftrightarrow \Theta(\sigma,\chi),
+\]
+one can study a Fourier--Mukai type functor by computing its action on theta
+generators. If the coherent kernel sends theta objects to explicitly described
+coherent objects, then the CCC translates this action into an operation on
+polyhedral sheaves.
+
+The example below is different from the toric fibration example of the previous
+subsection. There, the main point was that nonzero Hom-complexes acquire
+coefficients from the base. Here we keep a single toric variety and study how a
+kernel acts as a functor on the theta generators.
+
+Let \(X=\mathbb P^2\). Its fan has rays generated by
+\[
+v_1=(1,0),\qquad
+v_2=(0,1),\qquad
+v_3=(-1,-1),
+\]
+with maximal cones
+\[
+\sigma_{12}=\langle v_1,v_2\rangle,\qquad
+\sigma_{23}=\langle v_2,v_3\rangle,\qquad
+\sigma_{31}=\langle v_3,v_1\rangle.
+\]
+Consider the Fourier--Mukai transform given by tensoring with the equivariant
+line bundle
+\[
+\mathcal O_{\mathbb P^2}(1)\cong \mathcal O_{\mathbb P^2}(D_{\rho_3}).
+\]
+Equivalently, the kernel is
+\[
+K=\Delta_*\mathcal O_{\mathbb P^2}(1)
+\in \mathrm{Perf}(\mathbb P^2\times\mathbb P^2).
+\]
+
+To compute its effect on theta generators, we use the local Cartier data of
+\(\mathcal O_{\mathbb P^2}(1)\). With the above convention, these local
+characters are
+\[
+m_{\sigma_{12}}=(0,0),\qquad
+m_{\sigma_{23}}=(1,0),\qquad
+m_{\sigma_{31}}=(0,1).
+\]
+Indeed, for \(D_{\rho_3}\), the defining condition is
+\[
+\langle m_\sigma,v_\rho\rangle=-c_\rho
+\]
+for rays \(\rho\subset\sigma\), where \(c_{\rho_3}=1\) and
+\(c_{\rho_1}=c_{\rho_2}=0\).
+
+On the coherent side, tensoring by \(\mathcal O_{\mathbb P^2}(1)\) shifts the
+local equivariant weight on each affine chart:
+\[
+\Theta'(\sigma,\chi)
+\longmapsto
+\Theta'(\sigma,\chi+m_\sigma).
+\]
+Under the CCC, this becomes
+\[
+\Theta(\sigma,\chi)
+\longmapsto
+\Theta(\sigma,\chi+m_\sigma).
+\]
+Since
+\[
+\Theta(\sigma,\chi)
+=
+(i_{\chi+\sigma^\vee})_*\omega_{\chi+\sigma^\vee},
+\]
+the corresponding constructible operation is the translation
+\[
+\chi+\sigma^\vee
+\longmapsto
+\chi+m_\sigma+\sigma^\vee.
+\]
+
+Let us spell this out for the three maximal cones.
+
+For \(\sigma_{12}\), one has
+\[
+\sigma_{12}^\vee
+=
+\{m_1\ge 0,\ m_2\ge 0\}.
+\]
+Thus
+\[
+P_{\sigma_{12},(a,b)}
+=
+\{m_1\ge a,\ m_2\ge b\}.
+\]
+Since \(m_{\sigma_{12}}=(0,0)\), tensoring by
+\(\mathcal O_{\mathbb P^2}(1)\) does not shift the theta sheaves on this chart:
+\[
+P_{\sigma_{12},(a,b)}
+\longmapsto
+P_{\sigma_{12},(a,b)}.
+\]
+
+For \(\sigma_{23}\), the dual cone is
+\[
+\sigma_{23}^\vee
+=
+\{m_2\ge 0,\ m_1+m_2\le 0\}.
+\]
+Hence
+\[
+P_{\sigma_{23},(a,b)}
+=
+\{m_2\ge b,\ m_1+m_2\le a+b\}.
+\]
+Since \(m_{\sigma_{23}}=(1,0)\), the transform sends this sector to
+\[
+P_{\sigma_{23},(a+1,b)}
+=
+\{m_2\ge b,\ m_1+m_2\le a+b+1\}.
+\]
+Thus the corresponding constructible theta sheaf is translated by the local
+Cartier character \((1,0)\).
+
+For \(\sigma_{31}\), the dual cone is
+\[
+\sigma_{31}^\vee
+=
+\{m_1\ge 0,\ m_1+m_2\le 0\}.
+\]
+Hence
+\[
+P_{\sigma_{31},(a,b)}
+=
+\{m_1\ge a,\ m_1+m_2\le a+b\}.
+\]
+Since \(m_{\sigma_{31}}=(0,1)\), the transform sends this sector to
+\[
+P_{\sigma_{31},(a,b+1)}
+=
+\{m_1\ge a,\ m_1+m_2\le a+b+1\}.
+\]
+
+This calculation shows how the diagonal kernel
+\[
+\Delta_*\mathcal O_{\mathbb P^2}(1)
+\]
+appears on the constructible side. It acts on coherent theta generators by
+shifting their local equivariant weights. Under the CCC, the same operation
+becomes translation of the polyhedral supports of the corresponding
+constructible theta sheaves.
+
+The Hom-complex pattern is compatible with this operation. If
+\[
+P_{\sigma,\chi}\subset P_{\sigma,\psi},
+\]
+then after tensoring by \(\mathcal O_{\mathbb P^2}(1)\) the corresponding
+inclusion becomes
+\[
+P_{\sigma,\chi+m_\sigma}\subset P_{\sigma,\psi+m_\sigma}.
+\]
+Thus the inclusion condition is preserved. Equivalently, on the coherent side,
+tensoring by a line bundle is an autoequivalence, and the same autoequivalence
+is seen constructibly as translation of the theta polyhedra.
+
+Therefore this subsection illustrates a different use of the CCC from the
+toric fibration case. A toric fibration changes the values of the Hom-complexes
+by introducing coefficients from a base. A Fourier--Mukai kernel, by contrast,
+acts as a functor on the CCC category itself. In the example above, the kernel
+\(\Delta_*\mathcal O_{\mathbb P^2}(1)\) acts by translating the polyhedral
+supports determined by the local Cartier data of the line bundle.

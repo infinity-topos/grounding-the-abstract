@@ -1,0 +1,266 @@
+\section{The Toric Coherent--Constructible Correspondence}
+We now state the toric coherent--constructible correspondence. Let
+\(X_\Sigma\) be a smooth toric variety with acting torus \(T\), and let
+\(\Lambda_\Sigma\subset T^*M_{\mathbb R}\) be the FLTZ skeleton associated to
+the fan \(\Sigma\). The coherent side is the equivariant perfect category
+\(\operatorname{Perf}_T(X_\Sigma)\), which agrees with
+\(D^b(\operatorname{Coh}_T(X_\Sigma))\) in the smooth case. The
+constructible side is the dg category of constructible sheaves on
+\(M_{\mathbb R}\) with singular support contained in \(\Lambda_\Sigma\).
+
+\begin{theorem}[Toric coherent--constructible correspondence]
+Let \(X_\Sigma\) be a smooth toric variety. There is a quasi-equivalence of
+dg categories
+\[
+\kappa_\Sigma:
+\operatorname{Perf}_T(X_\Sigma)
+\xrightarrow{\sim}
+Sh_{\Lambda_\Sigma}(M_{\mathbb R}).
+\]
+Equivalently, on homotopy categories one obtains an equivalence
+\[
+D^b(\operatorname{Coh}_T(X_\Sigma))
+\simeq
+H^0\bigl(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\bigr).
+\]
+\end{theorem}
+
+The proof will be given by comparing the theta generators on the two sides.
+The objects \(\Theta'(\sigma,\chi)\) and \(\Theta(\sigma,\chi)\) are indexed
+by the same data \((\sigma,\chi)\), and the functor \(\kappa_\Sigma\) is
+characterized by
+\[
+\kappa_\Sigma\bigl(\Theta'(\sigma,\chi)\bigr)=\Theta(\sigma,\chi).
+\]
+It remains to compare the Hom-complexes between these generators and then
+apply the generator criterion for quasi-equivalences.
+
+
+\subsection{The Correspondence of Generators}
+
+The theta objects on the two sides are indexed by the same combinatorial
+data. More precisely, for each cone \(\sigma\in\Sigma\), let
+\(q_\sigma:M\to M_\sigma\) be the quotient map.
+
+\begin{lemma}
+Let \(\sigma\in\Sigma\), and let \(\chi,\chi'\in M\). If
+\(q_\sigma(\chi)=q_\sigma(\chi')\), then
+\(\Theta'(\sigma,\chi)\simeq \Theta'(\sigma,\chi')\).
+Hence the coherent-side theta object depends only on the class
+\(\bar\chi\in M_\sigma\).
+\end{lemma}
+
+\begin{proof}
+The condition \(q_\sigma(\chi)=q_\sigma(\chi')\) means that
+\(\chi'-\chi\in\sigma^\perp\cap M\). Put \(m_0=\chi'-\chi\). Then the
+monomial \(\chi^{m_0}\) is an invertible regular function on \(U_\sigma\).
+Multiplication by \(\chi^{m_0}\) gives a \(T\)-equivariant isomorphism
+\(\mathcal O_{U_\sigma}(\chi)\simeq\mathcal O_{U_\sigma}(\chi')\), and
+pushing forward along \(i_\sigma:U_\sigma\hookrightarrow X_\Sigma\) gives
+\(\Theta'(\sigma,\chi)\simeq\Theta'(\sigma,\chi')\).
+\end{proof}
+
+Thus we may write the coherent-side theta object as
+\(\Theta'(\sigma,\bar\chi)\), where \(\bar\chi\in M_\sigma\). The
+constructible theta object \(\Theta(\sigma,\bar\chi)\) is already indexed by
+the same data. The correspondence of generators is therefore
+\[
+\Theta'(\sigma,\bar\chi)\longmapsto \Theta(\sigma,\bar\chi).
+\]
+
+The functor \(\kappa_\Sigma\), once constructed, will be characterized on
+theta generators by
+\[
+\kappa_\Sigma\bigl(\Theta'(\sigma,\bar\chi)\bigr)
+=
+\Theta(\sigma,\bar\chi).
+\]
+The next step is to compare the Hom-complexes between these generators. This
+comparison is the essential computation from which the CCC functor and the
+quasi-equivalence will follow.
+\subsection{Hom-Complex Computations}
+We now compare the Hom-complexes between theta objects. For
+\(\bar\chi\in M_\sigma\), choose a lift \(\chi\in M\) and write
+\(P_{\sigma,\bar\chi}:=\chi+\sigma^\vee\). This subset is independent of the
+chosen lift.
+
+\begin{proposition}[Hom-complex comparison]
+Let \(\sigma,\tau\in\Sigma\), \(\bar\chi\in M_\sigma\), and
+\(\bar\psi\in M_\tau\). Then there is a natural quasi-isomorphism
+\[
+\operatorname{RHom}_T
+\bigl(\Theta'(\sigma,\bar\chi),\Theta'(\tau,\bar\psi)\bigr)
+\simeq
+\operatorname{RHom}
+\bigl(\Theta(\sigma,\bar\chi),\Theta(\tau,\bar\psi)\bigr).
+\]
+More explicitly, both sides are quasi-isomorphic to
+\[
+\begin{cases}
+k, & P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+In the nonzero case, the complex is concentrated in degree zero.
+\end{proposition}
+
+\begin{proof}
+We compute the two sides separately. On the coherent side, a morphism
+\(\Theta'(\sigma,\bar\chi)\to\Theta'(\tau,\bar\psi)\) is determined by an
+equivariant monomial map between the corresponding equivariant line bundles
+on the relevant toric affine charts. With our linearization convention, the
+possible equivariant map is multiplication by the monomial of weight
+\(\chi-\psi\). This multiplication map is regular precisely when
+\(P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi}\). If this inclusion holds,
+the space of equivariant maps is one-dimensional; if it does not hold, there
+is no equivariant map. Since the relevant toric intersections are affine, no
+higher derived Hom appears. Hence
+\[
+\operatorname{RHom}_T
+\bigl(\Theta'(\sigma,\bar\chi),\Theta'(\tau,\bar\psi)\bigr)
+\simeq
+\begin{cases}
+k, & P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+On the constructible side, the theta objects are costandard sheaves on the
+closed convex polyhedra \(P_{\sigma,\bar\chi}\) and
+\(P_{\tau,\bar\psi}\). For closed convex polyhedra \(P,Q\subset M_{\mathbb R}\),
+one has
+\(\operatorname{RHom}((i_P)_*\omega_P,(i_Q)_*\omega_Q)\simeq k\) if
+\(P\subset Q\), and zero otherwise. This follows from Verdier duality:
+\((i_P)_*\omega_P\simeq D(k_P)\), so the above Hom-complex is dual to the
+corresponding Hom-complex between the constant sheaves \(k_Q\) and \(k_P\).
+For convex polyhedra this complex is the cohomology of a contractible
+polyhedral region when \(P\subset Q\), and is acyclic otherwise.
+
+Applying this with \(P=P_{\sigma,\bar\chi}\) and
+\(Q=P_{\tau,\bar\psi}\), we get
+\[
+\operatorname{RHom}
+\bigl(\Theta(\sigma,\bar\chi),\Theta(\tau,\bar\psi)\bigr)
+\simeq
+\begin{cases}
+k, & P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+Therefore the coherent and constructible Hom-complexes agree.
+
+The comparison is compatible with composition: if
+\(P_{\sigma,\bar\chi}\subset P_{\tau,\bar\psi}\subset
+P_{\upsilon,\bar\eta}\), then the generator of the first Hom-complex
+composes with the generator of the second to give the generator of the third.
+If one of the inclusions fails, the corresponding Hom-complex is zero. Hence
+the quasi-isomorphisms above are compatible with composition.
+\end{proof}
+\subsection{The CCC Functor}
+
+We now construct the functor realizing the correspondence. Let
+\(\mathcal A_\Sigma'\) be the full dg subcategory of
+\(D(\operatorname{QCoh}_T(X_\Sigma))\) whose objects are the coherent-side
+theta objects \(\Theta'(\sigma,\bar\chi)\). Similarly, let
+\(\mathcal A_\Sigma\) be the full dg subcategory of
+\(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\) whose objects are the constructible
+theta objects \(\Theta(\sigma,\bar\chi)\).
+
+Define a map on objects by
+\[
+\Theta'(\sigma,\bar\chi)\longmapsto \Theta(\sigma,\bar\chi).
+\]
+By the Hom-complex comparison in Proposition 5.2, for every pair of indices
+\((\sigma,\bar\chi)\) and \((\tau,\bar\psi)\), there is a natural
+quasi-isomorphism
+\[
+\operatorname{RHom}_T
+\bigl(\Theta'(\sigma,\bar\chi),\Theta'(\tau,\bar\psi)\bigr)
+\simeq
+\operatorname{RHom}
+\bigl(\Theta(\sigma,\bar\chi),\Theta(\tau,\bar\psi)\bigr).
+\]
+These quasi-isomorphisms are compatible with composition. Hence the
+assignment on objects extends to a dg functor
+\[
+\kappa_\Sigma^0:\mathcal A_\Sigma'\longrightarrow \mathcal A_\Sigma.
+\]
+
+The functor \(\kappa_\Sigma^0\) is fully faithful up to quasi-isomorphism on
+the theta subcategories. To obtain the full CCC functor, we extend
+\(\kappa_\Sigma^0\) to the triangulated dg subcategories generated by the
+theta objects. Since exact dg functors preserve shifts, cones, and finite
+direct sums, the assignment extends to an exact dg functor
+\[
+\kappa_\Sigma:
+\big\langle \Theta'(\sigma,\bar\chi)\mid
+\sigma\in\Sigma,\ \bar\chi\in M_\sigma
+\big\rangle
+\longrightarrow
+\big\langle \Theta(\sigma,\bar\chi)\mid
+\sigma\in\Sigma,\ \bar\chi\in M_\sigma
+\big\rangle .
+\]
+
+Equivalently, \(\kappa_\Sigma\) is the exact dg functor characterized by
+\[
+\kappa_\Sigma\bigl(\Theta'(\sigma,\bar\chi)\bigr)
+=
+\Theta(\sigma,\bar\chi)
+\]
+on theta generators, together with the Hom-complex identifications from
+Proposition 5.2. By construction, \(\kappa_\Sigma\) is quasi-fully faithful
+on the generating theta objects. The remaining step is to use the generation
+results to prove that this functor is a quasi-equivalence.
+
+\subsection{Proof of the Quasi-Equivalence}
+
+
+We now prove that the functor constructed above is a quasi-equivalence. By
+construction, \(\kappa_\Sigma\) sends each coherent-side theta object to the
+corresponding constructible theta object:
+\[
+\kappa_\Sigma\bigl(\Theta'(\sigma,\bar\chi)\bigr)
+=
+\Theta(\sigma,\bar\chi).
+\]
+Moreover, Proposition 5.2 shows that, for any
+\(\sigma,\tau\in\Sigma\), \(\bar\chi\in M_\sigma\), and
+\(\bar\psi\in M_\tau\), the induced map on Hom-complexes
+\[
+\operatorname{RHom}_T
+\bigl(\Theta'(\sigma,\bar\chi),\Theta'(\tau,\bar\psi)\bigr)
+\longrightarrow
+\operatorname{RHom}
+\bigl(\Theta(\sigma,\bar\chi),\Theta(\tau,\bar\psi)\bigr)
+\]
+is a quasi-isomorphism.
+
+It remains to check generation. On the coherent side, the theta objects
+\(\Theta'(\sigma,\bar\chi)\) generate the ambient equivariant
+quasi-coherent category. Passing to compact objects gives the perfect
+equivariant category \(\operatorname{Perf}_T(X_\Sigma)\). Since
+\(X_\Sigma\) is smooth, this category is a dg enhancement of
+\(D^b(\operatorname{Coh}_T(X_\Sigma))\). On the constructible side,
+Theorem 4.6 says that the theta objects
+\(\Theta(\sigma,\bar\chi)\) generate
+\(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\).
+
+Thus the hypotheses of the generator criterion for quasi-equivalences are
+satisfied: the functor is exact, it identifies the Hom-complexes between
+generators up to quasi-isomorphism, and the images of the generators
+generate the target. Therefore \(\kappa_\Sigma\) is a quasi-equivalence:
+\[
+\kappa_\Sigma:
+\operatorname{Perf}_T(X_\Sigma)
+\xrightarrow{\sim}
+Sh_{\Lambda_\Sigma}(M_{\mathbb R}).
+\]
+Equivalently, passing to homotopy categories gives
+\[
+D^b(\operatorname{Coh}_T(X_\Sigma))
+\simeq
+H^0\bigl(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\bigr).
+\]
+This proves the toric coherent--constructible correspondence.
+

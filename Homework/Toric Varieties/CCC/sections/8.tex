@@ -1,0 +1,912 @@
+\section{Examples of the Toric CCC}
+The preceding sections established the toric coherent--constructible correspondence in its general form. The proof was based on theta generators, the FLTZ skeleton, and the comparison of Hom-complexes. In this section we illustrate these constructions in several explicit examples.
+
+In each example, we compute the same basic objects. We first describe the fan \(\Sigma\) and the associated toric variety \(X_\Sigma\). We then write down the FLTZ skeleton
+\[
+\Lambda_\Sigma
+=
+\bigcup_{\sigma\in\Sigma}
+\bigcup_{\chi\in M_\sigma}
+(\chi+\sigma^\perp)\times(-\sigma)
+\subset T^*M_{\mathbb R}.
+\]
+This specifies the allowed singular-support directions on the constructible side.
+
+Next, for each cone \(\sigma\in\Sigma\) and character class \(\chi\in M_\sigma\), we identify the constructible theta sheaf
+\[
+\Theta(\sigma,\chi)
+=
+(i_{\chi+\sigma^\vee})_*\omega_{\chi+\sigma^\vee}.
+\]
+We compare it with the coherent theta object
+\[
+\Theta'(\sigma,\chi)
+=
+(i_\sigma)_*\mathcal O_{U_\sigma}(\chi).
+\]
+Thus both sides are indexed by the same combinatorial data \((\sigma,\chi)\).
+
+The main calculation is the Hom-complex between theta objects. On the constructible side, this is determined by an inclusion of polyhedra:
+\[
+\mathrm{RHom}(\Theta(\sigma,\chi),\Theta(\tau,\psi))
+\simeq
+\begin{cases}
+k, & \chi+\sigma^\vee\subset \psi+\tau^\vee,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+The same condition appears on the coherent side as the regularity condition for an equivariant monomial map. Therefore the examples make explicit the basic dictionary
+\[
+\text{equivariant monomial maps}
+\quad\longleftrightarrow\quad
+\text{inclusions of polyhedral sheaves}.
+\]
+
+\subsection{The affine line \texorpdfstring{$\mathbb A^1$}{A1}}
+
+We begin with the affine line. This is the simplest example in which the FLTZ skeleton has a nontrivial conormal direction and the theta sheaves are supported on half-lines.
+
+Let \(N=M=\mathbb Z\), and identify \(N_{\mathbb R}\) and \(M_{\mathbb R}\) with \(\mathbb R\). Let \(\Sigma\) be the fan consisting of the zero cone \(0\) and the ray \(\rho=\mathbb R_{\ge 0}\). The corresponding toric variety is \(X_\Sigma=\mathbb A^1\). Under the identification \(T^*M_{\mathbb R}\simeq M_{\mathbb R}\times N_{\mathbb R}\), the zero cone contributes the zero section \(\mathbb R\times\{0\}\). For the ray \(\rho\), one has \(\rho^\perp=0\), \(M_\rho=M=\mathbb Z\), and \(-\rho=\mathbb R_{\le 0}\). Therefore
+\[
+\Lambda_\Sigma
+=
+\mathbb R\times\{0\}
+\cup
+\bigcup_{a\in\mathbb Z}\{a\}\times\mathbb R_{\le 0}.
+\]
+Thus a sheaf in \(Sh_{\Lambda_\Sigma}(\mathbb R)\) may have singularities only at integral points, and only in the negative cotangent direction.
+
+We now describe the theta sheaves. The zero cone gives \(\sigma^\vee=M_{\mathbb R}=\mathbb R\), so the corresponding constructible theta sheaf is the costandard sheaf on the whole line:
+\[
+\Theta(0,0)=\omega_{\mathbb R}.
+\]
+For the ray \(\rho\), we have \(\rho^\vee=\mathbb R_{\ge 0}\). Hence, for \(a\in M_\rho=\mathbb Z\), the associated polyhedron is
+\[
+P_{\rho,a}=a+\rho^\vee=[a,\infty),
+\]
+and the constructible theta sheaf is
+\[
+\Theta(\rho,a)=(i_{[a,\infty)})_*\omega_{[a,\infty)}.
+\]
+Thus the constructible theta objects for \(\mathbb A^1\) are the costandard sheaves on the half-lines \([a,\infty)\), together with the costandard sheaf on \(\mathbb R\) coming from the zero cone.
+
+On the coherent side, the affine chart corresponding to \(\rho\) is \(U_\rho=\mathbb A^1\), with coordinate ring \(k[x]\) and grading \(\deg x=1\). The coherent theta object attached to \((\rho,a)\) is
+\[
+\Theta'(\rho,a)=\mathcal O_{\mathbb A^1}(a),
+\]
+where the underlying line bundle is trivial and the equivariant structure has weight \(a\). The zero cone corresponds to the dense torus \(U_0=\mathbb G_m\); the associated theta object is \(\Theta'(0,0)=(j_0)_*\mathcal O_{\mathbb G_m}\), where \(j_0:\mathbb G_m\hookrightarrow\mathbb A^1\) is the open embedding. The correspondence sends
+\[
+\Theta'(\rho,a)\longmapsto \Theta(\rho,a),
+\qquad
+\Theta'(0,0)\longmapsto \Theta(0,0).
+\]
+
+The Hom-complexes are determined by inclusions of the corresponding polyhedra. For \(a,b\in\mathbb Z\), one has
+\[
+\mathrm{RHom}(\Theta(\rho,a),\Theta(\rho,b))
+\simeq
+\begin{cases}
+k, & [a,\infty)\subset [b,\infty),\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+Since \([a,\infty)\subset [b,\infty)\) if and only if \(a\ge b\), this becomes
+\[
+\mathrm{RHom}(\Theta(\rho,a),\Theta(\rho,b))
+\simeq
+\begin{cases}
+k, & a\ge b,\\
+0, & a<b.
+\end{cases}
+\]
+The other Hom-complexes involving the zero-cone object are also given by the same inclusion rule:
+\[
+\mathrm{RHom}(\Theta(0,0),\Theta(\rho,a))\simeq 0,
+\qquad
+\mathrm{RHom}(\Theta(\rho,a),\Theta(0,0))\simeq k.
+\]
+Indeed, \(\mathbb R\not\subset [a,\infty)\), while \([a,\infty)\subset\mathbb R\).
+
+This calculation agrees with the coherent side. A \(T\)-equivariant morphism \(\mathcal O_{\mathbb A^1}(a)\to \mathcal O_{\mathbb A^1}(b)\) is given by multiplication by a monomial of weight \(a-b\). Such a monomial is regular on \(\mathbb A^1\) precisely when \(a-b\ge 0\), or equivalently \(a\ge b\). Hence
+\[
+\mathrm{RHom}_T(\Theta'(\rho,a),\Theta'(\rho,b))
+\simeq
+\mathrm{RHom}(\Theta(\rho,a),\Theta(\rho,b)).
+\]
+Moreover, if \(a\ge b\ge c\), the composition of the maps corresponding to \(a\ge b\) and \(b\ge c\) is the map corresponding to \(a\ge c\). On the coherent side this is the equality \(x^{a-b}x^{b-c}=x^{a-c}\), while on the constructible side it is composition of the inclusion maps between the corresponding half-line sheaves.
+
+Thus, in the affine-line case, the coherent--constructible correspondence reduces to the elementary dictionary
+\[
+\text{regular monomial }x^{a-b}
+\quad\longleftrightarrow\quad
+[a,\infty)\subset [b,\infty).
+\]
+
+\subsection{The projective plane \texorpdfstring{$\mathbb P^2$}{P2}}
+
+We now consider the first two-dimensional projective example. Let \(N=M=\mathbb Z^2\), and let \(\Sigma\) be the complete fan in \(N_{\mathbb R}\) with rays generated by
+\[
+v_1=(1,0),\qquad v_2=(0,1),\qquad v_3=(-1,-1).
+\]
+The maximal cones are
+\[
+\sigma_{12}=\langle v_1,v_2\rangle,\qquad
+\sigma_{23}=\langle v_2,v_3\rangle,\qquad
+\sigma_{31}=\langle v_3,v_1\rangle.
+\]
+The corresponding toric variety is \(X_\Sigma=\mathbb P^2\). We write a point of \(M_{\mathbb R}\) as \(m=(m_1,m_2)\), and identify \(T^*M_{\mathbb R}\) with \(M_{\mathbb R}\times N_{\mathbb R}\).
+
+We first describe the FLTZ skeleton. The zero cone contributes the zero section \(M_{\mathbb R}\times\{0\}\). The three rays contribute conormal directions along three families of integral affine lines. More explicitly, for \(\rho_1=\mathbb R_{\ge 0}v_1\), one has \(\rho_1^\perp=\{m_1=0\}\), and the quotient \(M_{\rho_1}\) is indexed by the integer value of \(m_1\). Hence \(\rho_1\) contributes
+\[
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times \mathbb R_{\le 0}v_1.
+\]
+Similarly, \(\rho_2=\mathbb R_{\ge 0}v_2\) contributes
+\[
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times \mathbb R_{\le 0}v_2.
+\]
+For \(\rho_3=\mathbb R_{\ge 0}v_3\), the equation for \(\rho_3^\perp\) is \(m_1+m_2=0\). Thus \(\rho_3\) contributes
+\[
+\bigcup_{c\in\mathbb Z}\{m_1+m_2=c\}\times \mathbb R_{\ge 0}(1,1),
+\]
+because \(-\rho_3=\mathbb R_{\ge 0}(1,1)\).
+
+The maximal cones contribute conormal directions over integral lattice points. Since each maximal cone has \(\sigma^\perp=0\), the quotient \(M_\sigma\) is just \(M\). Therefore
+\[
+\Lambda_\Sigma
+=
+M_{\mathbb R}\times\{0\}
+\cup
+\bigcup_{i=1}^3
+\bigcup_{\chi\in M_{\rho_i}}
+(\chi+\rho_i^\perp)\times(-\rho_i)
+\cup
+\bigcup_{\sigma\in\Sigma(2)}
+\bigcup_{\chi\in M}
+\{\chi\}\times(-\sigma).
+\]
+Geometrically, the base of this skeleton is controlled by the integral affine arrangement consisting of the lines
+\[
+m_1=a,\qquad m_2=b,\qquad m_1+m_2=c,
+\]
+where \(a,b,c\in\mathbb Z\). The cotangent directions are prescribed by the corresponding cones of the fan.
+
+We now compute the constructible theta sheaves. The zero cone gives
+\[
+\Theta(0,0)=\omega_{M_{\mathbb R}}.
+\]
+For the ray \(\rho_1\), the dual cone is \(\rho_1^\vee=\{m_1\ge 0\}\). Hence, for \(a\in\mathbb Z\),
+\[
+P_{\rho_1,a}=\{m_1\ge a\},
+\qquad
+\Theta(\rho_1,a)=(i_{\{m_1\ge a\}})_*\omega_{\{m_1\ge a\}}.
+\]
+Similarly,
+\[
+P_{\rho_2,b}=\{m_2\ge b\},
+\qquad
+\Theta(\rho_2,b)=(i_{\{m_2\ge b\}})_*\omega_{\{m_2\ge b\}},
+\]
+and
+\[
+P_{\rho_3,c}=\{m_1+m_2\le c\},
+\qquad
+\Theta(\rho_3,c)=(i_{\{m_1+m_2\le c\}})_*\omega_{\{m_1+m_2\le c\}}.
+\]
+Thus the ray generators give costandard sheaves on three types of half-planes.
+
+For the maximal cone \(\sigma_{12}\), one has
+\[
+\sigma_{12}^\vee=\{m_1\ge 0,\ m_2\ge 0\}.
+\]
+Therefore, for \(\chi=(a,b)\in M\),
+\[
+P_{\sigma_{12},\chi}
+=
+\{m_1\ge a,\ m_2\ge b\}.
+\]
+This is a translated quadrant in \(M_{\mathbb R}\), and
+\[
+\Theta(\sigma_{12},\chi)
+=
+(i_{P_{\sigma_{12},\chi}})_*\omega_{P_{\sigma_{12},\chi}}.
+\]
+For the other two maximal cones, the corresponding polyhedra are
+\[
+P_{\sigma_{23},(a,b)}
+=
+\{m_2\ge b,\ m_1+m_2\le a+b\},
+\]
+and
+\[
+P_{\sigma_{31},(a,b)}
+=
+\{m_1\ge a,\ m_1+m_2\le a+b\}.
+\]
+Thus the maximal cones give costandard sheaves on translated two-dimensional sectors.
+
+On the coherent side, the affine chart \(U_{\sigma_{12}}\) is isomorphic to \(\mathbb A^2\), with coordinate ring
+\[
+\mathbb C[\sigma_{12}^\vee\cap M]\cong \mathbb C[x,y].
+\]
+The theta object associated to \((\sigma_{12},(a,b))\) is
+\[
+\Theta'(\sigma_{12},(a,b))
+=
+(i_{\sigma_{12}})_*\mathcal O_{U_{\sigma_{12}}}(a,b),
+\]
+where the equivariant structure has weight \((a,b)\). The same description applies to the other affine charts. Under the correspondence,
+\[
+\Theta'(\sigma,\chi)\longmapsto \Theta(\sigma,\chi)
+\]
+for every cone \(\sigma\in\Sigma\) and every \(\chi\in M_\sigma\).
+
+Let us spell out the Hom-computation for the cone \(\sigma_{12}\). For \(\chi=(a,b)\) and \(\psi=(a',b')\), we have
+\[
+P_{\sigma_{12},\chi}\subset P_{\sigma_{12},\psi}
+\]
+if and only if
+\[
+a\ge a',
+\qquad
+b\ge b'.
+\]
+Therefore
+\[
+\mathrm{RHom}(\Theta(\sigma_{12},(a,b)),\Theta(\sigma_{12},(a',b')))
+\simeq
+\begin{cases}
+k, & a\ge a'\text{ and } b\ge b',\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+This agrees with the coherent calculation. A \(T\)-equivariant morphism
+\[
+\mathcal O_{U_{\sigma_{12}}}(a,b)
+\longrightarrow
+\mathcal O_{U_{\sigma_{12}}}(a',b')
+\]
+is given by multiplication by a monomial of weight \((a-a',b-b')\). This monomial is regular on \(U_{\sigma_{12}}\cong\mathbb A^2\) precisely when
+\[
+(a-a',b-b')\in \sigma_{12}^\vee\cap M,
+\]
+which is equivalent to \(a\ge a'\) and \(b\ge b'\). Hence
+\[
+\mathrm{RHom}_T(\Theta'(\sigma_{12},(a,b)),\Theta'(\sigma_{12},(a',b')))
+\simeq
+\mathrm{RHom}(\Theta(\sigma_{12},(a,b)),\Theta(\sigma_{12},(a',b'))).
+\]
+
+The same computation holds for the other cones, with the corresponding dual cone replacing \(\sigma_{12}^\vee\). In general, the Hom-complex is nonzero exactly when
+\[
+\chi+\sigma^\vee\subset \psi+\tau^\vee.
+\]
+Thus, for \(\mathbb P^2\), the coherent side records regular equivariant monomial maps on the affine toric charts, while the constructible side records inclusions among half-planes and sectors in \(M_{\mathbb R}\).
+
+It is also useful to record how familiar line bundles appear in this example. Let \(D=dD_{\rho_3}\), with \(d\ge 0\). Then the associated polytope is
+\[
+P_D
+=
+\{(m_1,m_2)\in M_{\mathbb R}\mid m_1\ge 0,\ m_2\ge 0,\ m_1+m_2\le d\}.
+\]
+This is the standard triangle of side length \(d\). Under the correspondence, the equivariant line bundle \(\mathcal O_{\mathbb P^2}(D)\cong\mathcal O_{\mathbb P^2}(d)\) is represented on the constructible side by the costandard sheaf supported on this triangle:
+\[
+\kappa_\Sigma(\mathcal O_{\mathbb P^2}(d))
+\simeq
+(i_{P_D})_*\omega_{P_D}.
+\]
+Thus the usual monomial basis of \(H^0(\mathbb P^2,\mathcal O(d))\) is reflected by the lattice points of the triangular support \(P_D\). In this way, the projective-plane example makes visible the passage from equivariant coherent data to polyhedral constructible sheaves.
+
+
+
+\subsection{The product \texorpdfstring{$\mathbb P^1\times\mathbb P^1$}{P1 x P1}}
+
+We next consider the product \(\mathbb P^1\times\mathbb P^1\). This example is useful because its fan is the product of the fan of \(\mathbb P^1\) with itself, and the corresponding polyhedral picture is rectangular rather than triangular.
+
+Let \(N=M=\mathbb Z^2\), with coordinates \(m=(m_1,m_2)\) on \(M_{\mathbb R}\). The fan \(\Sigma\) has four rays generated by
+\[
+v_1=(1,0),\qquad
+v_2=(0,1),\qquad
+v_3=(-1,0),\qquad
+v_4=(0,-1),
+\]
+and four maximal cones
+\[
+\sigma_{12}=\langle v_1,v_2\rangle,\quad
+\sigma_{23}=\langle v_2,v_3\rangle,\quad
+\sigma_{34}=\langle v_3,v_4\rangle,\quad
+\sigma_{41}=\langle v_4,v_1\rangle.
+\]
+The associated toric variety is \(X_\Sigma=\mathbb P^1\times\mathbb P^1\).
+
+We first describe the FLTZ skeleton. The zero cone contributes the zero section \(M_{\mathbb R}\times\{0\}\). The rays \(\rho_1=\mathbb R_{\ge 0}v_1\) and \(\rho_3=\mathbb R_{\ge 0}v_3\) both have annihilator \(\{m_1=0\}\), so they contribute conormal directions along the vertical integral lines \(m_1=a\). More precisely,
+\[
+\rho_1:\quad
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times\mathbb R_{\le 0}v_1,
+\qquad
+\rho_3:\quad
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times\mathbb R_{\ge 0}v_1.
+\]
+Similarly, the rays \(\rho_2=\mathbb R_{\ge 0}v_2\) and \(\rho_4=\mathbb R_{\ge 0}v_4\) contribute conormal directions along the horizontal integral lines \(m_2=b\):
+\[
+\rho_2:\quad
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times\mathbb R_{\le 0}v_2,
+\qquad
+\rho_4:\quad
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times\mathbb R_{\ge 0}v_2.
+\]
+The maximal cones contribute conic directions over the lattice points of \(M\). Thus
+\[
+\Lambda_\Sigma
+=
+M_{\mathbb R}\times\{0\}
+\cup
+\bigcup_{\rho\in\Sigma(1)}
+\bigcup_{\chi\in M_\rho}
+(\chi+\rho^\perp)\times(-\rho)
+\cup
+\bigcup_{\sigma\in\Sigma(2)}
+\bigcup_{\chi\in M}
+\{\chi\}\times(-\sigma).
+\]
+Geometrically, the base of the skeleton is controlled by the integral grid consisting of the vertical and horizontal lines
+\[
+m_1=a,\qquad m_2=b,
+\qquad a,b\in\mathbb Z.
+\]
+This contrasts with the case of \(\mathbb P^2\), where a third diagonal family of affine lines also appears.
+
+We now identify the theta sheaves. The zero cone again gives
+\[
+\Theta(0,0)=\omega_{M_{\mathbb R}}.
+\]
+For the four rays, the dual cones are half-spaces. Hence the corresponding theta sheaves are costandard sheaves on vertical or horizontal half-planes:
+\[
+\Theta(\rho_1,a)
+=
+(i_{\{m_1\ge a\}})_*\omega_{\{m_1\ge a\}},
+\qquad
+\Theta(\rho_3,a)
+=
+(i_{\{m_1\le a\}})_*\omega_{\{m_1\le a\}},
+\]
+and
+\[
+\Theta(\rho_2,b)
+=
+(i_{\{m_2\ge b\}})_*\omega_{\{m_2\ge b\}},
+\qquad
+\Theta(\rho_4,b)
+=
+(i_{\{m_2\le b\}})_*\omega_{\{m_2\le b\}}.
+\]
+For the maximal cones, the theta sheaves are costandard sheaves on translated quadrants. If \(\chi=(a,b)\in M\), then
+\[
+P_{\sigma_{12},\chi}
+=
+\{m_1\ge a,\ m_2\ge b\},
+\]
+\[
+P_{\sigma_{23},\chi}
+=
+\{m_1\le a,\ m_2\ge b\},
+\]
+\[
+P_{\sigma_{34},\chi}
+=
+\{m_1\le a,\ m_2\le b\},
+\]
+and
+\[
+P_{\sigma_{41},\chi}
+=
+\{m_1\ge a,\ m_2\le b\}.
+\]
+Thus each maximal cone gives one of the four possible quadrant directions in \(M_{\mathbb R}\), and
+\[
+\Theta(\sigma,\chi)
+=
+(i_{P_{\sigma,\chi}})_*\omega_{P_{\sigma,\chi}}.
+\]
+
+On the coherent side, each maximal cone gives an affine chart isomorphic to \(\mathbb A^2\). For example,
+\[
+U_{\sigma_{12}}=\operatorname{Spec}\mathbb C[\sigma_{12}^\vee\cap M]
+\cong \mathbb A^2,
+\]
+with coordinate ring \(\mathbb C[x,y]\), where \(\deg x=(1,0)\) and \(\deg y=(0,1)\). The coherent theta object attached to \((\sigma_{12},(a,b))\) is
+\[
+\Theta'(\sigma_{12},(a,b))
+=
+(i_{\sigma_{12}})_*\mathcal O_{U_{\sigma_{12}}}(a,b).
+\]
+The other affine charts are treated in the same way, using the corresponding semigroup algebras. Under the correspondence,
+\[
+\Theta'(\sigma,\chi)\longmapsto \Theta(\sigma,\chi)
+\]
+for all cones \(\sigma\in\Sigma\) and all \(\chi\in M_\sigma\).
+
+Let us compute the Hom-complex for the cone \(\sigma_{12}\). For \(\chi=(a,b)\) and \(\psi=(a',b')\), one has
+\[
+P_{\sigma_{12},\chi}\subset P_{\sigma_{12},\psi}
+\]
+if and only if
+\[
+a\ge a',
+\qquad
+b\ge b'.
+\]
+Therefore
+\[
+\mathrm{RHom}(\Theta(\sigma_{12},(a,b)),\Theta(\sigma_{12},(a',b')))
+\simeq
+\begin{cases}
+k, & a\ge a'\text{ and }b\ge b',\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+On the coherent side, a \(T\)-equivariant morphism
+\[
+\mathcal O_{U_{\sigma_{12}}}(a,b)
+\longrightarrow
+\mathcal O_{U_{\sigma_{12}}}(a',b')
+\]
+is given by multiplication by a monomial of weight \((a-a',b-b')\). This monomial is regular on \(U_{\sigma_{12}}\) precisely when
+\[
+(a-a',b-b')\in\sigma_{12}^\vee\cap M,
+\]
+which is equivalent to \(a\ge a'\) and \(b\ge b'\). Hence the coherent Hom-complex agrees with the constructible one:
+\[
+\mathrm{RHom}_T(\Theta'(\sigma_{12},(a,b)),\Theta'(\sigma_{12},(a',b')))
+\simeq
+\mathrm{RHom}(\Theta(\sigma_{12},(a,b)),\Theta(\sigma_{12},(a',b'))).
+\]
+
+The same calculation applies to the other maximal cones. For example, for \(\sigma_{34}\), the corresponding polyhedra are lower-left quadrants, and the inclusion condition becomes \(a\le a'\) and \(b\le b'\). Thus the direction of the inequalities is determined by the chosen cone, exactly as the regularity of monomials is determined by the semigroup \(\sigma^\vee\cap M\).
+
+We finally record the image of the usual line bundles. Let \(p,q\ge 0\), and consider the divisor
+\[
+D=pD_{\rho_3}+qD_{\rho_4}.
+\]
+The associated polytope is
+\[
+P_D
+=
+\{(m_1,m_2)\in M_{\mathbb R}\mid
+0\le m_1\le p,\ 0\le m_2\le q\}.
+\]
+This is a rectangle. The corresponding line bundle is \(\mathcal O_{\mathbb P^1\times\mathbb P^1}(p,q)\), and under the correspondence it is represented on the constructible side by the costandard sheaf on this rectangle:
+\[
+\kappa_\Sigma(\mathcal O_{\mathbb P^1\times\mathbb P^1}(p,q))
+\simeq
+(i_{P_D})_*\omega_{P_D}.
+\]
+Thus the product structure of \(\mathbb P^1\times\mathbb P^1\) appears on the constructible side as the rectangular shape of the support. The lattice points of \(P_D\) correspond to the usual monomial basis of
+\[
+H^0(\mathbb P^1\times\mathbb P^1,\mathcal O(p,q)).
+\]
+In this example, the basic dictionary is therefore expressed by rectangles and quadrants: regular equivariant monomial maps correspond to inclusions among rectangular or quadrant-shaped polyhedral sheaves.
+
+
+\subsection{Hirzebruch surfaces \texorpdfstring{$\mathbb F_n$}{Fn}}
+
+We now consider the Hirzebruch surfaces. This family is useful because it
+interpolates between the product case and genuinely non-symmetric toric
+surfaces. The parameter \(n\) appears directly in the fan, and hence also in
+the FLTZ skeleton and in the inclusion conditions for theta polyhedra.
+
+Let \(n\ge 0\). The fan \(\Sigma_n\) of \(\mathbb F_n\) has rays generated by
+\[
+v_1=(1,0),\qquad
+v_2=(0,1),\qquad
+v_3=(-1,n),\qquad
+v_4=(0,-1).
+\]
+The maximal cones are
+\[
+\sigma_{12}=\langle v_1,v_2\rangle,\quad
+\sigma_{23}=\langle v_2,v_3\rangle,\quad
+\sigma_{34}=\langle v_3,v_4\rangle,\quad
+\sigma_{41}=\langle v_4,v_1\rangle.
+\]
+The associated toric surface is \(X_{\Sigma_n}=\mathbb F_n\). When \(n=0\), this is \(\mathbb P^1\times\mathbb P^1\). When \(n=1\), it is the blow-up of \(\mathbb P^2\) at one torus fixed point.
+
+We first compute the FLTZ skeleton. The zero cone contributes the zero section
+\(M_{\mathbb R}\times\{0\}\). The four rays contribute conormal directions
+along four families of integral affine lines. For \(\rho_1=\mathbb R_{\ge 0}v_1\),
+we get vertical lines
+\[
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times \mathbb R_{\le 0}v_1.
+\]
+For \(\rho_2=\mathbb R_{\ge 0}v_2\), we get horizontal lines
+\[
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times \mathbb R_{\le 0}v_2.
+\]
+For \(\rho_4=\mathbb R_{\ge 0}v_4\), we get the same horizontal base lines, but
+with the opposite cotangent direction:
+\[
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times \mathbb R_{\ge 0}v_2.
+\]
+The new feature is the ray \(\rho_3=\mathbb R_{\ge 0}v_3\). Since
+\[
+\rho_3^\perp=\{(m_1,m_2)\in M_{\mathbb R}\mid -m_1+nm_2=0\},
+\]
+this ray contributes the family of affine lines
+\[
+-m_1+nm_2=c,\qquad c\in\mathbb Z,
+\]
+with cotangent direction \(-\rho_3=\mathbb R_{\ge 0}(1,-n)\). Thus the full
+FLTZ skeleton is
+\[
+\Lambda_{\Sigma_n}
+=
+M_{\mathbb R}\times\{0\}
+\cup
+\bigcup_{\rho\in\Sigma_n(1)}
+\bigcup_{\chi\in M_\rho}
+(\chi+\rho^\perp)\times(-\rho)
+\cup
+\bigcup_{\sigma\in\Sigma_n(2)}
+\bigcup_{\chi\in M}
+\{\chi\}\times(-\sigma).
+\]
+Geometrically, the base arrangement consists of the lines
+\[
+m_1=a,\qquad m_2=b,\qquad -m_1+nm_2=c,
+\]
+where \(a,b,c\in\mathbb Z\). For \(n=0\), the last family is again vertical, so
+one recovers the grid picture of \(\mathbb P^1\times\mathbb P^1\). For \(n>0\),
+a new slanted family of lines appears.
+
+We now describe the theta sheaves. The ray generators give costandard sheaves
+on half-planes:
+\[
+\Theta(\rho_1,a)
+=
+(i_{\{m_1\ge a\}})_*\omega_{\{m_1\ge a\}},
+\qquad
+\Theta(\rho_2,b)
+=
+(i_{\{m_2\ge b\}})_*\omega_{\{m_2\ge b\}},
+\qquad
+\Theta(\rho_4,b)
+=
+(i_{\{m_2\le b\}})_*\omega_{\{m_2\le b\}}.
+\]
+For the slanted ray \(\rho_3\), if the character class is indexed by
+\(c\in\mathbb Z\), then
+\[
+P_{\rho_3,c}
+=
+\{(m_1,m_2)\in M_{\mathbb R}\mid -m_1+nm_2\ge c\},
+\]
+and hence
+\[
+\Theta(\rho_3,c)
+=
+(i_{P_{\rho_3,c}})_*\omega_{P_{\rho_3,c}}.
+\]
+Thus the parameter \(n\) appears as the slope of the boundary line of this
+half-plane.
+
+For maximal cones, the theta sheaves are costandard sheaves on translated
+two-dimensional sectors. If \(\chi=(a,b)\in M\), then
+\[
+P_{\sigma_{12},\chi}
+=
+\{m_1\ge a,\ m_2\ge b\},
+\]
+\[
+P_{\sigma_{23},\chi}
+=
+\{m_2\ge b,\ m_1-nm_2\le a-nb\},
+\]
+\[
+P_{\sigma_{34},\chi}
+=
+\{m_2\le b,\ m_1-nm_2\le a-nb\},
+\]
+and
+\[
+P_{\sigma_{41},\chi}
+=
+\{m_1\ge a,\ m_2\le b\}.
+\]
+The corresponding theta object is
+\[
+\Theta(\sigma,\chi)
+=
+(i_{P_{\sigma,\chi}})_*\omega_{P_{\sigma,\chi}}.
+\]
+Compared with the product case, the sectors associated to \(\sigma_{23}\) and
+\(\sigma_{34}\) have a slanted boundary depending on \(n\).
+
+On the coherent side, each maximal cone gives an affine chart. For example,
+\[
+U_{\sigma_{12}}
+=
+\operatorname{Spec}\mathbb C[\sigma_{12}^\vee\cap M]
+\cong \mathbb A^2,
+\]
+and
+\[
+\Theta'(\sigma_{12},(a,b))
+=
+(i_{\sigma_{12}})_*\mathcal O_{U_{\sigma_{12}}}(a,b).
+\]
+The same construction applies to the other cones, using the corresponding
+semigroup algebra \(\mathbb C[\sigma^\vee\cap M]\). Under the correspondence,
+\[
+\Theta'(\sigma,\chi)\longmapsto \Theta(\sigma,\chi).
+\]
+
+Let us compute the Hom-complex for the cone \(\sigma_{23}\), where the parameter
+\(n\) is visible. For \(\chi=(a,b)\) and \(\psi=(a',b')\), the inclusion
+\[
+P_{\sigma_{23},\chi}\subset P_{\sigma_{23},\psi}
+\]
+holds if and only if
+\[
+b\ge b',
+\qquad
+a-nb\le a'-nb'.
+\]
+Equivalently,
+\[
+b-b'\ge 0,
+\qquad
+-(a-a')+n(b-b')\ge 0.
+\]
+Therefore
+\[
+\mathrm{RHom}(\Theta(\sigma_{23},(a,b)),\Theta(\sigma_{23},(a',b')))
+\simeq
+\begin{cases}
+k, & b\ge b'\text{ and }a-nb\le a'-nb',\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+On the coherent side, a \(T\)-equivariant morphism between the corresponding
+theta objects is given by multiplication by a monomial of weight
+\((a-a',b-b')\). This monomial is regular on \(U_{\sigma_{23}}\) precisely when
+\[
+(a-a',b-b')\in\sigma_{23}^\vee\cap M.
+\]
+Since
+\[
+\sigma_{23}^\vee
+=
+\{u\in M_{\mathbb R}\mid \langle u,v_2\rangle\ge 0,\ 
+\langle u,v_3\rangle\ge 0\},
+\]
+this condition is exactly
+\[
+b-b'\ge 0,
+\qquad
+-(a-a')+n(b-b')\ge 0.
+\]
+Thus the coherent regularity condition agrees with the constructible inclusion
+condition:
+\[
+\mathrm{RHom}_T(\Theta'(\sigma_{23},(a,b)),\Theta'(\sigma_{23},(a',b')))
+\simeq
+\mathrm{RHom}(\Theta(\sigma_{23},(a,b)),\Theta(\sigma_{23},(a',b'))).
+\]
+
+As in the previous examples, one may also look at divisor polytopes to see the
+shape of familiar line bundle objects. For instance, take
+\[
+D=pD_{\rho_3}+qD_{\rho_4},\qquad p,q\ge 0.
+\]
+Then the associated polytope is
+\[
+P_D
+=
+\{(m_1,m_2)\in M_{\mathbb R}\mid
+0\le m_2\le q,\ 0\le m_1\le p+nm_2\}.
+\]
+This is a trapezoid. The corresponding constructible object is represented by
+the costandard sheaf on this trapezoid:
+\[
+\kappa_{\Sigma_n}(\mathcal O_{\mathbb F_n}(D))
+\simeq
+(i_{P_D})_*\omega_{P_D}.
+\]
+Thus the parameter \(n\), which appears in the fan through the ray
+\((-1,n)\), appears on the constructible side as the slope of the trapezoid and
+as the slope of the additional conormal directions in the FLTZ skeleton.
+
+The Hirzebruch surface example therefore shows that the CCC is sensitive not
+only to the number of rays in the fan, but also to their directions. Changing
+\(n\) changes the semigroup conditions for regular monomials on the coherent
+side, and the same change appears as a change in the inclusion conditions among
+polyhedral theta sheaves on the constructible side.
+
+
+\subsection{A toric del Pezzo surface}
+
+We now consider one toric del Pezzo example. Let \(X\) be the blow-up of
+\(\mathbb P^2\) at its three torus fixed points. This surface is often denoted
+by \(dP_6\). The point of this example is to see how toric blow-ups change the
+FLTZ skeleton and the corresponding theta sheaves.
+
+Start with the fan of \(\mathbb P^2\), whose rays are generated by
+\[
+v_1=(1,0),\qquad v_2=(0,1),\qquad v_3=(-1,-1).
+\]
+Blowing up the three torus fixed points means subdividing the three maximal
+cones by adding the rays
+\[
+v_{12}=v_1+v_2=(1,1),\qquad
+v_{23}=v_2+v_3=(-1,0),\qquad
+v_{31}=v_3+v_1=(0,-1).
+\]
+Thus the fan of \(X=dP_6\) has six rays. In cyclic order we write them as
+\[
+w_1=(1,0),\quad
+w_2=(1,1),\quad
+w_3=(0,1),\quad
+w_4=(-1,0),\quad
+w_5=(-1,-1),\quad
+w_6=(0,-1).
+\]
+The maximal cones are
+\[
+\langle w_1,w_2\rangle,\quad
+\langle w_2,w_3\rangle,\quad
+\langle w_3,w_4\rangle,\quad
+\langle w_4,w_5\rangle,\quad
+\langle w_5,w_6\rangle,\quad
+\langle w_6,w_1\rangle.
+\]
+
+We first describe the FLTZ skeleton. The zero cone contributes the zero section
+\(M_{\mathbb R}\times\{0\}\). The six rays give conormal directions along three
+families of integral affine lines, with both cotangent directions allowed.
+
+The rays \((1,0)\) and \((-1,0)\) give the vertical lines
+\[
+m_1=a,\qquad a\in\mathbb Z.
+\]
+The rays \((0,1)\) and \((0,-1)\) give the horizontal lines
+\[
+m_2=b,\qquad b\in\mathbb Z.
+\]
+The rays \((1,1)\) and \((-1,-1)\) give the diagonal lines
+\[
+m_1+m_2=c,\qquad c\in\mathbb Z.
+\]
+Therefore the one-dimensional part of the FLTZ skeleton contains
+\[
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times \mathbb R_{\le 0}(1,0),
+\qquad
+\bigcup_{a\in\mathbb Z}\{m_1=a\}\times \mathbb R_{\ge 0}(1,0),
+\]
+\[
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times \mathbb R_{\le 0}(0,1),
+\qquad
+\bigcup_{b\in\mathbb Z}\{m_2=b\}\times \mathbb R_{\ge 0}(0,1),
+\]
+and
+\[
+\bigcup_{c\in\mathbb Z}\{m_1+m_2=c\}\times \mathbb R_{\le 0}(1,1),
+\qquad
+\bigcup_{c\in\mathbb Z}\{m_1+m_2=c\}\times \mathbb R_{\ge 0}(1,1).
+\]
+The maximal cones add conic directions over lattice points, as prescribed by
+the general formula
+\[
+\Lambda_\Sigma
+=
+M_{\mathbb R}\times\{0\}
+\cup
+\bigcup_{\rho\in\Sigma(1)}
+\bigcup_{\chi\in M_\rho}
+(\chi+\rho^\perp)\times(-\rho)
+\cup
+\bigcup_{\sigma\in\Sigma(2)}
+\bigcup_{\chi\in M}
+\{\chi\}\times(-\sigma).
+\]
+
+We next identify the theta sheaves. The ray theta sheaves are costandard
+sheaves on the six half-planes
+\[
+m_1\ge a,\qquad m_1\le a,\qquad
+m_2\ge b,\qquad m_2\le b,\qquad
+m_1+m_2\ge c,\qquad m_1+m_2\le c.
+\]
+For instance,
+\[
+\Theta(\rho_{(1,1)},c)
+=
+(i_{\{m_1+m_2\ge c\}})_*
+\omega_{\{m_1+m_2\ge c\}},
+\]
+while
+\[
+\Theta(\rho_{(-1,-1)},c)
+=
+(i_{\{m_1+m_2\le c\}})_*
+\omega_{\{m_1+m_2\le c\}}.
+\]
+Thus, compared with \(\mathbb P^2\), the blow-up adds the missing opposite
+half-plane directions on the constructible side.
+
+For maximal cones, the theta sheaves are costandard sheaves on translated
+sectors. Consider
+\[
+\sigma=\langle w_1,w_2\rangle=\langle(1,0),(1,1)\rangle.
+\]
+Its dual cone is
+\[
+\sigma^\vee
+=
+\{m\in M_{\mathbb R}\mid m_1\ge 0,\ m_1+m_2\ge 0\}.
+\]
+Hence, for \(\chi=(a,b)\in M\),
+\[
+P_{\sigma,\chi}
+=
+\chi+\sigma^\vee
+=
+\{m_1\ge a,\ m_1+m_2\ge a+b\}.
+\]
+The corresponding theta sheaf is
+\[
+\Theta(\sigma,\chi)
+=
+(i_{P_{\sigma,\chi}})_*\omega_{P_{\sigma,\chi}}.
+\]
+
+Let \(\psi=(a',b')\). Then
+\[
+P_{\sigma,\chi}\subset P_{\sigma,\psi}
+\]
+if and only if
+\[
+a\ge a',
+\qquad
+a+b\ge a'+b'.
+\]
+Therefore
+\[
+\mathrm{RHom}(\Theta(\sigma,(a,b)),\Theta(\sigma,(a',b')))
+\simeq
+\begin{cases}
+k, & a\ge a'\text{ and }a+b\ge a'+b',\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+On the coherent side, a \(T\)-equivariant morphism between the corresponding
+theta objects is given by multiplication by a monomial of weight
+\((a-a',b-b')\). This monomial is regular on \(U_\sigma\) precisely when
+\[
+(a-a',b-b')\in\sigma^\vee\cap M.
+\]
+Since
+\[
+\sigma^\vee
+=
+\{m\in M_{\mathbb R}\mid m_1\ge 0,\ m_1+m_2\ge 0\},
+\]
+this is equivalent to the same two inequalities
+\[
+a\ge a',
+\qquad
+a+b\ge a'+b'.
+\]
+Thus
+\[
+\mathrm{RHom}_T(\Theta'(\sigma,(a,b)),\Theta'(\sigma,(a',b')))
+\simeq
+\mathrm{RHom}(\Theta(\sigma,(a,b)),\Theta(\sigma,(a',b'))).
+\]
+
+This example shows explicitly how the toric blow-up is reflected in the CCC
+data. On the fan side, blowing up a torus fixed point adds a new ray. On the
+FLTZ side, this adds a new conormal direction. On the constructible side, it
+adds new half-plane and sector theta sheaves. The Hom-complex calculation is
+unchanged in form: it is still governed by inclusion of the corresponding
+polyhedra, and on the coherent side this is still the regularity condition for
+the corresponding equivariant monomial map.
+

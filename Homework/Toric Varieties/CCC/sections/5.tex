@@ -1,0 +1,256 @@
+\section{The Constructible Side and the FLTZ Skeleton}
+
+Throughout this section, let \(\Sigma\) be a rational polyhedral fan in
+\(N_{\mathbb R}\). No smoothness assumption is imposed here, since the
+constructions in this section depend only on the polyhedral data of
+\(\Sigma\). The constructible side is not formulated on the toric variety
+\(X_\Sigma\), but on the real vector space \(M_{\mathbb R}\). Under the natural
+identification
+\[
+T^*M_{\mathbb R}
+\cong
+M_{\mathbb R}\times (M_{\mathbb R})^*
+\cong
+M_{\mathbb R}\times N_{\mathbb R},
+\]
+the fan \(\Sigma\subset N_{\mathbb R}\) appears as a source of prescribed
+cotangent directions. Thus this section constructs the microlocal object that
+controls the constructible side of the correspondence.
+
+\subsection{The FLTZ Skeleton and Prescribed Singular Support}
+
+We first define the FLTZ skeleton associated to \(\Sigma\). In the above
+identification of the cotangent bundle, the first factor is the base space and
+the second factor records cotangent directions. Thus the fan in
+\(N_{\mathbb R}\) imposes a microlocal condition on sheaves on
+\(M_{\mathbb R}\).
+
+\begin{definition}[FLTZ skeleton]
+For a cone \(\sigma\in\Sigma\), set
+\[
+\sigma^\perp
+=
+\{m\in M_{\mathbb R}\mid \langle m,n\rangle=0
+\text{ for all }n\in\sigma\},
+\qquad
+M_\sigma=M/(\sigma^\perp\cap M).
+\]
+For \(\chi\in M_\sigma\), let \(\chi+\sigma^\perp\) denote the affine subspace
+of \(M_{\mathbb R}\) determined by any lift of \(\chi\) to \(M\). This is
+well-defined because two lifts differ by an element of \(\sigma^\perp\cap M\).
+
+The FLTZ skeleton associated to \(\Sigma\) is the subset
+\[
+\Lambda_\Sigma
+=
+\bigcup_{\sigma\in\Sigma}
+\bigcup_{\chi\in M_\sigma}
+(\chi+\sigma^\perp)\times(-\sigma)
+\subset T^*M_{\mathbb R}.
+\]
+\end{definition}
+
+Equivalently,
+\[
+\Lambda_\Sigma
+=
+\bigcup_{\sigma\in\Sigma}
+(\sigma^\perp+M)\times(-\sigma).
+\]
+Here \(\chi+\sigma^\perp\) records the base locus in \(M_{\mathbb R}\), while
+\(-\sigma\) records the allowed cotangent directions.
+
+\begin{proposition}
+The subset \(\Lambda_\Sigma\) is conic with respect to the cotangent fibers.
+\end{proposition}
+
+\begin{proof}
+The conic action on \(T^*M_{\mathbb R}\cong M_{\mathbb R}\times N_{\mathbb R}\)
+scales only the second factor. If
+\[
+(m,n)\in(\chi+\sigma^\perp)\times(-\sigma),
+\]
+then for every \(t\in\mathbb R_{\ge 0}\), the base point \(m\) is unchanged and
+\(tn\in-\sigma\), since \(-\sigma\) is a cone. Hence
+\[
+(m,tn)\in(\chi+\sigma^\perp)\times(-\sigma)\subset\Lambda_\Sigma.
+\]
+Therefore \(\Lambda_\Sigma\) is conic in the cotangent direction.
+\end{proof}
+
+Using the notion of singular support recalled in Section~3, define
+\[
+Sh_{\Lambda_\Sigma}(M_{\mathbb R})
+=
+\{F\in Sh(M_{\mathbb R})\mid SS(F)\subset \Lambda_\Sigma\}.
+\]
+This is the category of constructible sheaves on \(M_{\mathbb R}\) whose
+singular support is prescribed by the FLTZ skeleton.
+
+
+\subsection{Singular Support of Polyhedral Sheaves}
+We first record the singular-support estimate for costandard sheaves on
+closed convex polyhedra.
+
+\begin{lemma}[Singular support of a polyhedral costandard sheaf]
+Let \(P\subset M_{\mathbb R}\) be a closed convex polyhedron, and let
+\(i_P:P\hookrightarrow M_{\mathbb R}\) be the inclusion. Put
+\[
+\omega_P:=i_P^!k_{M_{\mathbb R}}.
+\]
+For a face \(G\preceq P\), define the normal cone
+\[
+N_GP:=
+\{n\in N_{\mathbb R}\mid
+\langle m-g,n\rangle\ge 0
+\text{ for all }m\in P,\ g\in G\}.
+\]
+Then
+\[
+SS((i_P)_*\omega_P)
+\subset
+\bigcup_{G\preceq P}G\times(-N_GP)
+\subset T^*M_{\mathbb R}.
+\]
+\end{lemma}
+
+\begin{proof}
+First consider \(k_P\). Stratify \(P\) by its relative open faces. Near a
+point of \(\operatorname{relint}(G)\), the pair
+\((M_{\mathbb R},P)\) is microlocally modeled by the tangent cone to \(P\)
+along \(G\). The local computation for a closed convex polyhedral cone says
+that the singular covectors of the constant sheaf on this cone are contained
+in its polar cone. Hence, along the face \(G\), the singular covectors of
+\(k_P\) are contained in \(N_GP\). Therefore
+\[
+SS(k_P)\subset
+\bigcup_{G\preceq P}G\times N_GP .
+\]
+
+By Verdier duality,
+\[
+(i_P)_*\omega_P\simeq \mathbb D(k_P).
+\]
+Moreover,
+\[
+SS(\mathbb D F)=SS(F)^a,\qquad (x,\xi)^a=(x,-\xi).
+\]
+Thus
+\[
+SS((i_P)_*\omega_P)
+=
+SS(\mathbb D k_P)
+\subset
+\bigcup_{G\preceq P}G\times(-N_GP).
+\]
+\end{proof}
+
+
+
+
+\begin{proposition}
+Let \(\sigma\in\Sigma\), \(\chi\in M_\sigma\), and set
+\(P_{\sigma,\chi}:=\chi+\sigma^\vee\). Then
+\[
+SS((i_{\sigma,\chi})_*\omega_{P_{\sigma,\chi}})
+\subset
+\bigcup_{\tau\preceq\sigma}(\chi+\tau^\perp)\times(-\tau)
+\subset \Lambda_\Sigma .
+\]
+\end{proposition}
+
+\begin{proof}
+The faces of \(P_{\sigma,\chi}\) are indexed by faces
+\(\tau\preceq\sigma\). The face corresponding to \(\tau\) is contained in
+\(\chi+\tau^\perp\), and its normal cone is \(\tau\). Applying the
+polyhedral singular-support estimate gives
+\[
+SS((i_{\sigma,\chi})_*\omega_{P_{\sigma,\chi}})
+\subset
+\bigcup_{\tau\preceq\sigma}(\chi+\tau^\perp)\times(-\tau).
+\]
+Since every face \(\tau\preceq\sigma\) is again a cone of \(\Sigma\), the
+right-hand side is contained in \(\Lambda_\Sigma\).
+\end{proof}
+
+\begin{lemma}[Polyhedral microlocal dévissage]
+Let \(\mathcal C_\Sigma\) be the stable idempotent-complete subcategory of
+\(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\) generated by the
+costandard sheaves
+\[
+(i_{\sigma,\chi})_*\omega_{\chi+\sigma^\vee},
+\qquad \sigma\in\Sigma,\ \chi\in M_\sigma .
+\]
+Then every object of
+\(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\) belongs to
+\(\mathcal C_\Sigma\).
+\end{lemma}
+
+\begin{proof}[Sketch of proof]
+The condition \(SS(F)\subset \Lambda_\Sigma\) implies that the singularities
+of \(F\) can occur only along affine subspaces of the form
+\(\chi+\sigma^\perp\), with conormal directions contained in \(-\sigma\).
+Choose a polyhedral stratification of \(M_{\mathbb R}\) compatible with these
+affine subspaces. By the constructible dévissage theorem, \(F\) is generated
+by standard or costandard sheaves on the strata. The microlocal condition
+excludes all strata and conormal directions not appearing in
+\(\Lambda_\Sigma\). Therefore the remaining pieces are precisely
+polyhedral costandard sheaves compatible with the fan \(\Sigma\), and these
+are generated by the sheaves
+\((i_{\sigma,\chi})_*\omega_{\chi+\sigma^\vee}\).
+\end{proof}
+
+
+\subsection{Theta Sheaves and Generation}
+
+We now introduce the basic constructible objects attached to the cones of
+\(\Sigma\). For \(\sigma\in\Sigma\), let
+\(\sigma^\vee=\{m\in M_{\mathbb R}\mid \langle m,n\rangle\ge 0
+\text{ for all }n\in\sigma\}\). For \(\chi\in M_\sigma\), choose a lift of
+\(\chi\) to \(M\) and set
+\(P_{\sigma,\chi}:=\chi+\sigma^\vee\subset M_{\mathbb R}\). This subset is
+independent of the chosen lift, since \(\sigma^\perp\) is the lineality space
+of \(\sigma^\vee\). Let
+\(i_{\sigma,\chi}:P_{\sigma,\chi}\hookrightarrow M_{\mathbb R}\) be the
+inclusion. The constructible theta sheaf associated to \((\sigma,\chi)\) is
+\[
+\Theta(\sigma,\chi):=(i_{\sigma,\chi})_*\omega_{P_{\sigma,\chi}}.
+\]
+Thus \(\Theta(\sigma,\chi)\) is the costandard sheaf supported on the
+translated dual cone \(P_{\sigma,\chi}\). By Proposition~2.4, one has
+\(SS(\Theta(\sigma,\chi))\subset \Lambda_\Sigma\), and hence
+\(\Theta(\sigma,\chi)\in
+\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\).
+
+\begin{theorem}[FLTZ generation]
+The category \(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\) is generated
+by the theta sheaves:
+\[
+\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})
+=
+\left\langle
+\Theta(\sigma,\chi)\mid \sigma\in\Sigma,\ \chi\in M_\sigma
+\right\rangle .
+\]
+Here the right-hand side denotes the smallest stable idempotent-complete
+subcategory containing all \(\Theta(\sigma,\chi)\).
+\end{theorem}
+
+\begin{proof}
+Let \(\mathcal C_\Sigma\) be the stable idempotent-complete subcategory
+generated by the theta sheaves. Since
+\(SS(\Theta(\sigma,\chi))\subset \Lambda_\Sigma\) for every
+\(\sigma\in\Sigma\) and \(\chi\in M_\sigma\), and since
+\(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\) is closed under shifts,
+cones, finite direct sums, and retracts, we have
+\(\mathcal C_\Sigma\subset
+\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\).
+
+Conversely, Lemma~2.5 says that every object of
+\(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\) belongs to the stable
+idempotent-complete subcategory generated by the sheaves
+\((i_{\sigma,\chi})_*\omega_{\chi+\sigma^\vee}
+=\Theta(\sigma,\chi)\). Hence
+\(\operatorname{Sh}_{\Lambda_\Sigma}(M_{\mathbb R})\subset
+\mathcal C_\Sigma\). The two inclusions give the desired equality.
+\end{proof}

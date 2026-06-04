@@ -1,0 +1,255 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\qz}{\mathbb{Q}/\mathbb{Z}}
+\newcommand{\z}{\mathbb{Z}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 13}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+
+Write out a proof of Maschke's Theorem in the case of representations over
+\(\mathbb{C}\) along the following lines.
+\begin{enumerate}
+    \item Given a representation
+\[
+\rho:G\to GL(V),
+\]
+where \(V\) is a vector space over \(\mathbb{C}\), let \((\cdot,\cdot)\) be any
+positive definite Hermitian form on \(V\). Define a new form
+\((\cdot,\cdot)_1\) on \(V\) by
+\[
+(v,w)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gw).
+\]
+Show that \((\cdot,\cdot)_1\) is a positive definite Hermitian form, preserved
+under the action of \(G\); that is,
+\[
+(v,w)_1=(gv,gw)_1
+\]
+always.
+    \item If \(W\) is a subrepresentation of \(V\), show that
+\[
+V=W\oplus W^\perp
+\]
+as representations.
+\end{enumerate}
+\begin{solution}
+(1) For \(a,b\in \mathbb C\),
+\[
+(av_1+bv_2,w)_1
+=\frac{1}{|G|}\sum_{g\in G}(a\,gv_1+b\,gv_2,gw)
+=a(v_1,w)_1+b(v_2,w)_1,
+\]
+and similarly the second variable is conjugate-linear. Moreover,
+\[
+(w,v)_1
+=\frac{1}{|G|}\sum_{g\in G}(gw,gv)
+=\overline{\frac{1}{|G|}\sum_{g\in G}(gv,gw)}
+=\overline{(v,w)_1}.
+\]
+Thus \((\cdot,\cdot)_1\) is Hermitian.
+Next, for \(v\neq 0\), since each \(g\in G\) acts invertibly, we have \(gv\neq 0\). Hence
+\[
+(v,v)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gv)>0.
+\]
+Therefore \((\cdot,\cdot)_1\) is positive definite.
+Finally, we show that this form is preserved by the action of \(G\). Let \(h\in G\). Then
+\[
+(hv,hw)_1
+=\frac{1}{|G|}\sum_{g\in G}(ghv,ghw).
+\]
+As \(g\) runs over \(G\), so does \(gh\). Therefore
+\[
+(hv,hw)_1
+=\frac{1}{|G|}\sum_{u\in G}(uv,uw)
+=(v,w)_1.
+\]
+Thus
+\[
+(v,w)_1=(hv,hw)_1
+\]
+for all \(h\in G\), so \((\cdot,\cdot)_1\) is \(G\)-invariant.
+
+(2) Choose a basis of \(V\), so that \(V\simeq \mathbb C^n\), and take the
+standard positive definite Hermitian form
+\[
+(v,w)=\sum_i v_i\overline{w_i}.
+\]
+Averaging this form over the \(G\)-action gives a new Hermitian form
+\[
+(v,w)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gw).
+\]
+By the previous part, \((\cdot,\cdot)_1\) is positive definite and
+\(G\)-invariant.
+
+Now let \(W\subset V\) be a subrepresentation, and define
+\[
+W^\perp=\{v\in V\mid (v,w)_1=0 \text{ for all } w\in W\}.
+\]
+Since \((\cdot,\cdot)_1\) is positive definite, we have
+\[
+V=W\oplus W^\perp
+\]
+as vector spaces.
+
+It remains to show that \(W^\perp\) is \(G\)-stable. Let \(u\in W^\perp\),
+\(h\in G\), and \(w\in W\). Since \(W\) is a subrepresentation,
+\(h^{-1}w\in W\). Using \(G\)-invariance of \((\cdot,\cdot)_1\), we get
+\[
+(hu,w)_1=(u,h^{-1}w)_1=0.
+\]
+Hence \(hu\in W^\perp\), so \(W^\perp\) is a subrepresentation. Therefore
+\[
+V=W\oplus W^\perp
+\]
+as representations.
+\end{solution}
+
+
+
+
+\section*{Problem 2}
+
+Prove the following theorem of Burnside: let \(G\) be a finite group, \(k\) an
+algebraically closed field in which \(|G|\) is invertible, and
+\[
+\rho:G\to GL(V)
+\]
+be a representation over \(k\). By taking a basis of \(V\), write each
+endomorphism \(\rho(g)\) as a matrix. Let \(\dim V=n\). Show that the
+representation is simple if and only if there exist \(n^2\) elements
+\(g_1,\dots,g_{n^2}\) of \(G\) so that the matrices
+\[
+\rho(g_1),\dots,\rho(g_{n^2})
+\]
+are linearly independent, and that this happens if and only if the algebra
+homomorphism
+\[
+kG\to \operatorname{End}_k(V)
+\]
+is surjective. Note that \(\rho\) itself is generally not surjective.
+
+
+\begin{solution}
+    Let
+\[
+A=\operatorname{span}_k\{\rho(g):g\in G\}\subseteq \operatorname{End}_k(V).
+\]
+Then \(A\) is the image of the algebra homomorphism
+$
+kG\to \operatorname{End}_k(V).
+$
+
+
+Suppose that there exist \(g_1,\dots,g_{n^2}\in G\) such that
+\(\rho(g_1),\dots,\rho(g_{n^2})\) are linearly independent. Since
+\(\dim_k\operatorname{End}_k(V)=n^2\), they form a basis of
+\(\operatorname{End}_k(V)\). Hence every elementary matrix \(E_{ij}\), sending
+\(e_j\) to \(e_i\) and all other basis vectors to \(0\), can be written as a
+\(k\)-linear combination of the matrices \(\rho(g)\).
+Let \(0\neq W\subseteq V\) be a subrepresentation and choose
+\(0\neq v=\sum_{\ell=1}^n c_\ell e_\ell\in W\). Pick \(j\) with \(c_j\neq 0\).
+Then for every \(i\),
+\[
+\frac{1}{c_j}E_{ij}v=e_i.
+\]
+Since \(W\) is stable under every \(\rho(g)\), it is stable under their
+linear combinations. Thus \(e_i\in W\) for all \(i\), so \(W=V\). Therefore
+\(V\) is simple.
+
+
+Conversely, suppose that \(V\) is simple. Let
+\[
+A=\operatorname{im}(kG\to \operatorname{End}_k(V)).
+\]
+Since \(|G|\) is invertible in \(k\), Maschke's theorem implies that \(kG\) is
+semisimple. Hence its quotient \(A\) is also semisimple.
+
+Since \(V\) is simple as a \(G\)-representation, it is simple as an
+\(A\)-module. By Schur's lemma, because \(k\) is algebraically closed,
+\[
+\operatorname{End}_A(V)=k.
+\]
+By the Artin--Wedderburn theorem, \(A\) is a product of matrix algebras over
+\(k\). Since \(V\) is simple, only one simple factor acts nontrivially on
+\(V\). But \(A\) is defined as the image in \(\operatorname{End}_k(V)\), so its
+action on \(V\) is faithful. Therefore \(A\) has only this one factor, and its
+action on \(V\) identifies it with
+\[
+\operatorname{End}_k(V).
+\]
+Thus
+\[
+A=\operatorname{End}_k(V).
+\]
+Hence \(\dim_k A=n^2\). Since \(A\) is spanned by the matrices \(\rho(g)\), one
+can choose \(n^2\) linearly independent matrices among them.
+\end{solution}
+
+
+
+\section*{Problem 3}
+
+Let
+\[
+G=\langle x\mid x^n=1\rangle
+\]
+be a cyclic group of order \(n\), and let \(\zeta_n\in \mathbb{C}\) be a
+primitive \(n\)-th root of unity. Then the simple complex characters of \(G\)
+are the \(n\) functions
+\[
+\chi_r(x^s)=\zeta_n^{rs},
+\]
+where \(0\le r\le n-1\).
+\begin{solution}
+    Let \(V\) be a simple complex representation of \(G\), and set
+\(T=\rho(x)\). Since \(x^n=1\), we have \(T^n=I\). Hence the minimal
+polynomial of \(T\) divides \(t^n-1\). Over \(\mathbb C\), the polynomial
+\(t^n-1=\prod_{r=0}^{n-1}(t-\zeta_n^r)\) has distinct roots, so \(T\) is
+diagonalizable and its eigenvalues are among
+\(\zeta_n^0,\dots,\zeta_n^{n-1}\).
+
+For an eigenvalue \(\lambda\), the eigenspace
+\(V_\lambda=\{v\in V\mid Tv=\lambda v\}\) is \(G\)-stable, because
+\(G=\langle x\rangle\). Since \(V\) is simple, only one eigenspace can be
+nonzero. Thus \(V=V_\lambda\) for some \(\lambda\), so \(\dim V=1\).
+
+Therefore every simple complex representation of \(G\) is one-dimensional.
+Since \(\rho(x)^n=1\), we have \(\rho(x)=\zeta_n^r\) for some
+\(0\le r\le n-1\). Hence, for every \(s\),
+\[
+\chi_r(x^s)=\rho(x^s)=\rho(x)^s=(\zeta_n^r)^s=\zeta_n^{rs}.
+\]
+These \(n\) characters are distinct since
+\(\chi_r(x)=\zeta_n^r\). Hence they are exactly all the simple complex
+characters of \(G\).
+\end{solution}
+\end{document}

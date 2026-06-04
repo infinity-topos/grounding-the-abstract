@@ -1,0 +1,72 @@
+\section{Introduction}
+
+The purpose of these notes is to organize several constructions in equivariant
+geometry from the viewpoint of stratified homotopy theory. The guiding principle
+is that a geometric object with symmetry should not be studied only as a space,
+nor only through its ordinary quotient. Instead, if a group \(G\) acts on a
+stratified space \((X,\mathcal S)\), the natural object is the quotient stack
+\([X/G]\), equipped with the induced stratification. The corresponding
+exit-path \(\infty\)-category then records both the incidence relations among
+the strata and the homotopy-coherent information coming from stabilizers and
+monodromy.
+
+Thus the basic pattern considered in these notes is
+\[
+G\curvearrowright (X,\mathcal S)
+\quad\Longrightarrow\quad
+[X/G]
+\quad\Longrightarrow\quad
+\operatorname{Exit}([X/G])
+\quad\Longrightarrow\quad
+\operatorname{Sh}_{\mathrm{cstr},G}(X).
+\]
+Here \(\operatorname{Sh}_{\mathrm{cstr},G}(X)\) denotes the category of
+\(G\)-equivariant constructible sheaves on \(X\), constructible with respect to
+the stratification \(\mathcal S\). The point of the exit-path construction is
+that constructible sheaves on a stratified space are controlled by functors out
+of its exit-path \(\infty\)-category. In the equivariant setting, one should
+apply this principle not merely to \(X\), but to the quotient stack \([X/G]\).
+This retains the stabilizer data which would be lost by passing to the ordinary
+topological quotient.
+
+The affine Grassmannian provides the main example motivating this perspective.
+For a complex reductive group \(G\), its affine Grassmannian is
+\[
+\operatorname{Gr}_G = G((t))/G[[t]].
+\]
+It carries a natural \(G[[t]]\)-action, and the corresponding orbit
+decomposition gives the Schubert stratification
+\[
+\operatorname{Gr}_G
+=
+\bigsqcup_{\lambda\in X_*(T)^+}
+G[[t]]\cdot t^\lambda .
+\]
+The geometric categories appearing in the geometric Satake correspondence are
+built from sheaves that are constructible, and often equivariant, with respect
+to this Schubert stratification. From the present viewpoint, one regards
+\(\operatorname{Gr}_G\) as an equivariantly stratified object and studies the
+stack
+\[
+[\operatorname{Gr}_G/G[[t]]],
+\]
+together with its exit-path \(\infty\)-category.
+
+This framework also clarifies how other examples fit into the same pattern.
+In Morse theory, a function or moment map produces a stratification by stable
+or unstable manifolds. In Bruhat--Tits theory, buildings are stratified by
+facets, alcoves, and apartments, with group actions encoded by parahoric
+stabilizers. In toric geometry, the algebraic torus action gives the orbit
+stratification, while the compact torus action leads to moment-map and
+Morse-type decompositions. These examples are not identical, but they share a
+common homotopical skeleton: a space with symmetry, a compatible
+stratification, and a category of constructible objects controlled by exit
+paths.
+
+The aim of these notes is therefore not to develop the full technical machinery
+of equivariant stable homotopy theory, nor to prove the geometric Satake
+equivalence. Rather, the goal is to isolate the conceptual mechanism by which
+group actions and stratifications combine to produce categories of
+constructible sheaves. The affine Grassmannian will serve as the central test
+case, while Morse theory, Bruhat--Tits buildings, and toric varieties provide
+parallel examples illustrating the same equivariant stratified principle.

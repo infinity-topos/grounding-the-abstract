@@ -1,0 +1,50 @@
+\documentclass[a4paper,10pt]{article}
+
+% 引入我们自定义的样式包
+\usepackage{dag-notes}
+\usepackage{fontawesome5}
+\usepackage{CJKutf8}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm} % 设置适合 12 页阅读的页边距
+
+
+
+\newcommand{\rep}{\operatorname{rep}}
+\newcommand{\qcoh}{\operatorname{QCoh}}
+\newcommand{\coh}{\operatorname{Coh}}
+\newcommand{\dmod}{\operatorname{D-mod}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\ug}{U(\mathfrak{g})}
+\newcommand{\gmod}{\mathfrak{g}\text{-mod}}
+\newcommand{\dr}{\text{dR}}
+\newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\MR}{M_{\R}}
+\newcommand{\textbi}[1]{\textbf{\textit{#1}}}
+\title{Coherent-Constructible Correspondence}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+\begin{document}
+% 生成标题
+\maketitle
+% 导入各个章节
+% 使用 \input 可以保持紧凑排版（不会强制换页）
+% 如果想要每一章从新的一页开始，可以使用 \include
+\tableofcontents
+
+\input{sections/1}
+\input{sections/2}
+\input{sections/3}
+\input{sections/4}
+\input{sections/5}
+\input{sections/6}
+\input{sections/7}
+\input{sections/8}
+\input{sections/9}
+\end{document}

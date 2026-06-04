@@ -1,0 +1,306 @@
+\section{The Coherent Side for Toric Varieties}
+
+In this section we specialize the coherent side of the
+coherent--constructible correspondence to the toric setting.  Let
+\(X_\Sigma\) be a smooth toric variety with acting torus \(T\), and let
+\(M\) and \(N\) denote the character and cocharacter lattices of \(T\).
+The coherent side of the correspondence is modeled by the dg category
+\[
+\operatorname{Perf}_T(X_\Sigma),
+\]
+or equivalently, in the smooth setting, by the bounded equivariant
+coherent derived category \(D^b(\operatorname{Coh}_T(X_\Sigma))\).
+
+The toric structure gives a particularly explicit description of this
+category.  On an affine toric chart
+\(U_\sigma=\operatorname{Spec}k[\sigma^\vee\cap M]\), \(T\)-equivariant
+quasi-coherent sheaves correspond to \(M\)-graded modules over the
+semigroup algebra \(k[\sigma^\vee\cap M]\).  Thus equivariance translates
+the torus action into a grading by the character lattice \(M\).
+
+The purpose of this section is to recall this graded description and to
+introduce the coherent generators used in the proof of the toric CCC.
+These generators are indexed by pairs \((\sigma,\chi)\), where
+\(\sigma\in\Sigma\) is a cone of the fan and \(\chi\in M\) is a
+character.  They will later be matched with standard constructible
+sheaves on \(M_{\mathbb R}\).  The main result prepared in this section
+is that these coherent objects generate
+\(\operatorname{Perf}_T(X_\Sigma)\).
+
+
+\subsection{Equivariant Coherent Sheaves on Toric Varieties}
+
+Let \(\sigma\in\Sigma\) be a cone, and let
+\(U_\sigma\subset X_\Sigma\) be the corresponding affine toric open
+subset.  We write \(U_\sigma=\operatorname{Spec}A_\sigma\), where
+\(A_\sigma=k[\sigma^\vee\cap M]\).  The semigroup algebra \(A_\sigma\)
+has its natural \(M\)-grading
+\[
+A_\sigma=\bigoplus_{m\in\sigma^\vee\cap M}A_{\sigma,m},
+\qquad
+A_{\sigma,m}=k\cdot\chi^m.
+\]
+Equivalently, \(\deg(\chi^m)=m\).  This grading records the torus action
+on \(U_\sigma\).
+
+We denote by \(A_\sigma\text{-}\operatorname{Mod}^M\) the category of
+\(M\)-graded \(A_\sigma\)-modules.  Thus an object is an
+\(A_\sigma\)-module \(P=\bigoplus_{\chi\in M}P_\chi\) such that
+\(A_{\sigma,m}\cdot P_\chi\subset P_{\chi+m}\) for all
+\(m\in\sigma^\vee\cap M\) and \(\chi\in M\).
+
+\begin{proposition}\label{prop:affine-equiv-graded}
+There is an equivalence of categories
+\[
+\operatorname{QCoh}_T(U_\sigma)
+\simeq
+A_\sigma\text{-}\operatorname{Mod}^{M}.
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(U_\sigma\) is affine, a quasi-coherent sheaf is determined by its
+module of global sections.  If \(\mathcal F\) is \(T\)-equivariant, then
+\(\Gamma(U_\sigma,\mathcal F)\) carries a compatible \(T\)-action.  Since
+\(T\) is a torus, this module decomposes into weight spaces:
+\[
+\Gamma(U_\sigma,\mathcal F)
+=
+\bigoplus_{\chi\in M}\Gamma(U_\sigma,\mathcal F)_\chi .
+\]
+Compatibility with the \(A_\sigma\)-module structure is precisely the
+grading condition
+\[
+A_{\sigma,m}\cdot \Gamma(U_\sigma,\mathcal F)_\chi
+\subset
+\Gamma(U_\sigma,\mathcal F)_{\chi+m}.
+\]
+Thus \(\Gamma(U_\sigma,\mathcal F)\) is an \(M\)-graded
+\(A_\sigma\)-module.
+
+Conversely, an \(M\)-graded \(A_\sigma\)-module \(P\) defines a
+quasi-coherent sheaf \(\widetilde P\) on \(U_\sigma\), and the grading
+defines a \(T\)-equivariant structure on \(\widetilde P\).  These two
+constructions are inverse to each other.
+\end{proof}
+
+Let \(A_\sigma\text{-}\operatorname{mod}^M\) denote the full subcategory
+of finitely generated \(M\)-graded \(A_\sigma\)-modules.
+
+\begin{corollary}
+There is an equivalence of categories
+\[
+\operatorname{Coh}_T(U_\sigma)
+\simeq
+A_\sigma\text{-}\operatorname{mod}^{M}.
+\]
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:affine-equiv-graded}, \(T\)-equivariant
+quasi-coherent sheaves on \(U_\sigma\) are equivalent to \(M\)-graded
+\(A_\sigma\)-modules.  Since \(U_\sigma\) is affine, coherence is
+equivalent to finite generation over \(A_\sigma\).  Hence the coherent
+objects correspond exactly to finitely generated graded modules.
+\end{proof}
+
+
+
+We now pass from a single affine chart to the whole toric variety.  The
+fan \(\Sigma\) gives an affine open cover
+\(X_\Sigma=\bigcup_{\sigma\in\Sigma}U_\sigma\), and for two cones
+\(\sigma,\tau\in\Sigma\), one has
+\(U_\sigma\cap U_\tau=U_{\sigma\cap\tau}\).  The open immersions
+\(U_{\sigma\cap\tau}\hookrightarrow U_\sigma\) and
+\(U_{\sigma\cap\tau}\hookrightarrow U_\tau\) induce morphisms of
+\(M\)-graded algebras \(A_\sigma\to A_{\sigma\cap\tau}\) and
+\(A_\tau\to A_{\sigma\cap\tau}\).
+
+
+
+
+\begin{proposition}[Gluing over the fan]
+A \(T\)-equivariant quasi-coherent sheaf on \(X_\Sigma\) is equivalently
+given by a family of \(M\)-graded \(A_\sigma\)-modules \(P_\sigma\), one
+for each cone \(\sigma\in\Sigma\), together with isomorphisms of
+\(M\)-graded \(A_{\sigma\cap\tau}\)-modules
+\[
+A_{\sigma\cap\tau}\otimes_{A_\sigma}P_\sigma
+\xrightarrow{\sim}
+A_{\sigma\cap\tau}\otimes_{A_\tau}P_\tau
+\]
+for all pairs \(\sigma,\tau\in\Sigma\), satisfying the usual cocycle
+condition on triple overlaps.  The corresponding sheaf is coherent if
+and only if each \(P_\sigma\) is a finitely generated \(M\)-graded
+\(A_\sigma\)-module.
+\end{proposition}
+
+\begin{proof}
+This is the usual descent description of quasi-coherent sheaves with
+respect to the affine open cover \(\{U_\sigma\}_{\sigma\in\Sigma}\),
+combined with the equivalence
+\(\operatorname{QCoh}_T(U_\sigma)\simeq
+A_\sigma\text{-}\operatorname{Mod}^M\) on each affine chart.  Restricting
+a sheaf from \(U_\sigma\) to \(U_{\sigma\cap\tau}\) corresponds
+algebraically to extension of scalars along
+\(A_\sigma\to A_{\sigma\cap\tau}\).  Since these restriction maps
+preserve the \(M\)-grading, the gluing maps are isomorphisms of graded
+modules.  The cocycle condition is exactly the usual sheaf gluing
+condition on triple overlaps.  Finally, coherence is local on
+\(X_\Sigma\), so the coherent case is obtained by requiring each
+\(P_\sigma\) to be finitely generated.
+\end{proof}
+
+Thus \(T\)-equivariant coherent sheaves on \(X_\Sigma\) can be described
+in terms of \(M\)-graded modules over the affine semigroup algebras
+\(A_\sigma\), together with compatibility over the fan.  This
+local-to-global description will be used in the construction of the
+coherent generators.
+
+
+
+\subsection{Coherent Generators}
+
+We now introduce the coherent generators used in the toric
+coherent--constructible correspondence.  For each cone
+\(\sigma\in\Sigma\), let \(i_\sigma:U_\sigma\hookrightarrow X_\Sigma\)
+be the inclusion of the corresponding affine toric open subset. 
+
+
+\begin{definition}
+Let \(\sigma\in\Sigma\), and let \(U_\sigma\) be the corresponding
+affine toric open subset.  For a character \(\chi\in M\), define
+$
+\mathcal O_{U_\sigma}(\chi)
+$
+to be the trivial line bundle \(U_\sigma\times k\to U_\sigma\) with the
+following \(T\)-action on its total space:
+\[
+t\cdot(x,v)=(tx,\chi(t)v),
+\qquad
+t\in T,\ x\in U_\sigma,\ v\in k.
+\]
+\end{definition}
+
+\begin{proposition}
+The line bundle \(\mathcal O_{U_\sigma}(\chi)\) is a
+\(T\)-equivariant line bundle on \(U_\sigma\).
+\end{proposition}
+
+\begin{proof}
+Since \(\chi:T\to k^*\) is a character, it is a group homomorphism.
+Hence, for \(t_1,t_2\in T\), one has
+\[
+t_1\cdot(t_2\cdot(x,v))
+=
+t_1\cdot(t_2x,\chi(t_2)v)
+=
+(t_1t_2x,\chi(t_1)\chi(t_2)v)
+=
+(t_1t_2x,\chi(t_1t_2)v).
+\]
+Thus the formula defines a \(T\)-action on \(U_\sigma\times k\).
+
+Let \(\pi:U_\sigma\times k\to U_\sigma\) be the projection.  Then
+\[
+\pi(t\cdot(x,v))=\pi(tx,\chi(t)v)=tx=t\cdot\pi(x,v),
+\]
+so \(\pi\) is \(T\)-equivariant.  Moreover, for each \(x\in U_\sigma\),
+the induced map on fibers
+\[
+(\mathcal O_{U_\sigma}(\chi))_x
+\longrightarrow
+(\mathcal O_{U_\sigma}(\chi))_{tx}
+\]
+is multiplication by \(\chi(t)\), hence is \(k\)-linear.  Therefore
+\(\mathcal O_{U_\sigma}(\chi)\) is a \(T\)-equivariant line bundle.
+\end{proof}
+
+We call this equivariant structure the \textbi{\(T\)-linearization of weight
+\(\chi\)}.  Thus \(\mathcal O_{U_\sigma}(\chi)\) has the same underlying
+line bundle as \(\mathcal O_{U_\sigma}\), but its \(T\)-equivariant
+structure is twisted by the character \(\chi\).
+
+\begin{remark}
+The word ``linearization'' means that the \(T\)-action on
+\(U_\sigma\) is lifted to the total space of the line bundle, with linear
+maps on fibers.  Here the induced map
+\[
+(\mathcal O_{U_\sigma})_x\longrightarrow
+(\mathcal O_{U_\sigma})_{tx}
+\]
+is multiplication by \(\chi(t)\).  Equivalently, this is descent data for
+the action groupoid \(T\times U_\sigma\rightrightarrows U_\sigma\).
+\end{remark}
+
+
+We define
+\[
+\Theta'(\sigma,\chi)
+:=
+(i_\sigma)_*\mathcal O_{U_\sigma}(\chi).
+\]
+These objects are \(T\)-equivariant quasi-coherent sheaves on \(X_\Sigma\).
+They are indexed by the same combinatorial data \((\sigma,\chi)\) which
+will later index the constructible generators.
+
+
+
+
+\begin{theorem}[Theta generation in the equivariant quasi-coherent category]
+Let \(X_\Sigma\) be a smooth toric variety. Then
+\[
+D(\operatorname{QCoh}_T(X_\Sigma))
+=
+\Big\langle
+\Theta'(\sigma,\chi)
+\ \Big|\
+\sigma\in\Sigma,\ \chi\in M
+\Big\rangle_{\mathrm{loc}}.
+\]
+Here \(\langle - \rangle_{\mathrm{loc}}\) denotes the smallest localizing
+triangulated subcategory containing the indicated objects.
+\end{theorem}
+
+\begin{proof}
+Let \(\mathcal C\) be the right-hand side. We prove that every object of
+\(D(\operatorname{QCoh}_T(X_\Sigma))\) belongs to \(\mathcal C\).
+
+First consider an affine toric chart
+\(U_\sigma=\operatorname{Spec}A_\sigma\), where
+\(A_\sigma=k[\sigma^\vee\cap M]\). By Proposition 3.1, one has
+\(\operatorname{QCoh}_T(U_\sigma)\simeq A_\sigma\operatorname{-Mod}^M\).
+Under this equivalence, \(\mathcal O_{U_\sigma}(\chi)\) corresponds to the
+free graded module \(A_\sigma(\chi)\). The modules \(A_\sigma(\chi)\), for
+\(\chi\in M\), generate \(D(A_\sigma\operatorname{-Mod}^M)\): if
+\(P\in D(A_\sigma\operatorname{-Mod}^M)\) satisfies
+\(\operatorname{RHom}_{A_\sigma}(A_\sigma(\chi),P)=0\) for every
+\(\chi\in M\), then all graded components of all cohomology modules
+\(H^i(P)\) vanish, hence \(P\simeq 0\).
+
+Now let \(F\in D(\operatorname{QCoh}_T(X_\Sigma))\). Choose the finite
+\(T\)-stable affine cover of \(X_\Sigma\) by affine toric charts. Since
+intersections of affine toric charts are again affine toric charts, the
+associated \v{C}ech resolution expresses \(F\) as a finite totalization of
+objects of the form \((i_\tau)_*(F|_{U_\tau})\), with \(\tau\in\Sigma\).
+For each \(\tau\), the restriction \(F|_{U_\tau}\) is generated by
+\(\mathcal O_{U_\tau}(\chi)\), \(\chi\in M\). Since \((i_\tau)_*\) is exact
+and preserves coproducts for these quasi-compact open immersions,
+\((i_\tau)_*(F|_{U_\tau})\) is generated by
+\((i_\tau)_*\mathcal O_{U_\tau}(\chi)=\Theta'(\tau,\chi)\). Hence every term
+in the \v{C}ech resolution belongs to \(\mathcal C\).
+
+Since \(\mathcal C\) is localizing, it is closed under shifts, cones, finite
+totalizations, and coproducts. Therefore \(F\in\mathcal C\). This proves
+\[
+D(\operatorname{QCoh}_T(X_\Sigma))
+=
+\big\langle \Theta'(\sigma,\chi)\mid \sigma\in\Sigma,\ \chi\in M
+\big\rangle_{\mathrm{loc}}.
+\]
+\end{proof}
+
+Thus the coherent side has a distinguished set of generators indexed by
+pairs \((\sigma,\chi)\).  In the next section, we will construct
+corresponding constructible generators with the same indexing set.
+

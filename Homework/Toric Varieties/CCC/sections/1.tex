@@ -1,16 +1,177 @@
-{\begingroup
-\newcommand{\rep}{\operatorname{rep}}
-\newcommand{\icoh}{\operatorname{IndCoh}}
-\newcommand{\qcoh}{\operatorname{QCoh}}
-\newcommand{\coh}{\operatorname{Coh}}
-\newcommand{\dmod}{\operatorname{D-mod}}
-\newcommand{\g}{\mathfrak{g}}
-\newcommand{\ug}{U(\mathfrak{g})}
-\newcommand{\gmod}{\mathfrak{g}\text{-mod}}
-\newcommand{\dr}{\text{dR}}
-\newcommand{\spec}{\operatorname{Spec}}
 
 \section{Introduction}
 
+The coherent--constructible correspondence is a bridge between two different
+types of sheaf theories. On one side, one studies equivariant coherent sheaves
+on a toric variety. On the other side, one studies constructible sheaves on a
+real vector space, with singular support restricted by a conic subset determined
+by the fan. The main point of the correspondence is that the algebraic and
+equivariant data of a toric variety can be translated into polyhedral and
+microlocal data on the constructible side.
 
-\endgroup}
+The main goal of this paper is to explain and prove the coherent--constructible
+correspondence for smooth toric varieties. More precisely, if \(X_\Sigma\) is a
+smooth toric variety with acting torus \(T\), character lattice \(M\), and fan
+\(\Sigma\subset N_{\mathbb R}\), then the correspondence takes the form of a
+quasi-equivalence of dg categories
+\[
+\kappa_\Sigma:\mathrm{Perf}_T(X_\Sigma)
+\overset{\sim}{\longrightarrow}
+Sh_{\Lambda_\Sigma}(M_{\mathbb R}).
+\]
+Here \(\mathrm{Perf}_T(X_\Sigma)\) is the dg category of \(T\)-equivariant
+perfect complexes on \(X_\Sigma\), and \(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\)
+is the dg category of constructible sheaves on \(M_{\mathbb R}\) whose singular
+support is contained in the FLTZ skeleton \(\Lambda_\Sigma\). The FLTZ skeleton
+is a conic subset of \(T^*M_{\mathbb R}\) defined directly from the fan
+\(\Sigma\).
+
+The proof used in this paper follows the standard generator strategy. On the
+coherent side, one introduces theta objects
+\[
+\Theta'(\sigma,\chi)=(i_\sigma)_*\mathcal O_{U_\sigma}(\chi),
+\]
+where \(U_\sigma\) is the affine toric chart associated to a cone
+\(\sigma\in\Sigma\). On the constructible side, one introduces the corresponding
+theta sheaves
+\[
+\Theta(\sigma,\chi)
+=
+(i_{\chi+\sigma^\vee})_*\omega_{\chi+\sigma^\vee}.
+\]
+The functor \(\kappa_\Sigma\) is characterized by sending coherent theta objects
+to constructible theta sheaves:
+\[
+\Theta'(\sigma,\chi)\longmapsto \Theta(\sigma,\chi).
+\]
+The essential calculation is the comparison of Hom-complexes between these
+generators. Both sides are controlled by the same polyhedral condition:
+\[
+\mathrm{RHom}(\Theta(\sigma,\chi),\Theta(\tau,\psi))
+\simeq
+\begin{cases}
+k, & \chi+\sigma^\vee\subset \psi+\tau^\vee,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+On the coherent side, this same condition says that the corresponding
+equivariant monomial map is regular. Once the Hom-complexes are identified and
+the theta objects are shown to generate both categories, the quasi-equivalence
+follows from the generator criterion.
+
+The organization of the paper is as follows.
+
+Section 2 recalls the symplectic background for toric varieties. We review
+symplectic manifolds, Kähler forms, Hermitian line bundles, compact real tori,
+and moment polytopes. This material is not part of the proof of the
+coherent--constructible correspondence itself. Its role is to explain the
+geometric background behind toric varieties and to prepare for the later
+Fukaya-theoretic interpretation.
+
+Section 3 fixes the categorical and sheaf-theoretic conventions. We recall dg
+categories, perfect complexes, equivariant coherent sheaves, constructible
+sheaves, singular support, and sheaves with prescribed singular support. These
+notions provide the language in which the correspondence is stated and proved.
+In particular, the proof is formulated at the dg categorical level so that
+Hom-complexes, shifts, cones, and quasi-equivalences can be handled explicitly.
+
+Sections 4, 5, and 6 form the main body of the paper. Readers who are already
+comfortable with toric varieties, dg categories, constructible sheaves, and
+singular support may start directly from Section 4. Section 4 describes the
+coherent side of the correspondence. It recalls the description of
+\(T\)-equivariant coherent sheaves on affine toric charts in terms of
+\(M\)-graded modules, and it introduces the coherent theta generators
+\(\Theta'(\sigma,\chi)\). Section 5 constructs the constructible side. It
+defines the FLTZ skeleton, studies the singular support of polyhedral
+costandard sheaves, and introduces the constructible theta sheaves
+\(\Theta(\sigma,\chi)\). Section 6 proves the toric coherent--constructible
+correspondence by matching the two families of theta generators and comparing
+their Hom-complexes.
+
+Section 7 is introductory and interpretive. It explains how the constructible
+side of the correspondence can be viewed from the perspective of microlocal
+sheaf theory and Fukaya categories. The section does not give an independent
+construction of the Fukaya category. Instead, it explains how the FLTZ skeleton,
+which appears as a singular-support condition on the constructible side, can
+also be interpreted as a Lagrangian or stop condition in a cotangent bundle.
+
+Section 8 gives explicit examples of the correspondence. The examples include
+\(\mathbb A^1\), \(\mathbb P^2\), \(\mathbb P^1\times\mathbb P^1\),
+Hirzebruch surfaces, and a toric del Pezzo surface. In each case, we compute
+the fan, the FLTZ skeleton, the theta sheaves, and the Hom-complexes between
+theta objects. These examples are intended to make the abstract generator
+calculation concrete: equivariant monomial maps on the coherent side become
+inclusions of polyhedral sheaves on the constructible side.
+
+Section 9 is also introductory. It discusses several directions in which the
+toric coherent--constructible correspondence can be generalized. We describe
+the basic changes that occur for toric Deligne--Mumford stacks, toric
+fibrations, and Fourier--Mukai transforms. The aim is not to prove these
+generalizations in full detail, but to indicate how the same organizing ideas
+persist: the combinatorial input is modified, the coherent category changes
+accordingly, and the constructible side is still governed by microlocal
+conditions and theta-type generators.
+
+
+
+We use the standard notation of toric geometry. Let \(T\) be an algebraic torus
+over \(\mathbb C\). We write
+\[
+N=\operatorname{Hom}(\mathbb C^*,T),
+\qquad
+M=\operatorname{Hom}(T,\mathbb C^*)
+\]
+for the cocharacter and character lattices. Thus
+\[
+M=\operatorname{Hom}_{\mathbb Z}(N,\mathbb Z).
+\]
+Their realifications are
+\[
+N_{\mathbb R}=N\otimes_{\mathbb Z}\mathbb R,
+\qquad
+M_{\mathbb R}=M\otimes_{\mathbb Z}\mathbb R.
+\]
+For a fan \(\Sigma\subset N_{\mathbb R}\), we denote by \(X_\Sigma\) the
+associated toric variety. For a cone \(\sigma\in\Sigma\), the corresponding
+affine toric chart is denoted by
+\[
+U_\sigma=\operatorname{Spec}\mathbb C[\sigma^\vee\cap M].
+\]
+The inclusion is written as
+\[
+i_\sigma:U_\sigma\hookrightarrow X_\Sigma.
+\]
+
+For a cone \(\sigma\), we write
+\[
+\sigma^\vee=\{m\in M_{\mathbb R}\mid \langle m,n\rangle\ge 0
+\text{ for all }n\in\sigma\}
+\]
+for its dual cone, and
+\[
+\sigma^\perp=\{m\in M_{\mathbb R}\mid \langle m,n\rangle=0
+\text{ for all }n\in\sigma\}
+\]
+for its annihilator. We also use
+\[
+M_\sigma=M/(\sigma^\perp\cap M).
+\]
+The FLTZ skeleton associated to \(\Sigma\) is
+\[
+\Lambda_\Sigma
+=
+\bigcup_{\sigma\in\Sigma}
+\bigcup_{\chi\in M_\sigma}
+(\chi+\sigma^\perp)\times(-\sigma)
+\subset T^*M_{\mathbb R}.
+\]
+
+We write \(\mathrm{Perf}_T(X_\Sigma)\) for the dg category of
+\(T\)-equivariant perfect complexes on \(X_\Sigma\), and
+\(Sh_{\Lambda_\Sigma}(M_{\mathbb R})\) for the dg category of constructible
+sheaves on \(M_{\mathbb R}\) with singular support contained in
+\(\Lambda_\Sigma\). Derived Hom-complexes are denoted by \(\mathrm{RHom}\).
+
+
+
+

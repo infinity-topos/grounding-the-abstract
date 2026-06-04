@@ -1,0 +1,76 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{marvosym}
+\usepackage{mathrsfs}
+\usepackage{CJKutf8}
+\usepackage{bm}
+\usepackage[margin=1in]{geometry}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\qz}{\mathbb{Q}/\mathbb{Z}}
+\newcommand{\z}{\mathbb{Z}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newenvironment{lemma}[1]{
+    \noindent \textbf{Lemma #1.} \itshape
+}{
+    \vspace{1em}
+}
+
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Abstract Algebra III: Assignment - Week 14}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+Let \(G\) be a finite group and let \(p\) be a prime. Prove that each element
+\(x\in G\) can be uniquely written as
+\[
+x=st,
+\]
+where \(s\) is \(p\)-regular, \(t\) is \(p\)-singular, and \(st=ts\).
+If \(x_1=s_1t_1\) is such a decomposition of an element \(x_1\) that is
+conjugate to \(x\), then \(s\) is conjugate to \(s_1\), and \(t\) is conjugate
+to \(t_1\).
+
+\begin{solution}
+Let \(x\in G\), and write \(|x|=n=p^a m\), where \((m,p)=1\). Choose integers
+\(A,B\) such that \(Ap^a+Bm=1\). Set \(s=x^{Ap^a}\) and \(t=x^{Bm}\). Then
+\(s\) and \(t\) commute, since both are powers of \(x\), and
+\(st=x^{Ap^a+Bm}=x\). Moreover, \(s^m=x^{Ap^a m}=x^{An}=1\), so \(|s|\mid m\);
+hence \(s\) is \(p\)-regular. Similarly, \(t^{p^a}=x^{Bmp^a}=x^{Bn}=1\), so
+\(|t|\mid p^a\); hence \(t\) is a \(p\)-element. Thus the required
+decomposition exists.
+
+Now suppose \(x=s_1t_1\) is another such decomposition, with \(s_1\) \(p\)-regular,
+\(t_1\) a \(p\)-element, and \(s_1t_1=t_1s_1\). Since \(s_1\) and \(t_1\) commute
+and have relatively prime orders, \(|x|=|s_1t_1|=|s_1||t_1|\). Comparing the
+\(p\)-part and the prime-to-\(p\) part of \(|x|=p^a m\), we get
+\(|s_1|=m\) and \(|t_1|=p^a\). Therefore
+\[
+x^{Ap^a}=(s_1t_1)^{Ap^a}=s_1^{Ap^a}t_1^{Ap^a}=s_1,
+\]
+because \(Ap^a\equiv 1\pmod m\) and \(t_1^{p^a}=1\). Similarly,
+\(x^{Bm}=(s_1t_1)^{Bm}=t_1\). Hence \(s_1=s\) and \(t_1=t\), so the
+decomposition is unique.
+
+Finally, if \(x_1=gxg^{-1}\), then
+\(x_1=(gsg^{-1})(gtg^{-1})\). The first factor is still \(p\)-regular, the
+second is still a \(p\)-element, and they commute. By uniqueness, if
+\(x_1=s_1t_1\) is the corresponding decomposition, then
+\(s_1=gsg^{-1}\) and \(t_1=gtg^{-1}\). Thus \(s\) is conjugate to \(s_1\), and
+\(t\) is conjugate to \(t_1\).
+\end{solution}
+\end{document}
