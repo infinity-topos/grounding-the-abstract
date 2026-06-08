@@ -14,6 +14,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\q}{\mathfrak{q}}
 \newcommand{\tr}{\text{Tr}}
+\newcommand{\disc}{\text{disc}}
 \renewcommand{\o}{\mathcal{O}}
 \newtheorem{lemma}{Lemma}
 
@@ -1589,5 +1590,2038 @@ and if $\operatorname{dft}(a)\neq \operatorname{dft}(b)$, then
 \begin{solution}
     Let $\mathcal O=\mathcal O_F$ and let $e=v(2)$. We use the following standard consequence of Lemma 4.2.12. For $u\in \mathcal O^\times$, \[ \operatorname{dft}(u)\in \{1,3,\dots,2e-1,2e,+\infty\}. \] Moreover, \[ \operatorname{dft}(u)=+\infty \Longleftrightarrow u\in F^{\times 2}, \] and \[ \operatorname{dft}(u)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2}. \] The values $1,3,\dots,2e-1$ occur, for instance, on suitable unit classes represented by elements of the form $1+c\pi^{2j-1}$. By Exercise A.12.2, if $v(a)$ is odd, then \[ \operatorname{dft}(a)=0. \] If $v(a)$ is even, write $a=\pi^{2s}u$ with $u\in\mathcal O^\times$. Since $\pi^{2s}$ is a square, $a$ and $u$ have the same square class, and \[ \operatorname{dft}(a)=\operatorname{dft}(u). \] Therefore \[ \operatorname{dft}(F^\times) = \{0,2e,+\infty\} \cup \{2j-1\mid 1\leq j\leq e\}. \] Next we prove the stated equivalences. The first two follow immediately from Exercise A.12.2 and the unit classification above: \[ \operatorname{dft}(a)=0 \Longleftrightarrow v(a)\text{ is odd}, \] and \[ \operatorname{dft}(a)\geq 1 \Longleftrightarrow v(a)\text{ is even}. \] If $v(a)$ is even, then $aF^{\times 2}=uF^{\times 2}$ for some $u\in\mathcal O^\times$. Hence \[ \operatorname{dft}(a)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2} \Longleftrightarrow aF^{\times 2}=\Delta F^{\times 2}. \] Similarly, \[ \operatorname{dft}(a)=+\infty \Longleftrightarrow a\in F^{\times 2}. \] It remains to prove the domination principle. Since $\operatorname{dft}$ only depends on square classes, we may multiply $a$ and $b$ by squares whenever convenient. If $v(a)\not\equiv v(b)\pmod 2$, then $v(ab)$ is odd. Hence, by Exercise A.12.2, \[ \operatorname{dft}(ab)=0 = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] If $v(a)\equiv v(b)\equiv 1\pmod 2$, then \[ \operatorname{dft}(a)=\operatorname{dft}(b)=0. \] In this case one only gets $\operatorname{dft}(ab)\geq 0$ in general. Now assume $v(a)$ and $v(b)$ are both even. After multiplying by squares, we may assume $a,b\in\mathcal O^\times$. Put \[ r=\operatorname{dft}(a), \qquad s=\operatorname{dft}(b), \qquad m=\min\{r,s\}. \] If one of $r,s$ is $+\infty$, the assertion is immediate from the fact that squares do not change square classes. Thus assume $r,s<+\infty$. By Exercise A.12.1(3.a), there exist $\varepsilon,\eta\in\mathcal O^\times$ such that \[ a\equiv \varepsilon^2 \pmod{a\pi^r\mathcal O}, \qquad b\equiv \eta^2 \pmod{b\pi^s\mathcal O}. \] Since $a,b,\varepsilon,\eta$ are units, multiplying the two congruences gives \[ ab\equiv (\varepsilon\eta)^2 \pmod{ab\pi^m\mathcal O}. \] Again by Exercise A.12.1(3.a), \[ \operatorname{dft}(ab)\geq m. \] Thus \[ \operatorname{dft}(ab) \geq \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] Finally assume $\operatorname{dft}(a)\neq\operatorname{dft}(b)$. Without loss of generality, let $r<s$. The domination principle gives \[ \operatorname{dft}(ab)\geq r. \] If $\operatorname{dft}(ab)>r$, then applying the domination principle to $a=(ab)b^{-1}$ gives \[ r=\operatorname{dft}(a) = \operatorname{dft}((ab)b^{-1}) \geq \min\{\operatorname{dft}(ab),\operatorname{dft}(b^{-1})\}. \] Since $\operatorname{dft}(b^{-1})=\operatorname{dft}(b)=s$ and both $\operatorname{dft}(ab)$ and $s$ are strictly larger than $r$, this is a contradiction. Hence \[ \operatorname{dft}(ab)=r = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \]
 \end{solution}
+\section*{Homework 13}
+\subsection*{Exercise A.13.1}
+Let $F$ be a non-archimedean local field of characteristic $\neq 2$. If $\operatorname{char}(k) \neq 2$, prove that for any $\varepsilon, \delta \in \mathcal{O}_F^\times$ we have
+\[ (\varepsilon, \delta)_F = 1 \quad \text{and} \quad (\pi, \delta)_F = \begin{cases} 1 & \text{if } \delta \in \mathcal{O}_F^{\times 2} \,, \\ -1 & \text{if } \delta \notin \mathcal{O}_F^{\times 2} \,. \end{cases} \]
+\begin{solution}
+We prove the two assertions by the following steps.
+
+\emph{Step 1.} Use the quadratic-form criterion for the Hilbert symbol:
+\((a,b)_F=1\) if and only if the ternary quadratic form
+\(z^2-ax^2-by^2\) has a non-trivial zero over \(F\).
+
+\emph{Step 2.} For \((\epsilon,\delta)_F\), reduce the form modulo \(\pi\).
+Since the residue field \(k\) is finite of characteristic different from \(2\),
+every quadratic form of dimension at least \(3\) over \(k\) is isotropic.
+Then lift a non-trivial zero from \(k\) to \(\mathcal O_F\) by Hensel's lemma.
+
+\emph{Step 3.} For \((\pi,\delta)_F\), the square case is immediate. In the
+non-square case, assume a non-trivial zero exists, choose it primitive, and
+reduce modulo \(\pi\). This forces all coordinates to be divisible by \(\pi\),
+contradicting primitivity.
+
+Now we give the proof.
+
+First let \(\epsilon,\delta\in\mathcal O_F^\times\). Consider
+\[
+Q(x,y,z)=z^2-\epsilon x^2-\delta y^2.
+\]
+By the Hilbert-symbol criterion, it is enough to show that \(Q\) has a
+non-trivial zero over \(F\). Reducing modulo \(\pi\), we obtain
+\[
+\overline Q(\bar x,\bar y,\bar z)
+=\bar z^2-\bar\epsilon \bar x^2-\bar\delta \bar y^2
+\]
+over \(k\). Since \(k\) is finite and \(\operatorname{char}(k)\neq 2\), every
+ternary quadratic form over \(k\) is isotropic. Hence there exists
+\((\bar x_0,\bar y_0,\bar z_0)\neq (0,0,0)\) such that
+\(\overline Q(\bar x_0,\bar y_0,\bar z_0)=0\).
+
+At this point the gradient is
+\[
+\nabla\overline Q(\bar x_0,\bar y_0,\bar z_0)
+=(-2\bar\epsilon\bar x_0,-2\bar\delta\bar y_0,2\bar z_0).
+\]
+Since \(\bar\epsilon,\bar\delta\neq 0\) and \(\operatorname{char}(k)\neq 2\),
+these three partial derivatives cannot all vanish. Therefore at least one
+partial derivative is non-zero. Fix the other two variables and apply the usual
+one-variable Hensel lemma to the remaining variable. Thus the zero
+\((\bar x_0,\bar y_0,\bar z_0)\) lifts to a zero
+\((x_0,y_0,z_0)\in\mathcal O_F^3\) of \(Q\), and this zero is non-trivial.
+Therefore
+\[
+(\epsilon,\delta)_F=1.
+\]
+
+It remains to compute \((\pi,\delta)_F\). If
+\(\delta\in\mathcal O_F^{\times 2}\), say \(\delta=u^2\), then
+\[
+(\pi,\delta)_F=(\pi,u^2)_F=1.
+\]
+
+Now assume \(\delta\notin\mathcal O_F^{\times 2}\). Suppose, for contradiction,
+that \((\pi,\delta)_F=1\). Then the form
+\[
+z^2-\pi x^2-\delta y^2
+\]
+has a non-trivial zero \((x,y,z)\in F^3\). Multiplying by a suitable power of
+\(\pi\), we may assume that \(x,y,z\in\mathcal O_F\) and that at least one of
+them is a unit. Such a solution is called primitive.
+
+Reducing the equation modulo \(\pi\), we get
+\[
+\bar z^2-\bar\delta \bar y^2=0.
+\]
+If \(\bar y\neq 0\), then
+\[
+\bar\delta=\left(\frac{\bar z}{\bar y}\right)^2\in k^{\times 2}.
+\]
+By Hensel's lemma, this would imply
+\(\delta\in\mathcal O_F^{\times 2}\), contradicting our assumption. Hence
+\(\bar y=0\), and then the reduced equation gives \(\bar z=0\).
+
+Thus \(y,z\in\pi\mathcal O_F\). Write \(y=\pi y_1\) and \(z=\pi z_1\). Substituting
+back gives
+\[
+\pi^2 z_1^2-\pi x^2-\delta\pi^2 y_1^2=0.
+\]
+Dividing by \(\pi\), we obtain
+\[
+\pi z_1^2-x^2-\delta\pi y_1^2=0.
+\]
+Reducing modulo \(\pi\) gives \(-\bar x^2=0\), hence \(\bar x=0\). Therefore
+\(x,y,z\) are all divisible by \(\pi\), contradicting the primitivity of the
+solution.
+
+So no non-trivial zero exists when
+\(\delta\notin\mathcal O_F^{\times 2}\). Hence \((\pi,\delta)_F\neq 1\). Since
+the Hilbert symbol takes values in \(\{\pm 1\}\), we conclude that
+\[
+(\pi,\delta)_F=-1.
+\]
+
+Therefore
+\[
+(\epsilon,\delta)_F=1
+\]
+for all \(\epsilon,\delta\in\mathcal O_F^\times\), and
+\[
+(\pi,\delta)_F=
+\begin{cases}
+1,& \delta\in\mathcal O_F^{\times 2},\\
+-1,& \delta\notin\mathcal O_F^{\times 2}.
+\end{cases}
+\]
+\end{solution}
+
+
+\subsection*{Exercise A.13.2}
+Let $K$ be a field of characteristic $\neq 2$, and let $a, b \in K^\times$. \\
+Prove that the ternary quadratic space $\langle 1, -a, -b \rangle_K$ is isotropic if and only if the quaternary quadratic space $\langle 1, -a, -b, ab \rangle_K$ is isotropic.
+\begin{solution}
+We prove the equivalence by the following steps.
+
+\emph{Step 1.} The implication from the ternary form to the quaternary form is
+immediate by adding the fourth coordinate \(0\).
+
+\emph{Step 2.} For the converse, assume that
+\(\langle 1,-a,-b,ab\rangle_K\) is isotropic. If \(a\) is already a square in
+\(K\), then \(\langle 1,-a,-b\rangle_K\) is clearly isotropic.
+
+\emph{Step 3.} If \(a\notin K^{\times 2}\), pass to the quadratic extension
+\(E=K(\sqrt a)\). Rewrite the isotropy equation as an equality of norms.
+
+\emph{Step 4.} Divide the two norms to show that \(b\) is a norm from
+\(E/K\). This gives an explicit non-trivial zero of
+\(\langle 1,-a,-b\rangle_K\).
+
+Now we give the proof.
+
+First suppose that \(\langle 1,-a,-b\rangle_K\) is isotropic. Then there exist
+\(x,y,z\in K\), not all zero, such that
+\[
+x^2-ay^2-bz^2=0.
+\]
+Hence \((x,y,z,0)\) is a non-zero isotropic vector for
+\(\langle 1,-a,-b,ab\rangle_K\). Thus the quaternary form is isotropic.
+
+Conversely, suppose that \(\langle 1,-a,-b,ab\rangle_K\) is isotropic. Then
+there exist \(x,y,z,w\in K\), not all zero, such that
+\[
+x^2-ay^2-bz^2+ab w^2=0.
+\]
+If \(a\in K^{\times 2}\), say \(a=c^2\), then
+\(c^2-a\cdot 1^2=0\), so \(\langle 1,-a,-b\rangle_K\) is already isotropic.
+Thus we may assume that \(a\notin K^{\times 2}\).
+
+Let \(E=K(\sqrt a)\). Then \(E/K\) is a quadratic field extension, and
+\[
+N_{E/K}(r+s\sqrt a)=r^2-a s^2.
+\]
+The equation above can be rewritten as
+\[
+x^2-ay^2=b(z^2-aw^2),
+\]
+or equivalently
+\[
+N_{E/K}(x+y\sqrt a)=b\,N_{E/K}(z+w\sqrt a).
+\]
+We claim that \(z+w\sqrt a\neq 0\). Indeed, if \(z+w\sqrt a=0\), then
+\(z=w=0\). The equation then gives \(x^2-ay^2=0\), so
+\(x+y\sqrt a=0\), hence \(x=y=0\), a contradiction.
+
+Therefore we may divide by \(z+w\sqrt a\). We get
+\[
+b=N_{E/K}\left(\frac{x+y\sqrt a}{z+w\sqrt a}\right).
+\]
+Write
+\[
+\frac{x+y\sqrt a}{z+w\sqrt a}=u+v\sqrt a
+\]
+with \(u,v\in K\). Then
+\[
+b=u^2-av^2.
+\]
+Hence
+\[
+u^2-av^2-b=0.
+\]
+Thus \((u,v,1)\) is a non-zero isotropic vector for
+\(\langle 1,-a,-b\rangle_K\). Therefore the ternary form is isotropic.
+
+This proves that
+\[
+\langle 1,-a,-b\rangle_K
+\]
+is isotropic if and only if
+\[
+\langle 1,-a,-b,ab\rangle_K
+\]
+is isotropic.
+\end{solution}
+
+
+\subsection*{Exercise A.13.3}
+Let $K$ be a field of characteristic $\neq 2$, and let $(U, q), (V, Q)$ be non-singular binary quadratic spaces over $K$. \\
+Prove that the following statements are equivalent:
+\begin{itemize}
+    \item[(i)] $(U, q) \cong (V, Q)$ as quadratic spaces over $K$.
+    \item[(ii)] $q(U)^\times \cap Q(V)^\times \neq \emptyset$ and $\det(U) = \det(V) \in K^\times / K^{\times 2}$. \\
+    Here 
+    \[ Q(V)^\times := K^\times \cap \{ Q(v) \mid v \in V \}. \]
+    and similarly for $q(U)^\times$.
+\end{itemize}
+\begin{solution}
+We prove the equivalence by the following steps.
+
+\emph{Step 1.} The implication \((i)\Rightarrow (ii)\) is immediate: an
+isometry preserves represented values and determinants.
+
+\emph{Step 2.} For the converse, choose a common non-zero represented value
+\(c\in q(U)^*\cap Q(V)^*\).
+
+\emph{Step 3.} Use the vector representing \(c\) to split each binary quadratic
+space into an orthogonal sum of two one-dimensional spaces.
+
+\emph{Step 4.} Since the determinants are equal, the remaining one-dimensional
+summands are isometric. Hence the two binary spaces are isometric.
+
+Now we give the proof.
+
+First suppose that \((U,q)\cong (V,Q)\). Then clearly \(q(U)^*=Q(V)^*\), so
+\(q(U)^*\cap Q(V)^*\neq \emptyset\). Also an isometry preserves the determinant,
+hence \(\det(U)=\det(V)\) in \(K^\times/K^{\times 2}\). Therefore \((ii)\)
+holds.
+
+Conversely, assume that \((ii)\) holds. Choose
+\[
+c\in q(U)^*\cap Q(V)^*.
+\]
+Then there exist \(u\in U\) and \(v\in V\) such that
+\[
+q(u)=c,\qquad Q(v)=c.
+\]
+Since \(c\neq 0\) and \(\operatorname{char}(K)\neq 2\), the one-dimensional
+subspaces \(Ku\subset U\) and \(Kv\subset V\) are non-singular. Hence we have
+orthogonal decompositions
+\[
+U=Ku\perp u^\perp,\qquad V=Kv\perp v^\perp .
+\]
+Since \(U\) and \(V\) are binary, both \(u^\perp\) and \(v^\perp\) are
+one-dimensional. Therefore, for some \(d,e\in K^\times\), we may write
+\[
+(U,q)\cong \langle c,d\rangle,\qquad (V,Q)\cong \langle c,e\rangle .
+\]
+
+By assumption,
+\[
+\det(U)=\det(V)\quad \text{in } K^\times/K^{\times 2}.
+\]
+Using the above diagonal forms, this says
+\[
+cd=ce \quad \text{in } K^\times/K^{\times 2}.
+\]
+Since \(c\in K^\times\), we get
+\[
+d=e \quad \text{in } K^\times/K^{\times 2}.
+\]
+Thus \(d/e\in K^{\times 2}\), so the one-dimensional forms
+\(\langle d\rangle\) and \(\langle e\rangle\) are isometric. Hence
+\[
+\langle c,d\rangle\cong \langle c,e\rangle.
+\]
+Therefore
+\[
+(U,q)\cong (V,Q).
+\]
+
+This proves the equivalence of \((i)\) and \((ii)\).
+\end{solution}
+
+\noindent In the rest of this section, let $F$ be a non-archimedean local field of characteristic $\neq 2$, let $\pi \in \mathcal{O}_F$ be a uniformier and $k = \mathcal{O}_F / \pi \mathcal{O}_F$. The normalized discrete valuation on $F$ is denoted by $v$ or $v_F$.
+
+\subsection*{Exercise A.13.4}
+Let $\delta \in \mathcal{O}_F^\times$ and assume that $\delta \notin F^{\times 2} \cup \Delta F^{\times 2}$. \\
+Prove that there exist $\varepsilon_1, \varepsilon_2 \in \mathcal{O}_F^\times$ such that
+\[ (\delta, \varepsilon_1)_F = (\delta, \varepsilon_2 \pi)_F = -1. \]
+\begin{solution}
+We prove the statement by the following steps.
+
+\emph{Step 1.} Use the non-degeneracy of the Hilbert symbol on
+\(F^\times/F^{\times 2}\).
+
+\emph{Step 2.} Determine the orthogonal complement of the unit subgroup
+\(\mathcal O_F^\times/F^{\times 2}\). The given property of \(\Delta\) implies
+that this orthogonal complement is exactly \(\{1,\Delta\}\).
+
+\emph{Step 3.} Since
+\(\delta\notin F^{\times 2}\cup \Delta F^{\times 2}\), the class of \(\delta\)
+is not orthogonal to all unit classes. Hence there exists
+\(\epsilon_1\in\mathcal O_F^\times\) such that
+\((\delta,\epsilon_1)_F=-1\).
+
+\emph{Step 4.} Use bilinearity to find
+\(\epsilon_2\in\mathcal O_F^\times\) such that
+\((\delta,\epsilon_2\pi)_F=-1\).
+
+Now we give the proof.
+
+Let
+\[
+\overline F=F^\times/F^{\times 2},
+\qquad
+\overline U=\mathcal O_F^\times/\mathcal O_F^{\times 2}.
+\]
+The Hilbert symbol induces a non-degenerate bilinear pairing
+\[
+\overline F\times \overline F\longrightarrow \{\pm 1\}.
+\]
+Since \(F^\times=\pi^{\mathbb Z}\mathcal O_F^\times\), the subgroup
+\(\overline U\subset \overline F\) has codimension \(1\). Hence
+\(\overline U^\perp\) has order \(2\).
+
+By the defining property of \(\Delta\), we have
+\[
+(\epsilon,\Delta)_F=1
+\qquad
+\text{for all }\epsilon\in\mathcal O_F^\times.
+\]
+Thus the class of \(\Delta\) lies in \(\overline U^\perp\). Also the class of
+\(1\) lies in \(\overline U^\perp\). Since
+\[
+(\pi,\Delta)_F=-1,
+\]
+the class of \(\Delta\) is non-trivial. Therefore
+\[
+\overline U^\perp=\{1,\Delta\}.
+\]
+
+Now assume
+\[
+\delta\notin F^{\times 2}\cup \Delta F^{\times 2}.
+\]
+Equivalently, the square class of \(\delta\) is neither \(1\) nor \(\Delta\).
+Hence the class of \(\delta\) does not lie in \(\overline U^\perp\). Therefore
+\(\delta\) is not orthogonal to all unit classes. Thus there exists
+\(\epsilon_1\in\mathcal O_F^\times\) such that
+\[
+(\delta,\epsilon_1)_F=-1.
+\]
+
+It remains to find \(\epsilon_2\in\mathcal O_F^\times\) such that
+\[
+(\delta,\epsilon_2\pi)_F=-1.
+\]
+If \((\delta,\pi)_F=-1\), take \(\epsilon_2=1\). If
+\((\delta,\pi)_F=1\), take \(\epsilon_2=\epsilon_1\). In the second case,
+bilinearity gives
+\[
+(\delta,\epsilon_1\pi)_F
+=
+(\delta,\epsilon_1)_F(\delta,\pi)_F
+=
+(-1)(1)
+=
+-1.
+\]
+Thus in both cases there exists
+\(\epsilon_2\in\mathcal O_F^\times\) such that
+\[
+(\delta,\epsilon_2\pi)_F=-1.
+\]
+
+Therefore we have found \(\epsilon_1,\epsilon_2\in\mathcal O_F^\times\) with
+\[
+(\delta,\epsilon_1)_F=(\delta,\epsilon_2\pi)_F=-1.
+\]
+\end{solution}
+
+
+\subsection*{Exercise A.13.5}
+Prove the following formulas for the Hasse symbol of quadratic spaces over $F$:
+\begin{align*}
+    s(U \perp W) &= s(U)s(W) \cdot (\det(U), \det(W))_F \,, \\
+    s(c\varphi) &= s(\varphi) \cdot \left( c, (-1)^{\frac{n(n+1)}{2}} \det(\varphi)^{n+1} \right)_F \,, \\
+    s(m\mathbb{H}) &= \left( -1, -1 \right)_F^{\frac{m(m+1)}{2}} .
+\end{align*}
+Here $U = (U, \varphi)$ and $W$ denote nonsingular quadratic spaces, $n = \dim(\varphi)$, $c \in F^\times$, $m \in \mathbb{Z}_+$, and $\mathbb{H}$ denotes the quadratic hyperbolic plane.
+\begin{solution}
+We use the convention that, if
+\(\varphi=\langle a_1,\dots,a_n\rangle\), then
+\[
+s(\varphi)=\prod_{1\le i\le j\le n}(a_i,a_j)_F,
+\qquad
+\det(\varphi)=a_1\cdots a_n\in F^\times/F^{\times 2}.
+\]
+We shall also use the standard identities
+\[
+(ab,c)_F=(a,c)_F(b,c)_F,\qquad
+(a,bc)_F=(a,b)_F(a,c)_F,\qquad
+(a,a)_F=(a,-1)_F.
+\]
+
+First let
+\[
+U=\langle a_1,\dots,a_r\rangle,\qquad
+W=\langle b_1,\dots,b_s\rangle.
+\]
+Then
+\[
+U\perp W=\langle a_1,\dots,a_r,b_1,\dots,b_s\rangle.
+\]
+Hence
+\[
+s(U\perp W)
+=
+\prod_{1\le i\le j\le r}(a_i,a_j)_F
+\prod_{1\le p\le q\le s}(b_p,b_q)_F
+\prod_{i,p}(a_i,b_p)_F.
+\]
+The first two factors are \(s(U)\) and \(s(W)\). For the last factor, by
+bilinearity of the Hilbert symbol,
+\[
+\prod_{i,p}(a_i,b_p)_F
+=
+\left(\prod_i a_i,\prod_p b_p\right)_F
+=
+(\det(U),\det(W))_F.
+\]
+Thus
+\[
+s(U\perp W)
+=
+s(U)s(W)(\det(U),\det(W))_F.
+\]
+
+Next let \(\varphi=\langle a_1,\dots,a_n\rangle\) and put
+\(D=\det(\varphi)=a_1\cdots a_n\). Then
+\[
+c\varphi=\langle ca_1,\dots,ca_n\rangle,
+\]
+so
+\[
+s(c\varphi)=\prod_{1\le i\le j\le n}(ca_i,ca_j)_F.
+\]
+For each pair \(i\le j\), bilinearity gives
+\[
+(ca_i,ca_j)_F
+=
+(c,c)_F(c,a_j)_F(a_i,c)_F(a_i,a_j)_F.
+\]
+Multiplying over all \(i\le j\), the factors \((a_i,a_j)_F\) give
+\(s(\varphi)\), while \((c,c)_F\) appears \(n(n+1)/2\) times. Since
+\((c,c)_F=(c,-1)_F\), this contributes
+\[
+(c,-1)_F^{n(n+1)/2}
+=
+\left(c,(-1)^{n(n+1)/2}\right)_F.
+\]
+It remains to count the factors involving the \(a_i\)'s. For a fixed \(a_k\),
+it appears \(k\) times among the factors \((c,a_j)_F\), and \(n-k+1\) times
+among the factors \((a_i,c)_F\). Hence \(a_k\) appears \(n+1\) times in total.
+Therefore these factors contribute
+\[
+(c,D^{n+1})_F.
+\]
+Combining the contributions, we obtain
+\[
+s(c\varphi)
+=
+s(\varphi)\cdot
+\left(c,(-1)^{n(n+1)/2}D^{n+1}\right)_F.
+\]
+Thus
+\[
+s(c\varphi)
+=
+s(\varphi)\cdot
+\left(c,(-1)^{n(n+1)/2}\det(\varphi)^{n+1}\right)_F.
+\]
+
+Finally, take the hyperbolic plane
+\[
+\mathbb H=\langle 1,-1\rangle.
+\]
+Then
+\[
+m\mathbb H
+=
+\langle 1,-1,\dots,1,-1\rangle
+\]
+with \(m\) copies of \(1\) and \(m\) copies of \(-1\). Since every Hilbert
+symbol involving \(1\) is equal to \(1\), the only non-trivial contributions
+to \(s(m\mathbb H)\) come from pairs of entries both equal to \(-1\). With the
+convention \(i\le j\), there are
+\[
+m+\binom m2=\frac{m(m+1)}2
+\]
+such pairs. Hence
+\[
+s(m\mathbb H)
+=
+(-1,-1)_F^{m(m+1)/2}.
+\]
+This proves all three formulas.
+\end{solution}
+
+
+\subsection*{Exercise A.13.6}
+Let $U, V$ be nonsingular quadratic spaces over $F$ with $d := \dim V - \dim U \ge 0$. Prove that $U$ is represented by $V$ (cf. (2.1.15)) if and only if one of the following conditions holds:
+\begin{enumerate}
+    \item $d = 0$ and $U \cong V$.
+    \item $d = 1$ and $V \cong U \perp \langle \det(U)\det(V) \rangle$.
+    \item $d = 2$ and $V \cong U \perp \mathbb{H}$.
+    \item $d = 2$ and $\det(U) \neq -\det(V)$.
+    \item $d \ge 3$.
+\end{enumerate}
+\begin{solution}
+Recall that \(U\) is represented by \(V\) if and only if there is an isometric
+embedding \(U\hookrightarrow V\). Since \(U\) is nonsingular, this is equivalent
+to
+\[
+V\simeq U\perp W
+\]
+for some nonsingular quadratic space \(W\) of dimension
+\(d=\dim V-\dim U\).
+
+We first prove necessity. Suppose that \(U\) is represented by \(V\). Then
+\(V\simeq U\perp W\), where \(W\) is nonsingular and \(\dim W=d\).
+
+If \(d=0\), then \(W=0\), so \(U\simeq V\). This gives condition \(1\).
+
+If \(d=1\), then \(W\simeq \langle c\rangle\) for some \(c\in F^\times\). Since
+\(\det(V)=\det(U)\det(W)=\det(U)c\) in \(F^\times/F^{\times 2}\), we get
+\(c=\det(U)\det(V)\). Hence
+\[
+V\simeq U\perp \langle \det(U)\det(V)\rangle,
+\]
+which is condition \(2\).
+
+If \(d=2\), then \(W\) is binary and
+\[
+\det(W)=\det(U)\det(V).
+\]
+If \(\det(W)=-1\), then \(W\) is hyperbolic. Indeed, after diagonalizing
+\(W=\langle a,b\rangle\), the condition \(ab=-1\) in
+\(F^\times/F^{\times 2}\) implies \(W\simeq \langle a,-a^{-1}\rangle\), which
+is isotropic, hence hyperbolic. Thus \(V\simeq U\perp \mathbb H\), giving
+condition \(3\). If \(\det(W)\neq -1\), then
+\[
+\det(U)\det(V)\neq -1,
+\]
+or equivalently
+\[
+\det(U)\neq -\det(V),
+\]
+which is condition \(4\). Finally, if \(d\ge 3\), condition \(5\) holds.
+
+We now prove sufficiency. Conditions \(1\), \(2\), and \(3\) directly give an
+orthogonal decomposition \(V\simeq U\perp W\), so \(U\) is represented by \(V\).
+
+Assume next that \(d=2\) and
+\[
+\det(U)\neq -\det(V).
+\]
+Put
+\[
+D=\det(U)\det(V).
+\]
+Then \(D\neq -1\). We shall construct a binary space \(W\) such that
+\[
+\det(W)=D
+\]
+and
+\[
+s(U\perp W)=s(V).
+\]
+By the formula for the Hasse symbol of an orthogonal sum,
+\[
+s(U\perp W)=s(U)s(W)(\det(U),D)_F.
+\]
+Thus it is enough to choose \(W\) with
+\[
+s(W)=s(V)s(U)(\det(U),D)_F.
+\]
+Let
+\[
+\eta=s(V)s(U)(\det(U),D)_F.
+\]
+For \(a\in F^\times\), set
+\[
+W_a=\langle a,aD\rangle.
+\]
+Then
+\[
+\det(W_a)=a^2D=D
+\]
+in \(F^\times/F^{\times 2}\). Using the convention
+\(s(\langle x,y\rangle)=(x,x)_F(x,y)_F(y,y)_F\), we compute
+\[
+s(W_a)
+=(a,a)_F(a,aD)_F(aD,aD)_F
+=(a,-D)_F(D,-1)_F.
+\]
+Since \(D\neq -1\), the class of \(-D\) is nontrivial in
+\(F^\times/F^{\times 2}\). By non-degeneracy of the Hilbert symbol, the
+character
+\[
+a\longmapsto (a,-D)_F
+\]
+takes both values \(1\) and \(-1\). Hence we can choose \(a\in F^\times\) such
+that
+\[
+s(W_a)=\eta.
+\]
+For this choice of \(a\), we have
+\[
+\dim(U\perp W_a)=\dim V,\qquad
+\det(U\perp W_a)=\det(U)D=\det(V),
+\]
+and
+\[
+s(U\perp W_a)
+=s(U)s(W_a)(\det(U),D)_F
+=s(V).
+\]
+Thus \(U\perp W_a\) and \(V\) have the same dimension, the same determinant
+and the same Hasse symbol. Therefore, by Theorem 4.2.27,
+\[
+V\simeq U\perp W_a.
+\]
+So \(U\) is represented by \(V\).
+
+It remains to prove the case \(d\ge 3\). Again put
+\[
+D=\det(U)\det(V),
+\qquad
+\eta=s(V)s(U)(\det(U),D)_F.
+\]
+We shall construct a nonsingular space \(W\) of dimension \(d\) with
+\[
+\det(W)=D,\qquad s(W)=\eta.
+\]
+Let \(\pi\) be a uniformizer. Since \(-\pi\) is not a square class, the
+character
+\[
+a\longmapsto (a,-\pi)_F
+\]
+is nontrivial by non-degeneracy of the Hilbert symbol.
+
+For \(a\in F^\times\), define a three-dimensional space
+\[
+W_{3,a}:=\langle a,a\pi\rangle\perp \langle D\pi\rangle.
+\]
+Then
+\[
+\det(W_{3,a})=a^2\pi\cdot D\pi=D
+\]
+in \(F^\times/F^{\times 2}\). Its Hasse symbol is
+\[
+s(W_{3,a})
+=s(\langle a,a\pi\rangle)s(\langle D\pi\rangle)(\pi,D\pi)_F.
+\]
+As above,
+\[
+s(\langle a,a\pi\rangle)=(a,-\pi)_F(\pi,-1)_F,
+\]
+and
+\[
+s(\langle D\pi\rangle)=(D\pi,-1)_F.
+\]
+Hence
+\[
+s(W_{3,a})
+=(a,-\pi)_F(\pi,-1)_F(D\pi,-1)_F(\pi,D\pi)_F.
+\]
+All factors except \((a,-\pi)_F\) are fixed. Since
+\(a\mapsto (a,-\pi)_F\) takes both values \(1\) and \(-1\), we may choose
+\(a\) so that
+\[
+s(W_{3,a})=\eta.
+\]
+If \(d=3\), put \(W=W_{3,a}\). If \(d>3\), put
+\[
+W=W_{3,a}\perp \langle 1,\dots,1\rangle
+\]
+with \(d-3\) copies of \(\langle 1\rangle\). Adding these copies does not
+change determinant or Hasse symbol. Thus in all cases \(d\ge 3\), we have
+constructed \(W\) with
+\[
+\dim W=d,\qquad \det(W)=D,\qquad s(W)=\eta.
+\]
+
+Therefore
+\[
+\dim(U\perp W)=\dim V,
+\]
+and
+\[
+\det(U\perp W)=\det(U)D=\det(V).
+\]
+Moreover, by the orthogonal-sum formula,
+\[
+s(U\perp W)
+=s(U)s(W)(\det(U),D)_F
+=s(U)\eta(\det(U),D)_F
+=s(V).
+\]
+Hence \(U\perp W\) and \(V\) have the same dimension, determinant and Hasse
+symbol. By Theorem 4.2.27,
+\[
+V\simeq U\perp W.
+\]
+Thus \(U\) is represented by \(V\).
+
+This proves the equivalence.
+\end{solution}
+\subsection*{Exercise A.13.7}
+Let $V$ be a nonsingular quadratic space of dimension $n > 0$ over $F$. Prove that the following assertions are equivalent:
+\begin{itemize}
+    \item[(i)] There exists a nonsingular quadratic space $V'$ over $F$ such that
+    \[ \dim V' = n \,,\; \operatorname{disc}(V') = \operatorname{disc}(V) \quad \text{and} \quad s(V') = -s(V). \]
+    \item[(ii)] One of the following conditions holds:
+    \begin{enumerate}
+        \item $n = 2$ and $\operatorname{disc}(V) \neq 1 \in F^\times / F^{\times 2}$.
+        \item $n \ge 3$.
+    \end{enumerate}
+\end{itemize}
+\begin{solution}
+We prove the equivalence by the following steps.
+
+\emph{Step 1.} Since the dimension is fixed, having the same discriminant is
+equivalent to having the same determinant. We use the classification theorem
+of nonsingular quadratic spaces over \(F\): two nonsingular quadratic spaces
+are isomorphic if and only if they have the same dimension, discriminant, and
+Hasse symbol.
+
+\emph{Step 2.} We show that the assertion is impossible when \(n=1\), and also
+impossible when \(n=2\) and \(\disc(V)=1\).
+
+\emph{Step 3.} If \(n=2\) and \(\disc(V)\neq 1\), we construct a binary form
+with the same discriminant as \(V\) and the opposite Hasse symbol.
+
+\emph{Step 4.} If \(n\ge 3\), we construct an \(n\)-dimensional form with the
+same discriminant as \(V\) and the opposite Hasse symbol.
+
+Now we give the proof.
+
+First assume that there exists a nonsingular quadratic space \(V'\) over \(F\)
+such that
+\[
+\dim V'=n,\qquad \disc(V')=\disc(V),\qquad s(V')=-s(V).
+\]
+If \(n=1\), then \(V=\langle a\rangle\) and \(V'=\langle b\rangle\). Having the
+same discriminant means that \(a=b\) in \(F^\times/F^{\times 2}\). Hence
+\(V\simeq V'\), and therefore \(s(V')=s(V)\), a contradiction. Thus \(n\neq 1\).
+
+Now suppose \(n=2\) and \(\disc(V)=1\). Since
+\[
+\disc(V)=(-1)\det(V),
+\]
+we have \(\det(V)=-1\). Hence \(V\) is hyperbolic. Indeed, after diagonalizing
+\(V=\langle a,b\rangle\), the condition \(ab=-1\) in
+\(F^\times/F^{\times 2}\) gives
+\[
+V\simeq \langle a,-a^{-1}\rangle,
+\]
+which is isotropic, hence hyperbolic. The same argument applies to \(V'\).
+Thus \(V'\simeq V\), so again \(s(V')=s(V)\), a contradiction. Therefore, if
+the assertion holds, then either
+\[
+n=2 \text{ and } \disc(V)\neq 1,
+\]
+or
+\[
+n\ge 3.
+\]
+
+Conversely, first assume that \(n=2\) and \(\disc(V)\neq 1\). Put
+\[
+D=\det(V).
+\]
+Then \(\disc(V)=-D\), so the assumption \(\disc(V)\neq 1\) means
+\[
+D\neq -1.
+\]
+For \(a\in F^\times\), define
+\[
+V'_a:=\langle a,aD\rangle.
+\]
+Then
+\[
+\det(V'_a)=a^2D=D,
+\]
+so \(V'_a\) has the same discriminant as \(V\). We compute its Hasse symbol.
+Using
+\[
+s(\langle x,y\rangle)=(x,x)_F(x,y)_F(y,y)_F
+\]
+and \((t,t)_F=(t,-1)_F\), we get
+\[
+s(V'_a)
+=(a,a)_F(a,aD)_F(aD,aD)_F
+=(a,-D)_F(D,-1)_F.
+\]
+Since \(D\neq -1\), the class of \(-D\) is nontrivial in
+\(F^\times/F^{\times 2}\). By non-degeneracy of the Hilbert symbol, the
+character
+\[
+a\longmapsto (a,-D)_F
+\]
+takes both values \(1\) and \(-1\). Therefore we can choose \(a\in F^\times\)
+such that
+\[
+s(V'_a)=-s(V).
+\]
+For this choice of \(a\), the space \(V'_a\) has dimension \(2\), the same
+discriminant as \(V\), and the opposite Hasse symbol. Thus condition \((i)\)
+holds.
+
+It remains to treat the case \(n\ge 3\). Put again
+\[
+D=\det(V).
+\]
+We construct an \(n\)-dimensional nonsingular quadratic space with determinant
+\(D\) and Hasse symbol \(-s(V)\). Let \(\pi\) be a uniformizer. For
+\(a\in F^\times\), set
+\[
+W_a:=\langle a,a\pi,D\pi\rangle.
+\]
+Then
+\[
+\det(W_a)=a^2\pi\cdot D\pi=D
+\]
+in \(F^\times/F^{\times 2}\). By the orthogonal-sum formula for the Hasse
+symbol,
+\[
+s(W_a)
+=
+s(\langle a,a\pi\rangle)
+s(\langle D\pi\rangle)
+(\pi,D\pi)_F.
+\]
+As in the binary computation,
+\[
+s(\langle a,a\pi\rangle)=(a,-\pi)_F(\pi,-1)_F,
+\]
+and
+\[
+s(\langle D\pi\rangle)=(D\pi,-1)_F.
+\]
+Hence
+\[
+s(W_a)
+=
+(a,-\pi)_F
+(\pi,-1)_F
+(D\pi,-1)_F
+(\pi,D\pi)_F.
+\]
+All factors except \((a,-\pi)_F\) are independent of \(a\). Since
+\(-\pi\notin F^{\times 2}\), the character
+\[
+a\longmapsto (a,-\pi)_F
+\]
+takes both values \(1\) and \(-1\). Therefore we may choose \(a\) such that
+\[
+s(W_a)=-s(V).
+\]
+
+If \(n=3\), set \(V'=W_a\). If \(n>3\), set
+\[
+V'=W_a\perp \langle 1,\dots,1\rangle,
+\]
+where there are \(n-3\) copies of \(\langle 1\rangle\). Adding copies of
+\(\langle 1\rangle\) changes neither determinant nor Hasse symbol. Hence
+\[
+\dim V'=n,\qquad \det(V')=D,\qquad s(V')=-s(V).
+\]
+Since the dimension is fixed, \(\det(V')=D=\det(V)\) is equivalent to
+\(\disc(V')=\disc(V)\). Therefore \(V'\) satisfies
+\[
+\dim V'=n,\qquad \disc(V')=\disc(V),\qquad s(V')=-s(V).
+\]
+
+This proves the equivalence.
+\end{solution}
+
+\subsection*{Exercise A.13.8}
+Suppose given a positive integer $n_0$, an element $d_0 \in F^\times / F^{\times 2}$ and $s_0 \in \{ \pm 1 \}$. Prove that the following assertions are equivalent:
+\begin{itemize}
+    \item[(i)] There exists a nonsingular quadratic space $V$ over $F$ such that
+    \[ \dim V = n_0 \,,\; \det(V) = d_0 \quad \text{and} \quad s(V) = s_0. \]
+    \item[(ii)] One of the following conditions holds:
+    \begin{enumerate}
+        \item $n_0 = 1$ and $s_0 = (d_0, -1)_F$.
+        \item $n_0 = 2$, $s_0 = (d_0, -1)_F$ and $d_0 = -1 \in F^\times / F^{\times 2}$.
+        \item $n_0 = 2$ and $d_0 \neq -1 \in F^\times / F^{\times 2}$.
+        \item $n_0 \ge 3$.
+    \end{enumerate}
+\end{itemize}
+\begin{solution}
+We use the convention
+\[
+s(\langle a_1,\dots,a_n\rangle)
+=
+\prod_{1\le i\le j\le n}(a_i,a_j)_F.
+\]
+Also, for fixed dimension, equality of discriminants is equivalent to equality
+of determinants.
+
+We prove the equivalence by the following steps.
+
+\emph{Step 1.} In dimensions \(1\) and \(2\), identify the cases where the
+Hasse symbol is forced.
+
+\emph{Step 2.} In the remaining cases, construct a form \(V_0\) with the
+required dimension and determinant.
+
+\emph{Step 3.} If \(s(V_0)\neq s_0\), apply Exercise A.13.7 to replace \(V_0\)
+by another form with the same dimension and determinant but opposite Hasse
+symbol.
+
+Now suppose first that such a quadratic space \(V\) exists.
+
+If \(n_0=1\), then \(V\simeq \langle d_0\rangle\). Hence
+\[
+s_0=s(V)=(d_0,d_0)_F=(d_0,-1)_F.
+\]
+Thus condition \(1\) holds.
+
+If \(n_0=2\) and \(d_0=-1\), then \(V\) is hyperbolic, since a binary form of
+determinant \(-1\) is isotropic. Hence
+\[
+s_0=s(V)=s(\mathbb H)=(-1,-1)_F=(d_0,-1)_F.
+\]
+Thus condition \(2\) holds. If \(n_0=2\) and \(d_0\neq -1\), then condition
+\(3\) holds. If \(n_0\ge 3\), then condition \(4\) holds. This proves the
+necessity.
+
+Conversely, assume that one of the listed conditions holds.
+
+If \(n_0=1\), take
+\[
+V=\langle d_0\rangle .
+\]
+Then
+\[
+\dim V=1,\qquad \det(V)=d_0,\qquad
+s(V)=(d_0,d_0)_F=(d_0,-1)_F=s_0.
+\]
+
+If \(n_0=2\), \(d_0=-1\), and \(s_0=(d_0,-1)_F\), take
+\[
+V=\mathbb H=\langle 1,-1\rangle .
+\]
+Then
+\[
+\dim V=2,\qquad \det(V)=-1=d_0,\qquad
+s(V)=(-1,-1)_F=(d_0,-1)_F=s_0.
+\]
+
+If \(n_0=2\) and \(d_0\neq -1\), take first
+\[
+V_0=\langle d_0,1\rangle .
+\]
+Then
+\[
+\dim V_0=2,\qquad \det(V_0)=d_0.
+\]
+If \(s(V_0)=s_0\), take \(V=V_0\). If \(s(V_0)\neq s_0\), then
+\(s_0=-s(V_0)\). Since \(d_0\neq -1\), we have
+\[
+\operatorname{disc}(V_0)=-d_0\neq 1.
+\]
+By Exercise A.13.7, there exists a nonsingular binary quadratic space \(V\)
+such that
+\[
+\dim V=2,\qquad
+\operatorname{disc}(V)=\operatorname{disc}(V_0),
+\qquad
+s(V)=-s(V_0)=s_0.
+\]
+Since the dimension is fixed, \(\operatorname{disc}(V)=\operatorname{disc}(V_0)\)
+is equivalent to \(\det(V)=\det(V_0)=d_0\).
+
+Finally, suppose \(n_0\ge 3\). Take
+\[
+V_0=\langle d_0,1,\dots,1\rangle ,
+\]
+with \(n_0-1\) copies of \(1\). Then
+\[
+\dim V_0=n_0,\qquad \det(V_0)=d_0.
+\]
+If \(s(V_0)=s_0\), take \(V=V_0\). If \(s(V_0)\neq s_0\), then
+\(s_0=-s(V_0)\). By Exercise A.13.7, there exists a nonsingular quadratic
+space \(V\) such that
+\[
+\dim V=n_0,\qquad
+\operatorname{disc}(V)=\operatorname{disc}(V_0),
+\qquad
+s(V)=-s(V_0)=s_0.
+\]
+Again, since the dimension is fixed, this gives
+\[
+\det(V)=\det(V_0)=d_0.
+\]
+
+Therefore there exists a nonsingular quadratic space \(V\) over \(F\) with
+\[
+\dim V=n_0,\qquad \det(V)=d_0,\qquad s(V)=s_0
+\]
+if and only if one of the listed conditions holds.
+\end{solution}
+
+\section*{Homework 14}
+\subsection*{Exercise A.14.1}
+Prove Lemma 3.2.2: Let $(V, \| \cdot \|)$ be a normed vector space over $(K, | \cdot |)$. Then the maps
+\begin{align*}
+    \| \cdot \| : V \longrightarrow \mathbb{R} \ &; \quad x \longmapsto \|x\| \,, \\
+    V \times V \longrightarrow V \ &; \quad (x, y) \longmapsto x + y \,, \\
+    K \times V \longrightarrow V \ &; \quad (\alpha, x) \longmapsto \alpha x \,, \\
+    V \longrightarrow V \ &; \quad x \longmapsto -x
+\end{align*}
+are all continuous (for the metric topologies on $\mathbb{R}, K$ and $V$).
+\begin{solution}
+We prove the four assertions separately. Put
+\[
+d_V(x,y)=\|x-y\|,\qquad d_K(\alpha,\beta)=|\alpha-\beta|.
+\]
+On product spaces we use the max metric, which induces the product topology.
+
+First, the norm map \(V\to \mathbb R\), \(x\mapsto \|x\|\), is continuous.
+Indeed, by the triangle inequality,
+\[
+\|x\|\le \|y\|+\|x-y\|,
+\qquad
+\|y\|\le \|x\|+\|x-y\|.
+\]
+Hence
+\[
+\bigl|\|x\|-\|y\|\bigr|\le \|x-y\|.
+\]
+Thus the norm map is \(1\)-Lipschitz, hence continuous.
+
+Next, consider addition
+\[
+V\times V\longrightarrow V,\qquad (x,y)\longmapsto x+y.
+\]
+Let \((x_0,y_0)\in V\times V\). Then
+\[
+\|(x+y)-(x_0+y_0)\|
+=
+\|(x-x_0)+(y-y_0)\|
+\le \|x-x_0\|+\|y-y_0\|.
+\]
+Therefore, if \(\|x-x_0\|<\varepsilon/2\) and \(\|y-y_0\|<\varepsilon/2\), then
+\[
+\|(x+y)-(x_0+y_0)\|<\varepsilon.
+\]
+So addition is continuous.
+
+Now consider scalar multiplication
+\[
+K\times V\longrightarrow V,\qquad (\alpha,x)\longmapsto \alpha x.
+\]
+Fix \((\alpha_0,x_0)\in K\times V\). We have
+\[
+\alpha x-\alpha_0x_0
+=
+(\alpha-\alpha_0)x_0+\alpha(x-x_0),
+\]
+hence
+\[
+\|\alpha x-\alpha_0x_0\|
+\le
+|\alpha-\alpha_0|\|x_0\|+|\alpha|\|x-x_0\|.
+\]
+Choose \(\delta\le 1\). If \(|\alpha-\alpha_0|<\delta\), then
+\[
+|\alpha|\le |\alpha_0|+1.
+\]
+Thus, whenever
+\[
+|\alpha-\alpha_0|<\delta,\qquad \|x-x_0\|<\delta,
+\]
+we get
+\[
+\|\alpha x-\alpha_0x_0\|
+\le
+\delta\|x_0\|+(|\alpha_0|+1)\delta
+=
+\delta(\|x_0\|+|\alpha_0|+1).
+\]
+Taking
+\[
+\delta<\frac{\varepsilon}{\|x_0\|+|\alpha_0|+1}
+\]
+shows that scalar multiplication is continuous at \((\alpha_0,x_0)\). Since
+\((\alpha_0,x_0)\) was arbitrary, scalar multiplication is continuous.
+
+Finally, the map
+\[
+V\longrightarrow V,\qquad x\longmapsto -x
+\]
+is continuous because
+\[
+\|(-x)-(-y)\|=\|x-y\|.
+\]
+Thus it is an isometry.
+
+Therefore the norm map, addition, scalar multiplication, and negation are all
+continuous for the metric topologies on \(\mathbb R\), \(K\), and \(V\).
+\end{solution}
+\subsection*{Exercise A.14.2}
+With notation as in (3.2.5), prove that the following maps are all continuous:
+\begin{align*}
+    \operatorname{End}(V) \times \operatorname{End}(V) \longrightarrow \operatorname{End}(V) \ &; \quad (\sigma, \tau) \longmapsto \sigma\tau \,, \\
+    \operatorname{End}(V) \times V \longrightarrow V \ &; \quad (\sigma, x) \longmapsto \sigma(x) \,, \\
+    \operatorname{End}(V) \longrightarrow K \ &; \quad \sigma \longmapsto \det(\sigma)
+\end{align*}
+Show also that if the absolute value on $K$ is non-archimedean, then $\| \sigma\tau \| \le \| \sigma \| \cdot \| \tau \|$ for all $\sigma, \tau \in \operatorname{End}(V)$.
+\begin{solution}
+Let \(\mathcal E=(e_1,\dots,e_n)\) be the fixed ordered basis of \(V\). Write
+\[
+\sigma(e_j)=\sum_{i=1}^n \alpha_{ij}e_i,\qquad
+\tau(e_j)=\sum_{i=1}^n \beta_{ij}e_i.
+\]
+Thus
+\[
+\|\sigma\|_{\mathcal E}=\max_{i,j}|\alpha_{ij}|,
+\qquad
+\|\tau\|_{\mathcal E}=\max_{i,j}|\beta_{ij}|.
+\]
+
+We prove the continuity of the three maps separately.
+
+First consider composition
+\[
+\operatorname{End}(V)\times \operatorname{End}(V)\longrightarrow
+\operatorname{End}(V),\qquad
+(\sigma,\tau)\longmapsto \sigma\tau.
+\]
+The matrix of \(\sigma\tau\) has entries
+\[
+(\sigma\tau)_{ij}=\sum_{k=1}^n \alpha_{ik}\beta_{kj}.
+\]
+Each entry is a finite sum of products of the matrix entries of \(\sigma\) and
+\(\tau\). Since addition and multiplication in \(K\) are continuous, each
+coordinate function \((\sigma,\tau)\mapsto (\sigma\tau)_{ij}\) is continuous.
+Because the maximum norm topology on \(\operatorname{End}(V)\simeq K^{n^2}\)
+is the product topology, it follows that composition is continuous.
+
+Next consider the evaluation map
+\[
+\operatorname{End}(V)\times V\longrightarrow V,\qquad
+(\sigma,x)\longmapsto \sigma(x).
+\]
+Write
+\[
+x=\sum_{j=1}^n x_je_j.
+\]
+Then
+\[
+\sigma(x)=\sum_{i=1}^n\left(\sum_{j=1}^n\alpha_{ij}x_j\right)e_i.
+\]
+Again each coordinate of \(\sigma(x)\) is a finite sum of products
+\(\alpha_{ij}x_j\). Hence each coordinate function is continuous, and therefore
+the evaluation map is continuous.
+
+Finally, the determinant map
+\[
+\det:\operatorname{End}(V)\longrightarrow K
+\]
+is given by the polynomial formula
+\[
+\det(\sigma)=
+\sum_{\rho\in S_n}\operatorname{sgn}(\rho)
+\alpha_{1\rho(1)}\cdots \alpha_{n\rho(n)}.
+\]
+It is therefore a polynomial in the matrix entries of \(\sigma\), hence is
+continuous.
+
+It remains to prove the norm inequality in the non-archimedean case. Assume
+that the absolute value on \(K\) is non-archimedean. Then, for each \(i,j\),
+\[
+|(\sigma\tau)_{ij}|
+=
+\left|\sum_{k=1}^n \alpha_{ik}\beta_{kj}\right|
+\le
+\max_{1\le k\le n}|\alpha_{ik}\beta_{kj}|
+\le
+\|\sigma\|_{\mathcal E}\|\tau\|_{\mathcal E}.
+\]
+Taking the maximum over all \(i,j\), we get
+\[
+\|\sigma\tau\|_{\mathcal E}
+\le
+\|\sigma\|_{\mathcal E}\|\tau\|_{\mathcal E}.
+\]
+This proves the desired inequality.
+\end{solution}
+\subsection*{Exercise A.14.3}
+Let $F$ be a field of characteristic $\neq 2$ and let $\mathcal{O}_F$ be a Dedekind domain with fraction field $F$. \\
+Let $L$ be a nonsingular quadratic lattice over $\mathcal{O}_F$ and let $\mathfrak{a}$ be a fractional ideal of $\mathcal{O}_F$. Define
+\[ L^{\mathfrak{a}\#} := \{ x \in L \mid B(x, L) \subseteq \mathfrak{a} \}. \]
+\begin{enumerate}
+    \item Prove that $L^{\mathfrak{a}\#} = L \cap \mathfrak{a}L^\#$ and that $L^{\mathfrak{a}\#}$ spans the same $F$-vector space as $L$.
+    \item Let $\mathfrak{b}$ be another fractional ideal of $\mathcal{O}_F$. Prove that if $L$ is $\mathfrak{b}$-modular, then
+    \[ L^{\mathfrak{a}\#} = \begin{cases} L & \text{if } \mathfrak{b} \subseteq \mathfrak{a} \,, \\ \mathfrak{a}\mathfrak{b}^{-1}L & \text{if } \mathfrak{a} \subseteq \mathfrak{b} \,. \end{cases} \]
+    \item Prove that the following conditions are equivalent:
+    \begin{itemize}
+        \item[(i)] $\mathfrak{a} \subseteq \mathfrak{b}$.
+        \item[(ii)] $\mathfrak{a}\mathfrak{b}^{-1}L^{\mathfrak{b}\#} \subseteq L^{\mathfrak{a}\#} \subseteq L^{\mathfrak{b}\#}$.
+    \end{itemize}
+\end{enumerate}
+\begin{solution}
+Write \(\mathcal O=\mathcal O_F\), and let
+\[
+L^\#:=\{x\in F L\mid B(x,L)\subseteq \mathcal O\}
+\]
+be the usual dual lattice. We prove the assertions by the following steps.
+
+\emph{Step 1.} Express the \(\mathfrak a\)-dual as
+\[
+L^{\mathfrak a\#}=L\cap \mathfrak a L^\#.
+\]
+Then \(L^{\mathfrak a\#}\) is an intersection of two full lattices, hence is
+again a full lattice in \(F L\).
+
+\emph{Step 2.} If \(L\) is \(\mathfrak b\)-modular, use
+\(L^\#=\mathfrak b^{-1}L\) to compute
+\[
+L^{\mathfrak a\#}=L\cap \mathfrak a\mathfrak b^{-1}L.
+\]
+The two cases \(\mathfrak b\subseteq \mathfrak a\) and
+\(\mathfrak a\subseteq \mathfrak b\) then follow from ideal inclusion.
+
+\emph{Step 3.} For the final equivalence, prove one direction directly from
+\(\mathfrak a\subseteq \mathfrak b\). For the converse, use the fact that if
+\(M\) is a full \(\mathcal O\)-lattice, then
+\[
+\{\lambda\in F\mid \lambda M\subseteq M\}=\mathcal O.
+\]
+
+We now give the proof.
+
+First, by definition,
+\[
+L^{\mathfrak a\#}
+=
+\{x\in L\mid B(x,L)\subseteq \mathfrak a\}.
+\]
+On the other hand,
+\[
+\mathfrak a L^\#
+=
+\{x\in F L\mid B(x,L)\subseteq \mathfrak a\}.
+\]
+Indeed, this may be checked after localizing at every prime ideal of
+\(\mathcal O\), where \(\mathfrak a\) becomes principal. Hence
+\[
+L^{\mathfrak a\#}=L\cap \mathfrak a L^\#.
+\]
+Since \(L\) is nonsingular, \(L^\#\) is a full \(\mathcal O\)-lattice in
+\(F L\). Therefore \(\mathfrak a L^\#\) is also a full lattice, and the
+intersection of two full lattices is again a full lattice. Thus
+\(L^{\mathfrak a\#}\) spans the same \(F\)-vector space as \(L\).
+
+Now assume that \(L\) is \(\mathfrak b\)-modular, so
+\[
+L^\#=\mathfrak b^{-1}L.
+\]
+Using the formula just proved, we get
+\[
+L^{\mathfrak a\#}
+=
+L\cap \mathfrak a L^\#
+=
+L\cap \mathfrak a\mathfrak b^{-1}L.
+\]
+If \(\mathfrak b\subseteq \mathfrak a\), then
+\[
+\mathcal O\subseteq \mathfrak a\mathfrak b^{-1},
+\]
+so \(L\subseteq \mathfrak a\mathfrak b^{-1}L\). Hence
+\[
+L^{\mathfrak a\#}=L.
+\]
+If \(\mathfrak a\subseteq \mathfrak b\), then
+\[
+\mathfrak a\mathfrak b^{-1}\subseteq \mathcal O,
+\]
+so \(\mathfrak a\mathfrak b^{-1}L\subseteq L\). Hence
+\[
+L^{\mathfrak a\#}=\mathfrak a\mathfrak b^{-1}L.
+\]
+This proves the second assertion.
+
+Finally we prove the equivalence
+\[
+\mathfrak a\subseteq \mathfrak b
+\quad\Longleftrightarrow\quad
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak a\#}
+\subseteq
+L^{\mathfrak b\#}.
+\]
+
+Assume first that \(\mathfrak a\subseteq \mathfrak b\). Then
+\[
+\mathfrak a\mathfrak b^{-1}\subseteq \mathcal O.
+\]
+If \(x\in L^{\mathfrak a\#}\), then
+\[
+B(x,L)\subseteq \mathfrak a\subseteq \mathfrak b,
+\]
+so \(x\in L^{\mathfrak b\#}\). Thus
+\[
+L^{\mathfrak a\#}\subseteq L^{\mathfrak b\#}.
+\]
+Moreover, if \(t\in \mathfrak a\mathfrak b^{-1}\) and
+\(x\in L^{\mathfrak b\#}\), then \(t\in\mathcal O\), so \(tx\in L\), and
+\[
+B(tx,L)=tB(x,L)\subseteq
+\mathfrak a\mathfrak b^{-1}\mathfrak b
+=
+\mathfrak a.
+\]
+Therefore \(tx\in L^{\mathfrak a\#}\). Hence
+\[
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak a\#}
+\subseteq
+L^{\mathfrak b\#}.
+\]
+
+Conversely, suppose that
+\[
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak a\#}
+\subseteq
+L^{\mathfrak b\#}.
+\]
+Then for every \(t\in \mathfrak a\mathfrak b^{-1}\), we have
+\[
+tL^{\mathfrak b\#}\subseteq L^{\mathfrak b\#}.
+\]
+By the first part, \(L^{\mathfrak b\#}\) is a full \(\mathcal O\)-lattice.
+For any full \(\mathcal O\)-lattice \(M\), one has
+\[
+\{\lambda\in F\mid \lambda M\subseteq M\}=\mathcal O.
+\]
+Indeed, after localizing at any prime \(\mathfrak p\), the module
+\(M_{\mathfrak p}\) is free over the DVR \(\mathcal O_{\mathfrak p}\), and
+\(\lambda M_{\mathfrak p}\subseteq M_{\mathfrak p}\) forces
+\(\lambda\in\mathcal O_{\mathfrak p}\). Intersecting over all
+\(\mathfrak p\) gives \(\lambda\in\mathcal O\).
+
+Applying this to \(M=L^{\mathfrak b\#}\), we get
+\[
+\mathfrak a\mathfrak b^{-1}\subseteq \mathcal O.
+\]
+Since \(\mathfrak b\) is invertible in the Dedekind domain \(\mathcal O\), this
+is equivalent to
+\[
+\mathfrak a\subseteq \mathfrak b.
+\]
+This proves the equivalence.
+\end{solution}
+\subsection*{Exercise A.14.4}
+Let $\mathcal{O}_F$ be a discrete valuation ring with fraction field $F$ and suppose $\operatorname{char}(F) \neq 2$. Let $\mathfrak{a}$ be a fractional ideal of $\mathcal{O}_F$ and let $L$ be a quadratic $\mathcal{O}_F$-lattice with a Jordan splitting
+\[ L = L_1 \perp \cdots \perp L_t \perp \operatorname{rad}(L). \]
+Let $L^{\mathfrak{a}\#}$ be defined as in Exercise A.14.3.
+\begin{enumerate}
+    \item Show that $\mathfrak{s}(L^{\mathfrak{a}\#}) \subseteq \mathfrak{a}$.
+    \item Prove that $\mathfrak{s}(L^{\mathfrak{a}\#}) = \mathfrak{a}$ if and only if there exists $1 \le i \le t$ such that $\mathfrak{s}(L_i) = \mathfrak{a}$.
+\end{enumerate}
+\begin{solution}
+Write \(\mathcal O=\mathcal O_F\). Let
+\[
+L=L_1\perp\cdots\perp L_t\perp \operatorname{rad}(L)
+\]
+be a Jordan splitting, and put
+\[
+\mathfrak b_i=\mathfrak s(L_i).
+\]
+Then each \(L_i\) is \(\mathfrak b_i\)-modular.
+
+We prove the result by the following steps.
+
+\emph{Step 1.} Use the orthogonal decomposition to write
+\[
+L^{\mathfrak a\#}
+=
+L_1^{\mathfrak a\#}\perp\cdots\perp L_t^{\mathfrak a\#}
+\perp \operatorname{rad}(L).
+\]
+
+\emph{Step 2.} Compute each \(L_i^{\mathfrak a\#}\) using Exercise A.14.3.
+
+\emph{Step 3.} Compute the scale ideal of each component and then take their
+sum.
+
+Since the decomposition is orthogonal, for
+\(x=x_1+\cdots+x_t+r\in L\), with \(x_i\in L_i\) and
+\(r\in \operatorname{rad}(L)\), we have
+\[
+B(x,L)\subseteq \mathfrak a
+\]
+if and only if
+\[
+B(x_i,L_i)\subseteq \mathfrak a
+\qquad
+\text{for all } i.
+\]
+Moreover \(B(r,L)=0\). Hence
+\[
+L^{\mathfrak a\#}
+=
+L_1^{\mathfrak a\#}\perp\cdots\perp L_t^{\mathfrak a\#}
+\perp \operatorname{rad}(L).
+\]
+
+Now fix \(i\). Since \(L_i\) is \(\mathfrak b_i\)-modular, Exercise A.14.3
+gives
+\[
+L_i^{\mathfrak a\#}
+=
+\begin{cases}
+L_i, & \text{if } \mathfrak b_i\subseteq \mathfrak a,\\
+\mathfrak a\mathfrak b_i^{-1}L_i, & \text{if } \mathfrak a\subseteq \mathfrak b_i.
+\end{cases}
+\]
+Since \(\mathcal O\) is a discrete valuation ring, any two fractional ideals
+are comparable, so these two cases cover all possibilities.
+
+If \(\mathfrak b_i\subseteq \mathfrak a\), then
+\[
+\mathfrak s(L_i^{\mathfrak a\#})
+=
+\mathfrak s(L_i)
+=
+\mathfrak b_i
+\subseteq \mathfrak a.
+\]
+If \(\mathfrak a\subseteq \mathfrak b_i\), then
+\[
+L_i^{\mathfrak a\#}
+=
+\mathfrak a\mathfrak b_i^{-1}L_i,
+\]
+and therefore
+\[
+\mathfrak s(L_i^{\mathfrak a\#})
+=
+(\mathfrak a\mathfrak b_i^{-1})^2\mathfrak s(L_i)
+=
+\mathfrak a^2\mathfrak b_i^{-1}.
+\]
+Since \(\mathfrak a\subseteq \mathfrak b_i\), we have
+\(\mathfrak a\mathfrak b_i^{-1}\subseteq \mathcal O\). Hence
+\[
+\mathfrak a^2\mathfrak b_i^{-1}
+\subseteq
+\mathfrak a.
+\]
+Thus in all cases,
+\[
+\mathfrak s(L_i^{\mathfrak a\#})\subseteq \mathfrak a.
+\]
+
+Since the radical contributes no scale, we get
+\[
+\mathfrak s(L^{\mathfrak a\#})
+=
+\sum_{i=1}^t \mathfrak s(L_i^{\mathfrak a\#})
+\subseteq \mathfrak a.
+\]
+This proves the first assertion.
+
+It remains to prove the criterion for equality. From the computation above,
+\[
+\mathfrak s(L_i^{\mathfrak a\#})
+=
+\begin{cases}
+\mathfrak b_i, & \text{if } \mathfrak b_i\subseteq \mathfrak a,\\
+\mathfrak a^2\mathfrak b_i^{-1}, & \text{if } \mathfrak a\subseteq \mathfrak b_i.
+\end{cases}
+\]
+In the first case, this ideal equals \(\mathfrak a\) if and only if
+\(\mathfrak b_i=\mathfrak a\). In the second case, it equals
+\(\mathfrak a\) if and only if
+\[
+\mathfrak a^2\mathfrak b_i^{-1}=\mathfrak a,
+\]
+equivalently \(\mathfrak a=\mathfrak b_i\). Therefore
+\[
+\mathfrak s(L_i^{\mathfrak a\#})=\mathfrak a
+\quad\Longleftrightarrow\quad
+\mathfrak s(L_i)=\mathfrak a.
+\]
+
+Since \(\mathcal O\) is a discrete valuation ring, fractional ideals are totally
+ordered. Hence a finite sum of ideals contained in \(\mathfrak a\) equals
+\(\mathfrak a\) if and only if at least one of them equals \(\mathfrak a\).
+Thus
+\[
+\mathfrak s(L^{\mathfrak a\#})=\mathfrak a
+\]
+if and only if there exists \(1\le i\le t\) such that
+\[
+\mathfrak s(L_i^{\mathfrak a\#})=\mathfrak a.
+\]
+By the equivalence just proved, this is the same as saying that there exists
+\(1\le i\le t\) such that
+\[
+\mathfrak s(L_i)=\mathfrak a.
+\]
+This proves the second assertion.
+\end{solution}
+\subsection*{Exercise A.14.5}
+Let $F = \mathbb{Q}_2$ be the field of $2$-adic numbers, i.e., the $2$-adic completion of $\mathbb{Q}$. Let $\mathcal{O}_F$ be the valuation ring of $F$.
+\begin{enumerate}
+    \item Find a unit $\Delta \in \mathcal{O}_F^\times$ with quadratic defect $\mathfrak{d}(\Delta) = 4\mathcal{O}_F$.
+    \item Find a complete system $S$ of representatives for $F^\times / F^{\times 2}$ and compute the Hilbert symbol $(a, b)_F$ for all $a, b \in S$.
+\end{enumerate}
+\begin{solution}
+We write \(F=\mathbb Q_2\) and \(\mathcal O_F=\mathbb Z_2\).
+
+We prove the result by the following steps.
+
+\emph{Step 1.} Find a unit \(\Delta\) with quadratic defect \(4\mathbb Z_2\).
+
+\emph{Step 2.} Determine a complete system of representatives for
+\(\mathbb Q_2^\times/\mathbb Q_2^{\times 2}\).
+
+\emph{Step 3.} Use the standard formula for the Hilbert symbol over
+\(\mathbb Q_2\) to compute the table.
+
+First, take
+\[
+\Delta=5.
+\]
+Every odd square in \(\mathbb Z_2\) is congruent to \(1\) modulo \(8\). Hence
+\(5\) is congruent to a square modulo \(4\), since \(5\equiv 1\pmod 4\), but
+not congruent to a square modulo \(8\), since \(5\not\equiv 1\pmod 8\).
+Therefore
+\[
+\mathfrak d(5)=4\mathbb Z_2.
+\]
+Thus we may take
+\[
+\Delta=5.
+\]
+
+Next, we determine the square classes. Since
+\[
+\mathbb Q_2^\times=2^{\mathbb Z}\mathbb Z_2^\times,
+\]
+the valuation contributes one factor represented by \(1\) and \(2\). For units,
+one has
+\[
+u\in \mathbb Z_2^{\times 2}
+\quad\Longleftrightarrow\quad
+u\equiv 1\pmod 8.
+\]
+Thus the unit square classes are represented by
+\[
+1,\ -1,\ 5,\ -5.
+\]
+Hence a complete set of representatives for
+\(\mathbb Q_2^\times/\mathbb Q_2^{\times 2}\) is
+\[
+S=\{1,-1,2,-2,5,-5,10,-10\}.
+\]
+
+We now compute the Hilbert symbol. For
+\[
+a=2^\alpha u,\qquad b=2^\beta v,
+\]
+where \(u,v\in\mathbb Z_2^\times\), the Hilbert symbol over \(\mathbb Q_2\) is
+given by
+\[
+(a,b)_2
+=
+(-1)^{
+\frac{u-1}{2}\frac{v-1}{2}
++\alpha\frac{v^2-1}{8}
++\beta\frac{u^2-1}{8}
+}.
+\]
+The exponent is understood modulo \(2\). Evaluating this formula on the above
+representatives gives the following table:
+\[
+\begin{array}{c|rrrrrrrr}
+(a,b)_2
+& 1 & -1 & 2 & -2 & 5 & -5 & 10 & -10\\
+\hline
+1
+& 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+-1
+& 1 & -1 & 1 & -1 & 1 & -1 & 1 & -1\\
+2
+& 1 & 1 & 1 & 1 & -1 & -1 & -1 & -1\\
+-2
+& 1 & -1 & 1 & -1 & -1 & 1 & -1 & 1\\
+5
+& 1 & 1 & -1 & -1 & 1 & 1 & -1 & -1\\
+-5
+& 1 & -1 & -1 & 1 & 1 & -1 & -1 & 1\\
+10
+& 1 & 1 & -1 & -1 & -1 & -1 & 1 & 1\\
+-10
+& 1 & -1 & -1 & 1 & -1 & 1 & 1 & -1
+\end{array}
+\]
+This gives the complete Hilbert symbol table on
+\(\mathbb Q_2^\times/\mathbb Q_2^{\times 2}\).
+\end{solution}
+\subsection*{Exercise A.14.6}
+Let $F = \mathbb{Q}_5$ and let $\mathcal{O}_F$ be the valuation ring of $F$. Consider the quadratic $\mathcal{O}_F$-lattices
+\[ L = \langle 1, 25 \rangle \quad \text{and} \quad M = \begin{pmatrix} 3 & 6 \\ 6 & 87 \end{pmatrix}. \]
+\begin{enumerate}
+    \item Prove that there is an isomorphism of quadratic spaces $FL \cong FM$.
+    \item Find a Jordan splitting for each of the two lattices $L, M$.
+    \item Show that $L$ and $M$ are not isomorphic as quadratic $\mathcal{O}_F$-lattices.
+\end{enumerate}
+\begin{solution}
+We write \(\mathcal O=\mathbb Z_5\) and \(F=\mathbb Q_5\). We prove the
+assertions in the following steps.
+
+\emph{Step 1.} Diagonalize \(M\) over \(\mathcal O\).
+
+\emph{Step 2.} Compare the quadratic spaces \(FL\) and \(FM\) by dimension,
+determinant and Hasse symbol.
+
+\emph{Step 3.} Read off the Jordan splittings from the diagonal forms.
+
+\emph{Step 4.} Show that \(L\) and \(M\) are not isomorphic as
+\(\mathcal O\)-lattices by comparing unit values modulo \(5\).
+
+First diagonalize \(M\). Let \(f_1=e_1\) and \(f_2=e_2-2e_1\). Since the
+change-of-basis matrix has determinant \(1\), this is an
+\(\mathcal O\)-basis. We compute
+\[
+B(f_1,f_1)=3,\qquad B(f_1,f_2)=6-2\cdot 3=0,
+\]
+and
+\[
+B(f_2,f_2)=87-4\cdot 6+4\cdot 3=75.
+\]
+Hence
+\[
+M\simeq \langle 3,75\rangle
+\]
+as an \(\mathcal O\)-lattice.
+
+Now compare \(FL\) and \(FM\). We have
+\[
+FL\simeq \langle 1,25\rangle \simeq \langle 1,1\rangle
+\]
+over \(F\), since \(25\in F^{\times 2}\). Similarly,
+\[
+FM\simeq \langle 3,75\rangle \simeq \langle 3,3\rangle
+\]
+over \(F\), since \(75=3\cdot 25\). Both forms have dimension \(2\) and
+determinant \(1\) in \(F^\times/F^{\times 2}\).
+
+Using the convention
+\[
+s(\langle a_1,\dots,a_n\rangle)
+=
+\prod_{1\le i\le j\le n}(a_i,a_j)_F,
+\]
+we get
+\[
+s(\langle 1,1\rangle)=1.
+\]
+For \(\langle 3,3\rangle\),
+\[
+s(\langle 3,3\rangle)
+=(3,3)_F^3=(3,3)_F=(3,-1)_F.
+\]
+Since \(-1\) is a square in \(\mathbb Q_5\), we have
+\[
+(3,-1)_F=1.
+\]
+Thus \(FL\) and \(FM\) have the same dimension, the same determinant, and the
+same Hasse symbol. By the classification theorem for quadratic spaces over a
+local field,
+\[
+FL\simeq FM.
+\]
+
+Next we find the Jordan splittings. For \(L\), we already have
+\[
+L=\langle 1\rangle\perp \langle 25\rangle.
+\]
+The first component has scale \(\mathcal O\), and the second has scale
+\(25\mathcal O\). Hence this is a Jordan splitting.
+
+For \(M\), from the diagonalization above,
+\[
+M\simeq \langle 3\rangle\perp \langle 75\rangle.
+\]
+Since \(3\in\mathcal O^\times\) and \(75=3\cdot 25\), the first component has
+scale \(\mathcal O\), and the second has scale \(25\mathcal O\). Hence
+\[
+M=\langle 3\rangle\perp \langle 75\rangle
+\]
+is a Jordan splitting.
+
+It remains to show that \(L\) and \(M\) are not isomorphic as
+\(\mathcal O\)-lattices. The lattice \(L\) represents \(1\), since
+\[
+1=q(1,0).
+\]
+We show that \(M\) does not represent \(1\). In the diagonal basis of \(M\),
+a vector has norm
+\[
+3x^2+75y^2,\qquad x,y\in\mathbb Z_5.
+\]
+If this were equal to \(1\), then reducing modulo \(5\) would give
+\[
+3\bar x^2\equiv 1\pmod 5.
+\]
+Thus
+\[
+\bar x^2\equiv 2\pmod 5,
+\]
+because \(3^{-1}\equiv 2\pmod 5\). But the nonzero squares modulo \(5\) are
+\[
+1,\ 4,
+\]
+so \(2\) is not a square modulo \(5\). This is impossible. Therefore \(M\)
+does not represent \(1\).
+
+Since an isomorphism of \(\mathcal O\)-lattices preserves represented values,
+\(L\) and \(M\) cannot be isomorphic as quadratic \(\mathcal O\)-lattices.
+\end{solution}
+
+
+\subsection*{Exercise A.14.7}
+Let $F = \mathbb{Q}_2$ and let $\mathcal{O}_F$ be the valuation ring of $F$. Find a Jordan splitting for the quadratic $\mathcal{O}_F$-lattice
+\[ L = \langle 3 \rangle \perp \begin{pmatrix} 6 & 5 \\ 5 & 8 \end{pmatrix} \perp \begin{pmatrix} 4 & 3 \\ 3 & 2 \end{pmatrix}. \]
+\begin{solution}
+We write \(\mathcal O=\mathbb Z_2\) and \(F=\mathbb Q_2\). We use the following
+criterion: if a lattice has Gram matrix \(A\in M_r(\mathcal O)\) with
+\(\det(A)\in\mathcal O^\times\), then it is unimodular, i.e. \(\mathcal O\)-modular.
+
+The lattice is given as an orthogonal direct sum
+\[
+L=\langle 3\rangle
+\perp
+\begin{pmatrix}
+6&5\\
+5&8
+\end{pmatrix}
+\perp
+\begin{pmatrix}
+4&3\\
+3&2
+\end{pmatrix}.
+\]
+We check each summand.
+
+First,
+\[
+\det\langle 3\rangle =3\in\mathbb Z_2^\times,
+\]
+so \(\langle 3\rangle\) is unimodular.
+
+For the second summand,
+\[
+\det
+\begin{pmatrix}
+6&5\\
+5&8
+\end{pmatrix}
+=
+6\cdot 8-5^2
+=
+48-25
+=
+23\in\mathbb Z_2^\times.
+\]
+Hence this binary lattice is also unimodular.
+
+For the third summand,
+\[
+\det
+\begin{pmatrix}
+4&3\\
+3&2
+\end{pmatrix}
+=
+4\cdot 2-3^2
+=
+8-9
+=
+-1\in\mathbb Z_2^\times.
+\]
+Thus this binary lattice is also unimodular.
+
+Therefore each orthogonal summand is \(\mathcal O\)-modular. Hence
+\[
+L=\langle 3\rangle
+\perp
+\begin{pmatrix}
+6&5\\
+5&8
+\end{pmatrix}
+\perp
+\begin{pmatrix}
+4&3\\
+3&2
+\end{pmatrix}
+\]
+is a Jordan splitting of \(L\), with all Jordan components of scale
+\(\mathcal O\).
+
+Equivalently, since all components have the same scale, one may combine them
+and say that \(L\) itself is unimodular:
+\[
+L^\#=L.
+\]
+Thus, under the convention that Jordan components with the same scale are
+combined, the Jordan splitting is simply
+\[
+L=L_0,
+\qquad L_0=L,
+\]
+where \(L_0\) is \(\mathcal O\)-modular.
+\end{solution}
+\subsection*{Exercise A.14.8}
+Let $F = \mathbb{Q}_2$ and let $\mathcal{O}_F$ be the valuation ring of $F$. Prove that as quadratic $\mathcal{O}_F$-lattices
+\[ \langle 1 \rangle \perp \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \cong \langle 1 \rangle \perp \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \quad \text{but} \quad \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \not\cong \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}. \]
+\begin{solution}
+Write \(\mathcal O=\mathbb Z_2\). Put
+\[
+H=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\qquad
+A=
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+\]
+We prove the statement in two steps.
+
+\emph{Step 1.} We construct an explicit \(\mathcal O\)-basis change showing
+\[
+\langle 1\rangle\perp H \simeq \langle 1\rangle\perp A.
+\]
+
+\emph{Step 2.} We show that \(H\not\simeq A\) by comparing the values represented
+by the two lattices.
+
+Let \(L=\langle 1\rangle\perp H\), with basis \(e,f,g\), so that
+\[
+B(e,e)=1,\qquad B(f,g)=1,
+\]
+and all other pairings among basis vectors are zero. Thus the Gram matrix of
+\(L\) is
+\[
+G=
+\begin{pmatrix}
+1&0&0\\
+0&0&1\\
+0&1&0
+\end{pmatrix}.
+\]
+Define
+\[
+u=e-g,\qquad v=e+f,\qquad w=g.
+\]
+Then \((u,v,w)\) is an \(\mathcal O\)-basis, since the change-of-basis matrix
+from \((e,f,g)\) to \((u,v,w)\) is
+\[
+P=
+\begin{pmatrix}
+1&1&0\\
+0&1&0\\
+-1&0&1
+\end{pmatrix},
+\qquad \det(P)=1.
+\]
+Now compute the pairings:
+\[
+B(u,u)=1,\qquad B(u,v)=0,\qquad B(u,w)=0,
+\]
+and
+\[
+B(v,v)=1,\qquad B(v,w)=1,\qquad B(w,w)=0.
+\]
+Therefore the Gram matrix in the basis \((u,v,w)\) is
+\[
+\begin{pmatrix}
+1&0&0\\
+0&1&1\\
+0&1&0
+\end{pmatrix}
+=
+\langle 1\rangle\perp
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+\]
+Hence
+\[
+\langle 1\rangle\perp
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}
+\simeq
+\langle 1\rangle\perp
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+\]
+
+It remains to show that
+\[
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}
+\not\simeq
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+\]
+For the lattice \(H\), a vector \((x,y)\in\mathcal O^2\) has norm
+\[
+q_H(x,y)=2xy.
+\]
+Thus every value represented by \(H\) lies in \(2\mathcal O\). In particular,
+\(H\) does not represent any unit of \(\mathcal O\).
+
+For the lattice \(A\), we have
+\[
+q_A(x,y)=x^2+2xy.
+\]
+Hence
+\[
+q_A(1,0)=1.
+\]
+So \(A\) represents the unit \(1\).
+
+Since an isomorphism of quadratic \(\mathcal O\)-lattices preserves represented
+values, \(H\) and \(A\) cannot be isomorphic. Therefore
+\[
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}
+\not\simeq
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+\]
+\end{solution}
+\section*{Homework 15}
+\noindent Throughout what follows, let $F$ and $\mathcal{O}_F$ be as in \S 5.2, and let $(V,Q)$ be a nonsingular quadratic space of dimension $n \ge 1$ over $F$.
+
+\subsection*{Exercise A.15.1}
+Prove that the groups $\operatorname{O}_{\mathbf{A}}(V)$ and $\operatorname{O}_{\mathbf{A}}^+(V)$ defined in (5.2.3.1) and (5.2.3.2) are independent of the choice of the basis of $V$.
+
+\subsection*{Exercise A.15.2}
+Let $L$ be a full $\mathcal{O}_F$-lattice in $V$. For any fractional ideal $\mathfrak{a}$ of $\mathcal{O}_F$ and any $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$, let $\mathfrak{a}_{\mathfrak{p}} = \mathfrak{a}\mathcal{O}_{\mathfrak{p}}$ be the fractional ideal of $\mathcal{O}_{\mathfrak{p}}$ generated by $\mathfrak{a}$.
+\begin{enumerate}
+    \item Prove that for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$ one has
+    \[ \mathfrak{s}(L)_{\mathfrak{p}} = \mathfrak{s}(L_{\mathfrak{p}}) \,,\; \mathfrak{n}(L)_{\mathfrak{p}} = \mathfrak{n}(L_{\mathfrak{p}}) \quad \text{and} \quad \mathfrak{v}(L)_{\mathfrak{p}} = \mathfrak{v}(L_{\mathfrak{p}}) . \]
+    \item Let $\mathfrak{a}$ be a fractional ideal of $\mathcal{O}_F$. \\
+    Prove that $L$ is $\mathfrak{a}$-modular if and only if $L_{\mathfrak{p}}$ is $\mathfrak{a}_{\mathfrak{p}}$-modular for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$.
+    \item Prove that $L$ is $\mathfrak{a}$-maximal in $V$ if and only if $L_{\mathfrak{p}}$ is $\mathfrak{a}_{\mathfrak{p}}$-maximal in $V_{\mathfrak{p}}$ for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$.
+\end{enumerate}
+
+\subsection*{Exercise A.15.3}
+Let $\mathfrak{p}$ be a non-archimedean place of $F$. Prove that if $n = \dim V \ge 3$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(V_{\mathfrak{p}})) = F_{\mathfrak{p}}^\times$.
+
+\subsection*{Exercise A.15.4}
+Let $\mathfrak{p}$ be a non-dyadic place of $F$. Prove that if $n = \dim V \ge 2$ and $L$ is a modular full lattice in $V$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(L_{\mathfrak{p}})) = \mathcal{O}_{\mathfrak{p}}^\times F_{\mathfrak{p}}^{\times 2}$.
+
+\subsection*{Exercise A.15.5}
+Put
+\[ \mathbf{I}_{F, S_0} := \prod_{\mathfrak{p} \in S_0} F_{\mathfrak{p}}^\times \times \prod_{\mathfrak{p} \notin S_0} \mathcal{O}_{\mathfrak{p}}^\times . \]
+Prove that there is a group isomorphism
+\[ \mathbf{I}_F / F^\times \mathbf{I}_{F, S_0} \cong \mathcal{C}l(\mathcal{O}_F) . \]
+(Recall that $\mathcal{C}l(\mathcal{O}_F)$ denotes the ideal class group of $\mathcal{O}_F$.)
+
+\subsection*{Exercise A.15.6}
+Prove that the condition $\mathbf{I}_F = \theta(\operatorname{O}^+(V))\mathbf{I}_{F, S_0} \mathbf{I}_F^2$ in Thm. 5.2.12 holds if $\mathcal{O}_F = \mathbb{Z}$ and $\dim V \ge 3$.
+
+\subsection*{Exercise A.15.7}
+Let $\mathfrak{p}$ be a non-archimedean place of $F$. Let $L$ be a maximal lattice in $V$.
+\begin{enumerate}
+    \item Prove that $\operatorname{O}(L_{\mathfrak{p}}) = \operatorname{O}(V_{\mathfrak{p}})$.
+    \item Prove that if $\dim V \ge 3$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(L_{\mathfrak{p}})) \supseteq \mathcal{O}_{\mathfrak{p}}^\times$.
+\end{enumerate}
+
+\subsection*{Exercise A.15.8}
+Let $U, W$ be nonsingular quadratic spaces over $F$. Prove that there is a representation of quadratic spaces $U \to W$ over $F$ if and only if $U_{\mathfrak{p}} \to W_{\mathfrak{p}}$ for every $\mathfrak{p} \in \Omega_F$.
+
+\subsection*{Exercise A.15.9}
+Prove the following weak approximation theorem for $\operatorname{O}^+(V)$: Let $T$ be a finite subset of $\Omega_F$. Suppose that an element $\varphi_{\mathfrak{p}} \in \operatorname{O}^+(V_{\mathfrak{p}})$ is given for each $\mathfrak{p} \in T$. Then for any real number $\varepsilon > 0$ there exists $\sigma \in \operatorname{O}^+(V)$ such that
+\[ \| \sigma - \varphi_{\mathfrak{p}} \|_{\mathfrak{p}} < \varepsilon \quad \text{for every } \mathfrak{p} \in T . \]
+(\textit{Hint}: Use the Cartan--Dieudonné Theorem 2.3.2).
+
+\subsection*{Exercise A.15.10}
+Let $K$ and $L$ be full lattices in $V$ such that $\operatorname{gen}(K) = \operatorname{gen}(L)$. Let $T$ be a finite subset of $\operatorname{Spm}(\mathcal{O}_F)$. Prove that there is a full lattice $K'$ in $V$ such that
+\[ K' \in \operatorname{cls}^+(K) \quad \text{and} \quad K'_{\mathfrak{p}} = L_{\mathfrak{p}} \text{ for all } \mathfrak{p} \in T . \]
+
+\subsection*{Exercise A.15.11}
+Let $L$ be a full lattice in $V$ and let $K \subseteq V$ be a nonsingular lattice. Suppose that for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$, there is a representation $K_{\mathfrak{p}} \to L_{\mathfrak{p}}$. Prove that there is a representation $K \to L'$ of $K$ into a lattice $L'$ in $\operatorname{gen}(L)$.
+
+\subsection*{Exercise A.15.12}
+Assume $\mathcal{O}_F = \mathbb{Z}$. Let $L = \mathbb{Z}e_1 \perp \mathbb{Z}e_2$ in the quadratic space $V = \mathbb{Q}e_1 \perp \mathbb{Q}e_2$ with $Q(e_1) = 1$ and $Q(e_2) = 11$.
+\begin{enumerate}
+    \item Prove that $3 \in Q(V)$ and $3 \in Q(L_{\mathfrak{p}})$ for every $\mathfrak{p} \in \operatorname{Spm}(\mathbb{Z})$.
+    \item Prove that $3 \notin Q(L)$.
+\end{enumerate}
 
 \end{document}

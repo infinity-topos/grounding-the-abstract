@@ -250,7 +250,7 @@ distinguished triangles.
 
 In practice, we will use the following criterion.
 
-\begin{theorem}[Generator Criterion for Quasi-Equivalences]
+\begin{theorem}[Generator Criterion for Quasi-Equivalences]\label{thm:generator-criterion}
 Let \(F:\mathcal C\to\mathcal D\) be an exact dg functor between
 pretriangulated dg categories.  Let
 \(\mathcal S\subset\operatorname{Ob}(\mathcal C)\) be a collection of
@@ -351,7 +351,19 @@ correct dg model for the coherent side of the correspondence.  In the
 smooth case, bounded coherent complexes can be represented by perfect
 complexes.  In the equivariant setting, the same statement holds
 provided that there are sufficiently many equivariant vector bundles.
-
+\begin{theorem}
+\label{thm:perfect-complexes-as-compact-objects}
+Let \(X\) be a quasi-compact and quasi-separated scheme. Then
+\[
+D(\operatorname{QCoh}(X))^c \simeq \operatorname{Perf}(X).
+\]
+Equivariantly, for the toric varieties considered in this note, one has
+\[
+D(\operatorname{QCoh}_T(X_\Sigma))^c
+\simeq
+\operatorname{Perf}_T(X_\Sigma).
+\]
+\end{theorem}
 \begin{theorem}
 Let \(X\) be a smooth Noetherian scheme over a field \(k\).
 \begin{enumerate}

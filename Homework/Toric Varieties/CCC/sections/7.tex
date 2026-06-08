@@ -42,7 +42,7 @@ Lagrangian branes.
 
 \subsection{From Singular Support to Lagrangian Support}
 
-In Section 4, the FLTZ skeleton
+In Section 5, the FLTZ skeleton
 \(\Lambda_\Sigma\subset T^*M_{\mathbb R}\) was introduced as the
 singular-support condition defining the constructible side of the CCC. The
 purpose of this subsection is to explain how the same subset is interpreted
@@ -91,7 +91,7 @@ is the cosphere bundle.
 For \(Y=M_{\mathbb R}\), we have the identification
 \(T^*M_{\mathbb R}\simeq M_{\mathbb R}\times N_{\mathbb R}\). Under this
 identification, the fiberwise scaling action is the scaling action on the
-\(N_{\mathbb R}\)-factor. By Proposition 4.2, the FLTZ skeleton
+\(N_{\mathbb R}\)-factor. By \cref{prop:fltz-conic}, the FLTZ skeleton
 \(\Lambda_\Sigma\) is conic. Hence its boundary at infinity
 \[
 \Lambda_\Sigma^\infty
@@ -142,7 +142,7 @@ constructible \(k\)-sheaves on \(Y\) whose singular support is contained in
 category of \(T^*Y\) stopped at \(\Lambda^\infty\), with the brane and
 grading conventions fixed.
 
-\begin{theorem}[Microlocal sheaf--Fukaya correspondence, quoted form]
+\begin{theorem}[Microlocal sheaf--Fukaya correspondence]\label{thm:microlocal-fukaya}
 With the notation above, there is an equivalence of dg categories
 \[
 Sh_\Lambda(Y;k)^c
@@ -177,7 +177,7 @@ Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)^c
 \xrightarrow{\sim}
 \mathcal W(T^*M_{\mathbb R},\Lambda_\Sigma^\infty;k)
 \]
-be an equivalence as in Theorem 6.1. We use this equivalence to transport
+be an equivalence as in \cref{thm:microlocal-fukaya}. We use this equivalence to transport
 the constructible theta objects to the Fukaya side.
 
 \begin{lemma}
@@ -243,7 +243,7 @@ In the nonzero case, the complex is concentrated in degree zero.
 The first quasi-isomorphism follows from the fact that
 \(\Phi_\Sigma\) is an equivalence of dg categories. The explicit computation
 then follows from the Hom-complex calculation for constructible theta
-sheaves proved in Section 5.2.
+sheaves proved in \cref{prop:hom-complex-comparison}.
 \end{proof}
 
 Thus the theta sheaves become elementary Fukaya branes under the microlocal
@@ -254,7 +254,7 @@ Fukaya-theoretic interpretation, the corresponding objects
 is governed by \(\Lambda_\Sigma^\infty\).
 \subsection{The Fukaya-Theoretic Form of the CCC}
 We now combine the toric CCC with the microlocal sheaf--Fukaya
-correspondence recalled in Section 6.2. The CCC proved in Section 5 gives an
+correspondence recalled from \cref{thm:microlocal-fukaya}. The CCC proved in \cref{thm:toric-ccc} gives an
 equivalence between the equivariant coherent category of the toric variety
 and the constructible category with singular support in the FLTZ skeleton.
 The microlocal sheaf--Fukaya correspondence identifies this constructible
@@ -282,8 +282,8 @@ Sh_{\Lambda_\Sigma}(M_{\mathbb R};k)^c
 
 \begin{proof}
 The first equivalence in the chain is the compact form of the toric
-coherent--constructible correspondence proved in Section 5. The second
-equivalence is the microlocal sheaf--Fukaya correspondence from Theorem 6.1,
+coherent--constructible correspondence proved from \cref{thm:toric-ccc}. The second
+equivalence is the microlocal sheaf--Fukaya correspondence from \cref{thm:microlocal-fukaya},
 applied to \(Y=M_{\mathbb R}\) and
 \(\Lambda=\Lambda_\Sigma\). Composing these equivalences gives the desired
 Fukaya-theoretic form of the CCC.

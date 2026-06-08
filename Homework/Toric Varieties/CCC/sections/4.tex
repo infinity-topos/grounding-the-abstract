@@ -97,7 +97,7 @@ A_\sigma\text{-}\operatorname{mod}^{M}.
 \end{corollary}
 
 \begin{proof}
-By Proposition~\ref{prop:affine-equiv-graded}, \(T\)-equivariant
+By \cref{prop:affine-equiv-graded}, \(T\)-equivariant
 quasi-coherent sheaves on \(U_\sigma\) are equivalent to \(M\)-graded
 \(A_\sigma\)-modules.  Since \(U_\sigma\) is affine, coherence is
 equivalent to finite generation over \(A_\sigma\).  Hence the coherent
@@ -247,7 +247,7 @@ will later index the constructible generators.
 
 
 
-\begin{theorem}[Theta generation in the equivariant quasi-coherent category]
+\begin{theorem}[Theta generation in the equivariant quasi-coherent category]\label{thm:coherent-theta-generation}
 Let \(X_\Sigma\) be a smooth toric variety. Then
 \[
 D(\operatorname{QCoh}_T(X_\Sigma))
@@ -268,7 +268,7 @@ Let \(\mathcal C\) be the right-hand side. We prove that every object of
 
 First consider an affine toric chart
 \(U_\sigma=\operatorname{Spec}A_\sigma\), where
-\(A_\sigma=k[\sigma^\vee\cap M]\). By Proposition 3.1, one has
+\(A_\sigma=k[\sigma^\vee\cap M]\). By \cref{prop:affine-equiv-graded}, one has
 \(\operatorname{QCoh}_T(U_\sigma)\simeq A_\sigma\operatorname{-Mod}^M\).
 Under this equivalence, \(\mathcal O_{U_\sigma}(\chi)\) corresponds to the
 free graded module \(A_\sigma(\chi)\). The modules \(A_\sigma(\chi)\), for
@@ -300,7 +300,24 @@ D(\operatorname{QCoh}_T(X_\Sigma))
 \]
 \end{proof}
 
-Thus the coherent side has a distinguished set of generators indexed by
-pairs \((\sigma,\chi)\).  In the next section, we will construct
-corresponding constructible generators with the same indexing set.
+\begin{corollary}[Compact form of the coherent side]
+\label{thm:compact-form-of-the-coherent-side}
+Let \(X_\Sigma\) be a smooth toric variety. Then the compact part of the
+equivariant quasi-coherent derived category is the perfect equivariant category:
+\[
+D(\operatorname{QCoh}_T(X_\Sigma))^c
+\simeq
+\operatorname{Perf}_T(X_\Sigma).
+\]
+\end{corollary}
 
+\begin{proof}
+This follows directly from
+\cref{thm:coherent-theta-generation} and
+\cref{thm:perfect-complexes-as-compact-objects}.
+\end{proof}
+
+Thus the equivariant quasi-coherent side has a distinguished family of theta
+generators indexed by pairs \((\sigma,\chi)\). The perfect coherent side will be
+obtained by passing to compact objects as in
+\cref{thm:compact-form-of-the-coherent-side}. 

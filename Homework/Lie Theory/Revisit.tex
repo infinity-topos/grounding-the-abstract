@@ -1,0 +1,2314 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{CJKutf8}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\newtheorem{lemma}{Lemma}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\R}{\mathbb{R}}
+% 重新定义 solution 环境，保留标识并在末尾留出 8cm 空白
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+
+\title{Lie Theory}
+\author{
+    \begin{CJK*}{UTF8}{gbsn}
+    钟皓宇 (12533556)
+    \end{CJK*}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section{Basic Concepts}
+
+\subsection{ideal and homomorphism}
+
+\subsubsection{Problem 1}
+
+Prove that the set of all inner derivations \(\operatorname{ad} x\), \(x \in L\),
+is an ideal of \(\operatorname{Der} L\).
+
+\paragraph{Hint.}
+Use the derivation identity. For \(D \in \operatorname{Der}L\), compute
+\([D,\operatorname{ad}x](y)\) and show that it equals \(\operatorname{ad}(Dx)(y)\).
+
+
+Recall that a \emph{derivation} of a Lie algebra \(L\) is a linear map
+\(D:L\to L\) satisfying
+\[
+D([x,y])=[D(x),y]+[x,D(y)]
+\]
+for all \(x,y\in L\). The set of all derivations is denoted by
+\(\operatorname{Der}L\), and it is a Lie algebra under the commutator bracket
+\([D_1,D_2]=D_1D_2-D_2D_1\). For each \(x\in L\), the map
+\[
+\operatorname{ad}x:L\to L,\qquad y\mapsto [x,y],
+\]
+is called an \emph{inner derivation}.
+\subsubsection{Problem 2}
+
+Show that \(\mathfrak{sl}(n,F)\) is precisely the derived algebra of
+\(\mathfrak{gl}(n,F)\). Cf. Exercise 1.9.
+
+\paragraph{Hint.}
+First observe that every commutator has trace zero. Conversely, use the matrix
+units \(E_{ij}\). For \(i \neq j\), get \(E_{ij}\) as a commutator, and get
+\(E_{ii}-E_{jj}\) from \([E_{ij},E_{ji}]\).
+
+\subsubsection{Problem 3}
+
+Prove that the center of \(\mathfrak{gl}(n,F)\) equals \(\mathfrak{s}(n,F)\),
+the scalar matrices. Prove that \(\mathfrak{sl}(n,F)\) has center \(0\), unless
+\(\operatorname{char} F\) divides \(n\), in which case the center is
+\(\mathfrak{s}(n,F)\).
+
+\paragraph{Hint.}
+Let \(A=(a_{ij})\) commute with every matrix unit \(E_{ij}\). This forces
+\(A\) to be scalar. Then intersect the scalar matrices with
+\(\mathfrak{sl}(n,F)\): a scalar matrix \(\lambda I\) lies in
+\(\mathfrak{sl}(n,F)\) exactly when \(n\lambda=0\).
+
+\subsubsection{Problem 4}
+
+Show that, up to isomorphism, there is a unique Lie algebra over \(F\) of
+dimension \(3\) whose derived algebra has dimension \(1\) and lies in \(Z(L)\).
+
+\paragraph{Hint.}
+Choose \(0 \neq z \in [L,L]\). Since \([L,L]\subset Z(L)\), choose
+\(x,y\in L\) whose images form a basis of \(L/Fz\). After rescaling, arrange
+\([x,y]=z\). This gives the three-dimensional Heisenberg Lie algebra.
+
+\subsubsection{Problem 5}
+
+Suppose \(\dim L=3\) and \(L=[L,L]\). Prove that \(L\) must be simple. Observe
+first that any homomorphic image of \(L\) also equals its derived algebra.
+Recover the simplicity of \(\mathfrak{sl}(2,F)\), where
+\(\operatorname{char} F \neq 2\).
+
+\paragraph{Hint.}
+If \(I\) is a nonzero proper ideal, then \(L/I\) has dimension \(1\) or \(2\).
+But \(L/I\) is also perfect, because \(L=[L,L]\). Show that no nonzero Lie
+algebra of dimension \(1\) or \(2\) is perfect. For
+\(\mathfrak{sl}(2,F)\), check directly that \(x,y,h\) all lie in the derived
+algebra.
+
+\subsubsection{Problem 6}
+
+Prove that \(\mathfrak{sl}(3,F)\) is simple, unless \(\operatorname{char} F=3\).
+Cf. Exercise 3. Use the standard basis \(h_1,h_2,e_{ij}\), where \(i \neq j\).
+If \(I \neq 0\) is an ideal, then \(I\) is the direct sum of eigenspaces for
+\(\operatorname{ad} h_1\) or \(\operatorname{ad} h_2\); compare the eigenvalues
+of \(\operatorname{ad} h_1\) and \(\operatorname{ad} h_2\) acting on the
+\(e_{ij}\).
+
+\paragraph{Hint.}
+Use the root-space decomposition with respect to the diagonal elements
+\(h_1,h_2\). A nonzero ideal is stable under \(\operatorname{ad}h_1\) and
+\(\operatorname{ad}h_2\), so it contains some root vector \(e_{ij}\) or a
+nonzero diagonal element. From one root vector, use brackets to generate all
+root vectors and the \(h_i\). If \(\operatorname{char}F=3\), the scalar matrix
+\(I_3\) lies in \(\mathfrak{sl}(3,F)\), giving a nonzero center.
+
+\subsubsection{Problem 7}
+Let \(L\) be a Lie algebra and let \(A\subset L\) be a subalgebra. The
+\emph{normalizer} of \(A\) in \(L\) is
+\[
+N_L(A):=\{x\in L\mid [x,A]\subset A\}.
+\]
+Equivalently, \(x\in N_L(A)\) means that taking Lie brackets with \(x\)
+preserves the subalgebra \(A\). We say that \(A\) is \emph{self-normalizing} if
+\[
+N_L(A)=A.
+\]
+
+
+Prove that \(\mathfrak{t}(n,F)\) and \(\mathfrak{b}(n,F)\) are
+self-normalizing subalgebras of \(\mathfrak{gl}(n,F)\), whereas
+\(\mathfrak{n}(n,F)\) has normalizer \(\mathfrak{t}(n,F)\).
+
+\paragraph{Hint.}
+Write \(X=(x_{ij})\in \mathfrak{gl}(n,F)\) and impose the condition
+\([X,A]\in \mathfrak{t}(n,F)\), \([X,A]\in \mathfrak{b}(n,F)\), or
+\([X,A]\in \mathfrak{n}(n,F)\) for all \(A\) in the relevant subalgebra. Test
+this condition on suitable matrix units \(E_{ij}\). The entries of \(X\) below
+or above the diagonal are forced to vanish according to the triangular shape.
+
+\subsubsection{Problem 8}
+
+Prove that in each classical linear Lie algebra (1.2), the set of diagonal
+matrices is a self-normalizing subalgebra, when \(\operatorname{char} F=0\).
+
+\paragraph{Hint.}
+Let \(\mathfrak{h}\) be the diagonal subalgebra. If \(X\) normalizes
+\(\mathfrak{h}\), then \([X,H]\in \mathfrak{h}\) for every \(H\in\mathfrak{h}\).
+But the off-diagonal entries of \([X,H]\) are multiples of the off-diagonal
+entries of \(X\). In characteristic \(0\), choose \(H\) separating the relevant
+weights; this forces all off-diagonal entries of \(X\) to vanish.
+
+\subsubsection{Problem 9}
+
+Prove Proposition 2.2.
+
+\paragraph{Hint.}
+Check each assertion directly from the definitions. For quotient statements,
+first prove that the bracket is well-defined modulo the ideal. For isomorphism
+statements, construct the natural homomorphism and identify its kernel and
+image.
+
+\subsubsection{Problem 10}
+
+Let \(\sigma\) be the automorphism of \(\mathfrak{sl}(2,F)\) defined in (2.3).
+Verify that
+\[
+\sigma(x)=-y, \qquad \sigma(y)=-x, \qquad \sigma(h)=-h .
+\]
+
+\paragraph{Hint.}
+Use the explicit matrix formula for \(\sigma\) from (2.3). Substitute the
+standard matrices \(x,y,h\) and multiply directly.
+
+\subsubsection{Problem 11}
+
+If \(L=\mathfrak{sl}(n,F)\) and \(g \in \operatorname{GL}(n,F)\), prove that the
+map from \(L\) to itself defined by
+\[
+x \longmapsto -g x^t g^{-1},
+\]
+where \(x^t\) denotes the transpose of \(x\), belongs to \(\operatorname{Aut} L\).
+When \(n=2\) and \(g\) is the identity matrix, prove that this automorphism is
+inner.
+
+\paragraph{Hint.}
+Use the identity
+\[
+[x,y]^t=-[x^t,y^t].
+\]
+This shows that the extra minus sign turns transpose into a Lie algebra
+automorphism. For \(n=2\), show that
+\[
+-x^t=JxJ^{-1},
+\qquad
+J=
+\begin{pmatrix}
+0&1\\
+-1&0
+\end{pmatrix}.
+\]
+
+\subsubsection{Problem 12}
+
+Let \(L\) be an orthogonal Lie algebra of type \(B_\ell\) or \(D_\ell\). If
+\(g\) is an orthogonal matrix, in the sense that \(g\) is invertible and
+\(g^t s g=s\), prove that
+\[
+x \longmapsto gxg^{-1}
+\]
+defines an automorphism of \(L\).
+
+\paragraph{Hint.}
+Write the orthogonal Lie algebra as
+\[
+L=\{x\in \mathfrak{gl}(n,F)\mid x^t s+sx=0\}.
+\]
+For \(x\in L\), compute
+\[
+(gxg^{-1})^t s+s(gxg^{-1})
+\]
+using \(g^t s g=s\). This proves that conjugation by \(g\) preserves \(L\).
+Conjugation automatically preserves the Lie bracket.
+\subsection{Solvable and Nilpotent Lie Algebras}
+
+\subsubsection{Problem 1}
+
+Let \(I\) be an ideal of \(L\). Then each member of the derived series or
+descending central series of \(I\) is also an ideal of \(L\).
+
+\paragraph{Hint.}
+For the derived series, use induction and the Jacobi identity. If \(I^{(r)}\)
+is an ideal of \(L\), then
+\[
+I^{(r+1)}=[I^{(r)},I^{(r)}].
+\]
+To prove \(I^{(r+1)}\) is an ideal, compute \([x,[a,b]]\) with
+\(x\in L\) and \(a,b\in I^{(r)}\). For the descending central series, use the
+same idea with \(\gamma_{r+1}(I)=[I,\gamma_r(I)]\).
+
+\subsubsection{Problem 2}
+
+Prove that \(L\) is solvable if and only if there exists a chain of subalgebras
+\[
+L=L_0 \supset L_1 \supset L_2 \supset \cdots \supset L_k=0
+\]
+such that \(L_{i+1}\) is an ideal of \(L_i\) and such that each quotient
+\(L_i/L_{i+1}\) is abelian.
+
+\paragraph{Hint.}
+If \(L\) is solvable, take the derived series
+\[
+L=L^{(0)}\supset L^{(1)}\supset L^{(2)}\supset \cdots .
+\]
+The quotient \(L^{(i)}/L^{(i+1)}\) is abelian by definition. Conversely, use
+induction on the length of the chain and the fact that an extension of a
+solvable Lie algebra by an abelian Lie algebra is solvable.
+
+\subsubsection{Problem 3}
+
+Let \(\operatorname{char}F=2\). Prove that \(\mathfrak{sl}(2,F)\) is
+nilpotent.
+
+\paragraph{Hint.}
+Use the standard basis \(x,y,h\) of \(\mathfrak{sl}(2,F)\). In characteristic
+\(2\),
+\[
+[h,x]=2x=0,\qquad [h,y]=-2y=0.
+\]
+Also \([x,y]=h\). Hence \(h\) is central and
+\[
+[\mathfrak{sl}(2,F),\mathfrak{sl}(2,F)]=Fh.
+\]
+Then the next term of the descending central series is zero.
+
+\subsubsection{Problem 4}
+
+Prove that \(L\) is solvable, respectively nilpotent, if and only if
+\(\operatorname{ad}L\) is solvable, respectively nilpotent.
+
+\paragraph{Hint.}
+Use the natural Lie algebra homomorphism
+\[
+\operatorname{ad}:L\to \operatorname{Der}L.
+\]
+Its kernel is \(Z(L)\), so
+\[
+\operatorname{ad}L\cong L/Z(L).
+\]
+For solvability, use that central extensions of solvable Lie algebras are
+solvable. For nilpotency, use that if \(L/Z(L)\) is nilpotent, then \(L\) is
+nilpotent, with nilpotency class at most one larger.
+
+\subsubsection{Problem 5}
+
+Prove that the nonabelian two dimensional algebra constructed in (1.4) is
+solvable but not nilpotent. Do the same for the algebra in Exercise 1.2.
+
+\paragraph{Hint.}
+For the two-dimensional nonabelian algebra, choose a basis \(x,y\) with
+\[
+[x,y]=y.
+\]
+Then
+\[
+[L,L]=Fy,
+\qquad
+[[L,L],[L,L]]=0,
+\]
+so \(L\) is solvable. But the descending central series satisfies
+\[
+L^2=[L,L]=Fy,\qquad L^3=[L,L^2]=Fy,
+\]
+and therefore never becomes zero. Hence \(L\) is not nilpotent. For the algebra
+in Exercise 1.2, compute its derived series and descending central series in
+the same way.
+
+\subsubsection{Problem 6}
+
+Prove that the sum of two nilpotent ideals of a Lie algebra \(L\) is again a
+nilpotent ideal. Therefore, \(L\) possesses a unique maximal nilpotent ideal.
+Determine this ideal for each algebra in Exercise 5.
+
+\paragraph{Hint.}
+Let \(I,J\) be nilpotent ideals. First note that \(I+J\) is again an ideal.
+Use the fact that
+\[
+[I,J]\subset I\cap J.
+\]
+One way to finish is to use Engel's theorem: show that every element of
+\(I+J\) acts nilpotently under the adjoint representation. The sum of all
+nilpotent ideals is then itself nilpotent, hence gives the unique maximal
+nilpotent ideal. This ideal is usually called the nilradical.
+
+\subsubsection{Problem 7}
+
+Let \(L\) be nilpotent, and let \(K\) be a proper subalgebra of \(L\). Prove
+that \(N_L(K)\) includes \(K\) properly.
+
+\paragraph{Hint.}
+Consider the action of \(K\) on the quotient vector space \(L/K\) by
+\[
+k\cdot (x+K)=[k,x]+K.
+\]
+Since \(L\) is nilpotent, the operators \(\operatorname{ad}k\) are nilpotent.
+By Engel's theorem, there is a nonzero vector \(x+K\in L/K\) killed by \(K\).
+This means
+\[
+[K,x]\subset K.
+\]
+Thus \(x\in N_L(K)\), but \(x\notin K\).
+
+\subsubsection{Problem 8}
+
+Let \(L\) be nilpotent. Prove that \(L\) has an ideal of codimension \(1\).
+
+\paragraph{Hint.}
+Use induction on \(\dim L\). Since \(L\) is nilpotent, its center \(Z(L)\) is
+nonzero. Choose \(0\neq z\in Z(L)\), and pass to the quotient \(L/Fz\). By
+induction, \(L/Fz\) has an ideal of codimension \(1\). Take its inverse image
+in \(L\).
+
+\subsubsection{Problem 9}
+
+Prove that every nilpotent Lie algebra \(L\) has an outer derivation; see
+(1.3). Proceed as follows. Write
+\[
+L=K+Fx
+\]
+for some ideal \(K\) of codimension one, using Exercise 8. Then
+\[
+C_L(K)\neq 0.
+\]
+Choose \(n\) so that
+\[
+C_L(K)\not\subseteq L^n,
+\qquad
+C_L(K)\subseteq L^{n-1},
+\]
+and let
+\[
+z\in C_L(K)-L^n.
+\]
+Then the linear map \(\delta\) sending \(K\) to \(0\) and \(x\) to \(z\) is an
+outer derivation.
+
+\paragraph{Hint.}
+First, \(C_L(K)\neq 0\) because \(K\) is nilpotent, so \(Z(K)\neq 0\), and
+\(Z(K)\subset C_L(K)\). To prove that \(\delta\) is a derivation, check the
+Leibniz rule separately on brackets of elements in \(K\), and on brackets
+\([x,k]\) with \(k\in K\). The condition \(z\in C_L(K)\) is exactly what is
+needed. To prove that \(\delta\) is outer, suppose \(\delta=\operatorname{ad}y\).
+Since \(\delta(K)=0\), one gets \(y\in C_L(K)\). Then
+\[
+\delta(x)=[y,x]\in L^n,
+\]
+contradicting \(z\notin L^n\).
+
+\subsubsection{Problem 10}
+
+Let \(L\) be a Lie algebra, and let \(K\) be an ideal of \(L\) such that \(L/K\)
+is nilpotent and such that
+\[
+\operatorname{ad}x|_K
+\]
+is nilpotent for all \(x\in L\). Prove that \(L\) is nilpotent.
+
+\paragraph{Hint.}
+Use Engel's theorem. For each \(x\in L\), the map \(\operatorname{ad}x\) preserves
+\(K\). Its induced map on \(L/K\) is nilpotent because \(L/K\) is nilpotent, and
+its restriction to \(K\) is nilpotent by assumption. Therefore
+\(\operatorname{ad}x\) is nilpotent on all of \(L\). Engel's theorem then
+implies that \(L\) is nilpotent.
+
+
+
+\section{Semisimple Lie Algebras}
+
+\subsection{Theorem of Lie and Cartan}
+
+\subsubsection{Problem 1}
+
+Let \(L=\mathfrak{sl}(V)\). Use Lie's Theorem to prove that
+\(\operatorname{Rad} L=Z(L)\); conclude that \(L\) is semisimple
+(cf. Exercise 2.3). Observe that \(\operatorname{Rad}L\) lies in each maximal
+solvable subalgebra \(B\) of \(L\). Select a basis of \(V\) so that
+\[
+B=L\cap \mathfrak{t}(n,F),
+\]
+and notice that the transpose of \(B\) is also a maximal solvable subalgebra of
+\(L\). Conclude that
+\[
+\operatorname{Rad}L\subset L\cap \mathfrak{d}(n,F),
+\]
+then that \(\operatorname{Rad}L=Z(L)\).
+
+\paragraph{Hint.}
+By Lie's Theorem, any solvable subalgebra of \(\mathfrak{gl}(V)\) can be
+triangularized. Since \(\operatorname{Rad}L\) is an ideal, it is contained in
+every maximal solvable subalgebra. Choose one such maximal solvable subalgebra
+as upper triangular matrices, and compare it with its transpose, which is lower
+triangular. Their intersection is diagonal. Finally show that any diagonal
+ideal of \(\mathfrak{sl}(V)\) must lie in the center by bracketing with matrix
+units \(E_{ij}\).
+
+\subsubsection{Problem 2}
+
+Show that the proof of Theorem 4.1 still goes through in prime characteristic,
+provided \(\dim V\) is less than \(\operatorname{char} F\).
+
+\paragraph{Hint.}
+Look at where characteristic \(0\) is used in the proof of Lie's Theorem. The
+key point is that certain sums of at most \(\dim V\) eigenvalues cannot vanish
+for purely characteristic reasons. If \(\dim V<\operatorname{char}F\), the same
+trace and eigenvalue-counting argument still works.
+
+\subsubsection{Problem 3}
+
+This exercise illustrates the failure of Lie's Theorem when \(F\) is allowed to
+have prime characteristic \(p\). Consider the \(p\times p\) matrices
+\[
+x=
+\begin{pmatrix}
+0&1&0&\cdots&0\\
+0&0&1&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdots&\cdots&0&1\\
+1&\cdots&\cdots&0&0
+\end{pmatrix},
+\qquad
+y=\operatorname{diag}(0,1,2,3,\ldots,p-1).
+\]
+Check that \([x,y]=x\), hence that \(x\) and \(y\) span a two-dimensional
+solvable subalgebra \(L\) of \(\mathfrak{gl}(p,F)\). Verify that \(x,y\) have
+no common eigenvector.
+
+\paragraph{Hint.}
+Use the formula
+\[
+[E_{ij},y]=(j-i)E_{ij},
+\]
+where the indices are interpreted modulo \(p\). This gives \([x,y]=x\). To see
+that there is no common eigenvector, note that \(y\) has eigenvectors the
+standard basis vectors, while \(x\) cyclically permutes these basis vectors.
+Thus no one-dimensional eigenspace of \(y\) is preserved by \(x\).
+
+\subsubsection{Problem 4}
+
+When \(p=2\), Exercise 3.3 shows that a solvable Lie algebra of endomorphisms
+over a field of prime characteristic \(p\) need not have derived algebra
+consisting of nilpotent endomorphisms; cf. Corollary of Theorem 4.1. For
+arbitrary \(p\), construct a counterexample to Corollary C as follows. Start
+with \(L\subset \mathfrak{gl}(p,F)\), as in Exercise 3. Form the vector space
+direct sum
+\[
+M=L\oplus F^p,
+\]
+and make \(M\) a Lie algebra by decreeing that \(F^p\) is abelian, while \(L\)
+has its usual product and acts on \(F^p\) in the given way. Verify that \(M\) is
+solvable, but that its derived algebra
+\[
+[M,M]=Fx+F^p
+\]
+fails to be nilpotent.
+
+\paragraph{Hint.}
+This is a semidirect product \(M=L\ltimes F^p\). Since \(L\) is solvable and
+\(F^p\) is abelian, \(M\) is solvable. Compute the derived algebra using
+\[
+[L,L]=Fx,\qquad [L,F^p]\subset F^p,\qquad [F^p,F^p]=0.
+\]
+The obstruction to nilpotency is the action of \(x\) on \(F^p\). In the example,
+\(x\) is not nilpotent as an endomorphism of \(F^p\), because it cyclically
+permutes the standard basis.
+
+\subsubsection{Problem 5}
+
+If \(x,y\in \operatorname{End}V\) commute, prove that
+\[
+(x+y)_s=x_s+y_s,
+\qquad
+(x+y)_n=x_n+y_n.
+\]
+Show by example that this can fail if \(x,y\) fail to commute. Show first that
+\(x,y\) semisimple, respectively nilpotent, implies \(x+y\) semisimple,
+respectively nilpotent.
+
+\paragraph{Hint.}
+If \(x\) and \(y\) commute, then their semisimple and nilpotent parts also
+commute. For semisimple endomorphisms, use simultaneous diagonalization after
+passing to an algebraic closure. For nilpotent endomorphisms, if \(x\) and \(y\)
+commute, then \(x+y\) is nilpotent by the binomial theorem. For a counterexample
+without commutativity, take two nilpotent \(2\times 2\) matrices whose sum is
+semisimple.
+
+\subsubsection{Problem 6}
+
+Check formula \((*)\) at the end of (4.2).
+
+\paragraph{Hint.}
+Expand both sides using the Jordan decomposition
+\[
+x=x_s+x_n.
+\]
+Use that \(x_s\) and \(x_n\) commute. Then separate the semisimple and nilpotent
+parts. The formula follows from uniqueness of the Jordan decomposition.
+
+\subsubsection{Problem 7}
+
+Prove the converse of Theorem 4.3.
+
+\paragraph{Hint.}
+Use Cartan's Criterion in the reverse direction. Show that if the trace
+condition in Theorem 4.3 holds, then the derived algebra acts nilpotently under
+the adjoint representation. Then apply Engel's Theorem to conclude solvability.
+
+\subsubsection{Problem 8}
+
+Note that it suffices to check the hypotheses of Theorem 4.3, or its corollary,
+for \(x,y\) ranging over a basis of \(L\). For the example given in Exercise
+1.2, verify solvability by using Cartan's Criterion.
+
+\paragraph{Hint.}
+The trace pairing condition is bilinear in \(x\) and \(y\), so it is enough to
+check it on a basis. For the algebra in Exercise 1.2, write down the adjoint
+matrices \(\operatorname{ad}x\) for basis elements \(x\), compute the relevant
+traces, and verify that Cartan's Criterion applies.
+
+\subsection{Killing form}
+\subsubsection{Problem 1}
+
+Prove that if \(L\) is nilpotent, the Killing form of \(L\) is identically
+zero.
+
+\paragraph{Hint.}
+Use Engel's theorem or the fact that for nilpotent \(L\), every
+\(\operatorname{ad}x\) is a nilpotent endomorphism. Then
+\(\operatorname{ad}x\,\operatorname{ad}y\) has trace zero for all \(x,y\in L\).
+Therefore
+\[
+\kappa(x,y)=\operatorname{tr}(\operatorname{ad}x\,\operatorname{ad}y)=0.
+\]
+
+\subsubsection{Problem 2}
+
+Prove that \(L\) is solvable if and only if \([LL]\) lies in the radical of the
+Killing form.
+
+\paragraph{Hint.}
+The radical of the Killing form is
+\[
+\operatorname{rad}\kappa
+=
+\{x\in L\mid \kappa(x,y)=0\text{ for all }y\in L\}.
+\]
+Thus \([L,L]\subset \operatorname{rad}\kappa\) means
+\[
+\operatorname{tr}(\operatorname{ad}x\,\operatorname{ad}y)=0
+\]
+for all \(x\in [L,L]\) and \(y\in L\). This is exactly Cartan's solvability
+criterion.
+
+\subsubsection{Problem 3}
+
+Let \(L\) be the two dimensional nonabelian Lie algebra (1.4), which is
+solvable. Prove that \(L\) has nontrivial Killing form.
+
+\paragraph{Hint.}
+Choose a basis \(x,y\) with
+\[
+[x,y]=y.
+\]
+Compute the adjoint matrices of \(x\) and \(y\). In particular,
+\(\operatorname{ad}x\) acts nontrivially on \(Fy\). Then compute
+\[
+\kappa(x,x)=\operatorname{tr}((\operatorname{ad}x)^2).
+\]
+This trace is nonzero in characteristic \(0\), so the Killing form is not
+identically zero.
+
+\subsubsection{Problem 4}
+
+Let \(L\) be the three dimensional solvable Lie algebra of Exercise 1.2.
+Compute the radical of its Killing form.
+
+\paragraph{Hint.}
+Write down the adjoint matrices \(\operatorname{ad}x_i\) for a basis
+\(x_1,x_2,x_3\) of \(L\). Then form the Killing matrix
+\[
+\bigl(\kappa(x_i,x_j)\bigr)_{i,j}.
+\]
+The radical is the nullspace of this matrix:
+\[
+\operatorname{rad}\kappa
+=
+\left\{\sum_i a_i x_i \mid
+\sum_i a_i\kappa(x_i,x_j)=0
+\text{ for all }j
+\right\}.
+\]
+
+\subsubsection{Problem 5}
+
+Let \(L=\mathfrak{sl}(2,F)\). Compute the basis of \(L\) dual to the standard
+basis, relative to the Killing form.
+
+\paragraph{Hint.}
+Use the standard basis
+\[
+x=
+\begin{pmatrix}
+0&1\\
+0&0
+\end{pmatrix},
+\qquad
+y=
+\begin{pmatrix}
+0&0\\
+1&0
+\end{pmatrix},
+\qquad
+h=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}.
+\]
+Compute the values
+\[
+\kappa(x,y),\qquad \kappa(y,x),\qquad \kappa(h,h),
+\]
+and note that all other pairings among \(x,y,h\) are zero. The dual basis
+\((x^\vee,y^\vee,h^\vee)\) is determined by
+\[
+\kappa(x,x^\vee)=1,\qquad
+\kappa(y,y^\vee)=1,\qquad
+\kappa(h,h^\vee)=1.
+\]
+
+\subsubsection{Problem 6}
+
+Let \(\operatorname{char}F=p\neq 2,0\). Prove that \(L\) is semisimple if its
+Killing form is nondegenerate. Show by example that the converse fails. Look at
+\(\mathfrak{sl}(3,F)\) modulo its center, when \(\operatorname{char}F=3\).
+
+\paragraph{Hint.}
+If the Killing form is nondegenerate, then its radical is \(0\). Since the
+radical of the Killing form is a solvable ideal, \(L\) has no nonzero solvable
+ideal, hence \(L\) is semisimple. For the failure of the converse in prime
+characteristic, use
+\[
+\kappa_{\mathfrak{sl}_n}(a,b)=2n\operatorname{tr}(ab).
+\]
+When \(n=3\) and \(\operatorname{char}F=3\), the scalar \(2n=6\) is zero, so the
+Killing form becomes degenerate, even though
+\(\mathfrak{sl}(3,F)/Z(\mathfrak{sl}(3,F))\) is semisimple.
+
+\subsubsection{Problem 7}
+
+Relative to the standard basis of \(\mathfrak{sl}(3,F)\), compute the
+determinant of \(\kappa\).
+
+\paragraph{Hint.}
+Use the standard basis consisting of the six root vectors \(E_{ij}\), \(i\neq j\),
+together with two diagonal elements, for example
+\[
+h_1=E_{11}-E_{22},
+\qquad
+h_2=E_{22}-E_{33}.
+\]
+Use
+\[
+\kappa(a,b)=6\operatorname{tr}(ab)
+\]
+for \(\mathfrak{sl}(3,F)\). The root-vector part pairs \(E_{ij}\) only with
+\(E_{ji}\), while the diagonal part is computed from
+\(\operatorname{tr}(h_i h_j)\). The determinant is the product of these two
+blocks.
+
+\subsubsection{Problem 8}
+
+Let
+\[
+L=L_1\oplus\cdots\oplus L_t
+\]
+be the decomposition of a semisimple Lie algebra \(L\) into its simple ideals.
+Show that the semisimple and nilpotent parts of \(x\in L\) are the sums of the
+semisimple and nilpotent parts in the various \(L_i\) of the components of
+\(x\).
+
+\paragraph{Hint.}
+Write
+\[
+x=x_1+\cdots+x_t,
+\qquad x_i\in L_i.
+\]
+Since the \(L_i\) are ideals in a direct sum, one has
+\[
+[L_i,L_j]=0
+\qquad\text{for }i\neq j.
+\]
+Thus the adjoint action decomposes blockwise:
+\[
+\operatorname{ad}x
+=
+\operatorname{ad}x_1\oplus\cdots\oplus \operatorname{ad}x_t.
+\]
+The Jordan decomposition of a block diagonal endomorphism is obtained by taking
+the Jordan decomposition on each block. Use uniqueness of the abstract Jordan
+decomposition in a semisimple Lie algebra.
+
+\subsection{Complete reducibility of representation}
+\subsubsection{Problem 1}
+
+Using the standard basis for \(L=\mathfrak{sl}(2,F)\), write down the Casimir
+element of the adjoint representation of \(L\). Cf. Exercise 5.5. Do the same
+thing for the usual \(3\)-dimensional representation of \(\mathfrak{sl}(3,F)\),
+first computing dual bases relative to the trace form.
+
+\paragraph{Hint.}
+Use the definition of the Casimir element:
+\[
+C_\rho=\sum_i \rho(x_i)\rho(x^i),
+\]
+where \(\{x_i\}\) is a basis of \(L\), and \(\{x^i\}\) is the dual basis
+relative to the trace form
+\[
+(x,y)_\rho=\operatorname{Tr}(\rho(x)\rho(y)).
+\]
+For \(\mathfrak{sl}(2,F)\), use the standard basis \(x,y,h\) and compute the
+dual basis from the values of the Killing form. For \(\mathfrak{sl}(3,F)\), use
+the basis \(E_{ij}\), \(i\neq j\), together with
+\[
+h_1=E_{11}-E_{22},\qquad h_2=E_{22}-E_{33}.
+\]
+The dual of \(E_{ij}\) is \(E_{ji}\), while the dual diagonal basis is obtained
+from the inverse of the matrix \(\bigl(\operatorname{Tr}(h_i h_j)\bigr)\).
+
+\subsubsection{Problem 2}
+
+Let \(V\) be an \(L\)-module. Prove that \(V\) is a direct sum of irreducible
+submodules if and only if each \(L\)-submodule of \(V\) possesses a complement.
+
+\paragraph{Hint.}
+If \(V\) is completely reducible, write it as a direct sum of irreducible
+submodules and choose those summands not lying in the given submodule. Conversely,
+apply the complement condition repeatedly: choose an irreducible submodule
+\(W\subset V\), take a complement \(V=W\oplus V_1\), then continue by induction
+on \(\dim V\).
+
+\subsubsection{Problem 3}
+
+If \(L\) is solvable, every irreducible representation of \(L\) is
+one-dimensional.
+
+\paragraph{Hint.}
+Apply Lie's Theorem to the image of \(L\) in \(\mathfrak{gl}(V)\). Since \(L\)
+is solvable, there is a common eigenvector, hence a one-dimensional
+\(L\)-stable subspace of \(V\). If \(V\) is irreducible, this subspace must be
+all of \(V\).
+
+\subsubsection{Problem 4}
+
+Use Weyl's Theorem to give another proof that for \(L\) semisimple, all
+\(\operatorname{Der}L\) are inner. If \(\delta\in \operatorname{Der}L\), make
+the direct sum \(F\oplus L\) into an \(L\)-module via the rule
+\[
+x\cdot(a,y)=(0,a\delta(x)+[x,y]).
+\]
+Then consider a complement to the submodule \(L\).
+
+\paragraph{Hint.}
+Identify \(L\) with the submodule \(\{0\}\oplus L\subset F\oplus L\). By Weyl's
+Theorem, this submodule has a one-dimensional \(L\)-stable complement. Let this
+complement be generated by \((1,z)\). Since it is stable, for every \(x\in L\),
+\[
+x\cdot(1,z)=(0,\delta(x)+[x,z])
+\]
+must lie in \(F(1,z)\). Its first coordinate is \(0\), so it must be \(0\). Hence
+\[
+\delta(x)=-[x,z]=[z,x],
+\]
+so \(\delta=\operatorname{ad}z\).
+
+\subsubsection{Problem 5}
+
+A Lie algebra \(L\) for which \(\operatorname{Rad}L=Z(L)\) is called reductive.
+Examples are \(L\) abelian, \(L\) semisimple, and \(L=\mathfrak{gl}(n,F)\).
+
+\paragraph{(a)}
+If \(L\) is reductive, then \(L\) is a completely reducible
+\(\operatorname{ad}L\)-module. If \(L\neq 0\), use Weyl's Theorem. In particular,
+\(L\) is the direct sum of \(Z(L)\) and \([L,L]\), with \([L,L]\) semisimple.
+
+\paragraph{Hint.}
+Since \(\operatorname{Rad}L=Z(L)\), the quotient \(L/Z(L)\) is semisimple.
+The adjoint action of \(L\) factors through \(L/Z(L)\), because \(Z(L)\) acts
+trivially. Apply Weyl's Theorem to the \(L/Z(L)\)-module \(L\). Then choose an
+\(L\)-stable complement to \(Z(L)\). This complement is an ideal and is equal to
+\([L,L]\).
+
+\paragraph{(b)}
+If \(L\) is a classical linear Lie algebra (1.2), then \(L\) is semisimple.
+Cf. Exercise 1.9.
+
+\paragraph{Hint.}
+Use Exercise 1.9 to show that these classical Lie algebras are perfect:
+\[
+[L,L]=L.
+\]
+Then combine this with the earlier center computation. If a solvable radical
+existed, Lie's Theorem would force it into a triangular form; using the ideal
+condition and bracketing with root vectors forces it into the center. Since the
+center is zero, the radical is zero.
+
+\paragraph{(c)}
+If \(L\) is a completely reducible \(\operatorname{ad}L\)-module, then \(L\) is
+reductive.
+
+\paragraph{Hint.}
+Let \(R=\operatorname{Rad}L\). Since \(R\) is an ideal, it is an
+\(\operatorname{ad}L\)-submodule. Complete reducibility lets one split off
+\(L\)-stable complements. Use solvability of \(R\) to show that every irreducible
+\(L\)-submodule contained in \(R\) is abelian, hence central. Induct on
+\(\dim R\) to conclude
+\[
+R\subset Z(L).
+\]
+The reverse inclusion \(Z(L)\subset R\) is automatic, since the center is an
+abelian ideal. Hence \(\operatorname{Rad}L=Z(L)\).
+
+\paragraph{(d)}
+If \(L\) is reductive, then all finite-dimensional representations of \(L\) in
+which \(Z(L)\) is represented by semisimple endomorphisms are completely
+reducible.
+
+\paragraph{Hint.}
+Use the decomposition
+\[
+L=Z(L)\oplus [L,L],
+\]
+where \([L,L]\) is semisimple. Since \(Z(L)\) acts by commuting semisimple
+operators, decompose the representation into simultaneous eigenspaces for
+\(Z(L)\). Each eigenspace is stable under \([L,L]\). Apply Weyl's Theorem to
+the semisimple Lie algebra \([L,L]\) on each eigenspace.
+
+\subsubsection{Problem 6}
+
+Let \(L\) be a simple Lie algebra. Let \(\beta(x,y)\) and \(\gamma(x,y)\) be two
+symmetric associative bilinear forms on \(L\). If \(\beta\) and \(\gamma\) are
+nondegenerate, prove that \(\beta\) and \(\gamma\) are proportional. Use
+Schur's Lemma.
+
+\paragraph{Hint.}
+Since \(\beta\) is nondegenerate, define a linear map \(T:L\to L\) by
+\[
+\gamma(x,y)=\beta(Tx,y).
+\]
+The associativity of \(\beta\) and \(\gamma\) implies that \(T\) commutes with
+the adjoint action of \(L\). Thus \(T\) is an \(L\)-module endomorphism of the
+adjoint module \(L\). Since \(L\) is simple, the adjoint module is irreducible.
+By Schur's Lemma, \(T=\lambda\operatorname{id}\). Hence
+\[
+\gamma=\lambda\beta.
+\]
+
+\subsubsection{Problem 7}
+
+It will be seen later on that \(\mathfrak{sl}(n,F)\) is actually simple.
+Assuming this and using Exercise 6, prove that the Killing form \(\kappa\) on
+\(\mathfrak{sl}(n,F)\) is related to the ordinary trace form by
+\[
+\kappa(x,y)=2n\operatorname{Tr}(xy).
+\]
+
+\paragraph{Hint.}
+Both
+\[
+\kappa(x,y)
+\qquad\text{and}\qquad
+\operatorname{Tr}(xy)
+\]
+are symmetric associative nondegenerate bilinear forms on
+\(\mathfrak{sl}(n,F)\). Since \(\mathfrak{sl}(n,F)\) is simple, Exercise 6
+implies that
+\[
+\kappa(x,y)=c\operatorname{Tr}(xy)
+\]
+for some scalar \(c\). Determine \(c\) by evaluating both sides on a convenient
+pair such as
+\[
+x=E_{12},\qquad y=E_{21}.
+\]
+A direct computation of
+\(\operatorname{Tr}(\operatorname{ad}E_{12}\operatorname{ad}E_{21})\) gives
+\(c=2n\).
+
+\subsubsection{Problem 8}
+
+If \(L\) is a Lie algebra, then \(L\) acts via \(\operatorname{ad}\) on
+\((L\otimes L)^*\), which may be identified with the space of all bilinear
+forms \(\beta\) on \(L\). Prove that \(\beta\) is associative if and only if
+\(L\cdot \beta=0\).
+
+\paragraph{Hint.}
+The induced action on bilinear forms is
+\[
+(x\cdot \beta)(y,z)
+=
+-\beta([x,y],z)-\beta(y,[x,z]).
+\]
+Thus \(x\cdot\beta=0\) for all \(x\in L\) means
+\[
+\beta([x,y],z)+\beta(y,[x,z])=0.
+\]
+Since \([x,z]=-[z,x]\), this is equivalent to
+\[
+\beta([x,y],z)=\beta(y,[z,x]),
+\]
+which is precisely the associativity condition for the bilinear form.
+
+\subsubsection{Problem 9}
+
+Let \(L'\) be a semisimple subalgebra of a semisimple Lie algebra \(L\). If
+\(x\in L'\), its Jordan decomposition in \(L'\) is also its Jordan decomposition
+in \(L\).
+
+\paragraph{Hint.}
+Write the abstract Jordan decomposition of \(x\) inside \(L'\) as
+\[
+x=x_s+x_n.
+\]
+Because \(L'\) is semisimple, every finite-dimensional \(L'\)-module is
+completely reducible. Apply this to the \(L'\)-module \(L\) under the adjoint
+action. On every irreducible \(L'\)-submodule of \(L\), \(x_s\) acts
+semisimply and \(x_n\) acts nilpotently. Hence, as endomorphisms of \(L\),
+\[
+\operatorname{ad}_L x
+=
+\operatorname{ad}_L x_s+\operatorname{ad}_L x_n
+\]
+is the Jordan decomposition of \(\operatorname{ad}_L x\). By uniqueness of the
+abstract Jordan decomposition in the semisimple algebra \(L\), this is also the
+Jordan decomposition of \(x\) in \(L\).
+
+\subsection{Representations of \(\mathfrak{sl}(2,F)\)}
+
+In these exercises, let \(L=\mathfrak{sl}(2,F)\).
+
+\subsubsection{Problem 1}
+
+Use Lie's Theorem to prove the existence of a maximal vector in an arbitrary
+finite-dimensional \(L\)-module. Look at the subalgebra \(B\) spanned by
+\(h\) and \(x\).
+
+\paragraph{Hint.}
+The subalgebra \(B=Fh+Fx\) is solvable since \([h,x]=2x\). By Lie's Theorem,
+there is a common eigenvector for \(B\). In particular, it is an eigenvector
+for \(h\), and \(x\) acts by a scalar. Use the relation \([h,x]=2x\) to show
+that this scalar must be \(0\). Hence this vector is killed by \(x\), so it is
+a maximal vector.
+
+\subsubsection{Problem 2}
+
+Let \(M=\mathfrak{sl}(3,F)\) contain a copy of \(L\) in its upper left-hand
+\(2\times 2\) position. Write \(M\) as a direct sum of irreducible
+\(L\)-submodules, where \(M\) is viewed as an \(L\)-module via the adjoint
+representation:
+\[
+V(0)\oplus V(1)\oplus V(1)\oplus V(2).
+\]
+
+\paragraph{Hint.}
+Decompose the matrix units \(E_{ij}\) according to how the upper-left
+\(\mathfrak{sl}(2,F)\) acts by commutator. The upper-left \(2\times 2\)
+trace-zero block gives the adjoint module \(V(2)\). The scalar diagonal part
+commuting with this copy of \(L\) gives \(V(0)\). The first two entries of the
+third column and the first two entries of the third row each form a copy of
+the standard \(2\)-dimensional module \(V(1)\).
+
+\subsubsection{Problem 3}
+
+Verify that formulas (a)--(c) of Lemma 7.2 do define an irreducible
+representation of \(L\). To show that they define a representation, it suffices
+to check that the matrices corresponding to \(x,y,h\) satisfy the same
+structural equations as \(x,y,h\).
+
+\paragraph{Hint.}
+Check the three defining relations of \(\mathfrak{sl}(2,F)\):
+\[
+[h,x]=2x,\qquad [h,y]=-2y,\qquad [x,y]=h.
+\]
+Apply both sides to each basis vector \(v_i\). For irreducibility, take a
+nonzero submodule and choose a vector in it with maximal or minimal occurring
+index. Use the action of \(x\) and \(y\) to force the submodule to contain a
+maximal vector, hence \(v_0\), and then all basis vectors.
+
+\subsubsection{Problem 4}
+
+The irreducible representation of \(L\) of highest weight \(m\) can also be
+realized naturally as follows. Let \(X,Y\) be a basis for the two-dimensional
+vector space \(F^2\), on which \(L\) acts as usual. Let
+\[
+\mathcal{R}=F[X,Y]
+\]
+be the polynomial algebra in two variables, and extend the action of \(L\) to
+\(\mathcal{R}\) by the derivation rule
+\[
+z\cdot fg=(z\cdot f)g+f(z\cdot g),
+\qquad z\in L,\ f,g\in\mathcal{R}.
+\]
+Show that this extension is well-defined and that \(\mathcal{R}\) becomes an
+\(L\)-module. Then show that the subspace of homogeneous polynomials of degree
+\(m\), with basis
+\[
+X^m,\ X^{m-1}Y,\ \ldots,\ XY^{m-1},\ Y^m,
+\]
+is invariant under \(L\) and irreducible.
+
+\paragraph{Hint.}
+First check the action on monomials using the Leibniz rule. The operators
+coming from \(x,y,h\) are derivations of the polynomial algebra and satisfy
+the same \(\mathfrak{sl}(2,F)\)-relations. Since \(x,y,h\) act by differential
+operators preserving total degree, the homogeneous degree \(m\) part is
+stable. Identify \(X^m\) as a maximal vector of weight \(m\), and use repeated
+application of \(y\) to generate the whole degree \(m\) subspace.
+
+\subsubsection{Problem 5}
+
+Suppose \(\operatorname{char}F=p>0\) and \(L=\mathfrak{sl}(2,F)\). Prove that
+the representation \(V(m)\) of \(L\) constructed as in Exercise 3 or 4 is
+irreducible so long as the highest weight \(m\) is strictly less than \(p\),
+but reducible when \(m=p\).
+
+\paragraph{Hint.}
+In the usual basis \(v_0,\ldots,v_m\), the coefficients in the action of \(x\)
+and \(y\) involve integers such as \(i\) and \(m-i+1\). If \(m<p\), none of the
+necessary coefficients vanish modulo \(p\), so the standard irreducibility
+argument still works. When \(m=p\), one of these coefficients becomes \(0\) in
+\(F\), producing a proper nonzero submodule.
+
+\subsubsection{Problem 6}
+
+Decompose the tensor product of the two \(L\)-modules \(V(3)\), \(V(7)\) into
+the sum of irreducible submodules:
+\[
+V(4)\oplus V(6)\oplus V(8)\oplus V(10).
+\]
+Try to develop a general formula for the decomposition of \(V(m)\otimes V(n)\).
+
+\paragraph{Hint.}
+Use highest weights. The largest possible highest weight in
+\(V(m)\otimes V(n)\) is \(m+n\). After removing \(V(m+n)\), look for the next
+maximal vector. The general Clebsch--Gordan decomposition is
+\[
+V(m)\otimes V(n)
+\cong
+V(m+n)\oplus V(m+n-2)\oplus\cdots\oplus V(|m-n|).
+\]
+For \(m=3\) and \(n=7\), this gives
+\[
+V(10)\oplus V(8)\oplus V(6)\oplus V(4).
+\]
+
+\subsubsection{Problem 7}
+
+In this exercise we construct certain infinite-dimensional \(L\)-modules. Let
+\(\lambda\in F\) be an arbitrary scalar. Let \(Z(\lambda)\) be a vector space
+over \(F\) with countably infinite basis
+\[
+v_0,v_1,v_2,\ldots .
+\]
+
+\paragraph{(a)}
+Prove that formulas (a)--(c) of Lemma 7.2 define an \(L\)-module structure on
+\(Z(\lambda)\), and that every nonzero \(L\)-submodule of \(Z(\lambda)\)
+contains at least one maximal vector.
+
+\paragraph{Hint.}
+As in the finite-dimensional case, verify the defining relations
+\[
+[h,x]=2x,\qquad [h,y]=-2y,\qquad [x,y]=h
+\]
+on every basis vector \(v_i\). For the maximal-vector statement, take a
+nonzero vector in a submodule with minimal occurring index. Applying \(x\)
+lowers the index, so minimality forces the resulting vector to be killed by
+\(x\).
+
+\paragraph{(b)}
+Suppose \(\lambda+1=i\) is a nonnegative integer. Prove that \(v_i\) is a
+maximal vector, for example \(\lambda=-1\), \(i=0\). This induces an
+\(L\)-module homomorphism
+\[
+\phi:Z(\mu)\longrightarrow Z(\lambda),
+\qquad
+\mu=\lambda-2i,
+\]
+sending \(v_0\) to \(v_i\). Show that \(\phi\) is a monomorphism, and that
+\(\operatorname{Im}\phi\) and \(Z(\lambda)/\operatorname{Im}\phi\) are both
+irreducible \(L\)-modules, but \(Z(\lambda)\) fails to be completely reducible
+when \(i>0\).
+
+\paragraph{Hint.}
+Use the formula for \(xv_j\). The coefficient of \(v_{j-1}\) vanishes exactly
+when \(j=\lambda+1\), so \(v_i\) is killed by \(x\). The submodule generated by
+\(v_i\) has highest weight \(\lambda-2i\), giving the map from \(Z(\mu)\).
+Injectivity follows because the images of the basis vectors remain linearly
+independent. The quotient has basis represented by \(v_0,\ldots,v_{i-1}\) and
+is the finite-dimensional irreducible highest-weight module.
+
+\paragraph{(c)}
+Suppose \(\lambda+1\) is not a nonnegative integer. Prove that \(Z(\lambda)\)
+is irreducible.
+
+\paragraph{Hint.}
+By part (a), any nonzero submodule contains a maximal vector. Under the present
+assumption, the only possible maximal vector is \(v_0\). Hence any nonzero
+submodule contains \(v_0\), and repeated application of \(y\) generates all
+basis vectors \(v_0,v_1,v_2,\ldots\). Therefore the submodule is all of
+\(Z(\lambda)\).
+
+\subsection{Root Space Decomposition}
+
+\subsubsection{Problem 1}
+
+If \(L\) is a classical linear Lie algebra of type \(A_\ell,B_\ell,C_\ell\), or
+\(D_\ell\) (see (1.2)), prove that the set of all diagonal matrices in \(L\) is
+a maximal toral subalgebra, of dimension \(\ell\). Cf. Exercise 2.8.
+
+\paragraph{Hint.}
+First write down the diagonal subalgebra \(H\) explicitly. For type \(A_\ell\),
+it is the trace-zero diagonal subalgebra of \(\mathfrak{sl}(\ell+1,F)\). For
+types \(B_\ell,C_\ell,D_\ell\), it consists of diagonal matrices of the form
+\[
+\operatorname{diag}(a_1,\ldots,a_\ell,0,-a_1,\ldots,-a_\ell)
+\]
+or
+\[
+\operatorname{diag}(a_1,\ldots,a_\ell,-a_1,\ldots,-a_\ell),
+\]
+depending on the type. These matrices commute and act semisimply by
+\(\operatorname{ad}\). To prove maximality, show that the centralizer of \(H\)
+inside \(L\) is exactly \(H\). Hence no larger toral subalgebra can contain
+\(H\).
+
+\subsubsection{Problem 2}
+
+For each algebra in Exercise 1, determine the roots and root spaces. How are
+the various \(h_\alpha\) expressed in terms of the basis for \(H\) given in
+(1.2)?
+
+\paragraph{Hint.}
+Let \(\varepsilon_i\in H^*\) be the functional extracting the \(i\)-th diagonal
+coordinate. The roots are
+\[
+A_\ell:\quad \varepsilon_i-\varepsilon_j,\quad i\neq j,
+\]
+\[
+B_\ell:\quad \pm \varepsilon_i\pm \varepsilon_j,\ i\neq j,\quad
+\pm\varepsilon_i,
+\]
+\[
+C_\ell:\quad \pm \varepsilon_i\pm \varepsilon_j,\ i\neq j,\quad
+\pm 2\varepsilon_i,
+\]
+\[
+D_\ell:\quad \pm \varepsilon_i\pm \varepsilon_j,\quad i\neq j.
+\]
+For type \(A_\ell\), the root space for \(\varepsilon_i-\varepsilon_j\) is
+\(F E_{ij}\). For the other classical types, the root vectors are suitable
+linear combinations of matrix units forced by the defining bilinear form. The
+element \(h_\alpha\) is obtained from the condition
+\[
+\beta(h_\alpha,h)=\alpha(h)
+\qquad \text{for all } h\in H,
+\]
+where \(\beta\) is the Killing form, or equivalently from the standard
+\(\mathfrak{sl}_2\)-triple \([x_\alpha,x_{-\alpha}]=h_\alpha\).
+
+\subsubsection{Problem 3}
+
+If \(L\) is of classical type, compute explicitly the restriction of the
+Killing form to the maximal toral subalgebra described in Exercise 1.
+
+\paragraph{Hint.}
+Use the trace formulas
+\[
+\kappa_{\mathfrak{sl}_n}(x,y)=2n\operatorname{Tr}(xy),
+\qquad
+\kappa_{\mathfrak{so}_n}(x,y)=(n-2)\operatorname{Tr}(xy),
+\]
+and
+\[
+\kappa_{\mathfrak{sp}_{2\ell}}(x,y)=2(\ell+1)\operatorname{Tr}(xy).
+\]
+Then substitute diagonal elements
+\[
+h=\operatorname{diag}(a_1,\ldots),\qquad
+h'=\operatorname{diag}(b_1,\ldots).
+\]
+For example, in type \(A_\ell\), with \(n=\ell+1\),
+\[
+\kappa(h,h')=2n\sum_{i=1}^n a_i b_i,
+\qquad \sum_i a_i=\sum_i b_i=0.
+\]
+For types \(B,C,D\), the trace of \(hh'\) is twice \(\sum_i a_i b_i\).
+
+\subsubsection{Problem 4}
+
+If \(L=\mathfrak{sl}(2,F)\), prove that each maximal toral subalgebra is one
+dimensional.
+
+\paragraph{Hint.}
+A toral subalgebra consists of semisimple elements and is abelian. If
+\(0\neq h\in H\) is semisimple, then after choosing a suitable basis it is
+conjugate to a scalar multiple of
+\[
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}.
+\]
+Its centralizer in \(\mathfrak{sl}(2,F)\) is one-dimensional. Since every
+element of a toral subalgebra containing \(h\) must commute with \(h\), the
+whole toral subalgebra lies in \(C_L(h)\). Hence it has dimension \(1\).
+
+\subsubsection{Problem 5}
+
+If \(L\) is semisimple and \(H\) is a maximal toral subalgebra, prove that \(H\)
+is self-normalizing, i.e.
+\[
+H=N_L(H).
+\]
+
+\paragraph{Hint.}
+Use the root space decomposition
+\[
+L=H\oplus \bigoplus_{\alpha\in \Phi} L_\alpha.
+\]
+Let \(x\in N_L(H)\), and write
+\[
+x=h+\sum_{\alpha\in\Phi}x_\alpha,
+\qquad h\in H,\ x_\alpha\in L_\alpha.
+\]
+For every \(t\in H\), the condition \(x\in N_L(H)\) gives
+\[
+[t,x]\in H.
+\]
+But
+\[
+[t,x]=\sum_{\alpha\in\Phi}\alpha(t)x_\alpha.
+\]
+Since the summands lie in root spaces and not in \(H\), all \(x_\alpha\) must
+be zero. Therefore \(x\in H\), so \(N_L(H)=H\).
+
+\subsubsection{Problem 6}
+
+Compute the basis of \(\mathfrak{sl}(n,F)\) which is dual, via the Killing
+form, to the standard basis. Cf. Exercise 5.5.
+
+\paragraph{Hint.}
+Use the standard basis
+\[
+E_{ij}\quad (i\neq j),\qquad
+h_i=E_{ii}-E_{i+1,i+1},\quad 1\leq i\leq n-1.
+\]
+Since
+\[
+\kappa(x,y)=2n\operatorname{Tr}(xy),
+\]
+the element dual to \(E_{ij}\) is
+\[
+\frac{1}{2n}E_{ji}.
+\]
+For the diagonal part, compute the matrix
+\[
+\bigl(\kappa(h_i,h_j)\bigr)_{i,j}
+=
+2n\bigl(\operatorname{Tr}(h_i h_j)\bigr)_{i,j}.
+\]
+The trace matrix is the Cartan matrix of type \(A_{n-1}\). Therefore the dual
+basis to the \(h_i\)'s is obtained by multiplying by the inverse Cartan matrix.
+
+\subsubsection{Problem 7}
+
+Let \(L\) be semisimple and \(H\) a maximal toral subalgebra. If \(h\in H\),
+prove that \(C_L(h)\) is reductive in the sense of Exercise 6.5. Prove that
+\(H\) contains elements \(h\) for which \(C_L(h)=H\). For which \(h\in
+\mathfrak{sl}(n,F)\) is this true?
+
+\paragraph{Hint.}
+Using the root space decomposition, one has
+\[
+C_L(h)
+=
+H\oplus \bigoplus_{\alpha(h)=0} L_\alpha.
+\]
+This is a Lie subalgebra. Its center contains the part of \(H\) killed by the
+roots appearing in the centralizer, and its derived algebra is generated by
+the root spaces with \(\alpha(h)=0\). This gives a reductive decomposition.
+
+For \(C_L(h)=H\), choose \(h\in H\) such that
+\[
+\alpha(h)\neq 0
+\qquad \text{for all } \alpha\in\Phi.
+\]
+Such an \(h\) is called regular. In \(\mathfrak{sl}(n,F)\), this means that
+\(h=\operatorname{diag}(a_1,\ldots,a_n)\), with \(\sum_i a_i=0\), has pairwise
+distinct diagonal entries:
+\[
+a_i\neq a_j
+\qquad \text{for } i\neq j.
+\]
+
+\subsubsection{Problem 8}
+
+For \(\mathfrak{sl}(n,F)\) and other classical algebras, calculate explicitly
+the root strings and Cartan integers. In particular, prove that all Cartan
+integers
+\[
+\frac{2(\alpha,\beta)}{(\beta,\beta)},
+\qquad \alpha\neq \pm\beta,
+\]
+for \(\mathfrak{sl}(n,F)\) are \(0,\pm 1\).
+
+\paragraph{Hint.}
+For \(\mathfrak{sl}(n,F)\), write every root as
+\[
+\alpha=\varepsilon_i-\varepsilon_j.
+\]
+Use the standard inner product on the hyperplane
+\[
+\sum_i \varepsilon_i=0.
+\]
+Then compute
+\[
+(\varepsilon_i-\varepsilon_j,\varepsilon_k-\varepsilon_l)
+=
+\delta_{ik}-\delta_{il}-\delta_{jk}+\delta_{jl}.
+\]
+Since every root has squared length \(2\), the Cartan integer is just this
+inner product. For \(\alpha\neq \pm \beta\), the only possible values are
+\(0,\pm 1\). The root string through \(\alpha\) in the \(\beta\)-direction is
+found by checking which of
+\[
+\alpha-r\beta,\ldots,\alpha,\ldots,\alpha+q\beta
+\]
+are again roots.
+
+\subsubsection{Problem 9}
+
+Prove that every three dimensional semisimple Lie algebra has the same root
+system as \(\mathfrak{sl}(2,F)\), hence is isomorphic to \(\mathfrak{sl}(2,F)\).
+
+\paragraph{Hint.}
+Let \(H\) be a maximal toral subalgebra. Since \(L\) is semisimple,
+\[
+L=H\oplus \bigoplus_{\alpha\in\Phi}L_\alpha.
+\]
+The roots occur in pairs \(\alpha,-\alpha\), and each root space has dimension
+\(1\). Since \(\dim L=3\), the only possibility is
+\[
+\dim H=1,
+\qquad
+\Phi=\{\alpha,-\alpha\}.
+\]
+This is the root system of type \(A_1\). Choose root vectors
+\(x\in L_\alpha\), \(y\in L_{-\alpha}\), and \(h=[x,y]\in H\). After rescaling,
+the relations become
+\[
+[h,x]=2x,\qquad [h,y]=-2y,\qquad [x,y]=h,
+\]
+so \(L\cong \mathfrak{sl}(2,F)\).
+
+\subsubsection{Problem 10}
+
+Prove that no four, five, or seven dimensional semisimple Lie algebras exist.
+
+\paragraph{Hint.}
+A semisimple Lie algebra is a direct sum of simple ideals. The smallest
+nonzero simple Lie algebra is \(\mathfrak{sl}(2,F)\), of dimension \(3\). If a
+simple Lie algebra has rank \(1\), it is \(\mathfrak{sl}(2,F)\). If its rank is
+at least \(2\), its root system has at least six roots, so its dimension is at
+least
+\[
+2+6=8.
+\]
+Therefore the possible small dimensions of semisimple Lie algebras begin with
+\[
+3,\qquad 3+3=6,\qquad 8,\ldots
+\]
+Thus dimensions \(4,5,7\) cannot occur.
+
+\subsubsection{Problem 11}
+
+If \((\alpha,\beta)>0\), prove that
+\[
+\alpha-\beta\in \Phi
+\qquad (\alpha,\beta\in\Phi).
+\]
+Is the converse true?
+
+\paragraph{Hint.}
+Assume \(\alpha\neq \beta\). Consider the \(\beta\)-string through \(\alpha\):
+\[
+\alpha-r\beta,\ldots,\alpha,\ldots,\alpha+q\beta.
+\]
+The root string theorem gives
+\[
+r-q=\frac{2(\alpha,\beta)}{(\beta,\beta)}.
+\]
+If \((\alpha,\beta)>0\), then \(r-q>0\), hence \(r>0\). Therefore
+\(\alpha-\beta\in \Phi\).
+
+The converse is false. In type \(B_2\), take
+\[
+\alpha=\varepsilon_1,\qquad \beta=\varepsilon_2.
+\]
+Then
+\[
+\alpha-\beta=\varepsilon_1-\varepsilon_2
+\]
+is a root, but
+\[
+(\alpha,\beta)=0.
+\]
+
+\section{Root Systems}
+
+\subsection{Axioms}
+
+Unless otherwise specified, \(\Phi\) denotes a root system in \(E\), with Weyl
+group \(\mathcal W\).
+
+\subsubsection{Problem 1}
+
+Let \(E'\) be a subspace of \(E\). If a reflection \(\sigma_\alpha\) leaves
+\(E'\) invariant, prove that either \(\alpha\in E'\) or \(E'\subset P_\alpha\).
+
+\paragraph{Hint.}
+Use the formula
+\[
+\sigma_\alpha(v)=v-\frac{2(v,\alpha)}{(\alpha,\alpha)}\alpha .
+\]
+If some \(v\in E'\) satisfies \((v,\alpha)\neq 0\), then
+\(v-\sigma_\alpha(v)\) is a nonzero scalar multiple of \(\alpha\), so
+\(\alpha\in E'\). Otherwise \((v,\alpha)=0\) for all \(v\in E'\), hence
+\(E'\subset P_\alpha\).
+
+\subsubsection{Problem 2}
+
+Prove that \(\Phi^\vee\) is a root system in \(E\), whose Weyl group is
+naturally isomorphic to \(\mathcal W\). Show also that
+\[
+\langle \alpha^\vee,\beta^\vee\rangle
+=
+\langle \beta,\alpha\rangle,
+\]
+and draw a picture of \(\Phi^\vee\) in the cases \(A_1,A_2,B_2,G_2\).
+
+\paragraph{Hint.}
+Recall that
+\[
+\alpha^\vee=\frac{2\alpha}{(\alpha,\alpha)}.
+\]
+The reflection hyperplane of \(\alpha^\vee\) is the same as that of \(\alpha\),
+and
+\[
+\sigma_{\alpha^\vee}=\sigma_\alpha.
+\]
+Thus the Weyl group does not change. The axioms for \(\Phi^\vee\) follow by
+checking that reflections preserve coroots and that the possible scalar
+multiples are still only \(\pm\alpha^\vee\). For the Cartan integer, compute
+directly:
+\[
+\langle \alpha^\vee,\beta^\vee\rangle
+=
+\frac{2(\alpha^\vee,\beta^\vee)}{(\beta^\vee,\beta^\vee)}
+=
+\frac{2(\beta,\alpha)}{(\alpha,\alpha)}
+=
+\langle \beta,\alpha\rangle.
+\]
+Geometrically, passing to the dual root system interchanges long and short
+roots. Thus \(A_1\) and \(A_2\) are unchanged, \(B_2^\vee\) is \(C_2\), and
+\(G_2^\vee\) is again \(G_2\) with long and short roots interchanged.
+
+\subsubsection{Problem 3}
+
+In Table 1, show that the order of \(\sigma_\alpha\sigma_\beta\) in
+\(\mathcal W\) is respectively
+\[
+2,\ 3,\ 4,\ 6
+\]
+when
+\[
+\theta=\pi/2,\ \pi/3\text{ or }2\pi/3,\ \pi/4\text{ or }3\pi/4,\ 
+\pi/6\text{ or }5\pi/6.
+\]
+Note that \(\sigma_\alpha\sigma_\beta\) is a rotation through \(2\theta\).
+
+\paragraph{Hint.}
+In the plane spanned by \(\alpha\) and \(\beta\), the product of two reflections
+across lines with angle \(\theta\) is a rotation through angle \(2\theta\). The
+order of this rotation is the smallest positive integer \(m\) such that
+\[
+m(2\theta)\in 2\pi\mathbb Z.
+\]
+Thus
+\[
+\theta=\pi/2,\pi/3,\pi/4,\pi/6
+\]
+give orders \(2,3,4,6\), respectively. The obtuse-angle cases give the same
+orders because replacing \(\theta\) by \(\pi-\theta\) changes the rotation
+angle by sign modulo \(2\pi\).
+
+\subsubsection{Problem 4}
+
+Prove that the respective Weyl groups of
+\[
+A_1\times A_1,\quad A_2,\quad B_2,\quad G_2
+\]
+are dihedral of orders
+\[
+4,\ 6,\ 8,\ 12.
+\]
+If \(\Phi\) is any root system of rank \(2\), prove that its Weyl group must be
+one of these.
+
+\paragraph{Hint.}
+The Weyl group is generated by the two simple reflections
+\(\sigma_\alpha,\sigma_\beta\). From Problem 3, the product
+\(\sigma_\alpha\sigma_\beta\) has order \(m=2,3,4,6\), depending on the angle
+between the simple roots. Hence
+\[
+\mathcal W=\langle \sigma_\alpha,\sigma_\beta
+\mid \sigma_\alpha^2=\sigma_\beta^2=1,\ 
+(\sigma_\alpha\sigma_\beta)^m=1\rangle
+\]
+is a dihedral group of order \(2m\). The root-system axioms restrict rank-two
+angles to exactly these possibilities, so the only possible rank-two Weyl
+groups are the four listed above.
+
+\subsubsection{Problem 5}
+
+Show by example that \(\alpha-\beta\) may be a root even when
+\[
+(\alpha,\beta)\leq 0.
+\]
+Cf. Lemma 9.4.
+
+\paragraph{Hint.}
+Use type \(B_2\). Let
+\[
+\alpha=\varepsilon_1,\qquad \beta=\varepsilon_2.
+\]
+Then
+\[
+(\alpha,\beta)=0,
+\]
+but
+\[
+\alpha-\beta=\varepsilon_1-\varepsilon_2
+\]
+is a root of \(B_2\). This shows that the implication
+\[
+\alpha-\beta\in\Phi \Longrightarrow (\alpha,\beta)>0
+\]
+is false.
+
+\subsubsection{Problem 6}
+
+Prove that \(\mathcal W\) is a normal subgroup of
+\[
+\operatorname{Aut}\Phi,
+\]
+where \(\operatorname{Aut}\Phi\) denotes the group of all isomorphisms of
+\(\Phi\) onto itself.
+
+\paragraph{Hint.}
+If \(g\in \operatorname{Aut}\Phi\), then \(g\) sends roots to roots and
+preserves the reflection structure. Show that
+\[
+g\sigma_\alpha g^{-1}=\sigma_{g(\alpha)}.
+\]
+Since \(\mathcal W\) is generated by the reflections \(\sigma_\alpha\), this
+implies
+\[
+g\mathcal W g^{-1}\subset \mathcal W.
+\]
+Applying the same argument to \(g^{-1}\) gives equality, hence
+\(\mathcal W\triangleleft \operatorname{Aut}\Phi\).
+
+\subsubsection{Problem 7}
+
+Let \(\alpha,\beta\in\Phi\) span a subspace \(E'\) of \(E\). Prove that
+\(E'\cap\Phi\) is a root system in \(E'\). Prove similarly that
+\[
+\Phi\cap(\mathbb Z\alpha+\mathbb Z\beta)
+\]
+is a root system in \(E'\). Must this coincide with \(E'\cap\Phi\)?
+
+More generally, let \(\Phi'\) be a nonempty subset of \(\Phi\) such that
+\[
+\Phi'=-\Phi',
+\]
+and such that whenever \(\alpha,\beta\in\Phi'\) and
+\(\alpha+\beta\in\Phi\), one has
+\[
+\alpha+\beta\in\Phi'.
+\]
+Prove that \(\Phi'\) is a root system in the subspace of \(E\) it spans. Use
+Table 1.
+
+\paragraph{Hint.}
+For \(E'\cap\Phi\), check the axioms inside the plane \(E'\). If
+\(\gamma\in E'\cap\Phi\), then \(\sigma_\gamma\) preserves \(E'\), so it
+preserves \(E'\cap\Phi\). The integrality and scalar axioms are inherited from
+\(\Phi\).
+
+For \(\Phi\cap(\mathbb Z\alpha+\mathbb Z\beta)\), use that reflections send
+roots to integral linear combinations of roots:
+\[
+\sigma_\gamma(\delta)=\delta-\langle \delta,\gamma\rangle\gamma.
+\]
+Thus the lattice \(\mathbb Z\alpha+\mathbb Z\beta\) is preserved by the
+relevant reflections.
+
+For the general statement, the condition on sums says that \(\Phi'\) is closed
+under root strings. In each rank-two subsystem from Table 1, this closure under
+\(\alpha+\beta\) and symmetry under negatives is enough to ensure stability
+under the reflections. Hence \(\Phi'\) satisfies the root-system axioms in its
+span.
+
+\subsubsection{Problem 8}
+
+Compute root strings in \(G_2\) to verify the relation
+\[
+r-q=\langle \beta,\alpha\rangle.
+\]
+
+\paragraph{Hint.}
+Choose simple roots \(\alpha,\beta\) for \(G_2\), with \(\alpha\) short and
+\(\beta\) long. The positive roots are
+\[
+\alpha,\quad \beta,\quad \alpha+\beta,\quad 2\alpha+\beta,\quad
+3\alpha+\beta,\quad 3\alpha+2\beta.
+\]
+For each pair of roots, list the roots in the \(\alpha\)-string through
+\(\beta\):
+\[
+\beta-r\alpha,\ldots,\beta,\ldots,\beta+q\alpha.
+\]
+For example, the \(\alpha\)-string through \(\beta\) is
+\[
+\beta,\quad \beta+\alpha,\quad \beta+2\alpha,\quad \beta+3\alpha,
+\]
+so \(r=0\), \(q=3\), and therefore
+\[
+r-q=-3=\langle \beta,\alpha\rangle.
+\]
+Check the other strings similarly.
+
+\subsubsection{Problem 9}
+
+Let \(\Phi\) be a set of vectors in a Euclidean space \(E\), satisfying only
+\((R1)\), \((R3)\), and \((R4)\). Prove that the only possible multiples of
+\(\alpha\in\Phi\) which can be in \(\Phi\) are
+\[
+\pm\frac{1}{2}\alpha,\qquad \pm\alpha,\qquad \pm2\alpha.
+\]
+Verify that
+\[
+\{\alpha\in\Phi\mid 2\alpha\notin\Phi\}
+\]
+is a root system.
+
+\paragraph{Hint.}
+Suppose \(c\alpha\in\Phi\). Use the integrality axiom in both directions:
+\[
+\langle c\alpha,\alpha\rangle=2c\in\mathbb Z,
+\qquad
+\langle \alpha,c\alpha\rangle=\frac{2}{c}\in\mathbb Z.
+\]
+Thus both \(2c\) and \(2/c\) are integers, forcing
+\[
+c\in\left\{\pm\frac12,\pm1,\pm2\right\}.
+\]
+
+For the second claim, remove precisely the roots which are twice another root.
+The remaining set is reduced by construction. Check that it is still stable
+under reflections: if \(2\sigma_\alpha(\beta)\) were a root, then applying
+\(\sigma_\alpha^{-1}\) would imply that \(2\beta\) is a root. Hence the subset
+satisfies the reduced root-system axioms.
+
+
+\subsection{Simple Roots and Weyl Groups}
+
+Unless otherwise specified, \(\Phi\) denotes a root system in \(E\), with Weyl
+group \(\mathcal W\).
+
+\subsubsection{Problem 1}
+
+Let \(\Phi^\vee\) be the dual system of \(\Phi\), and let
+\[
+\Delta^\vee=\{\alpha^\vee\mid \alpha\in \Delta\}.
+\]
+Prove that \(\Delta^\vee\) is a base of \(\Phi^\vee\). Compare Weyl chambers of
+\(\Phi\) and \(\Phi^\vee\).
+
+\paragraph{Hint.}
+Use that
+\[
+P_{\alpha^\vee}=P_\alpha
+\]
+because \(\alpha^\vee\) is a positive scalar multiple of \(\alpha\). Hence
+\(\Phi\) and \(\Phi^\vee\) have the same reflecting hyperplanes and the same
+Weyl chambers. The chamber defined by
+\[
+(\lambda,\alpha)>0\qquad(\alpha\in\Delta)
+\]
+is also defined by
+\[
+(\lambda,\alpha^\vee)>0\qquad(\alpha^\vee\in\Delta^\vee).
+\]
+Therefore the walls of the same fundamental chamber are indexed by
+\(\Delta^\vee\), so \(\Delta^\vee\) is a base of \(\Phi^\vee\).
+
+\subsubsection{Problem 2}
+
+If \(\Delta\) is a base of \(\Phi\), prove that the set
+\[
+(\mathbb Z\alpha+\mathbb Z\beta)\cap\Phi
+\]
+where \(\alpha\neq\beta\) are in \(\Delta\), is a root system of rank \(2\) in
+the subspace of \(E\) spanned by \(\alpha,\beta\). Cf. Exercise 9.7. Generalize
+to an arbitrary subset of \(\Delta\).
+
+\paragraph{Hint.}
+Let
+\[
+E_{\alpha\beta}=\mathbb R\alpha+\mathbb R\beta.
+\]
+The set
+\[
+\Phi_{\alpha\beta}:=(\mathbb Z\alpha+\mathbb Z\beta)\cap\Phi
+\]
+is finite, spans \(E_{\alpha\beta}\), and inherits the integrality condition
+from \(\Phi\). For \(\gamma,\delta\in\Phi_{\alpha\beta}\), use
+\[
+\sigma_\gamma(\delta)=\delta-\langle\delta,\gamma\rangle\gamma.
+\]
+Since \(\langle\delta,\gamma\rangle\in\mathbb Z\), the reflection
+\(\sigma_\gamma\) preserves \(\mathbb Z\alpha+\mathbb Z\beta\). Hence it
+preserves \(\Phi_{\alpha\beta}\). The same argument works for
+\[
+\Phi_J:=\Phi\cap\sum_{\alpha\in J}\mathbb Z\alpha
+\]
+where \(J\subset\Delta\).
+
+\subsubsection{Problem 3}
+
+Prove that each root system of rank \(2\) is isomorphic to one of those listed
+in (9.3).
+
+\paragraph{Hint.}
+Choose two simple roots \(\alpha,\beta\). The root-system axioms imply
+\[
+\langle\alpha,\beta\rangle\langle\beta,\alpha\rangle
+=
+4\cos^2\theta,
+\]
+where \(\theta\) is the angle between \(\alpha\) and \(\beta\). Since both
+Cartan integers are nonpositive integers for simple roots, the only possible
+products are
+\[
+0,\ 1,\ 2,\ 3.
+\]
+These give respectively
+\[
+A_1\times A_1,\qquad A_2,\qquad B_2,\qquad G_2.
+\]
+Then use the root-string property to recover all roots in each case.
+
+\subsubsection{Problem 4}
+
+Verify the Corollary of Lemma 10.2A directly for \(G_2\).
+
+\paragraph{Hint.}
+Take simple roots \(\alpha,\beta\), where \(\alpha\) is short and \(\beta\) is
+long. The positive roots are
+\[
+\alpha,\quad \beta,\quad \alpha+\beta,\quad 2\alpha+\beta,\quad
+3\alpha+\beta,\quad 3\alpha+2\beta.
+\]
+Check directly that every positive root is a nonnegative integral combination
+of the simple roots. For each positive root which is not simple, verify that
+subtracting a suitable simple root still gives a root. This is the rank-two
+verification of the corollary.
+
+\subsubsection{Problem 5}
+
+If \(\sigma\in\mathcal W\) can be written as a product of \(t\) simple
+reflections, prove that \(t\) has the same parity as \(\ell(\sigma)\).
+
+\paragraph{Hint.}
+Use the fact that multiplication by a simple reflection changes length by
+exactly \(1\):
+\[
+\ell(\sigma\tau_\alpha)=\ell(\sigma)\pm 1.
+\]
+Starting from the identity, whose length is \(0\), after multiplying by \(t\)
+simple reflections the length has the same parity as \(t\). Therefore
+\[
+t\equiv \ell(\sigma)\pmod 2.
+\]
+
+\subsubsection{Problem 6}
+
+Define a function
+\[
+\operatorname{sn}:\mathcal W\to\{\pm 1\}
+\]
+by
+\[
+\operatorname{sn}(\sigma)=(-1)^{\ell(\sigma)}.
+\]
+Prove that \(\operatorname{sn}\) is a homomorphism. Cf. the case \(A_2\), where
+\(\mathcal W\) is isomorphic to the symmetric group \(S_3\).
+
+\paragraph{Hint.}
+Write reduced expressions
+\[
+\sigma=s_1\cdots s_r,\qquad \tau=t_1\cdots t_m.
+\]
+Then \(\sigma\tau\) is expressed as a product of \(r+m\) simple reflections.
+By Problem 5,
+\[
+\ell(\sigma\tau)\equiv r+m=\ell(\sigma)+\ell(\tau)\pmod 2.
+\]
+Hence
+\[
+\operatorname{sn}(\sigma\tau)
+=
+(-1)^{\ell(\sigma\tau)}
+=
+(-1)^{\ell(\sigma)}(-1)^{\ell(\tau)}.
+\]
+
+\subsubsection{Problem 7}
+
+Prove that the intersection of the ``positive'' open half-spaces associated
+with any basis \(\gamma_1,\ldots,\gamma_\ell\) of \(E\) is nonvoid. If
+\(\delta_i\) is the projection of \(\gamma_i\) on the orthogonal complement of
+the subspace spanned by all basis vectors except \(\gamma_i\), consider
+\[
+\gamma=\sum r_i\delta_i
+\]
+when all \(r_i>0\).
+
+\paragraph{Hint.}
+The vectors \(\delta_i\) satisfy
+\[
+(\delta_i,\gamma_j)=0\quad(j\neq i),
+\qquad
+(\delta_i,\gamma_i)>0.
+\]
+Therefore, if
+\[
+\gamma=\sum_i r_i\delta_i
+\]
+with all \(r_i>0\), then
+\[
+(\gamma,\gamma_j)=r_j(\delta_j,\gamma_j)>0
+\]
+for every \(j\). Hence \(\gamma\) lies in all the required positive open
+half-spaces.
+
+\subsubsection{Problem 8}
+
+Let \(\Delta\) be a base of \(\Phi\), and let \(\alpha\neq\beta\) be simple
+roots. Let \(\Phi_{\alpha\beta}\) be the rank two root system in
+\[
+E_{\alpha\beta}=\mathbb R\alpha+\mathbb R\beta.
+\]
+The Weyl group \(\mathcal W_{\alpha\beta}\) of \(\Phi_{\alpha\beta}\) is
+generated by the restrictions \(\tau_\alpha,\tau_\beta\) to \(E_{\alpha\beta}\)
+of \(\sigma_\alpha,\sigma_\beta\), and \(\mathcal W_{\alpha\beta}\) may be
+viewed as a subgroup of \(\mathcal W\). Prove that the length of an element of
+\(\mathcal W_{\alpha\beta}\), relative to \(\tau_\alpha,\tau_\beta\), coincides
+with the length of the corresponding element of \(\mathcal W\).
+
+\paragraph{Hint.}
+Use the inversion-set formula
+\[
+\ell(w)=\#\{\gamma\in\Phi^+\mid w\gamma\in\Phi^-\}.
+\]
+For \(w\in\mathcal W_{\alpha\beta}\), the roots whose signs can change are
+exactly the roots in
+\[
+\Phi_{\alpha\beta}=(\mathbb Z\alpha+\mathbb Z\beta)\cap\Phi.
+\]
+Thus the inversion set computed in the full root system is the same as the
+inversion set computed in the rank two subsystem. Therefore the two length
+functions agree.
+
+\subsubsection{Problem 9}
+
+Prove that there is a unique element \(\sigma\in\mathcal W\) sending
+\(\Phi^+\) to \(\Phi^-\), relative to \(\Delta\). Prove that any reduced
+expression for \(\sigma\) must involve all \(\sigma_\alpha\), where
+\(\alpha\in\Delta\). Discuss \(\ell(\sigma)\).
+
+\paragraph{Hint.}
+Weyl chambers are permuted simply transitively by \(\mathcal W\). Hence there
+is a unique element \(w_0\) sending the fundamental chamber to the opposite
+chamber, equivalently sending all positive roots to negative roots:
+\[
+w_0(\Phi^+)=\Phi^-.
+\]
+The length formula gives
+\[
+\ell(w_0)=|\Phi^+|.
+\]
+If a reduced expression for \(w_0\) omitted some simple reflection
+\(\sigma_\alpha\), then \(w_0\) would lie in the parabolic subgroup generated
+by \(\Delta-\{\alpha\}\). Such an element cannot send \(\alpha\) to a negative
+root. Therefore every simple reflection must occur.
+
+\subsubsection{Problem 10}
+
+Given
+\[
+\Delta=\{\alpha_1,\ldots,\alpha_\ell\}
+\]
+in \(\Phi\), let
+\[
+\lambda=\sum_{i=1}^{\ell} k_i\alpha_i,
+\qquad
+k_i\in\mathbb Z,
+\]
+where either all \(k_i\geq 0\) or all \(k_i\leq 0\). Prove that either
+\(\lambda\) is a multiple, possibly \(0\), of a root, or else there exists
+\(\sigma\in\mathcal W\) such that
+\[
+\sigma\lambda=\sum_{i=1}^{\ell} k_i'\alpha_i,
+\]
+with some \(k_i'>0\) and some \(k_i'<0\).
+
+\paragraph{Hint.}
+Assume that \(\lambda\) is not a multiple of any root. Then the hyperplane
+\[
+P_\lambda=\{\mu\in E\mid (\lambda,\mu)=0\}
+\]
+is not contained in
+\[
+\bigcup_{\alpha\in\Phi}P_\alpha.
+\]
+Choose
+\[
+\mu\in P_\lambda-\bigcup_{\alpha\in\Phi}P_\alpha.
+\]
+Then \(\mu\) is regular, so some \(\sigma\in\mathcal W\) sends \(\mu\) into the
+fundamental chamber. Thus
+\[
+(\alpha_i,\sigma\mu)>0
+\]
+for every \(i\). Since
+\[
+0=(\lambda,\mu)=(\sigma\lambda,\sigma\mu)
+=
+\sum_i k_i'(\alpha_i,\sigma\mu),
+\]
+and all \((\alpha_i,\sigma\mu)\) are positive, the coefficients \(k_i'\) cannot
+all have the same sign. Hence some are positive and some are negative.
+
+\subsubsection{Problem 11}
+
+Let \(\Phi\) be irreducible. Prove that \(\Phi^\vee\) is also irreducible. If
+\(\Phi\) has all roots of equal length, so does \(\Phi^\vee\), and then
+\(\Phi^\vee\) is isomorphic to \(\Phi\). On the other hand, if \(\Phi\) has two
+root lengths, then so does \(\Phi^\vee\); but if \(\alpha\) is long, then
+\(\alpha^\vee\) is short, and vice versa. Use this fact to prove that
+\(\Phi^\vee\) has a unique maximal short root, relative to the partial order
+defined by \(\Delta\).
+
+\paragraph{Hint.}
+Irreducibility is equivalent to connectedness of the Dynkin diagram. Passing to
+the dual root system reverses arrows but does not disconnect the diagram.
+Since
+\[
+\alpha^\vee=\frac{2\alpha}{(\alpha,\alpha)},
+\]
+long roots become short coroots and short roots become long coroots. If all
+roots have the same length, this operation only rescales the whole root
+system. If there are two lengths, use the uniqueness of the highest long root
+in \(\Phi\); its coroot gives the unique maximal short root in \(\Phi^\vee\).
+
+\subsubsection{Problem 12}
+
+Let \(\lambda\in C(\Delta)\). If
+\[
+\sigma\lambda=\lambda
+\]
+for some \(\sigma\in\mathcal W\), then \(\sigma=1\).
+
+\paragraph{Hint.}
+Here \(C(\Delta)\) is the open fundamental chamber, so
+\[
+(\lambda,\alpha)>0
+\]
+for every \(\alpha\in\Phi^+\). If \(\sigma\neq 1\), then its inversion set is
+nonempty: there exists \(\alpha\in\Phi^+\) such that
+\[
+\sigma^{-1}\alpha\in\Phi^-.
+\]
+Then
+\[
+(\alpha,\sigma\lambda)
+=
+(\sigma^{-1}\alpha,\lambda)<0,
+\]
+while
+\[
+(\alpha,\lambda)>0.
+\]
+This contradicts \(\sigma\lambda=\lambda\). Hence \(\sigma=1\).
+
+\subsubsection{Problem 13}
+
+The only reflections in \(\mathcal W\) are those of the form
+\[
+\sigma_\alpha,\qquad \alpha\in\Phi.
+\]
+A vector in the reflecting hyperplane would, if orthogonal to no root, be fixed
+only by the identity in \(\mathcal W\).
+
+\paragraph{Hint.}
+Let \(s\in\mathcal W\) be a reflection, with reflecting hyperplane \(H_s\). If
+\(H_s\) were not equal to \(P_\alpha\) for any root \(\alpha\), then one could
+choose a regular vector
+\[
+v\in H_s-\bigcup_{\alpha\in\Phi}P_\alpha.
+\]
+Since \(v\in H_s\), we have \(s(v)=v\). But a regular vector has trivial
+stabilizer in \(\mathcal W\), by Problem 12 after moving \(v\) to the
+fundamental chamber. Hence \(s=1\), contradiction. Therefore
+\[
+H_s=P_\alpha
+\]
+for some \(\alpha\in\Phi\), and the reflection is exactly \(\sigma_\alpha\).
+
+\subsubsection{Problem 14}
+
+Prove that each point of \(E\) is \(\mathcal W\)-conjugate to a point in the
+closure of the fundamental Weyl chamber relative to a base \(\Delta\). Enlarge
+the partial order on \(E\) by defining
+\[
+\mu<\lambda
+\]
+if and only if \(\lambda-\mu\) is a nonnegative \(\mathbb R\)-linear
+combination of simple roots. If \(\mu\in E\), choose \(\sigma\in\mathcal W\)
+for which
+\[
+\lambda=\sigma\mu
+\]
+is maximal in this partial order.
+
+\paragraph{Hint.}
+Since \(\mathcal W\mu\) is finite, choose a maximal element
+\[
+\lambda=\sigma\mu
+\]
+in its orbit with respect to this enlarged partial order. If
+\[
+(\lambda,\alpha)<0
+\]
+for some simple root \(\alpha\), then
+\[
+\sigma_\alpha\lambda
+=
+\lambda-\frac{2(\lambda,\alpha)}{(\alpha,\alpha)}\alpha
+\]
+is strictly larger than \(\lambda\), since the coefficient of \(\alpha\) added
+is positive. This contradicts maximality. Hence
+\[
+(\lambda,\alpha)\geq 0
+\]
+for all \(\alpha\in\Delta\), so \(\lambda\) lies in the closure of the
+fundamental Weyl chamber.
+
+
+\section{Existence Theorem}
+
+\subsubsection{Problem 1}
+
+Prove that if \(\dim L<\infty\), then \(\mathfrak U(L)\) has no zero divisors.
+Hint: Use the fact that the associated graded algebra
+\(\operatorname{gr}\mathfrak U(L)\) is isomorphic to a polynomial algebra.
+
+\paragraph{Hint.}
+Use the standard filtration
+\[
+\mathfrak U(L)_0\subset \mathfrak U(L)_1\subset \mathfrak U(L)_2\subset\cdots
+\]
+by degree. PBW gives
+\[
+\operatorname{gr}\mathfrak U(L)\cong S(L),
+\]
+and since \(\dim L<\infty\), \(S(L)\) is a polynomial algebra, hence an
+integral domain. If \(a,b\in \mathfrak U(L)\) are nonzero, take their leading
+terms \(\overline a,\overline b\) in \(\operatorname{gr}\mathfrak U(L)\). Since
+\(S(L)\) has no zero divisors,
+\[
+\overline a\,\overline b\neq 0,
+\]
+so the leading term of \(ab\) is nonzero. Hence \(ab\neq 0\).
+
+\subsubsection{Problem 2}
+
+Let \(L\) be the two dimensional nonabelian Lie algebra (1.4), with
+\[
+[x,y]=x.
+\]
+Prove directly that
+\[
+\iota:L\to \mathfrak U(L)
+\]
+is injective, i.e.
+\[
+\ker\iota\cap L=0.
+\]
+
+\paragraph{Hint.}
+Use the defining relation in \(\mathfrak U(L)\):
+\[
+xy-yx=x.
+\]
+One direct way is to construct a representation of \(L\). Take
+\[
+X=E_{12},\qquad
+Y=
+\begin{pmatrix}
+-1&0\\
+0&0
+\end{pmatrix}.
+\]
+Then
+\[
+[X,Y]=X.
+\]
+By the universal property of \(\mathfrak U(L)\), this gives an algebra
+homomorphism
+\[
+\mathfrak U(L)\to \operatorname{End}(F^2)
+\]
+sending \(x\mapsto X\), \(y\mapsto Y\). If \(ax+by\) maps to zero in
+\(\mathfrak U(L)\), then applying this representation gives
+\[
+aX+bY=0.
+\]
+Since \(X,Y\) are linearly independent matrices, \(a=b=0\). Hence
+\(\iota\) is injective on \(L\).
+
+\subsubsection{Problem 3}
+
+If \(x\in L\), extend \(\operatorname{ad}x\) to an endomorphism of
+\(\mathfrak U(L)\) by defining
+\[
+\operatorname{ad}x(y)=xy-yx,
+\qquad y\in\mathfrak U(L).
+\]
+If \(\dim L<\infty\), prove that each element of \(\mathfrak U(L)\) lies in a
+finite dimensional \(L\)-submodule. If \(x,x_1,\ldots,x_m\in L\), verify that
+\[
+\operatorname{ad}x(x_1\cdots x_m)
+=
+\sum_{i=1}^m x_1\cdots x_{i-1}(\operatorname{ad}x)(x_i)x_{i+1}\cdots x_m .
+\]
+
+\paragraph{Hint.}
+First show that \(\operatorname{ad}x\) is a derivation of the associative
+algebra \(\mathfrak U(L)\):
+\[
+\operatorname{ad}x(uv)=xu v-uvx=(xu-ux)v+u(xv-vx).
+\]
+This gives the displayed formula by induction on \(m\). Now use the PBW
+filtration. If \(u\in \mathfrak U(L)\) has degree at most \(m\), then
+\(\operatorname{ad}x(u)\) also has degree at most \(m\). Since \(\dim L<\infty\),
+the filtered piece \(\mathfrak U(L)_m\) is finite dimensional. Hence the
+\(L\)-submodule generated by \(u\) is contained in \(\mathfrak U(L)_m\), and is
+therefore finite dimensional.
+
+\subsubsection{Problem 4}
+
+If \(L\) is a free Lie algebra on a set \(X\), prove that \(\mathfrak U(L)\) is
+isomorphic to the tensor algebra on a vector space having \(X\) as basis.
+
+\paragraph{Hint.}
+Let \(V\) be the vector space with basis \(X\). The tensor algebra \(T(V)\) has
+the universal property that any map
+\[
+X\to A
+\]
+to an associative algebra \(A\) extends uniquely to an algebra homomorphism
+\[
+T(V)\to A.
+\]
+On the other hand, since \(L\) is the free Lie algebra on \(X\), any map
+\[
+X\to A_{\operatorname{Lie}}
+\]
+extends uniquely to a Lie homomorphism
+\[
+L\to A_{\operatorname{Lie}}.
+\]
+Then the universal property of \(\mathfrak U(L)\) extends this uniquely to an
+algebra homomorphism
+\[
+\mathfrak U(L)\to A.
+\]
+Thus \(\mathfrak U(L)\) and \(T(V)\) have the same universal property, so they
+are naturally isomorphic:
+\[
+\mathfrak U(L)\cong T(V).
+\]
+
+\subsubsection{Problem 5}
+
+Describe the free Lie algebra on a set
+\[
+X=\{x\}.
+\]
+
+\paragraph{Hint.}
+With only one generator, every bracket involving only \(x\) is zero because
+\[
+[x,x]=0.
+\]
+Thus no new nonzero elements are produced by taking Lie brackets. Hence the
+free Lie algebra on one generator is just the one-dimensional abelian Lie
+algebra
+\[
+Fx.
+\]
+Check this using the universal property: any map from \(\{x\}\) to a Lie
+algebra \(M\) extends uniquely to a Lie homomorphism
+\[
+Fx\to M.
+\]
+
+\subsubsection{Problem 6}
+
+How is the PBW Theorem used in the construction of free Lie algebras?
+
+\paragraph{Hint.}
+PBW is used to control the embedding of a Lie algebra into its universal
+enveloping algebra. In particular, PBW implies that the canonical map
+\[
+L\to \mathfrak U(L)
+\]
+is injective. For a free Lie algebra generated by \(X\), Exercise 4 gives
+\[
+\mathfrak U(L)\cong T(V),
+\]
+where \(V\) has basis \(X\). Thus \(L\) can be realized as the Lie subalgebra
+of the tensor algebra \(T(V)\) generated by \(X\), where the Lie bracket is the
+commutator
+\[
+[a,b]=ab-ba.
+\]
+PBW guarantees that this realization does not collapse \(L\); equivalently, the
+Lie words in \(X\) satisfy only the necessary Lie algebra identities.
+\end{document}
