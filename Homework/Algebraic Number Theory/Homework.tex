@@ -1588,7 +1588,39 @@ and if $\operatorname{dft}(a)\neq \operatorname{dft}(b)$, then
     \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}.
 \]
 \begin{solution}
-    Let $\mathcal O=\mathcal O_F$ and let $e=v(2)$. We use the following standard consequence of Lemma 4.2.12. For $u\in \mathcal O^\times$, \[ \operatorname{dft}(u)\in \{1,3,\dots,2e-1,2e,+\infty\}. \] Moreover, \[ \operatorname{dft}(u)=+\infty \Longleftrightarrow u\in F^{\times 2}, \] and \[ \operatorname{dft}(u)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2}. \] The values $1,3,\dots,2e-1$ occur, for instance, on suitable unit classes represented by elements of the form $1+c\pi^{2j-1}$. By Exercise A.12.2, if $v(a)$ is odd, then \[ \operatorname{dft}(a)=0. \] If $v(a)$ is even, write $a=\pi^{2s}u$ with $u\in\mathcal O^\times$. Since $\pi^{2s}$ is a square, $a$ and $u$ have the same square class, and \[ \operatorname{dft}(a)=\operatorname{dft}(u). \] Therefore \[ \operatorname{dft}(F^\times) = \{0,2e,+\infty\} \cup \{2j-1\mid 1\leq j\leq e\}. \] Next we prove the stated equivalences. The first two follow immediately from Exercise A.12.2 and the unit classification above: \[ \operatorname{dft}(a)=0 \Longleftrightarrow v(a)\text{ is odd}, \] and \[ \operatorname{dft}(a)\geq 1 \Longleftrightarrow v(a)\text{ is even}. \] If $v(a)$ is even, then $aF^{\times 2}=uF^{\times 2}$ for some $u\in\mathcal O^\times$. Hence \[ \operatorname{dft}(a)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2} \Longleftrightarrow aF^{\times 2}=\Delta F^{\times 2}. \] Similarly, \[ \operatorname{dft}(a)=+\infty \Longleftrightarrow a\in F^{\times 2}. \] It remains to prove the domination principle. Since $\operatorname{dft}$ only depends on square classes, we may multiply $a$ and $b$ by squares whenever convenient. If $v(a)\not\equiv v(b)\pmod 2$, then $v(ab)$ is odd. Hence, by Exercise A.12.2, \[ \operatorname{dft}(ab)=0 = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] If $v(a)\equiv v(b)\equiv 1\pmod 2$, then \[ \operatorname{dft}(a)=\operatorname{dft}(b)=0. \] In this case one only gets $\operatorname{dft}(ab)\geq 0$ in general. Now assume $v(a)$ and $v(b)$ are both even. After multiplying by squares, we may assume $a,b\in\mathcal O^\times$. Put \[ r=\operatorname{dft}(a), \qquad s=\operatorname{dft}(b), \qquad m=\min\{r,s\}. \] If one of $r,s$ is $+\infty$, the assertion is immediate from the fact that squares do not change square classes. Thus assume $r,s<+\infty$. By Exercise A.12.1(3.a), there exist $\varepsilon,\eta\in\mathcal O^\times$ such that \[ a\equiv \varepsilon^2 \pmod{a\pi^r\mathcal O}, \qquad b\equiv \eta^2 \pmod{b\pi^s\mathcal O}. \] Since $a,b,\varepsilon,\eta$ are units, multiplying the two congruences gives \[ ab\equiv (\varepsilon\eta)^2 \pmod{ab\pi^m\mathcal O}. \] Again by Exercise A.12.1(3.a), \[ \operatorname{dft}(ab)\geq m. \] Thus \[ \operatorname{dft}(ab) \geq \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] Finally assume $\operatorname{dft}(a)\neq\operatorname{dft}(b)$. Without loss of generality, let $r<s$. The domination principle gives \[ \operatorname{dft}(ab)\geq r. \] If $\operatorname{dft}(ab)>r$, then applying the domination principle to $a=(ab)b^{-1}$ gives \[ r=\operatorname{dft}(a) = \operatorname{dft}((ab)b^{-1}) \geq \min\{\operatorname{dft}(ab),\operatorname{dft}(b^{-1})\}. \] Since $\operatorname{dft}(b^{-1})=\operatorname{dft}(b)=s$ and both $\operatorname{dft}(ab)$ and $s$ are strictly larger than $r$, this is a contradiction. Hence \[ \operatorname{dft}(ab)=r = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \]
+    Let $\mathcal O=\mathcal O_F$ and let $e=v(2)$. 
+    By the exercise A.12.2, we reduce to the situation: $\text{dft}(\mathcal{O}^\times)$.
+    According to our textbook, for non-squre unit, we obtain the following statement
+    \begin{align*}
+        \{\text{dft}(\varepsilon)|\varepsilon\text{ is nonsquare}\}=\{1,3,\cdots,2e-1\}.
+    \end{align*}
+    Hence, the unit suqre give $\text{dft}(\varepsilon)=+\infty$ and $\Delta$ gives $\text{dft}(\Delta)=2e$. Hence, if $v(a)$ is odd we then have $\text{dft}(a)=0$.
+    Therefore, we obtain that 
+    \[
+    \operatorname{dft}(F^\times)
+    =
+    \{0,2e,+\infty\}
+    \cup
+    \{2j-1\mid j\in [1,e]\}.
+\]
+    Next we prove the stated equivalences.
+    The first two terms is quite clear. To give third, since it has unique quadratic extension, then the squre class in set 
+    \begin{align*}
+        \{\varepsilon| v(\varepsilon)= v(4)\}
+    \end{align*}
+    is only one, which menas that $\varepsilon F^{\times 2} =\Delta F^{\times 2}$
+    
+    The first two follow immediately from Exercise A.12.2 and the unit classification above: \[ \operatorname{dft}(a)=0 \Longleftrightarrow v(a)\text{ is odd}, \] and \[ \operatorname{dft}(a)\geq 1 \Longleftrightarrow v(a)\text{ is even}. \] If $v(a)$ is even, then $aF^{\times 2}=uF^{\times 2}$ for some $u\in\mathcal O^\times$. Hence \[ \operatorname{dft}(a)=2e \Longleftrightarrow uF^{\times 2}=\Delta F^{\times 2} \Longleftrightarrow aF^{\times 2}=\Delta F^{\times 2}. \] Similarly, \[ \operatorname{dft}(a)=+\infty \Longleftrightarrow a\in F^{\times 2}. \] 
+    It remains to prove the domination principle. Since $\operatorname{dft}$ only depends on square classes, we may multiply $a$ and $b$ by squares whenever convenient. 
+    If $v(a)\not\equiv v(b)\pmod 2$, then $v(ab)$ is odd. Hence, by Exercise A.12.2, \[ \operatorname{dft}(ab)=0 = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] 
+    If $v(a)\equiv v(b)\equiv 1\pmod 2$, then \[ \operatorname{dft}(a)=\operatorname{dft}(b)=0. \]
+    Hence, it menas the unit part of $a,b$ is square unit, then we have $\text{dft}(ab)=0$.
+
+    Therefore, the domination principal only remians both $v(a)$ and $v(b)$ are even.
+
+
+
+    After multiplying by squares, we may assume $a,b\in\mathcal O^\times$. Put \[ r=\operatorname{dft}(a), \qquad s=\operatorname{dft}(b), \qquad m=\min\{r,s\}. \] If one of $r,s$ is $+\infty$, the assertion is immediate from the fact that squares do not change square classes. Thus assume $r,s<+\infty$. By Exercise A.12.1(3.a), there exist $\varepsilon,\eta\in\mathcal O^\times$ such that \[ a\equiv \varepsilon^2 \pmod{a\pi^r\mathcal O}, \qquad b\equiv \eta^2 \pmod{b\pi^s\mathcal O}. \] Since $a,b,\varepsilon,\eta$ are units, multiplying the two congruences gives \[ ab\equiv (\varepsilon\eta)^2 \pmod{ab\pi^m\mathcal O}. \] Again by Exercise A.12.1(3.a), \[ \operatorname{dft}(ab)\geq m. \] Thus \[ \operatorname{dft}(ab) \geq \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \] Finally assume $\operatorname{dft}(a)\neq\operatorname{dft}(b)$. Without loss of generality, let $r<s$. The domination principle gives \[ \operatorname{dft}(ab)\geq r. \] If $\operatorname{dft}(ab)>r$, then applying the domination principle to $a=(ab)b^{-1}$ gives \[ r=\operatorname{dft}(a) = \operatorname{dft}((ab)b^{-1}) \geq \min\{\operatorname{dft}(ab),\operatorname{dft}(b^{-1})\}. \] Since $\operatorname{dft}(b^{-1})=\operatorname{dft}(b)=s$ and both $\operatorname{dft}(ab)$ and $s$ are strictly larger than $r$, this is a contradiction. Hence \[ \operatorname{dft}(ab)=r = \min\{\operatorname{dft}(a),\operatorname{dft}(b)\}. \]
 \end{solution}
 \section*{Homework 13}
 \subsection*{Exercise A.13.1}
@@ -3568,7 +3600,51 @@ values, \(H\) and \(A\) cannot be isomorphic. Therefore
 
 \subsection*{Exercise A.15.1}
 Prove that the groups $\operatorname{O}_{\mathbf{A}}(V)$ and $\operatorname{O}_{\mathbf{A}}^+(V)$ defined in (5.2.3.1) and (5.2.3.2) are independent of the choice of the basis of $V$.
+\begin{solution}
+We prove the statement for \(O_{\mathbb A}(V)\); the proof for
+\(O_{\mathbb A}^{+}(V)\) is identical.
 
+Let \(e=(e_1,\dots,e_n)\) and \(e'=(e'_1,\dots,e'_n)\) be two \(F\)-bases of
+\(V\). Let \(C\in \operatorname{GL}_n(F)\) be the change-of-basis matrix from
+\(e'\) to \(e\). If \(\sigma_{\mathfrak p}\in O(V_{\mathfrak p})\), write
+\(M_{\mathfrak p}\) for its matrix in the basis \(e\), and
+\(M'_{\mathfrak p}\) for its matrix in the basis \(e'\). Then
+\[
+M'_{\mathfrak p}=C^{-1}M_{\mathfrak p}C .
+\]
+
+Since \(C\) and \(C^{-1}\) have entries in \(F\), there is a finite set of
+places \(S\) such that, for every finite place \(\mathfrak p\notin S\), all
+entries of \(C\) and \(C^{-1}\) are \(\mathfrak p\)-adic integers. Hence
+\(\|C\|_{\mathfrak p}\le 1\) and \(\|C^{-1}\|_{\mathfrak p}\le 1\) for
+\(\mathfrak p\notin S\).
+
+Using the submultiplicativity of the matrix norm, for
+\(\mathfrak p\notin S\) we get
+\[
+\|M'_{\mathfrak p}\|_{\mathfrak p}
+=\|C^{-1}M_{\mathfrak p}C\|_{\mathfrak p}
+\le \|M_{\mathfrak p}\|_{\mathfrak p}.
+\]
+Conversely, since \(M_{\mathfrak p}=CM'_{\mathfrak p}C^{-1}\), we also have
+\[
+\|M_{\mathfrak p}\|_{\mathfrak p}
+\le \|M'_{\mathfrak p}\|_{\mathfrak p}.
+\]
+Therefore, for all \(\mathfrak p\notin S\),
+\[
+\|M_{\mathfrak p}\|_{\mathfrak p}=1
+\quad\Longleftrightarrow\quad
+\|M'_{\mathfrak p}\|_{\mathfrak p}=1 .
+\]
+
+Thus the condition \(\|\sigma_{\mathfrak p}\|_{\mathfrak p}=1\) for almost all
+\(\mathfrak p\) is independent of the chosen basis. Since \(O(V_{\mathfrak p})\)
+and \(O^{+}(V_{\mathfrak p})\) are intrinsically defined from the quadratic
+space \((V_{\mathfrak p},Q)\), the adelic groups
+\(O_{\mathbb A}(V)\) and \(O_{\mathbb A}^{+}(V)\) are independent of the choice
+of basis of \(V\).
+\end{solution}
 \subsection*{Exercise A.15.2}
 Let $L$ be a full $\mathcal{O}_F$-lattice in $V$. For any fractional ideal $\mathfrak{a}$ of $\mathcal{O}_F$ and any $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$, let $\mathfrak{a}_{\mathfrak{p}} = \mathfrak{a}\mathcal{O}_{\mathfrak{p}}$ be the fractional ideal of $\mathcal{O}_{\mathfrak{p}}$ generated by $\mathfrak{a}$.
 \begin{enumerate}
@@ -3578,12 +3654,458 @@ Let $L$ be a full $\mathcal{O}_F$-lattice in $V$. For any fractional ideal $\mat
     Prove that $L$ is $\mathfrak{a}$-modular if and only if $L_{\mathfrak{p}}$ is $\mathfrak{a}_{\mathfrak{p}}$-modular for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$.
     \item Prove that $L$ is $\mathfrak{a}$-maximal in $V$ if and only if $L_{\mathfrak{p}}$ is $\mathfrak{a}_{\mathfrak{p}}$-maximal in $V_{\mathfrak{p}}$ for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$.
 \end{enumerate}
+\begin{solution}
+We use the following standard facts in our textbook
 
+\begin{enumerate}
+    \item[(a)] For full lattices \(M,N\subset V\), one has \(M=N\) if and only if
+    \(M_{\mathfrak p}=N_{\mathfrak p}\) for every \(\mathfrak p\in \operatorname{Spm}(\mathcal O_F)\).
+    \item[(b)] If \(M_{\mathfrak p}\subset V_{\mathfrak p}\) is an \(\mathcal O_{\mathfrak p}\)-lattice for each
+    \(\mathfrak p\), and \(M_{\mathfrak p}=L_{\mathfrak p}\) for almost all \(\mathfrak p\), then there is a unique
+    full \(\mathcal O_F\)-lattice \(M\subset V\) such that \(M_{\mathfrak p}\) is its localization at every
+    \(\mathfrak p\).
+\end{enumerate}
+
+\begin{enumerate}
+    \item We first prove \( \mathfrak s(L)_{\mathfrak p}=\mathfrak s(L_{\mathfrak p}) \).
+    By definition, \(\mathfrak s(L)\) is generated over \(\mathcal O_F\) by the values
+    \(B(x,y)\) with \(x,y\in L\). After localizing at \(\mathfrak p\), \(\mathfrak s(L)_{\mathfrak p}\)
+    is generated over \(\mathcal O_{\mathfrak p}\) by the same values, so
+    \(\mathfrak s(L)_{\mathfrak p}\subseteq \mathfrak s(L_{\mathfrak p})\).
+
+    Conversely, every element of \(L_{\mathfrak p}\) has the form \(x/u\) with
+    \(x\in L\) and \(u\in \mathcal O_F\setminus \mathfrak p\). Hence every generator of
+    \(\mathfrak s(L_{\mathfrak p})\) has the form
+    \(B(x/u,y/v)=(uv)^{-1}B(x,y)\), where \(uv\) is a unit in \(\mathcal O_{\mathfrak p}\).
+    Thus it lies in \(\mathfrak s(L)_{\mathfrak p}\). So
+    \(\mathfrak s(L_{\mathfrak p})=\mathfrak s(L)_{\mathfrak p}\).
+
+    The proof for \( \mathfrak n(L)_{\mathfrak p}=\mathfrak n(L_{\mathfrak p}) \) is the same:
+    \(\mathfrak n(L)\) is generated by \(Q(x)\) for \(x\in L\), and
+    \(Q(x/u)=u^{-2}Q(x)\) with \(u\) a unit in \(\mathcal O_{\mathfrak p}\).
+
+    For the volume ideal, we cannot assume that \(L\) is free over
+\(\mathcal O_F\). Choose a pseudo-basis of \(L\), say
+\[
+L=\mathfrak a_1 e_1+\cdots+\mathfrak a_n e_n,
+\]
+where \(e_1,\dots,e_n\) is an \(F\)-basis of \(V\), and
+\(\mathfrak a_i\) are fractional ideals of \(F\). Then the volume ideal is
+\[
+\mathfrak v(L)
+=
+\mathfrak a_1^2\cdots \mathfrak a_n^2
+\det(B(e_i,e_j))\mathcal O_F .
+\]
+
+Localizing at \(\mathfrak p\), we get
+\[
+L_{\mathfrak p}
+=
+(\mathfrak a_1)_{\mathfrak p}e_1+\cdots+
+(\mathfrak a_n)_{\mathfrak p}e_n .
+\]
+Since \(\mathcal O_{\mathfrak p}\) is a DVR, every fractional ideal
+\((\mathfrak a_i)_{\mathfrak p}\) is principal. Choose
+\[
+(\mathfrak a_i)_{\mathfrak p}=\alpha_i\mathcal O_{\mathfrak p}.
+\]
+Then
+\[
+\alpha_1e_1,\dots,\alpha_ne_n
+\]
+is an \(\mathcal O_{\mathfrak p}\)-basis of \(L_{\mathfrak p}\). Hence
+\[
+\mathfrak v(L_{\mathfrak p})
+=
+\det\bigl(B(\alpha_i e_i,\alpha_j e_j)\bigr)\mathcal O_{\mathfrak p}.
+\]
+But
+\[
+\det\bigl(B(\alpha_i e_i,\alpha_j e_j)\bigr)
+=
+(\alpha_1\cdots \alpha_n)^2\det(B(e_i,e_j)).
+\]
+Therefore
+\[
+\mathfrak v(L_{\mathfrak p})
+=
+(\mathfrak a_1)_{\mathfrak p}^2\cdots
+(\mathfrak a_n)_{\mathfrak p}^2
+\det(B(e_i,e_j))\mathcal O_{\mathfrak p}
+=
+\mathfrak v(L)_{\mathfrak p}.
+\]
+
+    \item We use the criterion that a full lattice \(M\) of rank \(n\) is
+\(\mathfrak b\)-modular if and only if
+\[
+\mathfrak s(M)=\mathfrak b
+\qquad\text{and}\qquad
+\mathfrak v(M)=\mathfrak b^n .
+\]
+
+Suppose first that \(L\) is \(\mathfrak a\)-modular. Then
+\[
+\mathfrak s(L)=\mathfrak a
+\qquad\text{and}\qquad
+\mathfrak v(L)=\mathfrak a^n.
+\]
+Localizing at \(\mathfrak p\), and using part (1), we get
+\[
+\mathfrak s(L_{\mathfrak p})
+=
+\mathfrak s(L)_{\mathfrak p}
+=
+\mathfrak a_{\mathfrak p},
+\]
+and
+\[
+\mathfrak v(L_{\mathfrak p})
+=
+\mathfrak v(L)_{\mathfrak p}
+=
+(\mathfrak a^n)_{\mathfrak p}
+=
+\mathfrak a_{\mathfrak p}^n.
+\]
+Hence \(L_{\mathfrak p}\) is \(\mathfrak a_{\mathfrak p}\)-modular for every
+\(\mathfrak p\).
+
+Conversely, suppose that \(L_{\mathfrak p}\) is
+\(\mathfrak a_{\mathfrak p}\)-modular for every
+\(\mathfrak p\in \operatorname{Spm}(\mathcal O_F)\). Then
+\[
+\mathfrak s(L_{\mathfrak p})=\mathfrak a_{\mathfrak p}
+\qquad\text{and}\qquad
+\mathfrak v(L_{\mathfrak p})=\mathfrak a_{\mathfrak p}^n
+\]
+for every \(\mathfrak p\). By part (1),
+\[
+\mathfrak s(L)_{\mathfrak p}=\mathfrak a_{\mathfrak p}
+\qquad\text{and}\qquad
+\mathfrak v(L)_{\mathfrak p}=(\mathfrak a^n)_{\mathfrak p}
+\]
+for every \(\mathfrak p\).
+
+Since two fractional ideals of \(\mathcal O_F\) are equal if and only if their
+localizations at every maximal ideal are equal, we obtain
+\[
+\mathfrak s(L)=\mathfrak a
+\qquad\text{and}\qquad
+\mathfrak v(L)=\mathfrak a^n.
+\]
+Therefore \(L\) is \(\mathfrak a\)-modular.
+
+    \item We prove that \(L\) is \(\mathfrak a\)-maximal in \(V\) if and only if
+\(L_{\mathfrak p}\) is \(\mathfrak a_{\mathfrak p}\)-maximal in
+\(V_{\mathfrak p}\) for every
+\(\mathfrak p\in \operatorname{Spm}(\mathcal O_F)\).
+
+Recall that \(L\) is \(\mathfrak a\)-maximal means that
+\(\mathfrak n(L)\subseteq \mathfrak a\), and that there is no full lattice
+\(M\subset V\) with
+\[
+L\subsetneq M
+\qquad\text{and}\qquad
+\mathfrak n(M)\subseteq \mathfrak a .
+\]
+
+Suppose first that \(L\) is \(\mathfrak a\)-maximal. Fix
+\(\mathfrak p\in \operatorname{Spm}(\mathcal O_F)\). Let
+\(M_{\mathfrak p}\subset V_{\mathfrak p}\) be a lattice such that
+\[
+L_{\mathfrak p}\subseteq M_{\mathfrak p}
+\qquad\text{and}\qquad
+\mathfrak n(M_{\mathfrak p})\subseteq \mathfrak a_{\mathfrak p}.
+\]
+For every \(\mathfrak q\neq \mathfrak p\), set
+\[
+M_{\mathfrak q}:=L_{\mathfrak q}.
+\]
+Then \(M_{\mathfrak q}=L_{\mathfrak q}\) for almost all
+\(\mathfrak q\), so these local lattices come from a full lattice
+\(M\subset V\). Moreover, since
+\[
+L_{\mathfrak q}\subseteq M_{\mathfrak q}
+\]
+for every \(\mathfrak q\), we get \(L\subseteq M\).
+
+By part (1), for every \(\mathfrak q\),
+\[
+\mathfrak n(M)_{\mathfrak q}
+=
+\mathfrak n(M_{\mathfrak q}).
+\]
+For \(\mathfrak q=\mathfrak p\), this is contained in
+\(\mathfrak a_{\mathfrak p}\) by assumption. For
+\(\mathfrak q\neq \mathfrak p\), we have
+\(M_{\mathfrak q}=L_{\mathfrak q}\), and since
+\(\mathfrak n(L)\subseteq \mathfrak a\), part (1) gives
+\[
+\mathfrak n(M_{\mathfrak q})
+=
+\mathfrak n(L_{\mathfrak q})
+=
+\mathfrak n(L)_{\mathfrak q}
+\subseteq
+\mathfrak a_{\mathfrak q}.
+\]
+Thus
+\[
+\mathfrak n(M)_{\mathfrak q}\subseteq \mathfrak a_{\mathfrak q}
+\]
+for every \(\mathfrak q\). Since containment of fractional ideals can be checked
+after localizing at every maximal ideal, it follows that
+\[
+\mathfrak n(M)\subseteq \mathfrak a.
+\]
+By the \(\mathfrak a\)-maximality of \(L\), we get \(M=L\). Localizing at
+\(\mathfrak p\), we obtain
+\[
+M_{\mathfrak p}=L_{\mathfrak p}.
+\]
+Hence \(L_{\mathfrak p}\) is \(\mathfrak a_{\mathfrak p}\)-maximal.
+
+Conversely, suppose that \(L_{\mathfrak p}\) is
+\(\mathfrak a_{\mathfrak p}\)-maximal for every \(\mathfrak p\). First, by
+part (1),
+\[
+\mathfrak n(L)_{\mathfrak p}
+=
+\mathfrak n(L_{\mathfrak p})
+\subseteq
+\mathfrak a_{\mathfrak p}
+\]
+for every \(\mathfrak p\). Hence
+\[
+\mathfrak n(L)\subseteq \mathfrak a.
+\]
+
+Now let \(M\subset V\) be a full lattice such that
+\[
+L\subseteq M
+\qquad\text{and}\qquad
+\mathfrak n(M)\subseteq \mathfrak a.
+\]
+Then for every \(\mathfrak p\),
+\[
+L_{\mathfrak p}\subseteq M_{\mathfrak p}.
+\]
+Again by part (1),
+\[
+\mathfrak n(M_{\mathfrak p})
+=
+\mathfrak n(M)_{\mathfrak p}
+\subseteq
+\mathfrak a_{\mathfrak p}.
+\]
+Since \(L_{\mathfrak p}\) is \(\mathfrak a_{\mathfrak p}\)-maximal, we get
+\[
+M_{\mathfrak p}=L_{\mathfrak p}
+\]
+for every \(\mathfrak p\). Since two full lattices are equal if and only if
+their localizations at all maximal ideals are equal, it follows that
+\[
+M=L.
+\]
+Therefore \(L\) is \(\mathfrak a\)-maximal. 
+\end{enumerate}
+\end{solution}
 \subsection*{Exercise A.15.3}
 Let $\mathfrak{p}$ be a non-archimedean place of $F$. Prove that if $n = \dim V \ge 3$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(V_{\mathfrak{p}})) = F_{\mathfrak{p}}^\times$.
+\begin{solution}
+Put \(K=F_{\mathfrak p}\), and write \(q\) for the quadratic form on
+\(V_{\mathfrak p}\). Let \(\tau_x\) denote the orthogonal symmetry attached to
+a vector \(x\) with \(q(x)\neq 0\). Then \(\det(\tau_x)=-1\), so
+\(\tau_x\tau_y\in O^+(V_{\mathfrak p})\), and the definition of the spinor norm
+gives
+\[
+\theta_{\mathfrak p}(\tau_x\tau_y)
+= q(x)q(y) \quad \text{in } K^\times/K^{\times 2}.
+\]
+Thus it is enough to prove that every square class in \(K^\times\) can be
+written as a product of two nonzero values of \(q\).
 
+Let \(a\in K^\times\). First suppose that \(q\) is isotropic. Since \(q\) is
+nondegenerate, it contains a hyperbolic plane. A hyperbolic plane represents
+every element of \(K^\times\). Hence we may choose \(x,y\in V_{\mathfrak p}\)
+with \(q(x)=a\) and \(q(y)=1\). Then
+\[
+\theta_{\mathfrak p}(\tau_x\tau_y)=a
+\quad \text{in } K^\times/K^{\times 2}.
+\]
+
+Now suppose that \(q\) is anisotropic. Since \(K\) is a non-archimedean local
+field, every quadratic form over \(K\) of dimension at least \(5\) is isotropic.
+The form
+\[
+q\perp (-a)q
+\]
+has dimension \(2n\ge 6\), hence is isotropic. Therefore there exist
+\(x,y\in V_{\mathfrak p}\), not both zero, such that
+\[
+q(x)-a q(y)=0.
+\]
+Because \(q\) is anisotropic, we have \(x\neq 0\), \(y\neq 0\), and
+\(q(x),q(y)\neq 0\). Thus \(q(x)=a q(y)\), so in the square-class group,
+\[
+a=\frac{q(x)}{q(y)}\equiv q(x)q(y)
+\pmod{K^{\times 2}}.
+\]
+Hence
+\[
+\theta_{\mathfrak p}(\tau_x\tau_y)
+=q(x)q(y)
+\equiv a
+\pmod{K^{\times 2}}.
+\]
+
+Since \(a\in K^\times\) was arbitrary, every square class occurs as the spinor
+norm of an element of \(O^+(V_{\mathfrak p})\). Therefore
+\[
+\theta_{\mathfrak p}\bigl(O^+(V_{\mathfrak p})\bigr)
+=K^\times/K^{\times 2}
+=F_{\mathfrak p}^{\times}/F_{\mathfrak p}^{\times 2}.
+\]
+\end{solution}
 \subsection*{Exercise A.15.4}
 Let $\mathfrak{p}$ be a non-dyadic place of $F$. Prove that if $n = \dim V \ge 2$ and $L$ is a modular full lattice in $V$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(L_{\mathfrak{p}})) = \mathcal{O}_{\mathfrak{p}}^\times F_{\mathfrak{p}}^{\times 2}$.
+\begin{solution}
+Put \(K=F_{\mathfrak p}\), \(\mathcal O=\mathcal O_{\mathfrak p}\), and
+\(\Lambda=L_{\mathfrak p}\). Let \(\pi\) be a uniformizer of \(\mathcal O\).
+Since \(\mathfrak p\) is non-dyadic, \(2\in\mathcal O^\times\). Hence the norm
+ideal and the scale ideal of \(\Lambda\) are equal:
+\[
+\mathfrak n(\Lambda)=\mathfrak s(\Lambda).
+\]
+Write
+\[
+\mathfrak n(\Lambda)=\mathfrak s(\Lambda)=\pi^r\mathcal O.
+\]
+
+We first prove that
+\[
+\theta_{\mathfrak p}(O^+(\Lambda))
+\subseteq \mathcal O^\times K^{\times 2}.
+\]
+Let \(\sigma\in O^+(\Lambda)\). By Theorem 4.3.9, \(\sigma\) is a product of
+symmetries in \(O(\Lambda)\):
+\[
+\sigma=\tau_{x_1}\cdots \tau_{x_m}.
+\]
+Since each symmetry has determinant \(-1\), and \(\sigma\in O^+(\Lambda)\), the
+integer \(m\) is even.
+
+We claim that for each symmetry \(\tau_x\in O(\Lambda)\), after replacing \(x\)
+by a primitive generator of the line \(Kx\cap\Lambda\), one has
+\[
+Q(x)\mathcal O=\mathfrak n(\Lambda)=\pi^r\mathcal O.
+\]
+Indeed, since \(\tau_x\) preserves \(\Lambda\), for every \(y\in\Lambda\),
+\[
+\tau_x(y)=y-\frac{B(y,x)}{Q(x)}x\in \Lambda.
+\]
+Thus \(\frac{B(y,x)}{Q(x)}x\in\Lambda\). Since \(x\) is primitive, this implies
+\[
+\frac{B(y,x)}{Q(x)}\in\mathcal O.
+\]
+Hence \(B(x,\Lambda)\subseteq Q(x)\mathcal O\).
+
+On the other hand, \(\Lambda\) is modular, so the pairing
+\(\pi^{-r}B\) is unimodular on \(\Lambda\). Therefore, for primitive \(x\), one
+has
+\[
+B(x,\Lambda)=\pi^r\mathcal O.
+\]
+So
+\[
+\pi^r\mathcal O=B(x,\Lambda)\subseteq Q(x)\mathcal O.
+\]
+But \(x\in\Lambda\), so \(Q(x)\in\mathfrak n(\Lambda)=\pi^r\mathcal O\). Hence
+also
+\[
+Q(x)\mathcal O\subseteq \pi^r\mathcal O.
+\]
+Therefore
+\[
+Q(x)\mathcal O=\pi^r\mathcal O.
+\]
+
+Now return to \(\sigma=\tau_{x_1}\cdots\tau_{x_m}\). Since \(m\) is even, say
+\(m=2s\), and since every \(Q(x_i)\) lies in \(\pi^r\mathcal O^\times\), we get
+\[
+\theta_{\mathfrak p}(\sigma)
+=Q(x_1)\cdots Q(x_{2s})
+\in (\pi^r\mathcal O^\times)^{2s}K^{\times 2}
+=\mathcal O^\times K^{\times 2}.
+\]
+Thus
+\[
+\theta_{\mathfrak p}(O^+(\Lambda))
+\subseteq \mathcal O^\times K^{\times 2}.
+\]
+
+Conversely, let \(u\in \mathcal O^\times\). Since \(\Lambda\) is non-dyadic
+modular and \(\dim\Lambda\ge 2\), we may choose an orthogonal binary sublattice
+\(\mathcal O e_1\oplus \mathcal O e_2\subseteq \Lambda\) such that
+\[
+Q(e_1),Q(e_2)\in \pi^r\mathcal O^\times .
+\]
+Write
+\[
+Q(e_1)=\pi^r a_1,\qquad a_1\in \mathcal O^\times.
+\]
+On the binary sublattice, set
+\[
+Q'=\pi^{-r}Q.
+\]
+Then \(Q'\) is a unimodular binary quadratic form over \(\mathcal O\). Reducing
+modulo \(\pi\), we get a nondegenerate binary quadratic form \(\overline{Q'}\)
+over the residue field \(k\).
+
+Let
+\[
+t=ua_1^{-1}\in \mathcal O^\times.
+\]
+Since \(k\) has odd characteristic, every nondegenerate binary quadratic form
+over \(k\) represents every nonzero element of \(k\). Hence there exists
+\(\bar x\in k^2\) such that
+\[
+\overline{Q'}(\bar x)=\bar t.
+\]
+Since \(\bar t\neq 0\), the vector \(\bar x\) is nonzero. Moreover, because
+\(\overline{Q'}\) is nondegenerate, the gradient of
+\(\overline{Q'}-\bar t\) at \(\bar x\) is nonzero. Therefore Hensel's lemma
+lifts \(\bar x\) to a vector \(x\in \mathcal O e_1\oplus \mathcal O e_2\) such
+that
+\[
+Q'(x)=t.
+\]
+Thus
+\[
+Q(x)=\pi^r t\in \pi^r\mathcal O^\times.
+\]
+In particular, \(x\) is primitive. By the claim above, both \(\tau_x\) and
+\(\tau_{e_1}\) preserve \(\Lambda\). Hence
+\[
+\tau_x\tau_{e_1}\in O^+(\Lambda).
+\]
+Its spinor norm is
+\[
+\theta_{\mathfrak p}(\tau_x\tau_{e_1})
+=
+Q(x)Q(e_1)
+=
+(\pi^r t)(\pi^r a_1)
+=
+\pi^{2r}u
+\equiv u
+\pmod{K^{\times 2}}.
+\]
+Therefore every class in \(\mathcal O^\times K^{\times 2}\) occurs as the
+spinor norm of an element of \(O^+(\Lambda)\).
+\end{solution}
 
 \subsection*{Exercise A.15.5}
 Put
@@ -3591,37 +4113,698 @@ Put
 Prove that there is a group isomorphism
 \[ \mathbf{I}_F / F^\times \mathbf{I}_{F, S_0} \cong \mathcal{C}l(\mathcal{O}_F) . \]
 (Recall that $\mathcal{C}l(\mathcal{O}_F)$ denotes the ideal class group of $\mathcal{O}_F$.)
+\begin{solution}
+Define a map
+\[
+\Phi:I_F\longrightarrow \operatorname{Cl}(\mathcal O_F)
+\]
+as follows. For an idele \(a=(a_{\mathfrak p})_{\mathfrak p}\in I_F\), set
+\[
+\Phi(a)=\left[\prod_{\mathfrak p\notin S_0}
+\mathfrak p^{v_{\mathfrak p}(a_{\mathfrak p})}\right].
+\]
+This product is finite, because by definition of the idele group,
+\(a_{\mathfrak p}\in\mathcal O_{\mathfrak p}^{\times}\) for almost all finite
+places \(\mathfrak p\). Hence \(v_{\mathfrak p}(a_{\mathfrak p})=0\) for almost
+all \(\mathfrak p\).
+
+The map \(\Phi\) is a group homomorphism, since valuations are additive:
+\[
+v_{\mathfrak p}(a_{\mathfrak p}b_{\mathfrak p})
+=
+v_{\mathfrak p}(a_{\mathfrak p})+v_{\mathfrak p}(b_{\mathfrak p}).
+\]
+
+We first show that \(\Phi\) is surjective. Let \(\mathfrak a\) be a fractional
+ideal of \(\mathcal O_F\). Write
+\[
+\mathfrak a=\prod_{\mathfrak p\notin S_0}\mathfrak p^{n_{\mathfrak p}},
+\]
+where all but finitely many \(n_{\mathfrak p}\) are zero. Choose a uniformizer
+\(\pi_{\mathfrak p}\in F_{\mathfrak p}\) for each finite place
+\(\mathfrak p\), and define an idele \(a=(a_{\mathfrak p})\) by
+\(a_{\mathfrak p}=\pi_{\mathfrak p}^{n_{\mathfrak p}}\) for finite
+\(\mathfrak p\), and \(a_{\mathfrak p}=1\) for \(\mathfrak p\in S_0\). Then
+\[
+\Phi(a)=[\mathfrak a].
+\]
+Thus \(\Phi\) is surjective.
+
+Now compute the kernel. If \(u\in I_{F,S_0}\), then for every finite place
+\(\mathfrak p\notin S_0\), one has \(u_{\mathfrak p}\in
+\mathcal O_{\mathfrak p}^{\times}\), hence
+\(v_{\mathfrak p}(u_{\mathfrak p})=0\). Therefore \(\Phi(u)=1\). Also, if
+\(x\in F^\times\) is diagonally embedded into \(I_F\), then
+\[
+\prod_{\mathfrak p\notin S_0}
+\mathfrak p^{v_{\mathfrak p}(x)}
+=(x),
+\]
+so \(\Phi(x)=1\) in the ideal class group. Hence
+\[
+F^\times I_{F,S_0}\subseteq \ker \Phi.
+\]
+
+Conversely, suppose \(a=(a_{\mathfrak p})\in\ker\Phi\). Then
+\[
+\prod_{\mathfrak p\notin S_0}
+\mathfrak p^{v_{\mathfrak p}(a_{\mathfrak p})}
+\]
+is principal, say equal to \((x)\) for some \(x\in F^\times\). Therefore
+\[
+v_{\mathfrak p}(a_{\mathfrak p})
+=
+v_{\mathfrak p}(x)
+\]
+for every finite place \(\mathfrak p\notin S_0\). Hence
+\[
+v_{\mathfrak p}(a_{\mathfrak p}x^{-1})=0
+\]
+for every finite \(\mathfrak p\notin S_0\), so
+\[
+a x^{-1}\in I_{F,S_0}.
+\]
+Thus \(a\in F^\times I_{F,S_0}\), and we get
+\[
+\ker\Phi=F^\times I_{F,S_0}.
+\]
+
+By the first isomorphism theorem,
+\[
+I_F/F^\times I_{F,S_0}\cong \operatorname{Cl}(\mathcal O_F).
+\]
+\end{solution}
+
 
 \subsection*{Exercise A.15.6}
 Prove that the condition $\mathbf{I}_F = \theta(\operatorname{O}^+(V))\mathbf{I}_{F, S_0} \mathbf{I}_F^2$ in Thm. 5.2.12 holds if $\mathcal{O}_F = \mathbb{Z}$ and $\dim V \ge 3$.
+\begin{solution}
+Since \(\mathcal O_F=\mathbb Z\), we have \(F=\mathbb Q\). Also
+\(S_0=\{\infty\}\). By Exercise A.15.5 and the fact that
+\(\operatorname{Cl}(\mathbb Z)=1\), we have
+\[
+I_{\mathbb Q}=\mathbb Q^\times I_{\mathbb Q,S_0}.
+\]
+Thus it is enough to show that every positive rational square class belongs to
+\(\theta(O^+(V))\).
 
+Let \(a\in\mathbb Q_{>0}^{\times}\). We prove that
+\(a\in \theta(O^+(V))\) modulo \(\mathbb Q^{\times 2}\).
+
+First suppose that \(V\) is isotropic over \(\mathbb Q\). Then \(V\) contains a
+hyperbolic plane. A hyperbolic plane represents every element of
+\(\mathbb Q\), so we may choose \(x,y\in V\) such that
+\[
+Q(x)=a,\qquad Q(y)=1.
+\]
+Then \(\tau_x\tau_y\in O^+(V)\), and
+\[
+\theta(\tau_x\tau_y)=Q(x)Q(y)=a
+\quad \text{in } \mathbb Q^\times/\mathbb Q^{\times 2}.
+\]
+
+Now suppose that \(V\) is anisotropic over \(\mathbb Q\). Consider the quadratic
+space
+\[
+V\oplus V,\qquad (u,v)\longmapsto Q(u)-aQ(v).
+\]
+Its dimension is \(2n\ge 6\). For every finite prime \(p\), every quadratic
+form over \(\mathbb Q_p\) of dimension at least \(5\) is isotropic. Hence
+\(Q\oplus(-aQ)\) is isotropic over \(\mathbb Q_p\) for every finite \(p\).
+Over \(\mathbb R\), it is also isotropic because \(a>0\): if \(v\in V_\mathbb R\)
+with \(Q(v)\neq 0\), then
+\[
+Q(\sqrt a\,v)-aQ(v)=0.
+\]
+Therefore, by the Hasse--Minkowski theorem, \(Q\oplus(-aQ)\) is isotropic over
+\(\mathbb Q\). Hence there exist \(x,y\in V\), not both zero, such that
+\[
+Q(x)=aQ(y).
+\]
+Since \(V\) is anisotropic, \(x,y\neq 0\) and \(Q(x),Q(y)\neq 0\). Thus
+\[
+\theta(\tau_x\tau_y)=Q(x)Q(y)=aQ(y)^2
+\equiv a \pmod{\mathbb Q^{\times 2}}.
+\]
+So every positive rational square class lies in \(\theta(O^+(V))\).
+
+Now let \(t\in I_{\mathbb Q}\). Since
+\(I_{\mathbb Q}=\mathbb Q^\times I_{\mathbb Q,S_0}\), write
+\[
+t=b u,\qquad b\in\mathbb Q^\times,\quad u\in I_{\mathbb Q,S_0}.
+\]
+Write \(b=\varepsilon a\), where \(\varepsilon=\pm 1\) and
+\(a\in\mathbb Q_{>0}^{\times}\). Since \(\varepsilon\) is a \(p\)-adic unit for
+every finite prime \(p\), we have \(\varepsilon\in I_{\mathbb Q,S_0}\). Hence
+\[
+t=a(\varepsilon u),
+\qquad \varepsilon u\in I_{\mathbb Q,S_0}.
+\]
+By the previous paragraph, \(a\in \theta(O^+(V)) I_{\mathbb Q}^2\). Therefore
+\[
+t\in \theta(O^+(V))I_{\mathbb Q,S_0}I_{\mathbb Q}^2.
+\]
+Since \(t\in I_{\mathbb Q}\) was arbitrary, we get
+\[
+I_{\mathbb Q}
+=
+\theta(O^+(V))I_{\mathbb Q,S_0}I_{\mathbb Q}^2.
+\]
+\end{solution}
 \subsection*{Exercise A.15.7}
 Let $\mathfrak{p}$ be a non-archimedean place of $F$. Let $L$ be a maximal lattice in $V$.
 \begin{enumerate}
-    \item Prove that $\operatorname{O}(L_{\mathfrak{p}}) = \operatorname{O}(V_{\mathfrak{p}})$.
+    \item Prove that $\operatorname{O}(L_{\mathfrak{p}}) = \operatorname{O}(V_{\mathfrak{p}})$ if $V_{\mathfrak{p}}$ is anisotropic.
     \item Prove that if $\dim V \ge 3$, then $\theta_{\mathfrak{p}}(\operatorname{O}^+(L_{\mathfrak{p}})) \supseteq \mathcal{O}_{\mathfrak{p}}^\times$.
 \end{enumerate}
+\begin{solution}
+Put \(K=F_{\mathfrak p}\), \(\mathcal O=\mathcal O_{\mathfrak p}\), and
+\(\Lambda=L_{\mathfrak p}\).
 
+\begin{enumerate}
+    \item Suppose first that \(V_{\mathfrak p}\) is anisotropic. Let
+    \[
+    \Lambda_0:=\{x\in V_{\mathfrak p}\mid Q(x)\in \mathcal O\}.
+    \]
+    Since \(V_{\mathfrak p}\) is anisotropic, \(\Lambda_0\) is an
+    \(\mathcal O\)-lattice. It is integral, and every integral lattice in
+    \(V_{\mathfrak p}\) is contained in \(\Lambda_0\). Hence \(\Lambda_0\) is
+    the unique maximal lattice in \(V_{\mathfrak p}\). Since \(\Lambda\) is
+    maximal, we have \(\Lambda=\Lambda_0\).
+
+    Now let \(\sigma\in O(V_{\mathfrak p})\). Since \(\sigma\) preserves \(Q\),
+    one has
+    \[
+    Q(\sigma x)=Q(x)
+    \]
+    for every \(x\in V_{\mathfrak p}\). Therefore
+    \[
+    x\in \Lambda_0
+    \quad\Longleftrightarrow\quad
+    \sigma x\in \Lambda_0.
+    \]
+    Thus \(\sigma(\Lambda)=\Lambda\), so \(\sigma\in O(\Lambda)\). Hence
+    \[
+    O(\Lambda)=O(V_{\mathfrak p}).
+    \]
+
+    \item We prove that
+    \[
+    \theta_{\mathfrak p}(O^+(\Lambda))\supseteq \mathcal O^\times.
+    \]
+
+    If \(V_{\mathfrak p}\) is anisotropic, then by part (1),
+    \[
+    O^+(\Lambda)=O^+(V_{\mathfrak p}).
+    \]
+    Since \(\dim V\ge 3\), Exercise A.15.3 gives
+    \[
+    \theta_{\mathfrak p}(O^+(V_{\mathfrak p}))
+    =
+    K^\times/K^{\times 2}.
+    \]
+    Hence in particular
+    \[
+    \theta_{\mathfrak p}(O^+(\Lambda))
+    \supseteq \mathcal O^\times K^{\times 2}/K^{\times 2}.
+    \]
+
+    It remains to treat the isotropic case. Since \(V_{\mathfrak p}\) is
+    isotropic and \(\Lambda\) is maximal, the local splitting theorem for
+    maximal lattices gives an orthogonal decomposition
+    \[
+    \Lambda=H\perp \Lambda',
+    \]
+    where \(H=\mathcal Oe\oplus \mathcal Of\) is a hyperbolic plane with
+    \[
+    Q(e)=Q(f)=0,
+    \qquad
+    B(e,f)=1.
+    \]
+    Hence
+    \[
+    Q(ae+bf)=ab.
+    \]
+
+    Let \(u\in\mathcal O^\times\). Set
+    \[
+    x=e+uf,
+    \qquad
+    y=e+f.
+    \]
+    Then
+    \[
+    Q(x)=u,
+    \qquad
+    Q(y)=1.
+    \]
+    Since \(Q(x)\) and \(Q(y)\) are units, and since \(B(\Lambda,x)\subseteq
+    \mathcal O\) and \(B(\Lambda,y)\subseteq\mathcal O\), the symmetries
+    \(\tau_x\) and \(\tau_y\) preserve \(\Lambda\). Thus
+    \[
+    \tau_x,\tau_y\in O(\Lambda),
+    \qquad
+    \tau_x\tau_y\in O^+(\Lambda).
+    \]
+    The spinor norm is
+    \[
+    \theta_{\mathfrak p}(\tau_x\tau_y)
+    =
+    Q(x)Q(y)
+    =
+    u
+    \quad \text{in } K^\times/K^{\times 2}.
+    \]
+    Since \(u\in\mathcal O^\times\) was arbitrary, we obtain
+    \[
+    \theta_{\mathfrak p}(O^+(\Lambda))
+    \supseteq \mathcal O^\times.
+    \]
+\end{enumerate}
+\end{solution}
 \subsection*{Exercise A.15.8}
 Let $U, W$ be nonsingular quadratic spaces over $F$. Prove that there is a representation of quadratic spaces $U \to W$ over $F$ if and only if $U_{\mathfrak{p}} \to W_{\mathfrak{p}}$ for every $\mathfrak{p} \in \Omega_F$.
+\begin{solution}
+The necessity is immediate. If \(U\to W\) over \(F\), then after scalar
+extension to every completion \(F_{\mathfrak p}\), we get
+\[
+U_{\mathfrak p}\to W_{\mathfrak p}.
+\]
 
+We prove the converse by induction on \(m=\dim U\). The case \(m=0\) is
+trivial. Assume \(m\ge 1\), and suppose that
+\[
+U_{\mathfrak p}\to W_{\mathfrak p}
+\]
+for every place \(\mathfrak p\).
+
+Choose \(u\in U\) with \(Q_U(u)=a\neq 0\). Such a vector exists because \(U\)
+is nonsingular. For every \(\mathfrak p\), the local representation
+\(U_{\mathfrak p}\to W_{\mathfrak p}\) shows that \(a\) is represented by
+\(W_{\mathfrak p}\). Hence, by the Hasse--Minkowski theorem, \(a\) is
+represented by \(W\). Thus there exists \(x\in W\) such that
+\[
+Q_W(x)=a.
+\]
+
+Now decompose
+\[
+U=Fu\perp U',
+\qquad
+W=Fx\perp W',
+\]
+where \(U'=u^\perp\) and \(W'=x^\perp\). We claim that
+\[
+U'_{\mathfrak p}\to W'_{\mathfrak p}
+\]
+for every \(\mathfrak p\).
+
+Indeed, fix \(\mathfrak p\). Let
+\[
+i_{\mathfrak p}:U_{\mathfrak p}\to W_{\mathfrak p}
+\]
+be a local representation, and set
+\[
+y_{\mathfrak p}=i_{\mathfrak p}(u).
+\]
+Then
+\[
+Q_W(y_{\mathfrak p})=Q_U(u)=a=Q_W(x).
+\]
+By Witt's extension theorem, the isometry between the two one-dimensional
+subspaces \(F_{\mathfrak p}y_{\mathfrak p}\to F_{\mathfrak p}x\) extends to an
+element of \(O(W_{\mathfrak p})\). Therefore we may replace
+\(i_{\mathfrak p}\) by an equivalent local representation and assume that
+\[
+i_{\mathfrak p}(u)=x.
+\]
+Then for every \(z\in U'_{\mathfrak p}\), one has
+\[
+B_W(i_{\mathfrak p}(z),x)
+=
+B_W(i_{\mathfrak p}(z),i_{\mathfrak p}(u))
+=
+B_U(z,u)
+=
+0.
+\]
+Thus \(i_{\mathfrak p}(z)\in x^\perp=W'_{\mathfrak p}\), proving
+\[
+U'_{\mathfrak p}\to W'_{\mathfrak p}.
+\]
+
+By the induction hypothesis, there is a representation
+\[
+j:U'\to W'
+\]
+over \(F\). Define
+\[
+i:U=Fu\perp U'\longrightarrow W=Fx\perp W'
+\]
+by
+\[
+i(\lambda u+z)=\lambda x+j(z).
+\]
+Since \(Q_W(x)=Q_U(u)\), and \(j\) preserves the quadratic form on \(U'\), this
+map is a representation of quadratic spaces. Hence
+\[
+U\to W
+\]
+over \(F\).
+
+Therefore \(U\) is represented by \(W\) over \(F\) if and only if
+\(U_{\mathfrak p}\) is represented by \(W_{\mathfrak p}\) over
+\(F_{\mathfrak p}\) for every \(\mathfrak p\in \Omega_F\).
+\end{solution}
 \subsection*{Exercise A.15.9}
 Prove the following weak approximation theorem for $\operatorname{O}^+(V)$: Let $T$ be a finite subset of $\Omega_F$. Suppose that an element $\varphi_{\mathfrak{p}} \in \operatorname{O}^+(V_{\mathfrak{p}})$ is given for each $\mathfrak{p} \in T$. Then for any real number $\varepsilon > 0$ there exists $\sigma \in \operatorname{O}^+(V)$ such that
 \[ \| \sigma - \varphi_{\mathfrak{p}} \|_{\mathfrak{p}} < \varepsilon \quad \text{for every } \mathfrak{p} \in T . \]
 (\textit{Hint}: Use the Cartan--Dieudonné Theorem 2.3.2).
+\begin{solution}
+Fix an \(F\)-basis of \(V\), and use it to identify \(V\) with \(F^n\) and
+\(\operatorname{End}(V)\) with \(F^{n^2}\). Let \(Q\) be the quadratic form on
+\(V\), and let \(\tau_x\) denote the symmetry attached to a vector \(x\) with
+\(Q(x)\neq 0\). Thus
+\[
+\tau_x(y)=y-\frac{B(y,x)}{Q(x)}x .
+\]
+For every place \(\mathfrak p\), the map
+\[
+V_{\mathfrak p}\setminus \{Q=0\}\longrightarrow O(V_{\mathfrak p}),
+\qquad
+x\longmapsto \tau_x
+\]
+is continuous.
 
+Let \(T\subset \Omega_F\) be finite, and suppose that
+\(\varphi_{\mathfrak p}\in O^+(V_{\mathfrak p})\) is given for every
+\(\mathfrak p\in T\). By the Cartan--Dieudonne theorem, each
+\(\varphi_{\mathfrak p}\) is a product of symmetries. Since
+\(\varphi_{\mathfrak p}\in O^+(V_{\mathfrak p})\), it may be written as an even
+product:
+\[
+\varphi_{\mathfrak p}
+=
+\tau_{x_{\mathfrak p,1}}\tau_{x_{\mathfrak p,2}}
+\cdots
+\tau_{x_{\mathfrak p,2r_{\mathfrak p}}},
+\qquad
+Q(x_{\mathfrak p,i})\neq 0.
+\]
+Choose \(r\) larger than all \(r_{\mathfrak p}\). By inserting trivial pairs
+\(\tau_z\tau_z=1\), we may assume that all decompositions have the same length
+\(2r\):
+\[
+\varphi_{\mathfrak p}
+=
+\tau_{x_{\mathfrak p,1}}\cdots \tau_{x_{\mathfrak p,2r}} .
+\]
+
+Consider the product map
+\[
+\mu_{\mathfrak p}:
+\bigl(V_{\mathfrak p}\setminus\{Q=0\}\bigr)^{2r}
+\longrightarrow O(V_{\mathfrak p}),
+\qquad
+(y_1,\dots,y_{2r})
+\longmapsto
+\tau_{y_1}\cdots \tau_{y_{2r}} .
+\]
+This map is continuous. Hence, for each \(\mathfrak p\in T\), there exists a
+neighborhood of
+\[
+(x_{\mathfrak p,1},\dots,x_{\mathfrak p,2r})
+\]
+such that if \(y_i\) lies in that neighborhood, then
+\[
+\left\|
+\tau_{y_1}\cdots\tau_{y_{2r}}-\varphi_{\mathfrak p}
+\right\|_{\mathfrak p}<\varepsilon .
+\]
+
+By weak approximation for the vector space \(V\), we may choose global vectors
+\(x_1,\dots,x_{2r}\in V\) such that, for every \(\mathfrak p\in T\), each
+\(x_i\) is sufficiently close to \(x_{\mathfrak p,i}\). Since \(Q(x_{\mathfrak p,i})\neq 0\)
+and the condition \(Q(x_i)\neq 0\) is open locally, we may also assume
+\[
+Q(x_i)\neq 0
+\]
+for every \(i\).
+
+Define
+\[
+\sigma=\tau_{x_1}\tau_{x_2}\cdots\tau_{x_{2r}}\in O(V).
+\]
+Since \(\sigma\) is a product of an even number of symmetries, we have
+\[
+\sigma\in O^+(V).
+\]
+By the choice of the \(x_i\)'s and the continuity of the product map, for every
+\(\mathfrak p\in T\),
+\[
+\|\sigma-\varphi_{\mathfrak p}\|_{\mathfrak p}<\varepsilon .
+\]
+This proves the weak approximation theorem for \(O^+(V)\).
+\end{solution}
 \subsection*{Exercise A.15.10}
 Let $K$ and $L$ be full lattices in $V$ such that $\operatorname{gen}(K) = \operatorname{gen}(L)$. Let $T$ be a finite subset of $\operatorname{Spm}(\mathcal{O}_F)$. Prove that there is a full lattice $K'$ in $V$ such that
 \[ K' \in \operatorname{cls}^+(K) \quad \text{and} \quad K'_{\mathfrak{p}} = L_{\mathfrak{p}} \text{ for all } \mathfrak{p} \in T . \]
+\begin{solution}
+Since \(\operatorname{gen}(K)=\operatorname{gen}(L)\), for every
+\(\mathfrak p\in T\) we may choose
+\[
+\varphi_{\mathfrak p}\in O^+(V_{\mathfrak p})
+\]
+such that
+\[
+\varphi_{\mathfrak p}K_{\mathfrak p}=L_{\mathfrak p}.
+\]
 
+For each \(\mathfrak p\in T\), the stabilizer
+\[
+O(K_{\mathfrak p})
+=
+\{g\in O(V_{\mathfrak p})\mid gK_{\mathfrak p}=K_{\mathfrak p}\}
+\]
+is an open subgroup of \(O(V_{\mathfrak p})\). Hence
+\[
+\varphi_{\mathfrak p}O(K_{\mathfrak p})
+\]
+is an open neighborhood of \(\varphi_{\mathfrak p}\) in \(O(V_{\mathfrak p})\).
+By the weak approximation theorem for \(O^+(V)\), there exists
+\[
+\sigma\in O^+(V)
+\]
+such that, for every \(\mathfrak p\in T\),
+\[
+\sigma\in \varphi_{\mathfrak p}O(K_{\mathfrak p}).
+\]
+Equivalently, for every \(\mathfrak p\in T\),
+\[
+\varphi_{\mathfrak p}^{-1}\sigma\in O(K_{\mathfrak p}).
+\]
+Therefore
+\[
+\sigma K_{\mathfrak p}
+=
+\varphi_{\mathfrak p}K_{\mathfrak p}
+=
+L_{\mathfrak p}
+\]
+for every \(\mathfrak p\in T\).
+
+Now set
+\[
+K'=\sigma K.
+\]
+Since \(\sigma\in O^+(V)\), we have
+\[
+K'\in \operatorname{cls}^+(K).
+\]
+Moreover, for every \(\mathfrak p\in T\),
+\[
+K'_{\mathfrak p}
+=
+(\sigma K)_{\mathfrak p}
+=
+\sigma K_{\mathfrak p}
+=
+L_{\mathfrak p}.
+\]
+Thus the required lattice \(K'\) exists.
+\end{solution}
 \subsection*{Exercise A.15.11}
 Let $L$ be a full lattice in $V$ and let $K \subseteq V$ be a nonsingular lattice. Suppose that for every $\mathfrak{p} \in \operatorname{Spm}(\mathcal{O}_F)$, there is a representation $K_{\mathfrak{p}} \to L_{\mathfrak{p}}$. Prove that there is a representation $K \to L'$ of $K$ into a lattice $L'$ in $\operatorname{gen}(L)$.
+\begin{solution}
+Let \(U=FK\). Since \(K\subset V\) is nonsingular, \(U\) is a nonsingular
+subspace of \(V\), and \(K\) is a full lattice in \(U\).
 
+First note that
+\[
+K_{\mathfrak p}\subseteq L_{\mathfrak p}
+\]
+for almost all \(\mathfrak p\). Indeed, after choosing finitely many generators
+of \(K\) and an \(\mathcal O_F\)-basis of \(L\), only finitely many primes occur
+in the denominators of these generators. Hence outside a finite set of primes,
+all elements of \(K\) are integral with respect to \(L\).
+
+Let \(S\subset \operatorname{Spm}(\mathcal O_F)\) be a finite set containing
+all primes for which \(K_{\mathfrak p}\not\subseteq L_{\mathfrak p}\). For
+\(\mathfrak p\notin S\), set
+\[
+L'_{\mathfrak p}=L_{\mathfrak p}.
+\]
+
+Now fix \(\mathfrak p\in S\). By assumption, there is a representation
+\[
+\rho_{\mathfrak p}:K_{\mathfrak p}\longrightarrow L_{\mathfrak p}.
+\]
+Extending scalars, \(\rho_{\mathfrak p}\) gives an isometric embedding
+\[
+U_{\mathfrak p}\longrightarrow V_{\mathfrak p}.
+\]
+Since \(U_{\mathfrak p}\subset V_{\mathfrak p}\) is already a nonsingular
+subspace, Witt's extension theorem gives an element
+\[
+\sigma_{\mathfrak p}\in O(V_{\mathfrak p})
+\]
+such that
+\[
+\sigma_{\mathfrak p}|_{U_{\mathfrak p}}=\rho_{\mathfrak p}.
+\]
+Hence
+\[
+\sigma_{\mathfrak p}K_{\mathfrak p}
+=
+\rho_{\mathfrak p}K_{\mathfrak p}
+\subseteq L_{\mathfrak p}.
+\]
+Set
+\[
+L'_{\mathfrak p}:=\sigma_{\mathfrak p}^{-1}L_{\mathfrak p}.
+\]
+Then
+\[
+K_{\mathfrak p}\subseteq L'_{\mathfrak p},
+\]
+and \(L'_{\mathfrak p}\) is isometric to \(L_{\mathfrak p}\).
+
+Thus we have constructed local lattices \(L'_{\mathfrak p}\subset V_{\mathfrak p}\)
+such that \(L'_{\mathfrak p}=L_{\mathfrak p}\) for almost all \(\mathfrak p\),
+and such that \(L'_{\mathfrak p}\cong L_{\mathfrak p}\) for every
+\(\mathfrak p\). Define
+\[
+L'=\{x\in V\mid x\in L'_{\mathfrak p}\text{ for every }
+\mathfrak p\in\operatorname{Spm}(\mathcal O_F)\}.
+\]
+By the standard localization property of lattices, \(L'\) is a full lattice in
+\(V\), and its localization at \(\mathfrak p\) is precisely
+\(L'_{\mathfrak p}\).
+
+Since \(L'_{\mathfrak p}\cong L_{\mathfrak p}\) for every \(\mathfrak p\), we
+have
+\[
+L'\in \operatorname{gen}(L).
+\]
+Moreover, for every \(\mathfrak p\),
+\[
+K_{\mathfrak p}\subseteq L'_{\mathfrak p}.
+\]
+Therefore \(K\subseteq L'\). Hence the inclusion gives a representation
+\[
+K\longrightarrow L'
+\]
+with \(L'\in \operatorname{gen}(L)\), as required.
+\end{solution}
 \subsection*{Exercise A.15.12}
 Assume $\mathcal{O}_F = \mathbb{Z}$. Let $L = \mathbb{Z}e_1 \perp \mathbb{Z}e_2$ in the quadratic space $V = \mathbb{Q}e_1 \perp \mathbb{Q}e_2$ with $Q(e_1) = 1$ and $Q(e_2) = 11$.
 \begin{enumerate}
     \item Prove that $3 \in Q(V)$ and $3 \in Q(L_{\mathfrak{p}})$ for every $\mathfrak{p} \in \operatorname{Spm}(\mathbb{Z})$.
     \item Prove that $3 \notin Q(L)$.
 \end{enumerate}
+\begin{solution}
+Here \(V=\mathbb Q e_1\perp \mathbb Q e_2\) has quadratic form
+\[
+Q(xe_1+ye_2)=x^2+11y^2,
+\]
+and \(L=\mathbb Z e_1\perp \mathbb Z e_2\).
 
+First, \(3\in Q(V)\). Indeed,
+\[
+Q\left(\frac{1}{2}e_1+\frac{1}{2}e_2\right)
+=
+\frac{1}{4}+\frac{11}{4}=3.
+\]
+
+We now prove that \(3\in Q(L_p)\) for every prime \(p\), where
+\(L_p=\mathbb Z_p e_1\perp \mathbb Z_p e_2\).
+
+For \(p=2\), it is enough to show that \(3/11\) is a square in
+\(\mathbb Z_2^\times\). Since
+\[
+\frac{3}{11}\equiv 3\cdot 3\equiv 1 \pmod 8,
+\]
+and a \(2\)-adic unit is a square if and only if it is congruent to \(1\)
+modulo \(8\), there exists \(y\in \mathbb Z_2^\times\) such that
+\(y^2=3/11\). Hence
+\[
+Q(0\cdot e_1+y e_2)=11y^2=3.
+\]
+
+For \(p=3\), consider
+\[
+f(X,Y)=X^2+11Y^2-3.
+\]
+Modulo \(3\), we have
+\[
+f(1,1)=1+11-3=9\equiv 0\pmod 3,
+\]
+and
+\[
+\frac{\partial f}{\partial X}(1,1)=2\not\equiv 0\pmod 3.
+\]
+By Hensel's lemma, this solution lifts to a solution in \(\mathbb Z_3^2\).
+Thus \(3\in Q(L_3)\).
+
+For \(p=11\), we have
+\[
+f(5,0)=25-3=22\equiv 0\pmod{11},
+\]
+and
+\[
+\frac{\partial f}{\partial X}(5,0)=10\not\equiv 0\pmod{11}.
+\]
+Again Hensel's lemma gives a solution in \(\mathbb Z_{11}^2\). Hence
+\(3\in Q(L_{11})\).
+
+Now let \(p\neq 2,3,11\). Then the reduction
+\[
+\bar Q(X,Y)=X^2+11Y^2
+\]
+is a nonsingular binary quadratic form over \(\mathbb F_p\). A nonsingular
+binary quadratic form over a finite field of odd characteristic represents
+every element of the field. Hence there exist \(\bar x,\bar y\in\mathbb F_p\)
+such that
+\[
+\bar x^2+11\bar y^2=3.
+\]
+Since \(3\neq 0\) in \(\mathbb F_p\), the vector \((\bar x,\bar y)\) is nonzero.
+Because \(p\neq 2,11\), at least one of the partial derivatives
+\[
+2X,\qquad 22Y
+\]
+is nonzero at \((\bar x,\bar y)\). Therefore Hensel's lemma lifts this solution
+to a solution in \(\mathbb Z_p^2\). Thus \(3\in Q(L_p)\) for every prime \(p\).
+
+Finally, we show that \(3\notin Q(L)\). If \(3=Q(xe_1+ye_2)\) for some
+\(x,y\in\mathbb Z\), then
+\[
+x^2+11y^2=3.
+\]
+If \(y\neq 0\), then \(11y^2\ge 11>3\), impossible. Hence \(y=0\), and then
+\(x^2=3\), also impossible in \(\mathbb Z\). Therefore
+\[
+3\notin Q(L).
+\]
+\end{solution}
 \end{document}
