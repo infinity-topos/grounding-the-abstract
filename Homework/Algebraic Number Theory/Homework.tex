@@ -1072,30 +1072,91 @@ Let $K$ be a field of characteristic $\neq 2$, and let $(V,\varphi)$, $(U,\psi)$
 
     (2)Consider $(U,\psi)\perp (U,-\psi)$ on $U\oplus U$. Its quadratic form is \[ q(u_1,u_2)=\psi(u_1)-\psi(u_2). \] Let \[ \Delta=\{(u,u):u\in U\}\subseteq U\oplus U. \] Then $q(u,u)=0$ for all $u\in U$. Moreover, for the associated bilinear form, \[ B_q((u,u),(v,v))=B_\psi(u,v)-B_\psi(u,v)=0, \] so $\Delta$ is totally isotropic. Also \[ \dim(U\oplus U)=2\dim U=2\dim \Delta. \] By part $(1)$, $(U,\psi)\perp (U,-\psi)$ is hyperbolic.
 
-    (3) Assume additionally that $\dim V=\dim U$.
-
-If $(V,\varphi)\cong (U,\psi)$, then
+(3) Assume first that \((V,\varphi)\cong (U,\psi)\). Then
 \[
 (V,\varphi)\perp (U,-\psi)
 \cong
 (U,\psi)\perp (U,-\psi),
 \]
-which is hyperbolic by part $(2)$.
+which is hyperbolic by part (2).
 
-Conversely, suppose that $(V,\varphi)\perp (U,-\psi)$ is hyperbolic. Then
-$(V,\varphi)$ and $(U,\psi)$ have the same Witt class. By the Witt
-decomposition theorem, their anisotropic parts are isomorphic. Hence we may
-write
+Conversely, suppose that
 \[
-(V,\varphi)\cong H^r\perp A,\qquad
-(U,\psi)\cong H^s\perp A,
+(V,\varphi)\perp (U,-\psi)
 \]
-where $H$ is a hyperbolic plane and $A$ is anisotropic. Since
-$\dim V=\dim U$, we have
+is hyperbolic. Since this space is nonsingular and hyperbolic, its anisotropic
+part is zero.
+
+Write the Witt decompositions
 \[
-2r+\dim A=2s+\dim A,
+(V,\varphi)\cong H^r\perp A,
+\qquad
+(U,\psi)\cong H^s\perp B,
 \]
-so $r=s$. Therefore $(V,\varphi)\cong (U,\psi)$.
+where \(H\) is a hyperbolic plane, and \(A,B\) are anisotropic. Then
+\[
+(U,-\psi)\cong H^s\perp (-B),
+\]
+because the negative of a hyperbolic plane is again hyperbolic. Therefore
+\[
+(V,\varphi)\perp (U,-\psi)
+\cong
+H^{r+s}\perp A\perp (-B).
+\]
+Since this space is hyperbolic, its anisotropic part is zero. Hence
+\(A\perp (-B)\) is hyperbolic.
+
+We now show that this implies \(A\cong B\). Since
+\[
+A\perp (-B)
+\]
+is hyperbolic, by part (1) it has a totally isotropic subspace of dimension
+\[
+\frac{1}{2}\dim(A\perp (-B)).
+\]
+Equivalently, by Witt decomposition, the anisotropic part of
+\(A\perp (-B)\) is zero. If we decompose \(A\perp (-B)\), the only possible
+anisotropic contribution comes from \(A\) and \(B\). By the uniqueness of the
+anisotropic part in the Witt decomposition, \(A\) and \(B\) must be isometric.
+Indeed, if
+\[
+A\perp (-B)\cong H^m,
+\]
+then
+\[
+A\perp (-B)\perp B\cong H^m\perp B.
+\]
+By part (2), \((-B)\perp B\) is hyperbolic. Hence the left-hand side is
+isometric to \(A\) plus a hyperbolic space. Cancelling the common hyperbolic
+part in the Witt decomposition gives
+\[
+A\cong B.
+\]
+
+Now use the assumption \(\dim V=\dim U\). From
+\[
+\dim V=2r+\dim A,
+\qquad
+\dim U=2s+\dim B,
+\]
+and \(A\cong B\), we get
+\[
+2r+\dim A=2s+\dim A.
+\]
+Hence \(r=s\). Therefore
+\[
+(V,\varphi)\cong H^r\perp A
+\cong
+H^s\perp B
+\cong
+(U,\psi).
+\]
+This proves
+\[
+(V,\varphi)\cong (U,\psi)
+\quad\Longleftrightarrow\quad
+(V,\varphi)\perp (U,-\psi)\text{ is hyperbolic}.
+\]
 \end{solution}
 
 
@@ -1135,7 +1196,59 @@ Let $F$ be a henselian discrete valuation field with residue field $k$. Assume $
     \item Prove that $\varphi$ and $\psi$ are isomorphic over $F$ if and only if $\overline{\varphi}$ and $\overline{\psi}$ are isomorphic over $k$.
 \end{enumerate}
 \begin{solution}
-    We use the following consequence of Springer's theorem: if $q=\langle a_1,\dots,a_n\rangle$ with all $a_i\in \mathcal O_F^\times$, then $q$ is hyperbolic over $F$ if and only if its reduction $\overline q=\langle \overline a_1,\dots,\overline a_n\rangle$ is hyperbolic over $k$. Equivalently, the reduction map on unit forms detects the zero class in the Witt group. Now \[ \varphi\perp -\psi = \langle u_1,\dots,u_r,-w_1,\dots,-w_r\rangle \] is a unit form over $F$, and its reduction is \[ \overline\varphi\perp -\overline\psi = \langle \overline u_1,\dots,\overline u_r, -\overline w_1,\dots,-\overline w_r\rangle . \] Therefore, by Springer's theorem, \[ \varphi\perp -\psi \text{ is hyperbolic over } F \quad\Longleftrightarrow\quad \overline\varphi\perp -\overline\psi \text{ is hyperbolic over } k. \] This proves the first statement. For the second statement, since $\varphi$ and $\psi$ have the same dimension, Exercise A.11.2(3) gives \[ \varphi\cong \psi \quad\Longleftrightarrow\quad \varphi\perp -\psi \text{ is hyperbolic over } F. \] Similarly, \[ \overline\varphi\cong \overline\psi \quad\Longleftrightarrow\quad \overline\varphi\perp -\overline\psi \text{ is hyperbolic over } k. \] By the first statement, the two hyperbolicity conditions are equivalent. Hence \[ \varphi\cong \psi \quad\Longleftrightarrow\quad \overline\varphi\cong \overline\psi . \]
+    We first deduce the following consequence of Springer's theorem. Let
+\(q=\langle a_1,\dots,a_n\rangle\) be a unit form over \(F\), i.e.
+\(a_i\in\mathcal O_F^\times\). Then
+\[
+q \text{ is hyperbolic over }F
+\quad\Longleftrightarrow\quad
+\bar q \text{ is hyperbolic over }k.
+\]
+
+The $\Rightarrow$ is clear. For $\Leftarrow$, let $(V,q) = m\mathbb{H}\perp W$, then we have $(\bar{V},\bar{q})= m\mathbb{H}\perp \bar{W}$. If $\bar{q}$ is hyperbolic, then 
+it menas that $\bar{W}$ is isotropic. However, the springer theroem implies that $\bar{W}$ must be anisotropic, it is a contradiction.
+
+
+Now apply this to
+\[
+\varphi\perp(-\psi)
+=
+\langle u_1,\dots,u_r,-w_1,\dots,-w_r\rangle .
+\]
+This is a unit form, and its reduction is
+\[
+\bar\varphi\perp(-\bar\psi)
+=
+\langle \bar u_1,\dots,\bar u_r,-\bar w_1,\dots,-\bar w_r\rangle .
+\]
+Hence
+\[
+\varphi\perp(-\psi)\text{ is hyperbolic over }F
+\quad\Longleftrightarrow\quad
+\bar\varphi\perp(-\bar\psi)\text{ is hyperbolic over }k.
+\]
+This proves part (1).
+
+For part (2), since \(\dim\varphi=\dim\psi\), Exercise A.11.2(3) gives
+\[
+\varphi\cong\psi
+\quad\Longleftrightarrow\quad
+\varphi\perp(-\psi)\text{ is hyperbolic over }F.
+\]
+By part (1), this is equivalent to
+\[
+\bar\varphi\perp(-\bar\psi)\text{ is hyperbolic over }k.
+\]
+Again by Exercise A.11.2(3), this is equivalent to
+\[
+\bar\varphi\cong\bar\psi.
+\]
+Therefore
+\[
+\varphi\cong\psi
+\quad\Longleftrightarrow\quad
+\bar\varphi\cong\bar\psi .
+\]
 \end{solution}
 
 
@@ -1203,9 +1316,44 @@ space over $\mathbb F$.
 \subsection*{Exercise A.11.6}
 
 Let $F$ be a henselian discrete valuation field of characteristic $\neq 2$. Prove that $F^{\times 2}$ is an open and closed subgroup of $F^{\times}$. Here of course, the topology on $F^{\times}$ is the subspace topology induced from $F$.
-
 \begin{solution}
-    Let $v$ be the discrete valuation on $F$, let $\mathcal O=\mathcal O_F$, and let $\mathfrak m$ be its maximal ideal. Put $e=v(2)$, and choose an integer $N>2e$. We first prove that \[ 1+\mathfrak m^N\subseteq F^{\times 2}. \] Let $u\in 1+\mathfrak m^N$. If $u=1$, there is nothing to prove. Otherwise write $u=1+t$ with $v(t)\geq N$. We want to solve $X^2=u$. Put $X=1+Y$. Then this is equivalent to \[ Y^2+2Y-t=0. \] Consider \[ g(Y)=Y^2+2Y-t. \] The relevant points of its Newton polygon are \[ (0,v(t)),\qquad (1,e),\qquad (2,0). \] Since $v(t)\geq N>2e$, the point $(1,e)$ lies strictly below the line joining $(0,v(t))$ and $(2,0)$. Hence the Newton polygon has two sides, \[ (0,v(t))\to (1,e),\qquad (1,e)\to (2,0). \] The first side has horizontal length $1$ and slope $e-v(t)$. By the Newton polygon theorem over a henselian discrete valuation field, $g$ has a root $Y\in F$ with \[ v(Y)=v(t)-e>0. \] Thus $X=1+Y\in F^\times$ satisfies $X^2=u$. Therefore \[ 1+\mathfrak m^N\subseteq F^{\times 2}. \] It follows that $F^{\times 2}$ is open in $F^\times$. Indeed, for every $a^2\in F^{\times 2}$, the set \[ a^2(1+\mathfrak m^N) \] is an open neighborhood of $a^2$ contained in $F^{\times 2}$. Finally, $F^{\times 2}$ is a subgroup of the topological group $F^\times$. Every coset of an open subgroup is open, so the complement of $F^{\times 2}$ is a union of open cosets. Hence $F^{\times 2}$ is closed. Therefore $F^{\times 2}$ is an open and closed subgroup of $F^\times$.
+Let \(\pi\) be a uniformizer of \(\mathcal O_F\). By the local square theorem,
+for every \(\alpha\in\mathcal O_F\), there exists \(\beta\in\mathcal O_F\) such
+that
+\[
+1+4\pi\alpha=(1+2\pi\beta)^2.
+\]
+Hence
+\[
+1+4\pi\mathcal O_F\subset F^{\times 2}.
+\]
+
+Since \(4\pi\mathcal O_F\) is an open ideal of \(\mathcal O_F\), the set
+\[
+1+4\pi\mathcal O_F
+\]
+is an open neighborhood of \(1\) in \(F^\times\). Thus \(F^{\times 2}\) contains
+an open neighborhood of the identity. Since \(F^{\times 2}\) is a subgroup of
+the topological group \(F^\times\), it follows that \(F^{\times 2}\) is open.
+
+Indeed, for any \(a\in F^{\times 2}\), the translate
+\[
+a(1+4\pi\mathcal O_F)
+\]
+is an open neighborhood of \(a\) contained in \(F^{\times 2}\). Therefore
+\(F^{\times 2}\) is a union of open sets, hence open.
+
+Finally, every open subgroup of a topological group is closed, because its
+complement is a union of the other cosets:
+\[
+F^\times\setminus F^{\times 2}
+=
+\bigcup_{g\notin F^{\times 2}} gF^{\times 2},
+\]
+and each coset \(gF^{\times 2}\) is open. Hence the complement is open, so
+\(F^{\times 2}\) is closed.
+
+Therefore \(F^{\times 2}\) is both open and closed in \(F^\times\).
 \end{solution}
 
 
@@ -1604,6 +1752,7 @@ and if $\operatorname{dft}(a)\neq \operatorname{dft}(b)$, then
     \{2j-1\mid j\in [1,e]\}.
 \]
     Next we prove the stated equivalences.
+    The first holds since $k$ is a perfect field of characteristic $2$, the frob map is surjective means every element in $k$ is squre, therefore we have $u-c^2 \in \pi$ implies that if $v(a=u\pi^{2r})$ is even then ord is not zero.
     The first two terms is quite clear. To give third, since it has unique quadratic extension, then the squre class in set 
     \begin{align*}
         \{\varepsilon| v(\varepsilon)= v(4)\}
@@ -2993,6 +3142,51 @@ is equivalent to
 \]
 This proves the equivalence.
 \end{solution}
+\begin{solution}
+We prove \((ii)\Rightarrow (i)\). Suppose that
+\[
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak a\#}
+\subseteq
+L^{\mathfrak b\#}.
+\]
+Then in particular
+\[
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak b\#}.
+\]
+By part (1), \(L^{\mathfrak b\#}\) is a full \(\mathcal O_F\)-lattice in
+\(FL\). For any full lattice \(M\), one has
+\[
+\{\lambda\in F\mid \lambda M\subseteq M\}=\mathcal O_F.
+\]
+Indeed, if \(\lambda M\subseteq M\), then after localizing at every maximal
+ideal \(\mathfrak p\), we get
+\[
+\lambda M_{\mathfrak p}\subseteq M_{\mathfrak p}.
+\]
+Since \(M_{\mathfrak p}\) is a free \(\mathcal O_{\mathfrak p}\)-lattice, this
+forces \(\lambda\in\mathcal O_{\mathfrak p}\) for every \(\mathfrak p\), hence
+\(\lambda\in\mathcal O_F\).
+
+Applying this to \(M=L^{\mathfrak b\#}\), the inclusion
+\[
+\mathfrak a\mathfrak b^{-1}L^{\mathfrak b\#}
+\subseteq
+L^{\mathfrak b\#}
+\]
+implies
+\[
+\mathfrak a\mathfrak b^{-1}\subseteq \mathcal O_F.
+\]
+Therefore
+\[
+\mathfrak a\subseteq \mathfrak b.
+\]
+This proves \((ii)\Rightarrow(i)\).
+\end{solution}
 \subsection*{Exercise A.14.4}
 Let $\mathcal{O}_F$ be a discrete valuation ring with fraction field $F$ and suppose $\operatorname{char}(F) \neq 2$. Let $\mathfrak{a}$ be a fractional ideal of $\mathcal{O}_F$ and let $L$ be a quadratic $\mathcal{O}_F$-lattice with a Jordan splitting
 \[ L = L_1 \perp \cdots \perp L_t \perp \operatorname{rad}(L). \]
@@ -3242,6 +3436,11 @@ representatives gives the following table:
 \]
 This gives the complete Hilbert symbol table on
 \(\mathbb Q_2^\times/\mathbb Q_2^{\times 2}\).
+
+Acutally, we just need to compute 
+\begin{align*}
+    (2,5) = (-1,-1) = -1\quad (2,-1)=(5,-1) = 1.
+\end{align*}
 \end{solution}
 \subsection*{Exercise A.14.6}
 Let $F = \mathbb{Q}_5$ and let $\mathcal{O}_F$ be the valuation ring of $F$. Consider the quadratic $\mathcal{O}_F$-lattices
@@ -4398,83 +4597,28 @@ U_{\mathfrak p}\to W_{\mathfrak p}
 \]
 for every place \(\mathfrak p\).
 
-Choose \(u\in U\) with \(Q_U(u)=a\neq 0\). Such a vector exists because \(U\)
-is nonsingular. For every \(\mathfrak p\), the local representation
-\(U_{\mathfrak p}\to W_{\mathfrak p}\) shows that \(a\) is represented by
-\(W_{\mathfrak p}\). Hence, by the Hasse--Minkowski theorem, \(a\) is
-represented by \(W\). Thus there exists \(x\in W\) such that
-\[
-Q_W(x)=a.
-\]
-
-Now decompose
-\[
-U=Fu\perp U',
-\qquad
-W=Fx\perp W',
-\]
-where \(U'=u^\perp\) and \(W'=x^\perp\). We claim that
-\[
-U'_{\mathfrak p}\to W'_{\mathfrak p}
-\]
-for every \(\mathfrak p\).
-
-Indeed, fix \(\mathfrak p\). Let
-\[
-i_{\mathfrak p}:U_{\mathfrak p}\to W_{\mathfrak p}
-\]
-be a local representation, and set
-\[
-y_{\mathfrak p}=i_{\mathfrak p}(u).
-\]
-Then
-\[
-Q_W(y_{\mathfrak p})=Q_U(u)=a=Q_W(x).
-\]
-By Witt's extension theorem, the isometry between the two one-dimensional
-subspaces \(F_{\mathfrak p}y_{\mathfrak p}\to F_{\mathfrak p}x\) extends to an
-element of \(O(W_{\mathfrak p})\). Therefore we may replace
-\(i_{\mathfrak p}\) by an equivalent local representation and assume that
-\[
-i_{\mathfrak p}(u)=x.
-\]
-Then for every \(z\in U'_{\mathfrak p}\), one has
-\[
-B_W(i_{\mathfrak p}(z),x)
-=
-B_W(i_{\mathfrak p}(z),i_{\mathfrak p}(u))
-=
-B_U(z,u)
-=
-0.
-\]
-Thus \(i_{\mathfrak p}(z)\in x^\perp=W'_{\mathfrak p}\), proving
-\[
-U'_{\mathfrak p}\to W'_{\mathfrak p}.
-\]
-
-By the induction hypothesis, there is a representation
-\[
-j:U'\to W'
-\]
-over \(F\). Define
-\[
-i:U=Fu\perp U'\longrightarrow W=Fx\perp W'
-\]
-by
-\[
-i(\lambda u+z)=\lambda x+j(z).
-\]
-Since \(Q_W(x)=Q_U(u)\), and \(j\) preserves the quadratic form on \(U'\), this
-map is a representation of quadratic spaces. Hence
-\[
-U\to W
-\]
-over \(F\).
-
-Therefore \(U\) is represented by \(W\) over \(F\) if and only if
-\(U_{\mathfrak p}\) is represented by \(W_{\mathfrak p}\) over
-\(F_{\mathfrak p}\) for every \(\mathfrak p\in \Omega_F\).
+Suppose that $U$ represent $a$, then we can assume that 
+\begin{align*}
+    U \simeq \langle a \rangle \perp U'.
+\end{align*}
+since $\langle a \rangle$ is not singular. Hence, for every $\mathfrak{p}$ we can assume that 
+\begin{align*}
+    W_{\mathfrak{p}} \simeq\langle a \rangle \perp U'_{\mathfrak{p}} \perp W'_{\mathfrak{p}}.
+\end{align*}
+By Hasse–Minkowski theorem we obtain that $W$ represents $a$ then we can suppose that 
+\begin{align*}
+    W\simeq \langle a \rangle \perp  W''.
+\end{align*}
+Therefore, we have 
+\begin{align*}
+    \langle a \rangle \perp  W''_{\mathfrak{p}} \simeq \langle a \rangle \perp U'_{\mathfrak{p}} \perp W'_{\mathfrak{p}}.
+\end{align*}
+By Witt's cancellation, we have 
+\begin{align*}
+    W''_{\mathfrak{p}} \simeq U'_{\mathfrak{p}} \perp W'_{\mathfrak{p}}
+\end{align*}
+It menas that $W''$ represent $U'$ at every place. Hence, by Hasse–Minkowski theroem, we obtain that $W''$ represent $U'$ by our induction.
+Therefore, we have $W$ represents $U$.
 \end{solution}
 \subsection*{Exercise A.15.9}
 Prove the following weak approximation theorem for $\operatorname{O}^+(V)$: Let $T$ be a finite subset of $\Omega_F$. Suppose that an element $\varphi_{\mathfrak{p}} \in \operatorname{O}^+(V_{\mathfrak{p}})$ is given for each $\mathfrak{p} \in T$. Then for any real number $\varepsilon > 0$ there exists $\sigma \in \operatorname{O}^+(V)$ such that
