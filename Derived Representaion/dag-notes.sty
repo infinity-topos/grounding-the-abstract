@@ -13,7 +13,7 @@
 \RequirePackage{geometry}
 \geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
 \RequirePackage{fancyhdr} % 页眉页脚
-
+\usepackage{aliascnt}
 %----------------------------------------------------------------------------------------
 %	MATH PACKAGES
 %----------------------------------------------------------------------------------------
@@ -31,16 +31,54 @@
 %	THEOREM ENVIRONMENTS
 %----------------------------------------------------------------------------------------
 \theoremstyle{definition}
+
 \newtheorem{definition}{Definition}[section]
-\newtheorem{example}[definition]{Example}
-\newtheorem{remark}[definition]{Remark}
-\newtheorem{construction}[definition]{Construction}
-\newtheorem{convention}[definition]{Convention} % 增加 Convention 环境
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{proposition}[definition]{Proposition}
-\newtheorem{corollary}[definition]{Corollary}
-\newtheorem{conjecture}[definition]{Conjecture}
+\providecommand*{\definitionautorefname}{Definition}
+
+\newaliascnt{example}{definition}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\providecommand*{\exampleautorefname}{Example}
+
+\newaliascnt{remark}{definition}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\providecommand*{\remarkautorefname}{Remark}
+
+\newaliascnt{construction}{definition}
+\newtheorem{construction}[construction]{Construction}
+\aliascntresetthe{construction}
+\providecommand*{\constructionautorefname}{Construction}
+
+\newaliascnt{convention}{definition}
+\newtheorem{convention}[convention]{Convention}
+\aliascntresetthe{convention}
+\providecommand*{\conventionautorefname}{Convention}
+
+\newaliascnt{theorem}{definition}
+\newtheorem{theorem}[theorem]{Theorem}
+\aliascntresetthe{theorem}
+\providecommand*{\theoremautorefname}{Theorem}
+
+\newaliascnt{lemma}{definition}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\providecommand*{\lemmaautorefname}{Lemma}
+
+\newaliascnt{proposition}{definition}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\providecommand*{\propositionautorefname}{Proposition}
+
+\newaliascnt{corollary}{definition}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\providecommand*{\corollaryautorefname}{Corollary}
+
+\newaliascnt{conjecture}{definition}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\aliascntresetthe{conjecture}
+\providecommand*{\conjectureautorefname}{Conjecture}
 
 %----------------------------------------------------------------------------------------
 %	MACROS & SHORTCUTS (DAG SPECIFIC)

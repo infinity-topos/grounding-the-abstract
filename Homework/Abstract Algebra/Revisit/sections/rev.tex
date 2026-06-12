@@ -1,0 +1,552 @@
+
+\newcounter{paranum} 
+\newcommand{\np}{\stepcounter{paranum}\noindent\textbf{\arabic{paranum}.}\quad}
+
+\section{Concepts}
+
+\np faithful, injective, projective, flat, Noetherian, semisimple, Artinian, Soc, essnetial epi
+idem, Jacobson radical, projective cover, DVR.
+
+Composition series, Wedderburn’s Theorem, idempotents, Schur's lemma, the cartan matrix,Krull-Schmidt, Socle Series,Radical Series,Top, Nakayama lemma,Idempotent Lifting
+Jordan-Hölder, Loewy 
+
+\section{Module}
+
+\begin{theorem}
+    The following three conditions on $V_A$ are equivalent.
+    \begin{enumerate}
+        \item[(1)] $V$ is a Noetherian module.
+        \item[(2)] (Ascending chain condition.) For every infinite chain of $A$-submodules of $V$,
+        \begin{equation}\tag{2.1}
+            V_1 \subset V_2 \subset \cdots \subset V_n \subset \cdots,
+        \end{equation}
+        there is a number $m$ such that $V_m = V_{m+1} = \cdots$.
+        \item[(3)] Every $A$-submodule of $V$ is finitely generated over $A$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}[Finiteness in Category Theory]
+    \textbf{(1) Finite Presentation via Colimits:} \\
+    In classical module categories, ``finiteness'' is characterized by filtered colimits. A module $M$ is finitely presented if and only if the functor $\operatorname{Hom}(M, -)$ commutes with filtered colimits:
+    \[
+        \varinjlim \operatorname{Hom}(M, N_i) \xrightarrow{\sim} \operatorname{Hom}(M, \varinjlim N_i)
+    \]
+    Intuitively, any morphism from $M$ to an infinite filtered system must factor through a finite stage.
+
+    \vspace{1ex}
+    \noindent \textbf{(2) Finiteness via Functor Preservation in $\infty$-Categories:} \\
+    In higher category theory, objects lack ``elements.'' Instead, an object $X$ is defined as ``finite'' based on how its associated functors interact with limits and colimits.
+    \begin{itemize}
+        \item \textbf{Compact (Finitely Presented) Objects:} \\
+        The functor $\operatorname{Map}(X, -)$ commutes with \textit{filtered colimits}. \\
+        \textit{Example:} Finite CW complexes in the $\infty$-category of Spaces.
+
+        \item \textbf{Dualizable Objects:} \\
+        The functor $X \otimes -$ commutes with \textit{all limits} (e.g., infinite products). This happens because having a dual allows the left adjoint $X \otimes -$ to act like the right adjoint $\underline{\operatorname{Map}}(X^\vee, -)$. \\
+        \textit{Example:} Finite spectra in the stable $\infty$-category of Spectra.
+
+        \item \textbf{Perfect Complexes:} \\
+        The ultimate intersection of both finiteness conditions. $\mathbb{R}\operatorname{Map}(X, -)$ preserves filtered colimits, and $X \otimes^\mathbb{L} -$ preserves limits. \\
+        \textit{Example:} Perfect complexes in the derived $\infty$-category $\mathcal{D}(R)$ or $\operatorname{QCoh}(X)$ in derived algebraic geometry.
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}
+    The following three conditions on a module $V_A$ are equivalent:
+    \begin{enumerate}
+        \item[(1)] $V$ is an Artinian module.
+        \item[(2)] (Descending chain condition.) For every infinite chain of $A$-submodules of $V$,
+        \[
+            V_1 \supset V_2 \supset \cdots \supset V_n \supset \cdots,
+        \]
+        there is a number $m$ such that $V_m = V_{m+1} = \cdots$.
+        \item[(3)] (Minimal condition.) Every non-empty set of $A$-submodules of $V$ contains a minimal element with respect to inclusion.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}\label{thm:na-critria}
+Let $W$ be an $A$-submodule of $V$. Then $V$ is Noetherian (respectively, Artinian) if and only if both $W$ and $V/W$ are Noetherian (respectively, Artinian).
+\end{theorem}
+
+\begin{definition}
+A nonzero $A$-module $V$ is said to be \textbf{irreducible} (or \textbf{simple}) if it has no proper $A$-submodule other than $0$. 
+
+A chain of $A$-submodules of $V$
+$$V = V_0 \supset V_1 \supset \cdots \supset V_n = 0$$
+is said to be a \textbf{composition series} of $V$ if each $V_i/V_{i+1}$ is irreducible. And the simple modules
+$$V/V_1, V_1/V_2, \dots, V_{n-1}/V_n = V_{n-1}$$
+are called the \textbf{composition factors} of the series.
+\end{definition}
+
+\begin{theorem}
+A non-zero module has a composition series if and only if it is both Noetherian and Artinian.
+\end{theorem}
+\begin{proof}
+    Use \autoref{thm:na-critria} and induction on the length of chain.
+\end{proof}
+
+\begin{theorem}[Jordan--Hölder]
+If \(V\) has a composition series, any two composition factors obtained
+from the two series of \(V\) are the same up to order of occurrence and
+isomorphism.
+\end{theorem}
+
+
+
+\begin{theorem}[Equivalent descriptions of the Jacobson radical]\label{thm:eq des of J}
+Let \(A\) be a unital associative ring. For \(a\in A\), the following
+conditions are equivalent:
+\begin{enumerate}
+    \item[(i)] \(a\in J(A)\).
+    \item[(ii)] \(a\) annihilates every simple left \(A\)-module, i.e.
+    \(aS=0\) for every simple left \(A\)-module \(S\).
+    \item[(iii)] \(a\) annihilates every simple right \(A\)-module, i.e.
+    \(Ta=0\) for every simple right \(A\)-module \(T\).
+    \item[(iv)] \(a\) belongs to every maximal left ideal of \(A\).
+    \item[(v)] \(a\) belongs to every maximal right ideal of \(A\).
+    \item[(vi)] \(1-xa\in A^\times\) for every \(x\in A\).
+    \item[(vii)] \(1-ax\in A^\times\) for every \(x\in A\).
+\end{enumerate}
+Equivalently,
+\[
+J(A)=\bigcap_{S\ \mathrm{simple}}\operatorname{Ann}_A(S)
+     =\bigcap_{\mathfrak m\ \mathrm{maximal\ left}}\mathfrak m
+     =\bigcap_{\mathfrak n\ \mathrm{maximal\ right}}\mathfrak n .
+\]
+Moreover, \(J(A)\) is the largest two-sided ideal \(I\subset A\) such that
+\(1-a\in A^\times\) for every \(a\in I\).
+\end{theorem}
+
+\begin{theorem}
+Let \(A\) be a unital associative ring. If \(I\subset A\) is a nil left(right, double-sided) ideal,
+then \(I\subset J(A)\).
+\end{theorem}
+\begin{proof}
+    Use the (vi) of \autoref{thm:eq des of J}.
+\end{proof}
+
+\begin{theorem}[Jacobson radical of an Artinian ring] \label{thm:jacobson-radical-artinian} 
+    Let \(A\) be a unital associative ring. If \(A\) is left Artinian or right Artinian, then \(J(A)\) is the largest nilpotent two-sided ideal of \(A\).
+\end{theorem}
+
+\begin{theorem} \label{thm:simple-left-modules-quotients} 
+    Let \(A\) be a unital associative ring. If \(S\) is a simple left \(A\)-module, then there exists a maximal left ideal \(\mathfrak m\subset A\) such that \[ S\cong A/\mathfrak m \] as left \(A\)-modules. 
+\end{theorem}
+
+\begin{remark} \label{rem:annihilator-of-simple-quotient} 
+    Let \(A\) be a unital associative ring, and let \(\mathfrak m\subset A\) be a maximal left ideal. Then \(A/\mathfrak m\) is a simple left \(A\)-module, and \[ \operatorname{Ann}_A(A/\mathfrak m) = \{a\in A\mid aA\subset \mathfrak m\}. \] This is the largest two-sided ideal contained in \(\mathfrak m\). In general it need not equal \(\mathfrak m\), since \(\mathfrak m\) is only a left ideal. Thus \(\mathfrak m\) is the annihilator of the element \(1+\mathfrak m\), whereas \(\operatorname{Ann}_A(A/\mathfrak m)\) is the annihilator of the whole module. 
+\end{remark}
+
+\begin{theorem}[Azumaya--Nakayama] \label{thm:azumaya-nakayama} 
+    Let \(A\) be a unital associative ring. 
+    \begin{enumerate} 
+        \item[(i)] Let \(V\) be a left \(A\)-module and let \(W\) be an \(A\)-submodule of \(V\) such that \(V/W\) is finitely generated over \(A\). Then \[ V=W+J(A)V\Longrightarrow V=W. \] 
+        \item[(ii)] If \(V\) is a finitely generated left \(A\)-module, then \[ J(A)V=V\Longrightarrow V=0. \] 
+    \end{enumerate} 
+\end{theorem}
+
+\begin{theorem}
+\label{thm:finite-length-semisimple-radical}
+Let \(A\) be a unital associative ring, and let \(M\) be a left \(A\)-module
+of finite length. Then
+\[
+M \text{ is semisimple}
+\Longleftrightarrow
+\operatorname{rad}(M)=0.
+\]
+\end{theorem}
+
+\begin{theorem} \label{thm:semisimple-and-jacobson-radical} 
+    Let \(A\) be a unital associative ring. 
+    \begin{enumerate} 
+        \item[(i)] If \(A\) is semisimple, then \(J(A)=0\). 
+        \item[(ii)] If \(A\) is left Artinian or right Artinian, then \[ A \text{ is semisimple} \Longleftrightarrow J(A)=0. \] 
+    \end{enumerate} 
+\end{theorem}
+
+
+\begin{definition}
+\label{def:radical-of-module}
+Let \(A\) be a unital associative ring, and let \(M\) be a left
+\(A\)-module. The radical of \(M\) is defined by
+\[
+\operatorname{rad}(M)
+=
+\bigcap_{N\subset M\ \mathrm{maximal}} N,
+\]
+where the intersection is taken over all maximal submodules of \(M\).
+\end{definition}
+
+\begin{corollary}
+\label{cor:jacobson-radical-contained-in-module-radical}
+Let \(A\) be a unital associative ring, and let \(M\) be a left \(A\)-module.
+Then
+\[
+J(A)M\subset \operatorname{rad}(M).
+\]
+\end{corollary}
+
+\begin{theorem} \label{thm:semisimple-module-radical} 
+    Let \(A\) be a unital associative ring, and let \(M\) be a left \(A\)-module. If \(M\) is semisimple, then \[ \operatorname{rad}(M)=0. \] 
+\end{theorem}
+
+
+\begin{theorem}
+\label{thm:module-radical-artinian}
+Let \(A\) be a left Artinian ring, and let \(M\) be a finitely generated left
+\(A\)-module. Then
+\[
+\operatorname{rad}(M)=J(A)M.
+\]
+\end{theorem}
+
+\begin{proof}
+    Use \autoref{thm:semisimple-module-radical}.
+\end{proof}
+
+
+
+\begin{theorem}
+\label{thm:direct-sum-and-idempotents}
+Let \(A\) be a unital associative ring, and let \(M\) be a left
+\(A\)-module. A decomposition
+\[
+M=M_1\oplus\cdots\oplus M_n
+\]
+is equivalent to a decomposition of \(\operatorname{id}_M\) in
+\(\operatorname{End}_A(M)\) as
+\[
+\operatorname{id}_M=p_1+\cdots+p_n,
+\]
+where \(p_i^2=p_i\) and \(p_ip_j=0\) for \(i\neq j\). Under this
+correspondence,
+\[
+M_i=\operatorname{Im}(p_i).
+\]
+In particular, \(M\) is indecomposable if and only if \(\operatorname{id}_M\)
+is a primitive idempotent in \(\operatorname{End}_A(M)\).
+\end{theorem}
+
+
+\begin{theorem}
+\label{thm:endomorphism-ring-of-regular-module}
+Let \(A\) be a unital associative ring. Then
+\[
+\operatorname{End}_A(A_A)\cong A \quad \operatorname{End}_A(_A A)\cong A^{\text{op}}.
+\]
+\end{theorem}
+
+
+\begin{theorem} \label{thm:idempotents-and-ideal-decompositions} 
+    Let \(A\) be a unital associative ring, and let \(e\in A\) be an idempotent. 
+    \begin{enumerate} 
+        \item[(i)] If \(e=e_1+\cdots+e_n\) is a decomposition into pairwise orthogonal idempotents, then \[ eA=e_1A\oplus\cdots\oplus e_nA \] as right \(A\)-modules, and \[ Ae=Ae_1\oplus\cdots\oplus Ae_n \] as left \(A\)-modules. 
+        \item[(ii)] Conversely, every direct sum decomposition \[ eA=I_1\oplus\cdots\oplus I_n \] into right ideals is of the form \(I_i=e_iA\), where \(e=e_1+\cdots+e_n\) is a decomposition into pairwise orthogonal idempotents. Similarly, every direct sum decomposition \[ Ae=L_1\oplus\cdots\oplus L_n \] into left ideals is of the form \(L_i=Ae_i\), where \(e=e_1+\cdots+e_n\) is a decomposition into pairwise orthogonal idempotents. 
+    \end{enumerate} 
+\end{theorem}
+
+
+\begin{theorem}
+\label{thm:primitive-idempotents-for-modules}
+Let \(A\) be a unital associative ring, let \(M\) be a left \(A\)-module, and
+set \(E=\operatorname{End}_A(M)\). For a nonzero idempotent \(p\in E\), write
+\(pM=\operatorname{Im}(p)\). Then
+\[
+p \text{ is primitive in } E
+\Longleftrightarrow
+pM \text{ is indecomposable as a left } A\text{-module}.
+\]
+Moreover,
+\[
+\operatorname{End}_A(pM)\cong pEp .
+\]
+\end{theorem}
+
+
+\begin{theorem}
+\label{thm:indecomposable-local-endomorphism-ring}
+Let \(A\) be a unital associative ring, and let \(V\) be a left
+\(A\)-module. Suppose that \(V\) has a composition series. Then
+\[
+V \text{ is indecomposable}
+\Longleftrightarrow
+\operatorname{End}_A(V) \text{ is a local ring}.
+\]
+\end{theorem}
+
+\begin{theorem}[Krull--Schmidt--Azumaya]
+\label{thm:krull-schmidt-azumaya}
+Let \(A\) be a unital associative ring, and let \(V\) be a left
+\(A\)-module. Suppose that
+\[
+V=V_1\oplus\cdots\oplus V_n
+\]
+is a finite direct sum decomposition into indecomposable submodules, and that
+\(\operatorname{End}_A(V_i)\) is a local ring for every \(i\).
+
+Then this decomposition is unique up to isomorphism and permutation. That is,
+if
+\[
+V=W_1\oplus\cdots\oplus W_m
+\]
+is another finite direct sum decomposition into indecomposable submodules,
+then \(m=n\), and there exists a permutation \(\sigma\in S_n\) such that
+\[
+V_i\cong W_{\sigma(i)}
+\]
+for all \(1\leq i\leq n\).
+\end{theorem}
+
+
+
+\begin{lemma}
+\label{lem:idempotent-finite-decomposition-artinian-module}
+Let \(A\) be a unital associative ring, and let \(M\) be an Artinian left
+\(A\)-module. Set \(E=\operatorname{End}_A(M)\). Then every nonzero
+idempotent \(p\in E\) admits a finite decomposition
+\[
+p=p_1+\cdots+p_n
+\]
+where \(p_1,\dots,p_n\in E\) are pairwise orthogonal primitive idempotents.
+Equivalently,
+\[
+\operatorname{Im}(p)
+=
+\operatorname{Im}(p_1)\oplus\cdots\oplus \operatorname{Im}(p_n)
+\]
+is a finite direct sum decomposition into indecomposable left
+\(A\)-modules.
+\end{lemma}
+
+\begin{proof}
+Since \(p\) is idempotent, \(\operatorname{Im}(p)\) is a direct summand of
+\(M\). Hence \(\operatorname{Im}(p)\) is Artinian. Repeatedly decompose
+\(\operatorname{Im}(p)\) whenever it is decomposable. This process terminates,
+because otherwise one obtains an infinite strictly descending chain of
+submodules of \(M\). Thus
+\[
+\operatorname{Im}(p)=M_1\oplus\cdots\oplus M_n
+\]
+with each \(M_i\) indecomposable.
+
+Let \(p_i\) be the projection from \(M\) onto \(M_i\), with kernel equal to
+the sum of the other summands and \(\ker(p)\). Then the \(p_i\) are pairwise
+orthogonal idempotents in \(E\), and
+\[
+p=p_1+\cdots+p_n.
+\]
+Since \(\operatorname{Im}(p_i)=M_i\) is indecomposable, \(p_i\) is primitive.
+\end{proof}
+
+
+
+
+
+\begin{corollary}
+\label{cor:krull-schmidt-artinian}
+Let \(A\) be a left Artinian ring, and let \(M\) be a finitely generated
+left \(A\)-module. Then \(M\) admits a finite direct sum decomposition
+\[
+M=M_1\oplus\cdots\oplus M_n
+\]
+where each \(M_i\) is indecomposable. Moreover, this decomposition is unique
+up to isomorphism and permutation.
+\end{corollary}
+
+\begin{proof}
+    Use \autoref{lem:idempotent-finite-decomposition-artinian-module} and \autoref{thm:krull-schmidt-azumaya}.
+\end{proof}
+
+
+\begin{theorem}
+\label{thm:projective-module-characterizations}
+Let \(A\) be a unital associative ring, and let \(P\) be a left
+\(A\)-module. The following conditions are equivalent:
+\begin{enumerate}
+    \item[(i)] \(P\) is projective.
+
+    \item[(ii)] For every epimorphism \(M\twoheadrightarrow N\) and every
+    homomorphism \(P\to N\), there exists a lift \(P\to M\).
+
+    \item[(iii)] The functor
+    \[
+    \operatorname{Hom}_A(P,-):A\text{-}\mathrm{Mod}\longrightarrow
+    \mathrm{Ab}
+    \]
+    is exact.
+
+    \item[(iv)] \(P\) is a direct summand of a free left \(A\)-module.
+
+    \item[(v)] Every epimorphism \(M\twoheadrightarrow P\) splits.
+\end{enumerate}
+If \(P\) is finitely generated, then these conditions are also equivalent to
+\(P\) being a direct summand of \(A^n\) for some \(n\geq 1\).
+\end{theorem}
+
+\begin{theorem}
+\label{thm:injective-module-characterizations}
+Let \(A\) be a unital ring, and let \(I\) be a left \(A\)-module. The following
+conditions are equivalent:
+\begin{enumerate}
+    \item[(i)] \(I\) is injective, i.e., for every submodule \(M\subset N\) and
+    every homomorphism \(f:M\to I\), there exists an extension \(g:N\to I\)
+    such that \(g|_M=f\).
+
+    \item[(ii)] The functor
+    \[
+    \operatorname{Hom}_A(-,I):(A\text{-Mod})^{\mathrm{op}}\longrightarrow
+    \mathrm{Ab}
+    \]
+    is exact.
+
+    \item[(iii)] (Baer criterion) For every left ideal \(J\subset A\) and
+    homomorphism \(f:J\to I\), there exists an extension \(g:A\to I\)
+    with \(g|_J=f\).
+\end{enumerate}
+\end{theorem}
+
+
+\begin{theorem}
+\label{thm:flat-module-characterizations}
+Let \(A\) be a unital associative ring, and let \(F\) be a left
+\(A\)-module. The following conditions are equivalent:
+\begin{enumerate}
+    \item[(i)] \(F\) is flat, i.e. the functor
+    \[
+    -\otimes_A F:\mathrm{Mod}\text{-}A\longrightarrow \mathrm{Ab}
+    \]
+    is exact. Equivalently, for every monomorphism \(M'\hookrightarrow M\)
+    of right \(A\)-modules, the induced map
+    \[
+    M'\otimes_A F\longrightarrow M\otimes_A F
+    \]
+    is a monomorphism.
+
+    \item[(ii)] For every finitely generated right ideal \(I\subset A\), the
+    natural map
+    \[
+    I\otimes_A F\longrightarrow A\otimes_A F
+    \]
+    is injective.
+
+    \item[(iii)] \(F\) is a filtered colimit of finitely generated free left
+    \(A\)-modules.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{theorem}[Wedderburn--Artin]
+\label{thm:wedderburn-left-module}
+Let \(A\) be a simple Artinian ring. Then there exist a division ring \(D\) and
+a positive integer \(n\) such that
+\[
+A \cong M_n(D),
+\]
+the ring of \(n\times n\) matrices over \(D\).
+
+Moreover, as a left \(A\)-module, the left regular module \({}_A A\) decomposes as
+\[
+{}_A A \cong S^{\oplus n},
+\]
+where \(S = Ae_{11}\) is a minimal left ideal of \(A\), simple and projective,
+corresponding to the first column of the matrix block. Each of the \(n\) summands
+is isomorphic to \(S\), so the left regular module is a direct sum of
+mutually isomorphic minimal left ideals.
+\end{theorem}
+
+
+
+\begin{theorem}[Idempotent lifting modulo a nilpotent ideal]
+\label{thm:idempotent-lifting-nilpotent-ideal}
+Let \(A\) be a unital associative ring, and let \(I\subset A\) be a
+two-sided nilpotent ideal. Let \(\pi:A\to A/I\) be the quotient map.
+
+\begin{enumerate}
+    \item[(i)] Every idempotent of \(A/I\) lifts to an idempotent of \(A\).
+    That is, if \(\bar e\in A/I\) satisfies \(\bar e^2=\bar e\), then there
+    exists an idempotent \(e\in A\) such that \(\pi(e)=\bar e\).
+
+    \item[(ii)] More generally, if
+    \[
+    \bar e=\bar e_1+\cdots+\bar e_n
+    \]
+    is a decomposition into pairwise orthogonal idempotents in \(A/I\), and
+    \(e\in A\) is an idempotent lift of \(\bar e\), then there exist pairwise
+    orthogonal idempotents \(e_1,\dots,e_n\in A\) such that
+    \[
+    e=e_1+\cdots+e_n,
+    \qquad
+    \pi(e_i)=\bar e_i
+    \]
+    for all \(1\leq i\leq n\).
+\end{enumerate}
+\end{theorem}
+
+
+\begin{theorem} \label{thm:primitive-idempotent-lifting} 
+    Let \(A\) be a unital associative ring, and let \(I\subset A\) be a two-sided nilpotent ideal. 
+    Set \(\overline{A}=A/I\), and let \(\pi:A\to \overline{A}\) be the quotient map. If \(e\in A\) is an idempotent and \(\overline e=\pi(e)\), then \[ e \text{ is primitive in } A \Longleftrightarrow \overline e \text{ is primitive in } \overline A . \] 
+\end{theorem}
+
+\begin{lemma} \label{lem:essential-epimorphism-nakayama} 
+    Let \(A\) be a unital associative ring, and let \(f:M\to N\) be an epimorphism of left \(A\)-modules. If \(M\) is finitely generated and \[ \ker f\subset J(A)M, \] then \(f\) is essential. That is, if \(L\subset M\) is a submodule such that \(f(L)=N\), then \(L=M\). 
+\end{lemma}
+
+
+\begin{theorem}
+\label{thm:projective-covers-over-semiperfect-rings}
+Let \(A\) be a semiperfect ring, let \(J=J(A)\), and set
+\(\overline A=A/J\).
+
+\begin{enumerate}
+    \item[(i)] Every finitely generated left \(A\)-module \(M\) has a
+    projective cover
+    \[
+    p:P\twoheadrightarrow M,
+    \]
+    where \(P\) is a finitely generated projective left \(A\)-module. Moreover,
+    the induced map
+    \[
+    P/JP\longrightarrow M/JM
+    \]
+    is an isomorphism.
+
+    \item[(ii)] Let \(f:P\twoheadrightarrow M\) be an epimorphism of left
+    \(A\)-modules, and suppose that \(P\) is finitely generated and
+    projective. Then
+    \[
+    f \text{ is essential}
+    \Longleftrightarrow
+    \ker f\subset JP.
+    \]
+
+    \item[(iii)] If \(p:P\twoheadrightarrow M\) is the projective cover in
+    \textup{(i)}, then the induced map
+    \[
+    \overline p:P/JP\longrightarrow M/JM
+    \]
+    is a projective cover in \(\overline A\text{-}\mathrm{Mod}\).
+\end{enumerate}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

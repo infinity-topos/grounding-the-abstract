@@ -1,0 +1,32 @@
+\documentclass[a4paper,11pt]{article}
+
+% 引入我们自定义的样式包
+\usepackage{dag-notes}
+\usepackage{amsmath, amssymb, amsthm, amsfonts,amsthm,tikz-cd}
+\usepackage{fontawesome5}
+\usepackage{tikz-cd}
+\usepackage{marvosym}
+\usepackage{bm}
+\newcommand{\id}{\operatorname{id}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\qz}{\mathbb{Q}/\mathbb{Z}}
+\newcommand{\z}{\mathbb{Z}}
+\newenvironment{solution}
+  {\paragraph{\textit{Solution:}}\par\medskip}
+  {\hfill$\blacksquare$\vspace{0.1cm}}
+\title{\textbf{Revisit for Module and Representation Theory}}
+\date{\today}
+\begin{document}
+% 生成标题
+\maketitle
+\tableofcontents
+% 导入各个章节
+% 使用 \input 可以保持紧凑排版（不会强制换页）
+% 如果想要每一章从新的一页开始，可以使用 \include
+
+\input{sections/rev.tex}
+\input{sections/hk.tex}
+
+
+
+\end{document}

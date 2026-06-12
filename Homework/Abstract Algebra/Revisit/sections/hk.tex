@@ -1,0 +1,2421 @@
+\section{Week 1}
+\subsection*{Problem 1}
+Let $R$ be a ring, and let $M$ be an $R$-module. Suppose that $S$ is a ring and $\theta : S \to R$ is a ring homomorphism satisfying $\theta(1_S) = 1_R$. Let $S$ act on $M$ by $sx = \theta(s)x$, where $x \in M, s \in S$. Prove that $M$ is an $S$-module.
+
+\begin{solution}
+Define $s \cdot_S x = \theta(s) \cdot_R x$. We verify the axioms:
+\begin{itemize}
+    \item $s \cdot_S (x+y) = \theta(s) \cdot_R (x+y) = \theta(s) \cdot_R x + \theta(s) \cdot_R y = s \cdot_S x + s \cdot_S y$.
+    \item $(s_1 + s_2) \cdot_S x = \theta(s_1 + s_2) \cdot_R x = (\theta(s_1) + \theta(s_2)) \cdot_R x = s_1 \cdot_S x + s_2 \cdot_S x$.
+    \item $(s_1 s_2) \cdot_S x = \theta(s_1 s_2) \cdot_R x = \theta(s_1) \cdot_R (\theta(s_2) \cdot_R x) = s_1 \cdot_S (s_2 \cdot_S x)$.
+    \item $1_S \cdot_S x = \theta(1_S) \cdot_R x = 1_R \cdot_R x = x$.
+\end{itemize}
+Thus $M$ is an $S$-module.
+\end{solution}
+
+% --- Problem 2 ---
+\subsection*{Problem 2}
+Let $R$ be a ring, and let $M$ and $N$ be two right $R$-modules. Let $\text{Hom}_{\mathbb{Z}}(M, N)$ be the set of group homomorphisms from $M$ to $N$ (as abelian groups). The action of $R$ on $\text{Hom}_{\mathbb{Z}}(M, N)$ is given as follows: for any $a \in R, \varphi \in \text{Hom}_{\mathbb{Z}}(M, N)$, define
+\[ (\varphi a)(x) = \varphi(xa), \quad \forall x \in M. \]
+Prove that $\text{Hom}_{\mathbb{Z}}(M, N)$ is a left $R$-module.
+
+\begin{solution}
+    For any $a, b \in R$, $\varphi, \psi \in \text{Hom}_{\mathbb{Z}}(M, N)$, and $x \in M$:
+\begin{itemize}
+    \item  $(a \cdot (\varphi + \psi))(x) = (\varphi + \psi)(x \cdot a) = \varphi(x \cdot a) + \psi(x \cdot a) = (a \cdot \varphi)(x) + (a \cdot \psi)(x)$.
+    \item  $((a + b) \cdot \varphi)(x) = \varphi(x \cdot (a + b)) = \varphi(x \cdot a + x \cdot b) = \varphi(x \cdot a) + \varphi(x \cdot b) = (a \cdot \varphi)(x) + (b \cdot \varphi)(x)$.
+    \item  $((a \cdot b) \cdot \varphi)(x) = \varphi(x \cdot (a \cdot b)) = \varphi((x \cdot a) \cdot b) = (b \cdot \varphi)(x \cdot a) = (a \cdot (b \cdot \varphi))(x)$.
+    \item  $(1_R \cdot \varphi)(x) = \varphi(x \cdot 1_R) = \varphi(x)$, so $1_R \cdot \varphi = \varphi$.
+\end{itemize}
+Thus, $\text{Hom}_{\mathbb{Z}}(M, N)$ is a left $R$-module.
+\end{solution}
+
+% --- Problem 3 ---
+\subsection*{Problem 3}
+Let $R$ be a ring, and let $M$ be an $R$-module. Denote $\text{Ann}_R M = \{r \in R \mid rm = 0, \forall m \in M\}$. We call $M$ a \textbf{faithful} $R$-module if $\text{Ann}_R M = \{0\}$. Define the action of the quotient ring $R/\text{Ann}_R M$ on $M$ by $\bar{r}x = rx$, where $x \in M, r \in R, \bar{r} = r + \text{Ann}_R M$. Prove that $M$ is a faithful $R/\text{Ann}_R M$-module.
+
+\begin{solution}
+    Let $I = \text{Ann}_R M$ and $S = R/I$. 
+\begin{enumerate}
+    \item \textbf{$M$ is an $S$-module}: 
+    The action is well-defined because if $\bar{r} = \bar{r'}$, then $r - r' \in I$, so $(r - r') \cdot_R x = 0$, implying $r \cdot_R x = r' \cdot_R x$. The module axioms follow directly from the $R$-module structure.
+    
+    \item \textbf{$M$ is faithful over $S$}: 
+    Suppose $\bar{r} \in \text{Ann}_S M$. Then for all $x \in M$,
+    \[ \bar{r} \cdot_S x = r \cdot_R x = 0. \]
+    By definition of $I$, this implies $r \in I$. Thus $\bar{r} = r + I = \bar{0}$ in $S$. 
+    Since $\text{Ann}_S M = \{\bar{0}\}$, $M$ is a faithful $S$-module.
+\end{enumerate}
+\end{solution}
+
+% --- Problem 4 ---
+\subsection*{Problem 4}
+Let $\varphi : M \to M$ be a homomorphism of $R$-modules such that $\varphi\varphi = \varphi$. Prove that
+\[ M = \ker \varphi \oplus \text{im}\,\varphi. \]
+
+\begin{solution}
+Let $\psi = \text{id} - \varphi$. First, we observe that:
+\[ \varphi \cdot \psi = \varphi \cdot (\text{id} - \varphi) = \varphi - \varphi^2 = \varphi - \varphi = 0, \]
+\[ \psi \cdot \varphi = (\text{id} - \varphi) \cdot \varphi = \varphi - \varphi^2 = 0. \]
+We claim that $M = \text{im} \, \psi \oplus \text{im} \, \varphi$ and $\text{im} \, \psi = \ker \varphi$.
+
+\begin{enumerate}
+    \item 
+    For any $x \in M$, we can write:
+    \[ x = \text{id}(x) = (\psi + \varphi)(x) = \psi(x) + \varphi(x). \]
+    Since $\psi(x) \in \text{im} \, \psi$ and $\varphi(x) \in \text{im} \, \varphi$, it is clear that $M = \text{im} \, \psi + \text{im} \, \varphi$.
+
+    \item 
+     Since $\varphi \cdot \psi = 0$, for any $y = \psi(z) \in \text{im} \, \psi$, we have $\varphi(y) = \varphi(\psi(z)) = 0$. Thus $\text{im} \, \psi \subseteq \ker \varphi$.
+     If $x \in \ker \varphi$, then $x =\varphi(x)+ \psi(x)= \psi(x)$. 
+        This implies $x \in \text{im} \, \psi$, so $\ker \varphi \subseteq \text{im} \, \psi$.
+    Hence, $\text{im} \, \psi = \ker \varphi$.
+
+    \item 
+    Suppose $x \in \text{im} \, \psi \cap \text{im} \, \varphi$. Using the identity from step 2:
+    \[ x \in \text{im} \, \psi \implies x \in \ker \varphi \implies \varphi(x) = 0. \]
+    Meanwhile, $x \in \text{im} \, \varphi \implies x = \varphi(y)$ for some $y \in M$. 
+    Applying $\varphi$ to both sides: $\varphi(x) = \varphi^2(y) = \varphi(y) = x$.
+    Since $\varphi(x) = 0$ and $\varphi(x) = x$, we must have $x = 0$.
+\end{enumerate}
+Therefore, $M = \ker \varphi \oplus \text{im} \, \varphi$.
+\end{solution}
+
+% --- Problem 5 ---
+\subsection*{Problem 5}
+Show that any $R$-module is a homomorphic image of some free $R$-module.
+
+\begin{solution}
+    Let $M$ be an $R$-module. We construct a free $R$-module $F$ using the elements of $M$ as a basis. Specifically, let $F = \bigoplus_{m \in M} R \cdot e_m$, where $\{e_m\}_{m \in M}$ is the set of free generators indexed by $M$.
+
+By the universal property of free modules, there exists a unique $R$-module homomorphism $\pi: F \to M$ such that $\pi(e_m) = m$ for all $m \in M$. For any element in $F$, the map is defined as:
+\[ \pi\left( \sum_{i=1}^n r_i \cdot e_{m_i} \right) = \sum_{i=1}^n r_i \cdot m_i. \]
+
+For any $m \in M$, there is a corresponding generator $e_m \in F$ such that $\pi(e_m) = m$. This shows that $\pi$ is a surjective homomorphism. Therefore, $M = \text{im} \pi$ is a homomorphic image of the free $R$-module $F$.
+\end{solution}
+
+% --- Problem 6 ---
+\subsection*{Problem 6}
+Let $\mathbb{Q}$ be the field of rational numbers. Is the additive group $(\mathbb{Q}, +)$ a free $\mathbb{Z}$-module? Explain your answer.
+
+\begin{solution}
+Suppose $\mathbb{Q}$ is free over $\mathbb{Z}$. For any two non-zero elements $\frac{a}{b}, \frac{c}{d} \in \mathbb{Q}$ (where $a, b, c, d \in \mathbb{Z} \setminus \{0\}$), they are $\mathbb{Z}$-linearly dependent since:
+\[ (b \cdot c) \cdot \frac{a}{b} - (a \cdot d) \cdot \frac{c}{d} = (a \cdot c) - (a \cdot c) = 0. \]
+This implies that if $\mathbb{Q}$ were free, its rank must be $1$. 
+
+However, a free $\mathbb{Z}$-module of rank $1$ is isomorphic to $\mathbb{Z}$ itself, which is a cyclic group. $\mathbb{Q}$ is not cyclic because for any $q \in \mathbb{Q}$, the element $\frac{q}{2}$ cannot be expressed as $n \cdot q$ for any $n \in \mathbb{Z}$. Thus, $\mathbb{Q}$ cannot be a free $\mathbb{Z}$-module.
+\end{solution}
+
+\section{Week 2}
+
+\subsection*{Problem 1}
+Let $R$ be a commutative ring, and suppose that $\varphi$ is an endomorphism of the free $R$-module $R^m$. Prove that if $\varphi$ is surjective, then $\varphi$ is injective. Consider that: if $\varphi$ is injective, is $\varphi$ surjective?
+\begin{solution}
+Suppose $\{e_1,\dots,e_m\}$ is a basis of $R^m$ and $v_j=\varphi(e_j) = \sum_{i=1}^m a_{ij} e_i$. Then
+we represent $\varphi$ by matrix $A = (a_{ij}) \in M_m(R)$, we have 
+\begin{align*}
+(v_1,v_2,\dots,v_m) = (e_1,e_2,\dots,e_m) A. \tag{$\clubsuit$}
+\end{align*}
+Surjectivity implies that $\{e_i\}$ can be linearly represented by $\{v_i\}$. Equivalently, there exists an $m\times m$ matrix $B=(b_{ij})\in M_m(R)$ such that
+\begin{align*}
+    (e_1,e_2,\dots,e_m) = (v_1,v_2,\dots,v_m)B. \tag{$\spadesuit$}
+\end{align*} 
+Combine $\spadesuit$ and $\clubsuit$, we obtain that 
+\begin{align*}
+     (e_1,e_2,\dots,e_m)= (e_1,e_2,\dots,e_m)AB.
+\end{align*}
+$\{e_i\}$ is a basis implies that $AB=I$ and hence $\det(A)\det(B)=1$, $\det(A)$ is a unit in $R$. Let $A^*$ be adjoint matrix of $A$, then $A^*A=\det(A)I$. 
+Let $c=(c_1,\dots,c_m)^T\in R^m$ such that $\sum c_iv_i=0$, then 
+\begin{align*}
+    (e_1,e_2,\dots,e_m) Ac = (v_1,v_2,\dots,v_m)c =0
+\end{align*}  
+implies $Ac=0$, whence $c=\det(A)^{-1}A^*Ac=0$. Therefore, $\{v_i\}$, as linearly independent generators of $R^m$, is a basis.  If $w=\sum c_ie_i\in\ker(\varphi)$, then 
+$\sum c_iv_i=0$ implies $c_i=0$. The injectivity of $\varphi$ holds.
+
+The converse is not true. Take $R=\mathbb{Z}$ and consider an injective endomorphism
+\begin{align*}
+    \varphi:\mathbb{Z}^m &\to \mathbb{Z}^m\\
+    (n_1,\dots,n_m) &\mapsto (2n_1,\cdots,2n_m),
+\end{align*}
+which is not surjective.
+\end{solution}
+
+
+\subsection*{Problem 2}
+Let $\varphi : M \to N$ be a homomorphism of $R$-modules. Prove that:
+\begin{enumerate}
+    \item $\varphi$ is a monomorphism if and only if for any $R$-module $T$ and any two $R$-module homomorphisms $\xi, \eta : T \to M$, $\varphi\xi = \varphi\eta$ implies $\xi = \eta$;
+    \item $\varphi$ is an epimorphism if and only if for any $R$-module $S$ and any two $R$-module homomorphisms $\rho, \theta : N \to S$, $\rho\varphi = \theta\varphi$ implies $\rho = \theta$.
+\end{enumerate}
+
+\begin{solution}
+\textbf{(1)} Let $\varphi$ be a monomorphism and $\xi,\eta:T\to M$ be arbitrary module homomorphisms. Let $f=\xi-\eta$, then $\varphi f=0$ implies $\text{Im}(f)\subseteq \ker{\varphi} = \{0\}$. Therefore, It follows that $f=0$ and $\xi=\eta$.
+Conversely, setting $T = \ker(\varphi)$ and $\xi=\text{id},\eta=0$, then $\varphi\xi = \varphi\eta$ implies $\xi=\eta$. Consequently, $\text{id}=0$ yields $\ker(\varphi)=T=0$, $\varphi$ is injective.
+
+\textbf{(2)} Let $\varphi$ be an epimorphism and $\rho,\theta:N\to S$ be arbitrary module homomorphisms. Let $g=\rho-\theta$, then $g\varphi =0$ implies $N=\text{Im}(\varphi)\subseteq \ker(g)\subseteq N$, it follows $\ker(g)=N$ and $g=0,\rho=\theta$.
+Conversely, setting $S=\text{coker}(\varphi)=  N/\text{Im}(\varphi)$, let $\rho$ be the canonical module homomorphism and $\theta$ be a null homomorphism. $\rho\varphi = \theta\varphi$ implies $\rho = \theta$ is a null homomorphism,which yields $\text{Im}(\varphi) = N$.
+Therefore, the surjectivity of $\varphi$ holds. 
+\end{solution}
+
+\subsection*{Problem 3}
+Let $M$ and $M_i(1 \le i \le n)$ be $R$-modules. Show that $M \simeq \bigoplus_{i=1}^n M_i$ if and only if for every $i \in \{1, \dots, n\}$, there exists an $\varphi_i \in \text{End}_R(M)$ such that $\text{im } \varphi_i \simeq M_i$, $\varphi_i\varphi_j = 0$ (for $i \neq j$), and $\varphi_1 + \varphi_2 + \dots + \varphi_n = \text{id}_M$.
+
+\begin{solution}
+    Assume $M \simeq \bigoplus_{i=1}^n M_i$. Without loss of generality, identify $M$ with $\bigoplus_{i=1}^n M_i$.
+    Let $\pi_i: M \to M_i$ be the natural projection and $\iota_i: M_i \to M$ be the natural inclusion. 
+    Define $\varphi_i = \iota_i \circ \pi_i \in \text{End}_R(M)$. Then $\text{im} (\varphi_i) = \iota_i(M_i) \simeq M_i$
+    and for $i \neq j$, $\varphi_i \varphi_j = (\iota_i \pi_i)(\iota_j \pi_j) = \iota_i \circ (\pi_i \iota_j) \circ \pi_j = 0$.
+    For any $x = (m_1, \dots, m_n) \in M$, we have $\sum_{i=1}^n \varphi_i(x) = \sum_{i=1}^n (0, \dots, m_i, \dots, 0) = x$. Thus, $\sum_{i=1}^n \varphi_i = \text{id}_M$.
+    
+    Assume there exist $\varphi_1, \dots, \varphi_n \in \text{End}_R(M)$ satisfying the given conditions. Let $N_i = \text{im } \varphi_i$. By assumption, $N_i \simeq M_i$.
+    Firstly, note that $\varphi_i$ is idempotent. Multiplying $\sum_{j=1}^n \varphi_j = \text{id}_M$ by $\varphi_i$ gives $\sum_{j=1}^n \varphi_i \varphi_j = \varphi_i$. Since $\varphi_i \varphi_j = 0$ for $i \neq j$, this reduces to $\varphi_i^2 = \varphi_i$. 
+    Consequently, for any $x \in N_i$, $\varphi_i(x) = x$. $M$ is the sum of $N_i$ because for any $x \in M$, $x = \text{id}_M(x) = \sum_{i=1}^n \varphi_i(x)$. Since $\varphi_i(x) \in N_i$, we have $M = \sum_{i=1}^n N_i$.
+    Suppose $\sum_{j=1}^n x_j = 0$ where $x_j \in N_j$. Apply $\varphi_i$ to both sides:
+    $$\varphi_i \left( \sum_{j=1}^n x_j \right) = \varphi_i(0) = 0.$$
+    Because $x_j \in \text{im } \varphi_j$, we can write $x_j = \varphi_j(y_j)$ for some $y_j \in M$. 
+    For $j \neq i$, $\varphi_i(x_j) = \varphi_i \varphi_j(y_j) = 0$. 
+    Thus, the sum collapses to $\varphi_i(x_i) = 0$. Since $x_i \in N_i$, $x_i = \varphi_i(x_i) = 0$. 
+    This holds for all $i$, proving the sum is direct. Therefore, $M = \bigoplus_{i=1}^n N_i \simeq \bigoplus_{i=1}^n M_i$. 
+\end{solution}
+
+\subsection*{Problem 4}
+\begin{enumerate}
+    \item Prove $\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq \mathbb{Z}/(m,n)\mathbb{Z}$, where $m, n \in \mathbb{Z}$.
+    \item Let $A$ be an abelian group, prove $A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq A/nA$.
+    \item Let $A, B$ be two finitely generated abelian groups. What is $A \otimes_{\mathbb{Z}} B$?
+\end{enumerate}
+
+\begin{solution}
+    \textbf{(1)}
+    Let $d = (m,n)$. First, consider the map
+    \begin{align*}
+        f: \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z} &\to \mathbb{Z}/d\mathbb{Z} \\
+        (a\bmod m, b\bmod n) &\mapsto ab\bmod d.
+    \end{align*}
+    $f$ is well-defined because if we suppose $a' = a + km$ and $b' = b + ln$ for some integers $k, l$ then $a'b' = (a + km)(b + ln) \equiv ab \bmod d$. 
+    Furthermore, multiplication in $\mathbb{Z}/d\mathbb{Z}$ naturally distributes over addition, making $f$ a $\mathbb{Z}$-bilinear map. 
+    By the universal property of the tensor product, this bilinear map induces a unique $\mathbb{Z}$-module homomorphism
+    \begin{align*}
+        \phi: \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} &\to \mathbb{Z}/d\mathbb{Z}\\
+        a \otimes b &\mapsto ab \bmod d.
+    \end{align*}
+    Next, we construct the inverse homomorphism. 
+    Consider the $\mathbb{Z}$-module homomorphism 
+    \begin{align*}
+        \psi:\mathbb{Z}/d\mathbb{Z} &\to \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}\\
+        c \bmod d&\mapsto c(1 \otimes 1),
+    \end{align*}
+    which is well-defined because there exist integers $x,y$ such that $xm+yn=d$ by Bézout's identity and thus
+    \begin{align*}
+        d(1 \otimes 1) = (xm + yn)(1 \otimes 1) = xm(1 \otimes 1) + yn(1 \otimes 1)= x(m \otimes 1) + y(1 \otimes n)=0,
+    \end{align*}
+    then $\psi(c+kd) = \psi(c)$.
+    Finally, we verify that $\phi$ and $\psi$ are mutually inverse. For any $c \bmod d \in \mathbb{Z}/d\mathbb{Z}$, we have $\phi(\psi(c)) = \phi(c(1 \otimes 1)) = c \cdot \phi(1 \otimes 1) = c \cdot 1 = c \bmod d$,
+     so $\phi \circ \psi = \text{id}_{\mathbb{Z}/d\mathbb{Z}}$. Conversely, for any pure tensor $a \otimes b \in \mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}$, we have $\psi(\phi(a \otimes b)) = \psi(ab) = ab(1 \otimes 1) = a \otimes b$. 
+     Since the pure tensors generate the entire tensor product, $\psi \circ \phi = \text{id}_{\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}}$. Therefore, $\mathbb{Z}/m\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq \mathbb{Z}/(m,n)\mathbb{Z}$.
+
+     \textbf{(2)} First, consider the map
+     \begin{align*}
+        f: A \times \mathbb{Z}/n\mathbb{Z} &\to A/nA \\
+        (a, \bar{k}) &\mapsto ka\bmod nA,
+     \end{align*} 
+    where $\bar{k} = k\bmod n\mathbb{Z}$. To verify this is well-defined, suppose $k' = k + cn$ for some integer $c$. Then $f(a,\bar{k'}) = k'a \bmod nA = ka + cna + nA=ka\bmod nA $, since $A$ is a $\mathbb{Z}$-module and $cna \in nA$.
+    Furthermore, $f$ naturally preserves addition in both components, making it a $\mathbb{Z}$-bilinear map. 
+    By the universal property of the tensor product, this induces a unique $\mathbb{Z}$-module homomorphism 
+    \begin{align*}
+        \phi: A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} &\to A/nA \\
+        a \otimes \bar{k} &\mapsto ka \bmod nA.
+    \end{align*}
+    Next, we construct the inverse homomorphism. 
+    Consider the module homomorphism
+    \begin{align*}
+        \psi:A/nA &\to A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}\\
+        a \bmod nA&\mapsto a \otimes \bar{1},
+    \end{align*}
+    which is well-defined because if $a'=a+n\alpha$ where $\alpha\in A$ then $\psi(a') = a \otimes \bar{1} + \alpha \otimes \bar{n} = a \otimes \bar{1}$. 
+
+    Finally, we verify that $\phi$ and $\psi$ are mutually inverse. 
+    For any class $a + nA \in A/nA$, we have $\phi(\psi(a + nA)) = \phi(a \otimes \bar{1}) = 1a + nA = a + nA$, meaning $\phi \circ \psi = \text{id}_{A/nA}$. Conversely, for any pure tensor $a \otimes \bar{k} \in A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}$, we can rewrite it using scalar multiplication as $a \otimes k\bar{1} = ka \otimes \bar{1}$. Applying the composition yields $\psi(\phi(ka \otimes \bar{1})) = \psi(ka + nA) = ka \otimes \bar{1} = a \otimes \bar{k}$. Since pure tensors generate the entire tensor product, $\psi \circ \phi = \text{id}_{A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z}}$. Therefore, $A \otimes_{\mathbb{Z}} \mathbb{Z}/n\mathbb{Z} \simeq A/nA$.
+
+    \textbf{(3)} By the Structure Theorem for Finitely Generated Abelian Groups, suppose 
+    \begin{align*}
+        A \simeq \mathbb{Z}^r \oplus \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z}, \quad B \simeq \mathbb{Z}^s \oplus \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z}
+    \end{align*}
+    where $r, s \geq 0$, $\alpha_i,\beta_j>0$ and $p_i, q_j$ are prime numbers.
+    Since the tensor product functor distributes over arbitrary direct sums, we can expand $A \otimes_{\mathbb{Z}} B$ into four distinct blocks:
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq (\mathbb{Z}^r \otimes_{\mathbb{Z}} \mathbb{Z}^s) \oplus \left( \mathbb{Z}^r \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right) \oplus \left( \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}^s \right) \oplus \left( \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right).
+    \end{align*}
+    By $\textbf{(2)}$ and distributive law, we obtaint that 
+    \begin{align*}
+        \mathbb{Z}^r \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \simeq \bigoplus_{j=1}^l \left(\mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right)^r\text{ and }
+        \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}^s \simeq \bigoplus_{i=1}^k \left(\mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \right)^s.
+    \end{align*}
+    Hence, \textbf{(1)} implies
+    \begin{align*}
+        \bigoplus_{i=1}^k \mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \otimes_{\mathbb{Z}} \bigoplus_{j=1}^l \mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \simeq 
+        \bigoplus_{p_i = q_j = p} \mathbb{Z}/p^{\min(\alpha_i, \beta_j)}\mathbb{Z}.
+    \end{align*}
+    Therefore we obtain that 
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq \mathbb{Z}^{rs} \oplus \bigoplus_{j=1}^l \left(\mathbb{Z}/q_j^{\beta_j}\mathbb{Z} \right)^r \oplus \bigoplus_{i=1}^k \left(\mathbb{Z}/p_i^{\alpha_i}\mathbb{Z} \right)^s
+        \oplus \bigoplus_{p_i = q_j = p} \mathbb{Z}/p^{\min(\alpha_i, \beta_j)}\mathbb{Z}.
+    \end{align*}
+    Alternatively, if we let $T(A)$ and $T(B)$ denote the torsion subgroups of $A$ and $B$ respectively,
+    this entire result can be represented as 
+    \begin{align*}
+        A \otimes_{\mathbb{Z}} B \simeq \mathbb{Z}^{rs} \oplus T(B)^r \oplus T(A)^s \oplus \big(T(A) \otimes_{\mathbb{Z}} T(B)\big).
+    \end{align*}
+\end{solution}
+
+\subsection*{Problem 5}
+Let $\varphi : \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ be the unique monomorphism. Prove that 
+\[ \text{id} \otimes \varphi : \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/4\mathbb{Z} \]
+is a zero homomorphism.
+\begin{solution}
+    The unique monomorphism $\varphi : \mathbb{Z}/2\mathbb{Z} \to \mathbb{Z}/4\mathbb{Z}$ must map the generator $\bar{1} \in \mathbb{Z}/2\mathbb{Z}$ to the unique element of order $2$ in $\mathbb{Z}/4\mathbb{Z}$, which is $\bar{2}$. Therefore, $\varphi(\bar{1}) = \bar{2}$. 
+    Thus, we obtain that 
+    \begin{align*}
+        (\text{id} \otimes \varphi)(\bar{1} \otimes \bar{1}) = \text{id}(\bar{1}) \otimes \varphi(\bar{1}) = \bar{1} \otimes \bar{2} = 2(\bar{1})\otimes \bar{1} = 0.
+    \end{align*}
+    Therefore the only non-zero element $\bar{1} \otimes \bar{1}$ in $\mathbb{Z}/2\mathbb{Z} \otimes_{\mathbb{Z}} \mathbb{Z}/2\mathbb{Z}$ is mapped to 0 meaning that $\text{id} \otimes \varphi$ is a null homomorphism.
+\end{solution}
+
+
+
+\subsection*{Problem 6}
+Let $V_1$ and $V_2$ be two vector spaces over a field $F$ with dimension $n$ and $m$ respectively. Let $\{\epsilon_1, \dots, \epsilon_n\}$ and $\{\eta_1, \dots, \eta_m\}$ be bases of $V_1$ and $V_2$ respectively. Suppose that $\mathscr{A}$ (resp. $\mathscr{B}$) is an $F$-linear map of $V_1$ (resp. $V_2$), and it is represented by the matrix $A = (a_{ij})_{n \times n}$ (resp. $B = (b_{ij})_{m \times m}$) with respect to the above bases. Prove that 
+\[ \{\epsilon_i \otimes \eta_j \mid 1 \le i \le n, 1 \le j \le m\} \]
+is an $F$-basis of $V_1 \otimes_F V_2$. Determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis.
+\begin{solution}
+    We first prove that the set $\{\epsilon_i \otimes \eta_j \mid 1 \leq i \leq n, 1 \leq j \leq m\}$ forms an $F$-basis for $V_1 \otimes_F V_2$.
+    For arbitrary $v=\sum_{i=1}^n x_i \epsilon_i \in V_1$ and $w =\sum_{j=1}^m y_j \eta_j\in V_2$, we obtain that 
+    \begin{align*}
+        v \otimes w = (\sum_{i=1}^n x_i \epsilon_i) \otimes (\sum_{j=1}^m y_j \eta_j) = \sum_{i=1}^n \sum_{j=1}^m (x_i y_j) (\epsilon_i \otimes \eta_j).
+    \end{align*}
+    Since pure tensors of the form $v \otimes w$ generate the space $V_1 \otimes_F V_2$, and any such pure tensor can be expressed as a linear combination of $\{\epsilon_i \otimes \eta_j\}$, this set spans $V_1 \otimes_F V_2$.
+    To establish linear independence, suppose there exist scalars $c_{ij} \in F$ such that $\sum_{i=1}^n \sum_{j=1}^m c_{ij} (\epsilon_i \otimes \eta_j) = 0$.
+    There are natural isomorphisms
+    \begin{align*}
+        \text{Hom}_F(V_1\otimes_F V_2,F)\simeq \text{Hom}_F(V_1,V_2^*)\simeq V_1^* \otimes_F V_2^*.
+    \end{align*}
+    The first isomorphism arises directly from the Tensor-Hom adjunction and the second holds beacuse of finite dimension of $V_1$.  Therefore for any $1\le k\le n,1\le l\le m$, we obtain that
+    \begin{align*}
+        c_{kl} = (\epsilon_k^*\otimes \eta_l^*)\left(\sum_{i=1}^n \sum_{j=1}^m c_{ij} (\epsilon_i \otimes \eta_j)\right)  = 0
+    \end{align*}
+    meaning that $\{\epsilon_i \otimes \eta_j\}$ is a basis of $V_1\otimes V_2$.
+
+    Next, we determine the matrix representing the $F$-linear map $\mathscr{A} \otimes \mathscr{B}$ under this basis. 
+    By definition, the given matrices $A = (a_{ij})_{n \times n}$ and $B = (b_{ij})_{m \times m}$ describe the action of the linear maps on their respective bases as $\mathscr{A}(\epsilon_j) = \sum_{i=1}^n a_{ij} \epsilon_i$ and $\mathscr{B}(\eta_l) = \sum_{k=1}^m b_{kl} \eta_k$. 
+    Evaluating the action of $\mathscr{A} \otimes \mathscr{B}$ on a basis element $\epsilon_j \otimes \eta_l$ yields:$$(\mathscr{A} \otimes \mathscr{B})(\epsilon_j \otimes \eta_l) = \mathscr{A}(\epsilon_j) \otimes \mathscr{B}(\eta_l) = \left(\sum_{i=1}^n a_{ij} \epsilon_i\right) \otimes \left(\sum_{k=1}^m b_{kl} \eta_k\right) = \sum_{i=1}^n \sum_{k=1}^m (a_{ij} b_{kl}) (\epsilon_i \otimes \eta_k).$$
+    If we order the $nm$ basis vectors lexicographically (i.e., $(1,1), (1,2), \dots, (1,m), (2,1), \dots$), the resulting $nm \times nm$ matrix representation is the Kronecker product of the matrices
+    \begin{align*}
+        A \otimes B = \begin{pmatrix} a_{11}B & a_{12}B & \cdots & a_{1n}B \\ a_{21}B & a_{22}B & \cdots & a_{2n}B \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1}B & a_{n2}B & \cdots & a_{nn}B \end{pmatrix}
+    \end{align*}
+\end{solution}
+
+
+\section{Week 3}
+\subsection*{Problem 1}
+Let $M, N, M_i (i \in I)$ and $N_j (j \in J)$ be $R$-modules. Prove the following isomorphisms of abelian groups.
+\begin{enumerate}
+    \item[(1)] $\operatorname{Hom}_R\left(\bigoplus_{i\in I} M_i, N\right) \simeq \prod_{i\in I} \operatorname{Hom}_R(M_i, N)$;
+    \item[(2)] $\operatorname{Hom}_R\left(M, \prod_{j\in J} N_j\right) \simeq \prod_{j\in J} \operatorname{Hom}_R(M, N_j)$.
+\end{enumerate}
+\begin{solution}
+\textbf{(1)}
+Let $X = \operatorname{Hom}_R\left(\bigoplus_{i\in I} M_i, N\right)$ and $Y_i = \operatorname{Hom}_R(M_i, N)$. 
+Let $G$ be an arbitrary abelian group, and suppose we are given a family of group homomorphisms $\varphi_i: G \to Y_i$ for each $i \in I$. 
+For fixed $g\in G$, the family $\{\varphi_i(g)\}_{i \in I}$ is a collection of $R$-module homomorphisms from $M_i$ to $N$.
+Then by the universal property of the direct sum $\bigoplus_{i \in I} M_i$ in $R$-Mod, there exists a unique $R$-module homomorphism $f_g$
+such that 
+\begin{align*}
+    f_g \circ \iota_i = \varphi_i(g) \quad \text{for all } i \in I.
+\end{align*}
+where $\iota_i$ are the canonical injections. Define $\Phi: G \to X$ by setting $\Phi(g) = f_g$. I claim that $\Phi$ is the unique group 
+homomorphism such that the diagram
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=large, column sep=large]
+    G \arrow[d, "\varphi_i"'] \arrow[dr, "\Phi", dashed] \& \\
+    Y_i \& X \arrow[l, "\pi_i"]
+\end{tikzcd}
+\]
+commutes where $\pi_i=\text{Hom}_R(\iota_i,N)$ is the canonical projection induced by contravariant functor $\text{Hom}_R(-,N)$. Let $g, h \in G$. Since $\varphi_i(g+h)= \varphi_i(g)+\varphi_i(h)$ we obtain that
+\begin{align*}
+    f_{g+h}\circ \iota_i = \varphi_i(g)+\varphi_i(h) = (f_{g}+f_{h})\circ \iota_i.
+\end{align*}
+Then $f_{g+h} = f_g+f_h$, or equivalently $\Phi(g+h)=\Phi(g)+\Phi(h)$, by the uniqueness condition of the direct sum's universal property.  Therefore, $\Phi$ is a 
+group homomorphism. To prove the uniqueness of $\Phi$, we suppose
+there is another group homomorphism $\Psi: G \to X$ satisfying $(\Psi(g)) \circ \iota_i = \varphi_i(g)$ for all $i \in I$ and all $g \in G$. For any fixed $g$, both $R$-module homomorphisms $\Psi(g)$ and $\Phi(g)$ pull back along $\iota_i$ to the same maps $\varphi_i(g)$. 
+By the universal property of the direct sum, we must have $\Psi(g) = \Phi(g)$ for all $g$, so $\Psi = \Phi$.
+The uniqueness and existence of $\Phi$ yields $\operatorname{Hom}_R\left(\bigoplus_{i\in I} M_i, N\right) \simeq \prod_{i\in I} \operatorname{Hom}_R(M_i, N)$.
+
+\textbf{(2)} Let $X=\operatorname{Hom}_R\left(M, \prod_{j\in J} N_j\right)$ and $Y_j=\operatorname{Hom}_R(M, N_j)$. Let $G$ be an arbitrary abelian group, and suppose we are given a family of group homomorphisms
+$\varphi_j: G \to Y_j$ for each $j \in J$. Then for fixed $g\in G$ the family of $R$-module homomorphisms $\{\varphi_j(g):M\to N_j\}_{j\in J}$ uniquely induced an $R$-module homomorphism
+$f_g:M \to \prod_{j\in J} N_j$ such that $\varphi_j(g)= p_j\circ f_g$. Define the map $\Phi:G \to \operatorname{Hom}_R\left(M, \prod_{j\in J} N_j\right)$ by setting $\Phi(g) = f_g$. I claim $\Phi$ is the unique group
+homomorphism such that the diagram 
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=large, column sep=large]
+    G \arrow[d, "\varphi_j"'] \arrow[dr, "\Phi", dashed] \& \\
+    Y_j \& X \arrow[l, "\pi_j"]
+\end{tikzcd}
+\]
+commutes where $\pi_j=\text{Hom}_R(M,p_j)$ is the canonical projection induced by covariant functor $\text{Hom}_R(M,-)$. Let $g, h \in G$. Since $\varphi_j(g+h)= \varphi_j(g)+\varphi_j(h)$ we obtain that
+\begin{align*}
+    p_j\circ f_{g+h} = \varphi_j(g)+\varphi_j(h) = p_j\circ (f_{g}+f_{h}).
+\end{align*}
+It implies $\Phi(g+h)=\Phi(g)+\Phi(h)$ because of the uniqueness condition of the direct product's universal property.
+Therefore, $\Phi$ is a group homomorphism. To prove the uniqueness of $\Phi$, we suppose
+there is another group homomorphism $\Psi: G \to X$ satisfying $p_j\circ (\Psi(g))  = \varphi_j(g)$ for all $j \in J$ and all $g \in G$. For any fixed $g$, both $R$-module homomorphisms $\Psi(g)$ and $\Phi(g)$ push forward along $p_j$ to the same maps $\varphi_j(g)$. 
+By the universal property of the direct product, we must have $\Psi(g) = \Phi(g)$ for all $g$, so $\Psi = \Phi$.
+The uniqueness and existence of $\Phi$ yields $\operatorname{Hom}_R\left(M, \prod_{j\in J} N_j\right) \simeq \prod_{j\in J} \operatorname{Hom}_R(M, N_j)$.
+\end{solution}
+\begin{remark}
+    The isomorphism established in \textbf{(1)} is the direct consequence of the \textbf{Hom-Hom adjunction} and the fact that right adjoints preserve limits. Specifically, 
+    the contravariant functor $\operatorname{Hom}_R(-, N)$ is the right adjoint of contravariant functor $\operatorname{Hom}_{\textbf{Ab}}(-, N)$. 
+    More explicitly, there is a natural isomorphism 
+    \begin{align*}
+        \text{Hom}_R(M,\text{Hom}_\textbf{Ab}(A,N)) \cong \text{Hom}_\textbf{Ab}(A,\text{Hom}_R(M,N)),
+    \end{align*}
+    which holds for both left and right $R$-module categories.
+    Similarily, \textbf{(2)} is the direct consequence of the \textbf{Tensor-Hom adjunction}. Specifically, the covariant functor
+    $\text{Hom}_R(M,-)$ is the right adjoint of the covariant functor $-\otimes_\mathbb{Z} M$ if we consider right $R$-module category and $M \otimes_\mathbb{Z} - $ for the left.
+\end{remark}
+
+
+\subsection*{Problem 2}
+(\textit{Five Lemma}) Suppose that the following diagram of homomorphisms of $R$-modules
+\[\begin{tikzcd}
+    M_1 \arrow[r,"f_1"] \arrow[d, "\varphi_1"] & M_2 \arrow[r,"f_2"] \arrow[d, "\varphi_2"] & M_3 \arrow[r,"f_3"] \arrow[d, "\varphi_3"] & M_4 \arrow[r,"f_4"] \arrow[d, "\varphi_4"] & M_5 \arrow[d, "\varphi_5"] \\
+    N_1 \arrow[r,"g_1"] & N_2 \arrow[r,"g_2"] & N_3 \arrow[r,"g_3"] & N_4 \arrow[r,"g_4"] & N_5
+\end{tikzcd}\]
+is commutative and has exact rows. Prove that
+\begin{enumerate}
+    \item[(1)] if $\varphi_1$ is surjective, and $\varphi_2$ and $\varphi_4$ are injective, then $\varphi_3$ is injective;
+    \item[(2)] if $\varphi_5$ is injective, and $\varphi_2$ and $\varphi_4$ are surjective, then $\varphi_3$ is surjective.
+\end{enumerate}
+
+\begin{solution}
+    \textbf{(1)} Suppose $a_3\in M_3$ such that $\varphi_3(a_3) = 0$, then $\varphi_4\circ f_3(a_3) = g_3\circ \varphi_3(a_3)=0$ implies $f_3(a_3)=0$
+    since $\varphi_4$ is injective. Therefore, $\text{Im}(f_2)=\ker(f_3)$ implies that there exists an element $a_2\in M_2$ such that $f_2(a_2)=a_3$.
+    Let $b_2 = \varphi_2(a_2)$, then $g_2(b_2) = \varphi_3\circ f_2(a_2)= \varphi_3(a_3)=0$ implies there exists $b_1\in N_1$ such that $g_1(b_1)=b_2$. 
+    Because $\varphi_1$ is surjective then there exists $a_1$ such that $\varphi_1(a_1)=b_1$. I claim that $a_2=f_1(a_1)$ and therefore $a_2\in \text{Im}(f_1)=\ker(f_2)$ implies
+    $a_3=f_2(a_2)=0$ and thus $\varphi_3$ is injective. To prove it, we can consider $\varphi_2(a_2-f_1(a_1))=\varphi_2(a_2) - g_1\circ \varphi_{1}(a_1) = b_2-b_2=0$  which 
+    implies $a_2-f_1(a_1)=0$ because of injectivity of $\varphi_2$.
+    
+    \textbf{(2)} Suppose $b_3$ be arbitrary elements in $N_3$ respectively. Let $b_4=g_3(b_3)$. Because $\varphi_4$ is surjective 
+    then we can let $a_4 \in M_4$ such that $\varphi_4(a_4)=b_4$. Then $\varphi_5\circ f_4(a_4)=g_4\circ \varphi_4(a_4) = g_4\circ g_3(b_3) = 0$ implies 
+    $f_4(a_4)=0$ because of injectivity of $\varphi_5$. Then we can suppose $a_3\in M_3$ such that $f_3(a_3)= a_4$. Then $g_3(b_3-\varphi_3(a_3))= b_4-\varphi_4(a_4)=0$ implies 
+    there exists $b_2\in N_2$ such that $g_2(b_2) = b_3-\varphi_3(a_3)$. Then the surjectivity of $\varphi_2$ implies there exists $a_2$ such that $\varphi_2(a_2)=b_2$.
+    Since diagram commutes, we obtain that $\varphi_3\circ f_2(a_2) = b_3-\varphi_3(a_3)$, or equivalently, $b_3 = \varphi_3(f_2(a_2)+a_3)\in \text{Im}(\varphi_3)$ which implies $\varphi_3$ is 
+    surjective.
+\end{solution}
+
+\subsection*{Problem 3}
+(\textit{Snake Lemma}) Suppose that the following diagram of homomorphisms of $R$-modules
+\[\begin{tikzcd}
+    0 \arrow[r] & M' \arrow[r, "\alpha"] \arrow[d, "\varphi'"] & M \arrow[r, "\beta"] \arrow[d, "\varphi"] & M'' \arrow[r] \arrow[d, "\varphi''"] & 0 \\
+    0 \arrow[r] & N' \arrow[r, "\mu"] & N \arrow[r, "\nu"] & N'' \arrow[r] & 0
+\end{tikzcd}\]
+is commutative and has exact rows. Prove that
+\[ 0 \to \ker\varphi' \xrightarrow{\alpha'} \ker\varphi \xrightarrow{\beta'} \ker\varphi'' \xrightarrow{\delta} \operatorname{coker}\varphi' \xrightarrow{\mu'} \operatorname{coker}\varphi \xrightarrow{\nu'} \operatorname{coker}\varphi'' \to 0 \]
+is a long exact sequence, where $\alpha', \beta', \mu', \nu'$ are homomorphisms induced by $\alpha, \beta, \mu, \nu$, respectively. (Hint: for any $x \in \ker\varphi''$, take $y \in M$ such that $\beta(y) = x$, and take $z \in N'$ such that $\mu(z) = \varphi(y)$. Define $\delta(x) = \overline{z} = z + \operatorname{im}\varphi'$)
+\begin{solution}
+    \textbf{$\bm{\alpha'}$ is well-defined and injective}. Suppose $m'\in\ker(\varphi')$, since diagram commutes, we obtain that $\varphi\circ \alpha(m')=\mu\circ\varphi'(m')=0$ which implies $\alpha(m')\in\ker(\varphi)$. 
+    Therefore, $\alpha'= \alpha|_{\ker(\varphi')}:\ker(\varphi')\to \ker(\varphi)$ is well-defined. Hence, $\alpha'$ is injective since $\alpha$ is injective.
+    \textbf{$\bm{\beta'}$ is well-defined and $\bm{\textbf{Im}(\alpha')=\ker(\beta')}$.}  Let $m\in\ker(\varphi)$, then $\varphi''\circ\beta(m)=\nu\circ \varphi(m)=0$ yields well-definedness. Suppose $m'\in\ker(\varphi')$ then $\beta'\circ\alpha'(m')=\beta\circ\alpha(m')=0$ where $\beta\circ\alpha=0$ because of 
+    the exactness of the first row. Therefore, we obtain that $\text{Im}(\alpha')\subseteq\ker(\beta')$. Conversely, if $m\in\ker(\beta')$, then $\beta(m)=\beta'(m)=0$. By exactness, there exists $m'$ such that $\alpha(m')=m$. Hence, $m\in\ker(\varphi)$ implies that $\mu\circ\varphi'(m')= \varphi\circ\alpha(m')= \varphi(m)=0$. 
+    Because $\mu$ is injective, then we obtain that $m'\in\ker(\varphi')$. Therefore, for an arbitrary element $m\in\ker(\beta')$ there exists $m'\in\ker(\varphi')$ such that $m=\alpha'(m')$ meaning that $\ker(\beta')\subseteq\text{Im}(\alpha')$.
+    \textbf{$\bm{\delta}$ is well-defined.}
+    Because $\beta$ is surjective then for any $x\in \ker(\varphi'')$ there exists an element $y\in M$ such that $\beta(y)=x$.
+    Since $x\in\ker(\varphi'')$, we obtain that $\nu\circ\varphi(y)= \varphi''(x)=0$, which implies $\varphi(y)\in\ker(\nu)$. By exactness, 
+    there exists an element $z\in N'$ such that $\mu(z)=\varphi(y)$.
+    Let $y_0,y_1\in M $ be arbitrary two elements such that $\beta(y_0)=\beta(y_1)=x$. Let $z_0,z_1\in N'$ be arbitrary two elements such that $\mu(z_0)=\varphi(y_0)$ and $\mu(z_1)=\varphi(y_1)$.
+    Because $\beta(y_1-y_0)= 0$, then there exists an element $m'\in M'$ such that $\alpha(m')=y_1-y_0$. Therefore, 
+    \begin{align*}
+        \mu(\varphi'(m')-z_1+z_0)&= \mu\circ \varphi'(m')-\mu(z_1-z_0) \\
+        &= \varphi\circ\alpha(m')-\mu(z_1-z_0) \\
+        &= \varphi(y_1-y_0) - \mu(z_1-z_0)=0
+    \end{align*}
+    implies $\varphi'(m')=z_1-z_0$ since $\mu$ is injective. Equivalently, we obtain that $\overline{z_1-z_0}=0$ which yields the well-definedness of $\delta$.
+    \textbf{$\bm{\textbf{Im}(\beta')=\ker(\delta)}$}. Suppose $m\in\ker(\varphi)$, then we can select $z=0\in N'$ because $\mu(z)=\varphi(m)=0$ which implies $\delta\circ\beta'(m)=0$.
+    Therefore, $\text{Im}(\beta')\subseteq \ker(\delta)$. Suppose $m''\in\ker(\delta)$, then there exists $m\in M$ and $n'\in N'$ such that $\beta(m)=m''$ and $\varphi(m)=\mu(n')$.
+    Hence $\delta(m'')=0$ implies there exists an element $m'\in M'$ such that $\varphi'(m')=n'$.  I claim that $m-\alpha(m')\in \ker(\varphi)$ and thus $\beta'(m-\alpha(m'))=\beta(m)-\beta\circ\alpha(m')=m''$ implies 
+    that $\ker(\delta)\subseteq\text{Im}(\beta')$. To see that, we consider $\varphi(m-\alpha(m')) = \varphi(m) -\mu\circ\varphi'(m') = \varphi(m)-\mu(n')=0$.
+    \textbf{$\bm{\mu'}$ is well-defined and $\bm{\textbf{Im}(\delta)=\ker(\mu')}$.} Since the diagram commutes, $\mu\circ\varphi' = \varphi\circ\alpha$ implies $\mu(\text{Im}(\varphi'))\subseteq \text{Im}(\varphi)$ which 
+    yields well-definedness. Let $m''$ be an arbitrary element in $\ker(\varphi'')$ then there exists $m\in M$ and $n'\in N'$ such that $\beta(m) = m''$ and $\varphi(m)=\mu(n')$. Then we have $\mu'\circ\delta(m'') = \mu'(n'+\text{Im}(\varphi')) = \mu(n') + \text{Im}(\varphi)=0\in\text{coker}(\varphi)$,
+    which implies $\text{Im}(\delta)\subseteq \ker(\mu')$. For an arbitrary element $\overline{n'}\in\ker(\mu')$, then we have 
+    $\mu(n')\in\text{Im}(\varphi)$, which implies there exists an element $m\in M$ such that $\varphi(m)=\mu(n')$. Let $m'' = \beta(m)$ and I claim that $m''\in \ker(\varphi'')$
+    and thus $\delta(m'') = \overline{n'}$ implies $\ker(\mu')\subseteq \text{Im}(\delta)$. To see that, just consider $\varphi''(m'')=\nu\circ\varphi(m) = \nu\circ\mu(n')=0$.
+    \textbf{$\bm{\nu'}$ is well-defined and $\bm{\ker(\nu')=\textbf{Im}(\mu')}$.} Similarily, because diagram commutes, then $\nu\circ\varphi = \varphi''\circ\beta$ implies that $\nu(\text{Im}(\varphi))\subseteq \text{Im}(\varphi'')$
+    meaning that $\nu'$ is well-defined. Let $\overline{n'}$ be an arbitrary element in $\text{coker}(\varphi')$, then $\nu'\circ\mu'(\overline{n'}) = \nu'(\mu(n')+\text{Im}(\varphi))= \nu\circ\mu (n') + \text{Im}(\varphi'') = 0\in \text{coker}(\varphi'')$.
+    Therefore, $\text{Im}(\mu')\subseteq \ker(\nu')$. Let $\overline{n}$ be an arbitrary element such that $\nu'(\overline{n})=0$, equivalently $\nu(n)\in \text{Im}(\varphi'')$. Then there exists
+    an element $m''\in M''$ such that $\varphi''(m'')=\nu(n)$. Since $\beta$ is surjective, then there exists an element $m\in M$ such that $\beta(m)=m''$. I claim that 
+    $n-\varphi(m)\in\ker(\nu)$ and thus there exists an element $n'\in N'$ such that $\mu(n')= n-\varphi(m)$, which implies that $\mu'(\overline{n'}) = \overline{n}$ meaning that $\ker(\nu')\subseteq\text{Im}(\mu')$.
+    To see that, we consider $\nu(n-\varphi(m)) = \nu(n)-\varphi''\circ\beta(m)=\nu(n)-\varphi''(m)=0$.
+    \textbf{$\bm\nu'$ is surjective.} It is directly because $\nu'$ is well-defined and induced by surjection $\nu$. Explicitly, for any arbitrary element $\overline{n''}\in\text{coker}(\varphi'')$, there exists an element $n\in N$ such that 
+    $\nu(n)=n''$. Since $\nu(\text{Im}(\varphi))\subseteq \text{Im}(\varphi'')$ we have discussed, then we have $\nu'(\overline{n})=n''+\text{Im}(\varphi'')=\overline{n''}$. 
+\end{solution}
+
+
+
+
+
+\subsection*{Lemmas for Problem 3}
+
+\begin{lemma}{A}
+Let $f: M \to M''$ and $g: K \to M''$ be $R$-module homomorphisms. Let $P = M \times_{M''} K$ be the pullback of $f$ along $g$, defined explicitly by the subset of the direct sum:
+\[ P = \{ (m, k) \in M \times K \mid f(m) = g(k) \} \]
+equipped with the canonical projections $\pi_M: P \to M, (m, k) \mapsto m$ and $\pi_K: P \to K, (m, k) \mapsto k$. Then the following properties hold:
+\begin{enumerate}
+    \item If $f$ is surjective, then the projection $\pi_K$ is surjective.
+    \item If $f$ is injective, then the projection $\pi_K$ is injective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(1)} Suppose $f$ is surjective. Let $k \in K$ be an arbitrary element.
+Because $f$ is surjective, then there exists an element $m\in M$ such that $f(m)=g(k)$, which implies $(m,k)\in P$ then $k=\pi_{K}(m,k)$ implies surjectivity.
+
+
+\textbf{(2)} Suppose $f$ is injective. Suppose $(m,k)\in P$ such that $\pi_K(m,k)=0$. 
+ Then we obtain that $f\circ \pi_M(m,k) = f(m) =g(k)= g\circ \pi_K(m,k) = 0$. The injectivity of $f$ implies $m=0$. Hence, $k=\pi_{K}(m,k)=0$ implies the injectivity of $\pi_K$.
+\end{proof}
+
+\begin{lemma}{B}
+Let $\mu: N' \to N$ and $h: N' \to L$ be $R$-module homomorphisms. Let $Q = N \oplus_{N'} L$ be the pushout of $\mu$ along $h$, defined explicitly as the quotient module of the direct sum:
+\[ Q = (N \oplus L) / W \]
+where $W = \{(\mu(n'), -h(n')) \mid n' \in N'\}$. The induced maps are given by $\bar{h}: N \to Q, n \mapsto \overline{(n, 0)}$ and $i_L: L \to Q, l \mapsto \overline{(0, l)}$. Then the following properties hold:
+\begin{enumerate}
+    \item If $\mu$ is surjective, then the induced map $i_L$ is surjective.
+    \item If $\mu$ is injective, then the induced map $i_L$ is injective.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{(1)} Suppose $\mu$ is surjective. It suffices to prove that any pair with form $\overline{(n,0)}$ has preimage because $\overline{(n,l)} = \overline{(n,0)}+\overline{(0,l)}$ and $\overline{(0,l)}$ has preimage.
+Because $\mu$ is surjective, then there exists $n'\in N'$ such that $\mu(n')=n$. I claim that $\overline{(n,0)} = \overline{(0,h(n'))}= i_L(h(n'))$ and thus surjectivity of $i_L$ holds.
+To see that, we consider $\overline{(n,0)}-\overline{(0,h(n'))} = \overline{(n,-h(n'))}=0$ since $n=\mu(n')$.
+
+\textbf{(2)} Suppose $\mu$ is injective. Let $l\in L$ be an arbitrary element such that $i_L(l)= \overline{(0,l)}=0$, or equivalently there exists $n'\in N'$ such that $\mu(n')=0$ and $-h(n')=l$.
+The injectivity of $\mu$ implies $n'=0$ and hence $l=-h(n')=0$. Therefore, $i_L$ is injective.
+\end{proof}
+\section{Week 4}
+\subsection*{Lemmas for Problem}
+\begin{lemma}{A}
+Let $\mu: N' \to N$ and $h: N' \to L$ be $R$-module homomorphisms. Let $Q = N \oplus_{N'} L$ be the pushout of $\mu$ along $h$, defined explicitly as the quotient module of the direct sum:
+\[ Q = (N \oplus L) / W \]
+where $W = \{(\mu(n'), -h(n')) \mid n' \in N'\}$. The induced maps are given by $\bar{h}: N \to Q, n \mapsto \overline{(n, 0)}$ and $i_L: L \to Q, l \mapsto \overline{(0, l)}$. Then the following properties hold:
+\begin{enumerate}
+    \item If $\mu$ is surjective, then the induced map $i_L$ is surjective.
+    \item If $\mu$ is injective, then the induced map $i_L$ is injective.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{(1)} Suppose $\mu$ is surjective. It suffices to prove that any pair with form $\overline{(n,0)}$ has preimage because $\overline{(n,l)} = \overline{(n,0)}+\overline{(0,l)}$ and $\overline{(0,l)}$ has preimage.
+Because $\mu$ is surjective, then there exists $n'\in N'$ such that $\mu(n')=n$. I claim that $\overline{(n,0)} = \overline{(0,h(n'))}= i_L(h(n'))$ and thus surjectivity of $i_L$ holds.
+To see that, we consider $\overline{(n,0)}-\overline{(0,h(n'))} = \overline{(n,-h(n'))}=0$ since $n=\mu(n')$.
+
+\textbf{(2)} Suppose $\mu$ is injective. Let $l\in L$ be an arbitrary element such that $i_L(l)= \overline{(0,l)}=0$, or equivalently there exists $n'\in N'$ such that $\mu(n')=0$ and $-h(n')=l$.
+The injectivity of $\mu$ implies $n'=0$ and hence $l=-h(n')=0$. Therefore, $i_L$ is injective.
+\end{proof}
+
+\begin{lemma}{B}
+Let $f: M \to M''$ and $g: K \to M''$ be $R$-module homomorphisms. Let $P = M \times_{M''} K$ be the pullback of $f$ along $g$, defined explicitly by the subset of the direct sum:
+\[ P = \{ (m, k) \in M \times K \mid f(m) = g(k) \} \]
+equipped with the canonical projections $\pi_M: P \to M, (m, k) \mapsto m$ and $\pi_K: P \to K, (m, k) \mapsto k$. Then the following properties hold:
+\begin{enumerate}
+    \item If $f$ is surjective, then the projection $\pi_K$ is surjective.
+    \item If $f$ is injective, then the projection $\pi_K$ is injective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(1)} Suppose $f$ is surjective. Let $k \in K$ be an arbitrary element.
+Because $f$ is surjective, then there exists an element $m\in M$ such that $f(m)=g(k)$, which implies $(m,k)\in P$ then $k=\pi_{K}(m,k)$ implies surjectivity.
+
+
+\textbf{(2)} Suppose $f$ is injective. Suppose $(m,k)\in P$ such that $\pi_K(m,k)=0$. 
+ Then we obtain that $f\circ \pi_M(m,k) = f(m) =g(k)= g\circ \pi_K(m,k) = 0$. The injectivity of $f$ implies $m=0$. Hence, $k=\pi_{K}(m,k)=0$ implies the injectivity of $\pi_K$.
+\end{proof}
+
+\subsection*{Problem 1}
+Let $J$ be an $R$-module. Show that the following are equivalent.
+\begin{enumerate}
+    \item[(1)] $J$ is an injective module.
+    \item[(2)] For any $R$-module monomorphism $\varphi : J \to M$, there exists an $R$-module homomorphism $\psi : M \to J$ such that $\psi\varphi = \mathrm{id}_J$.
+    \item[(3)] If $J$ is a submodule of some $R$-module $M$, then $J$ is a direct summand of $M$.
+\end{enumerate}
+\begin{solution}
+    We first prove that (1) implies (2). According to the definition of injective module, for morphism $\id_J$ and monomorphism $\varphi:J\to M$, there exists $\psi:M\to J$ such that diagram
+    
+    \begin{center}
+        \begin{tikzcd}
+J \arrow[r, "\varphi", hook] \arrow[dr, "\id_J"'] & M \arrow[d, "\exists \psi", dashed] \\
+& J                                     
+\end{tikzcd}
+    \end{center}
+commutes. In other words, $\psi\circ\varphi = \id_J$.
+
+Next, we prove that (2) implies (3). Because $J$ is the submodule of $M$, then we obtain the canonical injection $\varphi:J\hookrightarrow M$, therefore (2) implies that there exists a morphism $\psi:M\to J$ such that $\psi\circ\varphi = \id_J$.
+I claim that $M\cong J\oplus\ker(\psi)$. To see that, we define maps 
+\begin{align*}
+    f:J\oplus \ker(\psi) &\to M \\ (j,h) &\mapsto \varphi(j)+h 
+\end{align*}
+and 
+\begin{align*}
+        g:M &\to J\oplus \ker(\psi)  \\ m  &\mapsto (\psi(m),m-\varphi\circ\psi(m)).
+\end{align*}
+$f$ is a $R$-module morphism is quite clear because we have 
+\begin{align*}
+    \hom_R(J\oplus\ker(\varphi),M)\cong \hom_R(J,M) \oplus \hom_R(\ker(\varphi),M).
+\end{align*}
+We need to verify $g$ is a $R$-module morphism. The well-definedness of $g$ is given by the fact that 
+\begin{align*}
+    \psi(m-\varphi\circ\psi(m))=\psi(m) - \psi\circ \varphi\circ\psi(m)= 0,
+\end{align*}
+and $g$ is a $R$-module homomorphism since $\psi$ and are $R$-module homomorphism. I claim that $f,g$ are bijection and $f^{-1}=g$.
+To see that, we just need to consider the compositon of two maps
+\begin{align*}
+    f\circ g(m)=\varphi\circ \psi(m)+(m-\varphi\circ \psi(m)) =m
+\end{align*}
+and 
+\begin{align*}
+    g\circ f(j,h) &= (\psi(\varphi(j)+h),\varphi(j)+h-\varphi\circ\psi(\varphi(j)+h)) \\
+    &= (j+\psi(h),\varphi(j)+h-\varphi(j)+\varphi\circ\psi(h)) \\
+    &=(j,h).
+\end{align*}
+Therefore, $M\cong J\oplus \ker(\psi)$ and then $J$ is a direct summand of $M$.
+
+Now we prove (3) implies (1).  Suppose $\varphi:M\to N$ is an arbitrary monomorphism and $f:M\to J$ is an arbitrary homomorphism. 
+Use the concepte already defined in \textbf{Lemma A.}
+We consider the pushout $f$ along $\varphi$
+\begin{center}
+\begin{tikzcd}
+M \arrow[r, "\varphi", hook] \arrow[d, "f"'] & N \arrow[d, "j"] \\
+J \arrow[r, "i"', hook]  & J\oplus_{M}N
+\end{tikzcd}
+\end{center}
+Since $\varphi$ is injective, $i$ is injective as well. Therefore, $J$ can be interpreted as the submodule of $J\oplus_{M}N$ by canonical inclusion. 
+Hence, (3) implies that $J$ is the direct summand of $J\oplus_{M}N$, then we can assume that $J\oplus_{M}N\cong J\oplus K$. Define map $\psi=p\circ j:N\to J$ where 
+$p:J\oplus K\to J$ is the canonical projection. Then $f=\psi\circ \varphi$ since $f=p\circ i\circ f = p\circ j\circ \varphi = \psi\circ \varphi$.
+\end{solution}
+
+
+
+\subsection*{Problem 2}
+Suppose that $M_i$ ($i \in I$) are $R$-modules. Prove that $\bigoplus_{i \in I} M_i$ is a flat $R$-module if and only if each $M_i$, $i \in I$ is a flat $R$-module.
+\begin{solution}
+    Let $M=\bigoplus_{i\in I}M_i$. Let $f:A\hookrightarrow B$ be an arbitrary monomorphism. Assume that $M_i$ are all flat, then by definition, the $R$-module morphisms $f\otimes_R \id_{M_i}:A\otimes_R M_i\hookrightarrow B\otimes_R M_i$ are all
+    monomorphic. Therefore
+    \begin{align*}
+        \bigoplus_{i\in I}(f\otimes_R \id_{M_i}):\bigoplus_{i\in I}(A\otimes_R M_i)\hookrightarrow \bigoplus_{i\in I} (B\otimes_R M_i)
+    \end{align*}
+    is monomorphism by definition of direct sum.
+    Hence, the commutativity of tensor product and direct sum implies that 
+    \begin{align*}
+        f\otimes_R \id_{M}:A\otimes_R M \hookrightarrow B\otimes_R M
+    \end{align*}
+    is monomorphism meaning that $M$ is flat.
+
+    Conversely, we use concepts defined in \textbf{Lemma B}. For arbitrary index $i$, consider canonical injection $j:B\otimes_R M_i\to B\otimes_R M$ pullback along $f\otimes_R \id_M$.
+    Let $P= (B\otimes_R M_i)\times_{B\otimes_R M} (A\otimes_R M)$, and according \textbf{Lemma B}, the pullback homomorphism $g:P \to B\otimes_R M_i$ is monomorphism. Let $\iota:A\otimes_R M_i\to P$ by sending 
+    pure tensor $a\otimes m_i$ to $(f(a)\otimes m_i,a\otimes m_i)$ and extending it linearly. It is clear that $\iota$ is well-defined because $f\otimes_R \id_M(a\otimes m_i) = f(a)\otimes m_i$ and for arbitrary $r\in R$, we have 
+    \begin{align*}
+        r.\iota(a\otimes m_i) = (f(r.a)\otimes m_i,r.a\otimes m_i) = \iota(r.a\otimes m_i)
+    \end{align*}
+    and other requirements of $R$-module is easy to prove. Therefore $\iota$ is a $R$-module morphism, hence it is injective since $a\otimes m_i$ equals zero if and only if $(f(a)\otimes m_i,a\otimes m_i)$ equals zero.
+    Therefore $f\otimes_R \id_{M_i}= g\circ \iota$ is monomorphic meaning that $M_i$ is flat.
+\end{solution}
+
+
+
+\subsection*{Problem 3}
+Prove: the following three conditions on an $R$-module $V$ are equivalent.
+\begin{enumerate}
+    \item[(1)] (Ascending chain condition.) For every infinite chain of $R$-submodules of $V$, 
+    $$V_1 \subseteq V_2 \subseteq \cdots \subseteq V_n \subseteq \cdots,$$
+    there is a number $m$ such that $V_m = V_{m+1} = \cdots$.
+    \item[(2)] Any non-empty set of submodules of $V$ contains a maximal element with respect to inclusion.
+    \item[(3)] Every $R$-submodule of $V$ is finitely generated.
+\end{enumerate}
+\begin{solution}
+    First we show that (1) implies (2). If there exists a non-empty set of submodules of $V$, denoted by $\mathcal{S}$, such that no maximal element exists.
+    Then for every submodule $V_1\in\mathcal{S}$, there exists a submodule $V_2\in\mathcal{S}$ such that $V_1\subsetneq V_2$. Continuing this process, we obtain an infinite ascending chain
+    contradicting to (1).
+
+    Now we prove (2) implies (3). Let $W$ be an arbitrary submodule of $V$. Let $\mathcal{S}$ be the collection of all finitely generated submodules of $W$. By (2), $\mathcal{S}$ contains a maximal element $W'$. Suppose $W'\subsetneq W$ is a proper submodule,
+    then select an element $\alpha\in W\setminus W'$ and let $W''$ be the submodule generated by $W'$ and $\alpha$, which is finitely generated because $W'$ is finitely generated. However, $W'$ is the maximal element of $\mathcal{S}$
+    meaning that $W''\notin \mathcal{S}$, which is a contradiction. Therefore, $W'=W$ implies that $W$ is finitely generated and thus
+    every submodule of $V$ is finitely generated. 
+
+    Finally, we claim that (3) implies (1). If there exists an infinite ascending chain 
+    \begin{align*}
+        V_1 \subsetneq V_2 \subsetneq \cdots \subsetneq V_n \subsetneq \cdots,
+    \end{align*}
+    By (3), the submodule $W= \cup_{i=1}^\infty V_i$ must be finitely generated.
+    For arbitrary two elements $x,y\in W$, there exists an integer $n$ such that $x,y\in V_1\cup\dots\cup V_n= V_n$ by definition. Then all requirements of $R$-module are satisfied since $V_n$
+    is a submodule. Suppose $W=\langle w_1, w_2, \dots, w_m \rangle$ is generated by finite elements $w_i$, then there exists an integer $s$ such that 
+    $w_i\in V_1\cup\dots\cup V_s=V_s$ for all $i$ meaning that $W\subseteq V_s$ and therefore for every $k\ge s$ we obtain that $V_s=V_k$, which is a contradiction.
+\end{solution}
+
+
+
+\subsection*{Problem 4}
+Let $W$ be an $R$-submodule of $V$. Prove: $V$ is Noetherian if and only if both $W$ and $V/W$ are Noetherian.
+\begin{solution}
+    Suppose $V$ is Noetherian. Every ascending chain of $W$ is also the ascending chain of $V$ meaning that chain is stationary. 
+    Hence, Correspondence Theorem implies that if 
+    \begin{align*}
+        \overline{V}_1\subseteq \overline{V}_2\subseteq \dots  \tag{\Jupiter}
+    \end{align*}
+    is an ascending chain of $V/W$, there exists ascending chain of $V$
+        \begin{align*}
+        V_1\subseteq V_2\subseteq \dots \tag{\YinYang}
+    \end{align*}
+    such that $V_i$ is the lift of $\overline{V}_i$. The chain (\YinYang) is stationary implies chain (\Jupiter) is stationary because $\overline{V}_i = V_i+W$.
+
+    Conversely, suppose $W$ and $V/W$ are Noetherian and let 
+    \begin{align*}
+        V_1\subseteq V_2\subseteq \dots \tag{\Gemini}
+    \end{align*}
+    be an arbitrary ascending chain of $V$. Since $V/W$ is Noetherian, the ascending chain 
+    \begin{align*}
+        V_1+W \subseteq V_2+W\subseteq \dots  \tag{\Scorpio}
+    \end{align*}
+    is stationary and we suppose it stationary at $n$. If chain (\Gemini) is not stationary, then select elements $\alpha_i\in V_i\setminus V_{i-1}$ for $i>n$.
+    Chain (\Scorpio) stationary implies that $\alpha_i\in V_i+W = V_n+W$. Then we can suppose $\alpha_i = \beta_i+\gamma_i$ where $\beta_i\in V_n$ and $\gamma_i\in W$.
+    Hence, $V_n\subseteq V_i$ implies that $\gamma_i\in V_{i}$ and $\gamma_i\notin V_{i-1}$. If not, $\alpha_i$ must be the element contained in $V_{i-1}$ contradicting our assumption.
+    Consider ascending chain of $W$
+    \begin{align*}
+        \langle \gamma_{n+1} \rangle\subseteq \langle  \gamma_{n+1},\gamma_{n+2} \rangle \subseteq \dots
+    \end{align*}
+    which is stationary since $W$ is Noetherian. Suppose it is stationary at $m$ meaning that $\gamma_{m+1}$ can be linearly represented by $\gamma_{n+1},\dots,\gamma_{m}$
+    and therefore $\gamma_{m+1}\in V_m$, which is a contradiction, chain (\Gemini) must be stationary.
+\end{solution}
+
+
+\subsection*{Problem 5}
+Let $V$ be a Noetherian $R$-module and $f : V \to V$ an epimorphism. Show that $f$ is an $R$-isomorphism.
+
+\begin{solution}
+    Let $W_i=\ker(f^i)$ and consider an ascending chain
+    \begin{align*}
+        W_1\subseteq W_2\subseteq\dots \tag{\Gemini}
+    \end{align*}
+    because $V$ is Noetherian then this chain is stationary. Suppose it is stationary at $n$. 
+    Then $W_n$ is the submodule of $V$ consisting exactly of all nilpotent elements associated to $f$.
+    I claim that $f(W_n)\subseteq W_n$ and for every element $x\in V\setminus W_n$ we have $f(x)\notin W_n$.
+    To see that, suppose $w\in W_n$ is nilpotent, then $f(w)$ is nilpotent as well, meaning that $f(w)\in W_n$.
+    Hence, for arbitrary element $x\in V\setminus W_n$, if $f(x)\in W_n$ then it implies that  $f(x)$ is nilpotent and thus $x$ is nilpotent, which is contradiction.
+    Suppose that $n>1$, ascending chain (\Gemini) stationary at $n$ means that $W_{n-1}\subsetneq W_{n}$, then $W_n\setminus W_{n-1}$ has no preimage of $f$ because $f(W_n)=W_{n-1}$.
+    It is contradicts the assumption that $f$ is epimorphism.
+    If $n=1$ and $W_1\neq \{0\}$ then $W_1 \setminus \{0\}$ has no preimage. Suppose $x\in V$ such that $f(x)\in W_1 \setminus \{0\}$, then $f^2(x) = 0$ implies that $x\in W_2$. 
+    However, $W_2=W_1$ implies that $f(x)=0$, which is a contradiction. 
+    Therefore, $f$ must be a monomorphism, hence an isomorphism. 
+\end{solution}
+\section{Week 5}
+
+\subsection*{Problem 1}
+Are the following statements correct?
+\begin{enumerate}
+    \item[(1)] Any submodule of a semisimple module is also semisimple.
+    \item[(2)] Any semisimple Noetherian module is Artinian.
+\end{enumerate}
+
+\begin{solution}
+    Both statements are correct.
+    (1) Suppose $N$ is an arbitrary submodule of semisimple module $M$. Then by discussion in our class, there exists simple submodules $\{M_i\}_{i\in I}$
+    such that 
+    \begin{align*}
+        M = \bigoplus_{i\in I} M_i 
+    \end{align*}
+    and subindex set $J$ of $I$ such that 
+    \begin{align*}
+        M= N\oplus  \left(\bigoplus_{j\in J} M_j\right)
+    \end{align*}
+    Consider the canonical projection $M\to N$ then by isomorphism theorem we obtain that 
+    \begin{align*}
+        N \cong M\left/ \left(\bigoplus_{j\in J} M_j\right) \right .\cong \bigoplus_{i\in I\setminus J} M_i 
+    \end{align*}
+    meaning that $N$ is semisimple.
+
+    (2) Suppose $M$ is an arbitrary semisimple Noetherian module with direct sum decomposition
+    \begin{align*}
+        M = \bigoplus_{i\in I} M_i.
+    \end{align*}
+    Noetherian implies that $M$ is finite-gernerated. Without lose of gernerality, we can suppose that $x_1,\dots,x_n$ are gernerators and $x_j\in M_j$.
+    Then $M$ admits a finite decomposition
+    \begin{align*}
+        M = \bigoplus_{j\in J} M_j.
+    \end{align*}
+    where $J=\{1,\dots,n\}$ is finite. Therefore $M$ has a finite composition series meaning that $M$ is Artinian.
+\end{solution}
+
+\subsection*{Problem 2}
+Prove that: the following conditions on an $R$-module $V$ with composition series are equivalent.
+\begin{enumerate}
+    \item[(1)] $V$ is semisimple.
+    \item[(2)] Every irreducible submodule of $V$ is a direct summand of $V$.
+    \item[(3)] Every maximal submodule of $V$ is a direct summand of $V$.
+\end{enumerate}
+\begin{solution}
+    (1) implies (2) and (3) just by equivalent definition of semisimple module we have discussed in our class.
+    
+    Next, we prove that (2) implies (1).
+    Suppose $V \neq \langle 0 \rangle$, otherwise it is trivially semisimple. Since $V$ has a composition series, it must contain an irreducible submodule. let us denote it by $V_1$.
+    Then by (2), we can let $V=V_1\oplus V'_1$. We claim that for every irreducible submodule of $V_1'$ also is a direct summand of $V'_1$. To see that, we suppose $V_2$ is an irreducible submodule of $V_1$ and hence 
+    it is also an irreducible submodule of $V$, then we can suppose that $V=V_2\oplus V'_2$. Then we claim that 
+    \begin{align*}
+        V'_1 = V_2\oplus (V_2'\cap V'_1).
+    \end{align*}
+    It is obvious that $V_2\cap(V_2'\cap V'_1)=0$ and $V_2\oplus (V_2'\cap V'_1) \subseteq V'_1$. For $x\in V'_1$, we can suppose that $x=y+z$ where $y\in V_2,z\in V'_2$.
+    Since $x,y\in V_1'$ then $z=x-y\in V'_1$ which implies that $V'_1\subseteq V_2\oplus (V_2'\cap V'_1)$. 
+    Continuing this process we obtain a decomposition
+    \begin{align*}
+        V = V_1\oplus V_2\oplus \dots \oplus V_k \oplus W_k
+    \end{align*}
+    where $V_1,\dots,V_k$ are irreducible. Suppose that the length of composition series of $V$ is $n$, then we obtain that $W_n=0$, because in this case we have a strict ascending chain 
+    \begin{align*}
+        \langle 0\rangle \subsetneq V_1\subsetneq \dots \subsetneq V_1\oplus V_2\oplus \dots \oplus V_n
+    \end{align*} 
+    which implies that 
+    \begin{align*}
+        V = \bigoplus_{i=1}^n V_i
+    \end{align*}
+    and $W_n=\langle 0 \rangle$. Then $V$ is semisimple.
+
+    We now show that (3) implies (1). Similarly, we suppose that $V'_1$ is an arbitrary maximal submodule of $V$.
+    Then we suppose that $V=V_1\oplus V'_1$ and $V_1\cong V/V_1'$ implies that $V_1$ is irreducible.
+    We claim that every maximal submodule of $V_1'$, denoted by $V'_2$, is a direct summand of $V'_1$. To see that, we note that $V_1\oplus V_2'$ is a maximal submodule of $V$ since 
+    \begin{align*}
+        V/(V_1\oplus V_2')\cong (V_1\oplus V_1')/(V_1\oplus V_2')\cong V_1'/V_2'.
+    \end{align*}
+    Let $V'_1= V_2\oplus V_2'$ and continuing this process, then we obtain a decomposition
+    \begin{align*}
+         V = V_1\oplus V_2\oplus \dots \oplus V_n \oplus W_n
+    \end{align*}
+    and by same reason we have discussed $W_n=\langle 0 \rangle$ and $V$ is semisimple.
+\end{solution}
+
+
+
+\subsection*{Problem 3}
+Prove: $\operatorname{Soc}(U \oplus V) = \operatorname{Soc}(U) \oplus \operatorname{Soc}(V)$.
+\begin{solution}
+    It is obvious that
+    \begin{align*}
+        \operatorname{Soc}(U \oplus V) \supseteq \operatorname{Soc}(U) \oplus \operatorname{Soc}(V).
+    \end{align*}
+    Because if $M$ is an irreducible submodule of $U$ or $V$, it is also an irreducible submodule of $U\oplus V$.
+    Conversely, suppose that $M$ is a nonzero irreducible submodule of $U\oplus V$. 
+    Then we obtain that 
+    \begin{align*}
+        M\subseteq M_1 \oplus M_2
+    \end{align*}
+    where $M_i=p_i(M)$ and $p_1:U \oplus V\to U$ and $p_2:U \oplus V\to V$ are canonical projections. 
+    I claim that $M_i$ is also irreducible since by isomorphism theorem $M_i\cong M/\ker(p_i|_{M})$ and $\ker(p_i|_{M})$ as submodule of $M$ must
+    equal to zero or $M$, then $M_i$ is isomorphic to zero or $M$ meaning $M_i$ is either the zero module or irreducible.
+    Then we obtain that
+    \begin{align*}
+        \operatorname{Soc}(U \oplus V) \subseteq \operatorname{Soc}(U) \oplus \operatorname{Soc}(V).
+    \end{align*}
+    Therefore, the statement is true.
+\end{solution}
+
+
+\subsection*{Problem 4}
+Let $R$ be an arbitrary ring. Then every 2-sided ideal of the matrix ring $M_n(R)$ can be expressed in the form $M_n(I)$, where $I$ is a 2-sided ideal of $R$. In particular, $R$ is simple if and only if $M_n(R)$ is simple. [Hint: For an ideal $L$ of $M_n(R)$, let $I$ be the set of (1,1)-entries of $L$. Show that $I$ is an ideal of $R$ and $L = M_n(I)$.]
+
+\begin{solution}
+    Use notations above.
+    First we need to show $I$ is an ideal. 
+    For an arbitrary element $r\in R$, let $\text{diag}(r)$ denote diagonal matrix setting diagonal elements to be $r$.
+    By our definition for any $s\in I$, there exists $A_s\in L$ such that the $(1,1)$-entry of $A_s$ is $s$.
+    Since $L$ is an ideal of $M_n(R)$,
+    we obtain that 
+    \begin{align*}
+        \text{diag}(r)\cdot  A_s\in L\text{ and }A_s\cdot\text{diag}(r)  \in L,
+    \end{align*} 
+    which implies that $r\cdot s\in I$ and $s\cdot r\in I$.
+    Furthermore, for any $s_1, s_2 \in I$, there exist $A_{s_1}, A_{s_2} \in L$ whose $(1,1)$-entries are $s_1$ and $s_2$, respectively. Since $L$ is an additive subgroup, $A_{s_1} - A_{s_2} \in L$, and its $(1,1)$-entry is $s_1 - s_2$, meaning $s_1 - s_2 \in I$.
+    Thus, $I$ is an ideal. 
+    Next, we need to prove that $L=M_n(I)$. Let $E_{ij}$ denote the matrix whose $(i,j)$-entry is $1$ and other entries are $0$. $\{E_{ij}\}$ form a basis of $M_n(R)$. 
+    Suppose that $B$ is an arbitrary matrix in $L$. Then we can suppose that 
+    \begin{align*}
+        B = \sum_{i,j} b_{ij} E_{ij}
+    \end{align*}
+    Since $L$ is an ideal then by 
+    \begin{align*}
+        E_{1k}\cdot B\cdot E_{l1} = b_{kl}E_{11}\in L
+    \end{align*}
+    we know that arbitrary entry $b_{kl}$ is contained in $I$. Therefore, we obtain that $L\subseteq M_n(I)$.
+    Conversely, suppose $B$ is an arbitrary matrix in $M_n(I)$. Then for $(i,j)$-entry of $B$, denoted by $b_{ij}$, there exists a matrix $A_{ij}\in L$ such
+    that the $(1,1)$-entry of $A_{ij}$ is $b_{ij}$. Then by 
+    \begin{align*}
+        B = \sum_{i,j} E_{i,1}\cdot A_{ij}\cdot E_{1,j}
+    \end{align*}
+    we obtain that $M_n(I)\subseteq L$. 
+    Therefore, $M_n(R)$ has no proper ideals if and only if $R$ has no proper ideals. Equivalently, $M_n(R)$ is simple if and only if $R$ is simple.
+\end{solution}
+
+\subsection*{Problem 5}
+If $W$ is a submodule of a semisimple module $V$, then $W$ and $V/W$ are also semisimple.
+\begin{solution}
+    We first show that for an arbitrary submodule of $W$, it is a direct summand of $W$ and thus $W$ is semisimple.
+    Let $U$ be an arbitrary submodule of $W$. 
+    Since $W \subseteq V$, $U$ is also a submodule of $V$. 
+    Because $V$ is semisimple, $U$ is a direct summand of $V$. 
+    Thus, there exists a submodule $U'$ of $V$ such that
+$$V = U \oplus U'.$$
+Intersecting both sides with $W$, we get
+$$W = V \cap W = (U \oplus U') \cap W.$$
+Since $U \subseteq W$, we can apply Dedekind's modular law to obtain
+$$W = U \oplus (U' \cap W).$$
+Note that $U' \cap W$ is a submodule of $W$. This shows that any submodule $U$ of $W$ is a direct summand of $W$.
+
+Next, we show that $V/W$ is semisimple.
+Since $W$ is a submodule of the semisimple module $V$, it is a direct summand of $V$. Therefore, there exists a submodule $W'$ of $V$ such that
+$$V = W \oplus W'.$$
+By the First Isomorphism Theorem, we have
+$$V/W = (W \oplus W')/W \cong W'.$$
+Since $W'$ is a submodule of the semisimple module $V$, by the conclusion from above, $W'$ is also semisimple. Because $V/W$ is isomorphic to a semisimple module $W'$, it follows that $V/W$ itself is semisimple. 
+\end{solution}
+
+\section{Week 6}
+\subsection*{Problem 1}
+
+Let $D$ be a division ring and $n$ a positive integer.
+\begin{itemize}
+    \item[(a)] Show that the natural left $M_n(D)$-module, consisting of column vectors of length $n$ with entries in $D$, is a simple module.
+    \item[(b)] Show that $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+    \item[(c)] Show that every ring of the form
+    \[ M_{n_1}(D_1) \oplus \cdots \oplus M_{n_r}(D_r) \]
+    is semisimple, where $D_i$ are division rings.
+    \item[(d)] Show that $M_n(D)$ is a simple ring, namely, one in which the only 2-sided ideals are the zero ideal and the whole ring.
+\end{itemize}
+\begin{solution}
+(a) Let $x$ be an arbitrary nonzero $n$ dimensional column vector of $D$. Suppose that the $i$-entry of $x$ is nonzero and denoted by $x_i$. 
+Let $E_{ji}$ denote the $n\times n$ matrix such that the $(j,i)$ entry is the identity in $D$ and other entries are zero.
+Then we obtain that 
+\begin{align*}
+    (x_i^{-1}E_{ji})x = \varepsilon_j
+\end{align*}
+where $\varepsilon_j$ denotes the column vector whose $j$ entry is the identity in $D$ and other entries are zero.
+Since $\{\varepsilon_j\}$ forms a basis, we obtain that if a submodule contains a nonzero element $x$, then we can use $x$ to generate any vector. Therefore, the module of column vectors $D^n$ is a simple $M_n(D)$-module.
+
+(b) Let $A_j$ denotes the submodule of $M_n(D)$ consisting of matrices whose entries are zero except possibly in the $i^{\text{th}}$ column. Then we obtain that 
+\begin{align*}
+    M_n(D) = A_1\oplus \dots\oplus A_n.
+\end{align*} 
+Since each $A_j\simeq D^n$ and $D^n$ is simple by (a). Therefore, $M_n(D)$ is semisimple and has up to isomorphism only one simple module.
+
+(c) Let $R$ denote such a ring. I claim that each $M_{n_i}(D_i)$ is semisimple as a $R$-module.
+Without loss of generality, we prove it for $M_{n_1}(D_1)$. By definition, we know 
+\begin{align*}
+    \text{Ann}_R(M_{n_1}(D_1)) = M_{n_2}(D_2) \oplus \cdots \oplus M_{n_r}(D_r).
+\end{align*}
+Let $I$ denote this annilihator. Since $R/I\simeq M_{n_1}(D_1)$, $M_{n_1}(D_1)$ is semisimple as $R/I$-module by (b).
+According the discussion in our class, $M_{n_1}(D_1)$ is semisimple as $R/I$-module if and only if as $R$-module.
+Then each $M_{n_i}(D_i)$ is semisimple as $R$-module, hence $R$ is semisimple.
+
+(d) We use a conclusion from Homework 6: Every 2-sided ideal of the matrix ring $M_n(D)$ can be expressed in the form $M_n(I)$ where $I$ is a 2-sided ideal of $D$.
+Since $D$ is a division ring, the 2-sided ideals of $D$ are trivial. Therefore, $M_n(D)$ is a simple ring.
+\end{solution}
+
+
+
+
+\subsection*{Problem 2}
+
+Let $U$ be an $A$-module for a semisimple finite-dimensional algebra $A$ (over a field). Show that if $\text{End}_A(U)$ is a division ring then $U$ is simple.
+
+\begin{solution}
+   Since $A$ is a semisimple finite-dimensional algebra, every $A$-module is semisimple.
+   Therefore, we can suppose that 
+   \begin{align*}
+    U \simeq   S_1 \oplus \dots \oplus S_k.
+   \end{align*}
+The endomorphism ring is then given by $\text{End}_A(U) \cong \bigoplus_{p, q} \text{Hom}_A(S_p, S_q)$. If $U$ contained two non-isomorphic simple modules $S_i$ and $S_j$, $\text{End}_A(U)$ would have a non-trivial idempotent corresponding to the projection onto one of the components, contradicting the fact that $\text{End}_A(U)$ is a division ring.
+
+Thus, all simple components must be isomorphic to some simple module $S$, meaning $U \cong S^k$. According to the properties of endomorphism rings of semisimple modules:
+\[ \text{End}_A(U) \cong M_k(\text{End}_A(S)) \]
+By Schur's Lemma, $D' = \text{End}_A(S)$ is a division ring. Therefore, $\text{End}_A(U) \cong M_k(D')$. A matrix ring $M_k(D')$ over a division ring is itself a division ring if and only if $k = 1$. 
+Since if dimension greater than one, there exists non-invertible matrices. Consequently, we have 
+\begin{align*}
+    U\simeq S 
+\end{align*} 
+showing that $U$ is simple.
+\end{solution}
+
+\subsection*{Problem 3}
+
+Let $A$ be a ring. Then $A$ is a semisimple Artinian ring if and only if every $A$-module is projective.
+
+\begin{solution}
+   Suppose that $A$ is a semisimple Artinian ring. We want to show that every $A$-module is projective.
+    For any arbitrary left $A$-module $N$, there exists a free $A$-module $F$ and an epimorphism $f: F \to N$. 
+    Since the free module $F$ is a direct sum of copies of semisimple module $_A A$, it follows that $F$ is also a semisimple module. 
+    Therefore, the kernel of the epimorphism $\ker(f)$ is a direct summand of $F$. This means the short exact sequence 
+$$ 0 \to \ker(f) \to F \xrightarrow{f} N \to 0 $$
+splits. Consequently, $F \cong \ker(f) \oplus N$, which implies that $N$ is isomorphic to a direct summand of the free module $F$ meaning that $N$ is projective.
+
+Conversely, suppose that every left $A$-module is projective. We want to show that $A$ is a semisimple Artinian ring.
+Let $I$ be an arbitrary left ideal of $A$. The quotient $A/I$ is naturally a left $A$-module. Consider the canonical short exact sequence:
+$$ 0 \to I \to A \xrightarrow{\pi} A/I \to 0 $$
+where $\pi$ is the natural projection. By our assumption, every $A$-module is projective, so $A/I$ is a projective module 
+and thus the short exact sequence splits. We obtain that 
+\begin{align*}
+    A \simeq I \oplus A/I.
+\end{align*}
+Therefore every submodule of $A$ splits $A$, we obtain that $A$ is semisimple. Since $A$ is semisimple ring, it is also Artinian. To see that, We may suppose that 
+\begin{align*}
+   _A A = \bigoplus_{i \in I} S_i
+\end{align*} 
+where $S_i$ is simple left ideal. Suppose that $1=e_1+\dots+e_n$ with $e_i\in S_i$ and therefore
+\begin{align*}
+    _A A = S_1 \oplus S_2 \oplus \dots \oplus S_n
+\end{align*}
+implying its Artinian.
+\end{solution}
+
+
+\subsection*{Problem 4}
+
+Let $k$ be a field. Suppose the group algebra $kG$ is semisimple, and the simple $kG$-modules are $S_1, \dots, S_r$ with degrees $d_i = \dim_k S_i$. Show that
+\[ \sum_{i=1}^{r} d_i^2 \geq |G| \]
+with equality if and only if $\text{End}_{kG}(S_i) = k$ for all $i$.
+
+\begin{solution}
+    According to Wedderburn-Artin theorem, we can suppose that 
+    \begin{align*}
+        kG \cong M_{n_1}(D_1) \oplus M_{n_2}(D_2) \oplus \dots \oplus M_{n_r}(D_r).
+    \end{align*}
+    Hence, we can suppose that $M_{n_i}(D_i)\simeq S_i^{n_i}$. Since $M_{n_i}(D_i)$ only consist of one simple module up to isomorphism and each simple module can be interpreted as the 
+    submodule of $kG$. Then for each simple module $S_j$, it can only be contained in one component in our decomposition meaning that our assumption is valid.
+    Therefore, we may assume that 
+    \begin{align*}
+        kG \cong S_1^{n_1}\oplus \dots \oplus S_r^{n_r}.
+    \end{align*}   
+    Hence we obtain that 
+    \begin{align*}
+        |G|=\dim_k(kG) = \sum_{i=1}^r n_i d_i.
+    \end{align*}
+    Since $S_i$ as a simple submodule of $M_{n_i}(D_i)$, then we can say $S_i\simeq D_i^{n_i}$ as $kG$-module isomorphism.
+    According to Schur's lemma, $\text{End}_{kG}(S_i)$ must be a division ring. It means that $\text{End}_{kG}(S_i)$ only
+    consists of the matrices of the form $dI_{n_i}$ where $d\in D_i$. Hence we can write 
+    \begin{align*}
+        \text{End}_{M_{n_i}(D_i)}(S_i)\simeq D_i^{\text{op}}.
+    \end{align*} 
+    We can rewrite our formula of dimension by 
+    \begin{align*}
+        n_i=\dim_{k}(S_i)/\dim_k(D_i).
+    \end{align*}
+    We obtain that 
+        \begin{align*}
+        |G|= \sum_{i=1}^r d^2_i/\dim_k(D_i).
+    \end{align*}
+    Therefore, the equality holds if and only if $\dim_k(\text{End}_{M_{n_i}(D_i)}(S_i))= \dim_k(D_i)=1$.
+    It also equivalently say $\text{End}_{M_{n_i}(D_i)}(S_i)\simeq k$.
+\end{solution}
+
+
+\subsection*{Problem 5}
+
+Suppose that we have $R$-module homomorphisms $U \xrightarrow{f} V \xrightarrow{g} W$. Show that: if $gf$ is an essential epimorphism and $f$ is an epimorphism, then both $f$ and $g$ are essential epimorphisms.
+\begin{solution}
+    Since $gf$ is an epimorphism, $g$ must be an epimorphism. Suppose that $f$ is not essential. Equivalently, there exists a proper submodule $N$ of $U$ such that $f|_{N}$ is an epimorphism. Since $g$ is an epimorphism, we now obtain that 
+    \begin{align*}
+        g \circ f|_N: N\to W 
+    \end{align*}  
+    is also an epimorphism. However, since $gf$ is essential, we obtain that $N=U$, which is a contradiction.
+    Therefore, $f$ is essential. 
+
+    Suppose that $g$ is not essential. Then we can find a proper submodule $M$ of $V$ such that $g(M)=W$.
+    Then we consider the submodule $Q = f^{-1}(M)$ of $U$. It is proper, since $f(Q)=M\subsetneq V$. 
+    Then we obtain that $gf(Q)=W$. Because $gf$ is essential, we find that $Q=U$, which is a contradiction. Therefore $g$ must be essential.
+    Our claim holds.
+\end{solution}
+
+\section{Week 7}
+\subsection*{Problem 1}
+Let $V$ be an $A$-module.
+\begin{enumerate}
+    \item[(a)] Show that an endomorphism $e : V \to V$ is a projection onto a $A$-submodule $W$ if and only if $e$ is idempotent as an element of $\text{End}_A(V)$.
+    \item[(b)] Show that direct sum decompositions $V = W_1 \oplus W_2$ as $A$-modules are in bijection with idempotent decompositions $1 = e + f$ in $\text{End}_A(V)$.
+    \item[(c)] Show that $e \in \text{End}_A(V)$ is primitive if and only if $e(V)$ is indecomposable.
+    \item[(d)] Suppose that $V$ is semisimple with finitely many simple summands and let $e_1, e_2 \in \text{End}_A(V)$ be idempotents. Show that $e_1(V) \cong e_2(V)$ as $A$-modules if and only if $e_1$ and $e_2$ are conjugate by an invertible element of $\text{End}_A(V)$.
+    \item[(e)] Let $k$ be a field. Show that all primitive idempotent elements in $M_n(k)$ are conjugate under the action of the unit group $GL_n(k)$, which consists of all the invertible matrices in $M_n(k)$.
+\end{enumerate}
+
+\begin{solution}
+    (a) If $e$ is a projection, by definition, we can suppose that $V=W\oplus W'$ such that $e(W')=0$ and for an arbitrary element $w\in W$ we have $e(w)=w$.
+    Therefore, let $v$ be an arbitrary element in $V$ with unique decomposition $v=w+w'$ where $w\in W$ and $w'\in W'$, then we obtain that $e^2(v)=e^2(w+w')=e(w)=w$, which implies $e^2(v)=e(v)$ and thus $e$ is idempotent.
+    Conversely, let $f=1-e$, I claim that $V=\text{im}(e)\oplus \text{im}(f)$. Then for an arbitrary element $v$ we obtain that $v=e(v)+f(v)$ and thus $V=\text{im}(e)+\text{im}(f)$.
+    Let $v\in\text{im}(e)\cap \text{im}(f)$, it means that there exists an element $v'$ such that $v=f(v')$. Since $e$ is idempotent, we then have $v=e(v)=ef(v')=e(1-e)(v')=0$. Therefore we obtain that $V=\text{im}(e)\oplus\text{im}(f)$
+    and $e$ act as an identity on $\text{im}(e)$ and as null morphism on $\text{im}(f)$, which implies that $e$ is a projection.
+
+    (b) Let Dirsum and Idmdec denotes the set of direct sum decompositions and the set of idempotent decompositions respectively.
+    The process of (a) have shown that $\text{Idmdec}\to \text{Dirsum}$. Conversely, suppose that we have a direct sum decomposition $V=W_1\oplus W_2$. 
+    Then we let $e$ and $f$ be the canonical projection to $W_1$ and $W_2$ respectively. Clearly, $e+f=1$ satisfies our requirement.
+    To show bijectivity, given that an idempotent morphism $e$. Let $f=1-e$, we obtain that $V=\text{im}(e)\oplus \text{im}(f)$ according to (a).
+    Then $e$ and $f$ are identified as the canonical projection to $\text{im}(e)$ and $\text{im}(f)$ respectively. It means that $\text{Idmdec}\to \text{Dirsum}\to \text{Idmdec}$ is an identity.
+    Hence, given that direct sum decomposition $V=W_1\oplus W_2$, let $e$ and $f$ denotes the canonical projection to $W_1$ and $W_2$ respectively.
+    According to the definition of canonical projection, we know that $e$ is idempotent and $e+f=1$. 
+    Hence we have $W_1=\text{im}(e)$ and $W_2=\text{im}(f)$.
+    It means that $\text{Dirsum}\to \text{Idmdec}\to \text{Dirsum}$ is an identity.
+    Therefore $\text{Dirsum}\to \text{Idmdec}$ is a bijection.
+
+    (c) Let $W$ denote $e(V)$.
+     If $W$ is decomposable, according to (b) then there exists an idempotent decomposition $e|_{W}=\text{id}|_{W}=\varphi+\psi $. 
+     Let $i:W\to V$ be the canonical inclusion by considering the direct sum decomposition induced by idempotent decomposition $\text{id}|_V = e+(1-e)$. Let $\tilde{\varphi}=i\circ \varphi \circ e$ and $\tilde{\psi}=i\circ \psi \circ e$.
+     Both $\tilde{\varphi}$ and $\tilde{\psi}$ are an idempotent morphism on $V$. Clearly both of them act as null morphism on $\text{im}(1-e)=\ker(e)$ and for an arbitrary element $v\in\text{im}(e)$,
+    we have $\tilde{\varphi}^2(v)=i\circ \varphi\circ e \circ i \circ \varphi\circ e(v)= i\circ \varphi^2\circ e(v)=\tilde{\varphi}(v)$. Simlilar for $\tilde{\psi}$.
+    Therefore, we obtain idempotent decomposition $e = \tilde{\varphi}+\tilde{\psi}$.
+    Conversely, suppose that $e$ is not primitive, then there exists an idempotent decomposition $e=\varphi+\psi$. Both $\varphi$ and $\psi$ act idempotently on $W$. Therefore we obtain an idempotent decomposition on $W$ which is $e|_W =\text{id}|_W = \varphi|_W+\psi|_W $.
+    According to (b), it corresponds to a direct sum decomposition of $W$. Therefore, our claim holds.
+
+    (d) Suppose that $e_1$ and $e_2$ are conjugate by $a$. Namely, we assume that $e_1=ae_2a^{-1}$ it gives an isomorphism $e_2(V)\to e_1(V)$ by $v\mapsto a(v)$.
+    We just need to verify its well-definedness. Let $v$ be an arbitrary element of $e_2(V)$, it means that there exists an element $v'\in V$ such that $v=e_2(v')$.
+    Since $a$ is invertible, then we obtain that $v=e_2\circ a^{-1}\circ a(v')$. By our assumption, then we have $a(v) = e_1\circ a(v')\in e_1(V)$. Since $a$ is invertible on $V$,
+    the morphism $e_2(V)\to e_1(V)$ is an isomorphism.
+    Conversely, suppose there exists an isomorphism $a:e_2(V)\to e_1(V)$. I claim that there exists an morphism $\tilde{a}$ such that $\tilde{a}|_{e_2(V)}= a$ and $e_1=\tilde{a} e_2 \tilde{a}^{-1}$.
+    Since $V$ is semisimple, then we can assume that 
+    \begin{align*}
+         V\simeq e_1(V)\oplus W_1 \simeq e_2(V)\oplus W_2.
+    \end{align*}
+    where $W_1$ and $W_2$ are the complement of $V_1$ and $V_2$ induced by idempotent morphisms $e_1$ and $e_2$ respectively.
+    Because $e_1(V)\simeq e_2(V)$, we the have $W_1\simeq W_2$ by considering the simple module decomposition $V \cong \bigoplus_{i=1}^k S_i^{n_i}$.
+    Therefore, we let $b:W_2\to W_1$ be an arbitrary isomorphism and let $\tilde{a}=a\oplus b$, we find that $\tilde{a}|_{e_2(V)}=a$.
+    To see the equation $e_1=\tilde{a} e_2 \tilde{a}^{-1}$ holds, by given an arbitrary element $v\in V$, there exists decomposition $v=v_2+w_2$ and $\tilde{a}(v)=a(v_2)+b(w_2)$.
+    Then we obtain that 
+    \begin{align*}
+        (e_1\circ \tilde{a}-  \tilde{a}\circ e_2) (v) = e_1(a(v_2)+b(w_2))-\tilde{a}(v_2) = a(v_2)-a(v_2)=0.
+    \end{align*}
+    Our claim holds.
+
+    (e) Let $V=k^n$ be a $k$-module. According to Artin–Wedderburn theorem, we obtain that $\text{End}_k(V)= M_n(D)$ where $D=\text{End}_k(k)=k$. Given that two arbitrary primitive idempotent elements $e_1$ and $e_2$ in $M_n(k)$, we must have $e_1(V)\simeq e_2(V)\simeq k$ according to (c).
+    Hence, by (d), we obtain that $e_1$ and $e_2$ are conjugate by an invertible element of $M_n(k)$.
+    Therefore, all primitive idempotent elements are conjugate under the action of unit group $\text{GL}_n(k)$.
+
+    
+    
+\end{solution}
+
+
+% --- Problem 2 ---
+\subsection*{Problem 2}
+Prove: No non-zero idempotent $e$ of $A$ is contained in $J(A)$. [Hint: $e(1 - e) = 0$.]
+
+\begin{solution}
+    Suppose that there exists a non-zero idempotent element $e$ in $J(A)$. Then we know that $1-e$ is invertible.
+    Therefore, we can reduce $1-e$ on each sides of equation $e(1-e)=0$, we know obtain that $e=0$ is trivial contradicting our assumption.
+\end{solution}
+
+% --- Problem 3 ---
+\subsection*{Problem 3}
+Prove: Let $A$ be an Artinian ring with Artinian center $Z(A)$. Then $J(Z(A)) = J(A) \cap Z(A)$.
+\begin{solution}
+    Suppose that $x\in J(A)\cap Z(A)$. Then for arbitrary element $y\in Z(A)$, we obtain that $1-yx$ is invertible in $A$.
+    Since $1-yx$ is comunatative and therefore its inverse is included in $Z(A)$. It means that $x\in J(Z(A))$. 
+    Conversely, since $A$ and $Z(A)$ are Artinian, their Jacobson radicals are nilpotent ideals. Therefore, let $x$ be a nilpotent element in $Z(A)$, it is also nilpotent in $A$.
+    Of course, it is communatative.
+    Therefore we obtain $J(Z(A))\subseteq J(A)\cap Z(A)$.
+\end{solution}
+
+
+
+% --- Problem 4 ---
+\subsection*{Problem 4}
+Prove: Let $A = A_1 \oplus \dots \oplus A_n$ be a direct sum of 2-sided ideals. Then
+\begin{enumerate}
+    \item[(i)] $Z(A) = Z(A_1) \oplus Z(A_2) \oplus \dots \oplus Z(A_n)$.
+    \item[(ii)] $J(A) = J(A_1) \oplus J(A_2) \oplus \dots \oplus J(A_n)$.
+\end{enumerate}
+\begin{solution}
+    (i) Let $x\in Z(A)$. It admits a decomposition $x = \sum_i x_i$ where $x_i\in A_i$.
+    Since $A_i$ is double sided ideals, then we obtain that $A_iA_j\subseteq A_i\cap A_j = 0$ and $A_jA_i=0$. Therefore, 
+    for arbitrary $y_i\in A_i$, the equation $xy_i=y_ix$ implies that $x_iy_i=y_ix_i$. It means that $x_i\in Z(A_i)$ and thus $Z(A)\subseteq \bigoplus_i Z(A_i)$.
+    Conversely, suppose that $x_i\in Z(A_i)$ and $x=\sum_ix_i$ is clearly communatative. Then $Z(A)\supseteq \bigoplus_i Z(A_i)$ and thus the claim holds.
+
+    (ii) Given that $x\in J(A)$ with decomposition $x=\sum_i x_i$ and $y_i\in A_i$. We find that $1-y_ix=1-y_ix_i$ is invertible in $A$. Suppose that $u(1-y_ix)=1$ and $u$ admits a decomposition $u=\sum_i u_i$.
+    Suppose $1$ admits a decomposition $1=\sum_i e_i$, then we obtain that $u_i(e_i -y_ix_i)=e_i$. Therefore, $e_i-y_ix_i$ is invertible in $A_i$ and thus $J(A)\subseteq \bigoplus_i J(A_i)$.
+    Conversely, given that $x_i\in J(A_i)$ and an arbitrary element $y=\sum_i y_i\in A$. We consider that $1-yx=\sum_i (e_i-y_ix_i)$. Since $x_i\in J(A_i)$, we can suppose there exists $u_i\in A_i$ such that $u_i(e_i-y_ix_i)=e_i$.
+    Therefore, we obtain that $u(1-yx)=\sum_i u_i(1-y_ix_i)=\sum_i e_i = 1$ and thus $J(A)\supseteq \bigoplus_i J(A_i)$.
+    
+\end{solution}
+
+
+% --- Problem 5 ---
+\subsection*{Problem 5}
+Let $\phi : U \to V$ be a homomorphism of $A$-modules. Show that $\phi(\text{Soc } U) \subseteq \text{Soc } V$, and that if $\phi$ is an isomorphism then $\phi$ restricts to an isomorphism $\text{Soc } U \to \text{Soc } V$.
+\begin{solution}
+    I claim that $\phi(\text{Soc}(U))$ is semisimple. Since $\text{Soc}(U)$ is semisimple, we suppose that $\text{Soc}(U)=\bigoplus_{i\in I} U_i$.
+    Since $U_i$ is simple, then $\phi(U_i)$ must be zero module or isomorphic to $U_i$.
+    In any case, $\phi(U_i)$ must be either zero or simple. $\phi(\text{Soc}(U))\subseteq \sum_{i} \phi(U_i)$ implies that $\phi(\text{Soc}(U))$ as a submodule of 
+    semisimple module $ \sum_{i} \phi(U_i)$ is also semisimple. It means that $\phi(\text{Soc}(U)) \subseteq \text{Soc}(V)$.
+    Since $\phi$ is an isomorphism, for any non zere simple submodule $U_i$, then $\phi(U_i)$ is not zero submodule. For arbitrary two simple module $U_i$ and $U_j$, we then have $\phi(U_i)\cap \varphi(U_j)=\{0\}$.
+    Therefore we can suppose that 
+    \begin{align*}
+        \text{Soc}(U)= \bigoplus_{i\in I}U_i \text{ and }  \phi(\text{Soc}(U))= \bigoplus_{i\in I}\phi(U_i).
+    \end{align*}
+    Let $\text{Soc}(V) = \phi(\text{Soc}(U))\oplus \bigoplus_{j\in J}V_j$. By (i), we obtain that 
+    \begin{align*}
+        \phi^{-1}(\text{Soc}(V))=\text{Soc}(U)\oplus  \bigoplus_{j\in J}\phi^{-1}(V_j)\subseteq \text{Soc}(U).
+    \end{align*}
+    It means $V_j\simeq \phi^{-1}(V_j)\simeq (0)$. Equivalently, we obtain that $\text{Soc } U \to \text{Soc } V$ is an isomorphism.
+\end{solution}
+
+
+% --- Problem 6 ---
+\subsection*{Problem 6}
+If $\varphi : A \to A'$ is an epimorphism of rings, then $\varphi(J(A)) \subset J(A')$.
+\begin{solution}
+    By definition, we obtain that 
+    \begin{align*}
+        \varphi(J(A))=\varphi\left(\bigcap_{\mathfrak{m}\in \text{Spm}(A)}\mathfrak{m}\right)\subseteq  \bigcap_{\mathfrak{m}\in \text{Spm}(A)}\varphi(\mathfrak{m}).
+    \end{align*}
+    where Spm denotes the spectrum of maximal ideals.
+    Since $\varphi$ is surjective, it follows that every maximal ideal $\mathfrak{m}'$ in $A'$ corresponds to a maximal ideal $\mathfrak{m}$ in $A$
+    such that $\varphi(\mathfrak{m})=\mathfrak{m}'$. Therefore, we obtain that 
+    \begin{align*}
+        \varphi(J(A))\subseteq \bigcap_{\mathfrak{m}'\in \text{Spm}(A')}\mathfrak{m}' = J(A').
+    \end{align*}
+\end{solution}
+
+\section{Week 8}
+\subsection*{Problem 1}
+Let $A$ be a finite-dimensional algebra over a field. Suppose that $V$ is a f.g. $A$-module, and that a certain simple $A$-module $S$ occurs as a composition factor of $V$ with multiplicity 1. Suppose that there exist nonzero homomorphisms $S \to V$ and $V \to S$. Prove that $S$ is a direct summand of $V$.
+\begin{solution}
+    Let $\varphi$ and $\psi$ denote nonzero homomorphism $S\to V$ and $V\to S$ respectively.
+    Since $S$ is simple, we obtain that $\varphi$ must be injective. Otherwise, it should be a zero homomorphism which contradicts our conditions.
+    For the same reason, we obtain that $\psi$ must be surjective. Hence, I claim that $\psi\circ \varphi\in \text{End}_A(S)$ is an isomorphism or a zero homomorphism according to Schur's Lemma.
+    Suppose that $\psi\circ \varphi=0$. We obtain that a descending chain of submodules of $V$
+    \begin{align*}
+        V\supseteq \ker{\psi}\supseteq \text{im }\varphi\supseteq (0).
+    \end{align*}
+    Since $\varphi$ is injective, we obtain that $S\simeq \text{im }\varphi$. By the First Isomorphism Theorem for modules, we also have $S\simeq V/{\ker \psi}$.
+    It implies that $S$ occurs twice as a composition factor which is a contradiction. Therefore, $\psi\circ \varphi$ must be an isomorphism.
+    Let $f= (\psi\circ\varphi)^{-1}$ then we obtain that $\psi\circ(\varphi\circ f)=\text{id}_S$. It follows that the short exact sequence 
+    \begin{align*}
+        0\to \ker \psi \to V \xrightarrow{\psi} S\to 0
+    \end{align*}
+    is split. Equivalently, we say $V\simeq S\oplus \ker \psi$.
+\end{solution}
+
+
+
+\subsection*{Problem 2}
+Suppose that $U$, $V$ and $W$ are modules for a finite-dimensional algebra over a field and $P_W$ is the projective cover of $W$. Assume that these modules are finite-dimensional.
+\begin{itemize}
+    \item[(a)] Show that $U \to W$ is an essential epimorphism if and only if there is a surjective homomorphism $P_W \to U$ so that the composite $P_W \to U \to W$ is a projective cover of $W$. In this situation, show that $P_W \to U$ must be a projective cover of $U$.
+    \item[(b)] Prove the following ``extension and converse'' to Nakayama's Lemma: let $V$ be any submodule of $U$. Then $U \to U/V$ is an essential epimorphism if and only if $V \subseteq \operatorname{Rad} U$.
+\end{itemize}
+\begin{solution}
+    (a) Let $f$ denote the essential epimorphism $U\to W$. Let $g$ denote $P_W\to W$. According to the universal property of projective module, there exists a morphism $h:P_W\to U$ such that $g=f\circ h$. Then we can see $h$ is the homomorphism that we want.  
+    According to discussion in our class, both $f$ and $g$ are essential epimorphisms implies that $h$ is also an essential epimorphism. 
+    It follows that $h:P_W\to U$ is a projective cover.
+    Coversely, since $g$ is an essential epimorphism and $h$ is a surjection, according to our homework, we obtain that $f:U\to W$ and $h:P_W\to U$ are also essentially epimorphic.
+    It follows that $P_W\to U$ is a projective cover and $U\to W$ is an essential epimorphism.
+
+    (b) Let $f$ denote morphisim $U\to U/V$.
+    Suppose that $V \not \subseteq \text{Rad }U$, then there exists a maximal submodule $M$ such that $M+V= U$. By isomorphism Theorem of module, we obtain that $U/V \simeq M/(M\cap V)$. It implies that 
+    \begin{align*}
+        f|_M:M \to U/V\simeq M/(M\cap V)
+    \end{align*}
+    is an epimorphism. Equivalently, $f$ is not an essential epimorphism.
+
+
+    Suppose that $V\subseteq \text{Rad }U$. Suppose that $f$ is not essentially epimorphic, equivalently, there exists a proper submodule $M$ of $U$ such that $f|_{M}$ is epimorphic.
+    For an arbitrary element $x\in U$, $f|_M$ is epimorphic implies that there exists $m\in M$ and $v\in V$ such that $x=m+v$.
+    It means that $M+V=U$. However, by Nakayama's Lemma, since $V\subseteq \text{Rad }U$, it implies that $M=U$. It contradicts our assumption. Therefore, $f$ must be essentially epimorphic.
+
+\end{solution}
+
+\begin{remark}
+    There are some facts:
+    \begin{itemize}
+        \item Let $\text{Idem}(R) = \{e \in R \mid e^2 = e\}$ be the set of idempotents of a ring $R$, and let $\text{Summ}(M)$ be the set of all direct summands of $M$. There is a bijection:$$\Phi: \text{Idem}(\text{End}_A(M)) \xrightarrow{\sim} \text{Summ}(M)$$$$e \mapsto eM$$
+        \item  Let $f: M \to N$ be an essential epimorphism ($\text{Ker}(f) \subseteq \text{rad}(M)$). We define $$\mathcal{L}_N = \{ \bar{e} \in \text{Idem}(\text{End}_A(N)) \mid \exists e \in \text{Idem}(\text{End}_A(M)) \text{ s.t. } f \circ e = \bar{e} \circ f \}.$$
+        then there exists bijective correspondence $\Psi$ maps these idempotents to the set of essential covers of summands: $$\Psi: \mathcal{L}_N \xrightarrow{\sim} \{ f|_{eM} : eM \to \bar{e}N \mid e \in \text{Idem}(\text{End}_A(M)) \text{ is a lift of } \bar{e} \}$$$$\bar{e} \mapsto (f|_{eM} : eM \to \bar{e}N)$$
+        \item A ring $R$ is semiperfect if every finitely generated (left) $R$-module admits a projective cover.
+        It is equivalent to the following conditions:
+        \begin{itemize}
+            \item[a] The quotient $R/J(R)$ is a semisimple Artinian ring;
+            \item[b] Idempotents lift modulo $J(R)$.
+        \end{itemize}
+        \item  Let $\text{Top}(M) = M/\text{rad}(M)$ be its radical quotient. A module $M$ admits a projective cover if and only if $\text{Top}(M)$ admits a projective cover.
+    \end{itemize}
+\end{remark}
+
+\subsection*{Problem 3}
+The following holds for a valuation $v$ of $K$:
+\begin{itemize}
+    \item[(i)] $v(\pm 1) = 0$
+    \item[(ii)] $v(a) = v(-a)$
+    \item[(iii)] $v(a^{-1}) = -v(a)$
+    \item[(iv)] $v(b) < v(a) \Rightarrow v(a + b) = v(b)$.
+\end{itemize}
+
+\begin{solution}
+    (i) Since $v(1) = v(1^n) = n v(1)$ for any integer $n$. For equation holds, $v(1)=0$. Similarly, $v(-1)=v((-1)^{2n+1}) = (2n+1)v(-1)$ for any integer $n$, then we obtain that $v(-1)=0$.
+    (ii) Since (i), we obtain that $v(-a)=v(-1)+v(a) = v(a)$.
+    (iii) Consider that $0=v(1)=v(a\cdot a^{-1})=v(a)+v(a^{-1})$, then $v(a^{-1})=-v(a)$.
+    (iv) We note that by the strongly triangular inequality, we obtain that $v(a+b)\ge \min\{v(a),v(b)\}=v(b)$. By the same reason, we consider that 
+    \begin{align*}
+        v(b)=v(a+b-a)\ge \min\{v(a+b),v(a)\}.
+    \end{align*}
+    Since $v(b)<v(a)$, then it implies that $v(b)\ge v(a+b) $ for the inequality holds. Therefore, we claim that $v(a+b)=v(b)$ if $v(b)<v(a)$.
+\end{solution}
+
+
+\section{Week 9}
+\subsection*{Problem 1}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Then the following holds:
+\begin{itemize}
+    \item[(i)] $(a_n)$ is a Cauchy sequence $\Leftrightarrow \lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    \item[(ii)] If $\lim_{n\to\infty} a_n = a \neq 0$, then $\varphi(a_n) = \varphi(a)$ for a sufficiently large $n$.
+\end{itemize}
+\begin{solution}
+    (i) Suppose that $(a_n)$ is a Cauchy sequence. Then for any $\varepsilon>0$, there exists $N\in \mathbb{Z}_{>0}$ such that 
+    \begin{align*}
+        \varphi(a_m-a_n)<\varepsilon \text{ for any }m,n>N.
+    \end{align*}
+    We take $m=n+1$, then we obtain that $\varphi(a_{n+1}-a_n)<\varepsilon$ for any $n>N$. Equivalently, we can say $\lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    Conversely, suppose that $\varphi(a_{n+1} - a_n) = 0$, it means that for any $\varepsilon>0$ there exists an positive integer $N$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_{n+1}-a_n)<\varepsilon.
+    \end{align*}
+    Consider the strongly triangular inequality, then we have 
+    \begin{align*}
+        \varphi(a_{n+m}-a_n)=\varphi\left(\sum_{i=0}^{m-1}(a_{n+i+1}-a_{n+i})\right) = \max_{i}\{\varphi(a_{n+i+1}-a_{n+i})\}<\varepsilon.
+    \end{align*}
+    Therefore, we obtain that $(a_n)$ is a Cauchy sequence.
+
+    (ii) Since $a_n-a$ converge to zero, then there exists $N>0$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_n-a)<\varphi(a)/2.
+    \end{align*}
+    Similarly, since $a_n$ converge to $a$, then there exists $M>0$ such that for any $n>M$ we have 
+    \begin{align*}
+        \varphi(a_n)>\varphi(a)/2.
+    \end{align*}
+    We can choose $N\ge M$, then we have $\varphi(a_n)>\varphi(a_n-a)$. It implies that 
+    \begin{align*}
+        \varphi(a)=\varphi(a-a_n+a_n)= \max\{\varphi(a-a_n),\varphi(a_n)\}=\varphi(a_n).
+    \end{align*}
+    Our claim holds.
+\end{solution}
+
+
+\subsection*{Problem 2}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Let $V$ be a finite dimensional $K$-space with basis $u_1, \ldots, u_n$. For $v = a_1 u_1 + \cdots + a_n u_n \in V$, define $\|v\|_0$ by
+$$\|v\|_0 = \max\{\varphi(a_i); 1 \leq i \leq n\}.$$
+Then this is a norm on $V$. Moreover, the following holds concerning the metric induced by this norm.
+\begin{itemize}
+    \item[(i)] Let $v_r = a_{r1}u_1 + \cdots + a_{rn}u_n \in V$ be given for $r = 1, 2, \ldots$. Then the sequence $(v_r)$ is a Cauchy sequence if and only if the sequence $(a_{ri})_r$ in $K$ is so for all $i$. Also $\lim_{r\to\infty} v_r = \sum_{i=1}^n a_i u_i$ if and only if $\lim_{r\to\infty} a_{ri} = a_i$ for all $i$.
+    \item[(ii)] If $K$ is complete, then so is $V$.
+\end{itemize}
+
+\begin{solution}
+    (i) Suppose that $(v_r)_r$ is a Cauchy sequence. It means that for any $\varepsilon>0$, there exists $N>0$ such that for any $r>N$ and index $i$ we have 
+    \begin{align*}
+       0\le \varphi(a_{r+1,i}-a_{ri})\le \|v_{r+1}-v_r\|_0  <\varepsilon.
+    \end{align*}
+    It implies that $\lim_{r\to\infty}\varphi(a_{r+1,i}-a_{ri}) = 0$. According to Problem 1.(i), we then have $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    
+    Conversely, suppose that $(a_{ri})_r$ is a Cauchy sequence. Then for every $\varepsilon>0$, there exists an integer $N$ such that for any $r>N$, an integer $m$ and index $i$ satisfy 
+    \begin{align*}
+        \varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    Hence, we have 
+    \begin{align*}
+        \|v_{r+m}-v_r\|_0 = \max_{i}\varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    It shows $(v_r)_r$ is a Cauchy sequence.
+
+    For next statement, it is suffice to show that $v_r \to 0$ iff. $a_{ri}\to 0$. 
+    Because we just let $w_r = v_r - \sum a_iu_i$, and the statement $w_r\to 0$ iff. $(a_{ri}-a_i) \to 0$ is equivalent to the statement we need to prove.
+    Suppose that $v_r$ converge to zero. It means that for any $\varepsilon>0$, we have $N>0$ and for any $r>N$ and index $i$ the inequality
+    \begin{align*}
+        0\le \varphi(a_{ri})\le \|v_r\|_0<\varepsilon
+    \end{align*}
+    Which implies that $\varphi(a_{ri})\to 0$ and $a_{ri}\to 0$ follows. Conversely, $a_{ri}\to 0$ implies $\varphi(a_{ri})\to 0$ and thus we have $\|v_r\|_0\to 0$. And $v_r\to 0$ follows.
+    Therefore, our claim holds.
+
+
+    (ii) Let $(v_r)_r$ be an arbitrary Cauchy sequence. According to (i), it is equivalent to $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    Since $K$ is complete, it means that there exists $a_i\in K$ such that $(a_{ri}-a_i)_r$ converge to zero. According to our discussion above, it is equivalent to 
+    $(v_r-\sum a_iu_i)_r$ converge to zero. Therefore, $V$ is complete as well. 
+\end{solution}
+
+\section{Week 10}
+\subsection*{Problem 1}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Then the following holds:
+\begin{itemize}
+    \item[(i)] $(a_n)$ is a Cauchy sequence $\Leftrightarrow \lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    \item[(ii)] If $\lim_{n\to\infty} a_n = a \neq 0$, then $\varphi(a_n) = \varphi(a)$ for a sufficiently large $n$.
+\end{itemize}
+\begin{solution}
+    (i) Suppose that $(a_n)$ is a Cauchy sequence. Then for any $\varepsilon>0$, there exists $N\in \mathbb{Z}_{>0}$ such that 
+    \begin{align*}
+        \varphi(a_m-a_n)<\varepsilon \text{ for any }m,n>N.
+    \end{align*}
+    We take $m=n+1$, then we obtain that $\varphi(a_{n+1}-a_n)<\varepsilon$ for any $n>N$. Equivalently, we can say $\lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
+    Conversely, suppose that $\varphi(a_{n+1} - a_n) = 0$, it means that for any $\varepsilon>0$ there exists an positive integer $N$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_{n+1}-a_n)<\varepsilon.
+    \end{align*}
+    Consider the strongly triangular inequality, then we have 
+    \begin{align*}
+        \varphi(a_{n+m}-a_n)=\varphi\left(\sum_{i=0}^{m-1}(a_{n+i+1}-a_{n+i})\right) = \max_{i}\{\varphi(a_{n+i+1}-a_{n+i})\}<\varepsilon.
+    \end{align*}
+    Therefore, we obtain that $(a_n)$ is a Cauchy sequence.
+
+    (ii) Since $a_n-a$ converge to zero, then there exists $N>0$ such that for any $n>N$ we have 
+    \begin{align*}
+        \varphi(a_n-a)<\varphi(a)/2.
+    \end{align*}
+    Similarly, since $a_n$ converge to $a$, then there exists $M>0$ such that for any $n>M$ we have 
+    \begin{align*}
+        \varphi(a_n)>\varphi(a)/2.
+    \end{align*}
+    We can choose $N\ge M$, then we have $\varphi(a_n)>\varphi(a_n-a)$. It implies that 
+    \begin{align*}
+        \varphi(a)=\varphi(a-a_n+a_n)= \max\{\varphi(a-a_n),\varphi(a_n)\}=\varphi(a_n).
+    \end{align*}
+    Our claim holds.
+\end{solution}
+
+
+\subsection*{Problem 2}
+
+Let $\varphi$ be a multiplicative valuation of a field $K$. Let $V$ be a finite dimensional $K$-space with basis $u_1, \ldots, u_n$. For $v = a_1 u_1 + \cdots + a_n u_n \in V$, define $\|v\|_0$ by
+$$\|v\|_0 = \max\{\varphi(a_i); 1 \leq i \leq n\}.$$
+Then this is a norm on $V$. Moreover, the following holds concerning the metric induced by this norm.
+\begin{itemize}
+    \item[(i)] Let $v_r = a_{r1}u_1 + \cdots + a_{rn}u_n \in V$ be given for $r = 1, 2, \ldots$. Then the sequence $(v_r)$ is a Cauchy sequence if and only if the sequence $(a_{ri})_r$ in $K$ is so for all $i$. Also $\lim_{r\to\infty} v_r = \sum_{i=1}^n a_i u_i$ if and only if $\lim_{r\to\infty} a_{ri} = a_i$ for all $i$.
+    \item[(ii)] If $K$ is complete, then so is $V$.
+\end{itemize}
+
+\begin{solution}
+    (i) Suppose that $(v_r)_r$ is a Cauchy sequence. It means that for any $\varepsilon>0$, there exists $N>0$ such that for any $r>N$ and index $i$ we have 
+    \begin{align*}
+       0\le \varphi(a_{r+1,i}-a_{ri})\le \|v_{r+1}-v_r\|_0  <\varepsilon.
+    \end{align*}
+    It implies that $\lim_{r\to\infty}\varphi(a_{r+1,i}-a_{ri}) = 0$. According to Problem 1.(i), we then have $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    
+    Conversely, suppose that $(a_{ri})_r$ is a Cauchy sequence. Then for every $\varepsilon>0$, there exists an integer $N$ such that for any $r>N$, an integer $m$ and index $i$ satisfy 
+    \begin{align*}
+        \varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    Hence, we have 
+    \begin{align*}
+        \|v_{r+m}-v_r\|_0 = \max_{i}\varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
+    \end{align*}
+    It shows $(v_r)_r$ is a Cauchy sequence.
+
+    For next statement, it is suffice to show that $v_r \to 0$ iff. $a_{ri}\to 0$. 
+    Because we just let $w_r = v_r - \sum a_iu_i$, and the statement $w_r\to 0$ iff. $(a_{ri}-a_i) \to 0$ is equivalent to the statement we need to prove.
+    Suppose that $v_r$ converge to zero. It means that for any $\varepsilon>0$, we have $N>0$ and for any $r>N$ and index $i$ the inequality
+    \begin{align*}
+        0\le \varphi(a_{ri})\le \|v_r\|_0<\varepsilon
+    \end{align*}
+    Which implies that $\varphi(a_{ri})\to 0$ and $a_{ri}\to 0$ follows. Conversely, $a_{ri}\to 0$ implies $\varphi(a_{ri})\to 0$ and thus we have $\|v_r\|_0\to 0$. And $v_r\to 0$ follows.
+    Therefore, our claim holds.
+
+
+    (ii) Let $(v_r)_r$ be an arbitrary Cauchy sequence. According to (i), it is equivalent to $(a_{ri})_r$ is a Cauchy sequence for each $i$.
+    Since $K$ is complete, it means that there exists $a_i\in K$ such that $(a_{ri}-a_i)_r$ converge to zero. According to our discussion above, it is equivalent to 
+    $(v_r-\sum a_iu_i)_r$ converge to zero. Therefore, $V$ is complete as well. 
+\end{solution}
+
+\section{Midterm}
+\subsection*{Lemmas for Problem}
+\begin{lemma}{A}
+     $\qz$ is an injective $\z$-module.
+\end{lemma}
+\begin{proof}
+    Given an arbitrary $\mathbb{Z}$-module $G$ with its submodule $H$ and a $\mathbb{Z}$-module homomorphism $f:H\to \qz$, let 
+    \begin{align*}
+        \Omega=\{J\supseteq H\mid \text{ there exists $f_J:J\to \qz$ such that $f_J|_{H}=f$}\}.
+    \end{align*}
+    According to Zorn's lemma, the partially ordered set $\Omega$ has a maximial element $K$.
+    Suppose that $K$ is a proper submodule of $G$.
+    Choose an arbitrary element $a\in G\setminus K$, we let $\tilde{K}$ denote the submodule generated by $K$ and $a$.
+    
+    If the intersection $\langle a \rangle\cap K$ only contains zero, equivalently, $\tilde{K}= K\oplus \mathbb{Z}\cdot a$, then we construct a map $\tilde{f}_K:\tilde{K}\to \qz$  
+    by sending $a$ to zero and identified with $f_K$ on $K$. Clearly, it is a $\mathbb{Z}$-module homomorphism since $\tilde{f}_K$ can be identified with the composite of $\tilde{K}\to K \to \qz$ with the first homomorphism is the canonical projection.
+    It is impossible because we already set $K$ is the maximial element but we find a larger element $\tilde{K}$ with homomorphism $\tilde{f}_K$.
+    
+    Next, We let the integer $n$ to be the minimal positive integer that makes $na\in K$ holds. We construct a map $\tilde{f}_K:\tilde{K}\to \qz$ by sending $a$ to $f_K(na)/n$ and $\tilde{f}_K|_K = f_K$. 
+    It is a well-defined module homomorphism since if we have $k-ma=0$ in $\tilde{K}$ where $k\in K$ then it implies that $n\mid m $ otherwise there must exists a positive integer $n'<n$ such that $n\equiv n'\bmod m$ and then $a^{n'}\in K$ which is a contradiction.
+    Therefore, we have $\tilde{f}_K(k)-\tilde{f}_K(ma)= f_K(k-ma)=0$. 
+    
+    The process that we extend $f_K$ to $\tilde{f}_K$ implies that $K$ must not be proper, equivalently, $K=G$.
+    Then we obtain that $f$ can be extended to $G\to\qz$, it means that $\qz$ is an injective $\mathbb{Z}$-module.
+\end{proof}
+\begin{lemma}{B}
+    Let $A$, $B$, and $C$ be $R$-modules such that $A \subseteq B \subseteq C$.
+    If $A$ is an essential submodule of $B$ and $B$ is an essential submodule of $C$, then $A$ is an essential submodule of $C$.
+\end{lemma}
+\begin{proof}
+    We let $\subseteq_e$ denote essential extension.
+    Let $W$ be an arbitrary non-zero submodule of $C$. To prove that $A \subseteq_e C$, we need to show that $W \cap A \neq 0$.
+    Since $B \subseteq_e C$ and $W$ is a non-zero submodule of $C$, the intersection of $W$ and $B$ must be non-trivial, i.e., $W \cap B \neq 0$. 
+
+    Since $A\subseteq_e B$ and $W \cap B$ is a submodule of $B$, we obtain that 
+    \[ (W \cap B) \cap A \neq 0 \]
+    which implies that $W\cap A \neq 0$. Therefore, we obtain that $A\subseteq_e C$.
+\end{proof}
+
+\begin{lemma}{C}
+    Let $A$ and $B$ be $R$-modules such that $A \subseteq_e B$. Let $f:B\to C$ be a $R$-module monomorphism, then $f(A)\subseteq_e f(B)$.
+\end{lemma}
+\begin{proof}
+    Given that an arbitrary submodule $W$ of $f(B)$. Since $A\subseteq_e B$, we have
+    \begin{align*}
+        f^{-1}(W)\cap A \neq 0.
+    \end{align*}
+    Since $f$ is monomorphic, we then have 
+        \begin{align*}
+        W\cap f(A) \neq 0
+    \end{align*}
+    which implies that $A\subseteq_e B$.
+\end{proof}
+
+\subsection*{Problem 1}
+
+Let $R$ be a ring with $1$.
+
+\begin{itemize}
+    \item[(i)] Let $h : U \to V$ be a monomorphism of $R$-modules. Then the following two conditions are equivalent.
+    \begin{itemize}
+        \item[(a)] A homomorphism $k : V \to Y$ must be a monomorphism whenever the composite map $U \xrightarrow{h} V \xrightarrow{k} Y$ is a monomorphism.
+        \item[(b)] If $0 \neq W \subset V$, then $h(U) \cap W \neq 0$.
+    \end{itemize}
+    The monomorphism $h$ that satisfy the above conditions is said to be \textit{essential}. If there is an injective $R$-module $Q$ with an essential monomorphism $h : V \to Q$, then the diagram $V \xrightarrow{h} Q$ is called an \textit{injective hull} of $V$.
+
+    \item[(ii)] Prove that: any $R$-module $V$ has an injective hull.
+\end{itemize}
+\begin{solution}
+    \textbf{(i)}
+    We first show that (a) implies (b). Suppose that $W\neq 0$ and $h(U)\cap W = 0$, then I claim that $U\to V/W$ is injective.
+    Since intersection $h(U)\cap W = 0$, we obtain that
+    \begin{align*}
+        h(U)+W\simeq h(U)\oplus W.
+    \end{align*}
+    Since $h$ is a monomorphism, there is a canonical isomorphism $h(U)\simeq U$ and a canonical inclusion
+    \begin{align*}
+        U\hookrightarrow h(U)\oplus W.
+    \end{align*}
+    In this sense, we find that the homomorphism $U\to V/W$ can be decomposed by 
+    \begin{align*}
+        U \hookrightarrow h(U)\oplus W \to (h(U)\oplus W)/W.
+    \end{align*}
+    The last step is exactly the canonical projection, then we obtain that $U\to V/W$ is an injection.
+    However, the homomorphism $V\to V/W$ is a monomorphism if and only if $W=(0)$ which contradicts our assumption.
+
+    Conversely, we suppose that $k\circ h$ is a monomorphism but $k$ is not injective. 
+    Since $k$ is not injective, it means that $\ker k\neq 0$. Hence, the injectivity of $k\circ h$ implies that $\ker (k\circ h)\supseteq (h(U)\cap \ker k)$ and thus
+    $h(U)\cap \ker k=0$. It is a contradiction because we require that for an arbitrary submodule $W$ of $V$ we must have $h(U)\cap W \neq 0$ and $\ker k$ does not satisfy this requirement.
+
+    \textbf{(ii)} For a fixed $R$-module $V$, we construct an injective hull for it as follow.
+    According to \textbf{Lemma A.}, we know that $\qz$ is an injective $\z$-module, it equals the functor $\hom_{\z}(-,\qz)$ is exact.
+    Let $Q=\hom_\z(R,\qz)$ be the Pontryagin dual module of $R$. Since the tensor-hom duality, we obtain that 
+    \begin{align*}
+        \hom_R(M,Q)\simeq \hom_\z(M\otimes_R R,\qz)\simeq \hom_\z(M,\qz)
+    \end{align*}
+    For arbitrary $R$-module $M$.
+    It means that the functor $\hom_R(-,Q)$ is also exact, thus $Q$ is an injective $R$-module.
+    To construct an injective hull for $R$-module $V$, we first view $V$ as a $\z$-module and consider the $\z$-module homomorphism
+    \begin{align*}
+        f:V \to \prod_{v\in V}\qz 
+    \end{align*} 
+    determined bt $\psi_v: V \to \qz$ by extending the $\z$-module homomorphism $\langle v \rangle\to \qz$ by sending $v$ to $1/2+\z$ if $\#\langle v\rangle=\infty$ or to $1/n$ if $\#\langle v\rangle=n$.
+    The extension exists because $\qz$ is an injective module. We alse note that $f$ is injective since for an arbitrary element $v\in \ker f$, we have $\psi_v(v) = \z$. It means that the order of $\langle v \rangle$ is one,
+    equivalently, $1\cdot v=0$ and thus we have $v=0$. The injectivity of $f$ holds.
+
+    It induces an $R$-module homomorphism 
+    \begin{align*}
+        \tilde{f}:\hom_\z(R,V) \to \hom_\z(R,\prod_{v\in V}\qz).
+    \end{align*}
+    Since we have $\hom_\z(R,V)\simeq V$ and $\hom_R(R,\prod_{v\in V}\qz)\simeq \prod_{v\in V} Q$. We can rewrite this homomorphism
+    \begin{align*}
+        \tilde{f}: V\to \prod_{v\in V} Q.
+    \end{align*}
+
+    First of all, the limit $\prod_{v\in V} Q$ is an injective $R$-module since given by an arbitrary $R$-module monomorphism $A \to B$ with homomorphism $A\to \prod_{v\in V} Q$,
+    The second homomorphism induces homomorphisms $A\to Q$ for each index $v\in V$ by composite the canonical projection.
+    Because $Q$ is an injective $R$-module, there exists lift $B\to Q$ for each $A\to Q$. Hence, by the universal property of production, $B\to Q$ for each index induces a $R$-module homomorphism $B\to \prod_{v\in V} Q$ such that $A\to \prod_{v\in V} Q$
+    can be decomposed to $A\to B\to \prod_{v\in V} Q$. It means that $\prod_{v\in V} Q$ is an injective $R$-module.
+    Hence, $\tilde{f}$ is injective since $f$ is injective and functor $\hom_\z(R,-)$ is left exact.
+
+    Now, we conisder the partially ordered set
+    \begin{align*}
+        \Omega = \left\{E\mid E\subseteq \prod_{v\in V} Q \text{ and }F\cap \tilde{f}(V)\neq 0\text{ for any nonzero submodule $F$ of $E$} \right\}.
+    \end{align*}
+    According to Zorn's lemma, $\Omega$ admits a maximal element we denote it by $E$. Hence, we consider the another partially ordered set 
+    \begin{align*}
+        \Gamma = \left\{K\mid K\subseteq \prod_{v\in V} Q \text{ and }K\cap E = 0 \right\}.
+    \end{align*}
+    Similarly, we let $K$ denote a maximal element of $\Gamma$. I claim that $\prod_{v\in V} Q\simeq K\oplus E$.
+    To see that we consider a homomorphism $E \to (\prod_{v\in V} Q)/K$. Since $E\cap K =0$, this homomorphism is injective. Therefore, $\prod_{v\in V} Q$ is an injective module implies that 
+    there exists a homomorphism 
+    \begin{align*}
+        \Phi:\left(\prod_{v\in V} Q\right)/K \to \prod_{v\in V} Q
+    \end{align*}
+    such that the diagram
+    \begin{center}
+            \begin{tikzcd}[row sep=large, column sep=large]
+    % 顶点定义
+    E \arrow[r, hook, "\iota"] \arrow[dr,hook, "\psi"'] & 
+    \left( \prod_{v \in V} Q \right) \Big/ K \arrow[d, dashed, "\Phi"] \\
+    & \prod_{v \in V} Q
+    \end{tikzcd}
+    \end{center}
+    commutes. We notice that $\Phi$ is injective. 
+    Because $\psi$ is injective, then $\Phi|_{\iota(E)}$ is injective, therefore we have $\ker \Phi\cap \iota(E) = 0$.
+    If $\ker \Phi\neq (0)$,  we consider the canonical quotient 
+    \begin{align*}
+        \pi:\prod_{v\in V} Q \to \left(\prod_{v\in V} Q\right)/K
+    \end{align*}
+    and we obtain that $\pi^{-1}(\ker \Phi)\cap E\subseteq K$, since $E\cap K=0$, then we have $\pi^{-1}(\ker \Phi)\cap E=0$.
+    Clearly, $\pi^{-1}(\ker \Phi)\not\subseteq K$ then we find that $(K+\pi^{-1}(\ker\Phi))\cap E=0$ and $K\subsetneq(K+\pi^{-1}(\ker\Phi))$.
+    It contradicts the maximality of $K$, therefore $\Phi$ must be injective.
+    The injectivity of $\Phi$ implies that $\iota(E)$ is an essential submodule of $(\prod_{v\in V} Q)/K$ since if there exists a submodule $M+K$ of $\left(\prod_{v\in V} Q\right)/K$ such that $(M+K)\cap \iota(E)=0$,
+    then we have $\Phi(M+K)\cap E = 0$. It implies that $\Phi(M+K)\subseteq K$ equivalently $M+K\in\ker \Phi$.
+    Therefore, we obtain that $\iota(E)$ is an essential submodule of $(\prod_{v\in V} Q)/K$.
+
+    According to \textbf{Lemma C.}, the essential extension $\tilde{f}(V)\subseteq_e E$ implies that $\iota\circ\tilde{f}(V)\subseteq_e \iota(E)$ since $\iota$ is injective.
+    Hence \textbf{Lemma B.} implies that
+    \begin{align*}
+        \iota\circ\tilde{f}(V)\subseteq_e (\prod_{v\in V} Q)/K
+    \end{align*}
+    due to the fact that $\iota\circ\tilde{f}(V)\subseteq_e \iota(E)$ and $\iota(E)\subseteq_e (\prod_{v\in V} Q)/K$.
+    The injectivity of $\Phi$ implies that 
+    \begin{align*}
+        \tilde{f}(V)\subseteq_e \Phi\left((\prod_{v\in V} Q)/K\right).
+    \end{align*}
+    Since we also have $E\subseteq \Phi\left((\prod_{v\in V} Q)/K\right)$,
+    the maximality of $E$ implies that 
+    \begin{align*}
+        E =  \Phi\left((\prod_{v\in V} Q)/K\right).
+    \end{align*}
+    Equivalently we say $E \simeq (\prod_{v\in V} Q)/K$ and therefore 
+    \begin{align*}
+        \prod_{v\in V} Q=K\oplus E.
+    \end{align*}
+    then $E$ as a summand of injective $R$-module $\prod_{v\in V} Q$ is also a injective $R$-module.
+    The definition of $\Omega$ yields $E$ satisfies condition \textbf{(i.b)}, therefore $E$ is an injective hull of $V$.
+    Our discussion implies that every $R$-module has an injective hull.
+\end{solution} 
+
+
+\subsection*{Problem 2}
+
+\begin{itemize}
+    \item[(i)] The following holds for an idempotent $e$ of $R$:
+    \[ J(eRe) = eJ(R)e = eRe \cap J(R). \]
+
+    \item[(ii)] Prove: $J(M_n(R)) = M_n(J(R))$. Here $M_n(R)$ means the matrix ring.
+\end{itemize}
+\begin{solution}
+    \textbf{(i)} 
+    Suppose that $x=er_0e\in J(eRe)$, then for arbitrary $r\in R$, we consider 
+    \begin{align*}
+        1-rx = (1-e)+(e-rx).
+    \end{align*}
+    Since $x\in J(eRe)$, then there exixs $t=er_1e\in eRe$ such that 
+    \begin{align*}
+        t(e-erx) = e.
+    \end{align*}
+    Hence we have 
+    \begin{align*}
+        t(e-rx) = er_1e^2(e-rx) = t(e-erx) = e.
+    \end{align*}
+    Now we consider 
+    \begin{align*}
+        (1-e+t)(1-rx) = (1-e+t)(1-e+e-rx) = 1-(1-e)rx
+    \end{align*}
+    Hence we have 
+    \begin{align*}
+        ((1-e)rx)^2 = (1-e)rx(1-e)rx = 0
+    \end{align*}
+    since $x\in eRe$ and $x(1-e)=0$.
+    Let $\varphi = (1-e+t)$ and $\psi = (1-rx)$ we then have 
+    \begin{align*}
+        (2\varphi-\varphi\psi\varphi)(1-rx) = 1.
+    \end{align*}
+    It means that $x\in J(R)$. Equivalently, we prove that $J(eRe)\subseteq J(R)$.
+
+    Since $J(eRe)\subseteq eRe$ we obtain that 
+    \begin{align*}
+        J(eRe) \subseteq eRe\cap J(R).
+    \end{align*}
+    Let $x\in eRe\cap J(R)$, then we can suppose that $x=er_0e$ and for any $r\in R$, we have 
+    \begin{align*}
+        1-rx = 1-r(er_0e)
+    \end{align*}
+    is invertible. Suppose that $t(1-rx)=1$ with $r=er'e$
+    then we consider 
+    \begin{align*}
+        (ete)(e-rx) = (ete)(e-(er'e)(er_0e)) = et(1-rx)e = e^2 = e.
+    \end{align*}
+    it implies that 
+        \begin{align*}
+        J(eRe) \supseteq eRe\cap J(R).
+    \end{align*}
+    Then we obtain that $J(eRe) = eRe\cap J(R)$. 
+
+    Next, we consider $eJ(R)e$. we consider that $R$ as a left $R$-module $_R R$. Then we have idempotent decomposition 
+    \begin{align*}
+        _R R = eR\oplus (1-e)R 
+    \end{align*}
+    Then we have $J(R) = eJ(R)+(1-e)J(R)$ and 
+    \begin{align*}
+        J(R)\cap eR = eJ(R). \tag{$\star$}
+    \end{align*}
+    Similarly, if we consider $R$ as a right $R$-module $R_R$, we obtain that 
+    \begin{align*}
+        J(R)\cap Re = J(R)e. \tag{$\Delta$}
+    \end{align*}
+    I claim that $eR\cap Re = eRe$. To see that, let $x\in eR\cap Re $ then suppose that $x= er_1=r_2e$. Since $e$ is idempotent, then we have 
+    \begin{align*}
+        er_1e =xe = r_2e^2=r_2e = x 
+    \end{align*}
+    it implies that $eR\cap Re\subseteq eRe$. And $eRe \subseteq eR\cap Re$ is easy to see. 
+    By the same reason we have $eJ(R)\cap J(R)e = eJ(R)e$. Then we obtain that 
+    \begin{align*}
+        (J(R)\cap eR)\cap (J(R)\cap Re) = J(R)\cap eRe
+    \end{align*}
+    and therefore $J(R)\cap eRe = eJ(R)e$.
+
+    \textbf{(ii)} 
+    Let $E_{ij}$ denote the matrix of $(i,j)$-entry is $1_R$ and others entires is zero. 
+    Let $M$ denote $M_n(R)$.
+    Let $A=(a_{ij})$ be an arbitrary element in $J(M)$. Since $J(M)$ is a double sided ideal, then we have $\tilde{A}=E_{1i}AE_{j1}\in J(M)$.
+    According to $\textbf{(i)}$, we have 
+    \begin{align*}
+        E_{11}J(M)E_{11} = J(E_{11}M E_{11}) \simeq J(R).
+    \end{align*}
+    Then it implies that $E_{11}\tilde{A}E_{11}\in J(E_{11}M E_{11})$. Equivalently, we have $a_{ij}\in J(R)$ and thus $J(M)\subseteq M_{n}(J(R))$.
+    Conversely, we first show that $J(R)E_{ii}\subseteq J(M)$ since 
+    \begin{align*}
+        J(R)E_{ii}= J(E_{ii} M E_{ii})=E_{ii}J(M)E_{ii} \subseteq J(M).
+    \end{align*}
+    Therefore, we have 
+    \begin{align*}
+        J(R)E_{ij} = J(R)E_{ii}E_{ij} \subseteq J(M)E_{ij}\subseteq J(M).
+    \end{align*}
+    It implies that $M_n(J(R))\subseteq J(M)$ and thus 
+    \begin{align*}
+        J(M_n(R)) = M_n(J(R)).
+    \end{align*}
+\end{solution}
+
+
+\subsection*{Problem 3}
+\textbf{Prove:} A submodule of a finitely generated free module over a PID is free.
+
+\begin{solution}
+    Let $R$ be an arbitrary PID. We first to show that submodules of $_R R$ is free.
+    Let $H$ be an arbitrary submodule of $R$, equivalently, $H$ be an arbitrary ideal of $R$.
+    Since $R$ is PID, then there exists an element $x\in R$ such that $H=Rx$. Since $R$ is integeral then there 
+    is not nontrivial zero divisor in $R$. Therefore, we find that 
+    \begin{align*}
+        R \to Rx\quad r\mapsto rx
+    \end{align*} 
+    is an isomorphism. Equivalently, $H$ is free $R$-module.
+
+    Now, we consider the induction on rank of finitely generated free modules. 
+    Suppose that our claim holds for $R^{n-1}$.
+    We consider the case that rank of $n$.
+    Let $H$ be an arbitrary submodule of $R^n$. Let $p_n$ be the canonical projection on $n^\text{th}$ position of $R^n$.
+    Then we obtain a short exact sequence 
+    \begin{align*}
+        0\to \ker p_n\cap H\to H \to p_n(H) \to 0.
+    \end{align*}
+    Since $p_n(H)$ is a submodule of $R$, it means that $p_n(H)$ is a free $R$-module. Therefore, the exact sequence split.
+    We can write 
+    \begin{align*}
+        H \simeq (\ker p_n\cap H)\oplus p_n(H).
+    \end{align*}
+    Since $\ker p_n\cap H$ is the submodule of $R^{n-1}$, then by our assumption, it is also a free $R$-module.
+    Therefore, our claim holds.
+\end{solution}
+\section{Week 11}
+\subsection*{Problem 1}
+Let $R$ be a ring and $V$ be an $R$-module. Let $I$ be an ideal of $R$. Suppose that $d_I$ is defined on $V$ and on $R$. Then
+\begin{enumerate}
+    \item[(i)] Addition is continuous from $V \times V$ to $V$.
+    \item[(ii)] Multiplication is continuous from $R \times V$ to $V$.
+    \item[(iii)] If $d_I$ is defined on the $R$-module $W$ and $f \in \mathrm{Hom}_R(V,W)$, then $f$ is continuous.
+\end{enumerate}
+
+\begin{solution}
+    (1) Let the addition map be $f: V \times V \to V$, where $f(x, y) = x + y$.
+    Let $O$ be an arbitrary open set in the target space $V$.
+    We need to prove that its preimage $f^{-1}(O)$ is an open set in $V \times V$.
+    If $f^{-1}(O)$ is empty, it is trivially open.
+    If $f^{-1}(O)$ is non-empty, pick an arbitrary point $(x, y) \in f^{-1}(O)$.
+    It means $x + y \in O$.
+    Since $O$ is an open set in $V$, there exists an integer $n$ such that:$$(x + y) + I^n V \subseteq O.$$
+    Let $U_x = x + I^n V$ and $U_y = y + I^n V$ be the open neighborhood of $x,y$ respectively. Then $U_x \times U_y$ is an open neighborhood of $(x, y)$ in $V \times V$.
+    Since $$f(U_x \times U_y) = U_x + U_y = (x + I^n V) + (y + I^n V) = x + y + I^n V$$
+    we have $f(U_x \times U_y) \subseteq O$ which implies $$U_x \times U_y \subseteq f^{-1}(O).$$
+    Therefore, for arbitrary $(x,y)\in f^{-1}(O)$, we have an open neighborhood $U_x\times U_y$ contained in $f^{-1}(O)$. It turns out that $f^{-1}(O)$ is open and thus $f$ is continuous. 
+
+    (2) Let the multiplication map be $g : R \times V \to V$, where $g(r,v) = rv$. Let $O$ be an arbitrary open set in the target space $V$. We need to prove that its preimage $g^{-1}(O)$ is an open set in $R \times V$. If $g^{-1}(O)$ is empty, it is trivially open. If $g^{-1}(O)$ is non-empty, pick an arbitrary point $(r,v) \in g^{-1}(O)$. It means $rv \in O$. Since $O$ is an open set in $V$, there exists an integer $n$ such that:$$rv + I^n V \subseteq O.$$Let $U_r = r + I^n$ and $U_v = v + I^n V$ be the open neighborhood of $r, v$ respectively. Then $U_r \times U_v$ is an open neighborhood of $(r,v)$ in $R \times V$. Since$$g(U_r \times U_v) = U_r U_v = (r + I^n)(v + I^n V) \subseteq rv + r(I^n V) + (I^n)v + I^{2n}V \subseteq rv + I^n V$$we have $g(U_r \times U_v) \subseteq O$ which implies$$U_r \times U_v \subseteq g^{-1}(O).$$Therefore, for arbitrary $(r,v) \in g^{-1}(O)$, we have an open neighborhood $U_r \times U_v$ contained in $g^{-1}(O)$. It turns out that $g^{-1}(O)$ is open and thus $g$ is continuous.
+
+    (3) Let $O$ be an arbitrary open set in the target space $W$. We need to prove that its preimage $f^{-1}(O)$ is an open set in $V$. If $f^{-1}(O)$ is empty, it is trivially open. If $f^{-1}(O)$ is non-empty, pick an arbitrary point $v \in f^{-1}(O)$. It means $f(v) \in O$. Since $O$ is an open set in $W$, there exists an integer $n$ such that:$$f(v) + I^n W \subseteq O.$$Let $U_v = v + I^n V$ be the open neighborhood of $v$ in $V$. Since $f$ is an $R$-module homomorphism, we have $f(I^n V) = I^n f(V) \subseteq I^n W$. Then$$f(U_v) = f(v + I^n V) = f(v) + f(I^n V) \subseteq f(v) + I^n W$$we have $f(U_v) \subseteq O$ which implies$$U_v \subseteq f^{-1}(O).$$Therefore, for arbitrary $v \in f^{-1}(O)$, we have an open neighborhood $U_v$ contained in $f^{-1}(O)$. It turns out that $f^{-1}(O)$ is open and thus $f$ is continuous.
+\end{solution}
+
+
+\subsection*{Problem 2}
+The following algebra isomorphisms hold for $R$-algebras $A$ and $B$, where $R$ is a commutative ring.
+\begin{enumerate}
+    \item[(i)] $M_n(A) \otimes_R B \simeq M_n(A \otimes_R B)$.
+    \item[(ii)] $M_n(A) \otimes_R M_m(B) \simeq M_{nm}(A \otimes_R B)$.
+\end{enumerate}
+\begin{solution}
+    (i) Let 
+    \begin{align*}
+        \phi : M_n(A) \times B &\to M_n(A \otimes_R B)\\
+        ((a_{ij}), b)&\mapsto (a_{ij} \otimes b)
+    \end{align*}
+    Since $\phi$ is $R$-bilinear, it induces a well-defined $R$-linear map 
+    \begin{align*}
+        \Phi : M_n(A) \otimes_R B &\to M_n(A \otimes_R B)\\
+        (a_{ij}) \otimes b &\mapsto (a_{ij} \otimes b)
+    \end{align*}
+    For any $(a_{ij}), (c_{ij}) \in M_n(A)$ and $b, d \in B$, we have$$\Phi(((a_{ij}) \otimes b)((c_{ij}) \otimes d)) = \Phi((a_{ij})(c_{ij}) \otimes bd) = \left(\sum_k a_{ik}c_{kj} \otimes bd\right).$$On the other hand,$$\Phi((a_{ij}) \otimes b)\Phi((c_{ij}) \otimes d) = (a_{ij} \otimes b)(c_{ij} \otimes d) = \left(\sum_k (a_{ik} \otimes b)(c_{kj} \otimes d)\right) = \left(\sum_k a_{ik}c_{kj} \otimes bd\right).$$Thus $\Phi$ preserves multiplication and is an algebra homomorphism. 
+    The map 
+    \begin{align*}
+        \Psi: M_n(A \otimes_R B) &\to M_n(A) \otimes_R B \\
+        (a \otimes b)E_{ij} &\mapsto aE_{ij} \otimes b
+    \end{align*}
+    provides a two-sided inverse to $\Phi$. Therefore, we obtain that $$M_n(A) \otimes_R B \simeq M_n(A \otimes_R B).$$
+    
+    (ii) By applying the isomorphism from (i) and treating $M_m(B)$ as an $R$-algebra, we have $$M_n(A) \otimes_R M_m(B) \simeq M_n(A \otimes_R M_m(B)).$$
+     Since $R$ is commutative, the tensor product is symmetric up to isomorphism, yielding $$A \otimes_R M_m(B) \simeq M_m(B) \otimes_R A.$$ Applying (i) again to $M_m(B) \otimes_R A$, we get $$M_m(B \otimes_R A) \simeq M_m(A \otimes_R B).$$ Substituting this sequence of isomorphisms back gives:$$M_n(A \otimes_R M_m(B)) \simeq M_n(M_m(A \otimes_R B)).$$For any ring $S$, there is a natural ring isomorphism $M_n(M_m(S)) \simeq M_{nm}(S)$ given by viewing an $n \times n$ block matrix of $m \times m$ matrices as an $nm \times nm$ matrix. Letting $S = A \otimes_R B$, we conclude $$M_n(A) \otimes_R M_m(B) \simeq M_{nm}(A \otimes_R B).$$
+\end{solution}
+
+
+\section{Week 12}
+\subsection*{Problem 1}
+\begin{enumerate}
+    \item[(i)] Let $(X, \rho)$ be a transitive \textbf{Set}-representation of $G$. For $x \in X$, let $G_x$ denote the fixator of $x$ in $G$. Then the map
+    $$
+    G/G_x \to X, \quad gG_x \mapsto \rho(g)(x)
+    $$
+    defines an isomorphism $(G/G_x, \rho_{G_x}) \xrightarrow{\sim} (X, \rho)$.
+    \item[(ii)] For subgroups $H$ and $H'$ of $G$, the representations $(G/H, \rho_H)$ and $(G/H', \rho_{H'})$ are isomorphic if and only if $H$ and $H'$ are conjugate in $G$.
+\end{enumerate}
+
+\begin{solution}
+    (i) Let $f:G/G_x\to X$ denote the map we discuss. First we show that \(f\) is well-defined. Suppose
+\[
+gG_x=hG_x.
+\]
+Then \(h^{-1}g\in G_x\), so
+\[
+\rho_{h^{-1}g}(x)=x.
+\]
+Hence
+\[
+\rho_g(x)=\rho_h(\rho_{h^{-1}g}(x))=\rho_h(x).
+\]
+Therefore \(f(gG_x)=f(hG_x)\), so \(f\) is well-defined.
+    Next, We show that $f$ is a bijection of sets. Let $y$ be an arbitrary element of $X$ that distinct to $x$. 
+    Since $G$ act transitively on $X$ then there exists $g\in G$ such that $\rho_g(x)=y$. Therefore, we have 
+    \begin{align*}
+        f(gG_x) = \rho_g(x) = y.
+    \end{align*}
+    It implies that $f$ is surjective. Let $g,h\in G$ such that $f(gG_x) = f(hG_x)$. It implies that $\rho_g(x)=\rho_h(x)$ and thus 
+    \begin{align*}
+        x = \rho_{h^{-1}}\circ\rho_g(x) = \rho_{h^{-1}\cdot g}(x).
+    \end{align*} 
+    Then we have $h^{-1}\cdot g\in G_x$. Equivalently, we have $gG_x = hG_x$. Therefore, $f$ is injective. 
+    For arbitrary $g\in G$, we then have 
+    \begin{align*}
+        f(g\cdot hG_x) = f(gh G_x) = \rho_{gh}(x) = \rho_g\circ\rho_h(x) = \rho_g \cdot f(hG_x).
+    \end{align*}
+    Therefore, $f$ is isomorphism of representation.
+
+    (ii) Suppose first that
+\[
+f:G/H\to G/H'
+\]
+is an isomorphism of \(G\)-sets. Write
+\[
+f(H)=gH'
+\]
+for some \(g\in G\). Since \(f\) is \(G\)-equivariant, it preserves stabilizers. Hence
+\[
+H=\operatorname{Stab}_G(H)
+=\operatorname{Stab}_G(f(H))
+=\operatorname{Stab}_G(gH')
+=gH'g^{-1}.
+\]
+Thus \(H\) and \(H'\) are conjugate.
+
+Conversely, suppose
+\[
+H=gH'g^{-1}
+\]
+for some \(g\in G\). Define
+\[
+\Phi:G/H\to G/H',
+\qquad
+\Phi(aH)=agH'.
+\]
+This is well-defined: if \(aH=bH\), then \(a=bh\) for some \(h\in H\). Since
+\[
+g^{-1}hg\in H',
+\]
+we get
+\[
+agH'=bhgH'=bgH'.
+\]
+Thus \(\Phi(aH)=\Phi(bH)\).
+
+The map \(\Phi\) is bijective, with inverse
+\[
+\Psi:G/H'\to G/H,
+\qquad
+\Psi(aH')=ag^{-1}H.
+\]
+Moreover, for \(k\in G\),
+\[
+\Phi(k\cdot aH)
+=
+\Phi(kaH)
+=
+kagH'
+=
+k\cdot \Phi(aH).
+\]
+Therefore \(\Phi\) is \(G\)-equivariant. Hence
+\[
+(G/H,\rho_H)\cong (G/H',\rho_{H'})
+\]
+if and only if \(H\) and \(H'\) are conjugate in \(G\).
+\end{solution}
+
+
+
+\subsection*{Problem 2}
+Assume that $G$ is the cyclic (additive) group $\mathbb{Z}/p\mathbb{Z}$ where $p$ is a prime number, and let $k$ be a field of characteristic $p$. 
+Consider the morphism
+$$
+G \to \mathrm{GL}_2(k), \quad \lambda \mapsto \begin{pmatrix} 1 & \lambda \\ 0 & 1 \end{pmatrix}.
+$$
+Prove that the line generated by the first standard basis vector of $k^2$ is $G$-stable but has no $G$-stable complement.
+\begin{solution}
+    Let
+\[
+e_1=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad
+e_2=\begin{pmatrix}0\\1\end{pmatrix}.
+\]
+Since \(\operatorname{char}(k)=p\), the map
+\[
+\rho:\mathbb Z/p\mathbb Z\to \mathrm{GL}_2(k),
+\qquad
+\lambda\mapsto
+\begin{pmatrix}
+1&\lambda\\
+0&1
+\end{pmatrix}
+\]
+is well-defined and is a group homomorphism.
+
+Let
+\[
+W=ke_1.
+\]
+Then for every \(\lambda\in \mathbb Z/p\mathbb Z\),
+\[
+\rho(\lambda)e_1=e_1,
+\]
+so \(W\) is \(G\)-stable.
+
+We claim that \(W\) has no \(G\)-stable complement. Suppose, for contradiction, that
+\[
+k^2=W\oplus U
+\]
+with \(U\) is \(G\)-stable. Then \(U\) is one-dimensional and \(U\neq W\), so
+\[
+U=k(ae_1+e_2)
+\]
+for some \(a\in k\). Since \(U\) is \(G\)-stable, it is stable under the action of \(1\in \mathbb Z/p\mathbb Z\). Thus
+\[
+\rho(1)(ae_1+e_2)=(a+1)e_1+e_2
+\]
+must lie in \(U\). Hence there exists \(c\in k\) such that
+\[
+(a+1)e_1+e_2=c(ae_1+e_2).
+\]
+Comparing coefficients gives \(c=1\), and then
+\[
+a+1=a,
+\]
+a contradiction. Therefore \(W\) has no \(G\)-stable complement.
+\end{solution}
+
+
+
+\subsection*{Problem 3}
+Let $(M, \rho)$ and $(N, \sigma)$ be two $k$-representations of $G$. Fix basis $(e_i)_{1 \le i \le m}$ and $(f_j)_{1 \le j \le n}$ of $M$ and $N$ respectively. Then $(e_i \otimes f_j)_{1 \le i \le m, 1 \le j \le n}$ is a basis of $M \otimes_k N$. Denote by $(m, \rho)$, $(n, \sigma)$, $(mn, \rho \otimes \sigma)$ be the matrix representations associated with $(M, \rho)$, $(N, \sigma)$, $(M \otimes_k N, \rho \otimes \sigma)$ respectively.
+Determine the relation between $(\rho \otimes \sigma)(g)$ and $\rho(g)$, $\sigma(g)$.
+\begin{solution}
+    Suppose
+\[
+\rho_g(e_i)=\sum_{k=1}^m a_{ki}e_k,
+\qquad
+\sigma_g(f_j)=\sum_{\ell=1}^n b_{\ell j}f_\ell .
+\]
+Then
+\[
+(\rho\otimes\sigma)_g(e_i\otimes f_j)
+=
+\rho_g(e_i)\otimes\sigma_g(f_j)
+=
+\sum_{k=1}^m\sum_{\ell=1}^n
+a_{ki}b_{\ell j}(e_k\otimes f_\ell).
+\]
+With respect to the ordered basis
+\[
+(e_1\otimes f_1,\ldots,e_1\otimes f_n,
+e_2\otimes f_1,\ldots,e_m\otimes f_n),
+\]
+the column corresponding to \(e_i\otimes f_j\) is
+\[
+(a_{1i}b_{1j},\ldots,a_{1i}b_{nj},
+a_{2i}b_{1j},\ldots,a_{2i}b_{nj},
+\ldots,
+a_{mi}b_{1j},\ldots,a_{mi}b_{nj})^T.
+\]
+Therefore
+\[
+[(\rho\otimes\sigma)_g]=[\rho_g]\otimes[\sigma_g],
+\]
+where the tensor product on the right is the Kronecker product of matrices.
+\end{solution}
+
+
+
+\subsection*{Problem 4}
+Let $(M, \rho)$ be a $k$-representations of $G$. Fix basis $(e_i)_{1 \le i \le m}$ of $M$. Let $(M^*, \rho^*)$ be the contragredient representation of $(M, \rho)$. Denote by $(m, \rho)$, $(m, \rho^*)$ be the matrix representations associated with $(M, \rho)$, $(M^*, \rho^*)$.
+Determine the relation between $\rho(g)$ and $\rho^*(g)$.
+
+\begin{solution}
+Let \(e_1,\dots,e_n\) be a basis of \(V\), with dual basis
+\(e_1^*,\dots,e_n^*\). Suppose
+\[
+\rho_g(e_i)=\sum_{k=1}^n a_{ki}e_k.
+\]
+Thus
+\[
+[\rho_g]=(a_{ki}).
+\]
+
+The contragredient representation \(\rho^*\) is defined by
+\[
+(\rho_g^*\varphi)(v)=\varphi(\rho_{g^{-1}}v).
+\]
+Write
+\[
+\rho_{g^{-1}}(e_j)=\sum_{k=1}^n b_{kj}e_k.
+\]
+Then \([\rho_{g^{-1}}]=(b_{kj})=[\rho_g]^{-1}\). For each \(i,j\),
+\[
+(\rho_g^*e_i^*)(e_j)
+=
+e_i^*(\rho_{g^{-1}}e_j)
+=
+e_i^*\left(\sum_{k=1}^n b_{kj}e_k\right)
+=
+b_{ij}.
+\]
+Hence the coefficient of \(e_j^*\) in \(\rho_g^*(e_i^*)\) is \(b_{ij}\). Therefore
+\[
+[\rho_g^*]=(b_{ij})= [\rho_{g^{-1}}]^T=([\rho_g]^{-1})^T.
+\]
+Thus the matrix of the contragredient representation is the inverse transpose
+of the original matrix.
+\end{solution}
+
+
+\subsection*{Problem 5}
+\begin{enumerate}
+    \item[(i)] Let $G$ be a finite group acting on a finite set $\Omega$. Let $\mathrm{Fix}^G(\Omega)$ denote the set of fixed points of $\Omega$ under $G$, and let $\Omega^\#$ denote the set of orbits of $G$ on $\Omega \setminus \mathrm{Fix}^G(\Omega)$. Prove that
+    $$
+    |\Omega| = |\mathrm{Fix}^G(\Omega)| + \sum_{\omega \in \Omega^\#} |\omega|.
+    $$
+    From now on, we assume that $p$ is a prime number and that $G$ is a nontrivial $p$-group.
+    \item[(ii)] Assume now that $|\Omega|$ is a power of $p$ different from 1. Prove that $|\mathrm{Fix}^G(\Omega)|$ is divisible by $p$.
+    \item[(iii)] Let $k$ be a (commutative) field of characteristic $p$. Let $M$ be a $kG$-module. Prove that $\mathrm{Fix}^G(M) \neq 0$. (Hint. (a) Let $(e_i)_{i=1,\dots,r}$ be a $k$-basis of $M$. Prove that the abelian group generated by $(g e_i)_{i=1,\dots,r \ (g \in G)}$ is an $\mathbb{F}_p G$-module. (b) Apply question (2) above to conclude.)
+    \item[(iv)] Prove that, up to isomorphism, the trivial representation of $G$ is the unique irreducible $kG$-module.
+\end{enumerate}
+\begin{solution}
+    (i) The set \(\Omega\) decomposes as a disjoint union
+\[
+\Omega=\operatorname{Fix}^G(\Omega)\sqcup
+\bigl(\Omega\setminus \operatorname{Fix}^G(\Omega)\bigr).
+\]
+Moreover, \(\Omega\setminus \operatorname{Fix}^G(\Omega)\) is \(G\)-stable, hence it is a disjoint union of its \(G\)-orbits:
+\[
+\Omega\setminus \operatorname{Fix}^G(\Omega)
+=
+\bigsqcup_{\omega\in \Omega^\#}\omega .
+\]
+Therefore
+\[
+\Omega
+=
+\operatorname{Fix}^G(\Omega)
+\sqcup
+\bigsqcup_{\omega\in \Omega^\#}\omega .
+\]
+Taking cardinalities gives
+\[
+|\Omega|
+=
+|\operatorname{Fix}^G(\Omega)|
++
+\sum_{\omega\in \Omega^\#}|\omega|.
+\]
+
+(ii) We just prove that for any $\omega\in \Omega^\#$ we have $|\omega|$ is divisible by $p$. Consider $\omega$ as transitive $G$-set, according to (1), we choose $x\in \omega$ then it induces the bijection
+\begin{align*}
+    G/G_x \xrightarrow{\sim} \omega.
+\end{align*}
+Since the only prime divisor of $|G|$ is $p$, we can suppsoe that $|\omega|= |G/G_x|=p^s.$ If $s=0$, it turns out that $x\in \operatorname{Fix}^G(\Omega)$, which contradicts to our assumption.
+Therefore, $|\Omega|$ and each $|\omega|$ is divisible by $p$ implies that 
+\begin{align*}
+|\operatorname{Fix}^G(\Omega)| =  |\Omega| - \sum_{\omega\in \Omega^\#}|\omega|.
+\end{align*}
+is also divisible by $p$.
+
+(iii) Assume \(M\neq 0\), and let \(e_1,\dots,e_r\) be a \(k\)-basis of \(M\).
+Set
+\[
+M'=\langle ge_i\mid g\in G,\ 1\leq i\leq r\rangle_{\mathbb F_p}\subset M.
+\]
+Since \(\operatorname{char}(k)=p\), this is a finite \(\mathbb F_p\)-subspace of
+\(M\). It is \(G\)-stable, because for \(h\in G\),
+\[
+h(ge_i)=(hg)e_i\in M'.
+\]
+Thus \(G\) acts on the finite set \(M'\).
+
+Since \(M'\neq 0\), we have \(|M'|=p^n\) for some \(n\geq 1\). By part (ii),
+\[
+|\operatorname{Fix}^G(M')|
+\]
+is divisible by \(p\). But \(0\in \operatorname{Fix}^G(M')\), so the fixed
+point set cannot consist only of \(0\). Hence there exists
+\[
+0\neq m\in \operatorname{Fix}^G(M').
+\]
+Since \(M'\subset M\), we get
+\[
+0\neq m\in \operatorname{Fix}^G(M).
+\]
+Therefore
+\[
+\operatorname{Fix}^G(M)\neq 0.
+\]
+
+(iv)Let \(M\) be an irreducible \(kG\)-module. By part (iii),
+\[
+\operatorname{Fix}^G(M)\neq 0.
+\]
+Choose
+\[
+0\neq m\in \operatorname{Fix}^G(M).
+\]
+Then \(gm=m\) for all \(g\in G\). Hence the one-dimensional subspace
+\[
+km\subset M
+\]
+is \(G\)-stable. Since \(M\) is irreducible, we must have
+\[
+M=km.
+\]
+Thus \(M\) is one-dimensional and \(G\) acts trivially on \(M\). Therefore
+\[
+M\cong k
+\]
+as \(kG\)-modules, where \(k\) is the trivial representation.
+
+Conversely, the trivial representation \(k\) is one-dimensional, hence
+irreducible. Therefore, up to isomorphism, the trivial representation is the
+unique irreducible \(kG\)-module.
+\end{solution}
+
+
+\section{Week 13}
+\subsection*{Problem 1}
+
+Write out a proof of Maschke's Theorem in the case of representations over
+\(\mathbb{C}\) along the following lines.
+\begin{enumerate}
+    \item Given a representation
+\[
+\rho:G\to GL(V),
+\]
+where \(V\) is a vector space over \(\mathbb{C}\), let \((\cdot,\cdot)\) be any
+positive definite Hermitian form on \(V\). Define a new form
+\((\cdot,\cdot)_1\) on \(V\) by
+\[
+(v,w)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gw).
+\]
+Show that \((\cdot,\cdot)_1\) is a positive definite Hermitian form, preserved
+under the action of \(G\); that is,
+\[
+(v,w)_1=(gv,gw)_1
+\]
+always.
+    \item If \(W\) is a subrepresentation of \(V\), show that
+\[
+V=W\oplus W^\perp
+\]
+as representations.
+\end{enumerate}
+\begin{solution}
+(1) For \(a,b\in \mathbb C\),
+\[
+(av_1+bv_2,w)_1
+=\frac{1}{|G|}\sum_{g\in G}(a\,gv_1+b\,gv_2,gw)
+=a(v_1,w)_1+b(v_2,w)_1,
+\]
+and similarly the second variable is conjugate-linear. Moreover,
+\[
+(w,v)_1
+=\frac{1}{|G|}\sum_{g\in G}(gw,gv)
+=\overline{\frac{1}{|G|}\sum_{g\in G}(gv,gw)}
+=\overline{(v,w)_1}.
+\]
+Thus \((\cdot,\cdot)_1\) is Hermitian.
+Next, for \(v\neq 0\), since each \(g\in G\) acts invertibly, we have \(gv\neq 0\). Hence
+\[
+(v,v)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gv)>0.
+\]
+Therefore \((\cdot,\cdot)_1\) is positive definite.
+Finally, we show that this form is preserved by the action of \(G\). Let \(h\in G\). Then
+\[
+(hv,hw)_1
+=\frac{1}{|G|}\sum_{g\in G}(ghv,ghw).
+\]
+As \(g\) runs over \(G\), so does \(gh\). Therefore
+\[
+(hv,hw)_1
+=\frac{1}{|G|}\sum_{u\in G}(uv,uw)
+=(v,w)_1.
+\]
+Thus
+\[
+(v,w)_1=(hv,hw)_1
+\]
+for all \(h\in G\), so \((\cdot,\cdot)_1\) is \(G\)-invariant.
+
+(2) Choose a basis of \(V\), so that \(V\simeq \mathbb C^n\), and take the
+standard positive definite Hermitian form
+\[
+(v,w)=\sum_i v_i\overline{w_i}.
+\]
+Averaging this form over the \(G\)-action gives a new Hermitian form
+\[
+(v,w)_1=\frac{1}{|G|}\sum_{g\in G}(gv,gw).
+\]
+By the previous part, \((\cdot,\cdot)_1\) is positive definite and
+\(G\)-invariant.
+
+Now let \(W\subset V\) be a subrepresentation, and define
+\[
+W^\perp=\{v\in V\mid (v,w)_1=0 \text{ for all } w\in W\}.
+\]
+Since \((\cdot,\cdot)_1\) is positive definite, we have
+\[
+V=W\oplus W^\perp
+\]
+as vector spaces.
+
+It remains to show that \(W^\perp\) is \(G\)-stable. Let \(u\in W^\perp\),
+\(h\in G\), and \(w\in W\). Since \(W\) is a subrepresentation,
+\(h^{-1}w\in W\). Using \(G\)-invariance of \((\cdot,\cdot)_1\), we get
+\[
+(hu,w)_1=(u,h^{-1}w)_1=0.
+\]
+Hence \(hu\in W^\perp\), so \(W^\perp\) is a subrepresentation. Therefore
+\[
+V=W\oplus W^\perp
+\]
+as representations.
+\end{solution}
+
+
+
+
+\subsection*{Problem 2}
+
+Prove the following theorem of Burnside: let \(G\) be a finite group, \(k\) an
+algebraically closed field in which \(|G|\) is invertible, and
+\[
+\rho:G\to GL(V)
+\]
+be a representation over \(k\). By taking a basis of \(V\), write each
+endomorphism \(\rho(g)\) as a matrix. Let \(\dim V=n\). Show that the
+representation is simple if and only if there exist \(n^2\) elements
+\(g_1,\dots,g_{n^2}\) of \(G\) so that the matrices
+\[
+\rho(g_1),\dots,\rho(g_{n^2})
+\]
+are linearly independent, and that this happens if and only if the algebra
+homomorphism
+\[
+kG\to \operatorname{End}_k(V)
+\]
+is surjective. Note that \(\rho\) itself is generally not surjective.
+
+
+\begin{solution}
+    Let
+\[
+A=\operatorname{span}_k\{\rho(g):g\in G\}\subseteq \operatorname{End}_k(V).
+\]
+Then \(A\) is the image of the algebra homomorphism
+$
+kG\to \operatorname{End}_k(V).
+$
+
+
+Suppose that there exist \(g_1,\dots,g_{n^2}\in G\) such that
+\(\rho(g_1),\dots,\rho(g_{n^2})\) are linearly independent. Since
+\(\dim_k\operatorname{End}_k(V)=n^2\), they form a basis of
+\(\operatorname{End}_k(V)\). Hence every elementary matrix \(E_{ij}\), sending
+\(e_j\) to \(e_i\) and all other basis vectors to \(0\), can be written as a
+\(k\)-linear combination of the matrices \(\rho(g)\).
+Let \(0\neq W\subseteq V\) be a subrepresentation and choose
+\(0\neq v=\sum_{\ell=1}^n c_\ell e_\ell\in W\). Pick \(j\) with \(c_j\neq 0\).
+Then for every \(i\),
+\[
+\frac{1}{c_j}E_{ij}v=e_i.
+\]
+Since \(W\) is stable under every \(\rho(g)\), it is stable under their
+linear combinations. Thus \(e_i\in W\) for all \(i\), so \(W=V\). Therefore
+\(V\) is simple.
+
+
+Conversely, suppose that \(V\) is simple. Let
+\[
+A=\operatorname{im}(kG\to \operatorname{End}_k(V)).
+\]
+Since \(|G|\) is invertible in \(k\), Maschke's theorem implies that \(kG\) is
+semisimple. Hence its quotient \(A\) is also semisimple.
+
+Since \(V\) is simple as a \(G\)-representation, it is simple as an
+\(A\)-module. By Schur's lemma, because \(k\) is algebraically closed,
+\[
+\operatorname{End}_A(V)=k.
+\]
+By the Artin--Wedderburn theorem, \(A\) is a product of matrix algebras over
+\(k\). Since \(V\) is simple, only one simple factor acts nontrivially on
+\(V\). But \(A\) is defined as the image in \(\operatorname{End}_k(V)\), so its
+action on \(V\) is faithful. Therefore \(A\) has only this one factor, and its
+action on \(V\) identifies it with
+\[
+\operatorname{End}_k(V).
+\]
+Thus
+\[
+A=\operatorname{End}_k(V).
+\]
+Hence \(\dim_k A=n^2\). Since \(A\) is spanned by the matrices \(\rho(g)\), one
+can choose \(n^2\) linearly independent matrices among them.
+\end{solution}
+
+
+
+\subsection*{Problem 3}
+
+Let
+\[
+G=\langle x\mid x^n=1\rangle
+\]
+be a cyclic group of order \(n\), and let \(\zeta_n\in \mathbb{C}\) be a
+primitive \(n\)-th root of unity. Then the simple complex characters of \(G\)
+are the \(n\) functions
+\[
+\chi_r(x^s)=\zeta_n^{rs},
+\]
+where \(0\le r\le n-1\).
+\begin{solution}
+    Let \(V\) be a simple complex representation of \(G\), and set
+\(T=\rho(x)\). Since \(x^n=1\), we have \(T^n=I\). Hence the minimal
+polynomial of \(T\) divides \(t^n-1\). Over \(\mathbb C\), the polynomial
+\(t^n-1=\prod_{r=0}^{n-1}(t-\zeta_n^r)\) has distinct roots, so \(T\) is
+diagonalizable and its eigenvalues are among
+\(\zeta_n^0,\dots,\zeta_n^{n-1}\).
+
+For an eigenvalue \(\lambda\), the eigenspace
+\(V_\lambda=\{v\in V\mid Tv=\lambda v\}\) is \(G\)-stable, because
+\(G=\langle x\rangle\). Since \(V\) is simple, only one eigenspace can be
+nonzero. Thus \(V=V_\lambda\) for some \(\lambda\), so \(\dim V=1\).
+
+Therefore every simple complex representation of \(G\) is one-dimensional.
+Since \(\rho(x)^n=1\), we have \(\rho(x)=\zeta_n^r\) for some
+\(0\le r\le n-1\). Hence, for every \(s\),
+\[
+\chi_r(x^s)=\rho(x^s)=\rho(x)^s=(\zeta_n^r)^s=\zeta_n^{rs}.
+\]
+These \(n\) characters are distinct since
+\(\chi_r(x)=\zeta_n^r\). Hence they are exactly all the simple complex
+characters of \(G\).
+\end{solution}
+
+\section{Week 14}
+\subsection*{Problem 1}
+Let \(G\) be a finite group and let \(p\) be a prime. Prove that each element
+\(x\in G\) can be uniquely written as
+\[
+x=st,
+\]
+where \(s\) is \(p\)-regular, \(t\) is \(p\)-singular, and \(st=ts\).
+If \(x_1=s_1t_1\) is such a decomposition of an element \(x_1\) that is
+conjugate to \(x\), then \(s\) is conjugate to \(s_1\), and \(t\) is conjugate
+to \(t_1\).
+
+\begin{solution}
+Let \(x\in G\), and write \(|x|=n=p^a m\), where \((m,p)=1\). Choose integers
+\(A,B\) such that \(Ap^a+Bm=1\). Set \(s=x^{Ap^a}\) and \(t=x^{Bm}\). Then
+\(s\) and \(t\) commute, since both are powers of \(x\), and
+\(st=x^{Ap^a+Bm}=x\). Moreover, \(s^m=x^{Ap^a m}=x^{An}=1\), so \(|s|\mid m\);
+hence \(s\) is \(p\)-regular. Similarly, \(t^{p^a}=x^{Bmp^a}=x^{Bn}=1\), so
+\(|t|\mid p^a\); hence \(t\) is a \(p\)-element. Thus the required
+decomposition exists.
+
+Now suppose \(x=s_1t_1\) is another such decomposition, with \(s_1\) \(p\)-regular,
+\(t_1\) a \(p\)-element, and \(s_1t_1=t_1s_1\). Since \(s_1\) and \(t_1\) commute
+and have relatively prime orders, \(|x|=|s_1t_1|=|s_1||t_1|\). Comparing the
+\(p\)-part and the prime-to-\(p\) part of \(|x|=p^a m\), we get
+\(|s_1|=m\) and \(|t_1|=p^a\). Therefore
+\[
+x^{Ap^a}=(s_1t_1)^{Ap^a}=s_1^{Ap^a}t_1^{Ap^a}=s_1,
+\]
+because \(Ap^a\equiv 1\pmod m\) and \(t_1^{p^a}=1\). Similarly,
+\(x^{Bm}=(s_1t_1)^{Bm}=t_1\). Hence \(s_1=s\) and \(t_1=t\), so the
+decomposition is unique.
+
+Finally, if \(x_1=gxg^{-1}\), then
+\(x_1=(gsg^{-1})(gtg^{-1})\). The first factor is still \(p\)-regular, the
+second is still a \(p\)-element, and they commute. By uniqueness, if
+\(x_1=s_1t_1\) is the corresponding decomposition, then
+\(s_1=gsg^{-1}\) and \(t_1=gtg^{-1}\). Thus \(s\) is conjugate to \(s_1\), and
+\(t\) is conjugate to \(t_1\).
+\end{solution}
