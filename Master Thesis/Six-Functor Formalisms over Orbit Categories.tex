@@ -1,0 +1,36 @@
+\documentclass[a4paper,10pt]{article}
+
+% 引入我们自定义的样式包
+\usepackage{dag-notes}
+\usepackage{fontawesome5}
+\usepackage{CJKutf8}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm} % 设置适合 12 页阅读的页边距
+
+
+
+\newcommand{\OG}{\operatorname{\mathcal{O}_G}}
+\newcommand{\Top}{\operatorname{Top}}
+\renewcommand{\hom}{\operatorname{Hom}}
+\title{Six-Functor Formalisms over Orbit Categories}
+\author{
+}
+\date{\today}
+\begin{document}
+% 生成标题
+\maketitle
+% 导入各个章节
+% 使用 \input 可以保持紧凑排版（不会强制换页）
+% 如果想要每一章从新的一页开始，可以使用 \include
+\begin{abstract}
+ \cite{scholzeSFF} and \cite{ScholzeGHT}
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/1}
+
+\bibliographystyle{alpha}
+\bibliography{ref}
+\end{document}

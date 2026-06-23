@@ -1,0 +1,109 @@
+%----------------------------------------------------------------------------------------
+% PACKAGE IDENTIFICATION
+%----------------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dag-notes}[2026/06/05 v1.1 Custom style for toric CCC notes]
+
+%----------------------------------------------------------------------------------------
+% BASIC PACKAGES & GEOMETRY
+%----------------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\RequirePackage{fancyhdr}
+
+%----------------------------------------------------------------------------------------
+% MATH PACKAGES
+%----------------------------------------------------------------------------------------
+\RequirePackage{amsmath,amssymb,amsthm,amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage{tikz-cd}
+
+%----------------------------------------------------------------------------------------
+% COLORS
+%----------------------------------------------------------------------------------------
+\RequirePackage{xcolor}
+
+%----------------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+% We use aliascnt so that cleveref can distinguish Theorem, Proposition,
+% Lemma, Corollary, Definition, and Remark, even though they share the same
+% numbering sequence within each section.
+\RequirePackage{aliascnt}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+
+%----------------------------------------------------------------------------------------
+% HYPERLINKS AND CROSS REFERENCES
+%----------------------------------------------------------------------------------------
+% Load hyperref only once. Do not load hyperref again in the main tex file.
+\RequirePackage{hyperref}
+\RequirePackage[nameinlink,capitalise,noabbrev]{cleveref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=red,
+  urlcolor=blue
+}
+
+% cleveref names for theorem-like environments
+\crefname{theorem}{Theorem}{Theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+
+\crefname{proposition}{Proposition}{Propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+
+\crefname{lemma}{Lemma}{Lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+
+\crefname{corollary}{Corollary}{Corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+
+\crefname{definition}{Definition}{Definitions}
+\Crefname{definition}{Definition}{Definitions}
+
+\crefname{remark}{Remark}{Remarks}
+\Crefname{remark}{Remark}{Remarks}
+
+% cleveref names for structural references
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
+
+\crefname{subsection}{Subsection}{Subsections}
+\Crefname{subsection}{Subsection}{Subsections}
+
+%----------------------------------------------------------------------------------------
+% MACROS & SHORTCUTS
+%----------------------------------------------------------------------------------------
+% Add custom macros here if needed.
+
+% End of package
+\endinput

@@ -12,6 +12,59 @@ Jordan-Hölder, Loewy
 
 \section{Module}
 
+\begin{theorem}[Universal property of direct sums] \label{thm:universal-property-direct-sum} 
+    Let \(A\) be a unital associative ring, and let \(\{M_i\}_{i\in I}\) be a family of left \(A\)-modules. The direct sum \[ \bigoplus_{i\in I} M_i \] together with the canonical inclusions \[ \iota_i:M_i\longrightarrow \bigoplus_{i\in I}M_i \] satisfies the following universal property: for every left \(A\)-module \(N\) and every family of homomorphisms \(f_i:M_i\to N\), there exists a unique homomorphism \[ f:\bigoplus_{i\in I}M_i\longrightarrow N \] such that \(f\circ \iota_i=f_i\) for all \(i\in I\). Equivalently, \[ \operatorname{Hom}_A\left(\bigoplus_{i\in I}M_i,N\right) \cong \prod_{i\in I}\operatorname{Hom}_A(M_i,N). \] 
+\end{theorem} 
+    
+\begin{theorem}[Universal property of direct products] \label{thm:universal-property-direct-product} 
+    Let \(A\) be a unital associative ring, and let \(\{M_i\}_{i\in I}\) be a family of left \(A\)-modules. The direct product \[ \prod_{i\in I} M_i \] together with the canonical projections \[ \pi_i:\prod_{i\in I}M_i\longrightarrow M_i \] satisfies the following universal property: for every left \(A\)-module \(N\) and every family of homomorphisms \(g_i:N\to M_i\), there exists a unique homomorphism \[ g:N\longrightarrow \prod_{i\in I}M_i \] such that \(\pi_i\circ g=g_i\) for all \(i\in I\). Equivalently, \[ \operatorname{Hom}_A\left(N,\prod_{i\in I}M_i\right) \cong \prod_{i\in I}\operatorname{Hom}_A(N,M_i). \] 
+\end{theorem}
+
+
+\begin{theorem}[Tensor--Hom adjunction]
+\label{thm:tensor-hom-adjunction}
+Let \(A\) and \(B\) be unital associative rings.
+
+\begin{enumerate}
+    \item[(i)] Let \({}_B X_A\) be a \((B,A)\)-bimodule. Then the functor
+    \[
+    X\otimes_A -: A\text{-}\mathrm{Mod}\longrightarrow B\text{-}\mathrm{Mod}
+    \]
+    is left adjoint to
+    \[
+    \operatorname{Hom}_B(X,-):B\text{-}\mathrm{Mod}
+    \longrightarrow A\text{-}\mathrm{Mod}.
+    \]
+    Equivalently, for every left \(A\)-module \(M\) and every left
+    \(B\)-module \(N\), there is a natural isomorphism
+    \[
+    \operatorname{Hom}_B(X\otimes_A M,N)
+    \cong
+    \operatorname{Hom}_A\bigl(M,\operatorname{Hom}_B(X,N)\bigr).
+    \]
+
+    \item[(ii)] Let \({}_A X_B\) be an \((A,B)\)-bimodule. Then the functor
+    \[
+    -\otimes_A X:\mathrm{Mod}\text{-}A\longrightarrow \mathrm{Mod}\text{-}B
+    \]
+    is left adjoint to
+    \[
+    \operatorname{Hom}_B(X,-):\mathrm{Mod}\text{-}B
+    \longrightarrow \mathrm{Mod}\text{-}A.
+    \]
+    Equivalently, for every right \(A\)-module \(M\) and every right
+    \(B\)-module \(N\), there is a natural isomorphism
+    \[
+    \operatorname{Hom}_B(M\otimes_A X,N)
+    \cong
+    \operatorname{Hom}_A\bigl(M,\operatorname{Hom}_B(X,N)\bigr).
+    \]
+\end{enumerate}
+\end{theorem}
+
+
+
+
 \begin{theorem}
     The following three conditions on $V_A$ are equivalent.
     \begin{enumerate}
@@ -528,6 +581,279 @@ Let \(A\) be a semiperfect ring, let \(J=J(A)\), and set
     is a projective cover in \(\overline A\text{-}\mathrm{Mod}\).
 \end{enumerate}
 \end{theorem}
+
+\section{Representation Theory}
+
+\begin{theorem}[Characters are class functions]
+\label{thm:characters-are-class-functions}
+Let \(G\) be a finite group, and let \(\chi\) be a complex character of
+\(G\). If \(g,h\in G\) are conjugate, then
+\[
+\chi(g)=\chi(h).
+\]
+Equivalently, every character of \(G\) is constant on conjugacy classes.
+\end{theorem}
+
+\begin{theorem}[Number of irreducible characters]
+\label{thm:number-of-irreducible-characters}
+Let \(G\) be a finite group, and let \(\operatorname{Irr}(G)\) be the set of
+irreducible complex characters of \(G\). Then
+\[
+|\operatorname{Irr}(G)|
+=
+|\operatorname{Cl}(G)|,
+\]
+where \(\operatorname{Cl}(G)\) denotes the set of conjugacy classes of \(G\).
+\end{theorem}
+
+\begin{theorem}[Linear characters and the abelianization]
+\label{thm:linear-characters-and-abelianization}
+Let \(G\) be a finite group, and let \(G'=[G,G]\) be its commutator subgroup.
+Then the one-dimensional complex characters of \(G\) are exactly the
+characters inflated from the abelianization \(G/G'\). Equivalently,
+\[
+\operatorname{Irr}_1(G)
+\cong
+\operatorname{Hom}(G/G',\mathbb C^\times).
+\]
+In particular,
+\[
+|\operatorname{Irr}_1(G)|=|G/G'|.
+\]
+\end{theorem}
+
+\begin{theorem}[Degree formula for irreducible characters]
+\label{thm:degree-formula-for-irreducible-characters}
+Let \(G\) be a finite group, and let \(\operatorname{Irr}(G)\) be the set of
+irreducible complex characters of \(G\). Then
+\[
+|G|
+=
+\sum_{\chi\in\operatorname{Irr}(G)}\chi(1)^2.
+\]
+Moreover, for every \(\chi\in\operatorname{Irr}(G)\),
+\[
+\chi(1)\mid |G|.
+\]
+\end{theorem}
+
+
+\begin{theorem}[Row orthogonality of irreducible characters]
+\label{thm:row-orthogonality-irreducible-characters}
+Let \(G\) be a finite group, and let \(\operatorname{Irr}(G)\) be the set of
+irreducible complex characters of \(G\). For class functions \(\chi,\psi\),
+define
+\[
+\langle \chi,\psi\rangle
+=
+\frac{1}{|G|}
+\sum_{g\in G}\chi(g)\overline{\psi(g)}.
+\]
+Then for \(\chi,\psi\in\operatorname{Irr}(G)\),
+\[
+\langle \chi,\psi\rangle=\delta_{\chi,\psi}.
+\]
+Equivalently, if \(C_1,\dots,C_r\) are the conjugacy classes of \(G\), then
+\[
+\frac{1}{|G|}
+\sum_{\ell=1}^r
+|C_\ell|\chi(C_\ell)\overline{\psi(C_\ell)}
+=
+\delta_{\chi,\psi}.
+\]
+\end{theorem}
+
+\begin{theorem}[Column orthogonality of irreducible characters]
+\label{thm:column-orthogonality-irreducible-characters}
+Let \(G\) be a finite group, and let \(\operatorname{Irr}(G)\) be the set of
+irreducible complex characters of \(G\). If \(g,h\in G\), then
+\[
+\sum_{\chi\in\operatorname{Irr}(G)}
+\chi(g)\overline{\chi(h)}
+=
+\begin{cases}
+|C_G(g)|, & g \text{ is conjugate to } h,\\
+0, & g \text{ is not conjugate to } h.
+\end{cases}
+\]
+In particular,
+\[
+\sum_{\chi\in\operatorname{Irr}(G)}|\chi(g)|^2
+=
+|C_G(g)|.
+\]
+\end{theorem}
+
+
+
+\begin{theorem}[Basic facts on ordinary characters of finite groups]
+\label{thm:basic-character-theory}
+Let \(G\) be a finite group, and let \(\operatorname{Irr}(G)\) denote the set
+of irreducible complex characters of \(G\). Then the following facts hold.
+
+\begin{enumerate}
+    \item[(i)] Every character is a class function. That is, if \(g,h\in G\)
+    are conjugate, then
+    \[
+    \chi(g)=\chi(h).
+    \]
+
+    \item[(ii)] The irreducible characters form an orthonormal basis of the
+    space of complex class functions on \(G\), with respect to the inner
+    product
+    \[
+    \langle \chi,\psi\rangle
+    =
+    \frac{1}{|G|}\sum_{g\in G}\chi(g)\overline{\psi(g)}.
+    \]
+    In particular,
+    \[
+    \langle \chi,\psi\rangle=\delta_{\chi,\psi}
+    \]
+    for \(\chi,\psi\in \operatorname{Irr}(G)\).
+
+    \item[(iii)] The number of irreducible characters equals the number of
+    conjugacy classes of \(G\):
+    \[
+    |\operatorname{Irr}(G)|
+    =
+    |\operatorname{Cl}(G)|.
+    \]
+
+    \item[(iv)] The one-dimensional characters of \(G\) are exactly the
+    characters inflated from the abelianization \(G/G'\), where
+    \(G'=[G,G]\). Equivalently,
+    \[
+    \operatorname{Irr}_1(G)
+    \cong
+    \operatorname{Hom}(G/G',\mathbb C^\times).
+    \]
+    In particular,
+    \[
+    |\operatorname{Irr}_1(G)|=|G/G'|.
+    \]
+
+    \item[(v)] The regular character \(\rho_{\mathrm{reg}}\) satisfies
+    \[
+    \rho_{\mathrm{reg}}(1)=|G|,
+    \qquad
+    \rho_{\mathrm{reg}}(g)=0
+    \quad (g\neq 1),
+    \]
+    and decomposes as
+    \[
+    \rho_{\mathrm{reg}}
+    =
+    \sum_{\chi\in\operatorname{Irr}(G)}\chi(1)\chi.
+    \]
+
+    \item[(vi)] The degrees of the irreducible characters satisfy
+    \[
+    |G|
+    =
+    \sum_{\chi\in\operatorname{Irr}(G)}\chi(1)^2.
+    \]
+    Moreover, for every \(\chi\in\operatorname{Irr}(G)\),
+    \[
+    \chi(1)\mid |G|.
+    \]
+
+    \item[(vii)] The row orthogonality relations are
+    \[
+    \frac{1}{|G|}
+    \sum_{C\in\operatorname{Cl}(G)}
+    |C|\chi(C)\overline{\psi(C)}
+    =
+    \delta_{\chi,\psi}.
+    \]
+
+    \item[(viii)] The column orthogonality relations are as follows. If
+    \(g,h\in G\), then
+    \[
+    \sum_{\chi\in\operatorname{Irr}(G)}
+    \chi(g)\overline{\chi(h)}
+    =
+    \begin{cases}
+    |C_G(g)|, & g \text{ is conjugate to } h,\\
+    0, & g \text{ is not conjugate to } h.
+    \end{cases}
+    \]
+    In particular,
+    \[
+    \sum_{\chi\in\operatorname{Irr}(G)}|\chi(g)|^2
+    =
+    |C_G(g)|.
+    \]
+
+    \item[(ix)] If \(z\in Z(G)\) and \(\chi\in\operatorname{Irr}(G)\), then
+    \(z\) acts by a scalar on any representation affording \(\chi\). Hence
+    \[
+    |\chi(z)|=\chi(1).
+    \]
+    Consequently,
+    \[
+    \chi(1)^2\leq |G:Z(G)|.
+    \]
+
+    \item[(x)] If \(N\triangleleft G\), then inflation gives an injection
+    \[
+    \operatorname{Irr}(G/N)\hookrightarrow \operatorname{Irr}(G).
+    \]
+    Its image consists exactly of those irreducible characters \(\chi\) of
+    \(G\) such that
+    \[
+    N\subset \ker \chi.
+    \]
+
+    \item[(xi)] For every character \(\chi\), its kernel is
+    \[
+    \ker\chi
+    =
+    \{g\in G\mid \chi(g)=\chi(1)\}.
+    \]
+    If \(\chi\) is irreducible, this is the kernel of any representation
+    affording \(\chi\), and hence is a normal subgroup of \(G\).
+
+    \item[(xii)] If \(H\leq G\), then induction and restriction satisfy
+    Frobenius reciprocity:
+    \[
+    \langle \operatorname{Ind}_H^G\varphi,\chi\rangle_G
+    =
+    \langle \varphi,\operatorname{Res}_H^G\chi\rangle_H
+    \]
+    for every character \(\varphi\) of \(H\) and every character \(\chi\) of
+    \(G\).
+
+    \item[(xiii)] If \(G\) acts on a finite set \(X\), then the associated
+    permutation character is
+    \[
+    \pi_X(g)=|\operatorname{Fix}_X(g)|.
+    \]
+
+    \item[(xiv)] If \(\chi\) and \(\psi\) are characters of \(G\), then
+    \(\chi+\psi\) is the character of a direct sum and \(\chi\psi\) is the
+    character of a tensor product. The character of the dual representation is
+    \[
+    \chi^\vee(g)=\chi(g^{-1})=\overline{\chi(g)}.
+    \]
+
+    \item[(xv)] For every character \(\chi\) and every \(g\in G\), the value
+    \(\chi(g)\) is an algebraic integer. In particular, if \(\chi(g)\in
+    \mathbb Q\), then \(\chi(g)\in\mathbb Z\).
+
+    \item[(xvi)] If \(A\triangleleft G\) is abelian, then for every
+    \(\chi\in\operatorname{Irr}(G)\),
+    \[
+    \chi(1)\mid |G:A|.
+    \]
+\end{enumerate}
+\end{theorem}
+
+
+
+
+
+
 
 
 

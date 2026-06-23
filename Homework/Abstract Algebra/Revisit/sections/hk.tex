@@ -1,4 +1,4 @@
-\section{Week 1}
+\section{Week 2}
 \subsection*{Problem 1}
 Let $R$ be a ring, and let $M$ be an $R$-module. Suppose that $S$ is a ring and $\theta : S \to R$ is a ring homomorphism satisfying $\theta(1_S) = 1_R$. Let $S$ act on $M$ by $sx = \theta(s)x$, where $x \in M, s \in S$. Prove that $M$ is an $S$-module.
 
@@ -106,7 +106,7 @@ This implies that if $\mathbb{Q}$ were free, its rank must be $1$.
 However, a free $\mathbb{Z}$-module of rank $1$ is isomorphic to $\mathbb{Z}$ itself, which is a cyclic group. $\mathbb{Q}$ is not cyclic because for any $q \in \mathbb{Q}$, the element $\frac{q}{2}$ cannot be expressed as $n \cdot q$ for any $n \in \mathbb{Z}$. Thus, $\mathbb{Q}$ cannot be a free $\mathbb{Z}$-module.
 \end{solution}
 
-\section{Week 2}
+\section{Week 3}
 
 \subsection*{Problem 1}
 Let $R$ be a commutative ring, and suppose that $\varphi$ is an endomorphism of the free $R$-module $R^m$. Prove that if $\varphi$ is surjective, then $\varphi$ is injective. Consider that: if $\varphi$ is injective, is $\varphi$ surjective?
@@ -315,7 +315,7 @@ is an $F$-basis of $V_1 \otimes_F V_2$. Determine the matrix representing the $F
 \end{solution}
 
 
-\section{Week 3}
+\section{Week 4}
 \subsection*{Problem 1}
 Let $M, N, M_i (i \in I)$ and $N_j (j \in J)$ be $R$-modules. Prove the following isomorphisms of abelian groups.
 \begin{enumerate}
@@ -499,7 +499,7 @@ To see that, we consider $\overline{(n,0)}-\overline{(0,h(n'))} = \overline{(n,-
 \textbf{(2)} Suppose $\mu$ is injective. Let $l\in L$ be an arbitrary element such that $i_L(l)= \overline{(0,l)}=0$, or equivalently there exists $n'\in N'$ such that $\mu(n')=0$ and $-h(n')=l$.
 The injectivity of $\mu$ implies $n'=0$ and hence $l=-h(n')=0$. Therefore, $i_L$ is injective.
 \end{proof}
-\section{Week 4}
+\section{Week 5}
 \subsection*{Lemmas for Problem}
 \begin{lemma}{A}
 Let $\mu: N' \to N$ and $h: N' \to L$ be $R$-module homomorphisms. Let $Q = N \oplus_{N'} L$ be the pushout of $\mu$ along $h$, defined explicitly as the quotient module of the direct sum:
@@ -713,7 +713,7 @@ Let $V$ be a Noetherian $R$-module and $f : V \to V$ an epimorphism. Show that $
     However, $W_2=W_1$ implies that $f(x)=0$, which is a contradiction. 
     Therefore, $f$ must be a monomorphism, hence an isomorphism. 
 \end{solution}
-\section{Week 5}
+\section{Week 6}
 
 \subsection*{Problem 1}
 Are the following statements correct?
@@ -881,7 +881,7 @@ $$V/W = (W \oplus W')/W \cong W'.$$
 Since $W'$ is a submodule of the semisimple module $V$, by the conclusion from above, $W'$ is also semisimple. Because $V/W$ is isomorphic to a semisimple module $W'$, it follows that $V/W$ itself is semisimple. 
 \end{solution}
 
-\section{Week 6}
+\section{Week 7}
 \subsection*{Problem 1}
 
 Let $D$ be a division ring and $n$ a positive integer.
@@ -1036,7 +1036,7 @@ Suppose that we have $R$-module homomorphisms $U \xrightarrow{f} V \xrightarrow{
     Our claim holds.
 \end{solution}
 
-\section{Week 7}
+\section{Week 8}
 \subsection*{Problem 1}
 Let $V$ be an $A$-module.
 \begin{enumerate}
@@ -1182,7 +1182,7 @@ If $\varphi : A \to A'$ is an epimorphism of rings, then $\varphi(J(A)) \subset 
     \end{align*}
 \end{solution}
 
-\section{Week 8}
+\section{Week 9}
 \subsection*{Problem 1}
 Let $A$ be a finite-dimensional algebra over a field. Suppose that $V$ is a f.g. $A$-module, and that a certain simple $A$-module $S$ occurs as a composition factor of $V$ with multiplicity 1. Suppose that there exist nonzero homomorphisms $S \to V$ and $V \to S$. Prove that $S$ is a direct summand of $V$.
 \begin{solution}
@@ -1268,88 +1268,6 @@ The following holds for a valuation $v$ of $K$:
 \end{solution}
 
 
-\section{Week 9}
-\subsection*{Problem 1}
-
-Let $\varphi$ be a multiplicative valuation of a field $K$. Then the following holds:
-\begin{itemize}
-    \item[(i)] $(a_n)$ is a Cauchy sequence $\Leftrightarrow \lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
-    \item[(ii)] If $\lim_{n\to\infty} a_n = a \neq 0$, then $\varphi(a_n) = \varphi(a)$ for a sufficiently large $n$.
-\end{itemize}
-\begin{solution}
-    (i) Suppose that $(a_n)$ is a Cauchy sequence. Then for any $\varepsilon>0$, there exists $N\in \mathbb{Z}_{>0}$ such that 
-    \begin{align*}
-        \varphi(a_m-a_n)<\varepsilon \text{ for any }m,n>N.
-    \end{align*}
-    We take $m=n+1$, then we obtain that $\varphi(a_{n+1}-a_n)<\varepsilon$ for any $n>N$. Equivalently, we can say $\lim_{n\to\infty} \varphi(a_{n+1} - a_n) = 0$.
-    Conversely, suppose that $\varphi(a_{n+1} - a_n) = 0$, it means that for any $\varepsilon>0$ there exists an positive integer $N$ such that for any $n>N$ we have 
-    \begin{align*}
-        \varphi(a_{n+1}-a_n)<\varepsilon.
-    \end{align*}
-    Consider the strongly triangular inequality, then we have 
-    \begin{align*}
-        \varphi(a_{n+m}-a_n)=\varphi\left(\sum_{i=0}^{m-1}(a_{n+i+1}-a_{n+i})\right) = \max_{i}\{\varphi(a_{n+i+1}-a_{n+i})\}<\varepsilon.
-    \end{align*}
-    Therefore, we obtain that $(a_n)$ is a Cauchy sequence.
-
-    (ii) Since $a_n-a$ converge to zero, then there exists $N>0$ such that for any $n>N$ we have 
-    \begin{align*}
-        \varphi(a_n-a)<\varphi(a)/2.
-    \end{align*}
-    Similarly, since $a_n$ converge to $a$, then there exists $M>0$ such that for any $n>M$ we have 
-    \begin{align*}
-        \varphi(a_n)>\varphi(a)/2.
-    \end{align*}
-    We can choose $N\ge M$, then we have $\varphi(a_n)>\varphi(a_n-a)$. It implies that 
-    \begin{align*}
-        \varphi(a)=\varphi(a-a_n+a_n)= \max\{\varphi(a-a_n),\varphi(a_n)\}=\varphi(a_n).
-    \end{align*}
-    Our claim holds.
-\end{solution}
-
-
-\subsection*{Problem 2}
-
-Let $\varphi$ be a multiplicative valuation of a field $K$. Let $V$ be a finite dimensional $K$-space with basis $u_1, \ldots, u_n$. For $v = a_1 u_1 + \cdots + a_n u_n \in V$, define $\|v\|_0$ by
-$$\|v\|_0 = \max\{\varphi(a_i); 1 \leq i \leq n\}.$$
-Then this is a norm on $V$. Moreover, the following holds concerning the metric induced by this norm.
-\begin{itemize}
-    \item[(i)] Let $v_r = a_{r1}u_1 + \cdots + a_{rn}u_n \in V$ be given for $r = 1, 2, \ldots$. Then the sequence $(v_r)$ is a Cauchy sequence if and only if the sequence $(a_{ri})_r$ in $K$ is so for all $i$. Also $\lim_{r\to\infty} v_r = \sum_{i=1}^n a_i u_i$ if and only if $\lim_{r\to\infty} a_{ri} = a_i$ for all $i$.
-    \item[(ii)] If $K$ is complete, then so is $V$.
-\end{itemize}
-
-\begin{solution}
-    (i) Suppose that $(v_r)_r$ is a Cauchy sequence. It means that for any $\varepsilon>0$, there exists $N>0$ such that for any $r>N$ and index $i$ we have 
-    \begin{align*}
-       0\le \varphi(a_{r+1,i}-a_{ri})\le \|v_{r+1}-v_r\|_0  <\varepsilon.
-    \end{align*}
-    It implies that $\lim_{r\to\infty}\varphi(a_{r+1,i}-a_{ri}) = 0$. According to Problem 1.(i), we then have $(a_{ri})_r$ is a Cauchy sequence for each $i$.
-    
-    Conversely, suppose that $(a_{ri})_r$ is a Cauchy sequence. Then for every $\varepsilon>0$, there exists an integer $N$ such that for any $r>N$, an integer $m$ and index $i$ satisfy 
-    \begin{align*}
-        \varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
-    \end{align*}
-    Hence, we have 
-    \begin{align*}
-        \|v_{r+m}-v_r\|_0 = \max_{i}\varphi(a_{r+m,i}-a_{r,i})<\varepsilon.
-    \end{align*}
-    It shows $(v_r)_r$ is a Cauchy sequence.
-
-    For next statement, it is suffice to show that $v_r \to 0$ iff. $a_{ri}\to 0$. 
-    Because we just let $w_r = v_r - \sum a_iu_i$, and the statement $w_r\to 0$ iff. $(a_{ri}-a_i) \to 0$ is equivalent to the statement we need to prove.
-    Suppose that $v_r$ converge to zero. It means that for any $\varepsilon>0$, we have $N>0$ and for any $r>N$ and index $i$ the inequality
-    \begin{align*}
-        0\le \varphi(a_{ri})\le \|v_r\|_0<\varepsilon
-    \end{align*}
-    Which implies that $\varphi(a_{ri})\to 0$ and $a_{ri}\to 0$ follows. Conversely, $a_{ri}\to 0$ implies $\varphi(a_{ri})\to 0$ and thus we have $\|v_r\|_0\to 0$. And $v_r\to 0$ follows.
-    Therefore, our claim holds.
-
-
-    (ii) Let $(v_r)_r$ be an arbitrary Cauchy sequence. According to (i), it is equivalent to $(a_{ri})_r$ is a Cauchy sequence for each $i$.
-    Since $K$ is complete, it means that there exists $a_i\in K$ such that $(a_{ri}-a_i)_r$ converge to zero. According to our discussion above, it is equivalent to 
-    $(v_r-\sum a_iu_i)_r$ converge to zero. Therefore, $V$ is complete as well. 
-\end{solution}
-
 \section{Week 10}
 \subsection*{Problem 1}
 
@@ -1432,6 +1350,8 @@ Then this is a norm on $V$. Moreover, the following holds concerning the metric 
     $(v_r-\sum a_iu_i)_r$ converge to zero. Therefore, $V$ is complete as well. 
 \end{solution}
 
+
+
 \section{Midterm}
 \subsection*{Lemmas for Problem}
 \begin{lemma}{A}
@@ -1485,6 +1405,7 @@ Then this is a norm on $V$. Moreover, the following holds concerning the metric 
     \end{align*}
     which implies that $A\subseteq_e B$.
 \end{proof}
+
 
 \subsection*{Problem 1}
 
@@ -2419,3 +2340,388 @@ second is still a \(p\)-element, and they commute. By uniqueness, if
 \(s_1=gsg^{-1}\) and \(t_1=gtg^{-1}\). Thus \(s\) is conjugate to \(s_1\), and
 \(t\) is conjugate to \(t_1\).
 \end{solution}
+
+
+
+\section{Extra Problems}
+
+\subsection{Problem 1}
+
+\textbf{(Principle of idealization)} Let \(U\) be an \((A,A)\)-bimodule and let
+\(B=A\oplus U\). Then \(B\) becomes a ring with multiplication defined by
+\[
+(a_1,u_1)(a_2,u_2)=(a_1a_2,a_1u_2+u_1a_2),
+\]
+and \(U\) is an ideal of \(B\).
+\begin{solution}
+    Verify it by definition of rings directly.
+\end{solution}
+\subsection{Problem 2}
+
+Let \(I_1,\ldots,I_r\) be ideals of \(A\), and suppose that
+\(I_i+I_j=A\) whenever \(i\ne j\). Then the following hold.
+
+\begin{enumerate}
+    \item[(i)] \(I_i+\bigcap_{j\ne i} I_j=A\).
+    \item[(ii)] \textbf{(Chinese remainder theorem)} The natural homomorphism
+    \[
+    \varphi:A\longrightarrow \bigoplus_{j=1}^r A/I_j,
+    \qquad
+    a\longmapsto (a+I_j)_j,
+    \]
+    is an epimorphism. Consequently, the following isomorphism holds:
+    \[
+    A\bigg/\bigcap_{j=1}^r I_j
+    \cong
+    \bigoplus_{j=1}^r A/I_j.
+    \]
+\end{enumerate}
+\begin{solution}
+    (1) Consider $\prod_{j\neq i}I_j \subseteq \cap_{j\neq i}I_j$ then let $y_j \equiv 1\bmod I_1$. Then $1-\prod_{j\neq 1}y_j\in I_1$.
+    (2) Directly by (1).
+\end{solution}
+
+
+\subsection{Problem 3}
+
+Let \(V_A\) be a Noetherian module. Then any epimorphism
+\(\varphi:V\to V\) is necessarily an isomorphism.
+
+
+
+\subsection{Problem 4}
+
+Let \(U=V\oplus W\), and let \(\pi_V\) and \(\pi_W\) be projections onto
+\(V\) and \(W\), respectively. Then the following hold.
+
+\begin{enumerate}
+    \item[(i)] For a submodule \(L\) of \(U\),
+    \[
+    \pi_V(L)/(L\cap V)\cong \pi_W(L)/(L\cap W).
+    \]
+
+    \item[(ii)] If \(U\) has a composition series, the following two conditions
+    are equivalent:
+    \begin{enumerate}
+        \item[(1)] Every submodule \(L\) of \(U\) is expressed in the form
+        \[
+        L=L_1\oplus L_2,
+        \qquad
+        L_1\subset V,\quad L_2\subset W.
+        \]
+        \item[(2)] \(V\) and \(W\) have no irreducible constituent in common.
+    \end{enumerate}
+\end{enumerate}
+\begin{solution}
+    (i) Consider $\pi_V(l) = \pi_W(l)+(L\cap W)$ with kernal $L\cap V.$ 
+    (ii) If $V$ and $W$ has common $E$ with 
+    \begin{align*}
+        V\supseteq \dots \supseteq V' \supseteq V''  \supseteq \dots
+    \end{align*}
+    and 
+    \begin{align*}
+        W\supseteq \dots \supseteq W' \supseteq W''  \supseteq\dots
+    \end{align*}
+    such that $V'/V''\simeq W'/W''\simeq E$. Consider pullback.
+    Conversely, consider the piece of composite series 
+    \begin{align*}
+        \pi_V(L) \supseteq \dots \supseteq L\cap V \quad 
+        \pi_W(L) \supseteq \dots \supseteq L\cap W
+    \end{align*}
+    Then condition (2) implies that its length is zero. Equivalently, $\pi_V(L) = L\cap V$ and $\pi_W(L) = L\cap W.$
+\end{solution}
+\subsection{Problem 5}
+
+If \(\varphi:A\to A'\) is an epimorphism of rings, then
+\[
+\varphi(J(A))\subset J(A').
+\]
+\begin{solution}
+    Use maximal ideal.
+\end{solution}
+\subsection{Problem 6}
+
+Suppose that \(\overline{A}=A/J(A)\) is Artinian, and let \(V\) be a finitely
+generated \(A\)-module. Then \(VJ(A)\) coincides with the intersection of all
+maximal \(A\)-submodules of \(V\).
+\begin{solution}
+    Let $M$ be an arbitrary maximal $A$-submodule of $V$. Consider that $J(A)(V/M) = 0$ which implies that $J(A)V \subseteq M$. Then we have 
+    \begin{align*}
+        VJ(A) \subseteq \bigcap_{M\text{ maximal}} M.
+    \end{align*}
+    Conversely, consider $\bar{V}$ be $A/J(A)$ module. Since $A/J(A)$ is artinian and hence 
+    \begin{align*}
+        J(A/J(A)) = 0
+    \end{align*}
+    since all maximal ideal of $A$ has intersection $J(A)$. Then the intersection of maximal ideal of $A/J(A)$ is zero.
+    $\bar{V}$ is f.g. semisimple artinian $\bar{A}$-module. Let $\bar{v}\in \bar{V}$ be an arbitrary nonzero element. Then we have 
+    \begin{align*}
+        \bar{V} = \langle\bar{v}\rangle \oplus \bar{V}'
+    \end{align*}
+    which menas that for any $v\notin VJ(A)$ there exists an maximal $A$-submodule $V'$ such that $V'/V'J(A)\simeq \bar{V'}$ and $v\notin V'$. 
+\end{solution}
+
+
+\subsection{Problem 7}
+
+Suppose that the identity of \(A\) is expressed as orthogonal sums of \(n\)
+idempotents in two ways:
+\[
+1=\sum_{i=1}^n e_i=\sum_{i=1}^n f_i.
+\]
+If \(e_iA\cong f_iA\) for all \(i\), then there exists a unit \(u\) of \(A\)
+such that
+\[
+u^{-1}e_i u=f_i
+\]
+for all \(i\).
+\begin{solution}
+    $e_i$ and $f_i$ gives 
+    \begin{align*}
+        A = \bigoplus_{i} e_iA  = \bigoplus_{i} f_iA 
+    \end{align*}
+    Then $\psi$ gives isomorphism such that $\psi(a)=ua$ where $u\in A^\times$ since $\text{End}_{A}(A_A) \simeq A$. 
+\end{solution}
+
+
+\subsection{Problem 8}
+
+Let \(I\) be an ideal of \(A\) contained in \(J(A)\), and let
+\(\overline{A}=A/I\). If two idempotents \(e,f\) of \(A\) satisfy
+\(\overline{e}=\overline{f}\), then there exists \(c\in I\) such that
+\[
+(1+c)^{-1}e(1+c)=f.
+\]
+\begin{solution}
+    Conisder $u=1+c =(1-e)(1-f)$ and verify it.
+\end{solution}
+
+\subsection{Problem 9}
+
+The following three conditions on \(V_A\) with a composition series are
+equivalent.
+
+\begin{enumerate}
+    \item[(1)] \(V\) is completely reducible.
+    \item[(2)] Every irreducible submodule of \(V\) is a direct summand of \(V\).
+    \item[(3)] Every maximal submodule of \(V\) is a direct summand of \(V\).
+\end{enumerate}
+
+
+
+
+\subsection{Problem 10}
+
+\[
+\operatorname{soc}(U\oplus V)=\operatorname{soc}(U)\oplus \operatorname{soc}(V).
+\]
+
+\subsection{Problem 11}
+
+Let \(A\) be a semisimple Artinian ring and let
+\[
+A=A_1\oplus \cdots \oplus A_n
+\]
+be the decomposition into the direct sum of simple components \(A_i\). Then the
+following hold.
+
+\begin{enumerate}
+    \item[(i)] Every ideal of \(A\) is a direct sum of some \(A_i\)'s.
+    \item[(ii)] If \(A'\) is a homomorphic image of \(A\), then \(A'\) is
+    isomorphic to a direct sum of some of the \(A_i\) as rings.
+\end{enumerate}
+\begin{solution}
+    Use idempotent decomposition on ideal and kernal.
+\end{solution}
+
+
+\subsection{Problem 12}
+
+Let \(A\) be an Artinian ring. Then the following hold.
+
+\begin{enumerate}
+    \item[(i)] There are only a finite number of maximal ideals, and the
+    intersection of them coincides with \(J(A)\).
+    \item[(ii)] Let \(I\) be an ideal of \(A\). If \(I\) contains no idempotent,
+    then \(I\subset J(A)\).
+\end{enumerate}
+
+\begin{solution}
+    Consider $A/J(A)$ is simisimple and its maximal ideals is 1-1 corresponding to $A$. 
+\end{solution}
+
+\subsection{Problem 13}
+
+Let \(A\) be Noetherian and let \(x,y\in A\). If \(xy=1\), then \(yx=1\).
+\begin{solution}
+    Use Problem 3, and $L_x$ is epimorphism then is isomorphism.
+\end{solution}
+
+
+\subsection{Problem 14}
+
+Let \(P,Q\) be finitely generated projective \(A\)-modules. Then
+\[
+P/PJ(A)\cong Q/QJ(A)
+\quad\Longleftrightarrow\quad
+P\cong Q.
+\]
+\begin{solution}
+    The projectivity induces $f:P\to Q$ such that $f(P)$ 1-1 correspondence to representation of $Q/QJ(A)$. Then we have 
+    \begin{align*}
+        Q = f(P) + QJ(A).
+    \end{align*}
+    By Nakayam lemma, we have $Q=f(P)$. To prove the injectivity, we consider 
+    \begin{align*}
+        0\to \ker(f) \to P \to Q \to 0
+    \end{align*}
+    splits.
+\end{solution}
+
+
+\subsection{Problem 15}
+
+Let \(e\) be an idempotent of \(A\) such that \(AeA=A\). Let
+\(\Gamma=eAe\), and set
+\[
+\mathfrak{F}(V)=Ve
+\]
+for \(V_A\), and
+\[
+\mathfrak{G}(W)=W\otimes_{\Gamma} eA
+\]
+for \(W_{\Gamma}\). Note that \(\mathfrak{F}(V)\) and \(\mathfrak{G}(W)\) are
+a \(\Gamma\)- and \(A\)-module under the natural actions, respectively. Then
+the following hold.
+
+\begin{enumerate}
+    \item[(i)] \(\mathfrak{G}(\mathfrak{F}(V))\cong V\), and
+    \(\mathfrak{F}(\mathfrak{G}(W))\cong W\).
+
+    \item[(ii)] The restriction map induces an isomorphism
+    \[
+    \operatorname{Hom}_A(U,V')
+    \cong
+    \operatorname{Hom}_{\Gamma}(Ue,V'e).
+    \]
+    In particular, there is a ring isomorphism
+    \[
+    A\cong \operatorname{End}_{\Gamma}(Ae),
+    \qquad
+    a\longmapsto \varphi_a,
+    \]
+    where \(\varphi_a(xe)=axe\).
+
+    \item[(iii)] \(\mathfrak{F}\) and \(\mathfrak{G}\) preserve direct sums,
+    inclusions, and projectivity.
+\end{enumerate}
+\begin{solution}
+    (i) 
+\end{solution}
+
+
+\subsection{Problem 16}
+
+Suppose that
+\[
+1=\sum_{i=1}^k\sum_{j=1}^{n_i} e_{ij}
+\]
+is a primitive idempotent decomposition of \(1\) such that
+\[
+e_{ij}A\cong e_{i'j'}A
+\quad\Longleftrightarrow\quad
+i=i'.
+\]
+If we set \(e_{i1}=e_i\) and \(e=e_1+\cdots+e_k\), then \(AeA=A\).
+Moreover, if we let \(\Gamma=eAe\) as in the preceding problem, then
+\[
+\Gamma=\bigoplus_{i=1}^k e_i\Gamma,
+\]
+and a \(\Gamma\)-isomorphism \(e_i\Gamma\cong e_j\Gamma\) holds only if
+\(i=j\). The ring \(\Gamma\) is called the basic ring of \(A\).
+
+\subsection{Problem 17}
+
+Let \(P\) be a finitely generated projective \(A\)-module and let
+\[
+E=\operatorname{End}_A(P).
+\]
+Then the following hold.
+
+\begin{enumerate}
+    \item[(i)]
+    \[
+    J(E)=\{\varphi\in E\mid \operatorname{Im}\varphi\subset PJ(A)\}.
+    \]
+
+    \item[(ii)]
+    \[
+    E/J(E)\cong \operatorname{End}_A(P/PJ(A)).
+    \]
+\end{enumerate}
+
+\subsection{Problem 18}
+
+The following condition on \(U_A\) is a necessary and sufficient condition for
+\(U\) to be a finitely generated projective \(A\)-module:
+
+There exist \(u_1,\ldots,u_n\in U\) and
+\(\varphi_1,\ldots,\varphi_n\in \operatorname{Hom}_A(U,A)\) such that
+\[
+u=\sum_i u_i\varphi_i(u)
+\]
+for all \(u\in U\).
+
+\subsection{Problem 19}
+
+Let \(I\) be an ideal of \(A\). If \(Z(A)\) has no idempotent other than the
+identity, then the same is true for \(Z(A/I)\), provided \(I\) satisfies one of
+the following conditions:
+
+\begin{enumerate}
+    \item[(1)] \(I=NA\), where \(N\) is a nilpotent ideal of \(Z(A)\).
+    \item[(2)] \(I\subset J(A)^2\), where \(J(A)\) is assumed to be nilpotent.
+\end{enumerate}
+
+\subsection{Problem 20}
+
+Given two exact sequences
+\[
+V'\xrightarrow{\lambda} V\xrightarrow{\mu} V''\to 0,
+\qquad
+W'\xrightarrow{\lambda'} W\xrightarrow{\mu'} W''\to 0,
+\]
+the following sequence is also exact:
+\[
+(V'\otimes_A W)\oplus (V\otimes_A W')
+\xrightarrow{f}
+V\otimes_A W
+\xrightarrow{\mu\otimes \mu'}
+V''\otimes_A W''
+\to 0,
+\]
+where
+\[
+f=\lambda\otimes \operatorname{id}_W+\operatorname{id}_V\otimes \lambda'.
+\]
+
+\subsection{Problem 21}
+
+Let \(V_A\) be a flat module and let \({}_A W\) be a left \(A\)-module. The
+following equality holds in \(V\otimes_A W\) for two \(A\)-submodules
+\(W_1,W_2\) of \(W\):
+\[
+V\otimes_A W_1\cap V\otimes_A W_2
+=
+V\otimes_A (W_1\cap W_2).
+\]
+
+\subsection{Problem 22}
+
+Let \(R\) be a commutative ring and let \(I,L\) be ideals of \(R\). Then the
+following isomorphism holds:
+\[
+R/I\otimes_R R/L
+\cong
+R/(I+L).
+\]
