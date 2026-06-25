@@ -1,0 +1,90 @@
+\chapter{Six-Functor Formalisms}
+
+Throughout this chapter, we let $\C$ denote a category satisfying the following hypotheses
+\begin{itemize}
+    \item[a.] The category $\C$ has all finite limits 
+    \item[b.] The class of morphisms $E$ contains all isomorphisms. $E$ is stable under pullback, composition and diagonals.
+\end{itemize} 
+
+A six-functor formalism is a functor $\D:\C^{\op} \to \CAlg(\catinf)$ sending any morphism $f$ in $
+\C$ to a symmetric monoidal functor $f^*$ in $\CAlg(\catinf)$ and an assignment
+\begin{align*}
+    f:X\to Y \qquad \mapsto \qquad f_!:\D(X)\to \D(Y)
+\end{align*}
+for any $f\in E$ to a functor of symmetric monoidal $\infcats$.\footnote{$f_!$ need not be a symmetric monoidal functor.}
+We call functor $f^*$ the star pullback and $f_!$ shriek pushforward.
+
+Additionally, we require that 
+\begin{itemize}
+    \item[1] There exists functor $f_*$ right adjont to $f^*$, we call $f_*$ star pushforward;
+    \item[2] There exists functor $f^!$ right adjont to $f_!$, we call $f^!$ shriek pullback;
+    \item[3] For any $X\in\C$ and $A\in \D(X)$, the symmetric monoidal $\infcat$ $\D(X)$ admits a adjoint pair of functor 
+    \begin{align*}
+         - \otimes A \dashv \inHom(A,-),
+    \end{align*} 
+    we call it tensor product and internal Hom;
+    \item[4] The star pullback functor $f^*:\D(Y)\to \D(X)$ compatible with symmetric monoidal structure on $\D(X)$ and $\D(Y)$ and compatible with composition;
+    \item[5] The shriek pushforward functor $f_!: \D(X)\to \D(Y)$ compatible with composition and satisfying the base change and projection formula isomorphism.
+\end{itemize}
+ 
+Here the base change formula means if there exists a Cartesian square 
+\[
+\begin{tikzcd}
+X' \arrow[r, "g'"] \arrow[d, "f'"'] 
+  \arrow[dr, phantom, "\lrcorner", very near start]
+& X \arrow[d, "f"] \\
+Y' \arrow[r, "g"'] & Y
+\end{tikzcd}
+\]
+over $\C$, then the diagram 
+\[
+\begin{tikzcd}
+D(X') \arrow[d, "f'_!"'] 
+& D(X) \arrow[l, "g'^*"'] \arrow[d, "f_!"] \\
+D(Y') 
+& D(Y) \arrow[l, "g^*"]
+\end{tikzcd}
+\]
+commutes up to homotopic coherent or equivariantly we say $f_!'\circ g'^*$ is natural isomorphic to $g^*\circ f_!$.
+
+The projection formula means $\D(X)$ is equipped with $\D(Y)$-module structure via $f^*:\D(Y)\to \D(X)$ and functor $f_!$ is $\D(Y)$-linear. Equivalently, for any $A\in X$ and $B\in Y$ the shriek pushforward satisfies
+\begin{align*}
+    f_!(A \otimes f^*B) = f_!(A)\otimes B.
+\end{align*}
+
+\begin{example}[Six functor formalism for abelian sheaves]
+    Let $S$ be the base scheme and $\tau$ denote a Grothedieck topology of $\Sch_{/S}$.\footnote{We can choose $\tau$ be the Zariski, \Etale, Nisnevich, fpqc, or fppf topology.}
+    Define the functor $\D:(\Sch_{/S})^\op \to \CAlg(\catinf)$ by assigning
+    \begin{align*}
+        X \mapsto \D(\Ab(X_{\tau})) \qquad (f:X\to Y) \mapsto (f^{-1}:\D(\Ab(Y_{\tau}))\mapsto \D(\Ab(X_{\tau})))
+    \end{align*}
+    where $X\in \Sch_{/S}$ and $\D(\Ab(X_{\tau}))$ denotes the derived $\infcat$ of  the abelian sheaves on $X$.
+    Let $E$ be the class of compactifiable morphisms, i.e., for any $f:X\to Y$ in $E$, there exists a factorization
+    \begin{align*}
+        f:X\xrightarrow{j} \bar{X} \xrightarrow{p} Y
+    \end{align*} 
+    such that $j$ is an open immersion and $p$ is a proper morphism. Define $f_!=  Rp_*\circ j_!$ where $j_!$ is extension by zero.  
+\end{example}
+
+\begin{example}[Six functor formalism for quasi-coherent sheaves]
+    Let $S$ be the base scheme. Define the functor $\D:(\Sch_{/S})^\op \to \CAlg(\catinf)$ by assigning
+    \begin{align*}
+        X\mapsto \D_{\qc}(X) \qquad f \mapsto Lf^*.
+    \end{align*}
+    where $\D_{\qc}(X)$ denotes the derived $\infcat$ of complexes with quasi-coherent cohomology sheaves on $X$.\footnote{When $X$ is qcqs, we have $\D_{\qc}(X)=\D(\QCoh(X))$.}
+    Let 
+    \begin{align*}
+        E =\{\text{proper morphism in }(\Sch_{/S})_{\qcqs}\}
+    \end{align*}
+    Define the shriek pushforward by $f_!:= Rf_*$. The existence of the right adjoint of $f_!$ is the statement of Grothedieck duality.
+\end{example}
+
+
+
+
+
+
+
+
+
+

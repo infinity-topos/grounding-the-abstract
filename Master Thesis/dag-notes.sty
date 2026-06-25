@@ -60,6 +60,12 @@
 \newtheorem{remark}[remark]{Remark}
 \aliascntresetthe{remark}
 
+
+\theoremstyle{example}
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+
 %----------------------------------------------------------------------------------------
 % HYPERLINKS AND CROSS REFERENCES
 %----------------------------------------------------------------------------------------
@@ -92,6 +98,9 @@
 
 \crefname{remark}{Remark}{Remarks}
 \Crefname{remark}{Remark}{Remarks}
+
+\crefname{example}{Example}{Examples}
+\Crefname{example}{Example}{Examples}
 
 % cleveref names for structural references
 \crefname{section}{Section}{Sections}

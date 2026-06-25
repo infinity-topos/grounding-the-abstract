@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,10pt]{book}
 
 % 引入我们自定义的样式包
 \usepackage{dag-notes}
@@ -12,7 +12,23 @@
 
 \newcommand{\OG}{\operatorname{\mathcal{O}_G}}
 \newcommand{\Top}{\operatorname{Top}}
-\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\inHom}{\underline{\operatorname{Hom}}}
+\newcommand{\Ab}{\operatorname{Ab}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\catinf}{\mathrm{Cat}_\infty}
+\newcommand{\infcat}{\infty\text{-category}}
+\newcommand{\infcats}{\infty\text{-categories}}
+\newcommand{\CAlg}{\operatorname{CAlg}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\Etale}{\text{Étale}}
+\newcommand{\QCoh}{\mathrm{QCoh}}
+\newcommand{\qc}{\mathrm{qc}}
+\newcommand{\qcqs}{\mathrm{qcqs}}
+
+
 \title{Six-Functor Formalisms over Orbit Categories}
 \author{
 }
@@ -23,13 +39,14 @@
 % 导入各个章节
 % 使用 \input 可以保持紧凑排版（不会强制换页）
 % 如果想要每一章从新的一页开始，可以使用 \include
-\begin{abstract}
- \cite{scholzeSFF} and \cite{ScholzeGHT}
-\end{abstract}
+
 
 \tableofcontents
-
-\input{sections/1}
+\input{sections/Introduction}
+\input{sections/Stable Homotopy Theory}
+\input{sections/Equivariant Homotopy Theory}
+\input{sections/Six-Functor Formalisms}
+\input{sections/Gestalt}
 
 \bibliographystyle{alpha}
 \bibliography{ref}
